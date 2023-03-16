@@ -13,7 +13,7 @@ declare(strict_types=1);
     $iconType = function ($iconType) {
         return sprintf(
             'educational-course-%s',
-            strtolower(preg_replace('/[A-Z]+/', '-\0', $iconType))
+            $iconType
         );
     };
 

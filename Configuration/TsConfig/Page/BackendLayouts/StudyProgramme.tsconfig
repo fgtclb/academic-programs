@@ -27,7 +27,7 @@ mod {
               3 {
                 columns {
                   1 {
-                    name = LLL:EXT:educational_course/Resources/Private/Language/locallang.xlf:pages.after_study
+                    name = LLL:EXT:educational_course/Resources/Private/Language/locallang.xlf:pages.after_course
                     colPos = 2
                   }
                 }
@@ -43,7 +43,7 @@ mod {
               5 {
                 columns {
                   1 {
-                    name = LLL:EXT:educational_course/Resources/Private/Language/locallang.xlf:pages.before_study
+                    name = LLL:EXT:educational_course/Resources/Private/Language/locallang.xlf:pages.before_course
                     colPos = 4
                   }
                 }

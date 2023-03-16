@@ -16,7 +16,12 @@
                 <fec:be.category page="{context.pageId}">
                     <f:for as="attributes" key="category" each="{courseCategory}">
                         <div class="row">
-                            <p class="col-md-4"><strong>{f:translate(key: 'sys_category.type.{category}', extensionName: 'educational_course')}</strong></p>
+                            <p class="col-md-4">
+                                <strong>
+                                    <core:icon identifier="educational-course-{category}"/>
+                                    {f:translate(key: 'sys_category.type.{category}', extensionName: 'educational_course')}
+                                </strong>
+                            </p>
                             <f:if condition="{attributes -> f:count()} > 0">
                                 <f:then>
                                     <ul class="col-md-8">

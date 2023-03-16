@@ -7,11 +7,11 @@ $sourceString = function ($icon) {
 };
 
 return [
-    'educational-course-application-period' => [
+    'educational-course-applicationPeriod' => [
         'provider' => \TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider::class,
         'source' => $sourceString('applicationPeriod.svg'),
     ],
-    'educational-course-begin-course' => [
+    'educational-course-beginCourse' => [
         'provider' => \TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider::class,
         'source' => $sourceString('beginCourse.svg'),
     ],
@@ -23,11 +23,11 @@ return [
         'provider' => \TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider::class,
         'source' => $sourceString('degree.svg'),
     ],
-    'educational-course-job-profile' => [
+    'educational-course-jobProfile' => [
         'provider' => \TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider::class,
         'source' => $sourceString('jobProfile.svg'),
     ],
-    'educational-course-performance-scope' => [
+    'educational-course-performanceScope' => [
         'provider' => \TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider::class,
         'source' => $sourceString('performanceScope.svg'),
     ],
@@ -35,15 +35,15 @@ return [
         'provider' => \TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider::class,
         'source' => $sourceString('prerequisites.svg'),
     ],
-    'educational-course-standard-period' => [
+    'educational-course-standardPeriod' => [
         'provider' => \TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider::class,
         'source' => $sourceString('standardPeriod.svg'),
     ],
-    'educational-course-course-type' => [
+    'educational-course-courseType' => [
         'provider' => \TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider::class,
         'source' => $sourceString('courseType.svg'),
     ],
-    'educational-course-teaching-language' => [
+    'educational-course-teachingLanguage' => [
         'provider' => \TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider::class,
         'source' => $sourceString('teachingLanguage.svg'),
     ],
