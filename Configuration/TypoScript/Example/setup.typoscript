@@ -1,0 +1,15 @@
+page = PAGE
+page {
+  10 = FLUIDTEMPLATE
+  10 {
+    templateRootPaths {
+      0 = EXT:educational_course/Resources/Private/Templates/
+    }
+    partialRootPaths {
+      0 = EXT:educational_course/Resources/Private/Partials/
+    }
+    layoutRootPaths {
+      0 = EXT:educational_course/Resources/Private/Layouts/
+    }
+  }
+}

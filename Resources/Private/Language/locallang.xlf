@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" target-language="" datatype="plaintext"
+		  original="messages" date="2023-03-15T11:39:25Z">
+		<header>
+			<generator>OwnScript</generator>
+		</header>
+		<body>
+			<trans-unit id="backend_layout.educational_course">
+				<source>Educational Course</source>
+			</trans-unit>
+
+			<trans-unit id="pages.educational_course">
+				<source>Educational Course page</source>
+			</trans-unit>
+			<trans-unit id="pages.course">
+				<source>Studies</source>
+			</trans-unit>
+			<trans-unit id="pages.div.course_information">
+				<source>Educational Course information</source>
+			</trans-unit>
+			<trans-unit id="pages.prerequisites">
+				<source>Prerequisites</source>
+			</trans-unit>
+			<trans-unit id="pages.job_profile">
+				<source>Job profile</source>
+			</trans-unit>
+			<trans-unit id="pages.performance_scope">
+				<source>Performance scope</source>
+			</trans-unit>
+			<trans-unit id="pages.overview">
+				<source>Overview</source>
+			</trans-unit>
+			<trans-unit id="pages.contents">
+				<source>Course contents</source>
+			</trans-unit>
+			<trans-unit id="pages.after_course">
+				<source>After graduation</source>
+			</trans-unit>
+			<trans-unit id="pages.application">
+				<source>Application</source>
+			</trans-unit>
+			<trans-unit id="pages.before_course">
+				<source>Before beginning studies</source>
+			</trans-unit>
+			<trans-unit id="pages.contact">
+				<source>Contact</source>
+			</trans-unit>
+
+			<trans-unit id="sys_category.type">
+				<source>Type</source>
+			</trans-unit>
+			<trans-unit id="sys_category.type.default">
+				<source>Default</source>
+			</trans-unit>
+			<trans-unit id="sys_category.type.applicationPeriod">
+				<source>Application period</source>
+			</trans-unit>
+			<trans-unit id="sys_category.type.beginCourse">
+				<source>Begin of course</source>
+			</trans-unit>
+			<trans-unit id="sys_category.type.costs">
+				<source>Costs</source>
+			</trans-unit>
+			<trans-unit id="sys_category.type.degree">
+				<source>Degree</source>
+			</trans-unit>
+			<trans-unit id="sys_category.type.standardPeriod">
+				<source>Standard period</source>
+			</trans-unit>
+			<trans-unit id="sys_category.type.courseType">
+				<source>Type of course</source>
+			</trans-unit>
+			<trans-unit id="sys_category.type.teachingLanguage">
+				<source>Teaching language</source>
+			</trans-unit>
+			<trans-unit id="sys_category.not_set">
+				<source>Not set</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

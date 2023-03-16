@@ -1,0 +1,36 @@
+<html
+    lang="en"
+    xmlns:f="https://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+    data-namespace-typo3-fluid="true"
+>
+<f:if condition="{degree}">
+    <f:render partial="Attributes/Degree" arguments="{_all}"/>
+</f:if>
+<f:if condition="{courseType}">
+    <f:render partial="Attributes/CourseType" arguments="{_all}"/>
+</f:if>
+<f:if condition="{teachingLanguage}">
+    <f:render partial="Attributes/TeachingLanguage" arguments="{_all}"/>
+</f:if>
+<f:if condition="{standardPeriod}">
+    <f:render partial="Attributes/StandardPeriod" arguments="{_all}"/>
+</f:if>
+<f:if condition="{beginCourse}">
+    <f:render partial="Attributes/BeginCourse" arguments="{_all}"/>
+</f:if>
+<f:if condition="{applicationPeriod}">
+    <f:render partial="Attributes/ApplicationPeriod" arguments="{_all}"/>
+</f:if>
+<f:if condition="{data.prerequisites}">
+    <f:render partial="Attributes/Prerequisites" arguments="{_all}"/>
+</f:if>
+<f:if condition="{data.performance_scope}">
+    <f:render partial="Attributes/PerformanceScope" arguments="{_all}"/>
+</f:if>
+<f:if condition="{data.job_profile}">
+    <f:render partial="Attributes/JobProfile" arguments="{_all}"/>
+</f:if>
+<f:if condition="{costs}">
+    <f:render partial="Attributes/Costs" arguments="{_all}"/>
+</f:if>
+</html>

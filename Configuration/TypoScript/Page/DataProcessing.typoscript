@@ -1,0 +1,9 @@
+page.10.dataProcessing {
+  200 < lib.educationalCourse.degree
+  210 < lib.educationalCourse.applicationPeriod
+  220 < lib.educationalCourse.standardPeriod
+  230 < lib.educationalCourse.beginCourse
+  240 < lib.educationalCourse.costs
+  250 < lib.educationalCourse.courseType
+  260 < lib.educationalCourse.teachingLanguage
+}

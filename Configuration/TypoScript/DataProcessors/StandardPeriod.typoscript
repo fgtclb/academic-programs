@@ -1,0 +1,5 @@
+lib.educationalCourse.standardPeriod < lib.educationalCourse.basic
+lib.educationalCourse.standardPeriod {
+  where.stdWrap.cObject.20.value = standardPeriod
+  as = standardPeriod
+}
