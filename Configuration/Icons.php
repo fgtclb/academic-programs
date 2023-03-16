@@ -2,49 +2,49 @@
 
 declare(strict_types=1);
 
+use FGTCLB\EducationalCourse\Domain\Enumeration\Category;
+
 $sourceString = function (string $icon) {
-    return sprintf('EXT:educational_course/Resources/Public/Icons/%s', $icon);
+    return sprintf(
+        'EXT:educational_course/Resources/Public/Icons/%s.svg',
+        \TYPO3\CMS\Core\Utility\GeneralUtility::underscoredToLowerCamelCase($icon)
+    );
+};
+
+$identifierString = function (string $identifier) {
+    return sprintf(
+        'educational-course-%s',
+        str_replace('_', '-', $identifier)
+    );
 };
 
 return [
-    'educational-course-applicationPeriod' => [
+    $identifierString(Category::TYPE_APPLICATION_PERIOD) => [
         'provider' => \TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider::class,
-        'source' => $sourceString('applicationPeriod.svg'),
+        'source' => $sourceString(Category::TYPE_APPLICATION_PERIOD),
     ],
-    'educational-course-beginCourse' => [
+    $identifierString(Category::TYPE_BEGIN_COURSE) => [
         'provider' => \TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider::class,
-        'source' => $sourceString('beginCourse.svg'),
+        'source' => $sourceString(Category::TYPE_BEGIN_COURSE),
     ],
-    'educational-course-costs' => [
+    $identifierString(Category::TYPE_COSTS) => [
         'provider' => \TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider::class,
-        'source' => $sourceString('costs.svg'),
+        'source' => $sourceString(Category::TYPE_COSTS),
     ],
-    'educational-course-degree' => [
+    $identifierString(Category::TYPE_DEGREE) => [
         'provider' => \TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider::class,
-        'source' => $sourceString('degree.svg'),
+        'source' => $sourceString(Category::TYPE_DEGREE),
     ],
-    'educational-course-jobProfile' => [
+    $identifierString(Category::TYPE_STANDARD_PERIOD) => [
         'provider' => \TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider::class,
-        'source' => $sourceString('jobProfile.svg'),
+        'source' => $sourceString(Category::TYPE_STANDARD_PERIOD),
     ],
-    'educational-course-performanceScope' => [
+    $identifierString(Category::TYPE_COURSE_TYPE) => [
         'provider' => \TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider::class,
-        'source' => $sourceString('performanceScope.svg'),
+        'source' => $sourceString(Category::TYPE_COURSE_TYPE),
     ],
-    'educational-course-prerequisites' => [
+    $identifierString(Category::TYPE_TEACHING_LANGUAGE) => [
         'provider' => \TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider::class,
-        'source' => $sourceString('prerequisites.svg'),
-    ],
-    'educational-course-standardPeriod' => [
-        'provider' => \TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider::class,
-        'source' => $sourceString('standardPeriod.svg'),
-    ],
-    'educational-course-courseType' => [
-        'provider' => \TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider::class,
-        'source' => $sourceString('courseType.svg'),
-    ],
-    'educational-course-teachingLanguage' => [
-        'provider' => \TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider::class,
-        'source' => $sourceString('teachingLanguage.svg'),
+        'source' => $sourceString(Category::TYPE_TEACHING_LANGUAGE),
     ],
 ];

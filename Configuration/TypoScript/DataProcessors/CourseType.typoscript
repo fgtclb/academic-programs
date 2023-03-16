@@ -1,5 +1,5 @@
 lib.educationalCourse.courseType < lib.educationalCourse.basic
 lib.educationalCourse.courseType {
-  where.stdWrap.cObject.20.value = courseType
+  where.stdWrap.cObject.20.value = course_type
   as = courseType
 }

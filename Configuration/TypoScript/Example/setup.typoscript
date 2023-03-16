@@ -1,3 +1,5 @@
+# This is example code
+# Although this code is so functional, you may want to create your own templates
 page = PAGE
 page {
   10 = FLUIDTEMPLATE
