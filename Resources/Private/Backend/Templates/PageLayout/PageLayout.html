@@ -14,7 +14,7 @@
             </div>
             <div class="media-right">
                 <fec:be.category page="{context.pageId}">
-                    <f:for as="attributes" key="category" each="{courseCategory}">
+                    <f:for as="attributes" key="category" each="{courseCategory.allAttributesByType}">
                         <div class="row">
                             <p class="col-md-4">
                                 <strong>

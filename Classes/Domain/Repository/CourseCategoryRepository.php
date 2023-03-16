@@ -7,6 +7,9 @@ namespace FGTCLB\EducationalCourse\Domain\Repository;
 use Doctrine\DBAL\DBALException;
 use Doctrine\DBAL\Driver\Exception;
 use FGTCLB\EducationalCourse\Domain\Enumeration\Category;
+use FGTCLB\EducationalCourse\Domain\Model\CategoryContainer;
+use FGTCLB\EducationalCourse\Domain\Model\EducationalCategory;
+use FGTCLB\EducationalCourse\Exception\Domain\CategoryExistException;
 use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Database\Query\QueryBuilder;
@@ -23,13 +26,17 @@ class CourseCategoryRepository
     }
 
     /**
-     * @return array<int|string, mixed>
      * @throws DBALException
      * @throws Exception
+     * @throws CategoryExistException
      */
-    public function findByType(int $pageId, Category $type): array
+    public function findByType(int $pageId, Category $type): CategoryContainer
     {
-        $statement = $this->connection->select('sys_category.*')
+        $statement = $this->connection->select(
+            'sys_category.uid',
+            'sys_category.type',
+            'sys_category.title'
+        )
             ->from('sys_category')
             ->join(
                 'sys_category',
@@ -61,25 +68,32 @@ class CourseCategoryRepository
                     $this->connection->createNamedParameter($pageId, Connection::PARAM_INT)
                 ),
             );
-        return $statement->executeQuery()->fetchAllAssociative() ?: [];
+        $attributes = new CategoryContainer();
+
+        foreach ($statement->executeQuery()->fetchAllAssociative() as $attribute) {
+            $attributes->attach(
+                new EducationalCategory(
+                    $attribute['uid'],
+                    Category::cast($attribute['type']),
+                    $attribute['title']
+                )
+            );
+        }
+        return $attributes;
     }
 
     /**
-     * @return array{
-     *     applicationPeriod: array<int|string, mixed>,
-     *     beginCourse: array<int|string, mixed>,
-     *     costs: array<int|string, mixed>,
-     *     degree: array<int|string, mixed>,
-     *     standardPeriod: array<int|string, mixed>,
-     *     courseType: array<int|string, mixed>,
-     *     teachingLanguage: array<int|string, mixed>
-     * }|array<int|string, mixed>
      * @throws DBALException
      * @throws Exception
+     * @throws CategoryExistException
      */
-    public function findAllByPageId(int $pageId): array
+    public function findAllByPageId(int $pageId): CategoryContainer
     {
-        $statement = $this->connection->select('sys_category.*')
+        $statement = $this->connection->select(
+            'sys_category.uid',
+            'sys_category.type',
+            'sys_category.title'
+        )
             ->from('sys_category')
             ->join(
                 'sys_category',
@@ -112,14 +126,16 @@ class CourseCategoryRepository
                 ),
             );
 
-        $attributes = [];
-
-        foreach (Category::getConstants() as $type) {
-            $attributes[$type] = [];
-        }
+        $attributes = new CategoryContainer();
 
         foreach ($statement->executeQuery()->fetchAllAssociative() as $row) {
-            $attributes[$row['type']][] = $row;
+            $attributes->attach(
+                new EducationalCategory(
+                    $row['uid'],
+                    Category::cast($row['type']),
+                    $row['title']
+                )
+            );
         }
         return $attributes;
     }
