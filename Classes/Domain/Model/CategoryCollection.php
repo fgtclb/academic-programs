@@ -10,10 +10,9 @@ use FGTCLB\EducationalCourse\Exception\Domain\CategoryExistException;
 use Iterator;
 
 /**
- * @template TEntity
- * @implements Iterator<int, TEntity>
+ * @implements Iterator<int, EducationalCategory>
  */
-class CategoryContainer implements Countable, Iterator
+class CategoryCollection implements Countable, Iterator
 {
     /**
      * @var EducationalCategory[]
@@ -98,7 +97,7 @@ class CategoryContainer implements Countable, Iterator
             /**
              * @var EducationalCategory[]
              */
-            private array $container = [];
+            private array $container;
 
             /**
              * @param EducationalCategory[] $attributes

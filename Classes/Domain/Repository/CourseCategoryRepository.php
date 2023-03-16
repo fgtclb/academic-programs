@@ -7,7 +7,7 @@ namespace FGTCLB\EducationalCourse\Domain\Repository;
 use Doctrine\DBAL\DBALException;
 use Doctrine\DBAL\Driver\Exception;
 use FGTCLB\EducationalCourse\Domain\Enumeration\Category;
-use FGTCLB\EducationalCourse\Domain\Model\CategoryContainer;
+use FGTCLB\EducationalCourse\Domain\Model\CategoryCollection;
 use FGTCLB\EducationalCourse\Domain\Model\EducationalCategory;
 use FGTCLB\EducationalCourse\Exception\Domain\CategoryExistException;
 use TYPO3\CMS\Core\Database\Connection;
@@ -30,7 +30,7 @@ class CourseCategoryRepository
      * @throws Exception
      * @throws CategoryExistException
      */
-    public function findByType(int $pageId, Category $type): CategoryContainer
+    public function findByType(int $pageId, Category $type): CategoryCollection
     {
         $statement = $this->connection->select(
             'sys_category.uid',
@@ -68,7 +68,7 @@ class CourseCategoryRepository
                     $this->connection->createNamedParameter($pageId, Connection::PARAM_INT)
                 ),
             );
-        $attributes = new CategoryContainer();
+        $attributes = new CategoryCollection();
 
         foreach ($statement->executeQuery()->fetchAllAssociative() as $attribute) {
             $attributes->attach(
@@ -87,7 +87,7 @@ class CourseCategoryRepository
      * @throws Exception
      * @throws CategoryExistException
      */
-    public function findAllByPageId(int $pageId): CategoryContainer
+    public function findAllByPageId(int $pageId): CategoryCollection
     {
         $statement = $this->connection->select(
             'sys_category.uid',
@@ -126,7 +126,7 @@ class CourseCategoryRepository
                 ),
             );
 
-        $attributes = new CategoryContainer();
+        $attributes = new CategoryCollection();
 
         foreach ($statement->executeQuery()->fetchAllAssociative() as $row) {
             $attributes->attach(
