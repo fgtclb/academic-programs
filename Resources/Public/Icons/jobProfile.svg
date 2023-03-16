@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 26.5.2, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Ebene_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 76.42 55.12" style="enable-background:new 0 0 76.42 55.12;" xml:space="preserve">
+<style type="text/css">
+	.st0{clip-path:url(#SVGID_00000160878056271240987430000007926380009515148215_);fill:none;stroke:#000000;stroke-width:2;}
+
+		.st1{clip-path:url(#SVGID_00000160878056271240987430000007926380009515148215_);fill:none;stroke:#000000;stroke-width:2;stroke-dasharray:6.111,4.111;}
+	.st2{fill:none;stroke:#000000;stroke-width:2;}
+</style>
+<g>
+	<defs>
+		<rect id="SVGID_1_" x="11.31" y="8.56" width="54.08" height="38"/>
+	</defs>
+	<clipPath id="SVGID_00000036210995806851297600000008330152818275907470_">
+		<use xlink:href="#SVGID_1_"  style="overflow:visible;"/>
+	</clipPath>
+
+		<path style="clip-path:url(#SVGID_00000036210995806851297600000008330152818275907470_);fill:none;stroke:#000000;stroke-width:2;" d="
+		M16.31,9.56c-2.21,0-4,1.79-4,4v28c0,2.21,1.79,4,4,4h44c2.21,0,4-1.79,4-4v-28c0-2.21-1.79-4-4-4H16.31z"/>
+
+		<line style="clip-path:url(#SVGID_00000036210995806851297600000008330152818275907470_);fill:none;stroke:#000000;stroke-width:2;stroke-dasharray:6.111,4.111;" x1="14.6" y1="13.27" x2="61.6" y2="13.27"/>
+
+		<path style="clip-path:url(#SVGID_00000036210995806851297600000008330152818275907470_);fill:none;stroke:#000000;stroke-width:2;" d="
+		M12.31,28.39v2.91c0,2.21,1.79,4,4,4h8"/>
+
+		<line style="clip-path:url(#SVGID_00000036210995806851297600000008330152818275907470_);fill:none;stroke:#000000;stroke-width:2;" x1="28.29" y1="35.31" x2="47.95" y2="35.31"/>
+
+		<path style="clip-path:url(#SVGID_00000036210995806851297600000008330152818275907470_);fill:none;stroke:#000000;stroke-width:2;" d="
+		M52.31,35.31h8c2.21,0,4-1.79,4-4v-2.91"/>
+</g>
+<rect x="24.31" y="28.56" class="st2" width="3.98" height="11.16"/>
+<rect x="48.41" y="28.56" class="st2" width="3.98" height="11.16"/>
+</svg>

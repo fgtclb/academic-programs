@@ -1,0 +1,2 @@
+@import 'EXT:educational_course/Configuration/TsConfig/Page/BackendLayouts/*.tsconfig'
+@import 'EXT:educational_course/Configuration/TsConfig/Page/*.tsconfig'

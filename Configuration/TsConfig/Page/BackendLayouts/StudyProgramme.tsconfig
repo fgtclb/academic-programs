@@ -1,0 +1,66 @@
+mod {
+  web_layout {
+    BackendLayouts {
+      EducationalCourse {
+        title = LLL:EXT:educational_course/Resources/Private/Language/locallang.xlf:backend_layout.educational_course
+        config {
+          backend_layout {
+            colCount = 1
+            rowCount = 6
+            rows {
+              1 {
+                columns {
+                  1 {
+                    name = LLL:EXT:educational_course/Resources/Private/Language/locallang.xlf:pages.overview
+                    colPos = 1
+                  }
+                }
+              }
+              2 {
+                columns {
+                  1 {
+                    name = LLL:EXT:educational_course/Resources/Private/Language/locallang.xlf:pages.contents
+                    colPos = 0
+                  }
+                }
+              }
+              3 {
+                columns {
+                  1 {
+                    name = LLL:EXT:educational_course/Resources/Private/Language/locallang.xlf:pages.after_study
+                    colPos = 2
+                  }
+                }
+              }
+              4 {
+                columns {
+                  1 {
+                    name = LLL:EXT:educational_course/Resources/Private/Language/locallang.xlf:pages.application
+                    colPos = 3
+                  }
+                }
+              }
+              5 {
+                columns {
+                  1 {
+                    name = LLL:EXT:educational_course/Resources/Private/Language/locallang.xlf:pages.before_study
+                    colPos = 4
+                  }
+                }
+              }
+              6 {
+                columns {
+                  1 {
+                    name = LLL:EXT:educational_course/Resources/Private/Language/locallang.xlf:pages.contact
+                    colPos = 5
+                  }
+                }
+              }
+            }
+          }
+        }
+        icon = educational-course-degree
+      }
+    }
+  }
+}

@@ -1,0 +1,5 @@
+lib.educationalCourse.beginCourse < lib.educationalCourse.basic
+lib.educationalCourse.beginCourse {
+  where.stdWrap.cObject.20.value = beginCourse
+  as = beginCourse
+}

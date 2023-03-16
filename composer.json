@@ -1,0 +1,20 @@
+{
+	"name": "fgtclb/educational-course",
+	"type": "typo3-cms-extension",
+	"description": "Study programme page for universities. Ships structured data preparation",
+	"minimum-stability": "stable",
+	"license": "proprietary",
+	"extra": {
+		"typo3/cms": {
+			"extension-key": "educational_course"
+		}
+	},
+	"require": {
+		"typo3/cms-core": "^11.5"
+	},
+	"autoload": {
+		"psr-4": {
+			"FGTCLB\\EducationalCourse\\": "Classes/"
+		}
+	}
+}

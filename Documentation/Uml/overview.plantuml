@@ -1,0 +1,53 @@
+@startuml
+class StudyProgramme {
+    # doktype: int
+    # prerequisites: text
+    # serviceScope: text
+    # occupationFields: text
+    + getDoktype(): int
+    + getPrerequisites(): string
+    + getServiceScope(): string
+    + getOccupationFields(): string
+}
+class Degree {
+    # title: PossibleDegrees
+}
+class StudyForm {
+    # title: StudyForms
+    # description: text
+}
+class CourseLanguage {
+    # language: string
+}
+class StandardPeriod {
+    # semester: int
+}
+class StudyStart {
+    # start: string
+}
+class ApplicationPeriod {
+    # period: string
+    # special: text
+}
+enum PossibleDegrees {
+    Bachelor
+    Master
+    Staatsexamen
+    Diplom
+    Magister
+}
+
+enum StudyForms {
+    Vollzeit
+    Teilzeit
+    Dual
+    Fern
+}
+
+StudyProgramme "1" *-- "1..4" Degree : contains
+StudyProgramme "1" *-- "2" StudyForm : contains
+StudyProgramme "1" *-- "2" CourseLanguage : contains
+StudyProgramme "1" *-- "1" StandardPeriod : contains
+StudyProgramme "1" *-- "1..2" StudyStart : contains
+StudyProgramme "1" *-- "*" ApplicationPeriod : contains
+@enduml

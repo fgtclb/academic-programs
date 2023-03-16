@@ -1,0 +1,7 @@
+module.tx_backend {
+  view {
+    templateRootPaths {
+      10 = EXT:educational_course/Resources/Private/Backend/Templates/
+    }
+  }
+}

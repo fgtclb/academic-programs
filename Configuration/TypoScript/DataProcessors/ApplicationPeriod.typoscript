@@ -1,0 +1,5 @@
+lib.educationalCourse.applicationPeriod < lib.educationalCourse.basic
+lib.educationalCourse.applicationPeriod {
+  where.stdWrap.cObject.20.value = applicationPeriod
+  as = applicationPeriod
+}
