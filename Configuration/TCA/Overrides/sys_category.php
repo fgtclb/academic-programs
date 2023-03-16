@@ -13,7 +13,7 @@ declare(strict_types=1);
     $iconType = function (string $iconType) {
         return sprintf(
             'educational-course-%s',
-            $iconType
+            str_replace('_', '-', $iconType)
         );
     };
 
@@ -22,19 +22,19 @@ declare(strict_types=1);
             'type' => 'type',
             'typeicon_classes' => [
                 \FGTCLB\EducationalCourse\Domain\Enumeration\Category::TYPE_APPLICATION_PERIOD
-                    => $iconType(\FGTCLB\EducationalCourse\Domain\Enumeration\Category::TYPE_APPLICATION_PERIOD),
+                => $iconType(\FGTCLB\EducationalCourse\Domain\Enumeration\Category::TYPE_APPLICATION_PERIOD),
                 \FGTCLB\EducationalCourse\Domain\Enumeration\Category::TYPE_BEGIN_COURSE
-                    => $iconType(\FGTCLB\EducationalCourse\Domain\Enumeration\Category::TYPE_BEGIN_COURSE),
+                => $iconType(\FGTCLB\EducationalCourse\Domain\Enumeration\Category::TYPE_BEGIN_COURSE),
                 \FGTCLB\EducationalCourse\Domain\Enumeration\Category::TYPE_COSTS
-                    => $iconType(\FGTCLB\EducationalCourse\Domain\Enumeration\Category::TYPE_COSTS),
+                => $iconType(\FGTCLB\EducationalCourse\Domain\Enumeration\Category::TYPE_COSTS),
                 \FGTCLB\EducationalCourse\Domain\Enumeration\Category::TYPE_DEGREE
-                    => $iconType(\FGTCLB\EducationalCourse\Domain\Enumeration\Category::TYPE_DEGREE),
+                => $iconType(\FGTCLB\EducationalCourse\Domain\Enumeration\Category::TYPE_DEGREE),
                 \FGTCLB\EducationalCourse\Domain\Enumeration\Category::TYPE_STANDARD_PERIOD
-                    => $iconType(\FGTCLB\EducationalCourse\Domain\Enumeration\Category::TYPE_STANDARD_PERIOD),
+                => $iconType(\FGTCLB\EducationalCourse\Domain\Enumeration\Category::TYPE_STANDARD_PERIOD),
                 \FGTCLB\EducationalCourse\Domain\Enumeration\Category::TYPE_COURSE_TYPE
-                    => $iconType(\FGTCLB\EducationalCourse\Domain\Enumeration\Category::TYPE_COURSE_TYPE),
+                => $iconType(\FGTCLB\EducationalCourse\Domain\Enumeration\Category::TYPE_COURSE_TYPE),
                 \FGTCLB\EducationalCourse\Domain\Enumeration\Category::TYPE_TEACHING_LANGUAGE
-                    => $iconType(\FGTCLB\EducationalCourse\Domain\Enumeration\Category::TYPE_TEACHING_LANGUAGE),
+                => $iconType(\FGTCLB\EducationalCourse\Domain\Enumeration\Category::TYPE_TEACHING_LANGUAGE),
             ],
             'typeicon_column' => 'type',
         ],

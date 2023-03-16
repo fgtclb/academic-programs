@@ -53,10 +53,10 @@
 			<trans-unit id="sys_category.type.default">
 				<source>Default</source>
 			</trans-unit>
-			<trans-unit id="sys_category.type.applicationPeriod">
+			<trans-unit id="sys_category.type.application-period">
 				<source>Application period</source>
 			</trans-unit>
-			<trans-unit id="sys_category.type.beginCourse">
+			<trans-unit id="sys_category.type.begin-course">
 				<source>Begin of course</source>
 			</trans-unit>
 			<trans-unit id="sys_category.type.costs">
@@ -65,13 +65,13 @@
 			<trans-unit id="sys_category.type.degree">
 				<source>Degree</source>
 			</trans-unit>
-			<trans-unit id="sys_category.type.standardPeriod">
+			<trans-unit id="sys_category.type.standard-period">
 				<source>Standard period</source>
 			</trans-unit>
-			<trans-unit id="sys_category.type.courseType">
+			<trans-unit id="sys_category.type.course-type">
 				<source>Type of course</source>
 			</trans-unit>
-			<trans-unit id="sys_category.type.teachingLanguage">
+			<trans-unit id="sys_category.type.teaching-language">
 				<source>Teaching language</source>
 			</trans-unit>
 			<trans-unit id="sys_category.not_set">
