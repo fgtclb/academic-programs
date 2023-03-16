@@ -15,6 +15,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 class CourseCategoryRepository
 {
     protected QueryBuilder $connection;
+
     public function __construct()
     {
         $this->connection = GeneralUtility::makeInstance(ConnectionPool::class)

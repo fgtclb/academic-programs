@@ -17,6 +17,7 @@ use TYPO3Fluid\Fluid\Core\ViewHelper\Traits\CompileWithRenderStatic;
 class CategoryViewHelper extends AbstractViewHelper
 {
     use CompileWithRenderStatic;
+
     protected $escapeOutput = false;
 
     public function initializeArguments(): void
