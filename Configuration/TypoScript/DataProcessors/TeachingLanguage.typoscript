@@ -1,5 +1,5 @@
 lib.educationalCourse.teachingLanguage < lib.educationalCourse.basic
 lib.educationalCourse.teachingLanguage {
-  where.stdWrap.cObject.20.value = teachingLanguage
+  where.stdWrap.cObject.20.value = teaching_language
   as = teachingLanguage
 }
