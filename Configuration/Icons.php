@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-$sourceString = function ($icon) {
+$sourceString = function (string $icon) {
     return sprintf('EXT:educational_course/Resources/Public/Icons/%s', $icon);
 };
 

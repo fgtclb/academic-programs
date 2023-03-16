@@ -3,14 +3,14 @@
 declare(strict_types=1);
 
 (static function (): void {
-    $llBackend = function ($label) {
+    $llBackend = function (string $label) {
         return sprintf('LLL:EXT:educational_course/Resources/Private/Language/locallang.xlf:sys_category.%s', $label);
     };
-    $llBackendType = function ($label) {
+    $llBackendType = function (string $label) {
         return sprintf('LLL:EXT:educational_course/Resources/Private/Language/locallang.xlf:sys_category.type.%s', $label);
     };
 
-    $iconType = function ($iconType) {
+    $iconType = function (string $iconType) {
         return sprintf(
             'educational-course-%s',
             $iconType
