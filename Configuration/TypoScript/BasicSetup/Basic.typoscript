@@ -1,5 +1,7 @@
 lib.educationalCourse.basic = TYPO3\CMS\Frontend\DataProcessing\DatabaseQueryProcessor
 lib.educationalCourse.basic {
+  # TODO is there a way to make this value corresponding to enum?
+  # see FGTCLB\EducationalCourse\Domain\Enumeration\Page
   if.equals = 20
   if.value.field = doktype
   table = sys_category
