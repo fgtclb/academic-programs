@@ -81,12 +81,7 @@ class CategoryCollection implements Countable, Iterator
      */
     public function getAllAttributesByType(): array
     {
-        $sanitized = [];
-        foreach ($this->typeSortedContainer as $type => $values) {
-            $sanitizedType = str_replace('_', '-', $type);
-            $sanitized[$sanitizedType] = $values;
-        }
-        return $sanitized;
+        return $this->typeSortedContainer;
     }
 
     public function getAttributesByType(Category $type): Iterator|Countable

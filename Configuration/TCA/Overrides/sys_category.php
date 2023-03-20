@@ -10,7 +10,7 @@ declare(strict_types=1);
     $iconType = function (string $iconType) {
         return sprintf(
             'educational-course-%s',
-            str_replace('_', '-', $iconType)
+            $iconType
         );
     };
 

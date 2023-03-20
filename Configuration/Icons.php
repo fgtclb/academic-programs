@@ -14,7 +14,7 @@ $sourceString = function (string $icon) {
 $identifierString = function (string $identifier) {
     return sprintf(
         'educational-course-%s',
-        str_replace('_', '-', $identifier)
+        $identifier
     );
 };
 
