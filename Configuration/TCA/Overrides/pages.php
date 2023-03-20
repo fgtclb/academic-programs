@@ -20,7 +20,7 @@ declare(strict_types=1);
         [
             'LLL:EXT:educational_course/Resources/Private/Language/locallang.xlf:pages.educational_course',
             $studyProgrammeDokType,
-            'educational-course-degree',
+            'actions-graduation-cap',
             'study',
         ]
     );
@@ -30,7 +30,7 @@ declare(strict_types=1);
         [
             'ctrl' => [
                 'typeicon_classes' => [
-                    $studyProgrammeDokType => 'educational-course-degree',
+                    $studyProgrammeDokType => 'actions-graduation-cap',
                 ],
             ],
             'types' => [
