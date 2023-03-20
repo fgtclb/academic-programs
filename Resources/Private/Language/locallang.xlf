@@ -47,16 +47,13 @@
 				<source>Contact</source>
 			</trans-unit>
 
-			<trans-unit id="sys_category.type">
-				<source>Type</source>
+			<trans-unit id="sys_category.courses">
+				<source>Course category types</source>
 			</trans-unit>
-			<trans-unit id="sys_category.type.default">
-				<source>Default</source>
-			</trans-unit>
-			<trans-unit id="sys_category.type.application-period">
+			<trans-unit id="sys_category.type.application_period">
 				<source>Application period</source>
 			</trans-unit>
-			<trans-unit id="sys_category.type.begin-course">
+			<trans-unit id="sys_category.type.begin_course">
 				<source>Begin of course</source>
 			</trans-unit>
 			<trans-unit id="sys_category.type.costs">
@@ -65,17 +62,14 @@
 			<trans-unit id="sys_category.type.degree">
 				<source>Degree</source>
 			</trans-unit>
-			<trans-unit id="sys_category.type.standard-period">
+			<trans-unit id="sys_category.type.standard_period">
 				<source>Standard period</source>
 			</trans-unit>
-			<trans-unit id="sys_category.type.course-type">
+			<trans-unit id="sys_category.type.course_type">
 				<source>Type of course</source>
 			</trans-unit>
-			<trans-unit id="sys_category.type.teaching-language">
+			<trans-unit id="sys_category.type.teaching_language">
 				<source>Teaching language</source>
-			</trans-unit>
-			<trans-unit id="sys_category.not_set">
-				<source>Not set</source>
 			</trans-unit>
 		</body>
 	</file>
