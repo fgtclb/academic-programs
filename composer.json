@@ -11,7 +11,7 @@
 	},
 	"require": {
 		"typo3/cms-core": "^11.5",
-		"fgtclb/fgtclb-educational": "@dev"
+		"fgtclb/fgtclb-educational": "*"
 	},
 	"autoload": {
 		"psr-4": {
