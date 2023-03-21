@@ -1,26 +1,26 @@
 styles.content {
   getContent < styles.content.get
   getContent {
-    where = {#colPos}=0
+    select.where = {#colPos}=0
   }
   getOverview < styles.content.get
   getOverview {
-    where = {#colPos}=1
+    select.where = {#colPos}=1
   }
   getAfterStudy < styles.content.get
   getAfterStudy {
-    where = {#colPos}=2
+    select.where = {#colPos}=2
   }
   getApplication < styles.content.getContent
   getApplication {
-    where = {#colPos}=3
+    select.where = {#colPos}=3
   }
   getBeforeStudy < styles.content.get
   getBeforeStudy {
-    where = {#colPos}=4
+    select.where = {#colPos}=4
   }
   getContact < styles.content.get
   getContact {
-    where = {#colPos}=5
+    select.where = {#colPos}=5
   }
 }
