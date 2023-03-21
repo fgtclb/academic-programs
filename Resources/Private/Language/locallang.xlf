@@ -46,7 +46,6 @@
 			<trans-unit id="pages.contact">
 				<source>Contact</source>
 			</trans-unit>
-
 			<trans-unit id="sys_category.courses">
 				<source>Course category types</source>
 			</trans-unit>
