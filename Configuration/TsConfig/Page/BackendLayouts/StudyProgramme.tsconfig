@@ -59,7 +59,7 @@ mod {
             }
           }
         }
-        icon = educational-course-degree
+        icon = actions-graduation-cap
       }
     }
   }
