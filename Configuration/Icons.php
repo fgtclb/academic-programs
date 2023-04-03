@@ -35,6 +35,10 @@ return [
         'provider' => \TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider::class,
         'source' => $sourceString(Category::TYPE_DEGREE),
     ],
+    $identifierString(Category::TYPE_DEPARTMENT) => [
+        'provider' => \TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider::class,
+        'source' => $sourceString(Category::TYPE_DEPARTMENT),
+    ],
     $identifierString(Category::TYPE_STANDARD_PERIOD) => [
         'provider' => \TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider::class,
         'source' => $sourceString(Category::TYPE_STANDARD_PERIOD),
@@ -46,5 +50,9 @@ return [
     $identifierString(Category::TYPE_TEACHING_LANGUAGE) => [
         'provider' => \TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider::class,
         'source' => $sourceString(Category::TYPE_TEACHING_LANGUAGE),
+    ],
+    $identifierString(Category::TYPE_TOPIC) => [
+        'provider' => \TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider::class,
+        'source' => $sourceString(Category::TYPE_TOPIC),
     ],
 ];
