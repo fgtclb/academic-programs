@@ -62,7 +62,7 @@ declare(strict_types=1);
         [
             $llBackendType(\FGTCLB\EducationalCourse\Domain\Enumeration\Category::TYPE_DEPARTMENT),
             \FGTCLB\EducationalCourse\Domain\Enumeration\Category::TYPE_DEPARTMENT,
-            $iconType(\FGTCLB\EducationalCourse\Domain\Enumeration\Category::TYPE_DEPARTMENT),
+            'actions-house',
             'courses',
         ],
         [
@@ -86,7 +86,7 @@ declare(strict_types=1);
         [
             $llBackendType(\FGTCLB\EducationalCourse\Domain\Enumeration\Category::TYPE_TOPIC),
             \FGTCLB\EducationalCourse\Domain\Enumeration\Category::TYPE_TOPIC,
-            $iconType(\FGTCLB\EducationalCourse\Domain\Enumeration\Category::TYPE_TOPIC),
+            'actions-thumbtack',
             'courses',
         ],
     ];
