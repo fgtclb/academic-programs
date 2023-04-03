@@ -61,6 +61,9 @@
 			<trans-unit id="sys_category.type.degree">
 				<source>Degree</source>
 			</trans-unit>
+			<trans-unit id="sys_category.type.department">
+				<source>Department / Faculty</source>
+			</trans-unit>
 			<trans-unit id="sys_category.type.standard_period">
 				<source>Standard period</source>
 			</trans-unit>
@@ -69,6 +72,9 @@
 			</trans-unit>
 			<trans-unit id="sys_category.type.teaching_language">
 				<source>Teaching language</source>
+			</trans-unit>
+			<trans-unit id="sys_category.type.topic">
+				<source>Topic</source>
 			</trans-unit>
 		</body>
 	</file>
