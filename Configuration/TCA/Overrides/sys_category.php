@@ -60,6 +60,12 @@ declare(strict_types=1);
             'courses',
         ],
         [
+            $llBackendType(\FGTCLB\EducationalCourse\Domain\Enumeration\Category::TYPE_DEPARTMENT),
+            \FGTCLB\EducationalCourse\Domain\Enumeration\Category::TYPE_DEPARTMENT,
+            $iconType(\FGTCLB\EducationalCourse\Domain\Enumeration\Category::TYPE_DEPARTMENT),
+            'courses',
+        ],
+        [
             $llBackendType(\FGTCLB\EducationalCourse\Domain\Enumeration\Category::TYPE_STANDARD_PERIOD),
             \FGTCLB\EducationalCourse\Domain\Enumeration\Category::TYPE_STANDARD_PERIOD,
             $iconType(\FGTCLB\EducationalCourse\Domain\Enumeration\Category::TYPE_STANDARD_PERIOD),
@@ -75,6 +81,12 @@ declare(strict_types=1);
             $llBackendType(\FGTCLB\EducationalCourse\Domain\Enumeration\Category::TYPE_TEACHING_LANGUAGE),
             \FGTCLB\EducationalCourse\Domain\Enumeration\Category::TYPE_TEACHING_LANGUAGE,
             $iconType(\FGTCLB\EducationalCourse\Domain\Enumeration\Category::TYPE_TEACHING_LANGUAGE),
+            'courses',
+        ],
+        [
+            $llBackendType(\FGTCLB\EducationalCourse\Domain\Enumeration\Category::TYPE_TOPIC),
+            \FGTCLB\EducationalCourse\Domain\Enumeration\Category::TYPE_TOPIC,
+            $iconType(\FGTCLB\EducationalCourse\Domain\Enumeration\Category::TYPE_TOPIC),
             'courses',
         ],
     ];
