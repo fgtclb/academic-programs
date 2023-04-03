@@ -33,4 +33,10 @@
 <f:if condition="{costs}">
     <f:render partial="Attributes/Costs" arguments="{_all}"/>
 </f:if>
+<f:if condition="{topic}">
+    <f:render partial="Attributes/Topic" arguments="{_all}"/>
+</f:if>
+<f:if condition="{department}">
+    <f:render partial="Attributes/Department" arguments="{_all}"/>
+</f:if>
 </html>
