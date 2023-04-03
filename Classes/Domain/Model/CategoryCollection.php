@@ -28,8 +28,10 @@ class CategoryCollection implements Countable, Iterator
         Category::TYPE_COURSE_TYPE => [],
         Category::TYPE_COSTS => [],
         Category::TYPE_DEGREE => [],
+        Category::TYPE_DEPARTMENT => [],
         Category::TYPE_STANDARD_PERIOD => [],
         Category::TYPE_TEACHING_LANGUAGE => [],
+        Category::TYPE_TOPIC => [],
     ];
     public function current(): EducationalCategory|false
     {
