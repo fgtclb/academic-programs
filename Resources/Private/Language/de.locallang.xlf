@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" target-language="" datatype="plaintext"
+		  original="messages" date="2023-03-15T11:39:25Z">
+		<header>
+			<generator>OwnScript</generator>
+		</header>
+		<body>
+			<trans-unit id="backend_layout.educational_course">
+				<source>Educational Course</source>
+				<target>Bildungskurs</target>
+			</trans-unit>
+			<trans-unit id="pages.educational_course">
+				<source>Educational Course page</source>
+				<target>Seite Bildungskurse</target>
+			</trans-unit>
+			<trans-unit id="pages.course">
+				<source>Studies</source>
+				<target>Studien</target>
+			</trans-unit>
+			<trans-unit id="pages.div.course_information">
+				<source>Educational Course information</source>
+				<target>Informationen zum Bildungskurs</target>
+			</trans-unit>
+			<trans-unit id="pages.prerequisites">
+				<source>Prerequisites</source>
+				<target>Voraussetzungen</target>
+			</trans-unit>
+			<trans-unit id="pages.job_profile">
+				<source>Job profile</source>
+				<target>Berufsprofil</target>
+			</trans-unit>
+			<trans-unit id="pages.performance_scope">
+				<source>Performance scope</source>
+				<target>Leistungsumfang</target>
+			</trans-unit>
+			<trans-unit id="pages.overview">
+				<source>Overview</source>
+				<target>Übersicht</target>
+			</trans-unit>
+			<trans-unit id="pages.contents">
+				<source>Course contents</source>
+				<target>Inhalt des Kurses</target>
+			</trans-unit>
+			<trans-unit id="pages.after_course">
+				<source>After graduation</source>
+				<target>Nach der Graduierung</target>
+			</trans-unit>
+			<trans-unit id="pages.application">
+				<source>Application</source>
+				<target>Antrag</target>
+			</trans-unit>
+			<trans-unit id="pages.before_course">
+				<source>Before beginning studies</source>
+				<target>Vor Beginn des Studiums</target>
+			</trans-unit>
+			<trans-unit id="pages.contact">
+				<source>Contact</source>
+				<target>Kontakt</target>
+			</trans-unit>
+			<trans-unit id="sys_category.courses">
+				<source>Course category types</source>
+				<target>Typen von Kurskategorien</target>
+			</trans-unit>
+			<trans-unit id="sys_category.type.application_period">
+				<source>Application period</source>
+				<target>Bewerbungszeitraum</target>
+			</trans-unit>
+			<trans-unit id="sys_category.type.begin_course">
+				<source>Begin of course</source>
+				<target>Beginn der Kurs</target>
+			</trans-unit>
+			<trans-unit id="sys_category.type.costs">
+				<source>Costs</source>
+				<target>Kosten</target>
+			</trans-unit>
+			<trans-unit id="sys_category.type.degree">
+				<source>Degree</source>
+				<target>Grad</target>
+			</trans-unit>
+			<trans-unit id="sys_category.type.standard_period">
+				<source>Standard period</source>
+				<target>Standardzeitraum</target>
+			</trans-unit>
+			<trans-unit id="sys_category.type.course_type">
+				<source>Type of course</source>
+				<target>Art des Kurses</target>
+			</trans-unit>
+			<trans-unit id="sys_category.type.teaching_language">
+				<source>Teaching language</source>
+				<target>Sprachunterricht</target>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>
