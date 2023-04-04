@@ -2,10 +2,11 @@
 
 declare(strict_types=1);
 
-namespace FGTCLB\EducationalCourse\Domain\Model;
+namespace FGTCLB\EducationalCourse\Domain\Collection;
 
 use Countable;
 use FGTCLB\EducationalCourse\Domain\Enumeration\Category;
+use FGTCLB\EducationalCourse\Domain\Model\EducationalCategory;
 use FGTCLB\EducationalCourse\Exception\Domain\CategoryExistException;
 use Iterator;
 

@@ -6,8 +6,8 @@ namespace FGTCLB\EducationalCourse\Domain\Repository;
 
 use Doctrine\DBAL\DBALException;
 use Doctrine\DBAL\Driver\Exception;
+use FGTCLB\EducationalCourse\Domain\Collection\CategoryCollection;
 use FGTCLB\EducationalCourse\Domain\Enumeration\Category;
-use FGTCLB\EducationalCourse\Domain\Model\CategoryCollection;
 use FGTCLB\EducationalCourse\Domain\Model\EducationalCategory;
 use FGTCLB\EducationalCourse\Exception\Domain\CategoryExistException;
 use TYPO3\CMS\Core\Database\Connection;
