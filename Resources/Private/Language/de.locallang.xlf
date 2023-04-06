@@ -28,7 +28,7 @@
 			</trans-unit>
 			<trans-unit id="pages.job_profile">
 				<source>Job profile</source>
-				<target>Berufsprofil</target>
+				<target>Berufsbilder</target>
 			</trans-unit>
 			<trans-unit id="pages.performance_scope">
 				<source>Performance scope</source>
@@ -52,7 +52,7 @@
 			</trans-unit>
 			<trans-unit id="pages.before_course">
 				<source>Before beginning studies</source>
-				<target>Vor Beginn des Studiums</target>
+				<target>Studienbeginn</target>
 			</trans-unit>
 			<trans-unit id="pages.contact">
 				<source>Contact</source>
@@ -76,19 +76,27 @@
 			</trans-unit>
 			<trans-unit id="sys_category.type.degree">
 				<source>Degree</source>
-				<target>Grad</target>
+				<target>Abschluss</target>
+			</trans-unit>
+			<trans-unit id="sys_category.type.department">
+				<source>Department / Faculty</source>
+				<target>Abteilung / Fakultät</target>
 			</trans-unit>
 			<trans-unit id="sys_category.type.standard_period">
 				<source>Standard period</source>
-				<target>Standardzeitraum</target>
+				<target>Regelstudienzeit</target>
 			</trans-unit>
 			<trans-unit id="sys_category.type.course_type">
 				<source>Type of course</source>
-				<target>Art des Kurses</target>
+				<target>Studienform</target>
 			</trans-unit>
 			<trans-unit id="sys_category.type.teaching_language">
 				<source>Teaching language</source>
-				<target>Sprachunterricht</target>
+				<target>Lehrsprache</target>
+			</trans-unit>
+			<trans-unit id="sys_category.type.topic">
+				<source>Topic</source>
+				<target>Thema</target>
 			</trans-unit>
 		</body>
 	</file>
