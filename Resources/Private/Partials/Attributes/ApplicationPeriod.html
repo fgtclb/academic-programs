@@ -3,9 +3,11 @@
     xmlns:f="https://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
     data-namespace-typo3-fluid="true"
 >
-<ul>
-    <f:for each="{applicationPeriod}" as="application">
-        <li>{application.data.title}</li>
-    </f:for>
-</ul>
+<f:if condition="{applicationPeriod}">
+    <ul>
+        <f:for each="{applicationPeriod}" as="application">
+            <li>{application.data.title}</li>
+        </f:for>
+    </ul>
+</f:if>
 </html>
