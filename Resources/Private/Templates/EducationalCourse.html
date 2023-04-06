@@ -14,6 +14,9 @@
             <f:cObject typoscriptObjectPath="styles.content.getOverview"/>
         </div>
         <section class="content">
+            <aside class="study-attributes">
+                <f:render partial="Attributes" arguments="{_all}"/>
+            </aside>
             <f:cObject typoscriptObjectPath="styles.content.getContent"/>
         </section>
         <section class="after-study">
@@ -26,9 +29,6 @@
             <f:cObject typoscriptObjectPath="styles.content.getBeforeStudy"/>
         </section>
     </main>
-    <aside class="study-attributes">
-        <f:render partial="Attributes" arguments="{_all}"/>
-    </aside>
     <footer>
         <f:cObject typoscriptObjectPath="styles.content.getContact"/>
     </footer>
