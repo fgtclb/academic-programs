@@ -23,4 +23,8 @@ styles.content {
   getContact {
     select.where = {#colPos}=5
   }
+  getIntro < styles.content.get
+  getIntro {
+    select.where = {#colPos}=6
+  }
 }

@@ -6,9 +6,17 @@ mod {
         config {
           backend_layout {
             colCount = 1
-            rowCount = 6
+            rowCount = 7
             rows {
               1 {
+                columns {
+                  1 {
+                    name = LLL:EXT:educational_course/Resources/Private/Language/locallang.xlf:pages.intro
+                    colPos = 6
+                  }
+                }
+              }
+              2 {
                 columns {
                   1 {
                     name = LLL:EXT:educational_course/Resources/Private/Language/locallang.xlf:pages.overview
@@ -16,7 +24,7 @@ mod {
                   }
                 }
               }
-              2 {
+              3 {
                 columns {
                   1 {
                     name = LLL:EXT:educational_course/Resources/Private/Language/locallang.xlf:pages.contents
@@ -24,7 +32,7 @@ mod {
                   }
                 }
               }
-              3 {
+              4 {
                 columns {
                   1 {
                     name = LLL:EXT:educational_course/Resources/Private/Language/locallang.xlf:pages.after_course
@@ -32,7 +40,7 @@ mod {
                   }
                 }
               }
-              4 {
+              5 {
                 columns {
                   1 {
                     name = LLL:EXT:educational_course/Resources/Private/Language/locallang.xlf:pages.application
@@ -40,7 +48,7 @@ mod {
                   }
                 }
               }
-              5 {
+              6 {
                 columns {
                   1 {
                     name = LLL:EXT:educational_course/Resources/Private/Language/locallang.xlf:pages.before_course
@@ -48,7 +56,7 @@ mod {
                   }
                 }
               }
-              6 {
+              7 {
                 columns {
                   1 {
                     name = LLL:EXT:educational_course/Resources/Private/Language/locallang.xlf:pages.contact
