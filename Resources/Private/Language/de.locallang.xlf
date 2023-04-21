@@ -36,23 +36,23 @@
 			</trans-unit>
 			<trans-unit id="pages.overview">
 				<source>Overview</source>
-				<target>Übersicht</target>
+				<target>Überblick</target>
 			</trans-unit>
 			<trans-unit id="pages.contents">
-				<source>Course contents</source>
-				<target>Inhalt des Kurses</target>
+				<source>Study contents</source>
+				<target>Studieninhalte</target>
 			</trans-unit>
 			<trans-unit id="pages.after_course">
 				<source>After graduation</source>
-				<target>Nach der Graduierung</target>
+				<target>Nach dem Studium</target>
 			</trans-unit>
 			<trans-unit id="pages.application">
 				<source>Application</source>
-				<target>Antrag</target>
+				<target>Bewerbung</target>
 			</trans-unit>
 			<trans-unit id="pages.before_course">
 				<source>Before beginning studies</source>
-				<target>Studienbeginn</target>
+				<target>Vor Studienbeginn</target>
 			</trans-unit>
 			<trans-unit id="pages.contact">
 				<source>Contact</source>
