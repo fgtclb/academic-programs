@@ -15,3 +15,12 @@ page {
     }
   }
 }
+
+lib.contentElement {
+  templateRootPaths {
+    edu = EXT:educational_course/Resources/Private/Content/Templates/
+  }
+  layoutRootPaths {
+    edu = EXT:educational_course/Resources/Private/Content/Layouts/
+  }
+}

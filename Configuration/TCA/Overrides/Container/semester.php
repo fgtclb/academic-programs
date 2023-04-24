@@ -31,8 +31,8 @@ declare(strict_types=1);
             'label' => 'LLL:EXT:educational_course/Resources/Private/Language/locallang_be.xlf:container.semester.header',
             'config' => [
                 'max' => 10,
-                'eval' => 'required'
-            ]
-        ]
+                'eval' => 'required',
+            ],
+        ],
     ];
 })();
