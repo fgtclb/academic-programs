@@ -13,6 +13,9 @@
 		"typo3/cms-core": "^11.5",
 		"fgtclb/fgtclb-educational": "*"
 	},
+	"suggest": {
+		"b13/container": "*"
+	},
 	"autoload": {
 		"psr-4": {
 			"FGTCLB\\EducationalCourse\\": "Classes/"
