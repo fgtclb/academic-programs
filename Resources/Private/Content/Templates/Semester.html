@@ -7,9 +7,12 @@
 
 <f:section name="Main">
     <div class="semester">
-        <f:for each="{children_950}" as="semesterContent">
-            <f:format.raw>{semesterContent.renderedContent}</f:format.raw>
-        </f:for>
+        <div class="header">{data.header}</div>
+        <div class="content">
+            <f:for each="{children_950}" as="semesterContent">
+                <f:format.raw>{semesterContent.renderedContent}</f:format.raw>
+            </f:for>
+        </div>
     </div>
 </f:section>
 </html>
