@@ -1,0 +1,14 @@
+tt_content.all_semesters < lib.contentElement
+tt_content.all_semesters {
+  templateName = AllSemesters
+  dataProcessing {
+    100 = B13\Container\DataProcessing\ContainerProcessor
+  }
+}
+tt_content.semester < lib.contentElement
+tt_content.semester {
+  templateName = Semester
+  dataProcessing {
+    100 = B13\Container\DataProcessing\ContainerProcessor
+  }
+}
