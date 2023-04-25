@@ -1,18 +1,18 @@
-<html
-    lang="en"
-    xmlns:f="https://typo3.org/ns/TYPO3Fluid/Fluid/ViewHelpers"
-    data-namespace-typo3-fluid="true"
->
-<f:layout name="ContainerLayout"/>
+<html lang="en"
+      xmlns:f="https://typo3.org/ns/TYPO3Fluid/Fluid/ViewHelpers"
+      data-namespace-typo3-fluid="true">
+<f:layout name="ContainerLayout" />
 
 <f:section name="Main">
-    <div class="semester">
-        <div class="header">{data.header}</div>
-        <div class="content">
-            <f:for each="{children_950}" as="semesterContent">
+    <div class="semester-item">
+        <f:for each="{children_950}" as="semesterContent" iteration="iteration">
+            <a class="semester-item-tab" data-bs-toggle="collapse" href="#tab-{semesterContent.uid}-{iterator.index}" role="tab" aria-expanded="false" aria-controls="tab-{semesterContent.uid}-{iterator.index}">
+                <span>{data.header}</span>
+            </a>
+            <div class="semester-item-content collapse {f:if(condition: '{iteration.index}', then: 'show')}" id="tab-{semesterContent.uid}-{iterator.index}" role="tabpanel" aria-labelledby="tab-{semesterContent.uid}-{iterator.index}">
                 <f:format.raw>{semesterContent.renderedContent}</f:format.raw>
-            </f:for>
-        </div>
+            </div>
+        </f:for>
     </div>
 </f:section>
 </html>
