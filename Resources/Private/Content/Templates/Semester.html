@@ -4,15 +4,11 @@
 <f:layout name="ContainerLayout" />
 
 <f:section name="Main">
-    <div class="semester-item">
-        <f:for each="{children_950}" as="semesterContent" iteration="iteration">
-            <a class="semester-item-tab" data-bs-toggle="collapse" href="#tab-{semesterContent.uid}-{iterator.index}" role="tab" aria-expanded="false" aria-controls="tab-{semesterContent.uid}-{iterator.index}">
-                <span>{data.header}</span>
-            </a>
-            <div class="semester-item-content collapse {f:if(condition: '{iteration.index}', then: 'show')}" id="tab-{semesterContent.uid}-{iterator.index}" role="tabpanel" aria-labelledby="tab-{semesterContent.uid}-{iterator.index}">
-                <f:format.raw>{semesterContent.renderedContent}</f:format.raw>
-            </div>
-        </f:for>
-    </div>
+    <f:for each="{children_950}" as="semesterContent" iteration="iteration">
+        <div class="semester-wrapper-content-item">
+            <h4 class="semester-wrapper-content-item-header">{data.header}</h4>
+            <f:format.raw>{semesterContent.renderedContent}</f:format.raw>
+        </div>
+    </f:for>
 </f:section>
 </html>
