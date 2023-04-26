@@ -1,14 +1,18 @@
-<html lang="en"
-      xmlns:f="https://typo3.org/ns/TYPO3Fluid/Fluid/ViewHelpers"
-      data-namespace-typo3-fluid="true">
-<f:layout name="ContainerLayout" />
+<html
+    lang="en"
+    xmlns:f="https://typo3.org/ns/TYPO3Fluid/Fluid/ViewHelpers"
+    data-namespace-typo3-fluid="true"
+>
+<f:layout name="ContainerLayout"/>
 
 <f:section name="Main">
-    <f:for each="{children_950}" as="semesterContent" iteration="iteration">
-        <div class="semester-wrapper-content-item">
-            <h4 class="semester-wrapper-content-item-header">{data.header}</h4>
-            <f:format.raw>{semesterContent.renderedContent}</f:format.raw>
+    <div class="semester">
+        <div class="header">{data.header}</div>
+        <div class="content">
+            <f:for each="{children_950}" as="semesterContent">
+                <f:format.raw>{semesterContent.renderedContent}</f:format.raw>
+            </f:for>
         </div>
-    </f:for>
+    </div>
 </f:section>
 </html>

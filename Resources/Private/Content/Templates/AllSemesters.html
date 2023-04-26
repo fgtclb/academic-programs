@@ -7,23 +7,9 @@
 
 <f:section name="Main">
     <div class="semester-wrapper">
-        <ul class="semester-wrapper-tabs" role="tablist">
-            <f:for each="{children_900}" as="content" iteration="iterator">
-                <li class="semester-item-tabs-item" role="presentation">
-                    <a class="semester-item-tabs-item-text{f:if(condition: '{iterator.cycle} == 1', then: ' active')}" data-bs-toggle="tab" data-bs-target="#semester-{content.uid}-tab" href="#semester-{content.uid}" role="tab" aria-expanded="false" aria-controls="semester-{content.uid}">
-                        {iterator.cycle}
-                    </a>
-                </li>
-            </f:for>
-        </ul>
-
-        <div class="semester-wrapper-content">
-            <f:for each="{children_900}" as="content" iteration="iterator">
-                <div id="semester-{content.uid}-tab" class="semester-wrapper-content collapse {f:if(condition: '{iterator.cycle} == 1', then: ' show')}" role="tabpanel" aria-labelledby="semester-{content.uid}">
-                    <f:format.raw>{content.renderedContent}</f:format.raw>
-                </div>
-            </f:for>
-        </div>
+        <f:for each="{children_900}" as="content">
+            <f:format.raw>{content.renderedContent}</f:format.raw>
+        </f:for>
     </div>
 </f:section>
 </html>
