@@ -25,12 +25,16 @@ declare(strict_types=1);
                 => $iconType(\FGTCLB\EducationalCourse\Domain\Enumeration\Category::TYPE_COSTS),
                 \FGTCLB\EducationalCourse\Domain\Enumeration\Category::TYPE_DEGREE
                 => $iconType(\FGTCLB\EducationalCourse\Domain\Enumeration\Category::TYPE_DEGREE),
+                \FGTCLB\EducationalCourse\Domain\Enumeration\Category::TYPE_DEPARTMENT
+                => $iconType(\FGTCLB\EducationalCourse\Domain\Enumeration\Category::TYPE_DEPARTMENT),
                 \FGTCLB\EducationalCourse\Domain\Enumeration\Category::TYPE_STANDARD_PERIOD
                 => $iconType(\FGTCLB\EducationalCourse\Domain\Enumeration\Category::TYPE_STANDARD_PERIOD),
                 \FGTCLB\EducationalCourse\Domain\Enumeration\Category::TYPE_COURSE_TYPE
                 => $iconType(\FGTCLB\EducationalCourse\Domain\Enumeration\Category::TYPE_COURSE_TYPE),
                 \FGTCLB\EducationalCourse\Domain\Enumeration\Category::TYPE_TEACHING_LANGUAGE
                 => $iconType(\FGTCLB\EducationalCourse\Domain\Enumeration\Category::TYPE_TEACHING_LANGUAGE),
+                \FGTCLB\EducationalCourse\Domain\Enumeration\Category::TYPE_TOPIC
+                => $iconType(\FGTCLB\EducationalCourse\Domain\Enumeration\Category::TYPE_TOPIC),
             ],
         ],
     ];
