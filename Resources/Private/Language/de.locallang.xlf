@@ -68,7 +68,7 @@
 			</trans-unit>
 			<trans-unit id="sys_category.type.begin_course">
 				<source>Begin of course</source>
-				<target>Beginn der Kurs</target>
+				<target>Studienbeginn</target>
 			</trans-unit>
 			<trans-unit id="sys_category.type.costs">
 				<source>Costs</source>
