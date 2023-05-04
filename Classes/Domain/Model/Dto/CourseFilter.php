@@ -4,14 +4,27 @@ declare(strict_types=1);
 
 namespace FGTCLB\EducationalCourse\Domain\Model\Dto;
 
-use FGTCLB\EducationalCourse\Domain\Collection\CategoryCollection;
+use FGTCLB\EducationalCourse\Domain\Model\EducationalCategory;
 
 class CourseFilter
 {
-    protected CategoryCollection $selectedCategories;
+    protected ?EducationalCategory $applicationPeriod = null;
 
-    public function __construct()
+    protected ?EducationalCategory $costs = null;
+
+    /**
+     * @return EducationalCategory|null
+     */
+    public function getApplicationPeriod(): ?EducationalCategory
     {
-        $this->selectedCategories = new CategoryCollection();
+        return $this->applicationPeriod;
+    }
+
+    /**
+     * @return EducationalCategory|null
+     */
+    public function getCosts(): ?EducationalCategory
+    {
+        return $this->costs;
     }
 }

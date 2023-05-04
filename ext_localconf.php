@@ -17,4 +17,12 @@
       @import "EXT:educational_course/Configuration/page.tsconfig"
    ');
     }
+
+    \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+        'EducationalCourse',
+        'CourseList',
+        [
+            \FGTCLB\EducationalCourse\Controller\CourseController::class => 'list'
+        ]
+    );
 })();
