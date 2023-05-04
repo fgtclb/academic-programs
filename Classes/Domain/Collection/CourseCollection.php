@@ -77,7 +77,6 @@ final class CourseCollection implements Iterator, Countable
             $courseCollection->attach($course);
         }
 
-
         return $courseCollection;
     }
 
