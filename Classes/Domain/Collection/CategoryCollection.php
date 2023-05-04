@@ -4,16 +4,19 @@ declare(strict_types=1);
 
 namespace FGTCLB\EducationalCourse\Domain\Collection;
 
+use ArrayAccess;
 use Countable;
 use FGTCLB\EducationalCourse\Domain\Enumeration\Category;
 use FGTCLB\EducationalCourse\Domain\Model\EducationalCategory;
 use FGTCLB\EducationalCourse\Exception\Domain\CategoryExistException;
 use Iterator;
+use TYPO3\CMS\Core\Type\Exception\InvalidEnumerationValueException;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * @implements Iterator<int, EducationalCategory>
  */
-class CategoryCollection implements Countable, Iterator
+class CategoryCollection implements Countable, Iterator, ArrayAccess
 {
     /**
      * @var EducationalCategory[]
@@ -134,5 +137,61 @@ class CategoryCollection implements Countable, Iterator
                 return count($this->container);
             }
         };
+    }
+
+    /**
+     * @param array<int|string, mixed> $arguments
+     * @throws InvalidEnumerationValueException
+     */
+    public function __call(string $name, array $arguments): Iterator|Countable
+    {
+        $lowerName = GeneralUtility::camelCaseToLowerCaseUnderscored($name);
+        $enum = new Category($lowerName);
+
+        return $this->getAttributesByType($enum);
+    }
+
+    public function offsetExists(mixed $offset): bool
+    {
+        if (!is_string($offset)) {
+            return false;
+        }
+        $lowerName = GeneralUtility::camelCaseToLowerCaseUnderscored($offset);
+        try {
+            $enum = new Category($lowerName);
+            return true;
+        } catch (InvalidEnumerationValueException $e) {
+            return false;
+        }
+    }
+
+    /**
+     * @throws InvalidEnumerationValueException
+     */
+    public function offsetGet(mixed $offset): Iterator|false|Countable
+    {
+        if (!is_string($offset)) {
+            return false;
+        }
+        $lowerName = GeneralUtility::camelCaseToLowerCaseUnderscored($offset);
+        $enum = new Category($lowerName);
+
+        return $this->getAttributesByType($enum);
+    }
+
+    public function offsetSet(mixed $offset, mixed $value): void
+    {
+        throw new \InvalidArgumentException(
+            'Method should never be called',
+            1683214236549
+        );
+    }
+
+    public function offsetUnset(mixed $offset): void
+    {
+        throw new \InvalidArgumentException(
+            'Method should never be called',
+            1683214246022
+        );
     }
 }

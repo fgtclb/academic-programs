@@ -52,9 +52,31 @@ final class CourseCollection implements Iterator, Countable
         return $courseCollection;
     }
 
-    public static function getByFilter(CourseFilter $filter): CourseCollection
+    /**
+     * @throws CategoryExistException
+     * @throws Exception
+     * @throws DBALException
+     */
+    public static function getByFilter(?CourseFilter $filter = null): CourseCollection
     {
         $courseCollection = new self();
+
+        $coursePages = GeneralUtility::makeInstance(ConnectionPool::class)
+            ->getConnectionForTable('pages')
+            ->select(
+                ['uid'],
+                'pages',
+                [
+                    'doktype' => Page::TYPE_EDUCATIONAL_COURSE,
+                ]
+            )
+            ->fetchAllAssociative();
+
+        foreach ($coursePages as $coursePage) {
+            $course = new Course($coursePage['uid']);
+            $courseCollection->attach($course);
+        }
+
 
         return $courseCollection;
     }

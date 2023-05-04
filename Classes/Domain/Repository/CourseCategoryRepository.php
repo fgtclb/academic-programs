@@ -139,4 +139,59 @@ class CourseCategoryRepository
         }
         return $attributes;
     }
+
+    /**
+     * @throws CategoryExistException
+     * @throws DBALException
+     * @throws Exception
+     */
+    public function findAll(): CategoryCollection
+    {
+        $statement = $this->connection->select(
+            'sys_category.uid',
+            'sys_category.type',
+            'sys_category.title'
+        )
+            ->from('sys_category')
+            ->join(
+                'sys_category',
+                'sys_category_record_mm',
+                'mm',
+                'sys_category.uid=mm.uid_local'
+            )
+            ->join(
+                'mm',
+                'pages',
+                'pages',
+                'mm.uid_foreign=pages.uid'
+            )
+            ->groupBy('sys_category.uid')
+            ->where(
+                $this->connection->expr()->neq(
+                    'sys_category.type',
+                    $this->connection->createNamedParameter('')
+                ),
+                $this->connection->expr()->eq(
+                    'mm.tablenames',
+                    $this->connection->createNamedParameter('pages')
+                ),
+                $this->connection->expr()->eq(
+                    'mm.fieldname',
+                    $this->connection->createNamedParameter('categories')
+                ),
+            );
+
+        $attributes = new CategoryCollection();
+
+        foreach ($statement->executeQuery()->fetchAllAssociative() as $row) {
+            $attributes->attach(
+                new EducationalCategory(
+                    $row['uid'],
+                    Category::cast($row['type']),
+                    $row['title']
+                )
+            );
+        }
+        return $attributes;
+    }
 }

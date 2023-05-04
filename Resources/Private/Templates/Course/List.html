@@ -3,5 +3,104 @@
     xmlns:f="https://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
     data-namespace-typo3-fluid="true"
 >
-
+<f:form action="list" object="{filter}" name="filter" objectName="filter">
+    <label for="applicationPeriod">{f:translate(key: 'sys_category.type.application_period')}</label>
+    <f:form.select
+        id="applicationPeriod"
+        property="applicationPeriod"
+        value="{filter.applicationPeriod}"
+        options="{categories.applicationPeriod}"
+        optionValueField="uid"
+        optionLabelField="title"
+    />
+    <label for="beginCourse">{f:translate(key: 'sys_category.type.begin_course')}</label>
+    <f:form.select
+        id="beginCourse"
+        property="beginCourse"
+        value="{filter.beginCourse}"
+        options="{categories.beginCourse}"
+        optionValueField="uid"
+        optionLabelField="title"
+    />
+    <label for="costs">{f:translate(key: 'sys_category.type.costs')}</label>
+    <f:form.select
+        id="costs"
+        property="costs"
+        value="{filter.costs}"
+        options="{categories.costs}"
+        optionValueField="uid"
+        optionLabelField="title"
+    />
+    <label for="degree">{f:translate(key: 'sys_category.type.degree')}</label>
+    <f:form.select
+        id="degree"
+        property="degree"
+        value="{filter.degree}"
+        options="{categories.degree}"
+        optionValueField="uid"
+        optionLabelField="title"
+    />
+    <label for="department">{f:translate(key: 'sys_category.type.department')}</label>
+    <f:form.select
+        id="department"
+        property="department"
+        value="{filter.department}"
+        options="{categories.department}"
+        optionValueField="uid"
+        optionLabelField="title"
+    />
+    <label for="standardPeriod">{f:translate(key: 'sys_category.type.standard_period')}</label>
+    <f:form.select
+        id="standardPeriod"
+        property="standardPeriod"
+        value="{filter.standardPeriod}"
+        options="{categories.standardPeriod}"
+        optionValueField="uid"
+        optionLabelField="title"
+    />
+    <label for="courseType">{f:translate(key: 'sys_category.type.course_type')}</label>
+    <f:form.select
+        id="courseType"
+        property="courseType"
+        value="{filter.courseType}"
+        options="{categories.courseType}"
+        optionValueField="uid"
+        optionLabelField="title"
+    />
+    <label for="teachingLanguage">{f:translate(key: 'sys_category.type.teaching_language')}</label>
+    <f:form.select
+        id="teachingLanguage"
+        property="teachingLanguage"
+        value="{filter.teachingLanguage}"
+        options="{categories.teachingLanguage}"
+        optionValueField="uid"
+        optionLabelField="title"
+    />
+    <label for="topic">{f:translate(key: 'sys_category.type.topic')}</label>
+    <f:form.select
+        id="topic"
+        property="topic"
+        value="{filter.topic}"
+        options="{categories.topic}"
+        optionValueField="uid"
+        optionLabelField="title"
+    />
+</f:form>
+<div class="course-list">
+    <f:for each="{courses}" as="course">
+        <div
+            class="course"
+            data-application=""
+        >
+            <f:link.page pageUid="{course.uid}">
+                <h3>{course.title}</h3>
+                <p>
+                    <f:for each="{course.attributes.degree}" as="degree">
+                        {degree.title}
+                    </f:for>
+                </p>
+            </f:link.page>
+        </div>
+    </f:for>
+</div>
 </html>
