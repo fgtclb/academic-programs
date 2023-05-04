@@ -18,7 +18,6 @@ class CourseController extends ActionController
     public function __construct(
         protected readonly CourseCategoryRepository $categoryRepository
     ) {
-
     }
 
     /**

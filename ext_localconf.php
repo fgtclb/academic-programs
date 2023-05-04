@@ -22,7 +22,7 @@
         'EducationalCourse',
         'CourseList',
         [
-            \FGTCLB\EducationalCourse\Controller\CourseController::class => 'list'
+            \FGTCLB\EducationalCourse\Controller\CourseController::class => 'list',
         ]
     );
 })();
