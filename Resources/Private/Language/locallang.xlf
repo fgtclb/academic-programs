@@ -13,6 +13,15 @@
 			<trans-unit id="pages.educational_course">
 				<source>Educational Course page</source>
 			</trans-unit>
+			<trans-unit id="pages.intro">
+				<source>Introduction</source>
+			</trans-unit>
+			<trans-unit id="pages.navi">
+				<source>Navigation</source>
+			</trans-unit>
+			<trans-unit id="pages.structured">
+				<source>Structured data</source>
+			</trans-unit>
 			<trans-unit id="pages.course">
 				<source>Studies</source>
 			</trans-unit>

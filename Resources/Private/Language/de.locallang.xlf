@@ -14,6 +14,18 @@
 				<source>Educational Course page</source>
 				<target>Seite Bildungskurse</target>
 			</trans-unit>
+			<trans-unit id="pages.intro">
+				<source>Introduction</source>
+				<target>Einleitung</target>
+			</trans-unit>
+			<trans-unit id="pages.navi">
+				<source>Navigation</source>
+				<target>Navigation</target>
+			</trans-unit>
+			<trans-unit id="pages.structured">
+				<source>Structured data</source>
+				<target>Strukturierte Daten</target>
+			</trans-unit>
 			<trans-unit id="pages.course">
 				<source>Studies</source>
 				<target>Studien</target>
