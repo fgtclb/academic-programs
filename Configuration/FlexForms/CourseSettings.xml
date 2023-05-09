@@ -1,0 +1,30 @@
+<T3DataStructure>
+    <ROOT>
+        <TCEforms>
+            <sheetTitle>Filter</sheetTitle>
+        </TCEforms>
+        <type>array</type>
+        <el>
+            <settings.categories>
+                <TCEforms>
+                    <label>LLL:EXT:core/Resources/Private/Language/locallang_tca.xlf:sys_category.categories</label>
+                    <description></description>
+                    <config>
+                        <type>category</type>
+                        <default>0</default>
+                        <relationship>oneToMany</relationship>
+                        <foreign_table>sys_category</foreign_table>
+                        <foreign_table_where>AND {#sys_category}.{#type} != '' AND {#sys_category}.{#sys_language_uid} IN (-1, 0)</foreign_table_where>
+                        <maxitems>9999</maxitems>
+                        <MM>sys_category_record_mm</MM>
+                        <MM_match_fields>
+                            <fieldname>pi_flexform</fieldname>
+                            <tablenames>tt_content</tablenames>
+                        </MM_match_fields>
+                        <MM_opposite_field>items</MM_opposite_field>
+                    </config>
+                </TCEforms>
+            </settings.categories>
+        </el>
+    </ROOT>
+</T3DataStructure>
