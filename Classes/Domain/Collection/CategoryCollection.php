@@ -90,8 +90,22 @@ class CategoryCollection implements Countable, Iterator, ArrayAccess
         return $this->typeSortedContainer;
     }
 
-    public function getAttributesByType(Category $type): Iterator|Countable
+    /**
+     * @param Category|string $type
+     * @return Iterator<int, EducationalCategory>|Countable
+     */
+    public function getAttributesByType(Category|string $type): Iterator|Countable
     {
+        if (!array_key_exists((string)$type, $this->typeSortedContainer)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    'Category type "%s" must type of "%s"',
+                    $type,
+                    Category::class
+                ),
+                1683633304209
+            );
+        }
         return new class (
             $this->typeSortedContainer[(string)$type]
         ) implements Iterator, Countable {
