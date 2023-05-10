@@ -12,17 +12,15 @@ use FGTCLB\EducationalCourse\Domain\Model\EducationalCategory;
 use FGTCLB\EducationalCourse\Exception\Domain\CategoryExistException;
 use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
-use TYPO3\CMS\Core\Database\Query\QueryBuilder;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class CourseCategoryRepository
 {
-    protected QueryBuilder $connection;
+    protected ConnectionPool $connection;
 
     public function __construct()
     {
-        $this->connection = GeneralUtility::makeInstance(ConnectionPool::class)
-            ->getQueryBuilderForTable('sys_category');
+        $this->connection = GeneralUtility::makeInstance(ConnectionPool::class);
     }
 
     /**
@@ -32,11 +30,14 @@ class CourseCategoryRepository
      */
     public function findByType(int $pageId, Category $type): CategoryCollection
     {
-        $statement = $this->connection->select(
-            'sys_category.uid',
-            'sys_category.type',
-            'sys_category.title'
-        )
+        $db = $this->connection
+            ->getQueryBuilderForTable('sys_category');
+        $statement = $db
+            ->select(
+                'sys_category.uid',
+                'sys_category.type',
+                'sys_category.title'
+            )
             ->from('sys_category')
             ->join(
                 'sys_category',
@@ -51,21 +52,21 @@ class CourseCategoryRepository
                 'mm.uid_foreign=pages.uid'
             )
             ->where(
-                $this->connection->expr()->eq(
+                $db->expr()->eq(
                     'sys_category.type',
-                    $this->connection->createNamedParameter((string)$type)
+                    $db->createNamedParameter((string)$type)
                 ),
-                $this->connection->expr()->eq(
+                $db->expr()->eq(
                     'mm.tablenames',
-                    $this->connection->createNamedParameter('pages')
+                    $db->createNamedParameter('pages')
                 ),
-                $this->connection->expr()->eq(
+                $db->expr()->eq(
                     'mm.fieldname',
-                    $this->connection->createNamedParameter('categories')
+                    $db->createNamedParameter('categories')
                 ),
-                $this->connection->expr()->eq(
+                $db->expr()->eq(
                     'pages.uid',
-                    $this->connection->createNamedParameter($pageId, Connection::PARAM_INT)
+                    $db->createNamedParameter($pageId, Connection::PARAM_INT)
                 ),
             );
         $attributes = new CategoryCollection();
@@ -89,11 +90,14 @@ class CourseCategoryRepository
      */
     public function findAllByPageId(int $pageId): CategoryCollection
     {
-        $statement = $this->connection->select(
-            'sys_category.uid',
-            'sys_category.type',
-            'sys_category.title'
-        )
+        $db = $this->connection
+            ->getQueryBuilderForTable('sys_category');
+        $statement = $db
+            ->select(
+                'sys_category.uid',
+                'sys_category.type',
+                'sys_category.title'
+            )
             ->from('sys_category')
             ->join(
                 'sys_category',
@@ -108,21 +112,21 @@ class CourseCategoryRepository
                 'mm.uid_foreign=pages.uid'
             )
             ->where(
-                $this->connection->expr()->neq(
+                $db->expr()->neq(
                     'sys_category.type',
-                    $this->connection->createNamedParameter('')
+                    $db->createNamedParameter('')
                 ),
-                $this->connection->expr()->eq(
+                $db->expr()->eq(
                     'mm.tablenames',
-                    $this->connection->createNamedParameter('pages')
+                    $db->createNamedParameter('pages')
                 ),
-                $this->connection->expr()->eq(
+                $db->expr()->eq(
                     'mm.fieldname',
-                    $this->connection->createNamedParameter('categories')
+                    $db->createNamedParameter('categories')
                 ),
-                $this->connection->expr()->eq(
+                $db->expr()->eq(
                     'pages.uid',
-                    $this->connection->createNamedParameter($pageId, Connection::PARAM_INT)
+                    $db->createNamedParameter($pageId, Connection::PARAM_INT)
                 ),
             );
 
@@ -147,11 +151,14 @@ class CourseCategoryRepository
      */
     public function findAll(): CategoryCollection
     {
-        $statement = $this->connection->select(
-            'sys_category.uid',
-            'sys_category.type',
-            'sys_category.title'
-        )
+        $db = $this->connection
+            ->getQueryBuilderForTable('sys_category');
+        $statement = $db
+            ->select(
+                'sys_category.uid',
+                'sys_category.type',
+                'sys_category.title'
+            )
             ->from('sys_category')
             ->join(
                 'sys_category',
@@ -167,18 +174,78 @@ class CourseCategoryRepository
             )
             ->groupBy('sys_category.uid')
             ->where(
-                $this->connection->expr()->neq(
+                $db->expr()->neq(
                     'sys_category.type',
-                    $this->connection->createNamedParameter('')
+                    $db->createNamedParameter('')
                 ),
-                $this->connection->expr()->eq(
+                $db->expr()->eq(
                     'mm.tablenames',
-                    $this->connection->createNamedParameter('pages')
+                    $db->createNamedParameter('pages')
                 ),
-                $this->connection->expr()->eq(
+                $db->expr()->eq(
                     'mm.fieldname',
-                    $this->connection->createNamedParameter('categories')
+                    $db->createNamedParameter('categories')
                 ),
+            );
+
+        $attributes = new CategoryCollection();
+
+        foreach ($statement->executeQuery()->fetchAllAssociative() as $row) {
+            $attributes->attach(
+                new EducationalCategory(
+                    $row['uid'],
+                    Category::cast($row['type']),
+                    $row['title']
+                )
+            );
+        }
+        return $attributes;
+    }
+
+    public function getByDatabaseFields(
+        int $uid,
+        string $table = 'tt_content',
+        string $field = 'pi_flexform'
+    ): CategoryCollection {
+        $db = $this->connection
+            ->getQueryBuilderForTable('sys_category');
+        $statement = $db
+            ->select(
+                'sys_category.uid',
+                'sys_category.type',
+                'sys_category.title'
+            )
+            ->from('sys_category')
+            ->join(
+                'sys_category',
+                'sys_category_record_mm',
+                'sys_category_record_mm',
+                'sys_category.uid=sys_category_record_mm.uid_local'
+            )
+            ->join(
+                'sys_category_record_mm',
+                $table,
+                $table,
+                sprintf('sys_category_record_mm.uid_foreign=%s.uid', $table)
+            )
+            ->groupBy('sys_category.uid')
+            ->where(
+                $db->expr()->neq(
+                    'sys_category.type',
+                    $db->createNamedParameter('')
+                ),
+                $db->expr()->eq(
+                    'sys_category_record_mm.tablenames',
+                    $db->createNamedParameter($table)
+                ),
+                $db->expr()->eq(
+                    'sys_category_record_mm.fieldname',
+                    $db->createNamedParameter($field)
+                ),
+                $db->expr()->eq(
+                    'sys_category_record_mm.uid_foreign',
+                    $db->createNamedParameter($uid, Connection::PARAM_INT)
+                )
             );
 
         $attributes = new CategoryCollection();

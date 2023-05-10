@@ -27,7 +27,14 @@ class CourseController extends ActionController
      */
     public function listAction(?CourseFilter $filter = null): ResponseInterface
     {
-        $filter ??= new CourseFilter();
+        if ($filter === null) {
+            if ((int)$this->settings['categories'] > 0) {
+                $uid = $this->configurationManager->getContentObject()->data['uid'];
+                $filterCategories = $this->categoryRepository->getByDatabaseFields($uid);
+                $filter = CourseFilter::createByCategoryCollection($filterCategories);
+            }
+        }
+        $filter ??= CourseFilter::createEmpty();
         $courses = CourseCollection::getByFilter($filter);
         $categories = $this->categoryRepository->findAll();
 
