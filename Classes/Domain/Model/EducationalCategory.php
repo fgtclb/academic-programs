@@ -4,9 +4,12 @@ declare(strict_types=1);
 
 namespace FGTCLB\EducationalCourse\Domain\Model;
 
+use Doctrine\DBAL\DBALException;
+use Doctrine\DBAL\Driver\Exception;
 use FGTCLB\EducationalCourse\Domain\Collection\CategoryCollection;
 use FGTCLB\EducationalCourse\Domain\Enumeration\Category;
 use FGTCLB\EducationalCourse\Domain\Repository\EducationalCategoryRepository;
+use FGTCLB\EducationalCourse\Exception\Domain\CategoryExistException;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class EducationalCategory
@@ -19,6 +22,11 @@ class EducationalCategory
 
     protected ?CategoryCollection $children = null;
 
+    /**
+     * @throws CategoryExistException
+     * @throws DBALException
+     * @throws Exception
+     */
     public function __construct(
         int $uid,
         Category $type,

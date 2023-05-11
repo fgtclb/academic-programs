@@ -9,12 +9,18 @@ use Doctrine\DBAL\Driver\Exception;
 use FGTCLB\EducationalCourse\Domain\Collection\CategoryCollection;
 use FGTCLB\EducationalCourse\Domain\Enumeration\Category;
 use FGTCLB\EducationalCourse\Domain\Model\EducationalCategory;
+use FGTCLB\EducationalCourse\Exception\Domain\CategoryExistException;
 use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class EducationalCategoryRepository
 {
+    /**
+     * @throws CategoryExistException
+     * @throws DBALException
+     * @throws Exception
+     */
     public function findChildren(int $uid): ?CategoryCollection
     {
         $db = GeneralUtility::makeInstance(ConnectionPool::class)
@@ -27,11 +33,7 @@ class EducationalCategoryRepository
             );
         $children = new CategoryCollection();
 
-        try {
-            $result = $statement->executeQuery()->fetchAllAssociative();
-        } catch (DBALException|Exception $e) {
-            return null;
-        }
+        $result = $statement->executeQuery()->fetchAllAssociative();
 
         foreach ($result as $child) {
             $children->attach(
