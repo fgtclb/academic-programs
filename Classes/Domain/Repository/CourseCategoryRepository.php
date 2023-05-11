@@ -160,32 +160,11 @@ class CourseCategoryRepository
                 'sys_category.title'
             )
             ->from('sys_category')
-            ->join(
-                'sys_category',
-                'sys_category_record_mm',
-                'mm',
-                'sys_category.uid=mm.uid_local'
-            )
-            ->join(
-                'mm',
-                'pages',
-                'pages',
-                'mm.uid_foreign=pages.uid'
-            )
-            ->groupBy('sys_category.uid')
             ->where(
                 $db->expr()->neq(
                     'sys_category.type',
                     $db->createNamedParameter('')
-                ),
-                $db->expr()->eq(
-                    'mm.tablenames',
-                    $db->createNamedParameter('pages')
-                ),
-                $db->expr()->eq(
-                    'mm.fieldname',
-                    $db->createNamedParameter('categories')
-                ),
+                )
             );
 
         $attributes = new CategoryCollection();
