@@ -10,7 +10,9 @@ use FGTCLB\EducationalCourse\Domain\Collection\CategoryCollection;
 use FGTCLB\EducationalCourse\Domain\Collection\FileReferenceCollection;
 use FGTCLB\EducationalCourse\Domain\Repository\CourseCategoryRepository;
 use FGTCLB\EducationalCourse\Exception\Domain\CategoryExistException;
+use InvalidArgumentException;
 use TYPO3\CMS\Core\Domain\Repository\PageRepository;
+use TYPO3\CMS\Core\Resource\Exception\FileDoesNotExistException;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class Course
@@ -37,11 +39,19 @@ class Course
      * @throws CategoryExistException
      * @throws Exception
      * @throws DBALException
+     * @throws FileDoesNotExistException
+     * @throws InvalidArgumentException
      */
     public function __construct(int $databaseId)
     {
         $pageRepository = GeneralUtility::makeInstance(PageRepository::class);
         $page = $pageRepository->getPage($databaseId);
+        if (count($page) === 0) {
+            throw new InvalidArgumentException(
+                'Page not found',
+                1683811343841
+            );
+        }
         $this->uid = $page['uid'];
         $this->title = $page['title'] ?? '';
         $this->subtitle = $page['subtitle'] ?? '';
@@ -56,6 +66,10 @@ class Course
         $this->media = self::loadMedia($this->uid);
     }
 
+    /**
+     * @throws FileDoesNotExistException
+     * @throws Exception
+     */
     protected static function loadMedia(int $pageId): FileReferenceCollection
     {
         return FileReferenceCollection::getCollectionByPageIdAndField($pageId, 'media');
