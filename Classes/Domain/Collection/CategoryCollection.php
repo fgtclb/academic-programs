@@ -108,7 +108,7 @@ class CategoryCollection implements Countable, Iterator, ArrayAccess
         }
         return new class (
             $this->typeSortedContainer[(string)$type]
-        ) implements Iterator, Countable {
+        ) implements Iterator, Countable, \JsonSerializable {
             /**
              * @var EducationalCategory[]
              */
@@ -149,6 +149,15 @@ class CategoryCollection implements Countable, Iterator, ArrayAccess
             public function count(): int
             {
                 return count($this->container);
+            }
+
+            public function jsonSerialize(): mixed
+            {
+                $values = [];
+                foreach ($this->container as $category) {
+                    $values[] = $category->getUid();
+                }
+                return $values;
             }
         };
     }
