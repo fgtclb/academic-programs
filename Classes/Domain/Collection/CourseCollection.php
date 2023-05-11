@@ -101,27 +101,31 @@ final class CourseCollection implements Iterator, Countable
                     'sys_category_record_mm',
                     'mm',
                     'mm.uid_foreign=pages.uid'
-                );
+                )
+                    ->addSelectLiteral(
+                        'group_concat(uid_local) as filtercategories'
+                    )
+                    ->groupBy('pages.uid');
                 $addWhere = [];
                 if (count($orWhere) > 0) {
                     foreach ($orWhere as $parent => $children) {
                         $addOrWhere = [];
                         foreach ($children as $child) {
-                            $addOrWhere[] = $db->expr()->eq('mm.uid_local', $db->createNamedParameter($child, Connection::PARAM_INT));
+                            $addOrWhere[] = $db->expr()->inSet('filtercategories', $db->createNamedParameter($child, Connection::PARAM_INT));
                         }
                         if (count($addOrWhere) > 0) {
                             $addWhere[] = $db->expr()->or(...$addOrWhere);
                         }
                     }
                 }
-                $addWhere[] = $db->expr()->in('mm.uid_local', $andWhere);
-                $statement->andWhere(
+                foreach ($andWhere as $value) {
+                    $addWhere[] = $db->expr()->inSet('filtercategories', $db->createNamedParameter($value, Connection::PARAM_INT));
+                }
+                $statement->having(
                     ...$addWhere
                 );
             }
         }
-        $sql = $statement->getSQL();
-        $params = $statement->getParameters();
         $coursePages = $statement->executeQuery()->fetchAllAssociative();
 
         foreach ($coursePages as $coursePage) {
