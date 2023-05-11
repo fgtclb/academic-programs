@@ -14,6 +14,7 @@ use FGTCLB\EducationalCourse\Exception\Domain\CategoryExistException;
 use Iterator;
 use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
+use TYPO3\CMS\Core\Resource\Exception\FileDoesNotExistException;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
@@ -60,6 +61,7 @@ final class CourseCollection implements Iterator, Countable
      * @throws CategoryExistException
      * @throws Exception
      * @throws DBALException
+     * @throws FileDoesNotExistException
      */
     public static function getByFilter(?CourseFilter $filter = null): CourseCollection
     {
