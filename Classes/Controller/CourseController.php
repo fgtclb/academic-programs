@@ -29,9 +29,11 @@ class CourseController extends ActionController
     {
         if ($filter === null) {
             if ((int)$this->settings['categories'] > 0) {
-                $uid = $this->configurationManager->getContentObject()->data['uid'];
-                $filterCategories = $this->categoryRepository->getByDatabaseFields($uid);
-                $filter = CourseFilter::createByCategoryCollection($filterCategories);
+                if ($this->configurationManager->getContentObject() !== null) {
+                    $uid = $this->configurationManager->getContentObject()->data['uid'];
+                    $filterCategories = $this->categoryRepository->getByDatabaseFields($uid);
+                    $filter = CourseFilter::createByCategoryCollection($filterCategories);
+                }
             }
         }
         $filter ??= CourseFilter::createEmpty();
