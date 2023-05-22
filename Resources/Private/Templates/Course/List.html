@@ -4,6 +4,15 @@
     data-namespace-typo3-fluid="true"
 >
 <f:form action="list" object="{filter}" name="filter" objectName="filter">
+    <label for="admissionRestriction">{f:translate(key: 'sys_category.type.admission_restriction')}</label>
+    <f:form.select
+        id="admissionRestriction"
+        property="admissionRestriction"
+        value="{filter.admissionRestriction}"
+        options="{categories.admissionRestriction}"
+        optionValueField="uid"
+        optionLabelField="title"
+    />
     <label for="applicationPeriod">{f:translate(key: 'sys_category.type.application_period')}</label>
     <f:form.select
         id="applicationPeriod"
