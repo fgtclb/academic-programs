@@ -8,6 +8,8 @@ use TYPO3\CMS\Core\Type\Enumeration;
 
 class Category extends Enumeration
 {
+    public const TYPE_ADMISSION_RESTRICTION = 'admission_restriction';
+
     public const TYPE_APPLICATION_PERIOD = 'application_period';
 
     public const TYPE_BEGIN_COURSE = 'begin_course';

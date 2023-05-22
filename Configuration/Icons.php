@@ -19,6 +19,10 @@ $identifierString = function (string $identifier) {
 };
 
 return [
+    $identifierString(Category::TYPE_ADMISSION_RESTRICTION) => [
+        'provider' => \TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider::class,
+        'source' => $sourceString(Category::TYPE_ADMISSION_RESTRICTION),
+    ],
     $identifierString(Category::TYPE_APPLICATION_PERIOD) => [
         'provider' => \TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider::class,
         'source' => $sourceString(Category::TYPE_APPLICATION_PERIOD),

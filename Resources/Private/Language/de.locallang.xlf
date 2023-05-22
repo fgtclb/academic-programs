@@ -74,6 +74,10 @@
 				<source>Course category types</source>
 				<target>Typen von Kurskategorien</target>
 			</trans-unit>
+			<trans-unit id="sys_category.type.admission_restriction">
+				<source>Admission restriction</source>
+				<target>Zulassungsbeschränkung</target>
+			</trans-unit>
 			<trans-unit id="sys_category.type.application_period">
 				<source>Application period</source>
 				<target>Bewerbungszeitraum</target>
