@@ -58,6 +58,9 @@
 			<trans-unit id="sys_category.courses">
 				<source>Course category types</source>
 			</trans-unit>
+			<trans-unit id="sys_category.type.admission_restriction">
+				<source>Admission restriction</source>
+			</trans-unit>
 			<trans-unit id="sys_category.type.application_period">
 				<source>Application period</source>
 			</trans-unit>

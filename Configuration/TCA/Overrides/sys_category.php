@@ -17,6 +17,8 @@ declare(strict_types=1);
     $sysCategoryTcaTypeIconOverrides = [
         'ctrl' => [
             'typeicon_classes' => [
+                \FGTCLB\EducationalCourse\Domain\Enumeration\Category::TYPE_ADMISSION_RESTRICTION
+                => $iconType(\FGTCLB\EducationalCourse\Domain\Enumeration\Category::TYPE_ADMISSION_RESTRICTION),
                 \FGTCLB\EducationalCourse\Domain\Enumeration\Category::TYPE_APPLICATION_PERIOD
                 => $iconType(\FGTCLB\EducationalCourse\Domain\Enumeration\Category::TYPE_APPLICATION_PERIOD),
                 \FGTCLB\EducationalCourse\Domain\Enumeration\Category::TYPE_BEGIN_COURSE
@@ -39,6 +41,12 @@ declare(strict_types=1);
         ],
     ];
     $addItems = [
+        [
+            $llBackendType(\FGTCLB\EducationalCourse\Domain\Enumeration\Category::TYPE_ADMISSION_RESTRICTION),
+            \FGTCLB\EducationalCourse\Domain\Enumeration\Category::TYPE_ADMISSION_RESTRICTION,
+            $iconType(\FGTCLB\EducationalCourse\Domain\Enumeration\Category::TYPE_ADMISSION_RESTRICTION),
+            'courses',
+        ],
         [
             $llBackendType(\FGTCLB\EducationalCourse\Domain\Enumeration\Category::TYPE_APPLICATION_PERIOD),
             \FGTCLB\EducationalCourse\Domain\Enumeration\Category::TYPE_APPLICATION_PERIOD,
