@@ -1,0 +1,13 @@
+<html
+    lang="en"
+    xmlns:f="https://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+    data-namespace-typo3-fluid="true"
+>
+<f:if condition="{admissionRestriction}">
+    <ul>
+        <f:for each="{admissionRestriction}" as="restriction">
+            <li>{restriction.data.title}</li>
+        </f:for>
+    </ul>
+</f:if>
+</html>
