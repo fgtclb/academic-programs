@@ -21,6 +21,9 @@
 <f:if condition="{applicationPeriod}">
     <f:render partial="Attributes/ApplicationPeriod" arguments="{_all}"/>
 </f:if>
+<f:if condition="{admissionRestriction}">
+    <f:render partial="Attributes/AdmissionRestriction" arguments="{_all}"/>
+</f:if>
 <f:if condition="{data.prerequisites}">
     <f:render partial="Attributes/Prerequisites" arguments="{_all}"/>
 </f:if>
