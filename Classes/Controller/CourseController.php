@@ -11,6 +11,7 @@ use FGTCLB\EducationalCourse\Domain\Model\Dto\CourseFilter;
 use FGTCLB\EducationalCourse\Domain\Repository\CourseCategoryRepository;
 use FGTCLB\EducationalCourse\Exception\Domain\CategoryExistException;
 use Psr\Http\Message\ResponseInterface;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 
 class CourseController extends ActionController
@@ -37,7 +38,7 @@ class CourseController extends ActionController
             }
         }
         $filter ??= CourseFilter::createEmpty();
-        $courses = CourseCollection::getByFilter($filter);
+        $courses = CourseCollection::getByFilter($filter, GeneralUtility::intExplode(',', $this->configurationManager->getContentObject()->data['pages']));
         $categories = $this->categoryRepository->findAll();
 
         $assignedValues = [

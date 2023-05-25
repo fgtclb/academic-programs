@@ -11,9 +11,11 @@ use FGTCLB\EducationalCourse\Domain\Enumeration\Page;
 use FGTCLB\EducationalCourse\Domain\Model\Course;
 use FGTCLB\EducationalCourse\Domain\Model\Dto\CourseFilter;
 use FGTCLB\EducationalCourse\Exception\Domain\CategoryExistException;
+use FGTCLB\EducationalCourse\Utility\PagesUtility;
 use Iterator;
 use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
+use TYPO3\CMS\Core\Domain\Repository\PageRepository;
 use TYPO3\CMS\Core\Resource\Exception\FileDoesNotExistException;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
@@ -35,6 +37,7 @@ final class CourseCollection implements Iterator, Countable
      * @throws CategoryExistException
      * @throws Exception
      * @throws DBALException
+     * @throws FileDoesNotExistException
      */
     public static function getAll(): CourseCollection
     {
@@ -58,12 +61,13 @@ final class CourseCollection implements Iterator, Countable
     }
 
     /**
+     * @param int[] $fromPid
      * @throws CategoryExistException
      * @throws Exception
      * @throws DBALException
      * @throws FileDoesNotExistException
      */
-    public static function getByFilter(?CourseFilter $filter = null): CourseCollection
+    public static function getByFilter(?CourseFilter $filter = null, array $fromPid = []): CourseCollection
     {
         $courseCollection = new self();
 
@@ -125,6 +129,14 @@ final class CourseCollection implements Iterator, Countable
                 }
                 $statement->having(
                     ...$addWhere
+                );
+            }
+        }
+        if (count($fromPid)) {
+            $searchPids = PagesUtility::getPagesRecursively($fromPid);
+            if (count($searchPids)) {
+                $statement->andWhere(
+                    $db->expr()->in('uid', $searchPids)
                 );
             }
         }
