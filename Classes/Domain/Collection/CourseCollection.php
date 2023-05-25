@@ -15,7 +15,6 @@ use FGTCLB\EducationalCourse\Utility\PagesUtility;
 use Iterator;
 use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
-use TYPO3\CMS\Core\Domain\Repository\PageRepository;
 use TYPO3\CMS\Core\Resource\Exception\FileDoesNotExistException;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
@@ -101,7 +100,7 @@ final class CourseCollection implements Iterator, Countable
                     $andWhere[] = $filterCategory->getUid();
                 }
             }
-            if (count($andWhere) > 0) {
+            if (count($andWhere) > 0 || count($orWhere) > 0) {
                 $statement->join(
                     'pages',
                     'sys_category_record_mm',

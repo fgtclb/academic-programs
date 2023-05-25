@@ -11,6 +11,7 @@ use FGTCLB\EducationalCourse\Domain\Model\Dto\CourseFilter;
 use FGTCLB\EducationalCourse\Domain\Repository\CourseCategoryRepository;
 use FGTCLB\EducationalCourse\Exception\Domain\CategoryExistException;
 use Psr\Http\Message\ResponseInterface;
+use TYPO3\CMS\Core\Resource\Exception\FileDoesNotExistException;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 
@@ -25,6 +26,7 @@ class CourseController extends ActionController
      * @throws Exception
      * @throws DBALException
      * @throws CategoryExistException
+     * @throws FileDoesNotExistException
      */
     public function listAction(?CourseFilter $filter = null): ResponseInterface
     {
@@ -38,7 +40,15 @@ class CourseController extends ActionController
             }
         }
         $filter ??= CourseFilter::createEmpty();
-        $courses = CourseCollection::getByFilter($filter, GeneralUtility::intExplode(',', $this->configurationManager->getContentObject()->data['pages']));
+        $courses = CourseCollection::getByFilter(
+            $filter,
+            GeneralUtility::intExplode(
+                ',',
+                $this->configurationManager->getContentObject()
+                    ? $this->configurationManager->getContentObject()->data['pages']
+                    : []
+            )
+        );
         $categories = $this->categoryRepository->findAll();
 
         $assignedValues = [
