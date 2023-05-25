@@ -83,7 +83,8 @@ final class CourseCollection implements Iterator, Countable
                         Connection::PARAM_INT
                     )
                 )
-            );
+            )
+            ->orderBy('pages.title', 'ASC');
         if ($filter !== null) {
             $andWhere = [];
             $orWhere = [];
