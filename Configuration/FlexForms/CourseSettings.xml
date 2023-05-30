@@ -5,6 +5,21 @@
         </TCEforms>
         <type>array</type>
         <el>
+            <settings.filter.options>
+                <TCEforms>
+                    <label>LLL:EXT:educational_course/Resources/Private/Language/locallang_be.xlf:flexform.filter.options.title</label>
+                    <description>LLL:EXT:educational_course/Resources/Private/Language/locallang_be.xlf:flexform.filter.options.description</description>
+                    <config>
+                        <type>check</type>
+                        <items type="array">
+                            <numIndex index="0" type="array">
+                                <numIndex index="0"></numIndex>
+                                <numIndex index="1"></numIndex>
+                            </numIndex>
+                        </items>
+                    </config>
+                </TCEforms>
+            </settings.filter.options>
             <settings.categories>
                 <TCEforms>
                     <label>LLL:EXT:core/Resources/Private/Language/locallang_tca.xlf:sys_category.categories</label>

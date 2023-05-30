@@ -34,6 +34,14 @@
 				<source>Semester header, usually the number of the semester</source>
 				<target>Semester-Überschrift, normalerweise die Nummer des Semesters</target>
 			</trans-unit>
+			<trans-unit id="flexform.filter.options.title">
+				<source>Deactivate options for filtering</source>
+				<target>Deaktiviere die Optionen für die Filterung</target>
+			</trans-unit>
+			<trans-unit id="flexform.filter.options.description">
+				<source>If the option is enabled, options with filters will not be visible in the frontend</source>
+				<target>Wenn diese Option aktiviert ist, werden die Filteroptionen im Frontend nicht sichtbar</target>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>
