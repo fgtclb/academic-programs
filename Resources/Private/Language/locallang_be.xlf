@@ -28,7 +28,7 @@
 				<source>Semester header, usually the number of the semester</source>
 			</trans-unit>
 			<trans-unit id="flexform.filter.options.title">
-				<source>Deactivate options for filtering</source>
+				<source>Deactivate filtering</source>
 			</trans-unit>
 			<trans-unit id="flexform.filter.options.description">
 				<source>If the option is enabled, options with filters will not be visible in the frontend</source>

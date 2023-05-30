@@ -35,8 +35,8 @@
 				<target>Semester-Überschrift, normalerweise die Nummer des Semesters</target>
 			</trans-unit>
 			<trans-unit id="flexform.filter.options.title">
-				<source>Deactivate options for filtering</source>
-				<target>Deaktiviere die Optionen für die Filterung</target>
+				<source>Deactivate filters</source>
+				<target>Filterung deaktivieren</target>
 			</trans-unit>
 			<trans-unit id="flexform.filter.options.description">
 				<source>If the option is enabled, options with filters will not be visible in the frontend</source>
