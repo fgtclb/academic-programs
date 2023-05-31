@@ -66,9 +66,14 @@ final class CourseCollection implements Iterator, Countable
      * @throws DBALException
      * @throws FileDoesNotExistException
      */
-    public static function getByFilter(?CourseFilter $filter = null, array $fromPid = []): CourseCollection
-    {
+    public static function getByFilter(
+        ?CourseFilter $filter = null,
+        array $fromPid = [],
+        string $sorting = 'title asc'
+    ): CourseCollection {
         $courseCollection = new self();
+
+        [$sortingField, $sortingDirection] = explode(' ', $sorting);
 
         $db = GeneralUtility::makeInstance(ConnectionPool::class)
             ->getQueryBuilderForTable('pages');
@@ -84,7 +89,7 @@ final class CourseCollection implements Iterator, Countable
                     )
                 )
             )
-            ->orderBy('pages.title', 'ASC');
+            ->orderBy(sprintf('pages.%s', $sortingField), $sortingDirection);
         if ($filter !== null) {
             $andWhere = [];
             $orWhere = [];

@@ -30,6 +30,7 @@ class CourseController extends ActionController
      */
     public function listAction(?CourseFilter $filter = null): ResponseInterface
     {
+        $sorting = $this->settings['sorting'] ?? 'title asc';
         if ($filter === null) {
             if ((int)$this->settings['categories'] > 0) {
                 if ($this->configurationManager->getContentObject() !== null) {
@@ -47,7 +48,8 @@ class CourseController extends ActionController
                 $this->configurationManager->getContentObject()
                     ? $this->configurationManager->getContentObject()->data['pages']
                     : []
-            )
+            ),
+            $sorting
         );
         $categories = $this->categoryRepository->findAll();
 
