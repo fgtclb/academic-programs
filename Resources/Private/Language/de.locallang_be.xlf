@@ -42,6 +42,28 @@
 				<source>If the option is enabled, options with filters will not be visible in the frontend</source>
 				<target>Wenn diese Option aktiviert ist, werden die Filteroptionen im Frontend nicht sichtbar</target>
 			</trans-unit>
+			<trans-unit id="flexform.sorting">
+				<source>Sorting</source>
+				<target>Sortierung</target>
+			</trans-unit>
+			<trans-unit id="flexform.sorting.description">
+				<source>Define sorting in frontend</source>
+				<target>Sortierung im Frontend</target>
+			</trans-unit>
+			<trans-unit id="flexform.sorting.title.asc">
+				<source>A-Z</source>
+			</trans-unit>
+			<trans-unit id="flexform.sorting.desc">
+				<source>Z-A</source>
+			</trans-unit>
+			<trans-unit id="flexform.sorting.update">
+				<source>Last updated (latest first)</source>
+				<target>Letztes Update</target>
+			</trans-unit>
+			<trans-unit id="flexform.category.description">
+				<source>Select categories. Main categories will select all subcategories by OR, multiple categories selects by AND</source>
+				<target>Obere Kategorien nutzen alle Unterkategorien (OR), mehrere Kategorien werden verknüpft (AND)</target>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>

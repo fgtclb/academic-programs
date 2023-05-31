@@ -33,6 +33,24 @@
 			<trans-unit id="flexform.filter.options.description">
 				<source>If the option is enabled, options with filters will not be visible in the frontend</source>
 			</trans-unit>
+			<trans-unit id="flexform.sorting">
+				<source>Sorting</source>
+			</trans-unit>
+			<trans-unit id="flexform.sorting.description">
+				<source>Define sorting in frontend</source>
+			</trans-unit>
+			<trans-unit id="flexform.sorting.title.asc">
+				<source>A-Z</source>
+			</trans-unit>
+			<trans-unit id="flexform.sorting.desc">
+				<source>Z-A</source>
+			</trans-unit>
+			<trans-unit id="flexform.sorting.update">
+				<source>Last updated (latest first)</source>
+			</trans-unit>
+			<trans-unit id="flexform.category.description">
+				<source>Select categories. Main categories will select all subcategories by OR, multiple categories selects by AND</source>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>
