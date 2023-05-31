@@ -8,6 +8,7 @@ use Doctrine\DBAL\DBALException;
 use Doctrine\DBAL\Driver\Exception;
 use FGTCLB\EducationalCourse\Domain\Collection\CategoryCollection;
 use FGTCLB\EducationalCourse\Domain\Collection\FileReferenceCollection;
+use FGTCLB\EducationalCourse\Domain\Enumeration\Page;
 use FGTCLB\EducationalCourse\Domain\Repository\CourseCategoryRepository;
 use FGTCLB\EducationalCourse\Exception\Domain\CategoryExistException;
 use InvalidArgumentException;
@@ -64,6 +65,35 @@ class Course
             ->findAllByPageId($databaseId);
 
         $this->media = self::loadMedia($this->uid);
+    }
+
+    /**
+     * @throws Exception
+     * @throws DBALException
+     * @throws CategoryExistException
+     * @throws FileDoesNotExistException
+     */
+    public static function loadFromLink(int $linkId): Course
+    {
+        $pageRepository = GeneralUtility::makeInstance(PageRepository::class);
+        $pageToResolve = $pageRepository->getPage($linkId);
+        $originalPage = match ($pageToResolve['doktype']) {
+            PageRepository::DOKTYPE_SHORTCUT => $pageRepository->resolveShortcutPage($pageToResolve),
+            // @todo Allow Mountpoints
+            //PageRepository::DOKTYPE_MOUNTPOINT => $pageRepository->getMountPointInfo($linkId, $pageToResolve),
+            default => throw new InvalidArgumentException(
+                'Calling with doktypes other than 4 or 7 not allowed',
+                1685532706120
+            ),
+        };
+        if ($originalPage['doktype'] !== Page::TYPE_EDUCATIONAL_COURSE) {
+            throw new \RuntimeException(
+                sprintf('Page "%d" has no Course page linked', $linkId),
+                1685532982084
+            );
+        }
+
+        return new self($originalPage['uid']);
     }
 
     /**
