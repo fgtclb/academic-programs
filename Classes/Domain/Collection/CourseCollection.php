@@ -12,9 +12,13 @@ use FGTCLB\EducationalCourse\Domain\Model\Course;
 use FGTCLB\EducationalCourse\Domain\Model\Dto\CourseFilter;
 use FGTCLB\EducationalCourse\Exception\Domain\CategoryExistException;
 use FGTCLB\EducationalCourse\Utility\PagesUtility;
+use InvalidArgumentException;
 use Iterator;
+use RuntimeException;
 use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
+use TYPO3\CMS\Core\Database\Query\QueryBuilder;
+use TYPO3\CMS\Core\Domain\Repository\PageRepository;
 use TYPO3\CMS\Core\Resource\Exception\FileDoesNotExistException;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
@@ -40,23 +44,11 @@ final class CourseCollection implements Iterator, Countable
      */
     public static function getAll(): CourseCollection
     {
-        $courseCollection = new self();
-        $coursePages = GeneralUtility::makeInstance(ConnectionPool::class)
-            ->getConnectionForTable('pages')
-            ->select(
-                ['uid'],
-                'pages',
-                [
-                    'doktype' => Page::TYPE_EDUCATIONAL_COURSE,
-                ]
-            )
-            ->fetchAllAssociative();
+        $statement = self::buildDefaultQuery();
 
-        foreach ($coursePages as $coursePage) {
-            $course = new Course($coursePage['uid']);
-            $courseCollection->attach($course);
-        }
-        return $courseCollection;
+        $coursePages = $statement->executeQuery()->fetchAllAssociative();
+
+        return self::buildCollection($coursePages);
     }
 
     /**
@@ -71,24 +63,73 @@ final class CourseCollection implements Iterator, Countable
         array $fromPid = [],
         string $sorting = 'title asc'
     ): CourseCollection {
-        $courseCollection = new self();
+        $statement = self::buildDefaultQuery($filter, $fromPid, $sorting);
 
+        $coursePages = $statement->executeQuery()->fetchAllAssociative();
+
+        return self::buildCollection($coursePages);
+    }
+
+    /**
+     * @param array<int|string, mixed> $coursePages
+     * @throws CategoryExistException
+     * @throws DBALException
+     * @throws Exception
+     * @throws FileDoesNotExistException
+     */
+    private static function buildCollection(array $coursePages): CourseCollection
+    {
+        $courseCollection = new self();
+        foreach ($coursePages as $coursePage) {
+            if ($coursePage['doktype'] !== Page::TYPE_EDUCATIONAL_COURSE) {
+                try {
+                    $course = Course::loadFromLink($coursePage['uid']);
+                } catch (InvalidArgumentException|RuntimeException $exception) {
+                    // silent catch, avoid logging here,
+                    // as multiple doktypes can be excluded this way
+                    continue;
+                }
+            } else {
+                $course = new Course($coursePage['uid']);
+            }
+            $courseCollection->attach($course);
+        }
+
+        return $courseCollection;
+    }
+
+    /**
+     * @param int[] $fromPid
+     */
+    private static function buildDefaultQuery(
+        ?CourseFilter $filter = null,
+        array $fromPid = [],
+        string $sorting = 'title asc'
+    ): QueryBuilder {
         [$sortingField, $sortingDirection] = explode(' ', $sorting);
 
         $db = GeneralUtility::makeInstance(ConnectionPool::class)
             ->getQueryBuilderForTable('pages');
-        $statement = $db
-            ->select('pages.uid')
-            ->from('pages')
-            ->where(
-                $db->expr()->eq(
-                    'doktype',
-                    $db->createNamedParameter(
-                        Page::TYPE_EDUCATIONAL_COURSE,
-                        Connection::PARAM_INT
-                    )
+        $doktypes = $db->expr()->or(
+            $db->expr()->eq(
+                'doktype',
+                $db->createNamedParameter(
+                    Page::TYPE_EDUCATIONAL_COURSE,
+                    Connection::PARAM_INT
+                )
+            ),
+            $db->expr()->eq(
+                'doktype',
+                $db->createNamedParameter(
+                    PageRepository::DOKTYPE_SHORTCUT,
+                    Connection::PARAM_INT
                 )
             )
+        );
+        $statement = $db
+            ->select('pages.uid', 'pages.doktype')
+            ->from('pages')
+            ->where($doktypes)
             ->orderBy(sprintf('pages.%s', $sortingField), $sortingDirection);
         if ($filter !== null) {
             $andWhere = [];
@@ -122,15 +163,15 @@ final class CourseCollection implements Iterator, Countable
                     foreach ($orWhere as $parent => $children) {
                         $addOrWhere = [];
                         foreach ($children as $child) {
-                            $addOrWhere[] = $db->expr()->inSet('filtercategories', $db->createNamedParameter($child, Connection::PARAM_INT));
+                            $addOrWhere[] = $statement->expr()->inSet('filtercategories', $statement->createNamedParameter($child, Connection::PARAM_INT));
                         }
                         if (count($addOrWhere) > 0) {
-                            $addWhere[] = $db->expr()->or(...$addOrWhere);
+                            $addWhere[] = $statement->expr()->or(...$addOrWhere);
                         }
                     }
                 }
                 foreach ($andWhere as $value) {
-                    $addWhere[] = $db->expr()->inSet('filtercategories', $db->createNamedParameter($value, Connection::PARAM_INT));
+                    $addWhere[] = $statement->expr()->inSet('filtercategories', $statement->createNamedParameter($value, Connection::PARAM_INT));
                 }
                 $statement->having(
                     ...$addWhere
@@ -141,18 +182,11 @@ final class CourseCollection implements Iterator, Countable
             $searchPids = PagesUtility::getPagesRecursively($fromPid);
             if (count($searchPids)) {
                 $statement->andWhere(
-                    $db->expr()->in('uid', $searchPids)
+                    $statement->expr()->in('uid', $searchPids)
                 );
             }
         }
-        $coursePages = $statement->executeQuery()->fetchAllAssociative();
-
-        foreach ($coursePages as $coursePage) {
-            $course = new Course($coursePage['uid']);
-            $courseCollection->attach($course);
-        }
-
-        return $courseCollection;
+        return $statement;
     }
 
     private function attach(Course $course): void
