@@ -34,6 +34,14 @@
                                 <numIndex index="0">LLL:EXT:educational_course/Resources/Private/Language/locallang_be.xlf:flexform.sorting.update</numIndex>
                                 <numIndex index="1">lastUpdated desc</numIndex>
                             </numIndex>
+                            <numIndex index="3" type="array">
+                                <numIndex index="0">LLL:EXT:educational_course/Resources/Private/Language/locallang_be.xlf:flexform.sorting.update.asc</numIndex>
+                                <numIndex index="1">lastUpdated asc</numIndex>
+                            </numIndex>
+                            <numIndex index="4" type="array">
+                                <numIndex index="0">LLL:EXT:educational_course/Resources/Private/Language/locallang_be.xlf:flexform.sorting.sorting.asc</numIndex>
+                                <numIndex index="1">sorting asc</numIndex>
+                            </numIndex>
                         </items>
                     </config>
                 </TCEforms>
