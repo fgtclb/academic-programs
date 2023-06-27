@@ -18,7 +18,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class Course
 {
-    protected readonly int $uid;
+    protected int $uid;
 
     protected string $title;
 

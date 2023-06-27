@@ -18,7 +18,7 @@ use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 class CourseController extends ActionController
 {
     public function __construct(
-        protected readonly CourseCategoryRepository $categoryRepository
+        protected CourseCategoryRepository $categoryRepository
     ) {
     }
 
