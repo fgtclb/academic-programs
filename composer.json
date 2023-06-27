@@ -4,21 +4,54 @@
 	"description": "Study programme page for universities. Ships structured data preparation",
 	"minimum-stability": "stable",
 	"license": "GPL-2.0-or-later",
+	"repositories": {
+		"educational": {
+			"type": "vcs",
+			"url": "https://github.com/fgtclb/typo3-fgtclb-educational"
+		}
+	},
+	"config": {
+		"vendor-dir": ".Build/vendor",
+		"bin-dir": ".Build/bin",
+		"optimize-autoloader": true,
+		"sort-packages": true,
+		"allow-plugins": {
+			"typo3/class-alias-loader": true,
+			"typo3/cms-composer-installers": true
+		}
+	},
 	"extra": {
 		"typo3/cms": {
-			"extension-key": "educational_course"
+			"cms-package-dir": "{$vendor-dir}/typo3/cms",
+			"extension-key": "educational_course",
+			"ignore-as-root": false,
+			"web-dir": ".Build/public",
+			"app-dir": ".Build"
 		}
 	},
 	"require": {
+		"php": "^8.1",
 		"typo3/cms-core": "^11.5",
-		"fgtclb/fgtclb-educational": "*"
+		"fgtclb/fgtclb-educational": "^1.0"
+	},
+	"require-dev": {
+		"typo3/coding-standards": "^0.7.1"
 	},
 	"suggest": {
-		"b13/container": "*"
+		"b13/container": "Allowed container element options for course"
 	},
 	"autoload": {
 		"psr-4": {
 			"FGTCLB\\EducationalCourse\\": "Classes/"
 		}
+	},
+	"autoload-dev": {
+		"psr-4": {
+			"FGTCLB\\EducationalCourse\\Tests\\": "Tests/"
+		}
+	},
+	"scripts": {
+		"cs:check": ".Build/bin/php-cs-fixer fix --config php-cs-rules.php --ansi --diff --verbose --dry-run",
+		"cs:fix": ".Build/bin/php-cs-fixer fix --config php-cs-rules.php --ansi"
 	}
 }
