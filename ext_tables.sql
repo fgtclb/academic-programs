@@ -4,3 +4,8 @@ CREATE TABLE pages
 	performance_scope text,
 	prerequisites     text
 );
+
+
+CREATE TABLE sys_category (
+	tx_migrations_version VARCHAR(14) DEFAULT '' NOT NULL
+);
