@@ -32,7 +32,7 @@ class CourseController extends ActionController
     {
         $sorting = $this->settings['sorting'] ?? 'title asc';
         if ($filter === null) {
-            if ((int)$this->settings['categories'] > 0) {
+            if (isset($this->settings['categories']) && (int)$this->settings['categories'] > 0) {
                 if ($this->configurationManager->getContentObject() !== null) {
                     $uid = $this->configurationManager->getContentObject()->data['uid'];
                     $filterCategories = $this->categoryRepository->getByDatabaseFields($uid);
