@@ -123,4 +123,10 @@ declare(strict_types=1);
         $GLOBALS['TCA']['sys_category'],
         $sysCategoryTcaTypeIconOverrides
     );
+
+    $GLOBALS['TCA']['sys_category']['columns']['tx_migrations_version'] = [
+        'config' => [
+            'type' => 'passthrough',
+        ],
+    ];
 })();

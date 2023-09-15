@@ -8,6 +8,10 @@
 		"educational": {
 			"type": "vcs",
 			"url": "https://github.com/fgtclb/typo3-fgtclb-educational"
+		},
+		"typo3-ext-migrations": {
+			"type": "vcs",
+			"url": "https://github.com/andreaswolf/typo3-ext-migrations"
 		}
 	},
 	"config": {
@@ -31,10 +35,25 @@
 	},
 	"require": {
 		"php": "^8.0",
+		"fgtclb/fgtclb-educational": "^1.0",
+		"typo3/cms-backend": "^11.5",
 		"typo3/cms-core": "^11.5",
-		"fgtclb/fgtclb-educational": "^1.0"
+		"typo3/cms-extbase": "^11.5",
+		"typo3/cms-fluid": "^11.5"
 	},
 	"require-dev": {
+		"fakerphp/faker": "^1.23",
+		"friendsofphp/php-cs-fixer": "^3.14",
+		"helhum/typo3-console": "^7.1",
+		"kaystrobach/migrations": "^0.11",
+		"phpstan/phpstan": "^1.10",
+		"saschaegerer/phpstan-typo3": "^1.8",
+		"typo3/cms-extensionmanager": "^11.5",
+		"typo3/cms-fluid-styled-content": "^11.5",
+		"typo3/cms-frontend": "^11.5",
+		"typo3/cms-info": "^11.5",
+		"typo3/cms-lowlevel": "^11.5",
+		"typo3/cms-tstemplate": "^11.5",
 		"typo3/coding-standards": "^0.7.1"
 	},
 	"suggest": {
@@ -42,7 +61,8 @@
 	},
 	"autoload": {
 		"psr-4": {
-			"FGTCLB\\EducationalCourse\\": "Classes/"
+			"FGTCLB\\EducationalCourse\\": "Classes/",
+			"FGTCLB\\EducationalCourse\\Migrations\\": "Migrations/"
 		}
 	},
 	"autoload-dev": {
@@ -51,7 +71,9 @@
 		}
 	},
 	"scripts": {
-		"cs:check": ".Build/bin/php-cs-fixer fix --config php-cs-rules.php --ansi --diff --verbose --dry-run",
-		"cs:fix": ".Build/bin/php-cs-fixer fix --config php-cs-rules.php --ansi"
+		"cs:check": "php-cs-fixer fix --config Build/php-cs-fixer/.php-cs-fixer.php --ansi --diff --verbose --dry-run",
+		"cs:fix": "php-cs-fixer fix --config Build/php-cs-fixer/.php-cs-fixer.php --ansi",
+		"analyze:php": "phpstan analyse --ansi --no-progress --memory-limit=1024M --configuration=Build/phpstan/phpstan.neon",
+		"analyze:baseline": "phpstan analyse --ansi --no-progress --memory-limit=1024M --configuration=Build/phpstan/phpstan.neon --generate-baseline=./build/phpstan/phpstan-baseline.neon"
 	}
 }
