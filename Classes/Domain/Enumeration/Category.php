@@ -27,4 +27,15 @@ class Category extends Enumeration
     public const TYPE_TEACHING_LANGUAGE = 'teaching_language';
 
     public const TYPE_TOPIC = 'topic';
+
+    public static function typeExist(string $value): bool
+    {
+        foreach (Category::getConstants() as $constantValue) {
+            if ($value === (string)$constantValue) {
+                return true;
+            }
+        }
+
+        return false;
+    }
 }
