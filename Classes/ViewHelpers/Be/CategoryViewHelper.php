@@ -8,7 +8,7 @@ use Doctrine\DBAL\DBALException;
 use Doctrine\DBAL\Driver\Exception;
 use FGTCLB\EducationalCourse\Domain\Enumeration\Category;
 use FGTCLB\EducationalCourse\Domain\Repository\CourseCategoryRepository;
-use TYPO3\CMS\Core\Type\Exception\InvalidEnumerationValueException;
+use FGTCLB\EducationalCourse\Exception\CategoryTypeException;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface;
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
@@ -61,9 +61,13 @@ class CategoryViewHelper extends AbstractViewHelper
 
         $repository = GeneralUtility::makeInstance(CourseCategoryRepository::class);
         try {
-            $categoryType = Category::cast($arguments['type']);
-            $attributes = $repository->findByType($arguments['page'], $categoryType);
-        } catch (InvalidEnumerationValueException $e) {
+            if (Category::typeExist($arguments['type'])) {
+                $categoryType = Category::cast($arguments['type']);
+                $attributes = $repository->findByType($arguments['page'], $categoryType);
+            } else {
+                throw new CategoryTypeException(sprintf('The category type "%s" not exist', $arguments['type']), 1694770343759);
+            }
+        } catch (\Exception $exception) {
             $attributes = $repository->findAllByPageId($arguments['page']);
         }
 

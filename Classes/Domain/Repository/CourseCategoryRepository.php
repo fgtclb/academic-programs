@@ -112,9 +112,9 @@ class CourseCategoryRepository
                 'mm.uid_foreign=pages.uid'
             )
             ->where(
-                $db->expr()->neq(
+                $db->expr()->in(
                     'sys_category.type',
-                    $db->createNamedParameter('')
+                    array_values(Category::getConstants())
                 ),
                 $db->expr()->eq(
                     'mm.tablenames',
@@ -161,10 +161,10 @@ class CourseCategoryRepository
             )
             ->from('sys_category')
             ->where(
-                $db->expr()->neq(
+                $db->expr()->in(
                     'sys_category.type',
-                    $db->createNamedParameter('')
-                )
+                    array_values(Category::getConstants())
+                ),
             );
 
         $attributes = new CategoryCollection();
@@ -209,9 +209,9 @@ class CourseCategoryRepository
             )
             ->groupBy('sys_category.uid')
             ->where(
-                $db->expr()->neq(
+                $db->expr()->in(
                     'sys_category.type',
-                    $db->createNamedParameter('')
+                    array_values(Category::getConstants())
                 ),
                 $db->expr()->eq(
                     'sys_category_record_mm.tablenames',
