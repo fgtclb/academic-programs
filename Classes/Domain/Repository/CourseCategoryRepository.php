@@ -114,7 +114,9 @@ class CourseCategoryRepository
             ->where(
                 $db->expr()->in(
                     'sys_category.type',
-                    array_values(Category::getConstants())
+                    array_map(function (string $value) {
+                        return '\'' . $value . '\'';
+                    }, array_values(Category::getConstants()))
                 ),
                 $db->expr()->eq(
                     'mm.tablenames',
@@ -163,7 +165,9 @@ class CourseCategoryRepository
             ->where(
                 $db->expr()->in(
                     'sys_category.type',
-                    array_values(Category::getConstants())
+                    array_map(function (string $value) {
+                        return '\'' . $value . '\'';
+                    }, array_values(Category::getConstants()))
                 ),
             );
 
@@ -211,7 +215,9 @@ class CourseCategoryRepository
             ->where(
                 $db->expr()->in(
                     'sys_category.type',
-                    array_values(Category::getConstants())
+                    array_map(function (string $value) {
+                        return '\'' . $value . '\'';
+                    }, array_values(Category::getConstants()))
                 ),
                 $db->expr()->eq(
                     'sys_category_record_mm.tablenames',

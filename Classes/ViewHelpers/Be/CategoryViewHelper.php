@@ -61,7 +61,7 @@ class CategoryViewHelper extends AbstractViewHelper
 
         $repository = GeneralUtility::makeInstance(CourseCategoryRepository::class);
         try {
-            if (Category::typeExist($arguments['type'])) {
+            if ($arguments['type'] !== null && Category::typeExist($arguments['type'])) {
                 $categoryType = Category::cast($arguments['type']);
                 $attributes = $repository->findByType($arguments['page'], $categoryType);
             } else {
