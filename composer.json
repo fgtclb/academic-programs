@@ -5,9 +5,9 @@
 	"minimum-stability": "stable",
 	"license": "GPL-2.0-or-later",
 	"repositories": {
-		"educational": {
+		"category-types": {
 			"type": "vcs",
-			"url": "https://github.com/fgtclb/typo3-fgtclb-educational"
+			"url": "https://github.com/fgtclb/typo3-category-types"
 		},
 		"typo3-ext-migrations": {
 			"type": "vcs",
@@ -35,7 +35,7 @@
 	},
 	"require": {
 		"php": "^8.0",
-		"fgtclb/fgtclb-educational": "^1.0",
+		"fgtclb/typo3-category-types": "^1.0",
 		"typo3/cms-backend": "^11.5",
 		"typo3/cms-core": "^11.5",
 		"typo3/cms-extbase": "^11.5",
