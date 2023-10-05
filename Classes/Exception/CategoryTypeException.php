@@ -6,5 +6,4 @@ namespace FGTCLB\EducationalCourse\Exception;
 
 class CategoryTypeException extends \Exception
 {
-
 }

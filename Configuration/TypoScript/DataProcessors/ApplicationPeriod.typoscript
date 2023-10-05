@@ -1,5 +1,5 @@
 lib.educationalCourse.applicationPeriod < lib.educationalCourse.basic
 lib.educationalCourse.applicationPeriod {
-  where.stdWrap.cObject.20.value = application_period
+  type = application_period
   as = applicationPeriod
 }
