@@ -1,5 +1,5 @@
 lib.educationalCourse.admissionRestriction < lib.educationalCourse.basic
 lib.educationalCourse.admissionRestriction {
-  where.stdWrap.cObject.20.value = admission_restriction
+  type = admission_restriction
   as = admissionRestriction
 }

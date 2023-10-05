@@ -1,28 +1,5 @@
-lib.educationalCourse.basic = TYPO3\CMS\Frontend\DataProcessing\DatabaseQueryProcessor
+lib.educationalCourse.basic = FGTCLB\EducationalCourse\DataProcessor\CourseCategoryProcessor
 lib.educationalCourse.basic {
-  # TODO is there a way to make this value corresponding to enum?
-  # see FGTCLB\EducationalCourse\Domain\Enumeration\Page
-  if.equals = 20
-  if.value.field = doktype
-  table = sys_category
-  pidInList = root,-1
-  selectFields = sys_category.title
-  join = sys_category_record_mm ON sys_category_record_mm.uid_local = sys_category.uid
-  where.stdWrap.cObject = COA
-  where.stdWrap.cObject {
-    10 = TEXT
-    10 {
-      data = field:_ORIG_uid // field:uid
-      intval = 1
-      noTrimWrap = | sys_category_record_mm.uid_foreign=| AND |
-    }
-    20 = TEXT
-    20 {
-      value =
-      noTrimWrap = | sys_category.type='|' |
-    }
-    stdWrap.noTrimWrap = | AND | |
-    as =
-  }
-  recursive = 10
+  type = # Set sys_category type identifer
+  storage = {$courese.stograge}
 }
