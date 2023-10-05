@@ -35,7 +35,7 @@
 	},
 	"require": {
 		"php": "^8.0",
-		"fgtclb/typo3-category-types": "^1.0",
+		"fgtclb/category-types": "^1.0",
 		"typo3/cms-backend": "^11.5",
 		"typo3/cms-core": "^11.5",
 		"typo3/cms-extbase": "^11.5",
