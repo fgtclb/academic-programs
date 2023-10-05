@@ -7,4 +7,5 @@ page.10.dataProcessing {
   250 < lib.educationalCourse.courseType
   260 < lib.educationalCourse.teachingLanguage
   270 < lib.educationalCourse.admissionRestriction
+  280 < lib.educationalCourse.topic
 }
