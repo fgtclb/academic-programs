@@ -1,5 +1,5 @@
 lib.educationalCourse.department < lib.educationalCourse.basic
 lib.educationalCourse.department {
-  where.stdWrap.cObject.20.value = department
+  type = department
   as = department
 }

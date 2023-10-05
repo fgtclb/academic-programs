@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace FGTCLB\EducationalCourse\Migrations\Mysql;
 
@@ -34,7 +34,7 @@ class Version20230824122000 extends AbstractDataHandlerMigration
                 'type' => $type,
                 'title' => 'Type' . Category::getHumanReadableName($type),
                 'description' => $faker->text(),
-                'parent' => $parent
+                'parent' => $parent,
             ];
         };
 
@@ -44,14 +44,13 @@ class Version20230824122000 extends AbstractDataHandlerMigration
             'NEW567' => [
                 'pid' => 'NEW124',
                 'title' => 'Course Extension Categories',
-                'description' => ''
-            ]
+                'description' => '',
+            ],
         ];
 
         foreach ($categoryTypes as $categoryType) {
             $categories[StringUtility::getUniqueId('NEW')] = $buildCategory($categoryType, 'NEW124', 'NEW567');
         }
-
 
         $this->dataMap = [
             'pages' => [
@@ -61,7 +60,7 @@ class Version20230824122000 extends AbstractDataHandlerMigration
                     'slug' => '/',
                     'doktype' => PageRepository::DOKTYPE_DEFAULT,
                     'hidden' => 0,
-                    'is_siteroot' => 1
+                    'is_siteroot' => 1,
                 ],
                 'NEW123' => [
                     'pid' => 'NEW111',
@@ -130,10 +129,10 @@ class Version20230824122000 extends AbstractDataHandlerMigration
                     'colPos' => 0,
                     'CType' => 'list',
                     'list_type' => 'educationalcourse_courselist',
-                    'pages' => 'NEW124'
-                ]
+                    'pages' => 'NEW124',
+                ],
             ],
-            'sys_category' => $categories
+            'sys_category' => $categories,
         ];
 
         parent::up($schema);
@@ -142,15 +141,15 @@ class Version20230824122000 extends AbstractDataHandlerMigration
     public function down(Schema $schema): void
     {
         $this->addSql('DELETE FROM pages WHERE tx_migrations_version = :tx_migrations_version', [
-            'tx_migrations_version' => '20230824122000'
+            'tx_migrations_version' => '20230824122000',
         ]);
 
         $this->addSql('DELETE FROM tt_content WHERE tx_migrations_version = :tx_migrations_version', [
-            'tx_migrations_version' => '20230824122000'
+            'tx_migrations_version' => '20230824122000',
         ]);
 
         $this->addSql('DELETE FROM sys_category WHERE tx_migrations_version = :tx_migrations_version', [
-            'tx_migrations_version' => '20230824122000'
+            'tx_migrations_version' => '20230824122000',
         ]);
     }
 }

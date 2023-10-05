@@ -43,6 +43,7 @@
 	},
 	"require-dev": {
 		"fakerphp/faker": "^1.23",
+		"fgtclb/page-backend-layout": "^1.0",
 		"friendsofphp/php-cs-fixer": "^3.14",
 		"helhum/typo3-console": "^7.1",
 		"kaystrobach/migrations": "^0.11",
@@ -57,7 +58,8 @@
 		"typo3/coding-standards": "^0.7.1"
 	},
 	"suggest": {
-		"b13/container": "Allowed container element options for course"
+		"b13/container": "Allowed container element options for course",
+		"fgtclb/page-backend-layout": ""
 	},
 	"autoload": {
 		"psr-4": {
