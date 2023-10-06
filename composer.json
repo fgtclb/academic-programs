@@ -55,7 +55,8 @@
 		"typo3/cms-info": "^11.5",
 		"typo3/cms-lowlevel": "^11.5",
 		"typo3/cms-tstemplate": "^11.5",
-		"typo3/coding-standards": "^0.7.1"
+		"typo3/coding-standards": "^0.7.1",
+		"typo3/testing-framework": "^7.0"
 	},
 	"suggest": {
 		"b13/container": "Allowed container element options for course",
@@ -76,6 +77,12 @@
 		"cs:check": "php-cs-fixer fix --config Build/php-cs-fixer/.php-cs-fixer.php --ansi --diff --verbose --dry-run",
 		"cs:fix": "php-cs-fixer fix --config Build/php-cs-fixer/.php-cs-fixer.php --ansi",
 		"analyze:php": "phpstan analyse --ansi --no-progress --memory-limit=1024M --configuration=Build/phpstan/phpstan.neon",
-		"analyze:baseline": "phpstan analyse --ansi --no-progress --memory-limit=1024M --configuration=Build/phpstan/phpstan.neon --generate-baseline=./build/phpstan/phpstan-baseline.neon"
+		"analyze:baseline": "phpstan analyse --ansi --no-progress --memory-limit=1024M --configuration=Build/phpstan/phpstan.neon --generate-baseline=./build/phpstan/phpstan-baseline.neon",
+		"test:php": [
+			"@test:php:unit",
+			"@test:php:functional"
+		],
+		"test:php:unit": ".Build/bin/phpunit --colors=always --configuration Build/phpunit/UnitTests.xml",
+		"test:php:functional": "@test:php:unit --configuration Build/phpunit/FunctionalTests.xml"
 	}
 }
