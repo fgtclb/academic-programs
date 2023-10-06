@@ -8,4 +8,5 @@ page.10.dataProcessing {
   260 < lib.educationalCourse.teachingLanguage
   270 < lib.educationalCourse.admissionRestriction
   280 < lib.educationalCourse.topic
+  290 < lib.educationalCourse.department
 }
