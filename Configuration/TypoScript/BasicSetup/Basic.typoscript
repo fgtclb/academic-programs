@@ -1,5 +1,5 @@
 lib.educationalCourse.basic = FGTCLB\EducationalCourse\DataProcessor\CourseCategoryProcessor
 lib.educationalCourse.basic {
   type = # Set sys_category type identifer
-  storage = {$courese.stograge}
+  storages = {$courese.storages}
 }
