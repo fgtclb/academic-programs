@@ -59,4 +59,8 @@ return [
         'provider' => \TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider::class,
         'source' => $sourceString(Category::TYPE_TOPIC),
     ],
+    $identifierString(Category::TYPE_LOCATION) => [
+        'provider' => \TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider::class,
+        'source' => $sourceString(Category::TYPE_LOCATION),
+    ],
 ];

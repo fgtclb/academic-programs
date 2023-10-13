@@ -9,4 +9,5 @@ page.10.dataProcessing {
   270 < lib.educationalCourse.admissionRestriction
   280 < lib.educationalCourse.topic
   290 < lib.educationalCourse.department
+  300 < lib.educationalCourse.location
 }

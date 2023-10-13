@@ -1,0 +1,5 @@
+lib.educationalCourse.location < lib.educationalCourse.basic
+lib.educationalCourse.location {
+  type = location
+  as = location
+}
