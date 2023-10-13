@@ -44,7 +44,7 @@ class CourseCategoryProcessor implements DataProcessorInterface
             return $processedData;
         }
 
-        if (!isset($processorConfiguration['storage'])) {
+        if (!isset($processorConfiguration['storages'])) {
             return $processedData;
         }
 
