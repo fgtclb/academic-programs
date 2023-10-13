@@ -114,6 +114,10 @@
 				<source>Topic</source>
 				<target>Thema</target>
 			</trans-unit>
+			<trans-unit id="sys_category.type.location">
+				<source>Location</source>
+				<target>Standort</target>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>

@@ -136,6 +136,19 @@
                 prependOptionValue=""
             />
         </f:if>
+        <f:if condition="{categories.location}">
+            <label for="topic">{f:translate(key: 'sys_category.type.location')}</label>
+            <f:form.select
+                id="location"
+                property="location"
+                value="{filter.location}"
+                options="{categories.location}"
+                optionValueField="uid"
+                optionLabelField="title"
+                prependOptionLabel=""
+                prependOptionValue=""
+            />
+        </f:if>
         <f:form.submit value="Filter" />
     </f:form>
 </f:if>

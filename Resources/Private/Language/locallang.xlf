@@ -88,6 +88,9 @@
 			<trans-unit id="sys_category.type.topic">
 				<source>Topic</source>
 			</trans-unit>
+			<trans-unit id="sys_category.type.location">
+				<source>Location</source>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>

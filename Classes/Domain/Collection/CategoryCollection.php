@@ -36,6 +36,7 @@ class CategoryCollection implements Countable, Iterator, ArrayAccess
         Category::TYPE_STANDARD_PERIOD => [],
         Category::TYPE_TEACHING_LANGUAGE => [],
         Category::TYPE_TOPIC => [],
+        Category::TYPE_LOCATION => [],
     ];
     public function current(): EducationalCategory|false
     {

@@ -1,5 +1,4 @@
 <html
-    lang="en"
     xmlns:f="https://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
     data-namespace-typo3-fluid="true"
 >
@@ -41,5 +40,8 @@
 </f:if>
 <f:if condition="{department}">
     <f:render partial="Attributes/Department" arguments="{_all}"/>
+</f:if>
+<f:if condition="{location}">
+    <f:render partial="Attributes/Location" arguments="{_all}"/>
 </f:if>
 </html>
