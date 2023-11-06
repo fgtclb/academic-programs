@@ -38,6 +38,7 @@ class CategoryCollection implements Countable, Iterator, ArrayAccess
         Category::TYPE_TOPIC => [],
         Category::TYPE_LOCATION => [],
     ];
+
     public function current(): EducationalCategory|false
     {
         return current($this->container);

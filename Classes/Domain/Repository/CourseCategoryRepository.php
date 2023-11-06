@@ -238,12 +238,50 @@ class CourseCategoryRepository
         foreach ($statement->executeQuery()->fetchAllAssociative() as $row) {
             $attributes->attach(
                 new EducationalCategory(
-                    $row['uid'],
+                    (int)$row['uid'],
                     Category::cast($row['type']),
                     $row['title']
                 )
             );
         }
         return $attributes;
+    }
+
+    /**
+     * @param array<int>|null $idList
+     * @return EducationalCategory[]
+     */
+    public function findByUidListAndType(array $idList, Category $categoryType): ?array
+    {
+        $queryBuilder = $this->connection
+            ->getQueryBuilderForTable('sys_category');
+
+        $queryBuilder->select(
+            'sys_category.uid',
+            'sys_category.type',
+            'sys_category.title'
+        )
+            ->from('sys_category')
+            ->where(
+                $queryBuilder->expr()->in('uid', $idList),
+                $queryBuilder->expr()->eq('type', $queryBuilder->createNamedParameter((string)$categoryType))
+            );
+
+        $result = $queryBuilder->executeQuery();
+
+        if ($result->rowCount() === 0) {
+            return null;
+        }
+
+        $category = [];
+        foreach ($result->fetchAllAssociative() as $row) {
+            $category[] = new EducationalCategory(
+                (int)$row['uid'],
+                Category::cast($row['type']),
+                $row['title']
+            );
+        }
+
+        return $category;
     }
 }

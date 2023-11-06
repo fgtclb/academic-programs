@@ -5,12 +5,9 @@ declare(strict_types=1);
 namespace FGTCLB\EducationalCourse\Domain\Collection;
 
 use Countable;
-use Doctrine\DBAL\DBALException;
-use Doctrine\DBAL\Driver\Exception;
+use FGTCLB\EducationalCourse\Collection\FilterCollection;
 use FGTCLB\EducationalCourse\Domain\Enumeration\Page;
 use FGTCLB\EducationalCourse\Domain\Model\Course;
-use FGTCLB\EducationalCourse\Domain\Model\Dto\CourseFilter;
-use FGTCLB\EducationalCourse\Exception\Domain\CategoryExistException;
 use FGTCLB\EducationalCourse\Utility\PagesUtility;
 use InvalidArgumentException;
 use Iterator;
@@ -19,7 +16,6 @@ use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Database\Query\QueryBuilder;
 use TYPO3\CMS\Core\Domain\Repository\PageRepository;
-use TYPO3\CMS\Core\Resource\Exception\FileDoesNotExistException;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
@@ -32,16 +28,6 @@ final class CourseCollection implements Iterator, Countable
      */
     private array $courses = [];
 
-    private function __construct()
-    {
-    }
-
-    /**
-     * @throws CategoryExistException
-     * @throws Exception
-     * @throws DBALException
-     * @throws FileDoesNotExistException
-     */
     public static function getAll(): CourseCollection
     {
         $statement = self::buildDefaultQuery();
@@ -53,13 +39,9 @@ final class CourseCollection implements Iterator, Countable
 
     /**
      * @param int[] $fromPid
-     * @throws CategoryExistException
-     * @throws Exception
-     * @throws DBALException
-     * @throws FileDoesNotExistException
      */
     public static function getByFilter(
-        ?CourseFilter $filter = null,
+        ?FilterCollection $filter = null,
         array $fromPid = [],
         string $sorting = 'title asc'
     ): CourseCollection {
@@ -72,10 +54,6 @@ final class CourseCollection implements Iterator, Countable
 
     /**
      * @param array<int|string, mixed> $coursePages
-     * @throws CategoryExistException
-     * @throws DBALException
-     * @throws Exception
-     * @throws FileDoesNotExistException
      */
     private static function buildCollection(array $coursePages): CourseCollection
     {
@@ -102,7 +80,7 @@ final class CourseCollection implements Iterator, Countable
      * @param int[] $fromPid
      */
     private static function buildDefaultQuery(
-        ?CourseFilter $filter = null,
+        ?FilterCollection $filter = null,
         array $fromPid = [],
         string $sorting = 'title asc'
     ): QueryBuilder {
@@ -110,6 +88,7 @@ final class CourseCollection implements Iterator, Countable
 
         $db = GeneralUtility::makeInstance(ConnectionPool::class)
             ->getQueryBuilderForTable('pages');
+
         $doktypes = $db->expr()->or(
             $db->expr()->eq(
                 'doktype',
@@ -126,6 +105,7 @@ final class CourseCollection implements Iterator, Countable
                 )
             )
         );
+
         $statement = $db
             ->select('pages.uid', 'pages.doktype')
             ->from('pages')
@@ -134,6 +114,7 @@ final class CourseCollection implements Iterator, Countable
         if ($filter !== null) {
             $andWhere = [];
             $orWhere = [];
+
             foreach ($filter->getFilterCategories() as $filterCategory) {
                 if (
                     ($children = $filterCategory->getChildren()) !== null
