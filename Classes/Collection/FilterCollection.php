@@ -2,31 +2,31 @@
 
 declare(strict_types=1);
 
-namespace FGTCLB\EducationalCourse\Domain\Model\Dto;
+namespace FGTCLB\EducationalCourse\Collection;
 
-use ArrayAccess;
 use Countable;
 use FGTCLB\EducationalCourse\Domain\Collection\CategoryCollection;
 use FGTCLB\EducationalCourse\Domain\Model\EducationalCategory;
 use InvalidArgumentException;
 use Iterator;
 
-final class CourseFilter implements ArrayAccess
+class FilterCollection implements \ArrayAccess
 {
     protected CategoryCollection $filterCategories;
 
-    private function __construct()
+    public function __construct()
     {
+        $this->filterCategories = new CategoryCollection();
     }
 
-    public static function createByCategoryCollection(CategoryCollection $categoryCollection): CourseFilter
+    public static function createByCategoryCollection(CategoryCollection $categoryCollection): FilterCollection
     {
         $filter = new self();
         $filter->filterCategories = $categoryCollection;
         return $filter;
     }
 
-    public static function createEmpty(): CourseFilter
+    public static function resetCollection(): FilterCollection
     {
         $filter = new self();
         $filter->filterCategories = new CategoryCollection();
@@ -73,9 +73,6 @@ final class CourseFilter implements ArrayAccess
         );
     }
 
-    /**
-     * @return CategoryCollection
-     */
     public function getFilterCategories(): CategoryCollection
     {
         return $this->filterCategories;

@@ -4,61 +4,46 @@ declare(strict_types=1);
 
 namespace FGTCLB\EducationalCourse\Controller;
 
-use Doctrine\DBAL\DBALException;
-use Doctrine\DBAL\Driver\Exception;
 use FGTCLB\EducationalCourse\Domain\Collection\CourseCollection;
-use FGTCLB\EducationalCourse\Domain\Model\Dto\CourseFilter;
 use FGTCLB\EducationalCourse\Domain\Repository\CourseCategoryRepository;
-use FGTCLB\EducationalCourse\Exception\Domain\CategoryExistException;
+use FGTCLB\EducationalCourse\Factory\FilterDemandFactory;
 use Psr\Http\Message\ResponseInterface;
-use TYPO3\CMS\Core\Resource\Exception\FileDoesNotExistException;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 
 class CourseController extends ActionController
 {
     public function __construct(
-        protected CourseCategoryRepository $categoryRepository
+        protected CourseCategoryRepository $categoryRepository,
+        protected FilterDemandFactory $filterDemandFactory
     ) {
     }
 
-    /**
-     * @throws Exception
-     * @throws DBALException
-     * @throws CategoryExistException
-     * @throws FileDoesNotExistException
-     */
-    public function listAction(?CourseFilter $filter = null): ResponseInterface
+    public function listAction(array $filter = null): ResponseInterface
     {
-        $sorting = $this->settings['sorting'] ?? 'title asc';
-        if ($filter === null) {
-            if (isset($this->settings['categories']) && (int)$this->settings['categories'] > 0) {
-                if ($this->configurationManager->getContentObject() !== null) {
-                    $uid = $this->configurationManager->getContentObject()->data['uid'];
-                    $filterCategories = $this->categoryRepository->getByDatabaseFields($uid);
-                    $filter = CourseFilter::createByCategoryCollection($filterCategories);
-                }
-            }
-        }
-        $filter ??= CourseFilter::createEmpty();
+        $demandSettings = [
+            'settings' => $this->settings,
+            'filters' => $filter,
+        ];
+
+        $filterDemand = $this->filterDemandFactory->createDemandObject($demandSettings);
+
         $courses = CourseCollection::getByFilter(
-            $filter,
+            $filterDemand->getFilterCollection(),
             GeneralUtility::intExplode(
                 ',',
                 $this->configurationManager->getContentObject()
                     ? $this->configurationManager->getContentObject()->data['pages']
                     : []
             ),
-            $sorting
+            $filterDemand->getSortingField() . ' ' . $filterDemand->getSorting()
         );
-        $categories = $this->categoryRepository->findAll();
 
-        $assignedValues = [
+        $this->view->assignMultiple([
             'courses' => $courses,
-            'filter' => $filter,
-            'categories' => $categories,
-        ];
-        $this->view->assignMultiple($assignedValues);
+            'filter' => $filterDemand->getFilterCollection(),
+            'categories' => $this->categoryRepository->findAll() ?? [],
+        ]);
 
         return $this->htmlResponse();
     }
