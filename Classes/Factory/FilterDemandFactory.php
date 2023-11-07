@@ -17,8 +17,7 @@ class FilterDemandFactory
     public function __construct(
         private ContentObjectRenderer $contentObjectRenderer,
         private CourseCategoryRepository $categoryRepository
-    ) {
-    }
+    ) {}
 
     /**
      * @param array{settings: array<string, mixed>, filters: array<string, int>|empty} $settings
