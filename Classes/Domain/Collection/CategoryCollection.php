@@ -26,18 +26,18 @@ class CategoryCollection implements Countable, Iterator, ArrayAccess
     /**
      * @var array<string, EducationalCategory[]>
      */
-    protected array $typeSortedContainer = [
-        Category::TYPE_APPLICATION_PERIOD => [],
-        Category::TYPE_BEGIN_COURSE => [],
-        Category::TYPE_COURSE_TYPE => [],
-        Category::TYPE_COSTS => [],
-        Category::TYPE_DEGREE => [],
-        Category::TYPE_DEPARTMENT => [],
-        Category::TYPE_STANDARD_PERIOD => [],
-        Category::TYPE_TEACHING_LANGUAGE => [],
-        Category::TYPE_TOPIC => [],
-        Category::TYPE_LOCATION => [],
-    ];
+    protected array $typeSortedContainer;
+
+    public function __construct()
+    {
+        $typeNames = Category::getConstants();
+        ksort($typeNames);
+
+        $this->typeSortedContainer = array_map(function () {
+            return [];
+        }, array_flip(array_values($typeNames)));
+    }
+
     public function current(): EducationalCategory|false
     {
         return current($this->container);
@@ -170,9 +170,7 @@ class CategoryCollection implements Countable, Iterator, ArrayAccess
     public function __call(string $name, array $arguments): Iterator|Countable
     {
         $lowerName = GeneralUtility::camelCaseToLowerCaseUnderscored($name);
-        $enum = new Category($lowerName);
-
-        return $this->getAttributesByType($enum);
+        return $this->getAttributesByType(Category::cast($lowerName));
     }
 
     public function offsetExists(mixed $offset): bool
@@ -198,9 +196,7 @@ class CategoryCollection implements Countable, Iterator, ArrayAccess
             return false;
         }
         $lowerName = GeneralUtility::camelCaseToLowerCaseUnderscored($offset);
-        $enum = new Category($lowerName);
-
-        return $this->getAttributesByType($enum);
+        return $this->getAttributesByType(Category::cast($lowerName));
     }
 
     public function offsetSet(mixed $offset, mixed $value): void

@@ -38,7 +38,7 @@ declare(strict_types=1);
                 \FGTCLB\EducationalCourse\Domain\Enumeration\Category::TYPE_TOPIC
                 => $iconType(\FGTCLB\EducationalCourse\Domain\Enumeration\Category::TYPE_TOPIC),
                 \FGTCLB\EducationalCourse\Domain\Enumeration\Category::TYPE_LOCATION
-                => $iconType(\FGTCLB\EducationalCourse\Domain\Enumeration\Category::TYPE_LOCATION)
+                => $iconType(\FGTCLB\EducationalCourse\Domain\Enumeration\Category::TYPE_LOCATION),
             ],
         ],
     ];
