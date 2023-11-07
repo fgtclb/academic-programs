@@ -22,9 +22,7 @@ final class FileReferenceCollection implements Countable, Iterator
      */
     protected array $fileReferences = [];
 
-    private function __construct()
-    {
-    }
+    private function __construct() {}
 
     /**
      * @throws FileDoesNotExistException

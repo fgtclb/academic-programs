@@ -1,7 +1,7 @@
 <html
-    lang="en"
-    xmlns:f="https://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
     data-namespace-typo3-fluid="true"
+    xmlns:f="https://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+    xmlns:ec="https://typo3.org/ns/FGTCLB/EducationalCourse/ViewHelpers"
 >
 
 <f:if condition="{categories}">
@@ -11,7 +11,7 @@
             <f:form.select
                 id="admissionRestriction"
                 property="admissionRestriction"
-                value="{filter.admissionRestriction}"
+                value="{filter.filterCategories.admissionRestriction}"
                 options="{categories.admissionRestriction}"
                 optionValueField="uid"
                 optionLabelField="title"
@@ -24,7 +24,7 @@
             <f:form.select
                 id="applicationPeriod"
                 property="applicationPeriod"
-                value="{filter.applicationPeriod}"
+                value="{filter.filterCategories.applicationPeriod}"
                 options="{categories.applicationPeriod}"
                 optionValueField="uid"
                 optionLabelField="title"
@@ -37,7 +37,7 @@
             <f:form.select
                 id="beginCourse"
                 property="beginCourse"
-                value="{filter.beginCourse}"
+                value="{filter.filterCategories.beginCourse}"
                 options="{categories.beginCourse}"
                 optionValueField="uid"
                 optionLabelField="title"
@@ -50,7 +50,7 @@
             <f:form.select
                 id="costs"
                 property="costs"
-                value="{filter.costs}"
+                value="{filter.filterCategories.costs}"
                 options="{categories.costs}"
                 optionValueField="uid"
                 optionLabelField="title"
@@ -63,7 +63,7 @@
             <f:form.select
                 id="degree"
                 property="degree"
-                value="{filter.degree}"
+                value="{filter.filterCategories.degree}"
                 options="{categories.degree}"
                 optionValueField="uid"
                 optionLabelField="title"
@@ -76,7 +76,7 @@
             <f:form.select
                 id="department"
                 property="department"
-                value="{filter.department}"
+                value="{filter.filterCategories.department}"
                 options="{categories.department}"
                 optionValueField="uid"
                 optionLabelField="title"
@@ -89,7 +89,7 @@
             <f:form.select
                 id="standardPeriod"
                 property="standardPeriod"
-                value="{filter.standardPeriod}"
+                value="{filter.filterCategories.standardPeriod}"
                 options="{categories.standardPeriod}"
                 optionValueField="uid"
                 optionLabelField="title"
@@ -102,7 +102,7 @@
             <f:form.select
                 id="courseType"
                 property="courseType"
-                value="{filter.courseType}"
+                value="{filter.filterCategories.courseType}"
                 options="{categories.courseType}"
                 optionValueField="uid"
                 optionLabelField="title"
@@ -115,7 +115,7 @@
             <f:form.select
                 id="teachingLanguage"
                 property="teachingLanguage"
-                value="{filter.teachingLanguage}"
+                value="{filter.filterCategories.teachingLanguage}"
                 options="{categories.teachingLanguage}"
                 optionValueField="uid"
                 optionLabelField="title"
@@ -128,7 +128,7 @@
             <f:form.select
                 id="topic"
                 property="topic"
-                value="{filter.topic}"
+                value="{filter.filterCategories.topic}"
                 options="{categories.topic}"
                 optionValueField="uid"
                 optionLabelField="title"
@@ -141,7 +141,7 @@
             <f:form.select
                 id="location"
                 property="location"
-                value="{filter.location}"
+                value="{filter.filterCategories.location}"
                 options="{categories.location}"
                 optionValueField="uid"
                 optionLabelField="title"
@@ -152,6 +152,10 @@
         <f:form.submit value="Filter" />
     </f:form>
 </f:if>
+
+<br>
+<hr>
+<br>
 
 <div class="course-list">
     <f:if condition="{courses}">

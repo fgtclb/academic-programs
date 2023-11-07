@@ -16,8 +16,7 @@ class CourseController extends ActionController
     public function __construct(
         protected CourseCategoryRepository $categoryRepository,
         protected FilterDemandFactory $filterDemandFactory
-    ) {
-    }
+    ) {}
 
     public function listAction(array $filter = null): ResponseInterface
     {
