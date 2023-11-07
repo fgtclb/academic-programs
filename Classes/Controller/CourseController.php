@@ -23,6 +23,7 @@ class CourseController extends ActionController
         $demandSettings = [
             'settings' => $this->settings,
             'filters' => $filter,
+            'currentPageId' => $this->configurationManager->getContentObject()->data['uid'] ?? null,
         ];
 
         $filterDemand = $this->filterDemandFactory->createDemandObject($demandSettings);

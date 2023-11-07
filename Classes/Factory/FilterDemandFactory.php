@@ -10,17 +10,15 @@ use FGTCLB\EducationalCourse\Domain\Enumeration\Category;
 use FGTCLB\EducationalCourse\Domain\Model\Dto\FilterDemand;
 use FGTCLB\EducationalCourse\Domain\Repository\CourseCategoryRepository;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 
 class FilterDemandFactory
 {
     public function __construct(
-        private ContentObjectRenderer $contentObjectRenderer,
         private CourseCategoryRepository $categoryRepository
     ) {}
 
     /**
-     * @param array{settings: array<string, mixed>, filters: array<string, int>|empty} $settings
+     * @param array{settings: array<string, mixed>, filters: array<string, int>|empty, currentPageId: int|null} $settings
      */
     public function createDemandObject(array $settings): FilterDemand
     {
@@ -34,12 +32,11 @@ class FilterDemandFactory
 
         $uid = null;
         // Categories ~ Filter Options
-        if (empty($settings['filter'])
+        if (empty($settings['filters'])
             && isset($settings['settings']['categories'])
-            && (int)$settings['settings']['categories'] > 0) {
-            if ($this->contentObjectRenderer !== null) {
-                $uid = $this->contentObjectRenderer->data['uid'];
-            }
+            && (int)$settings['settings']['categories'] > 0
+        ) {
+            $uid = $settings['currentPageId'] ?? null;
         }
 
         if ($uid !== null) {
