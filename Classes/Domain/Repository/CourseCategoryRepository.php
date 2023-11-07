@@ -6,12 +6,14 @@ namespace FGTCLB\EducationalCourse\Domain\Repository;
 
 use Doctrine\DBAL\DBALException;
 use Doctrine\DBAL\Driver\Exception;
+use FGTCLB\EducationalCourse\Database\Query\Restriction\LanguageRestriction;
 use FGTCLB\EducationalCourse\Domain\Collection\CategoryCollection;
 use FGTCLB\EducationalCourse\Domain\Enumeration\Category;
 use FGTCLB\EducationalCourse\Domain\Model\EducationalCategory;
 use FGTCLB\EducationalCourse\Exception\Domain\CategoryExistException;
 use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
+use TYPO3\CMS\Core\Database\Query\QueryBuilder;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class CourseCategoryRepository
@@ -30,9 +32,9 @@ class CourseCategoryRepository
      */
     public function findByType(int $pageId, Category $type): CategoryCollection
     {
-        $db = $this->connection
-            ->getQueryBuilderForTable('sys_category');
-        $statement = $db
+        $queryBuilder = $this->buildQueryBuilder();
+
+        $statement = $queryBuilder
             ->select(
                 'sys_category.uid',
                 'sys_category.type',
@@ -52,21 +54,21 @@ class CourseCategoryRepository
                 'mm.uid_foreign=pages.uid'
             )
             ->where(
-                $db->expr()->eq(
+                $queryBuilder->expr()->eq(
                     'sys_category.type',
-                    $db->createNamedParameter((string)$type)
+                    $queryBuilder->createNamedParameter((string)$type)
                 ),
-                $db->expr()->eq(
+                $queryBuilder->expr()->eq(
                     'mm.tablenames',
-                    $db->createNamedParameter('pages')
+                    $queryBuilder->createNamedParameter('pages')
                 ),
-                $db->expr()->eq(
+                $queryBuilder->expr()->eq(
                     'mm.fieldname',
-                    $db->createNamedParameter('categories')
+                    $queryBuilder->createNamedParameter('categories')
                 ),
-                $db->expr()->eq(
+                $queryBuilder->expr()->eq(
                     'pages.uid',
-                    $db->createNamedParameter($pageId, Connection::PARAM_INT)
+                    $queryBuilder->createNamedParameter($pageId, Connection::PARAM_INT)
                 ),
             );
         $attributes = new CategoryCollection();
@@ -90,9 +92,9 @@ class CourseCategoryRepository
      */
     public function findAllByPageId(int $pageId): CategoryCollection
     {
-        $db = $this->connection
-            ->getQueryBuilderForTable('sys_category');
-        $statement = $db
+        $queryBuilder = $this->buildQueryBuilder();
+
+        $statement = $queryBuilder
             ->select(
                 'sys_category.uid',
                 'sys_category.type',
@@ -112,23 +114,23 @@ class CourseCategoryRepository
                 'mm.uid_foreign=pages.uid'
             )
             ->where(
-                $db->expr()->in(
+                $queryBuilder->expr()->in(
                     'sys_category.type',
                     array_map(function (string $value) {
                         return '\'' . $value . '\'';
                     }, array_values(Category::getConstants()))
                 ),
-                $db->expr()->eq(
+                $queryBuilder->expr()->eq(
                     'mm.tablenames',
-                    $db->createNamedParameter('pages')
+                    $queryBuilder->createNamedParameter('pages')
                 ),
-                $db->expr()->eq(
+                $queryBuilder->expr()->eq(
                     'mm.fieldname',
-                    $db->createNamedParameter('categories')
+                    $queryBuilder->createNamedParameter('categories')
                 ),
-                $db->expr()->eq(
+                $queryBuilder->expr()->eq(
                     'pages.uid',
-                    $db->createNamedParameter($pageId, Connection::PARAM_INT)
+                    $queryBuilder->createNamedParameter($pageId, Connection::PARAM_INT)
                 ),
             );
 
@@ -146,16 +148,11 @@ class CourseCategoryRepository
         return $attributes;
     }
 
-    /**
-     * @throws CategoryExistException
-     * @throws DBALException
-     * @throws Exception
-     */
     public function findAll(): CategoryCollection
     {
-        $db = $this->connection
-            ->getQueryBuilderForTable('sys_category');
-        $statement = $db
+        $queryBuilder = $this->buildQueryBuilder();
+
+        $statement = $queryBuilder
             ->select(
                 'sys_category.uid',
                 'sys_category.type',
@@ -163,7 +160,7 @@ class CourseCategoryRepository
             )
             ->from('sys_category')
             ->where(
-                $db->expr()->in(
+                $queryBuilder->expr()->in(
                     'sys_category.type',
                     array_map(function (string $value) {
                         return '\'' . $value . '\'';
@@ -190,9 +187,9 @@ class CourseCategoryRepository
         string $table = 'tt_content',
         string $field = 'pi_flexform'
     ): CategoryCollection {
-        $db = $this->connection
-            ->getQueryBuilderForTable('sys_category');
-        $statement = $db
+        $queryBuilder = $this->buildQueryBuilder();
+
+        $statement = $queryBuilder
             ->select(
                 'sys_category.uid',
                 'sys_category.type',
@@ -213,23 +210,23 @@ class CourseCategoryRepository
             )
             ->groupBy('sys_category.uid')
             ->where(
-                $db->expr()->in(
+                $queryBuilder->expr()->in(
                     'sys_category.type',
                     array_map(function (string $value) {
                         return '\'' . $value . '\'';
                     }, array_values(Category::getConstants()))
                 ),
-                $db->expr()->eq(
+                $queryBuilder->expr()->eq(
                     'sys_category_record_mm.tablenames',
-                    $db->createNamedParameter($table)
+                    $queryBuilder->createNamedParameter($table)
                 ),
-                $db->expr()->eq(
+                $queryBuilder->expr()->eq(
                     'sys_category_record_mm.fieldname',
-                    $db->createNamedParameter($field)
+                    $queryBuilder->createNamedParameter($field)
                 ),
-                $db->expr()->eq(
+                $queryBuilder->expr()->eq(
                     'sys_category_record_mm.uid_foreign',
-                    $db->createNamedParameter($uid, Connection::PARAM_INT)
+                    $queryBuilder->createNamedParameter($uid, Connection::PARAM_INT)
                 )
             );
 
@@ -253,8 +250,7 @@ class CourseCategoryRepository
      */
     public function findByUidListAndType(array $idList, Category $categoryType): ?array
     {
-        $queryBuilder = $this->connection
-            ->getQueryBuilderForTable('sys_category');
+        $queryBuilder = $this->buildQueryBuilder();
 
         $queryBuilder->select(
             'sys_category.uid',
@@ -283,5 +279,13 @@ class CourseCategoryRepository
         }
 
         return $category;
+    }
+
+    private function buildQueryBuilder(string $tableName = 'sys_category'): QueryBuilder
+    {
+        $queryBuilder = $this->connection->getQueryBuilderForTable($tableName);
+        $queryBuilder->getRestrictions()->add(GeneralUtility::makeInstance(LanguageRestriction::class));
+
+        return $queryBuilder;
     }
 }
