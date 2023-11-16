@@ -18,6 +18,7 @@ use TYPO3\CMS\Frontend\ContentObject\DataProcessorInterface;
  *  10 {
  *    type = category-type-identifier
  *    storages = 13,15
+ *    fields = title,link,images
  *    as = category
  *  }
  */
@@ -53,10 +54,16 @@ class CourseCategoryProcessor implements DataProcessorInterface
         $tableName = 'sys_category';
 
         $targetVariableName = $cObj->stdWrapValue('as', $processorConfiguration, 'records');
+        $fieldList = $cObj->stdWrapValue('fields', $processorConfiguration, 'title');
+        $fields = GeneralUtility::trimExplode(',', $fieldList);
+
+        $fieldList = implode(', ', array_map(function (string $fieldName) use ($tableName) {
+            return $tableName . '.' . $fieldName;
+        }, $fields));
 
         $records = $cObj->getRecords($tableName, [
             'pidInList' => $storages . ',-1',
-            'selectFields' => $tableName . '.title',
+            'selectFields' => $fieldList,
             'join' => 'sys_category_record_mm ON sys_category_record_mm.uid_local = ' . $tableName . '.uid',
             'where.' => [
                 'stdWrap.' => [
