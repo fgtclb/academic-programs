@@ -161,4 +161,9 @@ class CategoryCollection implements Countable, Iterator, ArrayAccess
             1683214246022
         );
     }
+
+    public function __toString(): string
+    {
+        return self::class;
+    }
 }
