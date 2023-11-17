@@ -77,4 +77,9 @@ class FilterCollection implements \ArrayAccess
     {
         return $this->filterCategories;
     }
+
+    public function __toString(): string
+    {
+        return self::class;
+    }
 }
