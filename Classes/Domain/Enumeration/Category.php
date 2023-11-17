@@ -16,6 +16,8 @@ class Category extends Enumeration
 
     public const TYPE_COSTS = 'costs';
 
+    public const TYPE_PAYING = 'paying';
+
     public const TYPE_DEGREE = 'degree';
 
     public const TYPE_DEPARTMENT = 'department';
