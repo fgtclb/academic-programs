@@ -93,9 +93,8 @@ class CategoryCollection implements Countable, Iterator, ArrayAccess
 
     /**
      * @param Category|string $type
-     * @return Iterator<int, EducationalCategory>|Countable
      */
-    public function getAttributesByType(Category|string $type): Iterator|Countable
+    public function getAttributesByType(Category|string $type): array
     {
         if (!array_key_exists((string)$type, $this->typeSortedContainer)) {
             throw new \InvalidArgumentException(
@@ -107,60 +106,8 @@ class CategoryCollection implements Countable, Iterator, ArrayAccess
                 1683633304209
             );
         }
-        return new class (
-            $this->typeSortedContainer[(string)$type]
-        ) implements Iterator, Countable, \JsonSerializable {
-            /**
-             * @var EducationalCategory[]
-             */
-            private array $container;
 
-            /**
-             * @param EducationalCategory[] $attributes
-             */
-            public function __construct(array $attributes)
-            {
-                $this->container = $attributes;
-            }
-            public function current(): EducationalCategory|false
-            {
-                return current($this->container);
-            }
-
-            public function next(): void
-            {
-                next($this->container);
-            }
-
-            public function key(): string|int|null
-            {
-                return key($this->container);
-            }
-
-            public function valid(): bool
-            {
-                return current($this->container) !== false;
-            }
-
-            public function rewind(): void
-            {
-                reset($this->container);
-            }
-
-            public function count(): int
-            {
-                return count($this->container);
-            }
-
-            public function jsonSerialize(): mixed
-            {
-                $values = [];
-                foreach ($this->container as $category) {
-                    $values[] = $category->getUid();
-                }
-                return $values;
-            }
-        };
+        return $this->typeSortedContainer[(string)$type];
     }
 
     /**
