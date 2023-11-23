@@ -68,9 +68,6 @@ class CategoryCollection implements Countable, Iterator, ArrayAccess
         return count($this->container);
     }
 
-    /**
-     * @throws CategoryExistException
-     */
     public function attach(EducationalCategory $category): void
     {
         if (in_array($category, $this->container, true)) {
@@ -112,9 +109,8 @@ class CategoryCollection implements Countable, Iterator, ArrayAccess
 
     /**
      * @param array<int|string, mixed> $arguments
-     * @throws InvalidEnumerationValueException
      */
-    public function __call(string $name, array $arguments): Iterator|Countable
+    public function __call(string $name, array $arguments): array
     {
         $lowerName = GeneralUtility::camelCaseToLowerCaseUnderscored($name);
         return $this->getAttributesByType(Category::cast($lowerName));
@@ -134,10 +130,7 @@ class CategoryCollection implements Countable, Iterator, ArrayAccess
         }
     }
 
-    /**
-     * @throws InvalidEnumerationValueException
-     */
-    public function offsetGet(mixed $offset): Iterator|false|Countable
+    public function offsetGet(mixed $offset): array|false
     {
         if (!is_string($offset)) {
             return false;
