@@ -10,4 +10,5 @@ page.10.dataProcessing {
   280 < lib.educationalCourse.topic
   290 < lib.educationalCourse.department
   300 < lib.educationalCourse.location
+  310 < lib.educationalCourse.paying
 }
