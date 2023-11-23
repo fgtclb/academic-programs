@@ -149,6 +149,20 @@
                 prependOptionValue=""
             />
         </f:if>
+
+        <f:if condition="{categories.paying}">
+            <label for="location">{f:translate(key: 'sys_category.type.paying')}</label>
+            <f:form.select
+                id="paying"
+                property="paying"
+                value="{filter.filterCategories.paying}"
+                options="{categories.paying}"
+                optionValueField="uid"
+                optionLabelField="title"
+                prependOptionLabel=""
+                prependOptionValue=""
+            />
+        </f:if>
         <f:form.submit value="Filter" />
     </f:form>
 </f:if>
