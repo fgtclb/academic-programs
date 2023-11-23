@@ -45,9 +45,9 @@ class FilterCollection implements \ArrayAccess
 
     /**
      * @param mixed $offset
-     * @return Iterator<int, EducationalCategory>|false|Countable
+     * @return array<int, EducationalCategory>|false
      */
-    public function offsetGet(mixed $offset): Iterator|false|Countable
+    public function offsetGet(mixed $offset): array|false
     {
         try {
             $attributes = $this->filterCategories->getAttributesByType($offset);
