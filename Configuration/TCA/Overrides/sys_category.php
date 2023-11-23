@@ -45,7 +45,7 @@ declare(strict_types=1);
         $GLOBALS['TCA']['sys_category'],
         [
             'ctrl' => [
-                'typeicon_classes' => $typeIconClasses
+                'typeicon_classes' => $typeIconClasses,
             ],
         ]
     );

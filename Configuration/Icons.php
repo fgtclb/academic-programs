@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 use FGTCLB\EducationalCourse\Domain\Enumeration\Category;
 
-return (function() {
+return (function () {
     $sourceString = function (string $icon) {
         return sprintf(
             'EXT:educational_course/Resources/Public/Icons/%s.svg',
