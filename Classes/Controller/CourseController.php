@@ -6,7 +6,7 @@ namespace FGTCLB\EducationalCourse\Controller;
 
 use FGTCLB\EducationalCourse\Domain\Collection\CourseCollection;
 use FGTCLB\EducationalCourse\Domain\Repository\CourseCategoryRepository;
-use FGTCLB\EducationalCourse\Factory\FilterDemandFactory;
+use FGTCLB\EducationalCourse\Factory\CourseDemandFactory;
 use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
@@ -15,33 +15,30 @@ class CourseController extends ActionController
 {
     public function __construct(
         protected CourseCategoryRepository $categoryRepository,
-        protected FilterDemandFactory $filterDemandFactory
+        protected CourseDemandFactory $courseDemandFactory
     ) {}
 
-    public function listAction(array $filter = null): ResponseInterface
+    public function listAction(array $demand = null): ResponseInterface
     {
-        $demandSettings = [
-            'settings' => $this->settings,
-            'filters' => $filter,
-            'currentPageId' => $this->configurationManager->getContentObject()->data['uid'] ?? null,
-        ];
+        $demandObject = $this->courseDemandFactory->createDemandObject(
+            $demand,
+            $this->settings,
+            $this->configurationManager->getContentObject()->data['uid'] ?? null
+        );
 
-        $filterDemand = $this->filterDemandFactory->createDemandObject($demandSettings);
-
-        $courses = CourseCollection::getByFilter(
-            $filterDemand->getFilterCollection(),
+        $courses = CourseCollection::getByDemand(
+            $demandObject,
             GeneralUtility::intExplode(
                 ',',
                 $this->configurationManager->getContentObject()
                     ? $this->configurationManager->getContentObject()->data['pages']
                     : []
-            ),
-            $filterDemand->getSortingField() . ' ' . $filterDemand->getSorting()
+            )
         );
 
         $this->view->assignMultiple([
             'courses' => $courses,
-            'filter' => $filterDemand->getFilterCollection(),
+            'demand' => $demandObject,
             'categories' => $this->categoryRepository->findAll() ?? [],
         ]);
 
