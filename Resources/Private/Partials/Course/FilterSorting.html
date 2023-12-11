@@ -1,23 +1,24 @@
 <html
-    lang="en"
     xmlns:f="https://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
     xmlns:fe="http://typo3.org/ns/FGTCLB/EducationalCourse/ViewHelpers"
     data-namespace-typo3-fluid="true"
 >
 <label for="sortingDirection">Sortierfeld</label>
-<f:form.select
+<fe:form.select
     id="sortingField"
     property="sortingField"
     value="{demand.sortingField}"
     options="{demand.sortingFieldOptions}"
     additionalAttributes="{'onchange': 'this.form.submit()'}"
+    l10n="filter.sortingField" 
 />
 <label for="sortingDirection">Sortierreihenfolge</label>
-<f:form.select
+<fe:form.select
     id="sortingDirection"
     property="sortingDirection"
     value="{demand.sortingDirection}"
     options="{demand.sortingDirectionOptions}"
     additionalAttributes="{'onchange': 'this.form.submit()'}"
+    l10n="filter.sortingDirection" 
 />
 </html>

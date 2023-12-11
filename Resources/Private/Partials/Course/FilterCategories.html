@@ -1,170 +1,177 @@
-<f:if condition="{categories}">
-    <f:if condition="{categories.admissionRestriction}">
-        <label for="admissionRestriction">{f:translate(key: 'sys_category.type.admission_restriction')}</label>
-        <f:form.select
-            id="admissionRestriction"
-            property="filterCollection.admissionRestriction"
-            value="{demand.filterCollection.filterCategories.admissionRestriction}"
-            options="{categories.admissionRestriction}"
-            optionValueField="uid"
-            optionLabelField="title"
-            prependOptionLabel=""
-            prependOptionValue=""
-            additionalAttributes="{'onchange': 'this.form.submit()'}"
-        />
+<html
+    lang="en"
+    xmlns:f="https://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+    xmlns:fe="http://typo3.org/ns/FGTCLB/EducationalCourse/ViewHelpers"
+    data-namespace-typo3-fluid="true"
+>
+    <f:if condition="{categories}">
+        <f:if condition="{categories.admissionRestriction}">
+            <label for="admissionRestriction">{f:translate(key: 'sys_category.type.admission_restriction')}</label>
+            <fe:form.select
+                id="admissionRestriction"
+                property="filterCollection.admissionRestriction"
+                value="{demand.filterCollection.filterCategories.admissionRestriction}"
+                options="{categories.admissionRestriction}"
+                optionValueField="uid"
+                optionLabelField="title"
+                prependOptionLabel=""
+                prependOptionValue=""
+                additionalAttributes="{'onchange': 'this.form.submit()'}"
+            />
+        </f:if>
+        <f:if condition="{categories.applicationPeriod}">
+            <label for="applicationPeriod">{f:translate(key: 'sys_category.type.application_period')}</label>
+            <fe:form.select
+                id="applicationPeriod"
+                property="filterCollection.applicationPeriod"
+                value="{demand.filterCollection.filterCategories.applicationPeriod}"
+                options="{categories.applicationPeriod}"
+                optionValueField="uid"
+                optionLabelField="title"
+                prependOptionLabel=""
+                prependOptionValue=""
+                additionalAttributes="{'onchange': 'this.form.submit()'}"
+            />
+        </f:if>
+        <f:if condition="{categories.beginCourse}">
+            <label for="beginCourse">{f:translate(key: 'sys_category.type.begin_course')}</label>
+            <fe:form.select
+                id="beginCourse"
+                property="filterCollection.beginCourse"
+                value="{demand.filterCollection.filterCategories.beginCourse}"
+                options="{categories.beginCourse}"
+                optionValueField="uid"
+                optionLabelField="title"
+                prependOptionLabel=""
+                prependOptionValue=""
+                additionalAttributes="{'onchange': 'this.form.submit()'}"
+            />
+        </f:if>
+        <f:if condition="{categories.costs}">
+            <label for="costs">{f:translate(key: 'sys_category.type.costs')}</label>
+            <fe:form.select
+                id="costs"
+                property="filterCollection.costs"
+                value="{demand.filterCollection.filterCategories.costs}"
+                options="{categories.costs}"
+                optionValueField="uid"
+                optionLabelField="title"
+                prependOptionLabel=""
+                prependOptionValue=""
+                additionalAttributes="{'onchange': 'this.form.submit()'}"
+            />
+        </f:if>
+        <f:if condition="{categories.degree}">
+            <label for="degree">{f:translate(key: 'sys_category.type.degree')}</label>
+            <fe:form.select
+                id="degree"
+                property="filterCollection.degree"
+                value="{demand.filterCollection.filterCategories.degree}"
+                options="{categories.degree}"
+                optionValueField="uid"
+                optionLabelField="title"
+                prependOptionLabel=""
+                prependOptionValue=""
+                additionalAttributes="{'onchange': 'this.form.submit()'}"
+            />
+        </f:if>
+        <f:if condition="{categories.department}">
+            <label for="department">{f:translate(key: 'sys_category.type.department')}</label>
+            <fe:form.select
+                id="department"
+                property="filterCollection.department"
+                value="{demand.filterCollection.filterCategories.department}"
+                options="{categories.department}"
+                optionValueField="uid"
+                optionLabelField="title"
+                prependOptionLabel=""
+                prependOptionValue=""
+                additionalAttributes="{'onchange': 'this.form.submit()'}"
+            />
+        </f:if>
+        <f:if condition="{categories.standardPeriod}">
+            <label for="standardPeriod">{f:translate(key: 'sys_category.type.standard_period')}</label>
+            <fe:form.select
+                id="standardPeriod"
+                property="filterCollection.standardPeriod"
+                value="{demand.filterCollection.filterCategories.standardPeriod}"
+                options="{categories.standardPeriod}"
+                optionValueField="uid"
+                optionLabelField="title"
+                prependOptionLabel=""
+                prependOptionValue=""
+                additionalAttributes="{'onchange': 'this.form.submit()'}"
+            />
+        </f:if>
+        <f:if condition="{categories.courseType}">
+            <label for="courseType">{f:translate(key: 'sys_category.type.course_type')}</label>
+            <fe:form.select
+                id="courseType"
+                property="filterCollection.courseType"
+                value="{demand.filterCollection.filterCategories.courseType}"
+                options="{categories.courseType}"
+                optionValueField="uid"
+                optionLabelField="title"
+                prependOptionLabel=""
+                prependOptionValue=""
+                additionalAttributes="{'onchange': 'this.form.submit()'}"
+            />
+        </f:if>
+        <f:if condition="{categories.teachingLanguage}">
+            <label for="teachingLanguage">{f:translate(key: 'sys_category.type.teaching_language')}</label>
+            <fe:form.select
+                id="teachingLanguage"
+                property="filterCollection.teachingLanguage"
+                value="{demand.filterCollection.filterCategories.teachingLanguage}"
+                options="{categories.teachingLanguage}"
+                optionValueField="uid"
+                optionLabelField="title"
+                prependOptionLabel=""
+                prependOptionValue=""
+                additionalAttributes="{'onchange': 'this.form.submit()'}"
+            />
+        </f:if>
+        <f:if condition="{categories.topic}">
+            <label for="topic">{f:translate(key: 'sys_category.type.topic')}</label>
+            <fe:form.select
+                id="topic"
+                property="filterCollection.topic"
+                value="{demand.filterCollection.filterCategories.topic}"
+                options="{categories.topic}"
+                optionValueField="uid"
+                optionLabelField="title"
+                prependOptionLabel=""
+                prependOptionValue=""
+                additionalAttributes="{'onchange': 'this.form.submit()'}"
+            />
+        </f:if>
+        <f:if condition="{categories.location}">
+            <label for="location">{f:translate(key: 'sys_category.type.location')}</label>
+            <fe:form.select
+                id="location"
+                property="filterCollection.location"
+                value="{demand.filterCollection.filterCategories.location}"
+                options="{categories.location}"
+                optionValueField="uid"
+                optionLabelField="title"
+                prependOptionLabel=""
+                prependOptionValue=""
+                additionalAttributes="{'onchange': 'this.form.submit()'}"
+            />
+        </f:if>
+        <f:if condition="{categories.paying}">
+            <label for="location">{f:translate(key: 'sys_category.type.paying')}</label>
+            <fe:form.select
+                id="paying"
+                property="filterCollection.paying"
+                value="{demand.filterCollection.filterCategories.paying}"
+                options="{categories.paying}"
+                optionValueField="uid"
+                optionLabelField="title"
+                prependOptionLabel=""
+                prependOptionValue=""
+                additionalAttributes="{'onchange': 'this.form.submit()'}"
+            />
+        </f:if>
     </f:if>
-    <f:if condition="{categories.applicationPeriod}">
-        <label for="applicationPeriod">{f:translate(key: 'sys_category.type.application_period')}</label>
-        <f:form.select
-            id="applicationPeriod"
-            property="filterCollection.applicationPeriod"
-            value="{demand.filterCollection.filterCategories.applicationPeriod}"
-            options="{categories.applicationPeriod}"
-            optionValueField="uid"
-            optionLabelField="title"
-            prependOptionLabel=""
-            prependOptionValue=""
-            additionalAttributes="{'onchange': 'this.form.submit()'}"
-        />
-    </f:if>
-    <f:if condition="{categories.beginCourse}">
-        <label for="beginCourse">{f:translate(key: 'sys_category.type.begin_course')}</label>
-        <f:form.select
-            id="beginCourse"
-            property="filterCollection.beginCourse"
-            value="{demand.filterCollection.filterCategories.beginCourse}"
-            options="{categories.beginCourse}"
-            optionValueField="uid"
-            optionLabelField="title"
-            prependOptionLabel=""
-            prependOptionValue=""
-            additionalAttributes="{'onchange': 'this.form.submit()'}"
-        />
-    </f:if>
-    <f:if condition="{categories.costs}">
-        <label for="costs">{f:translate(key: 'sys_category.type.costs')}</label>
-        <f:form.select
-            id="costs"
-            property="filterCollection.costs"
-            value="{demand.filterCollection.filterCategories.costs}"
-            options="{categories.costs}"
-            optionValueField="uid"
-            optionLabelField="title"
-            prependOptionLabel=""
-            prependOptionValue=""
-            additionalAttributes="{'onchange': 'this.form.submit()'}"
-        />
-    </f:if>
-    <f:if condition="{categories.degree}">
-        <label for="degree">{f:translate(key: 'sys_category.type.degree')}</label>
-        <f:form.select
-            id="degree"
-            property="filterCollection.degree"
-            value="{demand.filterCollection.filterCategories.degree}"
-            options="{categories.degree}"
-            optionValueField="uid"
-            optionLabelField="title"
-            prependOptionLabel=""
-            prependOptionValue=""
-            additionalAttributes="{'onchange': 'this.form.submit()'}"
-        />
-    </f:if>
-    <f:if condition="{categories.department}">
-        <label for="department">{f:translate(key: 'sys_category.type.department')}</label>
-        <f:form.select
-            id="department"
-            property="filterCollection.department"
-            value="{demand.filterCollection.filterCategories.department}"
-            options="{categories.department}"
-            optionValueField="uid"
-            optionLabelField="title"
-            prependOptionLabel=""
-            prependOptionValue=""
-            additionalAttributes="{'onchange': 'this.form.submit()'}"
-        />
-    </f:if>
-    <f:if condition="{categories.standardPeriod}">
-        <label for="standardPeriod">{f:translate(key: 'sys_category.type.standard_period')}</label>
-        <f:form.select
-            id="standardPeriod"
-            property="filterCollection.standardPeriod"
-            value="{demand.filterCollection.filterCategories.standardPeriod}"
-            options="{categories.standardPeriod}"
-            optionValueField="uid"
-            optionLabelField="title"
-            prependOptionLabel=""
-            prependOptionValue=""
-            additionalAttributes="{'onchange': 'this.form.submit()'}"
-        />
-    </f:if>
-    <f:if condition="{categories.courseType}">
-        <label for="courseType">{f:translate(key: 'sys_category.type.course_type')}</label>
-        <f:form.select
-            id="courseType"
-            property="filterCollection.courseType"
-            value="{demand.filterCollection.filterCategories.courseType}"
-            options="{categories.courseType}"
-            optionValueField="uid"
-            optionLabelField="title"
-            prependOptionLabel=""
-            prependOptionValue=""
-            additionalAttributes="{'onchange': 'this.form.submit()'}"
-        />
-    </f:if>
-    <f:if condition="{categories.teachingLanguage}">
-        <label for="teachingLanguage">{f:translate(key: 'sys_category.type.teaching_language')}</label>
-        <f:form.select
-            id="teachingLanguage"
-            property="filterCollection.teachingLanguage"
-            value="{demand.filterCollection.filterCategories.teachingLanguage}"
-            options="{categories.teachingLanguage}"
-            optionValueField="uid"
-            optionLabelField="title"
-            prependOptionLabel=""
-            prependOptionValue=""
-            additionalAttributes="{'onchange': 'this.form.submit()'}"
-        />
-    </f:if>
-    <f:if condition="{categories.topic}">
-        <label for="topic">{f:translate(key: 'sys_category.type.topic')}</label>
-        <f:form.select
-            id="topic"
-            property="filterCollection.topic"
-            value="{demand.filterCollection.filterCategories.topic}"
-            options="{categories.topic}"
-            optionValueField="uid"
-            optionLabelField="title"
-            prependOptionLabel=""
-            prependOptionValue=""
-            additionalAttributes="{'onchange': 'this.form.submit()'}"
-        />
-    </f:if>
-    <f:if condition="{categories.location}">
-        <label for="location">{f:translate(key: 'sys_category.type.location')}</label>
-        <f:form.select
-            id="location"
-            property="filterCollection.location"
-            value="{demand.filterCollection.filterCategories.location}"
-            options="{categories.location}"
-            optionValueField="uid"
-            optionLabelField="title"
-            prependOptionLabel=""
-            prependOptionValue=""
-            additionalAttributes="{'onchange': 'this.form.submit()'}"
-        />
-    </f:if>
-    <f:if condition="{categories.paying}">
-        <label for="location">{f:translate(key: 'sys_category.type.paying')}</label>
-        <f:form.select
-            id="paying"
-            property="filterCollection.paying"
-            value="{demand.filterCollection.filterCategories.paying}"
-            options="{categories.paying}"
-            optionValueField="uid"
-            optionLabelField="title"
-            prependOptionLabel=""
-            prependOptionValue=""
-            additionalAttributes="{'onchange': 'this.form.submit()'}"
-        />
-    </f:if>
-</f:if>
+</html>
