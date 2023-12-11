@@ -4,11 +4,12 @@ declare(strict_types=1);
 
 namespace FGTCLB\EducationalCourse\Collection;
 
+use ArrayAccess;
 use FGTCLB\EducationalCourse\Domain\Collection\CategoryCollection;
 use FGTCLB\EducationalCourse\Domain\Model\EducationalCategory;
 use InvalidArgumentException;
 
-class FilterCollection implements \ArrayAccess
+class FilterCollection implements ArrayAccess
 {
     protected CategoryCollection $filterCategories;
 
