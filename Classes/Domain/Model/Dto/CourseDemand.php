@@ -5,33 +5,86 @@ declare(strict_types=1);
 namespace FGTCLB\EducationalCourse\Domain\Model\Dto;
 
 use FGTCLB\EducationalCourse\Collection\FilterCollection;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class CourseDemand
 {
-    protected string $sorting = 'asc';
+    public const SORTING_FIELDS = [
+        'title',
+        'lastUpdated',
+        'sorting',
+    ];
 
-    protected string $sortingField = 'title';
+    public const DEFAULT_SORTING_FIELD = 'title';
+
+    public const SORTING_DIRECTIONS = [
+        'asc',
+        'desc',
+    ];
+
+    public const DEFAULT_SORTING_DIRECTION = 'asc';
+
+    protected string $sortingField = self::DEFAULT_SORTING_FIELD;
+
+    protected string $sortingDirection = self::DEFAULT_SORTING_DIRECTION;
 
     protected FilterCollection $filterCollection;
 
-    public function setSorting(string $sorting): void
+    public function __construct()
     {
-        $this->sorting = $sorting;
+        $this->filterCollection = GeneralUtility::makeInstance(FilterCollection::class);
     }
 
-    public function getSorting(): string
+    /**
+     * @return array<string>
+     */
+    public function getSortingDirectionOptions(): array
     {
-        return $this->sorting;
+        $options = [];
+        foreach (self::SORTING_DIRECTIONS as $option) {
+            $options[$option] = $option;
+        }
+        return $options;
+    }
+
+    /**
+     * @return array<string>
+     */
+    public function getSortingFieldOptions(): array
+    {
+        $options = [];
+        foreach (self::SORTING_FIELDS as $option) {
+            $options[$option] = $option;
+        }
+        return $options;
     }
 
     public function setSortingField(string $sortingField): void
     {
-        $this->sortingField = $sortingField;
+        if (in_array($sortingField, self::SORTING_FIELDS)) {
+            $this->sortingField = $sortingField;
+        } else {
+            $sortingField = self::DEFAULT_SORTING_FIELD;
+        }
     }
 
     public function getSortingField(): string
     {
         return $this->sortingField;
+    }
+
+    public function setSortingDirection(string $sortingDirection): void
+    {
+        if (in_array($sortingDirection, self::SORTING_DIRECTIONS)) {
+            $this->sortingDirection = $sortingDirection;
+        } else {
+            $sortingDirection = self::DEFAULT_SORTING_DIRECTION;
+        }
+    }
+
+    public function getSortingDirection(): string
+    {
+        return $this->sortingDirection;
     }
 
     public function getFilterCollection(): FilterCollection
