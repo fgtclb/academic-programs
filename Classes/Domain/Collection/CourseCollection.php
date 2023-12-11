@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace FGTCLB\EducationalCourse\Domain\Collection;
 
 use Countable;
-use FGTCLB\EducationalCourse\Collection\FilterCollection;
 use FGTCLB\EducationalCourse\Domain\Enumeration\Page;
 use FGTCLB\EducationalCourse\Domain\Model\Course;
+use FGTCLB\EducationalCourse\Domain\Model\Dto\CourseDemand;
 use FGTCLB\EducationalCourse\Utility\PagesUtility;
 use InvalidArgumentException;
 use Iterator;
@@ -40,12 +40,11 @@ final class CourseCollection implements Iterator, Countable
     /**
      * @param int[] $fromPid
      */
-    public static function getByFilter(
-        ?FilterCollection $filter = null,
-        array $fromPid = [],
-        string $sorting = 'title asc'
+    public static function getByDemand(
+        CourseDemand $demand,
+        array $fromPid = []
     ): CourseCollection {
-        $statement = self::buildDefaultQuery($filter, $fromPid, $sorting);
+        $statement = self::buildDefaultQuery($demand, $fromPid);
 
         $coursePages = $statement->executeQuery()->fetchAllAssociative();
 
@@ -80,11 +79,12 @@ final class CourseCollection implements Iterator, Countable
      * @param int[] $fromPid
      */
     private static function buildDefaultQuery(
-        ?FilterCollection $filter = null,
-        array $fromPid = [],
-        string $sorting = 'title asc'
+        ?CourseDemand $demand = null,
+        array $fromPid = []
     ): QueryBuilder {
-        [$sortingField, $sortingDirection] = explode(' ', $sorting);
+        if ($demand === null) {
+            $demand = GeneralUtility::makeInstance(CourseDemand::class);
+        }
 
         $db = GeneralUtility::makeInstance(ConnectionPool::class)
             ->getQueryBuilderForTable('pages');
@@ -110,55 +110,56 @@ final class CourseCollection implements Iterator, Countable
             ->select('pages.uid', 'pages.doktype')
             ->from('pages')
             ->where($doktypes)
-            ->orderBy(sprintf('pages.%s', $sortingField), $sortingDirection);
-        if ($filter !== null) {
-            $andWhere = [];
-            $orWhere = [];
+            ->orderBy(sprintf('pages.%s', $demand->getSortingField()), $demand->getSortingDirection());
 
-            foreach ($filter->getFilterCategories() as $filterCategory) {
-                if (
-                    ($children = $filterCategory->getChildren()) !== null
-                    && $children->count() > 0
-                ) {
-                    $orWhere[$filterCategory->getUid()] = [];
-                    foreach ($children as $childCategory) {
-                        $orWhere[$filterCategory->getUid()][] = $childCategory->getUid();
-                    }
-                } else {
-                    $andWhere[] = $filterCategory->getUid();
+        $andWhere = [];
+        $orWhere = [];
+
+        foreach ($demand->getFilterCollection()->getFilterCategories() as $filterCategory) {
+            if (
+                ($children = $filterCategory->getChildren()) !== null
+                && $children->count() > 0
+            ) {
+                $orWhere[$filterCategory->getUid()] = [];
+                foreach ($children as $childCategory) {
+                    $orWhere[$filterCategory->getUid()][] = $childCategory->getUid();
                 }
-            }
-            if (count($andWhere) > 0 || count($orWhere) > 0) {
-                $statement->join(
-                    'pages',
-                    'sys_category_record_mm',
-                    'mm',
-                    'mm.uid_foreign=pages.uid'
-                )
-                    ->addSelectLiteral(
-                        'group_concat(uid_local) as filtercategories'
-                    )
-                    ->groupBy('pages.uid');
-                $addWhere = [];
-                if (count($orWhere) > 0) {
-                    foreach ($orWhere as $parent => $children) {
-                        $addOrWhere = [];
-                        foreach ($children as $child) {
-                            $addOrWhere[] = $statement->expr()->inSet('filtercategories', $statement->createNamedParameter($child, Connection::PARAM_INT));
-                        }
-                        if (count($addOrWhere) > 0) {
-                            $addWhere[] = $statement->expr()->or(...$addOrWhere);
-                        }
-                    }
-                }
-                foreach ($andWhere as $value) {
-                    $addWhere[] = $statement->expr()->inSet('filtercategories', $statement->createNamedParameter($value, Connection::PARAM_INT));
-                }
-                $statement->having(
-                    ...$addWhere
-                );
+            } else {
+                $andWhere[] = $filterCategory->getUid();
             }
         }
+
+        if (count($andWhere) > 0 || count($orWhere) > 0) {
+            $statement->join(
+                'pages',
+                'sys_category_record_mm',
+                'mm',
+                'mm.uid_foreign=pages.uid'
+            )
+                ->addSelectLiteral(
+                    'group_concat(uid_local) as filtercategories'
+                )
+                ->groupBy('pages.uid');
+            $addWhere = [];
+            if (count($orWhere) > 0) {
+                foreach ($orWhere as $parent => $children) {
+                    $addOrWhere = [];
+                    foreach ($children as $child) {
+                        $addOrWhere[] = $statement->expr()->inSet('filtercategories', $statement->createNamedParameter($child, Connection::PARAM_INT));
+                    }
+                    if (count($addOrWhere) > 0) {
+                        $addWhere[] = $statement->expr()->or(...$addOrWhere);
+                    }
+                }
+            }
+            foreach ($andWhere as $value) {
+                $addWhere[] = $statement->expr()->inSet('filtercategories', $statement->createNamedParameter($value, Connection::PARAM_INT));
+            }
+            $statement->having(
+                ...$addWhere
+            );
+        }
+
         if (count($fromPid)) {
             $searchPids = PagesUtility::getPagesRecursively($fromPid);
             if (count($searchPids)) {
