@@ -89,22 +89,23 @@ class CategoryCollection implements Countable, Iterator, ArrayAccess
     }
 
     /**
-     * @param Category|string $type
+     * @param string $typeName
      */
-    public function getAttributesByType(Category|string $type): array
+    public function getAttributesByTypeName(string $typeName): array
     {
-        if (!array_key_exists((string)$type, $this->typeSortedContainer)) {
+        $typeName = GeneralUtility::camelCaseToLowerCaseUnderscored($typeName);
+        if (!array_key_exists($typeName, $this->typeSortedContainer)) {
             throw new \InvalidArgumentException(
                 sprintf(
                     'Category type "%s" must type of "%s"',
-                    $type,
+                    $typeName,
                     Category::class
                 ),
                 1683633304209
             );
         }
 
-        return $this->typeSortedContainer[(string)$type];
+        return $this->typeSortedContainer[$typeName];
     }
 
     /**
@@ -112,8 +113,7 @@ class CategoryCollection implements Countable, Iterator, ArrayAccess
      */
     public function __call(string $name, array $arguments): array
     {
-        $lowerName = GeneralUtility::camelCaseToLowerCaseUnderscored($name);
-        return $this->getAttributesByType(Category::cast($lowerName));
+        return $this->getAttributesByTypeName($name);
     }
 
     public function offsetExists(mixed $offset): bool
@@ -135,8 +135,7 @@ class CategoryCollection implements Countable, Iterator, ArrayAccess
         if (!is_string($offset)) {
             return false;
         }
-        $lowerName = GeneralUtility::camelCaseToLowerCaseUnderscored($offset);
-        return $this->getAttributesByType(Category::cast($lowerName));
+        return $this->getAttributesByTypeName($offset);
     }
 
     public function offsetSet(mixed $offset, mixed $value): void
