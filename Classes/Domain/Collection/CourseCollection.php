@@ -205,4 +205,18 @@ final class CourseCollection implements Iterator, Countable
     {
         return count($this->courses);
     }
+
+    /**
+     * @return CategoryCollection
+     */
+    public function getApplicableCategories(): CategoryCollection
+    {
+        $applicableCategories = GeneralUtility::makeInstance(CategoryCollection::class);
+        foreach ($this->courses as $course) {
+            foreach ($course->getAttributes() as $attribute) {
+                $applicableCategories->attach($attribute);
+            }
+        }
+        return $applicableCategories;
+    }
 }
