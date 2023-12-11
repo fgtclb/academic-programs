@@ -158,4 +158,9 @@ class CategoryCollection implements Countable, Iterator, ArrayAccess
     {
         return self::class;
     }
+
+    public function exist(EducationalCategory $category): bool
+    {
+        return in_array($category, $this->container, false);
+    }
 }
