@@ -94,6 +94,24 @@
 			<trans-unit id="sys_category.type.paying">
 				<source>Paying?</source>
 			</trans-unit>
+			<trans-unit id="sys_category.type.paying">
+				<source>Paying?</source>
+			</trans-unit>
+			<trans-unit id="filter.sortingDirection.asc">
+				<source>ascending</source>
+			</trans-unit>
+			<trans-unit id="filter.sortingDirection.desc">
+				<source>descending</source>
+			</trans-unit>
+			<trans-unit id="filter.sortingField.title">
+				<source>Title</source>
+			</trans-unit>
+			<trans-unit id="filter.sortingField.lastUpdated">
+				<source>Last updated</source>
+			</trans-unit>
+			<trans-unit id="filter.sortingField.sorting">
+				<source>Sorting</source>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>
