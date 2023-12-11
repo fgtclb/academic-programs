@@ -18,8 +18,9 @@ class CourseDemandFactory
     ) {}
 
     /**
-     * @param ?array<mixed> $demandFromForm
-     * @param array{settings: array<string, mixed>, filters: array<string, int>|empty, currentPageId: int|null} $settings
+     * @param ?array<string, mixed> $demandFromForm
+     * @param array<string, mixed> $settings
+     * @param int $pluginUid
      */
     public function createDemandObject(
         ?array $demandFromForm,
