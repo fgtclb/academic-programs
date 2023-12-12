@@ -281,6 +281,50 @@ class CourseCategoryRepository
         return $category;
     }
 
+    /**
+     * @param CategoryCollection $applicableCategories
+     * @throws CategoryExistException
+     * @throws DBALException
+     * @throws Exception
+     */
+    public function findAllWitDisabledStatus(CategoryCollection $applicableCategories): CategoryCollection
+    {
+        $queryBuilder = $this->buildQueryBuilder();
+
+        $statement = $queryBuilder
+            ->select(
+                'sys_category.uid',
+                'sys_category.type',
+                'sys_category.title'
+            )
+            ->from('sys_category')
+            ->where(
+                $queryBuilder->expr()->in(
+                    'sys_category.type',
+                    array_map(function (string $value) {
+                        return '\'' . $value . '\'';
+                    }, array_values(Category::getConstants()))
+                ),
+            );
+
+        $categories = new CategoryCollection();
+
+        foreach ($statement->executeQuery()->fetchAllAssociative() as $attribute) {
+            if (in_array($attribute['type'], Category::getConstants())) {
+                $category = new EducationalCategory(
+                    $attribute['uid'],
+                    Category::cast($attribute['type']),
+                    $attribute['title']
+                );
+
+                $category->setDisabled(!$applicableCategories->exist($category));
+
+                $categories->attach($category);
+            }
+        }
+        return $categories;
+    }
+
     private function buildQueryBuilder(string $tableName = 'sys_category'): QueryBuilder
     {
         $queryBuilder = $this->connection->getQueryBuilderForTable($tableName);

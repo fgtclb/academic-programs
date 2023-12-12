@@ -20,6 +20,8 @@ class EducationalCategory
 
     protected string $title;
 
+    protected bool $disabled = false;
+
     protected ?CategoryCollection $children = null;
 
     /**
@@ -30,11 +32,13 @@ class EducationalCategory
     public function __construct(
         int $uid,
         Category $type,
-        string $title
+        string $title,
+        bool $disabled = false
     ) {
         $this->uid = $uid;
         $this->type = $type;
         $this->title = $title;
+        $this->disabled = $disabled;
         $this->children = GeneralUtility::makeInstance(EducationalCategoryRepository::class)
             ->findChildren($this->uid);
     }
@@ -57,5 +61,15 @@ class EducationalCategory
     public function getChildren(): ?CategoryCollection
     {
         return $this->children;
+    }
+
+    public function setDisabled(bool $disabled): void
+    {
+        $this->disabled = $disabled;
+    }
+
+    public function isDisabled(): bool
+    {
+        return $this->disabled;
     }
 }

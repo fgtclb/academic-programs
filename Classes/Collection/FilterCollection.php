@@ -4,13 +4,12 @@ declare(strict_types=1);
 
 namespace FGTCLB\EducationalCourse\Collection;
 
-use Countable;
+use ArrayAccess;
 use FGTCLB\EducationalCourse\Domain\Collection\CategoryCollection;
 use FGTCLB\EducationalCourse\Domain\Model\EducationalCategory;
 use InvalidArgumentException;
-use Iterator;
 
-class FilterCollection implements \ArrayAccess
+class FilterCollection implements ArrayAccess
 {
     protected CategoryCollection $filterCategories;
 
@@ -36,7 +35,7 @@ class FilterCollection implements \ArrayAccess
     public function offsetExists(mixed $offset): bool
     {
         try {
-            $this->filterCategories->getAttributesByType($offset);
+            $this->filterCategories->getAttributesByTypeName($offset);
         } catch (InvalidArgumentException $e) {
             return false;
         }
@@ -50,7 +49,7 @@ class FilterCollection implements \ArrayAccess
     public function offsetGet(mixed $offset): array|false
     {
         try {
-            $attributes = $this->filterCategories->getAttributesByType($offset);
+            $attributes = $this->filterCategories->getAttributesByTypeName($offset);
         } catch (InvalidArgumentException $e) {
             return false;
         }
