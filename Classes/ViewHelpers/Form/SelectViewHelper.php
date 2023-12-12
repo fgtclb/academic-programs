@@ -101,11 +101,11 @@ class SelectViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Form\SelectViewHelpe
             ];
         }
 
-        /*
         if ($this->arguments['sortByOptionLabel']) {
-            asort($options, SORT_LOCALE_STRING);
+            usort($options, function($a, $b) {
+                return strcoll($a['label'], $b['label']);
+            });
         }
-        */
 
         return $options;
     }
