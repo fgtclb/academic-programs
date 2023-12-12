@@ -38,7 +38,7 @@ class SelectViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Form\SelectViewHelpe
             $extensionName = $this->arguments['extensionName'] === null ? $request->getControllerExtensionName() : $this->arguments['extensionName'];
         }
 
-        foreach ($optionsArgument as $option) {
+        foreach ($optionsArgument as $key => $option) {
             if (is_object($option) || is_array($option)) {
                 if ($this->hasArgument('optionValueField')) {
                     $value = ObjectAccess::getPropertyPath($option, $this->arguments['optionValueField']);
@@ -73,6 +73,9 @@ class SelectViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Form\SelectViewHelpe
                     // @todo use $this->persistenceManager->isNewObject() once it is implemented
                     $label = $this->persistenceManager->getIdentifierByObject($option);
                 }
+            } else {
+                $value = $key;
+                $label = $option;
             }
 
             if (isset($this->arguments['l10n']) && $this->arguments['l10n']) {
