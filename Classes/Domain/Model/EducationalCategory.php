@@ -16,6 +16,8 @@ class EducationalCategory
 {
     protected int $uid;
 
+    protected int $parentId;
+
     protected Category $type;
 
     protected string $title;
@@ -24,6 +26,8 @@ class EducationalCategory
 
     protected ?CategoryCollection $children = null;
 
+    protected ?EducationalCategory $parent = null;
+
     /**
      * @throws CategoryExistException
      * @throws DBALException
@@ -31,11 +35,13 @@ class EducationalCategory
      */
     public function __construct(
         int $uid,
+        int $parentId,
         Category $type,
         string $title,
         bool $disabled = false
     ) {
         $this->uid = $uid;
+        $this->parentId = $parentId;
         $this->type = $type;
         $this->title = $title;
         $this->disabled = $disabled;
@@ -46,6 +52,11 @@ class EducationalCategory
     public function getUid(): int
     {
         return $this->uid;
+    }
+
+    public function getParentId(): int
+    {
+        return $this->parentId;
     }
 
     public function getType(): Category
@@ -61,6 +72,13 @@ class EducationalCategory
     public function getChildren(): ?CategoryCollection
     {
         return $this->children;
+    }
+
+    public function getParent(): ?EducationalCategory
+    {
+        $this->parent ??= GeneralUtility::makeInstance(EducationalCategoryRepository::class)
+            ->findParent($this->parentId);
+        return $this->parent;
     }
 
     public function setDisabled(bool $disabled): void

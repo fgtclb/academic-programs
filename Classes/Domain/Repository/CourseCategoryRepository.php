@@ -97,6 +97,7 @@ class CourseCategoryRepository
         $statement = $queryBuilder
             ->select(
                 'sys_category.uid',
+                'sys_category.parent',
                 'sys_category.type',
                 'sys_category.title'
             )
@@ -140,6 +141,7 @@ class CourseCategoryRepository
             $attributes->attach(
                 new EducationalCategory(
                     $row['uid'],
+                    $row['parent'],
                     Category::cast($row['type']),
                     $row['title']
                 )
@@ -155,6 +157,7 @@ class CourseCategoryRepository
         $statement = $queryBuilder
             ->select(
                 'sys_category.uid',
+                'sys_category.parent',
                 'sys_category.type',
                 'sys_category.title'
             )
@@ -174,6 +177,7 @@ class CourseCategoryRepository
             $attributes->attach(
                 new EducationalCategory(
                     $row['uid'],
+                    $row['parent'],
                     Category::cast($row['type']),
                     $row['title']
                 )
@@ -192,6 +196,7 @@ class CourseCategoryRepository
         $statement = $queryBuilder
             ->select(
                 'sys_category.uid',
+                'sys_category.parent',
                 'sys_category.type',
                 'sys_category.title'
             )
@@ -236,6 +241,7 @@ class CourseCategoryRepository
             $attributes->attach(
                 new EducationalCategory(
                     (int)$row['uid'],
+                    (int)$row['parent'],
                     Category::cast($row['type']),
                     $row['title']
                 )
@@ -254,6 +260,7 @@ class CourseCategoryRepository
 
         $queryBuilder->select(
             'sys_category.uid',
+            'sys_category.parent',
             'sys_category.type',
             'sys_category.title'
         )
@@ -273,6 +280,7 @@ class CourseCategoryRepository
         foreach ($result->fetchAllAssociative() as $row) {
             $category[] = new EducationalCategory(
                 (int)$row['uid'],
+                (int)$row['parent'],
                 Category::cast($row['type']),
                 $row['title']
             );
@@ -294,6 +302,7 @@ class CourseCategoryRepository
         $statement = $queryBuilder
             ->select(
                 'sys_category.uid',
+                'sys_category.parent',
                 'sys_category.type',
                 'sys_category.title'
             )
@@ -313,6 +322,7 @@ class CourseCategoryRepository
             if (in_array($attribute['type'], Category::getConstants())) {
                 $category = new EducationalCategory(
                     $attribute['uid'],
+                    $attribute['parent'],
                     Category::cast($attribute['type']),
                     $attribute['title']
                 );

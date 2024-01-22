@@ -27,7 +27,7 @@ class EducationalCategoryRepository
         $queryBuilder = $this->buildQueryBuilder();
 
         $statement = $queryBuilder
-            ->select('uid', 'title', 'type')
+            ->select('uid', 'parent', 'title', 'type')
             ->from('sys_category')
             ->where(
                 $queryBuilder->expr()->eq(
@@ -47,12 +47,47 @@ class EducationalCategoryRepository
             $children->attach(
                 new EducationalCategory(
                     $child['uid'],
+                    $child['parent'],
                     Category::cast($child['type']),
                     $child['title']
                 )
             );
         }
         return $children;
+    }
+
+    public function findParent(int $parent): ?EducationalCategory
+    {
+        $queryBuilder = $this->buildQueryBuilder();
+
+        $record = $queryBuilder
+            ->select('uid', 'parent', 'title', 'type')
+            ->from('sys_category')
+            ->where(
+                $queryBuilder->expr()->eq(
+                    'uid',
+                    $queryBuilder->createNamedParameter($parent, Connection::PARAM_INT)
+                ),
+                $queryBuilder->expr()->in('type', array_map(function (string $value) {
+                    return '\'' . $value . '\'';
+                }, array_values(Category::getConstants())))
+            )
+            ->setMaxResults(1)
+            ->executeQuery()
+            ->fetchAssociative();
+
+        if (!$record) {
+            return null;
+        }
+
+        $parent = new EducationalCategory(
+            $record['uid'],
+            $record['parent'],
+            Category::cast($record['type']),
+            $record['title']
+        );
+
+        return $parent;
     }
 
     private function buildQueryBuilder(string $tableName = 'sys_category'): QueryBuilder
