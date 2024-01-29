@@ -6,6 +6,9 @@ namespace FGTCLB\EducationalCourse\Domain\Enumeration;
 
 use TYPO3\CMS\Core\Type\Enumeration;
 
+/**
+ * ToDo: Move Collection to FGTCLB\EducationalCourse\Enumeration
+ */
 class Category extends Enumeration
 {
     public const TYPE_ADMISSION_RESTRICTION = 'admission_restriction';
