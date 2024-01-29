@@ -14,6 +14,8 @@ use TYPO3\CMS\Core\Type\Exception\InvalidEnumerationValueException;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
+ * ToDo: Move Collection to FGTCLB\EducationalCourse\Collection
+ *
  * @implements Iterator<int, EducationalCategory>
  */
 class CategoryCollection implements Countable, Iterator, ArrayAccess

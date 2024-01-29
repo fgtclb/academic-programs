@@ -19,6 +19,8 @@ use TYPO3\CMS\Core\Domain\Repository\PageRepository;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
+ * ToDo: Move Collection to FGTCLB\EducationalCourse\Collection
+ *
  * @implements Iterator<int, Course>
  */
 final class CourseCollection implements Iterator, Countable
