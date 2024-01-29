@@ -13,13 +13,52 @@ use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Database\Query\QueryBuilder;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
+/**
+ * ToDo: Rename to "CategoryRepository"
+ */
 class EducationalCategoryRepository
 {
+    /**
+     * @var string[]
+     */
+    private array $categoryFieldList = [
+        'sys_category.uid',
+        'sys_category.type',
+        'sys_category.parent',
+        'sys_category.title',
+    ];
+
     private ConnectionPool $connection;
 
-    public function __construct()
+    public function __construct(
+        ?ConnectionPool $connectionPool = null
+    ) {
+        $this->connection = $connectionPool ?? GeneralUtility::makeInstance(ConnectionPool::class);
+    }
+
+    /**
+     * @param Category $categoryType
+     * @return EducationalCategory[]
+     */
+    public function findCategoryByType(Category $categoryType): array
     {
-        $this->connection = GeneralUtility::makeInstance(ConnectionPool::class);
+        $queryBuilder = $this->buildQueryBuilder();
+        $result = $queryBuilder->select(...$this->categoryFieldList)
+            ->from('sys_category')
+            ->where(
+                $queryBuilder->expr()->eq('type', $queryBuilder->createNamedParameter((string)$categoryType))
+            )->executeQuery();
+
+        if ($result->rowCount() === 0) {
+            return [];
+        }
+
+        $category = [];
+        foreach ($result->fetchAllAssociative() as $record) {
+            $category[] = $this->categoryObjectMapping($record);
+        }
+
+        return $category;
     }
 
     public function findChildren(int $uid): ?CategoryCollection
@@ -27,31 +66,27 @@ class EducationalCategoryRepository
         $queryBuilder = $this->buildQueryBuilder();
 
         $statement = $queryBuilder
-            ->select('uid', 'parent', 'title', 'type')
+            ->select(...$this->categoryFieldList)
             ->from('sys_category')
             ->where(
                 $queryBuilder->expr()->eq(
                     'parent',
                     $queryBuilder->createNamedParameter($uid, Connection::PARAM_INT)
                 ),
-                $queryBuilder->expr()->in('type', array_map(function (string $value) {
-                    return '\'' . $value . '\'';
-                }, array_values(Category::getConstants())))
+                $this->categoryTypeCondition($queryBuilder)
             );
+
+        $result = $statement->executeQuery();
+
+        if ($result->rowCount() === 0) {
+            return null;
+        }
 
         $children = new CategoryCollection();
 
-        $result = $statement->executeQuery()->fetchAllAssociative();
-
-        foreach ($result as $child) {
-            $children->attach(
-                new EducationalCategory(
-                    $child['uid'],
-                    $child['parent'],
-                    Category::cast($child['type']),
-                    $child['title']
-                )
-            );
+        foreach ($result->fetchAllAssociative() as $child) {
+            $category = $this->categoryObjectMapping($child);
+            $children->attach($category);
         }
         return $children;
     }
@@ -60,34 +95,40 @@ class EducationalCategoryRepository
     {
         $queryBuilder = $this->buildQueryBuilder();
 
-        $record = $queryBuilder
-            ->select('uid', 'parent', 'title', 'type')
+        $result = $queryBuilder
+            ->select(...$this->categoryFieldList)
             ->from('sys_category')
             ->where(
                 $queryBuilder->expr()->eq(
                     'uid',
                     $queryBuilder->createNamedParameter($parent, Connection::PARAM_INT)
-                ),
-                $queryBuilder->expr()->in('type', array_map(function (string $value) {
-                    return '\'' . $value . '\'';
-                }, array_values(Category::getConstants())))
+                )
             )
             ->setMaxResults(1)
-            ->executeQuery()
-            ->fetchAssociative();
+            ->executeQuery();
 
-        if (!$record) {
+        if ($result->rowCount() === 0) {
             return null;
         }
 
-        $parent = new EducationalCategory(
-            $record['uid'],
-            $record['parent'],
-            Category::cast($record['type']),
-            $record['title']
-        );
+        $record = $result->fetchAssociative();
 
-        return $parent;
+        return $this->categoryObjectMapping($record);
+    }
+
+    private function categoryObjectMapping(array $data): EducationalCategory
+    {
+        return new EducationalCategory($data['uid'], $data['parent'], $data['title'], $data['type']);
+    }
+
+    private function categoryTypeCondition(QueryBuilder $queryBuilder): string
+    {
+        return $queryBuilder->expr()->in(
+            'sys_category.type',
+            array_map(function (string $value) {
+                return '\'' . $value . '\'';
+            }, array_values(Category::getConstants()))
+        );
     }
 
     private function buildQueryBuilder(string $tableName = 'sys_category'): QueryBuilder
