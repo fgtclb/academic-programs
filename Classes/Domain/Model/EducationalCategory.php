@@ -4,12 +4,9 @@ declare(strict_types=1);
 
 namespace FGTCLB\EducationalCourse\Domain\Model;
 
-use Doctrine\DBAL\DBALException;
-use Doctrine\DBAL\Driver\Exception;
 use FGTCLB\EducationalCourse\Domain\Collection\CategoryCollection;
 use FGTCLB\EducationalCourse\Domain\Enumeration\Category;
 use FGTCLB\EducationalCourse\Domain\Repository\EducationalCategoryRepository;
-use FGTCLB\EducationalCourse\Exception\Domain\CategoryExistException;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class EducationalCategory
@@ -18,7 +15,7 @@ class EducationalCategory
 
     protected int $parentId;
 
-    protected Category $type;
+    protected ?Category $type;
 
     protected string $title;
 
@@ -28,20 +25,23 @@ class EducationalCategory
 
     protected ?EducationalCategory $parent = null;
 
-    /**
-     * @throws CategoryExistException
-     * @throws DBALException
-     * @throws Exception
-     */
+
     public function __construct(
         int $uid,
         int $parentId,
-        Category $type,
         string $title,
+        string $type = '',
         bool $disabled = false
     ) {
         $this->uid = $uid;
         $this->parentId = $parentId;
+
+        if ($type === 'default' || $type === '') {
+            $type = null;
+        } else {
+            $type = Category::cast($type);
+        }
+
         $this->type = $type;
         $this->title = $title;
         $this->disabled = $disabled;
@@ -59,7 +59,7 @@ class EducationalCategory
         return $this->parentId;
     }
 
-    public function getType(): Category
+    public function getType(): ?Category
     {
         return $this->type;
     }
