@@ -23,9 +23,6 @@ class EducationalCategory
 
     protected ?CategoryCollection $children = null;
 
-    protected ?EducationalCategory $parent = null;
-
-
     public function __construct(
         int $uid,
         int $parentId,
@@ -74,11 +71,15 @@ class EducationalCategory
         return $this->children;
     }
 
+    public function hasParent(): bool
+    {
+        return $this->parentId > 0;
+    }
+
     public function getParent(): ?EducationalCategory
     {
-        $this->parent ??= GeneralUtility::makeInstance(EducationalCategoryRepository::class)
+        return GeneralUtility::makeInstance(EducationalCategoryRepository::class)
             ->findParent($this->parentId);
-        return $this->parent;
     }
 
     public function setDisabled(bool $disabled): void
