@@ -9,6 +9,9 @@ use FGTCLB\EducationalCourse\Domain\Enumeration\Category;
 use FGTCLB\EducationalCourse\Domain\Repository\EducationalCategoryRepository;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
+/**
+ * ToDo: rename class to "Category"
+ */
 class EducationalCategory
 {
     protected int $uid;
