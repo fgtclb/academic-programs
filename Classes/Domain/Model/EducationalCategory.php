@@ -81,8 +81,23 @@ class EducationalCategory
 
     public function getParent(): ?EducationalCategory
     {
+        if (!$this->hasParent()) {
+            return null;
+        }
+
         return GeneralUtility::makeInstance(EducationalCategoryRepository::class)
             ->findParent($this->parentId);
+    }
+
+    public function isRoot(): bool
+    {
+        $parent = $this->getParent();
+        if ($parent === null
+            || (string)$this->type !== (string)$parent->getType()
+        ) {
+            return true;
+        }
+        return false;
     }
 
     public function setDisabled(bool $disabled): void
