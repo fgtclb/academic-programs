@@ -4,19 +4,21 @@ declare(strict_types=1);
 
 namespace FGTCLB\EducationalCourse\Domain\Model;
 
-use Doctrine\DBAL\DBALException;
-use Doctrine\DBAL\Driver\Exception;
 use FGTCLB\EducationalCourse\Domain\Collection\CategoryCollection;
 use FGTCLB\EducationalCourse\Domain\Enumeration\Category;
 use FGTCLB\EducationalCourse\Domain\Repository\EducationalCategoryRepository;
-use FGTCLB\EducationalCourse\Exception\Domain\CategoryExistException;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
+/**
+ * ToDo: rename class to "Category"
+ */
 class EducationalCategory
 {
     protected int $uid;
 
-    protected Category $type;
+    protected int $parentId;
+
+    protected ?Category $type;
 
     protected string $title;
 
@@ -24,18 +26,22 @@ class EducationalCategory
 
     protected ?CategoryCollection $children = null;
 
-    /**
-     * @throws CategoryExistException
-     * @throws DBALException
-     * @throws Exception
-     */
     public function __construct(
         int $uid,
-        Category $type,
+        int $parentId,
         string $title,
+        string $type = '',
         bool $disabled = false
     ) {
         $this->uid = $uid;
+        $this->parentId = $parentId;
+
+        if ($type === 'default' || $type === '') {
+            $type = null;
+        } else {
+            $type = Category::cast($type);
+        }
+
         $this->type = $type;
         $this->title = $title;
         $this->disabled = $disabled;
@@ -48,7 +54,12 @@ class EducationalCategory
         return $this->uid;
     }
 
-    public function getType(): Category
+    public function getParentId(): int
+    {
+        return $this->parentId;
+    }
+
+    public function getType(): ?Category
     {
         return $this->type;
     }
@@ -61,6 +72,32 @@ class EducationalCategory
     public function getChildren(): ?CategoryCollection
     {
         return $this->children;
+    }
+
+    public function hasParent(): bool
+    {
+        return $this->parentId > 0;
+    }
+
+    public function getParent(): ?EducationalCategory
+    {
+        if (!$this->hasParent()) {
+            return null;
+        }
+
+        return GeneralUtility::makeInstance(EducationalCategoryRepository::class)
+            ->findParent($this->parentId);
+    }
+
+    public function isRoot(): bool
+    {
+        $parent = $this->getParent();
+        if ($parent === null
+            || (string)$this->type !== (string)$parent->getType()
+        ) {
+            return true;
+        }
+        return false;
     }
 
     public function setDisabled(bool $disabled): void

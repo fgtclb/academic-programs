@@ -13,6 +13,8 @@ use TYPO3\CMS\Core\Resource\FileReference;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
+ * ToDo: Move Collection to FGTCLB\EducationalCourse\Collection
+ *
  * @implements Iterator<int, FileReference>
  */
 final class FileReferenceCollection implements Countable, Iterator
