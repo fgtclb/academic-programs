@@ -136,10 +136,10 @@ class SelectViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Form\SelectViewHelpe
 
         return $options;
     }
-    
+
     /**
      * Create the options tree
-     * 
+     *
      * @param array<string, mixed> $options
      * @param array<string, mixed> $optionsTree
      * @return array<string, mixed>
@@ -163,10 +163,10 @@ class SelectViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Form\SelectViewHelpe
         }
         return $tree;
     }
-    
+
     /**
      * Linearize the options tree
-     * 
+     *
      * @param array<string, mixed> $options
      * @param array<string, mixed> $optionsTree
      * @return array<string, mixed>
@@ -192,7 +192,7 @@ class SelectViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Form\SelectViewHelpe
     {
         $output = '';
         foreach ($options as $value => $option) {
-            $output .= '<option value="' . htmlspecialchars((string)$value) . '"';
+            $output .= '<option value="' . $option['uid'] . '"';
             $output .= ' class="' . $this->arguments['groupLevelClassPrefix'] . $option['level'] . '"';
             if ($option['isSelected']) {
                 $output .= ' selected="selected"';
