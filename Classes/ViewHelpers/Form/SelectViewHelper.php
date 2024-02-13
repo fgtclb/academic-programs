@@ -19,6 +19,83 @@ class SelectViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Form\SelectViewHelpe
         $this->registerArgument('l10n', 'string', 'If specified, will call the correct label specified in locallang file.');
         $this->registerArgument('groupByParent', 'bool', 'If true, options will be grouped by parents.', false, false);
         $this->registerArgument('groupLevelClassPrefix', 'string', 'Prefix of the level indicator class for grouped options.', false, 'level-');
+        $this->registerArgument('renderOptions', 'bool', 'ViewHelper renders the option in "false" case an "options" variable is created for the child render', false, true);
+    }
+
+    public function render()
+    {
+        if (isset($this->arguments['required']) && $this->arguments['required']) {
+            $this->tag->addAttribute('required', 'required');
+        }
+        $name = $this->getName();
+        if (isset($this->arguments['multiple']) && $this->arguments['multiple']) {
+            $this->tag->addAttribute('multiple', 'multiple');
+            $name .= '[]';
+        }
+        $this->tag->addAttribute('name', $name);
+        $options = $this->getOptions();
+
+        if (isset($this->arguments['renderOptions']) && (bool)$this->arguments['renderOptions'] === false) {
+            $this->renderingContext->getVariableProvider()->add('options', $options);
+        }
+
+        $viewHelperVariableContainer = $this->renderingContext->getViewHelperVariableContainer();
+
+        $this->addAdditionalIdentityPropertiesIfNeeded();
+        $this->setErrorClassAttribute();
+        $content = '';
+
+        // register field name for token generation.
+        $this->registerFieldNameForFormTokenGeneration($name);
+        // in case it is a multi-select, we need to register the field name
+        // as often as there are elements in the box
+        if (isset($this->arguments['multiple']) && $this->arguments['multiple']) {
+            $content .= $this->renderHiddenFieldForEmptyValue();
+            // Register the field name additional times as required by the total number of
+            // options. Since we already registered it once above, we start the counter at 1
+            // instead of 0.
+            $optionsCount = count($options);
+            for ($i = 1; $i < $optionsCount; $i++) {
+                $this->registerFieldNameForFormTokenGeneration($name);
+            }
+            // save the parent field name so that any child f:form.select.option
+            // tag will know to call registerFieldNameForFormTokenGeneration
+            // this is the reason why "self::class" is used instead of static::class (no LSB)
+            $viewHelperVariableContainer->addOrUpdate(
+                self::class,
+                'registerFieldNameForFormTokenGeneration',
+                $name
+            );
+        }
+
+        $prependContent = $this->renderPrependOptionTag();
+
+        $tagContent = '';
+        if (isset($this->arguments['renderOptions']) && (bool)$this->arguments['renderOptions'] === true) {
+            $tagContent = $this->renderOptionTags($options);
+        }
+
+        $viewHelperVariableContainer->addOrUpdate(self::class, 'selectedValue', $this->getSelectedValue());
+
+        $childContent = $this->renderChildren();
+
+        $viewHelperVariableContainer->remove(self::class, 'selectedValue');
+        $viewHelperVariableContainer->remove(self::class, 'registerFieldNameForFormTokenGeneration');
+        if (isset($this->arguments['renderOptions']) && (bool)$this->arguments['renderOptions'] === false) {
+            $this->renderingContext->getVariableProvider()->remove('options');
+        }
+
+        if (isset($this->arguments['optionsAfterContent']) && $this->arguments['optionsAfterContent']) {
+            $tagContent = $childContent . $tagContent;
+        } else {
+            $tagContent .= $childContent;
+        }
+        $tagContent = $prependContent . $tagContent;
+
+        $this->tag->forceClosingTag(true);
+        $this->tag->setContent($tagContent);
+        $content .= $this->tag->render();
+        return $content;
     }
 
     /**
@@ -110,7 +187,7 @@ class SelectViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Form\SelectViewHelpe
         }
 
         if ($this->arguments['sortByOptionLabel'] !== false) {
-            usort($options, function($a, $b) {
+            usort($options, function ($a, $b) {
                 return strcoll($a['label'], $b['label']);
             });
         }
@@ -127,11 +204,6 @@ class SelectViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Form\SelectViewHelpe
 
             $options = [];
             $options = $this->linearizeOptionsTree($options, $optionsTree);
-        }
-
-        // Remove children from options
-        foreach ($options as $key => $option) {
-            unset($options[$key]['children']);
         }
 
         return $options;
