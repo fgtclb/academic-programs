@@ -4,47 +4,46 @@ declare(strict_types=1);
 
 namespace FGTCLB\EducationalCourse\Domain\Repository;
 
-use FGTCLB\EducationalCourse\Database\Query\Restriction\LanguageRestriction;
-use FGTCLB\EducationalCourse\Domain\Collection\CategoryCollection;
-use FGTCLB\EducationalCourse\Domain\Enumeration\Category;
-use FGTCLB\EducationalCourse\Domain\Model\EducationalCategory;
+use FGTCLB\EducationalCourse\Collection\CategoryCollection;
+use FGTCLB\EducationalCourse\Domain\Model\Category;
+use FGTCLB\EducationalCourse\Enumeration\CategoryTypes;
 use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Database\Query\QueryBuilder;
+use TYPO3\CMS\Core\Database\Query\Restriction\LimitToTablesRestrictionContainer;
+use TYPO3\CMS\Core\Database\Query\Restriction\WorkspaceRestriction;
+use TYPO3\CMS\Core\Domain\Repository\PageRepository;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
-/**
- * ToDo: Merge repository with "EducationalCategoryRepository"
- */
-class CourseCategoryRepository
+class CategoryRepository
 {
+    private ?ConnectionPool $connectionPool;
+
+    private PageRepository $pageRepository;
+
     /**
-     * @var string[]
+     * @param ConnectionPool|null $connectionPool
      */
-    private array $categoryFieldList = [
-        'sys_category.uid',
-        'sys_category.type',
-        'sys_category.parent',
-        'sys_category.title',
-    ];
-
-    protected ConnectionPool $connection;
-
     public function __construct(
         ?ConnectionPool $connectionPool = null
     ) {
         $this->connection = $connectionPool ?? GeneralUtility::makeInstance(ConnectionPool::class);
+        $this->pageRepository = GeneralUtility::makeInstance(PageRepository::class);
     }
 
     /**
-     * Find Category relation
+     * @param int $pageId
+     * @param Category $type
+     * @return CategoryCollection
      */
-    public function findByType(int $pageId, Category $type): CategoryCollection
-    {
+    public function findByType(
+        int $pageId,
+        Category $type
+    ): CategoryCollection {
         $queryBuilder = $this->buildQueryBuilder();
 
         $result = $queryBuilder
-            ->select(...$this->categoryFieldList)
+            ->select('sys_category.*')
             ->from('sys_category')
             ->join(
                 'sys_category',
@@ -59,6 +58,8 @@ class CourseCategoryRepository
                 'mm.uid_foreign=pages.uid'
             )
             ->where(
+                $this->categoryTypeCondition($queryBuilder),
+                $this->siteDefaultLanguageCondition($queryBuilder),
                 $queryBuilder->expr()->eq(
                     'sys_category.type',
                     $queryBuilder->createNamedParameter((string)$type)
@@ -77,25 +78,33 @@ class CourseCategoryRepository
                 ),
             )->executeQuery();
 
-        $attributes = new CategoryCollection();
+        $categories = new CategoryCollection();
         if ($result->rowCount() === 0) {
-            return $attributes;
+            return $categories;
         }
 
-        foreach ($result->fetchAllAssociative() as $attribute) {
-            $category = $this->categoryObjectMapping($attribute);
-            $attributes->attach($category);
+        foreach ($result->fetchAllAssociative() as $row) {
+            $categoryRow = $this->pageRepository->getLanguageOverlay('sys_category', $row);
+            if ($categoryRow === null) {
+                continue;
+            }
+            $category = $this->categoryObjectMapping($categoryRow);
+            $categories->attach($category);
         }
 
-        return $attributes;
+        return $categories;
     }
 
+    /**
+     * @param int $pageId
+     * @return CategoryCollection
+     */
     public function findAllByPageId(int $pageId): CategoryCollection
     {
         $queryBuilder = $this->buildQueryBuilder();
 
         $result = $queryBuilder
-            ->select(...$this->categoryFieldList)
+            ->select('sys_category.*')
             ->from('sys_category')
             ->join(
                 'sys_category',
@@ -111,6 +120,7 @@ class CourseCategoryRepository
             )
             ->where(
                 $this->categoryTypeCondition($queryBuilder),
+                $this->siteDefaultLanguageCondition($queryBuilder),
                 $queryBuilder->expr()->eq(
                     'mm.tablenames',
                     $queryBuilder->createNamedParameter('pages')
@@ -125,49 +135,38 @@ class CourseCategoryRepository
                 ),
             )->executeQuery();
 
-        $attributes = new CategoryCollection();
+        $categories = new CategoryCollection();
         if ($result->rowCount() === 0) {
-            return $attributes;
+            return $categories;
         }
 
         foreach ($result->fetchAllAssociative() as $row) {
-            $category = $this->categoryObjectMapping($row);
-            $attributes->attach($category);
+            $categoryRow = $this->pageRepository->getLanguageOverlay('sys_category', $row);
+            if ($categoryRow === null) {
+                continue;
+            }
+            $category = $this->categoryObjectMapping($categoryRow);
+            $categories->attach($category);
         }
 
-        return $attributes;
+        return $categories;
     }
 
-    public function findAll(): CategoryCollection
-    {
+    /**
+     * @param int $uid
+     * @param string $table
+     * @param string $field
+     * @return CategoryCollection
+     */
+    public function getByDatabaseFields(
+        int $uid,
+        string $table = 'tt_content',
+        string $field = 'pi_flexform'
+    ): CategoryCollection {
         $queryBuilder = $this->buildQueryBuilder();
 
         $result = $queryBuilder
-            ->select(...$this->categoryFieldList)
-            ->from('sys_category')
-            ->where(
-                $this->categoryTypeCondition($queryBuilder)
-            )->executeQuery();
-
-        $attributes = new CategoryCollection();
-
-        if ($result->rowCount() === 0) {
-            return $attributes;
-        }
-
-        foreach ($result->fetchAllAssociative() as $row) {
-            $category = $this->categoryObjectMapping($row);
-            $attributes->attach($category);
-        }
-        return $attributes;
-    }
-
-    public function getByDatabaseFields(int $uid, string $table = 'tt_content', string $field = 'pi_flexform'): CategoryCollection
-    {
-        $queryBuilder = $this->buildQueryBuilder();
-
-        $result = $queryBuilder
-            ->select(...$this->categoryFieldList)
+            ->select('sys_category.*')
             ->distinct()
             ->from('sys_category')
             ->join(
@@ -184,6 +183,7 @@ class CourseCategoryRepository
             )
             ->where(
                 $this->categoryTypeCondition($queryBuilder),
+                $this->siteDefaultLanguageCondition($queryBuilder),
                 $queryBuilder->expr()->eq(
                     'sys_category_record_mm.tablenames',
                     $queryBuilder->createNamedParameter($table)
@@ -198,30 +198,35 @@ class CourseCategoryRepository
                 )
             )->executeQuery();
 
-        $attributes = new CategoryCollection();
+        $categories = new CategoryCollection();
 
         if ($result->rowCount() === 0) {
-            return $attributes;
+            return $categories;
         }
 
         foreach ($result->fetchAllAssociative() as $row) {
-            $category = $this->categoryObjectMapping($row);
-            $attributes->attach($category);
+            $categoryRow = $this->pageRepository->getLanguageOverlay('sys_category', $row);
+            $category = $this->categoryObjectMapping($categoryRow);
+            $categories->attach($category);
         }
-        return $attributes;
+        return $categories;
     }
 
     /**
      * @param array<int>|null $idList
-     * @return array<EducationalCategory>|null
+     * @return array<CategoryTypes>|null
      */
-    public function findByUidListAndType(array $idList, Category $categoryType): ?array
-    {
+    public function findByUidListAndType(
+        array $idList,
+        CategoryTypes $categoryType
+    ): ?array {
         $queryBuilder = $this->buildQueryBuilder();
 
-        $queryBuilder->select(...$this->categoryFieldList)
+        $queryBuilder->select('sys_category.*')
             ->from('sys_category')
             ->where(
+                $this->categoryTypeCondition($queryBuilder),
+                $this->siteDefaultLanguageCondition($queryBuilder),
                 $queryBuilder->expr()->in('uid', $idList),
                 $queryBuilder->expr()->eq('type', $queryBuilder->createNamedParameter((string)$categoryType))
             );
@@ -234,21 +239,27 @@ class CourseCategoryRepository
 
         $category = [];
         foreach ($result->fetchAllAssociative() as $row) {
-            $category[] = $this->categoryObjectMapping($row);
+            $categoryRow = $this->pageRepository->getLanguageOverlay('sys_category', $row);
+            $category[] = $this->categoryObjectMapping($categoryRow);
         }
 
         return $category;
     }
 
+    /**
+     * @param CategoryCollection $applicableCategories
+     * @return CategoryCollection
+     */
     public function findAllWitDisabledStatus(CategoryCollection $applicableCategories): CategoryCollection
     {
         $queryBuilder = $this->buildQueryBuilder();
 
         $result = $queryBuilder
-            ->select(...$this->categoryFieldList)
+            ->select('sys_category.*')
             ->from('sys_category')
             ->where(
-                $this->categoryTypeCondition($queryBuilder)
+                $this->categoryTypeCondition($queryBuilder),
+                $this->siteDefaultLanguageCondition($queryBuilder)
             )->executeQuery();
 
         $categories = new CategoryCollection();
@@ -257,38 +268,157 @@ class CourseCategoryRepository
             return $categories;
         }
 
-        foreach ($result->fetchAllAssociative() as $attribute) {
-            if (!in_array($attribute['type'], Category::getConstants())) {
+        foreach ($result->fetchAllAssociative() as $row) {
+            if (!in_array($row['type'], CategoryTypes::getConstants())) {
                 continue;
             }
 
-            $category = $this->categoryObjectMapping($attribute);
+            $categoryRow = $this->pageRepository->getLanguageOverlay('sys_category', $row);
+            if ($categoryRow === null) {
+                continue;
+            }
+            $category = $this->categoryObjectMapping($categoryRow);
             $category->setDisabled(!$applicableCategories->exist($category));
-
             $categories->attach($category);
         }
         return $categories;
     }
 
-    private function categoryObjectMapping(array $data): EducationalCategory
+    /**
+     * @param int $uid
+     * @return ?CategoryCollection
+     */
+    public function findChildren(int $uid): ?CategoryCollection
     {
-        return new EducationalCategory($data['uid'], $data['parent'], $data['title'], $data['type']);
+        $queryBuilder = $this->buildQueryBuilder();
+
+        $statement = $queryBuilder
+            ->select('sys_category.*')
+            ->from('sys_category')
+            ->where(
+                $this->categoryTypeCondition($queryBuilder),
+                $this->siteDefaultLanguageCondition($queryBuilder),
+                $queryBuilder->expr()->eq(
+                    'parent',
+                    $queryBuilder->createNamedParameter($uid, Connection::PARAM_INT)
+                ),
+                $this->categoryTypeCondition($queryBuilder)
+            );
+
+        $result = $statement->executeQuery();
+
+        $categories = new CategoryCollection();
+
+        if ($result->rowCount() === 0) {
+            return $categories;
+        }
+
+        foreach ($result->fetchAllAssociative() as $row) {
+            $categoryRow = $this->pageRepository->getLanguageOverlay('sys_category', $row);
+            if ($categoryRow === null) {
+                continue;
+            }
+            $category = $this->categoryObjectMapping($categoryRow);
+            $categories->attach($category);
+        }
+        return $categories;
     }
 
+    public function findParent(int $parent): ?Category
+    {
+        $queryBuilder = $this->buildQueryBuilder();
+
+        $result = $queryBuilder
+            ->select('sys_category.*')
+            ->from('sys_category')
+            ->where(
+                $this->categoryTypeCondition($queryBuilder),
+                $this->siteDefaultLanguageCondition($queryBuilder),
+                $queryBuilder->expr()->eq(
+                    'uid',
+                    $queryBuilder->createNamedParameter($parent, Connection::PARAM_INT)
+                )
+            )
+            ->setMaxResults(1)
+            ->executeQuery();
+
+        if ($result->rowCount() === 0) {
+            return null;
+        }
+
+        $row = $result->fetchAssociative();
+        $categoryRow = $this->pageRepository->getLanguageOverlay('sys_category', $row);
+        $category = $this->categoryObjectMapping($categoryRow);
+
+        return $category;
+    }
+
+    /**
+     * @param array<string, mixed> $data
+     * @return Category
+     */
+    private function categoryObjectMapping(array $data): Category
+    {
+        return new Category(
+            $data['uid'],
+            $data['parent'],
+            $data['title'],
+            $data['type']
+        );
+    }
+
+    /**
+     * General check to exclude all non-course related category records
+     * 
+     * @param QueryBuilder $queryBuilder
+     * @return string
+     */
     private function categoryTypeCondition(QueryBuilder $queryBuilder): string
     {
         return $queryBuilder->expr()->in(
             'sys_category.type',
             array_map(function (string $value) {
                 return '\'' . $value . '\'';
-            }, array_values(Category::getConstants()))
+            }, array_values(CategoryTypes::getConstants()))
         );
     }
 
+    /**
+     * General check to exclude all translated category records
+     * 
+     * @param QueryBuilder $queryBuilder
+     * @return string
+     */
+    private function siteDefaultLanguageCondition(QueryBuilder $queryBuilder): string
+    {
+        $defaultLanguageUid = $GLOBALS['TYPO3_REQUEST']
+            ->getAttribute('site')
+            ->getDefaultLanguage()
+            ->getLanguageId();
+
+
+        return $queryBuilder->expr()->in(
+            'sys_category.sys_language_uid',
+            [$defaultLanguageUid, -1]
+        );
+    }
+
+    /**
+     * @param string $tableName
+     * @return QueryBuilder
+     */
     private function buildQueryBuilder(string $tableName = 'sys_category'): QueryBuilder
     {
         $queryBuilder = $this->connection->getQueryBuilderForTable($tableName);
-        $queryBuilder->getRestrictions()->add(GeneralUtility::makeInstance(LanguageRestriction::class));
+
+        // Add workspace/versioning restrictions (needs handling by PageRepository->versionOL())
+        /*
+        $queryBuilder->getRestrictions()
+            ->add(
+                GeneralUtility::makeInstance(LimitToTablesRestrictionContainer::class)
+                    ->addForTables(GeneralUtility::makeInstance(WorkspaceRestriction::class), [$tableName])
+            );
+        */
 
         return $queryBuilder;
     }
