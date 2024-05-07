@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace FGTCLB\EducationalCourse\Collection;
 
 use Countable;
-use FGTCLB\EducationalCourse\Enumeration\PageTypes;
 use FGTCLB\EducationalCourse\Domain\Model\Course;
 use FGTCLB\EducationalCourse\Domain\Model\Dto\CourseDemand;
+use FGTCLB\EducationalCourse\Enumeration\PageTypes;
 use FGTCLB\EducationalCourse\Utility\PagesUtility;
 use InvalidArgumentException;
 use Iterator;

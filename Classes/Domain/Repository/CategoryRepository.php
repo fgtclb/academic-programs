@@ -369,7 +369,7 @@ class CategoryRepository
 
     /**
      * General check to exclude all non-course related category records
-     * 
+     *
      * @param QueryBuilder $queryBuilder
      * @return string
      */
@@ -385,7 +385,7 @@ class CategoryRepository
 
     /**
      * General check to exclude all translated category records
-     * 
+     *
      * @param QueryBuilder $queryBuilder
      * @return string
      */
@@ -395,7 +395,6 @@ class CategoryRepository
             ->getAttribute('site')
             ->getDefaultLanguage()
             ->getLanguageId();
-
 
         return $queryBuilder->expr()->in(
             'sys_category.sys_language_uid',

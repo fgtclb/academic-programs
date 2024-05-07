@@ -93,7 +93,7 @@ class CourseCategoryRepositoryTest extends FunctionalTestCase
         $repository = GeneralUtility::makeInstance(CourseCategoryRepository::class);
         $categories = $repository->findAll();
 
-        static::assertCount(3, $categories);
+        self::assertCount(3, $categories);
     }
 
     /**
@@ -119,8 +119,8 @@ class CourseCategoryRepositoryTest extends FunctionalTestCase
         $repository = GeneralUtility::makeInstance(CourseCategoryRepository::class);
         $categories = $repository->getByDatabaseFields(1);
 
-        static::assertInstanceOf(CategoryCollection::class, $categories);
-        static::assertEquals(1, $categories->count());
+        self::assertInstanceOf(CategoryCollection::class, $categories);
+        self::assertEquals(1, $categories->count());
     }
 
     /**
@@ -134,8 +134,8 @@ class CourseCategoryRepositoryTest extends FunctionalTestCase
         $repository = GeneralUtility::makeInstance(CourseCategoryRepository::class);
         $categories = $repository->getByDatabaseFields(1);
 
-        static::assertInstanceOf(CategoryCollection::class, $categories);
-        static::assertEquals(0, $categories->count());
+        self::assertInstanceOf(CategoryCollection::class, $categories);
+        self::assertEquals(0, $categories->count());
     }
 
     /**

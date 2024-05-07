@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace FGTCLB\EducationalCourse\Factory;
 
-use FGTCLB\EducationalCourse\Collection\FilterCollection;
 use FGTCLB\EducationalCourse\Collection\CategoryCollection;
-use FGTCLB\EducationalCourse\Enumeration\CategoryTypes;
+use FGTCLB\EducationalCourse\Collection\FilterCollection;
 use FGTCLB\EducationalCourse\Domain\Model\Dto\CourseDemand;
 use FGTCLB\EducationalCourse\Domain\Repository\CategoryRepository;
+use FGTCLB\EducationalCourse\Enumeration\CategoryTypes;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class CourseDemandFactory
