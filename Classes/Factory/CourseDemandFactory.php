@@ -5,16 +5,16 @@ declare(strict_types=1);
 namespace FGTCLB\EducationalCourse\Factory;
 
 use FGTCLB\EducationalCourse\Collection\FilterCollection;
-use FGTCLB\EducationalCourse\Domain\Collection\CategoryCollection;
-use FGTCLB\EducationalCourse\Domain\Enumeration\Category;
+use FGTCLB\EducationalCourse\Collection\CategoryCollection;
+use FGTCLB\EducationalCourse\Enumeration\CategoryTypes;
 use FGTCLB\EducationalCourse\Domain\Model\Dto\CourseDemand;
-use FGTCLB\EducationalCourse\Domain\Repository\CourseCategoryRepository;
+use FGTCLB\EducationalCourse\Domain\Repository\CategoryRepository;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class CourseDemandFactory
 {
     public function __construct(
-        private CourseCategoryRepository $categoryRepository
+        private CategoryRepository $categoryRepository
     ) {}
 
     /**
@@ -60,13 +60,13 @@ class CourseDemandFactory
                 foreach ($demandFromForm['filterCollection'] as $type => $categoriesIds) {
                     $formatType = GeneralUtility::camelCaseToLowerCaseUnderscored($type);
                     $categoriesIdList = GeneralUtility::intExplode(',', $categoriesIds);
-                    $categoryFilterObject = $this->categoryRepository->findByUidListAndType($categoriesIdList, Category::cast($formatType));
+                    $categoryFilterObject = $this->categoryRepository->findByUidListAndType($categoriesIdList, CategoryTypes::cast($formatType));
                     if ($categoryFilterObject === null) {
                         continue;
                     }
 
-                    foreach ($categoryFilterObject as $educationalCategory) {
-                        $categoryCollection->attach($educationalCategory);
+                    foreach ($categoryFilterObject as $Category) {
+                        $categoryCollection->attach($Category);
                     }
                 }
 

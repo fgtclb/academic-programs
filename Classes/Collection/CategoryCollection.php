@@ -2,37 +2,35 @@
 
 declare(strict_types=1);
 
-namespace FGTCLB\EducationalCourse\Domain\Collection;
+namespace FGTCLB\EducationalCourse\Collection;
 
 use ArrayAccess;
 use Countable;
-use FGTCLB\EducationalCourse\Domain\Enumeration\Category;
-use FGTCLB\EducationalCourse\Domain\Model\EducationalCategory;
+use FGTCLB\EducationalCourse\Enumeration\CategoryTypes;
+use FGTCLB\EducationalCourse\Domain\Model\Category;
 use FGTCLB\EducationalCourse\Exception\Domain\CategoryExistException;
 use Iterator;
 use TYPO3\CMS\Core\Type\Exception\InvalidEnumerationValueException;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
- * ToDo: Move Collection to FGTCLB\EducationalCourse\Collection
- *
- * @implements Iterator<int, EducationalCategory>
+ * @implements Iterator<int, Category>
  */
 class CategoryCollection implements Countable, Iterator, ArrayAccess
 {
     /**
-     * @var EducationalCategory[]
+     * @var Category[]
      */
     protected array $container = [];
 
     /**
-     * @var array<string, EducationalCategory[]>
+     * @var array<string, Category[]>
      */
     protected array $typeSortedContainer;
 
     public function __construct()
     {
-        $typeNames = Category::getConstants();
+        $typeNames = CategoryTypes::getConstants();
         ksort($typeNames);
 
         $this->typeSortedContainer = array_map(function () {
@@ -40,7 +38,10 @@ class CategoryCollection implements Countable, Iterator, ArrayAccess
         }, array_flip(array_values($typeNames)));
     }
 
-    public function current(): EducationalCategory|false
+    /**
+     * @return Category|false
+     */
+    public function current(): Category|false
     {
         return current($this->container);
     }
@@ -50,11 +51,17 @@ class CategoryCollection implements Countable, Iterator, ArrayAccess
         next($this->container);
     }
 
+    /**
+     * @return string|int|null
+     */
     public function key(): string|int|null
     {
         return key($this->container);
     }
 
+    /**
+     * @return bool
+     */
     public function valid(): bool
     {
         return current($this->container) !== false;
@@ -65,12 +72,18 @@ class CategoryCollection implements Countable, Iterator, ArrayAccess
         reset($this->container);
     }
 
+    /**
+     * @return int
+     */
     public function count(): int
     {
         return count($this->container);
     }
 
-    public function attach(EducationalCategory $category): void
+    /**
+     * @param Category $category
+     */
+    public function attach(Category $category): void
     {
         if (in_array($category, $this->container, true)) {
             throw new CategoryExistException(
@@ -83,17 +96,18 @@ class CategoryCollection implements Countable, Iterator, ArrayAccess
     }
 
     /**
-     * @return array<string, EducationalCategory[]>
+     * @return array<string, Category[]>
      */
-    public function getAllAttributesByType(): array
+    public function getAllCategoriesByType(): array
     {
         return $this->typeSortedContainer;
     }
 
     /**
      * @param string $typeName
+     * @return Category[]
      */
-    public function getAttributesByTypeName(string $typeName): array
+    public function getCategoriesByTypeName(string $typeName): array
     {
         $typeName = GeneralUtility::camelCaseToLowerCaseUnderscored($typeName);
         if (!array_key_exists($typeName, $this->typeSortedContainer)) {
@@ -101,7 +115,7 @@ class CategoryCollection implements Countable, Iterator, ArrayAccess
                 sprintf(
                     'Category type "%s" must type of "%s"',
                     $typeName,
-                    Category::class
+                    CategoryTypes::class
                 ),
                 1683633304209
             );
@@ -115,7 +129,7 @@ class CategoryCollection implements Countable, Iterator, ArrayAccess
      */
     public function __call(string $name, array $arguments): array
     {
-        return $this->getAttributesByTypeName($name);
+        return $this->getCategoriesByTypeName($name);
     }
 
     public function offsetExists(mixed $offset): bool
@@ -125,7 +139,7 @@ class CategoryCollection implements Countable, Iterator, ArrayAccess
         }
         $lowerName = GeneralUtility::camelCaseToLowerCaseUnderscored($offset);
         try {
-            $enum = new Category($lowerName);
+            $enum = new CategoryTypes($lowerName);
             return true;
         } catch (InvalidEnumerationValueException $e) {
             return false;
@@ -137,7 +151,7 @@ class CategoryCollection implements Countable, Iterator, ArrayAccess
         if (!is_string($offset)) {
             return false;
         }
-        return $this->getAttributesByTypeName($offset);
+        return $this->getCategoriesByTypeName($offset);
     }
 
     public function offsetSet(mixed $offset, mixed $value): void
@@ -156,12 +170,19 @@ class CategoryCollection implements Countable, Iterator, ArrayAccess
         );
     }
 
+    /**
+     * @return string
+     */
     public function __toString(): string
     {
         return self::class;
     }
 
-    public function exist(EducationalCategory $category): bool
+    /**
+     * @param Category $category
+     * @return bool
+     */
+    public function exist(Category $category): bool
     {
         return in_array($category, $this->container, false);
     }

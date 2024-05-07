@@ -14,7 +14,7 @@ use TYPO3\CMS\Frontend\ContentObject\DataProcessorInterface;
  *
  * Example TypoScript configuration:
  *
- *  10 = FGTCLB\EducationalCourse\DataProcessor\CourseCategoryProcessor
+ *  10 = FGTCLB\EducationalCourse\DataProcessor\CategoryProcessor
  *  10 {
  *    type = category-type-identifier
  *    storages = 13,15
@@ -22,7 +22,7 @@ use TYPO3\CMS\Frontend\ContentObject\DataProcessorInterface;
  *    as = category
  *  }
  */
-class CourseCategoryProcessor implements DataProcessorInterface
+class CategoryProcessor implements DataProcessorInterface
 {
     protected ContentDataProcessor $contentDataProcessor;
 
