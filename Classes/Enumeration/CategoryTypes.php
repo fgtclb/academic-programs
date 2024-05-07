@@ -2,14 +2,11 @@
 
 declare(strict_types=1);
 
-namespace FGTCLB\EducationalCourse\Domain\Enumeration;
+namespace FGTCLB\EducationalCourse\Enumeration;
 
 use TYPO3\CMS\Core\Type\Enumeration;
 
-/**
- * ToDo: Move Collection to FGTCLB\EducationalCourse\Enumeration
- */
-class Category extends Enumeration
+class CategoryTypes extends Enumeration
 {
     public const TYPE_ADMISSION_RESTRICTION = 'admission_restriction';
 
@@ -37,12 +34,11 @@ class Category extends Enumeration
 
     public static function typeExist(string $value): bool
     {
-        foreach (Category::getConstants() as $constantValue) {
+        foreach (CategoryTypes::getConstants() as $constantValue) {
             if ($value === (string)$constantValue) {
                 return true;
             }
         }
-
         return false;
     }
 }

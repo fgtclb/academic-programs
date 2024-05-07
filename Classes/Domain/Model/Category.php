@@ -4,21 +4,18 @@ declare(strict_types=1);
 
 namespace FGTCLB\EducationalCourse\Domain\Model;
 
-use FGTCLB\EducationalCourse\Domain\Collection\CategoryCollection;
-use FGTCLB\EducationalCourse\Domain\Enumeration\Category;
-use FGTCLB\EducationalCourse\Domain\Repository\EducationalCategoryRepository;
+use FGTCLB\EducationalCourse\Collection\CategoryCollection;
+use FGTCLB\EducationalCourse\Enumeration\CategoryTypes;
+use FGTCLB\EducationalCourse\Domain\Repository\CategoryRepository;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
-/**
- * ToDo: rename class to "Category"
- */
-class EducationalCategory
+class Category
 {
     protected int $uid;
 
     protected int $parentId;
 
-    protected ?Category $type;
+    protected ?CategoryTypes $type;
 
     protected string $title;
 
@@ -39,13 +36,13 @@ class EducationalCategory
         if ($type === 'default' || $type === '') {
             $type = null;
         } else {
-            $type = Category::cast($type);
+            $type = CategoryTypes::cast($type);
         }
 
         $this->type = $type;
         $this->title = $title;
         $this->disabled = $disabled;
-        $this->children = GeneralUtility::makeInstance(EducationalCategoryRepository::class)
+        $this->children = GeneralUtility::makeInstance(CategoryRepository::class)
             ->findChildren($this->uid);
     }
 
@@ -59,7 +56,7 @@ class EducationalCategory
         return $this->parentId;
     }
 
-    public function getType(): ?Category
+    public function getType(): ?CategoryTypes
     {
         return $this->type;
     }
@@ -79,13 +76,13 @@ class EducationalCategory
         return $this->parentId > 0;
     }
 
-    public function getParent(): ?EducationalCategory
+    public function getParent(): ?Category
     {
         if (!$this->hasParent()) {
             return null;
         }
 
-        return GeneralUtility::makeInstance(EducationalCategoryRepository::class)
+        return GeneralUtility::makeInstance(CategoryRepository::class)
             ->findParent($this->parentId);
     }
 

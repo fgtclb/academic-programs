@@ -1,4 +1,4 @@
-lib.educationalCourse.basic = FGTCLB\EducationalCourse\DataProcessor\CourseCategoryProcessor
+lib.educationalCourse.basic = FGTCLB\EducationalCourse\DataProcessor\CategoryProcessor
 lib.educationalCourse.basic {
   type = # Set sys_category type identifer
   storages = {$courese.storages}

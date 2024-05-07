@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace FGTCLB\EducationalCourse\Domain\Collection;
+namespace FGTCLB\EducationalCourse\Collection;
 
 use Countable;
-use FGTCLB\EducationalCourse\Domain\Enumeration\Page;
+use FGTCLB\EducationalCourse\Enumeration\PageTypes;
 use FGTCLB\EducationalCourse\Domain\Model\Course;
 use FGTCLB\EducationalCourse\Domain\Model\Dto\CourseDemand;
 use FGTCLB\EducationalCourse\Utility\PagesUtility;
@@ -19,8 +19,6 @@ use TYPO3\CMS\Core\Domain\Repository\PageRepository;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
- * ToDo: Move Collection to FGTCLB\EducationalCourse\Collection
- *
  * @implements Iterator<int, Course>
  */
 final class CourseCollection implements Iterator, Countable
@@ -60,7 +58,7 @@ final class CourseCollection implements Iterator, Countable
     {
         $courseCollection = new self();
         foreach ($coursePages as $coursePage) {
-            if ($coursePage['doktype'] !== Page::TYPE_EDUCATIONAL_COURSE) {
+            if ($coursePage['doktype'] !== PageTypes::TYPE_EDUCATIONAL_COURSE) {
                 try {
                     $course = Course::loadFromLink($coursePage['uid']);
                 } catch (InvalidArgumentException|RuntimeException $exception) {
@@ -95,7 +93,7 @@ final class CourseCollection implements Iterator, Countable
             $db->expr()->eq(
                 'doktype',
                 $db->createNamedParameter(
-                    Page::TYPE_EDUCATIONAL_COURSE,
+                    PageTypes::TYPE_EDUCATIONAL_COURSE,
                     Connection::PARAM_INT
                 )
             ),
@@ -215,8 +213,8 @@ final class CourseCollection implements Iterator, Countable
     {
         $applicableCategories = GeneralUtility::makeInstance(CategoryCollection::class);
         foreach ($this->courses as $course) {
-            foreach ($course->getAttributes() as $attribute) {
-                $applicableCategories->attach($attribute);
+            foreach ($course->getCategories() as $category) {
+                $applicableCategories->attach($category);
             }
         }
         return $applicableCategories;
