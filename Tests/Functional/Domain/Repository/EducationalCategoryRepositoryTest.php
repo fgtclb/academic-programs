@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace FGTCLB\EducationalCourse\Tests\Functional\Domain\Repository;
 
@@ -34,8 +36,8 @@ class EducationalCategoryRepositoryTest extends FunctionalTestCase
         $repository = GeneralUtility::makeInstance(EducationalCategoryRepository::class);
         $categories = $repository->findCategoryByType(new Category(Category::TYPE_DEPARTMENT));
 
-        static::assertIsArray($categories);
-        static::assertCount(3, $categories);
+        self::assertIsArray($categories);
+        self::assertCount(3, $categories);
     }
 
     /**
@@ -49,8 +51,8 @@ class EducationalCategoryRepositoryTest extends FunctionalTestCase
         $repository = GeneralUtility::makeInstance(EducationalCategoryRepository::class);
         $categories = $repository->findCategoryByType(new Category(Category::TYPE_DEPARTMENT));
 
-        static::assertIsArray($categories);
-        static::assertCount(0, $categories);
+        self::assertIsArray($categories);
+        self::assertCount(0, $categories);
     }
 
     /**
@@ -61,8 +63,8 @@ class EducationalCategoryRepositoryTest extends FunctionalTestCase
         $repository = GeneralUtility::makeInstance(EducationalCategoryRepository::class);
         $categories = $repository->findCategoryByType(new Category(Category::TYPE_DEPARTMENT));
 
-        static::assertIsArray($categories);
-        static::assertContainsOnlyInstancesOf(EducationalCategory::class, $categories);
+        self::assertIsArray($categories);
+        self::assertContainsOnlyInstancesOf(EducationalCategory::class, $categories);
     }
 
     /**
@@ -73,8 +75,8 @@ class EducationalCategoryRepositoryTest extends FunctionalTestCase
         $repository = GeneralUtility::makeInstance(EducationalCategoryRepository::class);
         $categories = $repository->findChildren(4);
 
-        static::assertInstanceOf(CategoryCollection::class, $categories);
-        static::assertEquals(1, $categories->count());
+        self::assertInstanceOf(CategoryCollection::class, $categories);
+        self::assertEquals(1, $categories->count());
     }
 
     /**
@@ -85,7 +87,7 @@ class EducationalCategoryRepositoryTest extends FunctionalTestCase
         $repository = GeneralUtility::makeInstance(EducationalCategoryRepository::class);
         $categories = $repository->findChildren(5);
 
-        static::assertNull($categories);
+        self::assertNull($categories);
     }
 
     /**
@@ -96,8 +98,8 @@ class EducationalCategoryRepositoryTest extends FunctionalTestCase
         $repository = GeneralUtility::makeInstance(EducationalCategoryRepository::class);
         $category = $repository->findParent(1);
 
-        static::assertInstanceOf(EducationalCategory::class, $category);
-        static::assertEquals('Category 1', $category->getTitle());
-        static::assertEquals(null, $category->getType());
+        self::assertInstanceOf(EducationalCategory::class, $category);
+        self::assertEquals('Category 1', $category->getTitle());
+        self::assertNull($category->getType());
     }
 }

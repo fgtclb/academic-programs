@@ -6,8 +6,8 @@ namespace FGTCLB\EducationalCourse\ViewHelpers\Be;
 
 use Doctrine\DBAL\DBALException;
 use Doctrine\DBAL\Driver\Exception;
-use FGTCLB\EducationalCourse\Enumeration\CategoryTypes;
 use FGTCLB\EducationalCourse\Domain\Repository\CategoryRepository;
+use FGTCLB\EducationalCourse\Enumeration\CategoryTypes;
 use FGTCLB\EducationalCourse\Exception\CategoryTypeException;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface;

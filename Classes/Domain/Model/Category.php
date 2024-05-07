@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace FGTCLB\EducationalCourse\Domain\Model;
 
 use FGTCLB\EducationalCourse\Collection\CategoryCollection;
-use FGTCLB\EducationalCourse\Enumeration\CategoryTypes;
 use FGTCLB\EducationalCourse\Domain\Repository\CategoryRepository;
+use FGTCLB\EducationalCourse\Enumeration\CategoryTypes;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class Category
