@@ -14,7 +14,7 @@ use TYPO3\CMS\Frontend\ContentObject\DataProcessorInterface;
  *
  * Example TypoScript configuration:
  *
- *  10 = FGTCLB\EducationalCourse\DataProcessor\CourseCategoryProcessor
+ *  10 = FGTCLB\EducationalCourse\DataProcessor\CategoryProcessor
  *  10 {
  *    type = category-type-identifier
  *    storages = 13,15
@@ -22,21 +22,27 @@ use TYPO3\CMS\Frontend\ContentObject\DataProcessorInterface;
  *    as = category
  *  }
  */
-class CourseCategoryProcessor implements DataProcessorInterface
+class CategoryProcessor implements DataProcessorInterface
 {
-    protected ContentDataProcessor $contentDataProcessor;
+    public function __construct(
+        protected ContentDataProcessor $contentDataProcessor
+    ) {}
 
-    public function __construct()
-    {
-        $this->contentDataProcessor = GeneralUtility::makeInstance(ContentDataProcessor::class);
-    }
-
+    /**
+     * Process data
+     *
+     * @param ContentObjectRenderer $cObj
+     * @param array<string, mixed> $contentObjectConfiguration
+     * @param array<string, mixed> $processorConfiguration
+     * @param array<string, mixed> $processedData
+     * @return array<string, mixed>
+     */
     public function process(
         ContentObjectRenderer $cObj,
         array $contentObjectConfiguration,
         array $processorConfiguration,
         array $processedData
-    ) {
+    ): array {
         if (isset($processorConfiguration['if.']) && !$cObj->checkIf($processorConfiguration['if.'])) {
             return $processedData;
         }
@@ -55,7 +61,7 @@ class CourseCategoryProcessor implements DataProcessorInterface
 
         $targetVariableName = $cObj->stdWrapValue('as', $processorConfiguration, 'records');
         $fieldList = $cObj->stdWrapValue('fields', $processorConfiguration, 'title');
-        $fields = GeneralUtility::trimExplode(',', $fieldList);
+        $fields = GeneralUtility::trimExplode(',', (string)$fieldList);
 
         $fieldList = implode(', ', array_map(function (string $fieldName) use ($tableName) {
             return $tableName . '.' . $fieldName;
@@ -89,13 +95,18 @@ class CourseCategoryProcessor implements DataProcessorInterface
         $request = $cObj->getRequest();
         $processedRecordVariables = [];
         foreach ($records as $key => $record) {
+            /** @var ContentObjectRenderer $recordContentObjectRenderer */
             $recordContentObjectRenderer = GeneralUtility::makeInstance(ContentObjectRenderer::class);
             $recordContentObjectRenderer->start($record, $tableName, $request);
-            $processedRecordVariables[$key] = ['data' => $record];
-            $processedRecordVariables[$key] = $this->contentDataProcessor->process($recordContentObjectRenderer, $processorConfiguration, $processedRecordVariables[$key]);
+            $processedRecordVariables[(string)$key] = ['data' => $record];
+            $processedRecordVariables[(string)$key] = $this->contentDataProcessor->process(
+                $recordContentObjectRenderer,
+                $processorConfiguration,
+                $processedRecordVariables[$key]
+            );
         }
 
-        $processedData[$targetVariableName] = $processedRecordVariables;
+        $processedData[(string)$targetVariableName] = $processedRecordVariables;
 
         return $processedData;
     }

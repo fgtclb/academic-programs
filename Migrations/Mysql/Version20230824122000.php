@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace FGTCLB\EducationalCourse\Migrations\Mysql;
 
 use Doctrine\DBAL\Schema\Schema;
-use FGTCLB\EducationalCourse\Domain\Enumeration\Category;
-use FGTCLB\EducationalCourse\Domain\Enumeration\Page;
+use FGTCLB\EducationalCourse\Enumeration\CategoryTypes;
+use FGTCLB\EducationalCourse\Enumeration\PageTypes;
 use KayStrobach\Migrations\Migration\AbstractDataHandlerMigration;
 use TYPO3\CMS\Core\Core\Environment;
 use TYPO3\CMS\Core\Domain\Repository\PageRepository;
@@ -32,13 +32,13 @@ class Version20230824122000 extends AbstractDataHandlerMigration
             return [
                 'pid' => $storagePageId,
                 'type' => $type,
-                'title' => 'Type' . Category::getHumanReadableName($type),
+                'title' => 'Type' . CategoryTypes::getHumanReadableName($type),
                 'description' => $faker->text(),
                 'parent' => $parent,
             ];
         };
 
-        $categoryTypes = Category::getConstants();
+        $categoryTypes = CategoryTypes::getConstants();
 
         $categories = [
             'NEW567' => [
@@ -80,7 +80,7 @@ class Version20230824122000 extends AbstractDataHandlerMigration
                     'pid' => 'NEW124',
                     'title' => 'Studiengang 1',
                     'slug' => $faker->slug(),
-                    'doktype' => Page::TYPE_EDUCATIONAL_COURSE,
+                    'doktype' => PageTypes::TYPE_EDUCATIONAL_COURSE,
                     'backend_layout' => 'pagets__EducationalCourse',
                     'hidden' => 0,
                     'job_profile' => $faker->text,
@@ -91,7 +91,7 @@ class Version20230824122000 extends AbstractDataHandlerMigration
                     'pid' => 'NEW124',
                     'title' => 'Studiengang 2',
                     'slug' => $faker->slug(),
-                    'doktype' => Page::TYPE_EDUCATIONAL_COURSE,
+                    'doktype' => PageTypes::TYPE_EDUCATIONAL_COURSE,
                     'backend_layout' => 'pagets__EducationalCourse',
                     'hidden' => 0,
                     'job_profile' => $faker->text,
@@ -102,7 +102,7 @@ class Version20230824122000 extends AbstractDataHandlerMigration
                     'pid' => 'NEW124',
                     'title' => 'Studiengang 3',
                     'slug' => $faker->slug(),
-                    'doktype' => Page::TYPE_EDUCATIONAL_COURSE,
+                    'doktype' => PageTypes::TYPE_EDUCATIONAL_COURSE,
                     'backend_layout' => 'pagets__EducationalCourse',
                     'hidden' => 0,
                     'job_profile' => $faker->text,
@@ -113,7 +113,7 @@ class Version20230824122000 extends AbstractDataHandlerMigration
                     'pid' => 'NEW124',
                     'title' => 'Studiengang 4',
                     'slug' => $faker->slug(),
-                    'doktype' => Page::TYPE_EDUCATIONAL_COURSE,
+                    'doktype' => PageTypes::TYPE_EDUCATIONAL_COURSE,
                     'backend_layout' => 'pagets__EducationalCourse',
                     'hidden' => 0,
                     'job_profile' => $faker->text,

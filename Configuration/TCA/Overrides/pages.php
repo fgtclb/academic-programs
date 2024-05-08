@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 (static function (): void {
     // first add doktype to select
-    $studyProgrammeDokType = \FGTCLB\EducationalCourse\Domain\Enumeration\Page::TYPE_EDUCATIONAL_COURSE;
+    $studyProgrammeDokType = \FGTCLB\EducationalCourse\Enumeration\PageTypes::TYPE_EDUCATIONAL_COURSE;
 
     // create new group
     \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTcaSelectItemGroup(

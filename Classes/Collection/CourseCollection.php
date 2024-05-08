@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace FGTCLB\EducationalCourse\Domain\Collection;
+namespace FGTCLB\EducationalCourse\Collection;
 
 use Countable;
-use FGTCLB\EducationalCourse\Domain\Enumeration\Page;
 use FGTCLB\EducationalCourse\Domain\Model\Course;
 use FGTCLB\EducationalCourse\Domain\Model\Dto\CourseDemand;
+use FGTCLB\EducationalCourse\Enumeration\PageTypes;
 use FGTCLB\EducationalCourse\Utility\PagesUtility;
 use InvalidArgumentException;
 use Iterator;
@@ -19,8 +19,6 @@ use TYPO3\CMS\Core\Domain\Repository\PageRepository;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
- * ToDo: Move Collection to FGTCLB\EducationalCourse\Collection
- *
  * @implements Iterator<int, Course>
  */
 final class CourseCollection implements Iterator, Countable
@@ -30,24 +28,27 @@ final class CourseCollection implements Iterator, Countable
      */
     private array $courses = [];
 
+    /**
+     * @return CourseCollection
+     */
     public static function getAll(): CourseCollection
     {
         $statement = self::buildDefaultQuery();
-
         $coursePages = $statement->executeQuery()->fetchAllAssociative();
 
         return self::buildCollection($coursePages);
     }
 
     /**
+     * @param CourseDemand $demand
      * @param int[] $fromPid
+     * @return CourseCollection
      */
     public static function getByDemand(
         CourseDemand $demand,
         array $fromPid = []
     ): CourseCollection {
         $statement = self::buildDefaultQuery($demand, $fromPid);
-
         $coursePages = $statement->executeQuery()->fetchAllAssociative();
 
         return self::buildCollection($coursePages);
@@ -55,17 +56,17 @@ final class CourseCollection implements Iterator, Countable
 
     /**
      * @param array<int|string, mixed> $coursePages
+     * @return CourseCollection
      */
     private static function buildCollection(array $coursePages): CourseCollection
     {
         $courseCollection = new self();
         foreach ($coursePages as $coursePage) {
-            if ($coursePage['doktype'] !== Page::TYPE_EDUCATIONAL_COURSE) {
+            if ($coursePage['doktype'] !== PageTypes::TYPE_EDUCATIONAL_COURSE) {
                 try {
                     $course = Course::loadFromLink($coursePage['uid']);
                 } catch (InvalidArgumentException|RuntimeException $exception) {
-                    // silent catch, avoid logging here,
-                    // as multiple doktypes can be excluded this way
+                    // Silent catch, avoid logging here, as multiple doktypes can be excluded this way
                     continue;
                 }
             } else {
@@ -78,37 +79,39 @@ final class CourseCollection implements Iterator, Countable
     }
 
     /**
+     * @param ?CourseDemand $demand
      * @param int[] $fromPid
+     * @return QueryBuilder
      */
     private static function buildDefaultQuery(
         ?CourseDemand $demand = null,
         array $fromPid = []
     ): QueryBuilder {
         if ($demand === null) {
+            /** @var CourseDemand $demand */
             $demand = GeneralUtility::makeInstance(CourseDemand::class);
         }
 
-        $db = GeneralUtility::makeInstance(ConnectionPool::class)
-            ->getQueryBuilderForTable('pages');
+        $queryBuilder = self::buildQueryBuilder();
 
-        $doktypes = $db->expr()->or(
-            $db->expr()->eq(
+        $doktypes = $queryBuilder->expr()->or(
+            $queryBuilder->expr()->eq(
                 'doktype',
-                $db->createNamedParameter(
-                    Page::TYPE_EDUCATIONAL_COURSE,
+                $queryBuilder->createNamedParameter(
+                    PageTypes::TYPE_EDUCATIONAL_COURSE,
                     Connection::PARAM_INT
                 )
             ),
-            $db->expr()->eq(
+            $queryBuilder->expr()->eq(
                 'doktype',
-                $db->createNamedParameter(
+                $queryBuilder->createNamedParameter(
                     PageRepository::DOKTYPE_SHORTCUT,
                     Connection::PARAM_INT
                 )
             )
         );
 
-        $statement = $db
+        $statement = $queryBuilder
             ->select('pages.uid', 'pages.doktype')
             ->from('pages')
             ->where($doktypes)
@@ -213,12 +216,25 @@ final class CourseCollection implements Iterator, Countable
      */
     public function getApplicableCategories(): CategoryCollection
     {
+        /** @var CategoryCollection $applicableCategories */
         $applicableCategories = GeneralUtility::makeInstance(CategoryCollection::class);
         foreach ($this->courses as $course) {
-            foreach ($course->getAttributes() as $attribute) {
-                $applicableCategories->attach($attribute);
+            foreach ($course->getCategories() as $category) {
+                $applicableCategories->attach($category);
             }
         }
         return $applicableCategories;
+    }
+
+    /**
+     * @param string $tableName
+     * @return QueryBuilder
+     */
+    private static function buildQueryBuilder(string $tableName = 'pages'): QueryBuilder
+    {
+        /** @var ConnectionPool $connectionPool */
+        $connectionPool = GeneralUtility::makeInstance(ConnectionPool::class);
+        $queryBuilder = $connectionPool->getQueryBuilderForTable($tableName);
+        return $queryBuilder;
     }
 }

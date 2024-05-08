@@ -25,7 +25,7 @@
                 <f:link.page pageUid="{course.uid}">
                     <h3>{course.title}</h3>
                     <p>
-                        <f:for each="{course.attributes.degree}" as="degree">
+                        <f:for each="{course.categories.degree}" as="degree">
                             {degree.title}
                         </f:for>
                     </p>

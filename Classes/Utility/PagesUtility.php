@@ -15,13 +15,16 @@ final class PagesUtility
      */
     public static function getPagesRecursively(array $pageIds): array
     {
+        /** @var PageRepository $pageRepository */
         $pageRepository = GeneralUtility::makeInstance(PageRepository::class);
+
         $foundSubPages = [];
         do {
             $subPages = $pageRepository->getMenu($pageIds, 'uid');
             $pageIds = array_keys($subPages);
             $foundSubPages = array_merge($foundSubPages, $pageIds);
         } while (count($subPages));
+
         return array_unique($foundSubPages);
     }
 }

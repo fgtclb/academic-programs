@@ -1,7 +1,7 @@
 <?php
 
 (static function (): void {
-    $studyProgrammeDokType = \FGTCLB\EducationalCourse\Domain\Enumeration\Page::TYPE_EDUCATIONAL_COURSE;
+    $studyProgrammeDokType = \FGTCLB\EducationalCourse\Enumeration\PageTypes::TYPE_EDUCATIONAL_COURSE;
     // Allow backend users to drag and drop the new page type:
     \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addUserTSConfig(
         sprintf(

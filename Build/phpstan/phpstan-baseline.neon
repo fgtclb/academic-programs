@@ -1,0 +1,91 @@
+parameters:
+	ignoreErrors:
+		-
+			message: "#^Else branch is unreachable because ternary operator condition is always true\\.$#"
+			count: 1
+			path: ../../Classes/ViewHelpers/Form/SelectViewHelper.php
+
+		-
+			message: "#^Method FGTCLB\\\\EducationalCourse\\\\ViewHelpers\\\\Form\\\\SelectViewHelper\\:\\:createOptionsTree\\(\\) has parameter \\$parent with no type specified\\.$#"
+			count: 1
+			path: ../../Classes/ViewHelpers/Form/SelectViewHelper.php
+
+		-
+			message: "#^Method FGTCLB\\\\EducationalCourse\\\\ViewHelpers\\\\Form\\\\SelectViewHelper\\:\\:createOptionsTree\\(\\) should return array\\<string, mixed\\> but returns array\\<int\\<0, max\\>, mixed\\>\\.$#"
+			count: 1
+			path: ../../Classes/ViewHelpers/Form/SelectViewHelper.php
+
+		-
+			message: "#^Method FGTCLB\\\\EducationalCourse\\\\ViewHelpers\\\\Form\\\\SelectViewHelper\\:\\:getOptions\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../../Classes/ViewHelpers/Form/SelectViewHelper.php
+
+		-
+			message: "#^PHPDoc tag @param references unknown parameter\\: \\$optionsTree$#"
+			count: 1
+			path: ../../Classes/ViewHelpers/Form/SelectViewHelper.php
+
+		-
+			message: "#^Parameter \\#1 \\$object of method TYPO3\\\\CMS\\\\Extbase\\\\Persistence\\\\PersistenceManagerInterface\\:\\:getIdentifierByObject\\(\\) expects object, array\\|object given\\.$#"
+			count: 4
+			path: ../../Classes/ViewHelpers/Form/SelectViewHelper.php
+
+		-
+			message: "#^Parameter \\#2 \\$optionsTree of method FGTCLB\\\\EducationalCourse\\\\ViewHelpers\\\\Form\\\\SelectViewHelper\\:\\:linearizeOptionsTree\\(\\) expects array\\<string, mixed\\>, array\\<int\\|string, array\\<string, mixed\\>\\> given\\.$#"
+			count: 1
+			path: ../../Classes/ViewHelpers/Form/SelectViewHelper.php
+
+		-
+			message: "#^Variable \\$extensionName might not be defined\\.$#"
+			count: 1
+			path: ../../Classes/ViewHelpers/Form/SelectViewHelper.php
+
+		-
+			message: "#^Variable \\$label might not be defined\\.$#"
+			count: 2
+			path: ../../Classes/ViewHelpers/Form/SelectViewHelper.php
+
+		-
+			message: "#^Variable \\$value might not be defined\\.$#"
+			count: 2
+			path: ../../Classes/ViewHelpers/Form/SelectViewHelper.php
+
+		-
+			message: "#^Call to method configureContainer\\(\\) on an unknown class B13\\\\Container\\\\Tca\\\\Registry\\.$#"
+			count: 1
+			path: ../../Configuration/TCA/Overrides/Container/all_semesters.php
+
+		-
+			message: "#^Call to method setIcon\\(\\) on an unknown class B13\\\\Container\\\\Tca\\\\ContainerConfiguration\\.$#"
+			count: 1
+			path: ../../Configuration/TCA/Overrides/Container/all_semesters.php
+
+		-
+			message: "#^Class B13\\\\Container\\\\Tca\\\\Registry not found\\.$#"
+			count: 1
+			path: ../../Configuration/TCA/Overrides/Container/all_semesters.php
+
+		-
+			message: "#^Instantiated class B13\\\\Container\\\\Tca\\\\ContainerConfiguration not found\\.$#"
+			count: 1
+			path: ../../Configuration/TCA/Overrides/Container/all_semesters.php
+
+		-
+			message: "#^Call to method configureContainer\\(\\) on an unknown class B13\\\\Container\\\\Tca\\\\Registry\\.$#"
+			count: 1
+			path: ../../Configuration/TCA/Overrides/Container/semester.php
+
+		-
+			message: "#^Call to method setIcon\\(\\) on an unknown class B13\\\\Container\\\\Tca\\\\ContainerConfiguration\\.$#"
+			count: 1
+			path: ../../Configuration/TCA/Overrides/Container/semester.php
+
+		-
+			message: "#^Class B13\\\\Container\\\\Tca\\\\Registry not found\\.$#"
+			count: 1
+			path: ../../Configuration/TCA/Overrides/Container/semester.php
+
+		-
+			message: "#^Instantiated class B13\\\\Container\\\\Tca\\\\ContainerConfiguration not found\\.$#"
+			count: 1
+			path: ../../Configuration/TCA/Overrides/Container/semester.php

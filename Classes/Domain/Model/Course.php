@@ -6,10 +6,10 @@ namespace FGTCLB\EducationalCourse\Domain\Model;
 
 use Doctrine\DBAL\DBALException;
 use Doctrine\DBAL\Driver\Exception;
-use FGTCLB\EducationalCourse\Domain\Collection\CategoryCollection;
-use FGTCLB\EducationalCourse\Domain\Collection\FileReferenceCollection;
-use FGTCLB\EducationalCourse\Domain\Enumeration\Page;
-use FGTCLB\EducationalCourse\Domain\Repository\CourseCategoryRepository;
+use FGTCLB\EducationalCourse\Collection\CategoryCollection;
+use FGTCLB\EducationalCourse\Collection\FileReferenceCollection;
+use FGTCLB\EducationalCourse\Domain\Repository\CategoryRepository;
+use FGTCLB\EducationalCourse\Enumeration\PageTypes;
 use FGTCLB\EducationalCourse\Exception\Domain\CategoryExistException;
 use InvalidArgumentException;
 use TYPO3\CMS\Core\Domain\Repository\PageRepository;
@@ -32,7 +32,7 @@ class Course
 
     protected string $prerequisites;
 
-    protected CategoryCollection $attributes;
+    protected CategoryCollection $categories;
 
     protected FileReferenceCollection $media;
 
@@ -45,6 +45,7 @@ class Course
      */
     public function __construct(int $databaseId)
     {
+        /** @var PageRepository $pageRepository */
         $pageRepository = GeneralUtility::makeInstance(PageRepository::class);
         $page = $pageRepository->getPage($databaseId);
         if (count($page) === 0) {
@@ -61,8 +62,9 @@ class Course
         $this->performanceScope = $page['performance_scope'] ?? '';
         $this->prerequisites = $page['prerequisites'] ?? '';
 
-        $this->attributes = GeneralUtility::makeInstance(CourseCategoryRepository::class)
-            ->findAllByPageId($databaseId);
+        /** @var CategoryRepository $categoryRepository */
+        $categoryRepository = GeneralUtility::makeInstance(CategoryRepository::class);
+        $this->categories = $categoryRepository ->findAllByPageId($databaseId);
 
         $this->media = self::loadMedia($this->uid);
     }
@@ -75,6 +77,7 @@ class Course
      */
     public static function loadFromLink(int $linkId): Course
     {
+        /** @var PageRepository $pageRepository */
         $pageRepository = GeneralUtility::makeInstance(PageRepository::class);
         $pageToResolve = $pageRepository->getPage($linkId);
         $originalPage = match ($pageToResolve['doktype']) {
@@ -86,7 +89,7 @@ class Course
                 1685532706120
             ),
         };
-        if ($originalPage['doktype'] !== Page::TYPE_EDUCATIONAL_COURSE) {
+        if ($originalPage['doktype'] !== PageTypes::TYPE_EDUCATIONAL_COURSE) {
             throw new \RuntimeException(
                 sprintf('Page "%d" has no Course page linked', $linkId),
                 1685532982084
@@ -102,49 +105,78 @@ class Course
      */
     protected static function loadMedia(int $pageId): FileReferenceCollection
     {
-        return FileReferenceCollection::getCollectionByPageIdAndField($pageId, 'media');
+        /** @var FileReferenceCollection $fileReferenceCollection */
+        $fileReferenceCollection = GeneralUtility::makeInstance(FileReferenceCollection::class);
+        return $fileReferenceCollection->getCollectionByPageIdAndField($pageId, 'media');
     }
 
+    /**
+     * @return string
+     */
     public function getTitle(): string
     {
         return $this->title;
     }
 
+    /**
+     * @return string
+     */
     public function getSubtitle(): string
     {
         return $this->subtitle;
     }
 
+    /**
+     * @return string
+     */
     public function getAbstract(): string
     {
         return $this->abstract;
     }
 
-    public function getAttributes(): CategoryCollection
+    /**
+     * @return CategoryCollection
+     */
+    public function getCategories(): CategoryCollection
     {
-        return $this->attributes;
+        return $this->categories;
     }
 
+    /**
+     * @return FileReferenceCollection
+     */
     public function getMedia(): FileReferenceCollection
     {
         return $this->media;
     }
 
+    /**
+     * @return string
+     */
     public function getJobProfile(): string
     {
         return $this->jobProfile;
     }
 
+    /**
+     * @return string
+     */
     public function getPerformanceScope(): string
     {
         return $this->performanceScope;
     }
 
+    /**
+     * @return string
+     */
     public function getPrerequisites(): string
     {
         return $this->prerequisites;
     }
 
+    /**
+     * @return int
+     */
     public function getUid(): int
     {
         return $this->uid;

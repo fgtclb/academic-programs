@@ -23,9 +23,8 @@ declare(strict_types=1);
     );
 
     $typeIconClasses = [];
-    $constants = \FGTCLB\EducationalCourse\Domain\Enumeration\Category::getConstants();
+    $constants = \FGTCLB\EducationalCourse\Enumeration\CategoryTypes::getConstants();
     foreach ($constants as $constant) {
-        // Set select option for Category Attribute
         \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTcaSelectItem(
             'sys_category',
             'type',
@@ -37,7 +36,6 @@ declare(strict_types=1);
             ]
         );
 
-        // Set icons for Category Attribute
         $typeIconClasses[$constant] = $iconType($constant);
     }
 

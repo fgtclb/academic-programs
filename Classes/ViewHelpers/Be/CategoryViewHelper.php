@@ -6,8 +6,8 @@ namespace FGTCLB\EducationalCourse\ViewHelpers\Be;
 
 use Doctrine\DBAL\DBALException;
 use Doctrine\DBAL\Driver\Exception;
-use FGTCLB\EducationalCourse\Domain\Enumeration\Category;
-use FGTCLB\EducationalCourse\Domain\Repository\CourseCategoryRepository;
+use FGTCLB\EducationalCourse\Domain\Repository\CategoryRepository;
+use FGTCLB\EducationalCourse\Enumeration\CategoryTypes;
 use FGTCLB\EducationalCourse\Exception\CategoryTypeException;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface;
@@ -39,7 +39,7 @@ class CategoryViewHelper extends AbstractViewHelper
             'string',
             'The variable name',
             false,
-            'courseCategory'
+            'category'
         );
     }
 
@@ -59,19 +59,20 @@ class CategoryViewHelper extends AbstractViewHelper
     ): string {
         $templateVariableContainer = $renderingContext->getVariableProvider();
 
-        $repository = GeneralUtility::makeInstance(CourseCategoryRepository::class);
+        /** @var CategoryRepository $repository */
+        $repository = GeneralUtility::makeInstance(CategoryRepository::class);
         try {
-            if ($arguments['type'] !== null && Category::typeExist($arguments['type'])) {
-                $categoryType = Category::cast($arguments['type']);
-                $attributes = $repository->findByType($arguments['page'], $categoryType);
+            if ($arguments['type'] !== null && CategoryTypes::typeExist($arguments['type'])) {
+                $categoryType = CategoryTypes::cast($arguments['type']);
+                $categories = $repository->findByType($arguments['page'], $categoryType);
             } else {
                 throw new CategoryTypeException(sprintf('The category type "%s" not exist', $arguments['type']), 1694770343759);
             }
         } catch (\Exception $exception) {
-            $attributes = $repository->findAllByPageId($arguments['page']);
+            $categories = $repository->findAllByPageId($arguments['page']);
         }
 
-        $templateVariableContainer->add($arguments['as'], $attributes);
+        $templateVariableContainer->add($arguments['as'], $categories);
 
         $output = $renderChildrenClosure();
 
