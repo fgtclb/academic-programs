@@ -39,7 +39,7 @@ class CategoryViewHelper extends AbstractViewHelper
             'string',
             'The variable name',
             false,
-            'courseCategory'
+            'category'
         );
     }
 
@@ -59,6 +59,7 @@ class CategoryViewHelper extends AbstractViewHelper
     ): string {
         $templateVariableContainer = $renderingContext->getVariableProvider();
 
+        /** @var CategoryRepository $repository */
         $repository = GeneralUtility::makeInstance(CategoryRepository::class);
         try {
             if ($arguments['type'] !== null && CategoryTypes::typeExist($arguments['type'])) {

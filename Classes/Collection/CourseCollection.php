@@ -28,33 +28,37 @@ final class CourseCollection implements Iterator, Countable
      */
     private array $courses = [];
 
-    public static function getAll(): CourseCollection
+    /**
+     * @return CourseCollection
+     */
+    public function getAll(): CourseCollection
     {
-        $statement = self::buildDefaultQuery();
-
+        $statement = $this->buildDefaultQuery();
         $coursePages = $statement->executeQuery()->fetchAllAssociative();
 
-        return self::buildCollection($coursePages);
+        return $this->buildCollection($coursePages);
     }
 
     /**
+     * @param CourseDemand $demand
      * @param int[] $fromPid
+     * @return CourseCollection
      */
-    public static function getByDemand(
+    public function getByDemand(
         CourseDemand $demand,
         array $fromPid = []
     ): CourseCollection {
-        $statement = self::buildDefaultQuery($demand, $fromPid);
-
+        $statement = $this->buildDefaultQuery($demand, $fromPid);
         $coursePages = $statement->executeQuery()->fetchAllAssociative();
 
-        return self::buildCollection($coursePages);
+        return $this->buildCollection($coursePages);
     }
 
     /**
      * @param array<int|string, mixed> $coursePages
+     * @return CourseCollection
      */
-    private static function buildCollection(array $coursePages): CourseCollection
+    private function buildCollection(array $coursePages): CourseCollection
     {
         $courseCollection = new self();
         foreach ($coursePages as $coursePage) {
@@ -62,8 +66,7 @@ final class CourseCollection implements Iterator, Countable
                 try {
                     $course = Course::loadFromLink($coursePage['uid']);
                 } catch (InvalidArgumentException|RuntimeException $exception) {
-                    // silent catch, avoid logging here,
-                    // as multiple doktypes can be excluded this way
+                    // Silent catch, avoid logging here, as multiple doktypes can be excluded this way
                     continue;
                 }
             } else {
@@ -76,37 +79,39 @@ final class CourseCollection implements Iterator, Countable
     }
 
     /**
+     * @param ?CourseDemand $demand
      * @param int[] $fromPid
+     * @return QueryBuilder
      */
-    private static function buildDefaultQuery(
+    private function buildDefaultQuery(
         ?CourseDemand $demand = null,
         array $fromPid = []
     ): QueryBuilder {
         if ($demand === null) {
+            /** @var CourseDemand $demand */
             $demand = GeneralUtility::makeInstance(CourseDemand::class);
         }
 
-        $db = GeneralUtility::makeInstance(ConnectionPool::class)
-            ->getQueryBuilderForTable('pages');
+        $queryBuilder = $this->buildQueryBuilder();
 
-        $doktypes = $db->expr()->or(
-            $db->expr()->eq(
+        $doktypes = $queryBuilder->expr()->or(
+            $queryBuilder->expr()->eq(
                 'doktype',
-                $db->createNamedParameter(
+                $queryBuilder->createNamedParameter(
                     PageTypes::TYPE_EDUCATIONAL_COURSE,
                     Connection::PARAM_INT
                 )
             ),
-            $db->expr()->eq(
+            $queryBuilder->expr()->eq(
                 'doktype',
-                $db->createNamedParameter(
+                $queryBuilder->createNamedParameter(
                     PageRepository::DOKTYPE_SHORTCUT,
                     Connection::PARAM_INT
                 )
             )
         );
 
-        $statement = $db
+        $statement = $queryBuilder
             ->select('pages.uid', 'pages.doktype')
             ->from('pages')
             ->where($doktypes)
@@ -211,6 +216,7 @@ final class CourseCollection implements Iterator, Countable
      */
     public function getApplicableCategories(): CategoryCollection
     {
+        /** @var CategoryCollection $applicableCategories */
         $applicableCategories = GeneralUtility::makeInstance(CategoryCollection::class);
         foreach ($this->courses as $course) {
             foreach ($course->getCategories() as $category) {
@@ -218,5 +224,17 @@ final class CourseCollection implements Iterator, Countable
             }
         }
         return $applicableCategories;
+    }
+
+    /**
+     * @param string $tableName
+     * @return QueryBuilder
+     */
+    private function buildQueryBuilder(string $tableName = 'pages'): QueryBuilder
+    {
+        /** @var ConnectionPool $connectionPool */
+        $connectionPool = GeneralUtility::makeInstance(ConnectionPool::class);
+        $queryBuilder = $connectionPool->getQueryBuilderForTable($tableName);
+        return $queryBuilder;
     }
 }
