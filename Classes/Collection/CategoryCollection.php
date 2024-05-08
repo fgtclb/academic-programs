@@ -14,6 +14,7 @@ use TYPO3\CMS\Core\Type\Exception\InvalidEnumerationValueException;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
+ * @implements ArrayAccess<string, Category[]>
  * @implements Iterator<int, Category>
  */
 class CategoryCollection implements Countable, Iterator, ArrayAccess
@@ -33,9 +34,9 @@ class CategoryCollection implements Countable, Iterator, ArrayAccess
         $typeNames = CategoryTypes::getConstants();
         ksort($typeNames);
 
-        $this->typeSortedContainer = array_map(function () {
-            return [];
-        }, array_flip(array_values($typeNames)));
+        foreach ($typeNames as $typeName) {
+            $this->typeSortedContainer[(string)$typeName] = [];
+        }
     }
 
     /**
@@ -125,7 +126,9 @@ class CategoryCollection implements Countable, Iterator, ArrayAccess
     }
 
     /**
+     * @param string $name
      * @param array<int|string, mixed> $arguments
+     * @return Category[]
      */
     public function __call(string $name, array $arguments): array
     {
@@ -146,6 +149,10 @@ class CategoryCollection implements Countable, Iterator, ArrayAccess
         }
     }
 
+    /**
+     * @param mixed $offset
+     * @return Category[]|false
+     */
     public function offsetGet(mixed $offset): array|false
     {
         if (!is_string($offset)) {

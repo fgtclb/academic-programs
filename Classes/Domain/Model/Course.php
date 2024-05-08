@@ -45,6 +45,7 @@ class Course
      */
     public function __construct(int $databaseId)
     {
+        /** @var PageRepository $pageRepository */
         $pageRepository = GeneralUtility::makeInstance(PageRepository::class);
         $page = $pageRepository->getPage($databaseId);
         if (count($page) === 0) {
@@ -61,8 +62,9 @@ class Course
         $this->performanceScope = $page['performance_scope'] ?? '';
         $this->prerequisites = $page['prerequisites'] ?? '';
 
-        $this->categories = GeneralUtility::makeInstance(CategoryRepository::class)
-            ->findAllByPageId($databaseId);
+        /** @var CategoryRepository $categoryRepository */
+        $categoryRepository = GeneralUtility::makeInstance(CategoryRepository::class);
+        $this->categories = $categoryRepository ->findAllByPageId($databaseId);
 
         $this->media = self::loadMedia($this->uid);
     }
@@ -75,6 +77,7 @@ class Course
      */
     public static function loadFromLink(int $linkId): Course
     {
+        /** @var PageRepository $pageRepository */
         $pageRepository = GeneralUtility::makeInstance(PageRepository::class);
         $pageToResolve = $pageRepository->getPage($linkId);
         $originalPage = match ($pageToResolve['doktype']) {
@@ -102,7 +105,9 @@ class Course
      */
     protected static function loadMedia(int $pageId): FileReferenceCollection
     {
-        return FileReferenceCollection::getCollectionByPageIdAndField($pageId, 'media');
+        /** @var FileReferenceCollection $fileReferenceCollection */
+        $fileReferenceCollection = GeneralUtility::makeInstance(FileReferenceCollection::class);
+        return $fileReferenceCollection->getCollectionByPageIdAndField($pageId, 'media');
     }
 
     /**

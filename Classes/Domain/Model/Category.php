@@ -42,8 +42,10 @@ class Category
         $this->type = $type;
         $this->title = $title;
         $this->disabled = $disabled;
-        $this->children = GeneralUtility::makeInstance(CategoryRepository::class)
-            ->findChildren($this->uid);
+
+        /** @var CategoryRepository $categoryRepository */
+        $categoryRepository = GeneralUtility::makeInstance(CategoryRepository::class);
+        $this->children = $categoryRepository->findChildren($this->uid);
     }
 
     public function getUid(): int
@@ -82,8 +84,9 @@ class Category
             return null;
         }
 
-        return GeneralUtility::makeInstance(CategoryRepository::class)
-            ->findParent($this->parentId);
+        /** @var CategoryRepository $categoryRepository */
+        $categoryRepository = GeneralUtility::makeInstance(CategoryRepository::class);
+        return $categoryRepository->findParent($this->parentId);
     }
 
     public function isRoot(): bool

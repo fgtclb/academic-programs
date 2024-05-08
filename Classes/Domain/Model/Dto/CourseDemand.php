@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace FGTCLB\EducationalCourse\Domain\Model\Dto;
 
 use FGTCLB\EducationalCourse\Collection\FilterCollection;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class CourseDemand
 {
@@ -24,16 +23,19 @@ class CourseDemand
 
     public const DEFAULT_SORTING_DIRECTION = 'asc';
 
+    /**
+     * @var string
+     */
     protected string $sortingField = self::DEFAULT_SORTING_FIELD;
 
+    /**
+     * @var string
+     */
     protected string $sortingDirection = self::DEFAULT_SORTING_DIRECTION;
 
-    protected FilterCollection $filterCollection;
-
-    public function __construct()
-    {
-        $this->filterCollection = GeneralUtility::makeInstance(FilterCollection::class);
-    }
+    public function __construct(
+        protected FilterCollection $filterCollection
+    ) {}
 
     /**
      * @return array<string>

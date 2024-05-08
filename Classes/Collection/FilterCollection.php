@@ -8,26 +8,25 @@ use ArrayAccess;
 use FGTCLB\EducationalCourse\Domain\Model\Category;
 use InvalidArgumentException;
 
+/**
+ * @implements ArrayAccess<string, Category[]>
+ */
 class FilterCollection implements ArrayAccess
 {
-    protected CategoryCollection $filterCategories;
+    public function __construct(
+        protected CategoryCollection $filterCategories
+    ) {}
 
-    public function __construct()
+    public static function createByCategoryCollection(CategoryCollection $filterCategories): FilterCollection
     {
-        $this->filterCategories = new CategoryCollection();
-    }
-
-    public static function createByCategoryCollection(CategoryCollection $categoryCollection): FilterCollection
-    {
-        $filter = new self();
-        $filter->filterCategories = $categoryCollection;
+        $filter = new self($filterCategories);
         return $filter;
     }
 
     public static function resetCollection(): FilterCollection
     {
-        $filter = new self();
-        $filter->filterCategories = new CategoryCollection();
+        $filterCategories = new CategoryCollection();
+        $filter = new self($filterCategories);
         return $filter;
     }
 
@@ -65,7 +64,7 @@ class FilterCollection implements ArrayAccess
 
     public function offsetUnset(mixed $offset): void
     {
-        throw new \http\Exception\InvalidArgumentException(
+        throw new InvalidArgumentException(
             'Method should never be called',
             1683633656658
         );

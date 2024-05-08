@@ -10,10 +10,7 @@ use TYPO3Fluid\Fluid\Core\ViewHelper\Exception;
 
 class SelectViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Form\SelectViewHelper
 {
-    /**
-     * Initialize arguments.
-     */
-    public function initializeArguments()
+    public function initializeArguments(): void
     {
         parent::initializeArguments();
         $this->registerArgument('l10n', 'string', 'If specified, will call the correct label specified in locallang file.');
@@ -22,7 +19,10 @@ class SelectViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Form\SelectViewHelpe
         $this->registerArgument('renderOptions', 'bool', 'ViewHelper renders the option in "false" case an "options" variable is created for the child render', false, true);
     }
 
-    public function render()
+    /**
+     * @return string
+     */
+    public function render(): string
     {
         if (isset($this->arguments['required']) && $this->arguments['required']) {
             $this->tag->addAttribute('required', 'required');
