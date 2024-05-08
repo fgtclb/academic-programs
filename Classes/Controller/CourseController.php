@@ -14,7 +14,6 @@ use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 class CourseController extends ActionController
 {
     public function __construct(
-        protected CourseCollection $courseCollection,
         protected CategoryRepository $categoryRepository,
         protected CourseDemandFactory $courseDemandFactory
     ) {}
@@ -31,7 +30,7 @@ class CourseController extends ActionController
             $this->configurationManager->getContentObject()->data['uid'] ?? null
         );
 
-        $courses = $this->courseCollection->getByDemand(
+        $courses = CourseCollection::getByDemand(
             $demandObject,
             GeneralUtility::intExplode(
                 ',',
