@@ -31,12 +31,12 @@ final class CourseCollection implements Iterator, Countable
     /**
      * @return CourseCollection
      */
-    public function getAll(): CourseCollection
+    public static function getAll(): CourseCollection
     {
-        $statement = $this->buildDefaultQuery();
+        $statement = self::buildDefaultQuery();
         $coursePages = $statement->executeQuery()->fetchAllAssociative();
 
-        return $this->buildCollection($coursePages);
+        return self::buildCollection($coursePages);
     }
 
     /**
@@ -44,21 +44,21 @@ final class CourseCollection implements Iterator, Countable
      * @param int[] $fromPid
      * @return CourseCollection
      */
-    public function getByDemand(
+    public static function getByDemand(
         CourseDemand $demand,
         array $fromPid = []
     ): CourseCollection {
-        $statement = $this->buildDefaultQuery($demand, $fromPid);
+        $statement = self::buildDefaultQuery($demand, $fromPid);
         $coursePages = $statement->executeQuery()->fetchAllAssociative();
 
-        return $this->buildCollection($coursePages);
+        return self::buildCollection($coursePages);
     }
 
     /**
      * @param array<int|string, mixed> $coursePages
      * @return CourseCollection
      */
-    private function buildCollection(array $coursePages): CourseCollection
+    private static function buildCollection(array $coursePages): CourseCollection
     {
         $courseCollection = new self();
         foreach ($coursePages as $coursePage) {
@@ -83,7 +83,7 @@ final class CourseCollection implements Iterator, Countable
      * @param int[] $fromPid
      * @return QueryBuilder
      */
-    private function buildDefaultQuery(
+    private static function buildDefaultQuery(
         ?CourseDemand $demand = null,
         array $fromPid = []
     ): QueryBuilder {
@@ -92,7 +92,7 @@ final class CourseCollection implements Iterator, Countable
             $demand = GeneralUtility::makeInstance(CourseDemand::class);
         }
 
-        $queryBuilder = $this->buildQueryBuilder();
+        $queryBuilder = self::buildQueryBuilder();
 
         $doktypes = $queryBuilder->expr()->or(
             $queryBuilder->expr()->eq(
@@ -230,7 +230,7 @@ final class CourseCollection implements Iterator, Countable
      * @param string $tableName
      * @return QueryBuilder
      */
-    private function buildQueryBuilder(string $tableName = 'pages'): QueryBuilder
+    private static function buildQueryBuilder(string $tableName = 'pages'): QueryBuilder
     {
         /** @var ConnectionPool $connectionPool */
         $connectionPool = GeneralUtility::makeInstance(ConnectionPool::class);

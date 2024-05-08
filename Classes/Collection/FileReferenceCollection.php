@@ -28,11 +28,13 @@ final class FileReferenceCollection implements Countable, Iterator
      * @throws FileDoesNotExistException
      * @throws Exception
      */
-    public function getCollectionByPageIdAndField(int $pageId, string $field): FileReferenceCollection
-    {
+    public static function getCollectionByPageIdAndField(
+        int $pageId,
+        string $field
+    ): FileReferenceCollection {
         $fileReferenceCollection = new self();
 
-        $queryBuilder = $this->buildQueryBuilder();
+        $queryBuilder = self::buildQueryBuilder();
         $references = $queryBuilder
             ->select('sys_file_reference.*')
             ->from('sys_file_reference')
@@ -102,7 +104,7 @@ final class FileReferenceCollection implements Countable, Iterator
      * @param string $tableName
      * @return QueryBuilder
      */
-    private function buildQueryBuilder(string $tableName = 'sys_file_reference'): QueryBuilder
+    private static function buildQueryBuilder(string $tableName = 'sys_file_reference'): QueryBuilder
     {
         /** @var ConnectionPool $connectionPool */
         $connectionPool = GeneralUtility::makeInstance(ConnectionPool::class);
