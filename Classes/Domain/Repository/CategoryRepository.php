@@ -332,7 +332,6 @@ class CategoryRepository
      */
     private function buildCategoryObjectFromArray(array $row): Category
     {
-        // TODO: check if fetching an overlay is needed (compare current language in language aspect with default language of the site)
         $row = $this->pageRepository->getLanguageOverlay('sys_category', $row) ?? $row;
 
         return new Category(
