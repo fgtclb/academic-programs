@@ -10,35 +10,23 @@ use FGTCLB\EducationalCourse\Enumeration\CategoryTypes;
 use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Database\Query\QueryBuilder;
-use TYPO3\CMS\Core\Database\Query\Restriction\LimitToTablesRestrictionContainer;
-use TYPO3\CMS\Core\Database\Query\Restriction\WorkspaceRestriction;
 use TYPO3\CMS\Core\Domain\Repository\PageRepository;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class CategoryRepository
 {
-    private ?ConnectionPool $connectionPool;
-
-    private PageRepository $pageRepository;
-
-    /**
-     * @param ConnectionPool|null $connectionPool
-     */
     public function __construct(
-        ?ConnectionPool $connectionPool = null
-    ) {
-        $this->connection = $connectionPool ?? GeneralUtility::makeInstance(ConnectionPool::class);
-        $this->pageRepository = GeneralUtility::makeInstance(PageRepository::class);
-    }
+        protected ConnectionPool $connectionPool,
+        protected PageRepository $pageRepository
+    ) {}
 
     /**
      * @param int $pageId
-     * @param Category $type
+     * @param CategoryTypes $type
      * @return CategoryCollection
      */
     public function findByType(
         int $pageId,
-        Category $type
+        CategoryTypes $type
     ): CategoryCollection {
         $queryBuilder = $this->buildQueryBuilder();
 
@@ -84,11 +72,7 @@ class CategoryRepository
         }
 
         foreach ($result->fetchAllAssociative() as $row) {
-            $categoryRow = $this->pageRepository->getLanguageOverlay('sys_category', $row);
-            if ($categoryRow === null) {
-                continue;
-            }
-            $category = $this->categoryObjectMapping($categoryRow);
+            $category = $this->buildCategoryObjectFromArray($row);
             $categories->attach($category);
         }
 
@@ -141,11 +125,7 @@ class CategoryRepository
         }
 
         foreach ($result->fetchAllAssociative() as $row) {
-            $categoryRow = $this->pageRepository->getLanguageOverlay('sys_category', $row);
-            if ($categoryRow === null) {
-                continue;
-            }
-            $category = $this->categoryObjectMapping($categoryRow);
+            $category = $this->buildCategoryObjectFromArray($row);
             $categories->attach($category);
         }
 
@@ -205,16 +185,16 @@ class CategoryRepository
         }
 
         foreach ($result->fetchAllAssociative() as $row) {
-            $categoryRow = $this->pageRepository->getLanguageOverlay('sys_category', $row);
-            $category = $this->categoryObjectMapping($categoryRow);
+            $category = $this->buildCategoryObjectFromArray($row);
             $categories->attach($category);
         }
         return $categories;
     }
 
     /**
-     * @param array<int>|null $idList
-     * @return array<CategoryTypes>|null
+     * @param array<int> $idList
+     * @param CategoryTypes $categoryType
+     * @return ?Category[]
      */
     public function findByUidListAndType(
         array $idList,
@@ -239,8 +219,7 @@ class CategoryRepository
 
         $category = [];
         foreach ($result->fetchAllAssociative() as $row) {
-            $categoryRow = $this->pageRepository->getLanguageOverlay('sys_category', $row);
-            $category[] = $this->categoryObjectMapping($categoryRow);
+            $category[] = $this->buildCategoryObjectFromArray($row);
         }
 
         return $category;
@@ -273,11 +252,7 @@ class CategoryRepository
                 continue;
             }
 
-            $categoryRow = $this->pageRepository->getLanguageOverlay('sys_category', $row);
-            if ($categoryRow === null) {
-                continue;
-            }
-            $category = $this->categoryObjectMapping($categoryRow);
+            $category = $this->buildCategoryObjectFromArray($row);
             $category->setDisabled(!$applicableCategories->exist($category));
             $categories->attach($category);
         }
@@ -314,11 +289,7 @@ class CategoryRepository
         }
 
         foreach ($result->fetchAllAssociative() as $row) {
-            $categoryRow = $this->pageRepository->getLanguageOverlay('sys_category', $row);
-            if ($categoryRow === null) {
-                continue;
-            }
-            $category = $this->categoryObjectMapping($categoryRow);
+            $category = $this->buildCategoryObjectFromArray($row);
             $categories->attach($category);
         }
         return $categories;
@@ -347,23 +318,28 @@ class CategoryRepository
         }
 
         $row = $result->fetchAssociative();
-        $categoryRow = $this->pageRepository->getLanguageOverlay('sys_category', $row);
-        $category = $this->categoryObjectMapping($categoryRow);
+        if ($row === false) {
+            return null;
+        }
+        $category = $this->buildCategoryObjectFromArray($row);
 
         return $category;
     }
 
     /**
-     * @param array<string, mixed> $data
+     * @param array<string, mixed> $row
      * @return Category
      */
-    private function categoryObjectMapping(array $data): Category
+    private function buildCategoryObjectFromArray(array $row): Category
     {
+        // TODO: check if fetching an overlay is needed (compare current language in language aspect with default language of the site)
+        $row = $this->pageRepository->getLanguageOverlay('sys_category', $row) ?? $row;
+
         return new Category(
-            $data['uid'],
-            $data['parent'],
-            $data['title'],
-            $data['type']
+            $row['uid'],
+            $row['parent'],
+            $row['title'],
+            $row['type']
         );
     }
 
@@ -408,17 +384,7 @@ class CategoryRepository
      */
     private function buildQueryBuilder(string $tableName = 'sys_category'): QueryBuilder
     {
-        $queryBuilder = $this->connection->getQueryBuilderForTable($tableName);
-
-        // Add workspace/versioning restrictions (needs handling by PageRepository->versionOL())
-        /*
-        $queryBuilder->getRestrictions()
-            ->add(
-                GeneralUtility::makeInstance(LimitToTablesRestrictionContainer::class)
-                    ->addForTables(GeneralUtility::makeInstance(WorkspaceRestriction::class), [$tableName])
-            );
-        */
-
+        $queryBuilder = $this->connectionPool->getQueryBuilderForTable($tableName);
         return $queryBuilder;
     }
 }
