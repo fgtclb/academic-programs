@@ -1,6 +1,7 @@
 includes:
 #  - ../../vendor/jangregor/phpstan-prophecy/extension.neon
-#  - ../../vendor/saschaegerer/phpstan-typo3/extension.neon
+  - ../../.Build/vendor/saschaegerer/phpstan-typo3/extension.neon
+  - phpstan-baseline.neon
 
 parameters:
   level: 8
@@ -11,9 +12,6 @@ parameters:
     - ../../Migrations
   inferPrivatePropertyTypeFromConstructor: true
   ignoreErrors:
-    - message: '#Variable \$_EXTKEY might not be defined.#'
-      path: */ext_emconf.php
-    - '#Property.+does not accept TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage#'
   excludes_analyse:
   dynamicConstantNames:
     - TYPO3_MODE
