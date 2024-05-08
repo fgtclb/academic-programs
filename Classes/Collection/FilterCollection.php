@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace FGTCLB\EducationalCourse\Collection;
 
 use ArrayAccess;
+use FGTCLB\EducationalCourse\Collection\CategoryCollection;
 use FGTCLB\EducationalCourse\Domain\Model\Category;
 use InvalidArgumentException;
 
@@ -13,20 +14,24 @@ use InvalidArgumentException;
  */
 class FilterCollection implements ArrayAccess
 {
-    public function __construct(
-        protected CategoryCollection $filterCategories
-    ) {}
+    protected CategoryCollection $filterCategories;
+
+    public function __construct()
+    {
+        $this->filterCategories = new CategoryCollection();
+    }
 
     public static function createByCategoryCollection(CategoryCollection $filterCategories): FilterCollection
     {
-        $filter = new self($filterCategories);
+        $filter = new self();
+        $filter->filterCategories = $filterCategories;
         return $filter;
     }
 
     public static function resetCollection(): FilterCollection
     {
-        $filterCategories = new CategoryCollection();
-        $filter = new self($filterCategories);
+        $filter = new self();
+        $filter->filterCategories = new CategoryCollection();
         return $filter;
     }
 
