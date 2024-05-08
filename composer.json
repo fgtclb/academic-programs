@@ -77,7 +77,7 @@
 		"cs:check": "php-cs-fixer fix --config Build/php-cs-fixer/.php-cs-fixer.php --ansi --diff --verbose --dry-run",
 		"cs:fix": "php-cs-fixer fix --config Build/php-cs-fixer/.php-cs-fixer.php --ansi",
 		"analyze:php": "phpstan analyse --ansi --no-progress --memory-limit=1024M --configuration=Build/phpstan/phpstan.neon",
-		"analyze:baseline": "phpstan analyse --ansi --no-progress --memory-limit=1024M --configuration=Build/phpstan/phpstan.neon --generate-baseline=./build/phpstan/phpstan-baseline.neon",
+		"analyze:baseline": "phpstan analyse --ansi --no-progress --memory-limit=1024M --configuration=Build/phpstan/phpstan.neon --generate-baseline=./Build/phpstan/phpstan-baseline.neon",
 		"test:php": [
 			"@test:php:unit",
 			"@test:php:functional"
