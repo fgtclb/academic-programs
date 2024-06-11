@@ -3,35 +3,29 @@
     xmlns:f="https://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
     xmlns:ec="https://typo3.org/ns/FGTCLB/EducationalCourse/ViewHelpers"
 >
-
-<f:if condition="{settings.filter.options}==false">
-    <f:form action="list" object="{demand}" name="demand" objectName="demand">
-        <f:render partial="Course/FilterSorting" arguments="{_all}" />
-        <f:render partial="Course/FilterCategories" arguments="{_all}" />
-    </f:form>
-</f:if>
-
-<br>
-<hr>
-<br>
-
-<div class="course-list">
-    <f:if condition="{courses}">
-        <f:for each="{courses}" as="course">
-            <div
-                class="course"
-                data-application=""
-            >
-                <f:link.page pageUid="{course.uid}">
-                    <h3>{course.title}</h3>
-                    <p>
-                        <f:for each="{course.categories.degree}" as="degree">
-                            {degree.title}
-                        </f:for>
-                    </p>
-                </f:link.page>
-            </div>
-        </f:for>
+    <f:if condition="{settings.filter.options} == 0 && !{settings.categories}" >
+        <f:form action="list" object="{demand}" name="demand" objectName="demand">
+            <f:render partial="Course/FilterSorting" arguments="{_all}" />
+            <f:render partial="Course/FilterCategories" arguments="{_all}" />
+        </f:form>
     </f:if>
-</div>
+    <div class="course-list">
+        <f:if condition="{courses}">
+            <f:for each="{courses}" as="course">
+                <div
+                    class="course"
+                    data-application=""
+                >
+                    <f:link.page pageUid="{course.uid}">
+                        <h3>{course.title}</h3>
+                        <p>
+                            <f:for each="{course.categories.degree}" as="degree">
+                                {degree.title}
+                            </f:for>
+                        </p>
+                    </f:link.page>
+                </div>
+            </f:for>
+        </f:if>
+    </div>
 </html>
