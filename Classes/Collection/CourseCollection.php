@@ -138,7 +138,7 @@ final class CourseCollection implements Iterator, Countable
                         'pages',
                         'sys_category_record_mm',
                         'mm' . $i,
-                        'mm' . $i .  '.uid_foreign=pages.uid'
+                        'mm' . $i . '.uid_foreign=pages.uid'
                     )
                     ->groupBy('pages.uid')
                     ->expr()
