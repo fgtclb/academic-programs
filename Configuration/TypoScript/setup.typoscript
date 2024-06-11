@@ -2,3 +2,9 @@
 @import 'EXT:educational_course/Configuration/TypoScript/BasicSetup/'
 @import 'EXT:educational_course/Configuration/TypoScript/DataProcessors/'
 @import 'EXT:educational_course/Configuration/TypoScript/Page/'
+
+plugin.tx_educationalcourse {
+  features {
+    skipDefaultArguments = 1
+  }
+}
