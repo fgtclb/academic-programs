@@ -117,52 +117,35 @@ final class CourseCollection implements Iterator, Countable
             ->where($doktypes)
             ->orderBy(sprintf('pages.%s', $demand->getSortingField()), $demand->getSortingDirection());
 
-        $andWhere = [];
-        $orWhere = [];
-
-        foreach ($demand->getFilterCollection()->getFilterCategories() as $filterCategory) {
+        $typeSortedCategories = [];
+        foreach ($demand->getFilterCollection()->getFilterCategories() as $category) {
+            $typeSortedCategories[(string)$category->getType()][] = $category->getUid();
             if (
-                ($children = $filterCategory->getChildren()) !== null
+                ($children = $category->getChildren()) !== null
                 && $children->count() > 0
             ) {
-                $orWhere[$filterCategory->getUid()] = [];
                 foreach ($children as $childCategory) {
-                    $orWhere[$filterCategory->getUid()][] = $childCategory->getUid();
+                    $typeSortedCategories[(string)$category->getType()][] = $childCategory->getUid();
                 }
-            } else {
-                $andWhere[] = $filterCategory->getUid();
             }
         }
 
-        if (count($andWhere) > 0 || count($orWhere) > 0) {
-            $statement->join(
-                'pages',
-                'sys_category_record_mm',
-                'mm',
-                'mm.uid_foreign=pages.uid'
-            )
-                ->addSelectLiteral(
-                    'group_concat(uid_local) as filtercategories'
-                )
-                ->groupBy('pages.uid');
-            $addWhere = [];
-            if (count($orWhere) > 0) {
-                foreach ($orWhere as $parent => $children) {
-                    $addOrWhere = [];
-                    foreach ($children as $child) {
-                        $addOrWhere[] = $statement->expr()->inSet('filtercategories', $statement->createNamedParameter($child, Connection::PARAM_INT));
-                    }
-                    if (count($addOrWhere) > 0) {
-                        $addWhere[] = $statement->expr()->or(...$addOrWhere);
-                    }
-                }
+        if (count($typeSortedCategories)) {
+            $i = 1;
+            foreach ($typeSortedCategories as $categoryUids) {
+                $statement->andWhere(
+                    $statement->join(
+                        'pages',
+                        'sys_category_record_mm',
+                        'mm' . $i,
+                        'mm' . $i .  '.uid_foreign=pages.uid'
+                    )
+                    ->groupBy('pages.uid')
+                    ->expr()
+                    ->in('mm' . $i . '.uid_local', $categoryUids)
+                );
+                $i++;
             }
-            foreach ($andWhere as $value) {
-                $addWhere[] = $statement->expr()->inSet('filtercategories', $statement->createNamedParameter($value, Connection::PARAM_INT));
-            }
-            $statement->having(
-                ...$addWhere
-            );
         }
 
         if (count($fromPid)) {
@@ -173,6 +156,7 @@ final class CourseCollection implements Iterator, Countable
                 );
             }
         }
+
         return $statement;
     }
 
