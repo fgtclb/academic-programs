@@ -55,7 +55,7 @@
 				<source>Page sorting (Result may be unexpected)</source>
 			</trans-unit>
 			<trans-unit id="flexform.category.description">
-				<source>Select categories. Main categories will select all subcategories by OR, multiple categories selects by AND</source>
+				<source>Select categories. Selected categories of the same type (e.g. ‘Degree’) are checked as alternatives (OR). If a category has subcategories (e.g. ‘Master’ with ‘Master of Arts’), these are automatically added to the list of alternatives. In addition, the pages found for each category type must also be able to be found in all other selected category types (AND).</source>
 			</trans-unit>
 		</body>
 	</file>
