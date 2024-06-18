@@ -42,7 +42,7 @@ class CourseController extends ActionController
 
         $this->view->assignMultiple([
             'courses' => $courses,
-            'data' => $this->configurationManager->getContentObject()->data,
+            'data' => $this->configurationManager->getContentObject()->data ?? [],
             'demand' => $demandObject,
             'categories' => $this->categoryRepository->findAllWitDisabledStatus($courses->getApplicableCategories()),
         ]);
