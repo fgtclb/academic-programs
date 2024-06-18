@@ -51,16 +51,19 @@ final class CourseCollection implements Iterator, Countable
         $statement = self::buildDefaultQuery($demand, $fromPid);
         $coursePages = $statement->executeQuery()->fetchAllAssociative();
 
-        return self::buildCollection($coursePages);
+        return self::buildCollection($coursePages, $demand);
     }
 
     /**
      * @param array<int|string, mixed> $coursePages
+     * @param ?CourseDemand $demand
      * @return CourseCollection
      */
-    private static function buildCollection(array $coursePages): CourseCollection
-    {
-        $courseCollection = new self();
+    private static function buildCollection(
+        array $coursePages,
+        ?CourseDemand $demand = null
+    ): CourseCollection {
+        $courseArray = [];
         foreach ($coursePages as $coursePage) {
             if ($coursePage['doktype'] !== PageTypes::TYPE_EDUCATIONAL_COURSE) {
                 try {
@@ -72,6 +75,17 @@ final class CourseCollection implements Iterator, Countable
             } else {
                 $course = new Course($coursePage['uid']);
             }
+            $courseArray[] = $course;
+        }
+
+        if ($demand !== null && $demand->getSortingField() === 'title') {
+            usort($courseArray, function ($a, $b) {
+                return strcoll($a->getTitle(), $b->getTitle());
+            });
+        }
+
+        $courseCollection = new self();
+        foreach ($courseArray as $course) {
             $courseCollection->attach($course);
         }
 
@@ -160,6 +174,33 @@ final class CourseCollection implements Iterator, Countable
         return $statement;
     }
 
+    /**
+     * @return CategoryCollection
+     */
+    public function getApplicableCategories(): CategoryCollection
+    {
+        /** @var CategoryCollection $applicableCategories */
+        $applicableCategories = GeneralUtility::makeInstance(CategoryCollection::class);
+        foreach ($this->courses as $course) {
+            foreach ($course->getCategories() as $category) {
+                $applicableCategories->attach($category);
+            }
+        }
+        return $applicableCategories;
+    }
+
+    /**
+     * @param string $tableName
+     * @return QueryBuilder
+     */
+    private static function buildQueryBuilder(string $tableName = 'pages'): QueryBuilder
+    {
+        /** @var ConnectionPool $connectionPool */
+        $connectionPool = GeneralUtility::makeInstance(ConnectionPool::class);
+        $queryBuilder = $connectionPool->getQueryBuilderForTable($tableName);
+        return $queryBuilder;
+    }
+
     private function attach(Course $course): void
     {
         $this->courses[] = $course;
@@ -193,32 +234,5 @@ final class CourseCollection implements Iterator, Countable
     public function count(): int
     {
         return count($this->courses);
-    }
-
-    /**
-     * @return CategoryCollection
-     */
-    public function getApplicableCategories(): CategoryCollection
-    {
-        /** @var CategoryCollection $applicableCategories */
-        $applicableCategories = GeneralUtility::makeInstance(CategoryCollection::class);
-        foreach ($this->courses as $course) {
-            foreach ($course->getCategories() as $category) {
-                $applicableCategories->attach($category);
-            }
-        }
-        return $applicableCategories;
-    }
-
-    /**
-     * @param string $tableName
-     * @return QueryBuilder
-     */
-    private static function buildQueryBuilder(string $tableName = 'pages'): QueryBuilder
-    {
-        /** @var ConnectionPool $connectionPool */
-        $connectionPool = GeneralUtility::makeInstance(ConnectionPool::class);
-        $queryBuilder = $connectionPool->getQueryBuilderForTable($tableName);
-        return $queryBuilder;
     }
 }
