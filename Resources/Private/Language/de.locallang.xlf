@@ -46,6 +46,10 @@
 				<source>Performance scope</source>
 				<target>Leistungsumfang</target>
 			</trans-unit>
+			<trans-unit id="pages.shortcut_overwrite">
+				<source>Overwrite fields</source>
+				<target>Felder überschreiben</target>
+			</trans-unit>
 			<trans-unit id="pages.overview">
 				<source>Overview</source>
 				<target>Überblick</target>

@@ -2,7 +2,8 @@ CREATE TABLE pages
 (
 	job_profile       text,
 	performance_scope text,
-	prerequisites     text
+	prerequisites     text,
+	shortcut_overwrite tinyint(1) unsigned DEFAULT '0' NOT NULL
 );
 
 

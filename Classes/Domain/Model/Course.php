@@ -96,7 +96,12 @@ class Course
             );
         }
 
-        return new self($originalPage['uid']);
+        $studyPage = new self($originalPage['uid']);
+        if ($pageToResolve['shortcut_overwrite'] === 1) {
+            $studyPage->overwriteFields($pageToResolve);
+        }
+
+        return $studyPage;
     }
 
     /**
@@ -108,6 +113,24 @@ class Course
         /** @var FileReferenceCollection $fileReferenceCollection */
         $fileReferenceCollection = GeneralUtility::makeInstance(FileReferenceCollection::class);
         return $fileReferenceCollection->getCollectionByPageIdAndField($pageId, 'media');
+    }
+
+    /**
+     * @param array<string, mixed> $pageToResolve
+     */
+    protected function overwriteFields(array $pageToResolve): void
+    {
+        foreach ($pageToResolve as $key => $pageToResolveValue) {
+            if ($key == 'title' && $pageToResolveValue !== '') {
+                $this->title = $pageToResolveValue;
+            }
+            if ($key == 'media' && $pageToResolveValue !== 0) {
+                $media = self::loadMedia($pageToResolve['uid']);
+                if ($media->count() > 0) {
+                    $this->media = $media;
+                }
+            }
+        }
     }
 
     /**
