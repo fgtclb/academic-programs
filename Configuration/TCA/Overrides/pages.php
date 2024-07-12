@@ -64,6 +64,14 @@ declare(strict_types=1);
                 'enableRichtext' => true,
             ],
         ],
+        'shortcut_overwrite' => [
+            'label' => 'LLL:EXT:educational_course/Resources/Private/Language/locallang.xlf:pages.shortcut_overwrite',
+            'config' => [
+                'type' => 'check',
+            ],
+            'exclude' => 1,
+            'default' => 0,
+        ],
     ];
 
     \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTCAcolumns(
@@ -75,5 +83,11 @@ declare(strict_types=1);
         '--div--;LLL:EXT:educational_course/Resources/Private/Language/locallang.xlf:pages.div.course_information,job_profile,performance_scope,prerequisites',
         '20',
         'after:rowDescription'
+    );
+    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes(
+        'pages',
+        'shortcut_overwrite',
+        '4',
+        'after:title'
     );
 })();
