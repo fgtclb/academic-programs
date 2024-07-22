@@ -6,7 +6,8 @@ declare(strict_types=1);
     \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
         'EducationalCourse',
         'CourseList',
-        'Educational Course'
+        'Educational Course',
+        'educational-course-studiesIcon'
     );
 
     $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_excludelist']['educationalcourse_courselist'] = 'layout,recursive';
