@@ -3,9 +3,8 @@
 namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 
 use FGTCLB\EducationalCourse\Collection\FilterCollection;
-use FGTCLB\EducationalCourse\DataProcessor\CategoryProcessor;
-use FGTCLB\EducationalCourse\Domain\Model\Dto\CourseDemand;
 use FGTCLB\EducationalCourse\Domain\Repository\CategoryRepository;
+use FGTCLB\EducationalCourse\Domain\Repository\CourseRepository;
 
 return function (ContainerConfigurator $containerConfigurator) {
     $services = $containerConfigurator
@@ -19,7 +18,7 @@ return function (ContainerConfigurator $containerConfigurator) {
         ->exclude('../Classes/Domain/Model/');
 
     $services
-        ->set(CategoryProcessor::class)
+        ->set(FilterCollection::class)
         ->public();
 
     $services
@@ -27,10 +26,6 @@ return function (ContainerConfigurator $containerConfigurator) {
         ->public();
 
     $services
-        ->set(CourseDemand::class)
-        ->public();
-
-    $services
-        ->set(FilterCollection::class)
+        ->set(CourseRepository::class)
         ->public();
 };
