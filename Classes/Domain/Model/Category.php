@@ -109,4 +109,9 @@ class Category
     {
         return $this->disabled;
     }
+
+    public function __toString(): string
+    {
+        return (string)$this->uid;
+    }
 }
