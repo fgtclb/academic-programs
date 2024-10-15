@@ -4,89 +4,40 @@ declare(strict_types=1);
 
 namespace FGTCLB\EducationalCourse\Domain\Model\Dto;
 
+use FGTCLB\EducationalCourse\Enumeration\SortingOptions;
 use FGTCLB\EducationalCourse\Collection\FilterCollection;
 
 class CourseDemand
 {
-    public const SORTING_FIELDS = [
-        'title',
-        'lastUpdated',
-        'sorting',
-    ];
+    /** @var int[] */
+    protected array $pages = [];
 
-    public const DEFAULT_SORTING_FIELD = 'title';
+    protected ?FilterCollection $filterCollection = null;
 
-    public const SORTING_DIRECTIONS = [
-        'asc',
-        'desc',
-    ];
+    protected string $sorting = '';
 
-    public const DEFAULT_SORTING_DIRECTION = 'asc';
+    protected string $sortingField = '';
 
-    /**
-     * @var string
-     */
-    protected string $sortingField = self::DEFAULT_SORTING_FIELD;
+    protected string $sortingDirection = '';
 
-    /**
-     * @var string
-     */
-    protected string $sortingDirection = self::DEFAULT_SORTING_DIRECTION;
-
-    public function __construct(
-        protected FilterCollection $filterCollection
-    ) {}
-
-    /**
-     * @return array<string>
-     */
-    public function getSortingDirectionOptions(): array
-    {
-        $options = [];
-        foreach (self::SORTING_DIRECTIONS as $option) {
-            $options[$option] = $option;
-        }
-        return $options;
+    public function __construct() {
+        $this->setSorting(SortingOptions::__default);
     }
 
     /**
-     * @return array<string>
+     * @param int[] $pages
      */
-    public function getSortingFieldOptions(): array
+    public function setPages(array $pages): void
     {
-        $options = [];
-        foreach (self::SORTING_FIELDS as $option) {
-            $options[$option] = $option;
-        }
-        return $options;
+        $this->pages = $pages;
     }
 
-    public function setSortingField(string $sortingField): void
+    /**
+     * @return int[]
+     */
+    public function getPages(): array
     {
-        if (in_array($sortingField, self::SORTING_FIELDS)) {
-            $this->sortingField = $sortingField;
-        } else {
-            $sortingField = self::DEFAULT_SORTING_FIELD;
-        }
-    }
-
-    public function getSortingField(): string
-    {
-        return $this->sortingField;
-    }
-
-    public function setSortingDirection(string $sortingDirection): void
-    {
-        if (in_array($sortingDirection, self::SORTING_DIRECTIONS)) {
-            $this->sortingDirection = $sortingDirection;
-        } else {
-            $sortingDirection = self::DEFAULT_SORTING_DIRECTION;
-        }
-    }
-
-    public function getSortingDirection(): string
-    {
-        return $this->sortingDirection;
+        return $this->pages;
     }
 
     public function getFilterCollection(): FilterCollection
@@ -97,5 +48,40 @@ class CourseDemand
     public function setFilterCollection(FilterCollection $filterCollection): void
     {
         $this->filterCollection = $filterCollection;
+    }
+
+    public function setSorting(string $sorting): void
+    {
+        if (in_array($sorting, SortingOptions::getConstants())) {
+            $this->sorting = $sorting;
+            [$this->sortingField, $this->sortingDirection] = explode(' ', $sorting);
+        }
+    }
+
+    public function getSorting(): string
+    {
+        return $this->sorting;
+    }
+
+    public function setSortingField(string $sortingField): void
+    {
+        $newSorting = $sortingField . ' ' . $this->sortingDirection;
+        $this->setSorting($newSorting);
+    }
+
+    public function getSortingField(): string
+    {
+        return $this->sortingField;
+    }
+
+    public function setSortingDirection(string $sortingDirection): void
+    {
+        $newSorting = $this->sortingField . ' ' . $sortingDirection;
+        $this->setSorting($newSorting);
+    }
+
+    public function getSortingDirection(): string
+    {
+        return $this->sortingDirection;
     }
 }

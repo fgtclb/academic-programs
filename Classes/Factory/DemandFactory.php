@@ -11,7 +11,7 @@ use FGTCLB\EducationalCourse\Domain\Repository\CategoryRepository;
 use FGTCLB\EducationalCourse\Enumeration\CategoryTypes;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
-class CourseDemandFactory
+class DemandFactory
 {
     public function __construct(
         private CategoryRepository $categoryRepository
@@ -20,12 +20,12 @@ class CourseDemandFactory
     /**
      * @param ?array<string, mixed> $demandFromForm
      * @param array<string, mixed> $settings
-     * @param int $pluginUid
+     * @param array<string, mixed> $contentElementData
      */
     public function createDemandObject(
         ?array $demandFromForm,
         array $settings,
-        int $pluginUid
+        array $contentElementData
     ): CourseDemand {
         $demand = GeneralUtility::makeInstance(CourseDemand::class);
         $filterCollection = GeneralUtility::makeInstance(FilterCollection::class);
@@ -41,7 +41,7 @@ class CourseDemandFactory
             if (isset($settings['categories'])
                 && (int)$settings['categories'] > 0
             ) {
-                $categoryCollection = $this->categoryRepository->getByDatabaseFields($pluginUid);
+                $categoryCollection = $this->categoryRepository->getByDatabaseFields($contentElementData['uid']);
                 $filterCollection = FilterCollection::createByCategoryCollection($categoryCollection);
             }
         } else {
@@ -60,7 +60,11 @@ class CourseDemandFactory
                 foreach ($demandFromForm['filterCollection'] as $type => $categoriesIds) {
                     $formatType = GeneralUtility::camelCaseToLowerCaseUnderscored($type);
                     $categoriesIdList = GeneralUtility::intExplode(',', $categoriesIds);
-                    $categoryFilterObject = $this->categoryRepository->findByUidListAndType($categoriesIdList, CategoryTypes::cast($formatType));
+                    $categoryFilterObject = $this->categoryRepository->findByUidListAndType(
+                        $categoriesIdList,
+                        CategoryTypes::cast($formatType)
+                    );
+
                     if ($categoryFilterObject === null) {
                         continue;
                     }

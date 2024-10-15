@@ -6,9 +6,8 @@ namespace FGTCLB\EducationalCourse\Controller;
 
 use FGTCLB\EducationalCourse\Domain\Repository\CourseRepository;
 use FGTCLB\EducationalCourse\Domain\Repository\CategoryRepository;
-use FGTCLB\EducationalCourse\Factory\CourseDemandFactory;
+use FGTCLB\EducationalCourse\Factory\DemandFactory;
 use Psr\Http\Message\ResponseInterface;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 
 class CourseController extends ActionController
@@ -16,7 +15,7 @@ class CourseController extends ActionController
     public function __construct(
         protected CourseRepository $courseRepository,
         protected CategoryRepository $categoryRepository,
-        protected CourseDemandFactory $courseDemandFactory
+        protected DemandFactory $courseDemandFactory
     ) {}
 
     /**
@@ -25,10 +24,14 @@ class CourseController extends ActionController
      */
     public function listAction(array $demand = null): ResponseInterface
     {
+        /** @var ContentObjectRenderer $contentObjectRenderer */
+        $contentObjectRenderer = $this->configurationManager->getContentObject();
+        $contentElementData = $contentObjectRenderer->data;
+
         $demandObject = $this->courseDemandFactory->createDemandObject(
             $demand,
             $this->settings,
-            $this->configurationManager->getContentObject()->data['uid'] ?? null
+            $contentElementData
         );
 
         $courses = $this->courseRepository->findByDemand($demandObject);
@@ -36,7 +39,7 @@ class CourseController extends ActionController
 
         $this->view->assignMultiple([
             'courses' => $courses,
-            'data' => $this->configurationManager->getContentObject()->data ?? [],
+            'data' => $contentElementData,
             'demand' => $demandObject,
             'categories' => $categories,
         ]);
