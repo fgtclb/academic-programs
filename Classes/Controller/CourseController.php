@@ -9,6 +9,7 @@ use FGTCLB\EducationalCourse\Domain\Repository\CourseRepository;
 use FGTCLB\EducationalCourse\Factory\DemandFactory;
 use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
+use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 
 class CourseController extends ActionController
 {
