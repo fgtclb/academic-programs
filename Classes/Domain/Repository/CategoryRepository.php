@@ -11,6 +11,7 @@ use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Database\Query\QueryBuilder;
 use TYPO3\CMS\Core\Domain\Repository\PageRepository;
+use TYPO3\CMS\Extbase\Persistence\Generic\QueryResult;
 
 class CategoryRepository
 {
@@ -73,6 +74,47 @@ class CategoryRepository
 
         foreach ($result->fetchAllAssociative() as $row) {
             $category = $this->buildCategoryObjectFromArray($row);
+            $categories->attach($category);
+        }
+
+        return $categories;
+    }
+
+    /**
+     * @param QueryResult<Course> $courses
+     */
+    public function findAllApplicable(QueryResult $courses): CategoryCollection
+    {
+        $queryBuilder = $this->buildQueryBuilder();
+
+        $result = $queryBuilder
+            ->select('sys_category.*')
+            ->from('sys_category')
+            ->where(
+                $this->categoryTypeCondition($queryBuilder),
+                $this->siteDefaultLanguageCondition($queryBuilder),
+            )->executeQuery();
+
+        $categories = new CategoryCollection();
+
+        if ($result->rowCount() === 0) {
+            return $categories;
+        }
+
+        // Generate aa list of all categories which are assigned to the given courses
+        $applicableCategories = [];
+        foreach ($courses as $course) {
+            foreach ($course->getAttributes() as $attribute) {
+                $applicableCategories[] = $attribute->getUid();
+            }
+        }
+
+        // Disable all categories which are not assigned to any of the given courses
+        foreach ($result->fetchAllAssociative() as $row) {
+            $category = $this->buildCategoryObjectFromArray($row);
+            if (!in_array($row['uid'], $applicableCategories)) {
+                $category->setDisabled(true);
+            }
             $categories->attach($category);
         }
 
