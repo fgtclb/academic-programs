@@ -3,10 +3,11 @@
 declare(strict_types=1);
 
 (static function (): void {
-    // first add doktype to select
+    // Add doktype to select
     $studyProgrammeDokType = \FGTCLB\EducationalCourse\Enumeration\PageTypes::TYPE_EDUCATIONAL_COURSE;
 
-    // create new group
+    // Create new option group
+    // TODO: Harmonize with otheer academical extensions
     \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTcaSelectItemGroup(
         'pages',
         'doktype',
@@ -14,6 +15,7 @@ declare(strict_types=1);
         'LLL:EXT:educational_course/Resources/Private/Language/locallang.xlf:pages.study',
         'after:default'
     );
+
     \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTcaSelectItem(
         'pages',
         'doktype',
@@ -24,7 +26,8 @@ declare(strict_types=1);
             'study',
         ]
     );
-    // add type and typeicon
+
+    // Add type and typeicon
     \TYPO3\CMS\Core\Utility\ArrayUtility::mergeRecursiveWithOverrule(
         $GLOBALS['TCA']['pages'],
         [
@@ -41,7 +44,7 @@ declare(strict_types=1);
         ]
     );
 
-    // adds study programme fields
+    // Adds study programme fields
     $newTcaFields = [
         'job_profile' => [
             'label' => 'LLL:EXT:educational_course/Resources/Private/Language/locallang.xlf:pages.job_profile',
@@ -78,6 +81,7 @@ declare(strict_types=1);
         'pages',
         $newTcaFields
     );
+
     \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes(
         'pages',
         '--div--;LLL:EXT:educational_course/Resources/Private/Language/locallang.xlf:pages.div.course_information,job_profile,performance_scope,prerequisites',
