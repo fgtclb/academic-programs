@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace FGTCLB\EducationalCourse\Controller;
 
-use FGTCLB\EducationalCourse\Collection\CourseCollection;
+use FGTCLB\EducationalCourse\Domain\Repository\CourseRepository;
 use FGTCLB\EducationalCourse\Domain\Repository\CategoryRepository;
 use FGTCLB\EducationalCourse\Factory\CourseDemandFactory;
 use Psr\Http\Message\ResponseInterface;
@@ -14,6 +14,7 @@ use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 class CourseController extends ActionController
 {
     public function __construct(
+        protected CourseRepository $courseRepository,
         protected CategoryRepository $categoryRepository,
         protected CourseDemandFactory $courseDemandFactory
     ) {}
@@ -30,21 +31,14 @@ class CourseController extends ActionController
             $this->configurationManager->getContentObject()->data['uid'] ?? null
         );
 
-        $courses = CourseCollection::getByDemand(
-            $demandObject,
-            GeneralUtility::intExplode(
-                ',',
-                $this->configurationManager->getContentObject()
-                    ? $this->configurationManager->getContentObject()->data['pages']
-                    : []
-            )
-        );
+        $courses = $this->courseRepository->findByDemand($demandObject);
+        $categories = $this->categoryRepository->findAllApplicable($courses);
 
         $this->view->assignMultiple([
             'courses' => $courses,
             'data' => $this->configurationManager->getContentObject()->data ?? [],
             'demand' => $demandObject,
-            'categories' => $this->categoryRepository->findAllWitDisabledStatus($courses->getApplicableCategories()),
+            'categories' => $categories,
         ]);
 
         return $this->htmlResponse();
