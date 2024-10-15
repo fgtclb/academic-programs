@@ -1,5 +1,0 @@
-lib.educationalCourse.costs < lib.educationalCourse.basic
-lib.educationalCourse.costs {
-  type = costs
-  as = costs
-}

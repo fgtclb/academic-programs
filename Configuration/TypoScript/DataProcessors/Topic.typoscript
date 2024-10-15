@@ -1,5 +1,0 @@
-lib.educationalCourse.topic < lib.educationalCourse.basic
-lib.educationalCourse.topic {
-  type = topic
-  as = topic
-}

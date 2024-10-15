@@ -1,5 +1,0 @@
-lib.educationalCourse.courseType < lib.educationalCourse.basic
-lib.educationalCourse.courseType {
-  type = course_type
-  as = courseType
-}

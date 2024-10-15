@@ -1,5 +1,0 @@
-lib.educationalCourse.admissionRestriction < lib.educationalCourse.basic
-lib.educationalCourse.admissionRestriction {
-  type = admission_restriction
-  as = admissionRestriction
-}

@@ -1,5 +1,0 @@
-lib.educationalCourse.paying < lib.educationalCourse.basic
-lib.educationalCourse.paying {
-  type = paying
-  as = paying
-}
