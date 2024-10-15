@@ -1,5 +1,0 @@
-lib.educationalCourse.beginCourse < lib.educationalCourse.basic
-lib.educationalCourse.beginCourse {
-  type = begin_course
-  as = beginCourse
-}

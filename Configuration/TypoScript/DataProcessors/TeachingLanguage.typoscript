@@ -1,5 +1,0 @@
-lib.educationalCourse.teachingLanguage < lib.educationalCourse.basic
-lib.educationalCourse.teachingLanguage {
-  type = teaching_language
-  as = teachingLanguage
-}

@@ -1,5 +1,0 @@
-lib.educationalCourse.standardPeriod < lib.educationalCourse.basic
-lib.educationalCourse.standardPeriod {
-  type = standard_period
-  as = standardPeriod
-}

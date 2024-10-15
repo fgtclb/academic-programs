@@ -1,5 +1,0 @@
-lib.educationalCourse.degree < lib.educationalCourse.basic
-lib.educationalCourse.degree {
-  type = degree
-  as = degree
-}

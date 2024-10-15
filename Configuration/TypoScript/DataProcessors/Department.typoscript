@@ -1,5 +1,0 @@
-lib.educationalCourse.department < lib.educationalCourse.basic
-lib.educationalCourse.department {
-  type = department
-  as = department
-}

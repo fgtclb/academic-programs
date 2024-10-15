@@ -1,5 +1,0 @@
-lib.educationalCourse.applicationPeriod < lib.educationalCourse.basic
-lib.educationalCourse.applicationPeriod {
-  type = application_period
-  as = applicationPeriod
-}
