@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace FGTCLB\EducationalCourse\ViewHelpers\Form;
 
-use FGTCLB\EducationalCourse\ViewHelpers\Form\AbstractSelectViewHelper;
-
 class FilterSelectViewHelper extends AbstractSelectViewHelper
 {
     public function initializeArguments(): void

@@ -4,9 +4,8 @@ declare(strict_types=1);
 
 namespace FGTCLB\EducationalCourse\Domain\Repository;
 
-use DateTime;
-use FGTCLB\EducationalCourse\Domain\Model\Dto\CourseDemand;
 use FGTCLB\EducationalCourse\Domain\Model\Course;
+use FGTCLB\EducationalCourse\Domain\Model\Dto\CourseDemand;
 use FGTCLB\EducationalCourse\Enumeration\PageTypes;
 use TYPO3\CMS\Core\Type\Exception\InvalidEnumerationValueException;
 use TYPO3\CMS\Extbase\Persistence\Generic\QueryResult;

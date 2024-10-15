@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace FGTCLB\EducationalCourse\Domain\Model\Dto;
 
-use FGTCLB\EducationalCourse\Enumeration\SortingOptions;
 use FGTCLB\EducationalCourse\Collection\FilterCollection;
+use FGTCLB\EducationalCourse\Enumeration\SortingOptions;
 
 class CourseDemand
 {
@@ -20,7 +20,8 @@ class CourseDemand
 
     protected string $sortingDirection = '';
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->setSorting(SortingOptions::__default);
     }
 
