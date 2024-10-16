@@ -126,6 +126,52 @@
 				<source>Paying?</source>
 				<target>Kostenpflichtig?</target>
 			</trans-unit>
+
+			<!-- Sorting field and direction options -->
+
+			<trans-unit id="sorting.direction.asc">
+				<source>ascending</source>
+				<target>aufsteigend</target>
+			</trans-unit>
+			<trans-unit id="sorting.direction.desc">
+				<source>descending</source>
+				<target>absteigend</target>
+			</trans-unit>
+			<trans-unit id="sorting.field.title">
+				<source>Title</source>
+				<target>Titel</target>
+			</trans-unit>
+			<trans-unit id="sorting.field.lastUpdated">
+				<source>Last updated</source>
+				<target>Zuletzt aktualisiert</target>
+			</trans-unit>
+			<trans-unit id="sorting.field.sorting">
+				<source>Sorting</source>
+				<target>Sortierung</target>
+			</trans-unit>
+
+			<!-- Sorting options -->
+
+			<trans-unit id="sorting.title.asc">
+				<source>Title A-Z</source>
+				<target>Titel A-Z</target>
+			</trans-unit>
+			<trans-unit id="sorting.title.desc">
+				<source>Title Z-A</source>
+				<target>Titel Z-A</target>
+			</trans-unit>
+			<trans-unit id="sorting.lastUpdated.asc">
+				<source>Last updated (latest last)</source>
+				<target>Zuletzt aktualisiert (neueste zuletzt)</target>
+			</trans-unit>
+			<trans-unit id="sorting.lastUpdated.desc">
+				<source>Last updated (latest first)</source>
+				<target>Zuletzt aktualisiert (neueste zuerst)</target>
+			</trans-unit>
+			<trans-unit id="sorting.sorting.asc">
+				<source>Page sorting (Result may be unexpected)</source>
+				<target>Seitensortierung (Ergebnis kann unerwartet sein)</target>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>
