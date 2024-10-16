@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace FGTCLB\EducationalCourse\ViewHelpers\Form;
 
 use FGTCLB\EducationalCourse\Enumeration\SortingOptions;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 class SortingSelectViewHelper extends AbstractSelectViewHelper
@@ -22,55 +23,43 @@ class SortingSelectViewHelper extends AbstractSelectViewHelper
      */
     protected function getOptions(): array
     {
-        $optionsArgument = [];
+        $options = [];
 
         if (!is_array($this->arguments['options'])
             && !$this->arguments['options'] instanceof \Traversable
         ) {
-            foreach (SortingOptions::getConstants() as $value) {
+            foreach (SortingOptions::getConstants() as $sortingValue) {
                 if ($this->arguments['fieldsOnly'] || $this->arguments['directionsOnly']) {
-                    [$sortingField, $sortingDirection] = explode(' ', $value);
+                    [$sortingField, $sortingDirection] = GeneralUtility::trimExplode(' ', $sortingValue);
                     if ($this->arguments['fieldsOnly']) {
                         $value = $sortingField;
+                        $labelKey = 'field.' . $sortingField;
                     } elseif ($this->arguments['directionsOnly']) {
                         $value = $sortingDirection;
+                        $labelKey = 'direction.' . $sortingDirection;
                     }
+                } else {
+                    $labelKey = str_replace(' ', '.', $sortingValue);
                 }
 
-                $label = str_replace(' ', '.', $value);
-                $key = 'LLL:EXT:academic_projects/Resources/Private/Language/locallang_be.xlf:flexform.sorting.' . $label;
-                $translatedLabel = LocalizationUtility::translate($key);
-                if ($translatedLabel !== null) {
-                    $label = $translatedLabel;
-                }
-                $optionsArgument[$value] = $label;
+                $options[$sortingValue] = [
+                    'value' => $sortingValue,
+                    'label' => $this->translateLabel($labelKey),
+                    'isSelected' => $this->isSelected($sortingValue),
+                ];
             }
         } else {
-            $optionsArgument = $this->arguments['options'];
-            $extensionName = $this->arguments['extensionName'] === null ? 'academic_projects' : $this->arguments['extensionName'];
-
-            foreach ($optionsArgument as $value => $label) {
+            foreach ($this->arguments['options'] as $value => $label) {
                 if (isset($this->arguments['l10n']) && $this->arguments['l10n']) {
-                    $translatedLabel = LocalizationUtility::translate(
-                        $this->arguments['l10n'] . '.' . $label,
-                        $extensionName,
-                        $this->arguments['arguments']
-                    );
-                    if ($translatedLabel !== null) {
-                        $label = $translatedLabel;
-                    }
+                    $label = $this->translateLabel($label, $this->arguments['l10n']);
                 }
+
+                $options[$value] = [
+                    'value' => $value,
+                    'label' => $label,
+                    'isSelected' => $this->isSelected($value),
+                ];
             }
-        }
-
-        $options = [];
-
-        foreach ($optionsArgument as $value => $label) {
-            $options[] = [
-                'value' => $value,
-                'label' => $label,
-                'isSelected' => $this->isSelected($value),
-            ];
         }
 
         if ($this->arguments['sortByOptionLabel'] !== false) {
@@ -97,5 +86,29 @@ class SortingSelectViewHelper extends AbstractSelectViewHelper
             $output .= '>' . htmlspecialchars((string)$option['label']) . '</option>' . LF;
         }
         return $output;
+    }
+
+    protected function translateLabel(
+        string $labelKey,
+        ?string $l10nPrefix = 'sorting'
+    ): string {
+        $key = sprintf(
+            'LLL:EXT:educational_course/Resources/Private/Language/locallang.xlf:%s.%s',
+            $l10nPrefix,
+            $labelKey
+        );
+
+        $extensionName = $this->arguments['extensionName'] === null ? 'educational_course' : $this->arguments['extensionName'];
+
+        $translatedLabel = LocalizationUtility::translate(
+            $key,
+            $extensionName
+        );
+
+        if ($translatedLabel === null) {
+            return $labelKey;
+        }
+
+        return $translatedLabel;
     }
 }
