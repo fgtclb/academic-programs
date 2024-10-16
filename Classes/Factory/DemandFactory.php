@@ -45,12 +45,16 @@ class DemandFactory
                 $filterCollection = FilterCollection::createByCategoryCollection($categoryCollection);
             }
         } else {
-            if (isset($demandFromForm['sortingField'])) {
-                $demand->setSortingField($demandFromForm['sortingField']);
-            }
-
-            if (isset($demandFromForm['sortingDirection'])) {
-                $demand->setSortingDirection($demandFromForm['sortingDirection']);
+            // Either use combined sorting or separate sorting field and direction
+            if (isset($demandFromForm['sorting'])) {
+                $demand->setSorting($demandFromForm['sorting']);
+            } else {
+                if (isset($demandFromForm['sortingField'])) {
+                    $demand->setSortingField($demandFromForm['sortingField']);
+                }
+                if (isset($demandFromForm['sortingDirection'])) {
+                    $demand->setSortingDirection($demandFromForm['sortingDirection']);
+                }
             }
 
             if ($demandFromForm['filterCollection'] !== null) {
