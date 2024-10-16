@@ -39,13 +39,14 @@ class SortingSelectViewHelper extends AbstractSelectViewHelper
                         $labelKey = 'direction.' . $sortingDirection;
                     }
                 } else {
+                    $value = $sortingValue;
                     $labelKey = str_replace(' ', '.', $sortingValue);
                 }
 
-                $options[$sortingValue] = [
-                    'value' => $sortingValue,
+                $options[$value] = [
+                    'value' => $value,
                     'label' => $this->translateLabel($labelKey),
-                    'isSelected' => $this->isSelected($sortingValue),
+                    'isSelected' => $this->isSelected($value),
                 ];
             }
         } else {
