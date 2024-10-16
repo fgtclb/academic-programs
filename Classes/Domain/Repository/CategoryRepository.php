@@ -6,6 +6,7 @@ namespace FGTCLB\EducationalCourse\Domain\Repository;
 
 use FGTCLB\EducationalCourse\Collection\CategoryCollection;
 use FGTCLB\EducationalCourse\Domain\Model\Category;
+use FGTCLB\EducationalCourse\Domain\Model\Course;
 use FGTCLB\EducationalCourse\Enumeration\CategoryTypes;
 use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;

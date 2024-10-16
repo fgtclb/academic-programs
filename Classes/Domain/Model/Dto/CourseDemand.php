@@ -41,12 +41,12 @@ class CourseDemand
         return $this->pages;
     }
 
-    public function getFilterCollection(): FilterCollection
+    public function getFilterCollection(): ?FilterCollection
     {
         return $this->filterCollection;
     }
 
-    public function setFilterCollection(FilterCollection $filterCollection): void
+    public function setFilterCollection(?FilterCollection $filterCollection): void
     {
         $this->filterCollection = $filterCollection;
     }
