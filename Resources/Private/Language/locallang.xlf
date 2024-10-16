@@ -100,20 +100,41 @@
 			<trans-unit id="sys_category.type.paying">
 				<source>Paying?</source>
 			</trans-unit>
-			<trans-unit id="filter.sortingDirection.asc">
+
+			<!-- Sorting field and direction options -->
+
+			<trans-unit id="sorting.direction.asc">
 				<source>ascending</source>
 			</trans-unit>
-			<trans-unit id="filter.sortingDirection.desc">
+			<trans-unit id="sorting.direction.desc">
 				<source>descending</source>
 			</trans-unit>
-			<trans-unit id="filter.sortingField.title">
+			<trans-unit id="sorting.field.title">
 				<source>Title</source>
 			</trans-unit>
-			<trans-unit id="filter.sortingField.lastUpdated">
+			<trans-unit id="sorting.field.lastUpdated">
 				<source>Last updated</source>
 			</trans-unit>
-			<trans-unit id="filter.sortingField.sorting">
+			<trans-unit id="sorting.field.sorting">
 				<source>Sorting</source>
+			</trans-unit>
+
+			<!-- Sorting options -->
+
+			<trans-unit id="sorting.title.asc">
+				<source>Title A-Z</source>
+			</trans-unit>
+			<trans-unit id="sorting.title.desc">
+				<source>Title Z-A</source>
+			</trans-unit>
+			<trans-unit id="sorting.lastUpdated.asc">
+				<source>Last updated (latest last)</source>
+			</trans-unit>
+			<trans-unit id="sorting.lastUpdated.desc">
+				<source>Last updated (latest first)</source>
+			</trans-unit>
+			<trans-unit id="sorting.sorting.asc">
+				<source>Page sorting (Result may be unexpected)</source>
 			</trans-unit>
 		</body>
 	</file>
