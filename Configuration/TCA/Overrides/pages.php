@@ -12,7 +12,7 @@ declare(strict_types=1);
         'pages',
         'doktype',
         'study',
-        'LLL:EXT:educational_course/Resources/Private/Language/locallang.xlf:pages.study',
+        'LLL:EXT:academic_programs/Resources/Private/Language/locallang.xlf:pages.study',
         'after:default'
     );
 
@@ -20,7 +20,7 @@ declare(strict_types=1);
         'pages',
         'doktype',
         [
-            'LLL:EXT:educational_course/Resources/Private/Language/locallang.xlf:pages.educational_course',
+            'LLL:EXT:academic_programs/Resources/Private/Language/locallang.xlf:pages.academic_programs',
             $studyProgrammeDokType,
             'actions-graduation-cap',
             'study',
@@ -47,28 +47,28 @@ declare(strict_types=1);
     // Adds study programme fields
     $newTcaFields = [
         'job_profile' => [
-            'label' => 'LLL:EXT:educational_course/Resources/Private/Language/locallang.xlf:pages.job_profile',
+            'label' => 'LLL:EXT:academic_programs/Resources/Private/Language/locallang.xlf:pages.job_profile',
             'config' => [
                 'type' => 'text',
                 'enableRichtext' => true,
             ],
         ],
         'performance_scope' => [
-            'label' => 'LLL:EXT:educational_course/Resources/Private/Language/locallang.xlf:pages.performance_scope',
+            'label' => 'LLL:EXT:academic_programs/Resources/Private/Language/locallang.xlf:pages.performance_scope',
             'config' => [
                 'type' => 'text',
                 'enableRichtext' => true,
             ],
         ],
         'prerequisites' => [
-            'label' => 'LLL:EXT:educational_course/Resources/Private/Language/locallang.xlf:pages.prerequisites',
+            'label' => 'LLL:EXT:academic_programs/Resources/Private/Language/locallang.xlf:pages.prerequisites',
             'config' => [
                 'type' => 'text',
                 'enableRichtext' => true,
             ],
         ],
         'shortcut_overwrite' => [
-            'label' => 'LLL:EXT:educational_course/Resources/Private/Language/locallang.xlf:pages.shortcut_overwrite',
+            'label' => 'LLL:EXT:academic_programs/Resources/Private/Language/locallang.xlf:pages.shortcut_overwrite',
             'config' => [
                 'type' => 'check',
             ],
@@ -84,7 +84,7 @@ declare(strict_types=1);
 
     \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes(
         'pages',
-        '--div--;LLL:EXT:educational_course/Resources/Private/Language/locallang.xlf:pages.div.course_information,job_profile,performance_scope,prerequisites',
+        '--div--;LLL:EXT:academic_programs/Resources/Private/Language/locallang.xlf:pages.div.course_information,job_profile,performance_scope,prerequisites',
         '20',
         'after:rowDescription'
     );

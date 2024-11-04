@@ -1,5 +1,5 @@
-@import 'EXT:educational_course/Configuration/TypoScript/Content/'
-@import 'EXT:educational_course/Configuration/TypoScript/Page/'
+@import 'EXT:academic_programs/Configuration/TypoScript/Content/'
+@import 'EXT:academic_programs/Configuration/TypoScript/Page/'
 
 plugin.tx_AcademicPrograms {
   features {

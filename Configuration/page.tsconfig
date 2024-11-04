@@ -1,2 +1,2 @@
-@import 'EXT:educational_course/Configuration/TsConfig/Page/BackendLayouts/*.tsconfig'
-@import 'EXT:educational_course/Configuration/TsConfig/Page/*.tsconfig'
+@import 'EXT:academic_programs/Configuration/TsConfig/Page/BackendLayouts/*.tsconfig'
+@import 'EXT:academic_programs/Configuration/TsConfig/Page/*.tsconfig'

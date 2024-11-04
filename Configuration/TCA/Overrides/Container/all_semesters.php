@@ -7,12 +7,12 @@ declare(strict_types=1);
         (
         new \B13\Container\Tca\ContainerConfiguration(
             'all_semesters',
-            'LLL:EXT:educational_course/Resources/Private/Language/locallang_be.xlf:container.all_semesters.label',
-            'LLL:EXT:educational_course/Resources/Private/Language/locallang_be.xlf:container.all_semesters.description',
+            'LLL:EXT:academic_programs/Resources/Private/Language/locallang_be.xlf:container.all_semesters.label',
+            'LLL:EXT:academic_programs/Resources/Private/Language/locallang_be.xlf:container.all_semesters.description',
             [
                 [
                     [
-                        'name' => 'LLL:EXT:educational_course/Resources/Private/Language/locallang_be.xlf:container.all_semesters.column.title',
+                        'name' => 'LLL:EXT:academic_programs/Resources/Private/Language/locallang_be.xlf:container.all_semesters.column.title',
                         'colPos' => 900,
                         'maxitems' => 14,
                         'allowed' => [
@@ -24,6 +24,6 @@ declare(strict_types=1);
         ))
             ->setIcon('content-container-columns-4')
             ->setSaveAndCloseInNewContentElementWizard(false)
-            ->setBackendTemplate('EXT:educational_course/Resources/Private/Backend/Templates/Container.html')
+            ->setBackendTemplate('EXT:academic_programs/Resources/Private/Backend/Templates/Container.html')
     );
 })();
