@@ -5,8 +5,8 @@
 >
     <f:if condition="{settings.filter.options} == 0 && !{settings.categories}" >
         <f:form action="list" object="{demand}" name="demand" objectName="demand">
-            <f:render partial="Course/FilterSorting" arguments="{_all}" />
-            <f:render partial="Course/FilterCategories" arguments="{_all}" />
+            <f:render partial="Program/FilterSorting" arguments="{_all}" />
+            <f:render partial="Program/FilterCategories" arguments="{_all}" />
         </f:form>
     </f:if>
     <div class="program-list">

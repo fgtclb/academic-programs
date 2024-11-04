@@ -43,7 +43,7 @@ class Version20230824122000 extends AbstractDataHandlerMigration
         $categories = [
             'NEW567' => [
                 'pid' => 'NEW124',
-                'title' => 'Course Extension Categories',
+                'title' => 'Program Extension Categories',
                 'description' => '',
             ],
         ];

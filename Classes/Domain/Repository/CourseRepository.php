@@ -4,23 +4,23 @@ declare(strict_types=1);
 
 namespace FGTCLB\AcademicPrograms\Domain\Repository;
 
-use FGTCLB\AcademicPrograms\Domain\Model\Course;
-use FGTCLB\AcademicPrograms\Domain\Model\Dto\CourseDemand;
+use FGTCLB\AcademicPrograms\Domain\Model\Program;
+use FGTCLB\AcademicPrograms\Domain\Model\Dto\ProgramDemand;
 use FGTCLB\AcademicPrograms\Enumeration\PageTypes;
 use TYPO3\CMS\Core\Type\Exception\InvalidEnumerationValueException;
 use TYPO3\CMS\Extbase\Persistence\Generic\QueryResult;
 use TYPO3\CMS\Extbase\Persistence\Repository;
 
 /**
- * @extends Repository<Course>
+ * @extends Repository<Program>
  */
-class CourseRepository extends Repository
+class ProgramRepository extends Repository
 {
     /**
-     * @return QueryResult<Course>
+     * @return QueryResult<Program>
      * @throws InvalidEnumerationValueException
      */
-    public function findByDemand(CourseDemand $demand): QueryResult
+    public function findByDemand(ProgramDemand $demand): QueryResult
     {
         $query = $this->createQuery();
         $query->getQuerySettings()->setRespectStoragePage(false);

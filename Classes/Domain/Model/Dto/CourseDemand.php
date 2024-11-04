@@ -7,7 +7,7 @@ namespace FGTCLB\AcademicPrograms\Domain\Model\Dto;
 use FGTCLB\AcademicPrograms\Collection\FilterCollection;
 use FGTCLB\AcademicPrograms\Enumeration\SortingOptions;
 
-class CourseDemand
+class ProgramDemand
 {
     /** @var int[] */
     protected array $pages = [];

@@ -6,7 +6,7 @@ namespace FGTCLB\AcademicPrograms\Domain\Repository;
 
 use FGTCLB\AcademicPrograms\Collection\CategoryCollection;
 use FGTCLB\AcademicPrograms\Domain\Model\Category;
-use FGTCLB\AcademicPrograms\Domain\Model\Course;
+use FGTCLB\AcademicPrograms\Domain\Model\Program;
 use FGTCLB\AcademicPrograms\Enumeration\CategoryTypes;
 use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
@@ -82,7 +82,7 @@ class CategoryRepository
     }
 
     /**
-     * @param QueryResult<Course> $programs
+     * @param QueryResult<Program> $programs
      */
     public function findAllApplicable(QueryResult $programs): CategoryCollection
     {

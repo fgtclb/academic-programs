@@ -2,7 +2,7 @@
 
 namespace FGTCLB\AcademicPrograms\DataProcessing;
 
-use FGTCLB\AcademicPrograms\Factory\CourseFactory;
+use FGTCLB\AcademicPrograms\Factory\ProgramFactory;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 use TYPO3\CMS\Frontend\ContentObject\DataProcessorInterface;
@@ -10,7 +10,7 @@ use TYPO3\CMS\Frontend\ContentObject\DataProcessorInterface;
 /**
  * Processor class for program page types
  */
-class CourseProcessor implements DataProcessorInterface
+class ProgramProcessor implements DataProcessorInterface
 {
     /**
      * Make program data accessable in Fluid
@@ -27,7 +27,7 @@ class CourseProcessor implements DataProcessorInterface
         array $processorConfiguration,
         array $processedData
     ) {
-        $programFactory = GeneralUtility::makeInstance(CourseFactory::class);
+        $programFactory = GeneralUtility::makeInstance(ProgramFactory::class);
         $processedData['program'] = $programFactory->get($processedData['data']);
         return $processedData;
     }

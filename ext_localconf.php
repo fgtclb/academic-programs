@@ -20,12 +20,12 @@
 
     \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
         'AcademicPrograms',
-        'CourseList',
+        'ProgramList',
         [
-            \FGTCLB\AcademicPrograms\Controller\CourseController::class => 'list',
+            \FGTCLB\AcademicPrograms\Controller\ProgramController::class => 'list',
         ],
         [
-            \FGTCLB\AcademicPrograms\Controller\CourseController::class => 'list',
+            \FGTCLB\AcademicPrograms\Controller\ProgramController::class => 'list',
         ]
     );
 })();
