@@ -36,10 +36,10 @@
 	"require": {
 		"php": "^8.0",
 		"fgtclb/category-types": "^1.0",
-		"typo3/cms-backend": "^11.5",
-		"typo3/cms-core": "^11.5",
-		"typo3/cms-extbase": "^11.5",
-		"typo3/cms-fluid": "^11.5"
+		"typo3/cms-backend": "^11.5 || ^12.4 || ^13.4",
+		"typo3/cms-core": "^11.5 || ^12.4 || ^13.4",
+		"typo3/cms-extbase": "^11.5 || ^12.4 || ^13.4",
+		"typo3/cms-fluid": "^11.5 || ^12.4 || ^13.4"
 	},
 	"require-dev": {
 		"fakerphp/faker": "^1.23",
@@ -49,12 +49,12 @@
 		"kaystrobach/migrations": "^0.11",
 		"phpstan/phpstan": "^1.10",
 		"saschaegerer/phpstan-typo3": "^1.8",
-		"typo3/cms-extensionmanager": "^11.5",
-		"typo3/cms-fluid-styled-content": "^11.5",
-		"typo3/cms-frontend": "^11.5",
-		"typo3/cms-info": "^11.5",
-		"typo3/cms-lowlevel": "^11.5",
-		"typo3/cms-tstemplate": "^11.5",
+		"typo3/cms-extensionmanager": "^11.5 || ^12.4 || ^13.4",
+		"typo3/cms-fluid-styled-content": "^11.5 || ^12.4 || ^13.4",
+		"typo3/cms-frontend": "^11.5 || ^12.4 || ^13.4",
+		"typo3/cms-info": "^11.5 || ^12.4 || ^13.4",
+		"typo3/cms-lowlevel": "^11.5 || ^12.4 || ^13.4",
+		"typo3/cms-tstemplate": "^11.5 || ^12.4 || ^13.4",
 		"typo3/coding-standards": "^0.7.1",
 		"typo3/testing-framework": "^7.0"
 	},
