@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace FGTCLB\EducationalCourse\Domain\Model\Dto;
+namespace FGTCLB\AcademicPrograms\Domain\Model\Dto;
 
-use FGTCLB\EducationalCourse\Collection\FilterCollection;
-use FGTCLB\EducationalCourse\Enumeration\SortingOptions;
+use FGTCLB\AcademicPrograms\Collection\FilterCollection;
+use FGTCLB\AcademicPrograms\Enumeration\SortingOptions;
 
 class CourseDemand
 {

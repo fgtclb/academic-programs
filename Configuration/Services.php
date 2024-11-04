@@ -2,9 +2,9 @@
 
 namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 
-use FGTCLB\EducationalCourse\Collection\FilterCollection;
-use FGTCLB\EducationalCourse\Domain\Repository\CategoryRepository;
-use FGTCLB\EducationalCourse\Domain\Repository\CourseRepository;
+use FGTCLB\AcademicPrograms\Collection\FilterCollection;
+use FGTCLB\AcademicPrograms\Domain\Repository\CategoryRepository;
+use FGTCLB\AcademicPrograms\Domain\Repository\CourseRepository;
 
 return function (ContainerConfigurator $containerConfigurator) {
     $services = $containerConfigurator
@@ -14,7 +14,7 @@ return function (ContainerConfigurator $containerConfigurator) {
         ->autoconfigure();
 
     $services
-        ->load('FGTCLB\\EducationalCourse\\', '../Classes/')
+        ->load('FGTCLB\\AcademicPrograms\\', '../Classes/')
         ->exclude('../Classes/Domain/Model/');
 
     $services

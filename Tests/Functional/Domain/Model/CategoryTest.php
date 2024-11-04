@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace FGTCLB\EducationalCourse\Tests\Functional\Domain\Model;
+namespace FGTCLB\AcademicPrograms\Tests\Functional\Domain\Model;
 
-use FGTCLB\EducationalCourse\Collection\CategoryCollection;
-use FGTCLB\EducationalCourse\Domain\Model\Category;
-use FGTCLB\EducationalCourse\Enumeration\CategoryTypes;
+use FGTCLB\AcademicPrograms\Collection\CategoryCollection;
+use FGTCLB\AcademicPrograms\Domain\Model\Category;
+use FGTCLB\AcademicPrograms\Enumeration\CategoryTypes;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
 class CategoryTest extends FunctionalTestCase

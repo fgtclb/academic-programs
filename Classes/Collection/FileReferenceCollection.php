@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace FGTCLB\EducationalCourse\Collection;
+namespace FGTCLB\AcademicPrograms\Collection;
 
 use Countable;
 use Doctrine\DBAL\Driver\Exception;

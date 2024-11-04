@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace FGTCLB\EducationalCourse\Domain\Model;
+namespace FGTCLB\AcademicPrograms\Domain\Model;
 
-use FGTCLB\EducationalCourse\Collection\CategoryCollection;
-use FGTCLB\EducationalCourse\Domain\Repository\CategoryRepository;
-use FGTCLB\EducationalCourse\Enumeration\CategoryTypes;
+use FGTCLB\AcademicPrograms\Collection\CategoryCollection;
+use FGTCLB\AcademicPrograms\Domain\Repository\CategoryRepository;
+use FGTCLB\AcademicPrograms\Enumeration\CategoryTypes;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class Category

@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace FGTCLB\EducationalCourse\Factory;
+namespace FGTCLB\AcademicPrograms\Factory;
 
-use FGTCLB\EducationalCourse\Collection\CategoryCollection;
-use FGTCLB\EducationalCourse\Collection\FilterCollection;
-use FGTCLB\EducationalCourse\Domain\Model\Dto\CourseDemand;
-use FGTCLB\EducationalCourse\Domain\Repository\CategoryRepository;
-use FGTCLB\EducationalCourse\Enumeration\CategoryTypes;
+use FGTCLB\AcademicPrograms\Collection\CategoryCollection;
+use FGTCLB\AcademicPrograms\Collection\FilterCollection;
+use FGTCLB\AcademicPrograms\Domain\Model\Dto\CourseDemand;
+use FGTCLB\AcademicPrograms\Domain\Repository\CategoryRepository;
+use FGTCLB\AcademicPrograms\Enumeration\CategoryTypes;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class DemandFactory

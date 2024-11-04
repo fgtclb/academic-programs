@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use FGTCLB\EducationalCourse\Domain\Model\Course;
+use FGTCLB\AcademicPrograms\Domain\Model\Course;
 
 return [
     Course::class => [

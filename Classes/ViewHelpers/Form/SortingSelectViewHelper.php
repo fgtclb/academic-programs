@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace FGTCLB\EducationalCourse\ViewHelpers\Form;
+namespace FGTCLB\AcademicPrograms\ViewHelpers\Form;
 
-use FGTCLB\EducationalCourse\Enumeration\SortingOptions;
+use FGTCLB\AcademicPrograms\Enumeration\SortingOptions;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 

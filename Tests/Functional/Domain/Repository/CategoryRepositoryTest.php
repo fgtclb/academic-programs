@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace FGTCLB\EducationalCourse\Tests\Functional\Domain\Repository;
+namespace FGTCLB\AcademicPrograms\Tests\Functional\Domain\Repository;
 
-use FGTCLB\EducationalCourse\Collection\CategoryCollection;
-use FGTCLB\EducationalCourse\Domain\Repository\CategoryRepository;
-use FGTCLB\EducationalCourse\Enumeration\CategoryTypes;
+use FGTCLB\AcademicPrograms\Collection\CategoryCollection;
+use FGTCLB\AcademicPrograms\Domain\Repository\CategoryRepository;
+use FGTCLB\AcademicPrograms\Enumeration\CategoryTypes;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 

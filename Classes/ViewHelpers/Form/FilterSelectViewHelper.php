@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace FGTCLB\EducationalCourse\ViewHelpers\Form;
+namespace FGTCLB\AcademicPrograms\ViewHelpers\Form;
 
 class FilterSelectViewHelper extends AbstractSelectViewHelper
 {

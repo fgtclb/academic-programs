@@ -1,7 +1,7 @@
 @import 'EXT:educational_course/Configuration/TypoScript/Content/'
 @import 'EXT:educational_course/Configuration/TypoScript/Page/'
 
-plugin.tx_educationalcourse {
+plugin.tx_AcademicPrograms {
   features {
     skipDefaultArguments = 1
   }

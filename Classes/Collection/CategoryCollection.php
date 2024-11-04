@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace FGTCLB\EducationalCourse\Collection;
+namespace FGTCLB\AcademicPrograms\Collection;
 
 use ArrayAccess;
 use Countable;
-use FGTCLB\EducationalCourse\Domain\Model\Category;
-use FGTCLB\EducationalCourse\Enumeration\CategoryTypes;
-use FGTCLB\EducationalCourse\Exception\Domain\CategoryExistException;
+use FGTCLB\AcademicPrograms\Domain\Model\Category;
+use FGTCLB\AcademicPrograms\Enumeration\CategoryTypes;
+use FGTCLB\AcademicPrograms\Exception\Domain\CategoryExistException;
 use Iterator;
 use TYPO3\CMS\Core\Type\Exception\InvalidEnumerationValueException;
 use TYPO3\CMS\Core\Utility\GeneralUtility;

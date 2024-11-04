@@ -2,6 +2,6 @@
 
 declare(strict_types=1);
 
-namespace FGTCLB\EducationalCourse\Exception\Domain;
+namespace FGTCLB\AcademicPrograms\Exception\Domain;
 
 class CategoryExistException extends \Exception {}

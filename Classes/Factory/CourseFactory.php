@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace FGTCLB\EducationalCourse\Factory;
+namespace FGTCLB\AcademicPrograms\Factory;
 
-use FGTCLB\EducationalCourse\Domain\Model\Course;
+use FGTCLB\AcademicPrograms\Domain\Model\Course;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Persistence\Generic\Mapper\DataMapper;
 

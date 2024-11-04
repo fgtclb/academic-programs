@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace FGTCLB\EducationalCourse\Controller;
+namespace FGTCLB\AcademicPrograms\Controller;
 
-use FGTCLB\EducationalCourse\Domain\Repository\CategoryRepository;
-use FGTCLB\EducationalCourse\Domain\Repository\CourseRepository;
-use FGTCLB\EducationalCourse\Factory\DemandFactory;
+use FGTCLB\AcademicPrograms\Domain\Repository\CategoryRepository;
+use FGTCLB\AcademicPrograms\Domain\Repository\CourseRepository;
+use FGTCLB\AcademicPrograms\Factory\DemandFactory;
 use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;

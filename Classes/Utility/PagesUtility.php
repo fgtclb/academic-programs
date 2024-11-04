@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace FGTCLB\EducationalCourse\Utility;
+namespace FGTCLB\AcademicPrograms\Utility;
 
 use TYPO3\CMS\Core\Domain\Repository\PageRepository;
 use TYPO3\CMS\Core\Utility\GeneralUtility;

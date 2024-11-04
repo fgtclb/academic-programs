@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace FGTCLB\EducationalCourse\Migrations\Mysql;
+namespace FGTCLB\AcademicPrograms\Migrations\Mysql;
 
 use Doctrine\DBAL\Schema\Schema;
-use FGTCLB\EducationalCourse\Enumeration\CategoryTypes;
-use FGTCLB\EducationalCourse\Enumeration\PageTypes;
+use FGTCLB\AcademicPrograms\Enumeration\CategoryTypes;
+use FGTCLB\AcademicPrograms\Enumeration\PageTypes;
 use KayStrobach\Migrations\Migration\AbstractDataHandlerMigration;
 use TYPO3\CMS\Core\Core\Environment;
 use TYPO3\CMS\Core\Domain\Repository\PageRepository;
@@ -81,7 +81,7 @@ class Version20230824122000 extends AbstractDataHandlerMigration
                     'title' => 'Studiengang 1',
                     'slug' => $faker->slug(),
                     'doktype' => PageTypes::TYPE_EDUCATIONAL_COURSE,
-                    'backend_layout' => 'pagets__EducationalCourse',
+                    'backend_layout' => 'pagets__AcademicPrograms',
                     'hidden' => 0,
                     'job_profile' => $faker->text,
                     'performance_scope' => $faker->text,
@@ -92,7 +92,7 @@ class Version20230824122000 extends AbstractDataHandlerMigration
                     'title' => 'Studiengang 2',
                     'slug' => $faker->slug(),
                     'doktype' => PageTypes::TYPE_EDUCATIONAL_COURSE,
-                    'backend_layout' => 'pagets__EducationalCourse',
+                    'backend_layout' => 'pagets__AcademicPrograms',
                     'hidden' => 0,
                     'job_profile' => $faker->text,
                     'performance_scope' => $faker->text,
@@ -103,7 +103,7 @@ class Version20230824122000 extends AbstractDataHandlerMigration
                     'title' => 'Studiengang 3',
                     'slug' => $faker->slug(),
                     'doktype' => PageTypes::TYPE_EDUCATIONAL_COURSE,
-                    'backend_layout' => 'pagets__EducationalCourse',
+                    'backend_layout' => 'pagets__AcademicPrograms',
                     'hidden' => 0,
                     'job_profile' => $faker->text,
                     'performance_scope' => $faker->text,
@@ -114,7 +114,7 @@ class Version20230824122000 extends AbstractDataHandlerMigration
                     'title' => 'Studiengang 4',
                     'slug' => $faker->slug(),
                     'doktype' => PageTypes::TYPE_EDUCATIONAL_COURSE,
-                    'backend_layout' => 'pagets__EducationalCourse',
+                    'backend_layout' => 'pagets__AcademicPrograms',
                     'hidden' => 0,
                     'job_profile' => $faker->text,
                     'performance_scope' => $faker->text,
@@ -128,7 +128,7 @@ class Version20230824122000 extends AbstractDataHandlerMigration
                     'header_layout' => 100,
                     'colPos' => 0,
                     'CType' => 'list',
-                    'list_type' => 'educationalcourse_courselist',
+                    'list_type' => 'AcademicPrograms_courselist',
                     'pages' => 'NEW124',
                 ],
             ],
