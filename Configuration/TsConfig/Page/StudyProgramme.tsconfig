@@ -1,9 +1,0 @@
-TCEFORM.tt_content {
-  header {
-    types {
-      semester {
-        label = LLL:EXT:academic_programs/Resources/Private/Language/locallang_be.xlf:container.semester.header
-      }
-    }
-  }
-}
