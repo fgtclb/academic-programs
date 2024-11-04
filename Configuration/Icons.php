@@ -14,7 +14,7 @@ return (function () {
 
     $identifierString = function (string $identifier) {
         return sprintf(
-            'educational-course-%s',
+            'academic-programs-%s',
             $identifier
         );
     };

@@ -1,4 +1,4 @@
-name: educational-course
+name: academic-programs
 type: typo3
 docroot: .Build/public
 php_version: "8.1"

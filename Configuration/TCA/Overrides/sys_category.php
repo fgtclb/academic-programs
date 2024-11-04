@@ -9,7 +9,7 @@ declare(strict_types=1);
 
     $iconType = function (string $iconType) {
         return sprintf(
-            'educational-course-%s',
+            'academic-programs-%s',
             $iconType
         );
     };
