@@ -1,4 +1,8 @@
-/composer.lock
-/.Build/
-/.php-cs-fixer.cache
-/Build/phpunit/.phpunit.cache/
+.php-cs-fixer.cache
+.DS_Store
+.idea
+.vscode/
+.Build
+!.Build/Web/.gitkeep
+composer.lock
+*.cache
