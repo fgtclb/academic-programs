@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace FGTCLB\EducationalCourse\ViewHelpers\Form;
+namespace FGTCLB\AcademicPrograms\ViewHelpers\Form;
 
 class AbstractSelectViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Form\SelectViewHelper
 {

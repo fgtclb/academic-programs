@@ -1,8 +1,8 @@
 <?php
 
-namespace FGTCLB\EducationalCourse\DataProcessing;
+namespace FGTCLB\AcademicPrograms\DataProcessing;
 
-use FGTCLB\EducationalCourse\Factory\CourseFactory;
+use FGTCLB\AcademicPrograms\Factory\CourseFactory;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 use TYPO3\CMS\Frontend\ContentObject\DataProcessorInterface;

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 (static function (): void {
     // Add doktype to select
-    $studyProgrammeDokType = \FGTCLB\EducationalCourse\Enumeration\PageTypes::TYPE_EDUCATIONAL_COURSE;
+    $studyProgrammeDokType = \FGTCLB\AcademicPrograms\Enumeration\PageTypes::TYPE_EDUCATIONAL_COURSE;
 
     // Create new option group
     // TODO: Harmonize with otheer academical extensions

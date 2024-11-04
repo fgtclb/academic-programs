@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace FGTCLB\EducationalCourse\Domain\Repository;
+namespace FGTCLB\AcademicPrograms\Domain\Repository;
 
-use FGTCLB\EducationalCourse\Domain\Model\Course;
-use FGTCLB\EducationalCourse\Domain\Model\Dto\CourseDemand;
-use FGTCLB\EducationalCourse\Enumeration\PageTypes;
+use FGTCLB\AcademicPrograms\Domain\Model\Course;
+use FGTCLB\AcademicPrograms\Domain\Model\Dto\CourseDemand;
+use FGTCLB\AcademicPrograms\Enumeration\PageTypes;
 use TYPO3\CMS\Core\Type\Exception\InvalidEnumerationValueException;
 use TYPO3\CMS\Extbase\Persistence\Generic\QueryResult;
 use TYPO3\CMS\Extbase\Persistence\Repository;

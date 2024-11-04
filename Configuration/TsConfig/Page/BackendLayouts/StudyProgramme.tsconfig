@@ -1,7 +1,7 @@
 mod {
   web_layout {
     BackendLayouts {
-      EducationalCourse {
+      AcademicPrograms {
         title = LLL:EXT:educational_course/Resources/Private/Language/locallang.xlf:backend_layout.educational_course
         config {
           backend_layout {

@@ -64,13 +64,13 @@
 	},
 	"autoload": {
 		"psr-4": {
-			"FGTCLB\\EducationalCourse\\": "Classes/",
-			"FGTCLB\\EducationalCourse\\Migrations\\": "Migrations/"
+			"FGTCLB\\AcademicPrograms\\": "Classes/",
+			"FGTCLB\\AcademicPrograms\\Migrations\\": "Migrations/"
 		}
 	},
 	"autoload-dev": {
 		"psr-4": {
-			"FGTCLB\\EducationalCourse\\Tests\\": "Tests/"
+			"FGTCLB\\AcademicPrograms\\Tests\\": "Tests/"
 		}
 	},
 	"scripts": {

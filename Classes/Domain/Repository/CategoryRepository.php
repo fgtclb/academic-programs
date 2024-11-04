@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace FGTCLB\EducationalCourse\Domain\Repository;
+namespace FGTCLB\AcademicPrograms\Domain\Repository;
 
-use FGTCLB\EducationalCourse\Collection\CategoryCollection;
-use FGTCLB\EducationalCourse\Domain\Model\Category;
-use FGTCLB\EducationalCourse\Domain\Model\Course;
-use FGTCLB\EducationalCourse\Enumeration\CategoryTypes;
+use FGTCLB\AcademicPrograms\Collection\CategoryCollection;
+use FGTCLB\AcademicPrograms\Domain\Model\Category;
+use FGTCLB\AcademicPrograms\Domain\Model\Course;
+use FGTCLB\AcademicPrograms\Enumeration\CategoryTypes;
 use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Database\Query\QueryBuilder;

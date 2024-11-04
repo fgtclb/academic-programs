@@ -2,7 +2,7 @@
   page {
     10 {
       dataProcessing {
-        300 = FGTCLB\EducationalCourse\DataProcessing\CourseProcessor
+        300 = FGTCLB\AcademicPrograms\DataProcessing\CourseProcessor
         310 = TYPO3\CMS\Frontend\DataProcessing\FilesProcessor
         310 {
           references.fieldName = media

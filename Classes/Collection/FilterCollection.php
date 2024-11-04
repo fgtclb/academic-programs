@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace FGTCLB\EducationalCourse\Collection;
+namespace FGTCLB\AcademicPrograms\Collection;
 
 use ArrayAccess;
-use FGTCLB\EducationalCourse\Domain\Model\Category;
+use FGTCLB\AcademicPrograms\Domain\Model\Category;
 use InvalidArgumentException;
 
 /**

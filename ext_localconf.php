@@ -1,7 +1,7 @@
 <?php
 
 (static function (): void {
-    $studyProgrammeDokType = \FGTCLB\EducationalCourse\Enumeration\PageTypes::TYPE_EDUCATIONAL_COURSE;
+    $studyProgrammeDokType = \FGTCLB\AcademicPrograms\Enumeration\PageTypes::TYPE_EDUCATIONAL_COURSE;
     // Allow backend users to drag and drop the new page type:
     \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addUserTSConfig(
         sprintf(
@@ -19,13 +19,13 @@
     }
 
     \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
-        'EducationalCourse',
+        'AcademicPrograms',
         'CourseList',
         [
-            \FGTCLB\EducationalCourse\Controller\CourseController::class => 'list',
+            \FGTCLB\AcademicPrograms\Controller\CourseController::class => 'list',
         ],
         [
-            \FGTCLB\EducationalCourse\Controller\CourseController::class => 'list',
+            \FGTCLB\AcademicPrograms\Controller\CourseController::class => 'list',
         ]
     );
 })();

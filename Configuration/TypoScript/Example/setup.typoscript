@@ -13,8 +13,8 @@ page {
       default = TEXT
       default.value = Example
 
-      pagets__EducationalCourse = TEXT
-      pagets__EducationalCourse.value = EducationalCourse
+      pagets__AcademicPrograms = TEXT
+      pagets__AcademicPrograms.value = AcademicPrograms
     }
 
     templateRootPaths {

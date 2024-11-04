@@ -23,7 +23,7 @@ declare(strict_types=1);
     );
 
     $typeIconClasses = [];
-    $constants = \FGTCLB\EducationalCourse\Enumeration\CategoryTypes::getConstants();
+    $constants = \FGTCLB\AcademicPrograms\Enumeration\CategoryTypes::getConstants();
     foreach ($constants as $constant) {
         \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTcaSelectItem(
             'sys_category',

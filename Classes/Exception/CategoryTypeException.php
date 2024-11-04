@@ -2,6 +2,6 @@
 
 declare(strict_types=1);
 
-namespace FGTCLB\EducationalCourse\Exception;
+namespace FGTCLB\AcademicPrograms\Exception;
 
 class CategoryTypeException extends \Exception {}

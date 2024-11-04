@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace FGTCLB\EducationalCourse\ViewHelpers\Be;
+namespace FGTCLB\AcademicPrograms\ViewHelpers\Be;
 
 use Doctrine\DBAL\DBALException;
 use Doctrine\DBAL\Driver\Exception;
-use FGTCLB\EducationalCourse\Domain\Repository\CategoryRepository;
-use FGTCLB\EducationalCourse\Enumeration\CategoryTypes;
-use FGTCLB\EducationalCourse\Exception\CategoryTypeException;
+use FGTCLB\AcademicPrograms\Domain\Repository\CategoryRepository;
+use FGTCLB\AcademicPrograms\Enumeration\CategoryTypes;
+use FGTCLB\AcademicPrograms\Exception\CategoryTypeException;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface;
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace FGTCLB\EducationalCourse\Enumeration;
+namespace FGTCLB\AcademicPrograms\Enumeration;
 
 use TYPO3\CMS\Core\Type\Enumeration;
 
