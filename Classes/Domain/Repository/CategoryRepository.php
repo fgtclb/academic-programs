@@ -19,7 +19,8 @@ class CategoryRepository
     public function __construct(
         protected ConnectionPool $connectionPool,
         protected PageRepository $pageRepository
-    ) {}
+    ) {
+    }
 
     /**
      * @param int $pageId

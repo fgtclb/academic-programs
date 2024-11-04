@@ -15,7 +15,8 @@ class DemandFactory
 {
     public function __construct(
         private CategoryRepository $categoryRepository
-    ) {}
+    ) {
+    }
 
     /**
      * @param ?array<string, mixed> $demandFromForm
