@@ -46,6 +46,7 @@
 		"fgtclb/page-backend-layout": "^1.0",
 		"friendsofphp/php-cs-fixer": "^3.14",
 		"helhum/typo3-console": "^7.1",
+		"helmich/typo3-typoscript-lint": "^3.1.0",
 		"kaystrobach/migrations": "^0.11",
 		"phpstan/phpstan": "^1.10",
 		"saschaegerer/phpstan-typo3": "^1.8",
@@ -57,10 +58,6 @@
 		"typo3/cms-tstemplate": "^11.5 || ^12.4 || ^13.4",
 		"typo3/coding-standards": "^0.7.1",
 		"typo3/testing-framework": "^7.0"
-	},
-	"suggest": {
-		"b13/container": "Allowed container element options for program",
-		"fgtclb/page-backend-layout": ""
 	},
 	"autoload": {
 		"psr-4": {
@@ -74,10 +71,21 @@
 		}
 	},
 	"scripts": {
-		"cs:check": "php-cs-fixer fix --config Build/php-cs-fixer/.php-cs-fixer.php --ansi --diff --verbose --dry-run",
-		"cs:fix": "php-cs-fixer fix --config Build/php-cs-fixer/.php-cs-fixer.php --ansi",
-		"analyze:php": "phpstan analyse --ansi --no-progress --memory-limit=1024M --configuration=Build/phpstan/phpstan.neon",
-		"analyze:baseline": "phpstan analyse --ansi --no-progress --memory-limit=1024M --configuration=Build/phpstan/phpstan.neon --generate-baseline=./Build/phpstan/phpstan-baseline.neon",
+		"cs": ".Build/bin/php-cs-fixer",
+		"tl": ".Build/bin/typoscript-lint",
+		"tl": ".Build/bin/typoscript-lint",
+		"phpstan": ".Build/bin/phpstan",
+		"phpunit": ".Build/bin/phpunit",
+		"cs:check": "@cs fix --config Build/php-cs-fixer/php-cs-rules.php --ansi --diff --verbose --dry-run",
+		"cs:fix": "@cs fix --config Build/php-cs-fixer/php-cs-rules.php --ansi",
+		"analyze:php": "@phpstan analyse --ansi --no-progress --memory-limit=768M",
+		"analyze:php:11": "@analyze:php --configuration=Build/phpstan/Core11/phpstan.neon",
+		"analyze:baseline:11": "@analyze:php --configuration=Build/phpstan/Core11/phpstan.neon --generate-baseline=Build/phpstan/Core11/phpstan-baseline.neon",
+		"analyze:php:12": "@analyze:php --configuration=Build/phpstan/Core12/phpstan.neon",
+		"analyze:baseline:12": "@analyze:php --configuration=Build/phpstan/Core12/phpstan.neon --generate-baseline=Build/phpstan/Core12/phpstan-baseline.neon",
+		"analyze:php:13": "@analyze:php --configuration=Build/phpstan/Core13/phpstan.neon",
+		"analyze:baseline:13": "@analyze:php --configuration=Build/phpstan/Core13/phpstan.neon --generate-baseline=Build/phpstan/Core12/phpstan-baseline.neon",
+		"lint:typoscript": "@tl --ansi --config=./Build/typoscript-lint/typoscript-lint.yml",
 		"test:php": [
 			"@test:php:unit",
 			"@test:php:functional"
