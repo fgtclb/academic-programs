@@ -1,19 +1,17 @@
 includes:
-#  - ../../vendor/jangregor/phpstan-prophecy/extension.neon
-  - ../../.Build/vendor/saschaegerer/phpstan-typo3/extension.neon
+  - ../../../.Build/vendor/saschaegerer/phpstan-typo3/extension.neon
   - phpstan-baseline.neon
 
 parameters:
   level: 8
-  paths:
-    - ../../Classes
-    - ../../Tests
-    - ../../Configuration
-    - ../../Migrations
-  inferPrivatePropertyTypeFromConstructor: true
-  ignoreErrors:
-  excludes_analyse:
-  dynamicConstantNames:
-    - TYPO3_MODE
-
   reportUnmatchedIgnoredErrors: true
+  tmpDir: ../../../.cache/phpstan
+
+  paths:
+    - ../../../Classes
+    - ../../../Tests
+    - ../../../Configuration
+    - ../../../Migrations
+
+  excludePaths:
+    - ../../../.Build/*
