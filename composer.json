@@ -1,7 +1,7 @@
 {
 	"name": "fgtclb/academic-programs",
 	"type": "typo3-cms-extension",
-	"description": "Study programme page for universities. Ships structured data preparation",
+	"description": "Add structured data for academic programs to pages",
 	"minimum-stability": "stable",
 	"license": "GPL-2.0-or-later",
 	"repositories": {
