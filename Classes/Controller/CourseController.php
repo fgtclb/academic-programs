@@ -14,9 +14,9 @@ use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 class CourseController extends ActionController
 {
     public function __construct(
-        protected CourseRepository $courseRepository,
+        protected CourseRepository $programRepository,
         protected CategoryRepository $categoryRepository,
-        protected DemandFactory $courseDemandFactory
+        protected DemandFactory $programDemandFactory
     ) {}
 
     /**
@@ -29,17 +29,17 @@ class CourseController extends ActionController
         $contentObjectRenderer = $this->configurationManager->getContentObject();
         $contentElementData = $contentObjectRenderer->data;
 
-        $demandObject = $this->courseDemandFactory->createDemandObject(
+        $demandObject = $this->programDemandFactory->createDemandObject(
             $demand,
             $this->settings,
             $contentElementData
         );
 
-        $courses = $this->courseRepository->findByDemand($demandObject);
-        $categories = $this->categoryRepository->findAllApplicable($courses);
+        $programs = $this->programRepository->findByDemand($demandObject);
+        $categories = $this->categoryRepository->findAllApplicable($programs);
 
         $this->view->assignMultiple([
-            'courses' => $courses,
+            'programs' => $programs,
             'data' => $contentElementData,
             'demand' => $demandObject,
             'categories' => $categories,

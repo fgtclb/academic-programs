@@ -34,7 +34,7 @@
             />
         </f:if>
         <f:if condition="{categories.beginCourse}">
-            <label for="beginCourse">{f:translate(key: 'sys_category.type.begin_course')}</label>
+            <label for="beginCourse">{f:translate(key: 'sys_category.type.begin_program')}</label>
             <fe:form.select
                 id="beginCourse"
                 property="filterCollection.beginCourse"
@@ -103,13 +103,13 @@
                 additionalAttributes="{'onchange': 'this.form.submit()'}"
             />
         </f:if>
-        <f:if condition="{categories.courseType}">
-            <label for="courseType">{f:translate(key: 'sys_category.type.course_type')}</label>
+        <f:if condition="{categories.programType}">
+            <label for="programType">{f:translate(key: 'sys_category.type.program_type')}</label>
             <fe:form.select
-                id="courseType"
-                property="filterCollection.courseType"
-                value="{demand.filterCollection.filterCategories.courseType}"
-                options="{categories.courseType}"
+                id="programType"
+                property="filterCollection.programType"
+                value="{demand.filterCollection.filterCategories.programType}"
+                options="{categories.programType}"
                 optionValueField="uid"
                 optionLabelField="title"
                 prependOptionLabel=""

@@ -84,7 +84,7 @@ declare(strict_types=1);
 
     \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes(
         'pages',
-        '--div--;LLL:EXT:academic_programs/Resources/Private/Language/locallang.xlf:pages.div.course_information,job_profile,performance_scope,prerequisites',
+        '--div--;LLL:EXT:academic_programs/Resources/Private/Language/locallang.xlf:pages.div.program_information,job_profile,performance_scope,prerequisites',
         '20',
         'after:rowDescription'
     );

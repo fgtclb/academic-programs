@@ -16,7 +16,7 @@ class Version20230824122000 extends AbstractDataHandlerMigration
 {
     public function getDescription(): string
     {
-        return 'Create course pages structure';
+        return 'Create program pages structure';
     }
 
     public function up(Schema $schema): void
@@ -128,7 +128,7 @@ class Version20230824122000 extends AbstractDataHandlerMigration
                     'header_layout' => 100,
                     'colPos' => 0,
                     'CType' => 'list',
-                    'list_type' => 'AcademicPrograms_courselist',
+                    'list_type' => 'AcademicPrograms_programlist',
                     'pages' => 'NEW124',
                 ],
             ],

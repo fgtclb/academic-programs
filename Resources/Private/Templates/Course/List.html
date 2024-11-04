@@ -9,17 +9,17 @@
             <f:render partial="Course/FilterCategories" arguments="{_all}" />
         </f:form>
     </f:if>
-    <div class="course-list">
-        <f:if condition="{courses}">
-            <f:for each="{courses}" as="course">
+    <div class="program-list">
+        <f:if condition="{programs}">
+            <f:for each="{programs}" as="program">
                 <div
-                    class="course"
+                    class="program"
                     data-application=""
                 >
-                    <f:link.page pageUid="{course.uid}">
-                        <h3>{course.title}</h3>
+                    <f:link.page pageUid="{program.uid}">
+                        <h3>{program.title}</h3>
                         <p>
-                            <f:for each="{course.categories.degree}" as="degree">
+                            <f:for each="{program.categories.degree}" as="degree">
                                 {degree.title}
                             </f:for>
                         </p>
