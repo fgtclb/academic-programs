@@ -15,6 +15,6 @@ declare(strict_types=1);
 
     \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPiFlexFormValue(
         'AcademicPrograms_courselist',
-        'FILE:EXT:educational_course/Configuration/FlexForms/CourseSettings.xml'
+        'FILE:EXT:academic_programs/Configuration/FlexForms/CourseSettings.xml'
     );
 })();

@@ -7,12 +7,12 @@ declare(strict_types=1);
         (
         new \B13\Container\Tca\ContainerConfiguration(
             'semester',
-            'LLL:EXT:educational_course/Resources/Private/Language/locallang_be.xlf:container.semester.label',
-            'LLL:EXT:educational_course/Resources/Private/Language/locallang_be.xlf:container.semester.description',
+            'LLL:EXT:academic_programs/Resources/Private/Language/locallang_be.xlf:container.semester.label',
+            'LLL:EXT:academic_programs/Resources/Private/Language/locallang_be.xlf:container.semester.description',
             [
                 [
                     [
-                        'name' => 'LLL:EXT:educational_course/Resources/Private/Language/locallang_be.xlf:container.semester.column.title',
+                        'name' => 'LLL:EXT:academic_programs/Resources/Private/Language/locallang_be.xlf:container.semester.column.title',
                         'colPos' => 950,
                         'disallowed' => [
                             'CType' => 'all_semesters,semester',
@@ -23,7 +23,7 @@ declare(strict_types=1);
         ))
             ->setIcon('content-container-columns-4')
             ->setSaveAndCloseInNewContentElementWizard(false)
-            ->setBackendTemplate('EXT:educational_course/Resources/Private/Backend/Templates/Container.html')
+            ->setBackendTemplate('EXT:academic_programs/Resources/Private/Backend/Templates/Container.html')
     );
     $GLOBALS['TCA']['tt_content']['types']['semester']['columnsOverrides'] ??= [];
     $GLOBALS['TCA']['tt_content']['types']['semester']['columnsOverrides'] = [

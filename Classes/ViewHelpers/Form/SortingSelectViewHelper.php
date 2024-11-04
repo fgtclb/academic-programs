@@ -94,12 +94,12 @@ class SortingSelectViewHelper extends AbstractSelectViewHelper
         ?string $l10nPrefix = 'sorting'
     ): string {
         $key = sprintf(
-            'LLL:EXT:educational_course/Resources/Private/Language/locallang.xlf:%s.%s',
+            'LLL:EXT:academic_programs/Resources/Private/Language/locallang.xlf:%s.%s',
             $l10nPrefix,
             $labelKey
         );
 
-        $extensionName = $this->arguments['extensionName'] === null ? 'educational_course' : $this->arguments['extensionName'];
+        $extensionName = $this->arguments['extensionName'] === null ? 'academic_programs' : $this->arguments['extensionName'];
 
         $translatedLabel = LocalizationUtility::translate(
             $key,

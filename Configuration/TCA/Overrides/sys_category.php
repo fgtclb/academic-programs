@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 (static function (): void {
     $llBackendType = function (string $label) {
-        return sprintf('LLL:EXT:educational_course/Resources/Private/Language/locallang.xlf:sys_category.type.%s', $label);
+        return sprintf('LLL:EXT:academic_programs/Resources/Private/Language/locallang.xlf:sys_category.type.%s', $label);
     };
 
     $iconType = function (string $iconType) {
@@ -19,7 +19,7 @@ declare(strict_types=1);
         'sys_category',
         'type',
         'courses',
-        'LLL:EXT:educational_course/Resources/Private/Language/locallang.xlf:sys_category.courses',
+        'LLL:EXT:academic_programs/Resources/Private/Language/locallang.xlf:sys_category.courses',
     );
 
     $typeIconClasses = [];

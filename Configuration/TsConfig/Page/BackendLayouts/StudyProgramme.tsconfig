@@ -2,7 +2,7 @@ mod {
   web_layout {
     BackendLayouts {
       AcademicPrograms {
-        title = LLL:EXT:educational_course/Resources/Private/Language/locallang.xlf:backend_layout.educational_course
+        title = LLL:EXT:academic_programs/Resources/Private/Language/locallang.xlf:backend_layout.academic_programs
         config {
           backend_layout {
             colCount = 1
@@ -11,7 +11,7 @@ mod {
               1 {
                 columns {
                   1 {
-                    name = LLL:EXT:educational_course/Resources/Private/Language/locallang.xlf:pages.intro
+                    name = LLL:EXT:academic_programs/Resources/Private/Language/locallang.xlf:pages.intro
                     colPos = 6
                   }
                 }
@@ -19,21 +19,21 @@ mod {
               2 {
                 columns {
                   1 {
-                    name = LLL:EXT:educational_course/Resources/Private/Language/locallang.xlf:pages.navi
+                    name = LLL:EXT:academic_programs/Resources/Private/Language/locallang.xlf:pages.navi
                   }
                 }
               }
               3 {
                 columns {
                   1 {
-                    name = LLL:EXT:educational_course/Resources/Private/Language/locallang.xlf:pages.structured
+                    name = LLL:EXT:academic_programs/Resources/Private/Language/locallang.xlf:pages.structured
                   }
                 }
               }
               4 {
                 columns {
                   1 {
-                    name = LLL:EXT:educational_course/Resources/Private/Language/locallang.xlf:pages.overview
+                    name = LLL:EXT:academic_programs/Resources/Private/Language/locallang.xlf:pages.overview
                     colPos = 1
                   }
                 }
@@ -41,7 +41,7 @@ mod {
               5 {
                 columns {
                   1 {
-                    name = LLL:EXT:educational_course/Resources/Private/Language/locallang.xlf:pages.contents
+                    name = LLL:EXT:academic_programs/Resources/Private/Language/locallang.xlf:pages.contents
                     colPos = 0
                   }
                 }
@@ -49,7 +49,7 @@ mod {
               6 {
                 columns {
                   1 {
-                    name = LLL:EXT:educational_course/Resources/Private/Language/locallang.xlf:pages.after_course
+                    name = LLL:EXT:academic_programs/Resources/Private/Language/locallang.xlf:pages.after_course
                     colPos = 2
                   }
                 }
@@ -57,7 +57,7 @@ mod {
               7 {
                 columns {
                   1 {
-                    name = LLL:EXT:educational_course/Resources/Private/Language/locallang.xlf:pages.application
+                    name = LLL:EXT:academic_programs/Resources/Private/Language/locallang.xlf:pages.application
                     colPos = 3
                   }
                 }
@@ -65,7 +65,7 @@ mod {
               8 {
                 columns {
                   1 {
-                    name = LLL:EXT:educational_course/Resources/Private/Language/locallang.xlf:pages.before_course
+                    name = LLL:EXT:academic_programs/Resources/Private/Language/locallang.xlf:pages.before_course
                     colPos = 4
                   }
                 }
@@ -73,7 +73,7 @@ mod {
               9 {
                 columns {
                   1 {
-                    name = LLL:EXT:educational_course/Resources/Private/Language/locallang.xlf:pages.contact
+                    name = LLL:EXT:academic_programs/Resources/Private/Language/locallang.xlf:pages.contact
                     colPos = 5
                   }
                 }

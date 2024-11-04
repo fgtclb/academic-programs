@@ -7,7 +7,7 @@ use FGTCLB\AcademicPrograms\Enumeration\CategoryTypes;
 return (function () {
     $sourceString = function (string $icon) {
         return sprintf(
-            'EXT:educational_course/Resources/Public/Icons/%s.svg',
+            'EXT:academic_programs/Resources/Public/Icons/%s.svg',
             \TYPO3\CMS\Core\Utility\GeneralUtility::underscoredToLowerCamelCase($icon)
         );
     };

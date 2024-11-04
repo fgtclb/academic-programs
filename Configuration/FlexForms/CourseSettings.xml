@@ -7,8 +7,8 @@
         <el>
             <settings.filter.options>
                 <TCEforms>
-                    <label>LLL:EXT:educational_course/Resources/Private/Language/locallang_be.xlf:flexform.filter.options.title</label>
-                    <description>LLL:EXT:educational_course/Resources/Private/Language/locallang_be.xlf:flexform.filter.options.description</description>
+                    <label>LLL:EXT:academic_programs/Resources/Private/Language/locallang_be.xlf:flexform.filter.options.title</label>
+                    <description>LLL:EXT:academic_programs/Resources/Private/Language/locallang_be.xlf:flexform.filter.options.description</description>
                     <config>
                         <type>check</type>
                     </config>
@@ -16,30 +16,30 @@
             </settings.filter.options>
             <settings.sorting>
                 <TCEforms>
-                    <label>LLL:EXT:educational_course/Resources/Private/Language/locallang_be.xlf:flexform.sorting</label>
-                    <description>LLL:EXT:educational_course/Resources/Private/Language/locallang_be.xlf:flexform.sorting.description</description>
+                    <label>LLL:EXT:academic_programs/Resources/Private/Language/locallang_be.xlf:flexform.sorting</label>
+                    <description>LLL:EXT:academic_programs/Resources/Private/Language/locallang_be.xlf:flexform.sorting.description</description>
                     <config>
                         <type>select</type>
                         <renderType>selectSingle</renderType>
                         <items>
                             <numIndex index="0" type="array">
-                                <numIndex index="0">LLL:EXT:educational_course/Resources/Private/Language/locallang_be.xlf:flexform.sorting.title.asc</numIndex>
+                                <numIndex index="0">LLL:EXT:academic_programs/Resources/Private/Language/locallang_be.xlf:flexform.sorting.title.asc</numIndex>
                                 <numIndex index="1">title asc</numIndex>
                             </numIndex>
                             <numIndex index="1" type="array">
-                                <numIndex index="0">LLL:EXT:educational_course/Resources/Private/Language/locallang_be.xlf:flexform.sorting.title.desc</numIndex>
+                                <numIndex index="0">LLL:EXT:academic_programs/Resources/Private/Language/locallang_be.xlf:flexform.sorting.title.desc</numIndex>
                                 <numIndex index="1">title desc</numIndex>
                             </numIndex>
                             <numIndex index="2" type="array">
-                                <numIndex index="0">LLL:EXT:educational_course/Resources/Private/Language/locallang_be.xlf:flexform.sorting.update</numIndex>
+                                <numIndex index="0">LLL:EXT:academic_programs/Resources/Private/Language/locallang_be.xlf:flexform.sorting.update</numIndex>
                                 <numIndex index="1">lastUpdated desc</numIndex>
                             </numIndex>
                             <numIndex index="3" type="array">
-                                <numIndex index="0">LLL:EXT:educational_course/Resources/Private/Language/locallang_be.xlf:flexform.sorting.update.asc</numIndex>
+                                <numIndex index="0">LLL:EXT:academic_programs/Resources/Private/Language/locallang_be.xlf:flexform.sorting.update.asc</numIndex>
                                 <numIndex index="1">lastUpdated asc</numIndex>
                             </numIndex>
                             <numIndex index="4" type="array">
-                                <numIndex index="0">LLL:EXT:educational_course/Resources/Private/Language/locallang_be.xlf:flexform.sorting.sorting.asc</numIndex>
+                                <numIndex index="0">LLL:EXT:academic_programs/Resources/Private/Language/locallang_be.xlf:flexform.sorting.sorting.asc</numIndex>
                                 <numIndex index="1">sorting asc</numIndex>
                             </numIndex>
                         </items>
@@ -49,7 +49,7 @@
             <settings.categories>
                 <TCEforms>
                     <label>LLL:EXT:core/Resources/Private/Language/locallang_tca.xlf:sys_category.categories</label>
-                    <description>LLL:EXT:educational_course/Resources/Private/Language/locallang_be.xlf:flexform.category.description</description>
+                    <description>LLL:EXT:academic_programs/Resources/Private/Language/locallang_be.xlf:flexform.category.description</description>
                     <config>
                         <type>category</type>
                         <default>0</default>

@@ -6,11 +6,11 @@
 			<generator>OwnScript</generator>
 		</header>
 		<body>
-			<trans-unit id="backend_layout.educational_course">
+			<trans-unit id="backend_layout.academic_programs">
 				<source>Educational Course</source>
 				<target>Bildungskurs</target>
 			</trans-unit>
-			<trans-unit id="pages.educational_course">
+			<trans-unit id="pages.academic_programs">
 				<source>Educational Course page</source>
 				<target>Seite Bildungskurse</target>
 			</trans-unit>
