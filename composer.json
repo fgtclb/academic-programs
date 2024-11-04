@@ -4,6 +4,7 @@
 	"description": "Add structured data for academic programs to pages",
 	"minimum-stability": "stable",
 	"license": "GPL-2.0-or-later",
+	"version": "1.0.0",
 	"repositories": {
 		"category-types": {
 			"type": "vcs",
@@ -71,13 +72,12 @@
 		}
 	},
 	"scripts": {
-		"cs": ".Build/bin/php-cs-fixer",
-		"tl": ".Build/bin/typoscript-lint",
+		"cs": "php-cs-fixer fix --config Build/php-cs-fixer/php-cs-rules.php --ansi",
 		"tl": ".Build/bin/typoscript-lint",
 		"phpstan": ".Build/bin/phpstan",
 		"phpunit": ".Build/bin/phpunit",
-		"cs:check": "@cs fix --config Build/php-cs-fixer/php-cs-rules.php --ansi --diff --verbose --dry-run",
-		"cs:fix": "@cs fix --config Build/php-cs-fixer/php-cs-rules.php --ansi",
+		"cs:check": "@cs --diff --verbose --dry-run",
+		"cs:fix": "@cs",
 		"analyze:php": "@phpstan analyse --ansi --no-progress --memory-limit=768M",
 		"analyze:php:11": "@analyze:php --configuration=Build/phpstan/Core11/phpstan.neon",
 		"analyze:baseline:11": "@analyze:php --configuration=Build/phpstan/Core11/phpstan.neon --generate-baseline=Build/phpstan/Core11/phpstan-baseline.neon",
