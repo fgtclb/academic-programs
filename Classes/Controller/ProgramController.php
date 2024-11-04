@@ -17,13 +17,14 @@ class ProgramController extends ActionController
         protected ProgramRepository $programRepository,
         protected CategoryRepository $categoryRepository,
         protected DemandFactory $programDemandFactory
-    ) {}
+    ) {
+    }
 
     /**
      * @param array<string, mixed>|null $demand
      * @return ResponseInterface
      */
-    public function listAction(array $demand = null): ResponseInterface
+    public function listAction(?array $demand = null): ResponseInterface
     {
         /** @var ContentObjectRenderer $contentObjectRenderer */
         $contentObjectRenderer = $this->configurationManager->getContentObject();
