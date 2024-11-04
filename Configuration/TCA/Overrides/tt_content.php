@@ -7,7 +7,7 @@ declare(strict_types=1);
         'EducationalCourse',
         'CourseList',
         'Educational Course',
-        'educational-course-studiesIcon'
+        'academic-programs-studiesIcon'
     );
 
     $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_excludelist']['educationalcourse_courselist'] = 'layout,recursive';

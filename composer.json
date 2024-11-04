@@ -1,5 +1,5 @@
 {
-	"name": "fgtclb/educational-course",
+	"name": "fgtclb/academic-programs",
 	"type": "typo3-cms-extension",
 	"description": "Study programme page for universities. Ships structured data preparation",
 	"minimum-stability": "stable",
