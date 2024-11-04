@@ -4,7 +4,7 @@ namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 
 use FGTCLB\AcademicPrograms\Collection\FilterCollection;
 use FGTCLB\AcademicPrograms\Domain\Repository\CategoryRepository;
-use FGTCLB\AcademicPrograms\Domain\Repository\CourseRepository;
+use FGTCLB\AcademicPrograms\Domain\Repository\ProgramRepository;
 
 return function (ContainerConfigurator $containerConfigurator) {
     $services = $containerConfigurator
@@ -26,6 +26,6 @@ return function (ContainerConfigurator $containerConfigurator) {
         ->public();
 
     $services
-        ->set(CourseRepository::class)
+        ->set(ProgramRepository::class)
         ->public();
 };

@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-use FGTCLB\AcademicPrograms\Domain\Model\Course;
+use FGTCLB\AcademicPrograms\Domain\Model\Program;
 
 return [
-    Course::class => [
+    Program::class => [
         'tableName' => 'pages',
         'properties' => [
             'doktype' => [

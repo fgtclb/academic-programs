@@ -5,16 +5,16 @@ declare(strict_types=1);
 namespace FGTCLB\AcademicPrograms\Controller;
 
 use FGTCLB\AcademicPrograms\Domain\Repository\CategoryRepository;
-use FGTCLB\AcademicPrograms\Domain\Repository\CourseRepository;
+use FGTCLB\AcademicPrograms\Domain\Repository\ProgramRepository;
 use FGTCLB\AcademicPrograms\Factory\DemandFactory;
 use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 
-class CourseController extends ActionController
+class ProgramController extends ActionController
 {
     public function __construct(
-        protected CourseRepository $programRepository,
+        protected ProgramRepository $programRepository,
         protected CategoryRepository $categoryRepository,
         protected DemandFactory $programDemandFactory
     ) {}

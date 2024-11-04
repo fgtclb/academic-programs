@@ -6,7 +6,7 @@ namespace FGTCLB\AcademicPrograms\Factory;
 
 use FGTCLB\AcademicPrograms\Collection\CategoryCollection;
 use FGTCLB\AcademicPrograms\Collection\FilterCollection;
-use FGTCLB\AcademicPrograms\Domain\Model\Dto\CourseDemand;
+use FGTCLB\AcademicPrograms\Domain\Model\Dto\ProgramDemand;
 use FGTCLB\AcademicPrograms\Domain\Repository\CategoryRepository;
 use FGTCLB\AcademicPrograms\Enumeration\CategoryTypes;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -26,8 +26,8 @@ class DemandFactory
         ?array $demandFromForm,
         array $settings,
         array $contentElementData
-    ): CourseDemand {
-        $demand = GeneralUtility::makeInstance(CourseDemand::class);
+    ): ProgramDemand {
+        $demand = GeneralUtility::makeInstance(ProgramDemand::class);
         $filterCollection = GeneralUtility::makeInstance(FilterCollection::class);
 
         // Intitialise demand from settings if there is no demand from form

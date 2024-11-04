@@ -33,13 +33,13 @@
                 additionalAttributes="{'onchange': 'this.form.submit()'}"
             />
         </f:if>
-        <f:if condition="{categories.beginCourse}">
-            <label for="beginCourse">{f:translate(key: 'sys_category.type.begin_program')}</label>
+        <f:if condition="{categories.beginProgram}">
+            <label for="beginProgram">{f:translate(key: 'sys_category.type.begin_program')}</label>
             <fe:form.select
-                id="beginCourse"
-                property="filterCollection.beginCourse"
-                value="{demand.filterCollection.filterCategories.beginCourse}"
-                options="{categories.beginCourse}"
+                id="beginProgram"
+                property="filterCollection.beginProgram"
+                value="{demand.filterCollection.filterCategories.beginProgram}"
+                options="{categories.beginProgram}"
                 optionValueField="uid"
                 optionLabelField="title"
                 prependOptionLabel=""

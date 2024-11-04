@@ -6,7 +6,7 @@
     <f:render partial="Categories/Degree" arguments="{_all}"/>
 </f:if>
 <f:if condition="{programType}">
-    <f:render partial="Categories/CourseType" arguments="{_all}"/>
+    <f:render partial="Categories/ProgramType" arguments="{_all}"/>
 </f:if>
 <f:if condition="{teachingLanguage}">
     <f:render partial="Categories/TeachingLanguage" arguments="{_all}"/>
@@ -14,8 +14,8 @@
 <f:if condition="{standardPeriod}">
     <f:render partial="Categories/StandardPeriod" arguments="{_all}"/>
 </f:if>
-<f:if condition="{beginCourse}">
-    <f:render partial="Categories/BeginCourse" arguments="{_all}"/>
+<f:if condition="{beginProgram}">
+    <f:render partial="Categories/BeginProgram" arguments="{_all}"/>
 </f:if>
 <f:if condition="{applicationPeriod}">
     <f:render partial="Categories/ApplicationPeriod" arguments="{_all}"/>

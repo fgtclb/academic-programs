@@ -7,11 +7,11 @@
 		</header>
 		<body>
 			<trans-unit id="backend_layout.academic_programs">
-				<source>Educational Course</source>
+				<source>Educational Program</source>
 				<target>Bildungskurs</target>
 			</trans-unit>
 			<trans-unit id="pages.academic_programs">
-				<source>Educational Course page</source>
+				<source>Educational Program page</source>
 				<target>Seite Bildungskurse</target>
 			</trans-unit>
 			<trans-unit id="pages.intro">
@@ -31,7 +31,7 @@
 				<target>Studien</target>
 			</trans-unit>
 			<trans-unit id="pages.div.program_information">
-				<source>Educational Course information</source>
+				<source>Educational Program information</source>
 				<target>Informationen zum Bildungskurs</target>
 			</trans-unit>
 			<trans-unit id="pages.prerequisites">
@@ -75,7 +75,7 @@
 				<target>Kontakt</target>
 			</trans-unit>
 			<trans-unit id="sys_category.programs">
-				<source>Course category types</source>
+				<source>Program category types</source>
 				<target>Typen von Kurskategorien</target>
 			</trans-unit>
 			<trans-unit id="sys_category.type.admission_restriction">

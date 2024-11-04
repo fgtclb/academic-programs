@@ -5,8 +5,8 @@ declare(strict_types=1);
 (static function (): void {
     \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
         'AcademicPrograms',
-        'CourseList',
-        'Educational Course',
+        'ProgramList',
+        'Educational Program',
         'academic-programs-studiesIcon'
     );
 
@@ -15,6 +15,6 @@ declare(strict_types=1);
 
     \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPiFlexFormValue(
         'AcademicPrograms_programlist',
-        'FILE:EXT:academic_programs/Configuration/FlexForms/CourseSettings.xml'
+        'FILE:EXT:academic_programs/Configuration/FlexForms/ProgramSettings.xml'
     );
 })();

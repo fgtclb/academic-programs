@@ -6,11 +6,11 @@ declare(strict_types=1);
     \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile(
         'academic_programs',
         'Configuration/TypoScript/',
-        'Educational Course page Setup'
+        'Educational Program page Setup'
     );
     \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile(
         'academic_programs',
         'Configuration/TypoScript/Example/',
-        'Educational Course Example Page (Add before Page Setup)'
+        'Educational Program Example Page (Add before Page Setup)'
     );
 })();
