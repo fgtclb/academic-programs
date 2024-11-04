@@ -18,8 +18,8 @@ declare(strict_types=1);
     \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTcaSelectItemGroup(
         'sys_category',
         'type',
-        'courses',
-        'LLL:EXT:academic_programs/Resources/Private/Language/locallang.xlf:sys_category.courses',
+        'programs',
+        'LLL:EXT:academic_programs/Resources/Private/Language/locallang.xlf:sys_category.programs',
     );
 
     $typeIconClasses = [];
@@ -32,7 +32,7 @@ declare(strict_types=1);
                 $llBackendType($constant),
                 $constant,
                 $iconType($constant),
-                'courses',
+                'programs',
             ]
         );
 

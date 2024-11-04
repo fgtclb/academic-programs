@@ -10,11 +10,11 @@ declare(strict_types=1);
         'academic-programs-studiesIcon'
     );
 
-    $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_excludelist']['AcademicPrograms_courselist'] = 'layout,recursive';
-    $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_addlist']['AcademicPrograms_courselist'] = 'pi_flexform';
+    $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_excludelist']['AcademicPrograms_programlist'] = 'layout,recursive';
+    $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_addlist']['AcademicPrograms_programlist'] = 'pi_flexform';
 
     \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPiFlexFormValue(
-        'AcademicPrograms_courselist',
+        'AcademicPrograms_programlist',
         'FILE:EXT:academic_programs/Configuration/FlexForms/CourseSettings.xml'
     );
 })();

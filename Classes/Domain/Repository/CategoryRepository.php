@@ -82,9 +82,9 @@ class CategoryRepository
     }
 
     /**
-     * @param QueryResult<Course> $courses
+     * @param QueryResult<Course> $programs
      */
-    public function findAllApplicable(QueryResult $courses): CategoryCollection
+    public function findAllApplicable(QueryResult $programs): CategoryCollection
     {
         $queryBuilder = $this->buildQueryBuilder();
 
@@ -102,15 +102,15 @@ class CategoryRepository
             return $categories;
         }
 
-        // Generate aa list of all categories which are assigned to the given courses
+        // Generate aa list of all categories which are assigned to the given programs
         $applicableCategories = [];
-        foreach ($courses as $course) {
-            foreach ($course->getAttributes() as $attribute) {
+        foreach ($programs as $program) {
+            foreach ($program->getAttributes() as $attribute) {
                 $applicableCategories[] = $attribute->getUid();
             }
         }
 
-        // Disable all categories which are not assigned to any of the given courses
+        // Disable all categories which are not assigned to any of the given programs
         foreach ($result->fetchAllAssociative() as $row) {
             $category = $this->buildCategoryObjectFromArray($row);
             if (!in_array($row['uid'], $applicableCategories)) {
@@ -386,7 +386,7 @@ class CategoryRepository
     }
 
     /**
-     * General check to exclude all non-course related category records
+     * General check to exclude all non-program related category records
      *
      * @param QueryBuilder $queryBuilder
      * @return string

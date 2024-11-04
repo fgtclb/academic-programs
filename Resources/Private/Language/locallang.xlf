@@ -22,10 +22,10 @@
 			<trans-unit id="pages.structured">
 				<source>Structured data</source>
 			</trans-unit>
-			<trans-unit id="pages.course">
+			<trans-unit id="pages.program">
 				<source>Studies</source>
 			</trans-unit>
-			<trans-unit id="pages.div.course_information">
+			<trans-unit id="pages.div.program_information">
 				<source>Educational Course information</source>
 			</trans-unit>
 			<trans-unit id="pages.prerequisites">
@@ -46,19 +46,19 @@
 			<trans-unit id="pages.contents">
 				<source>Study contents</source>
 			</trans-unit>
-			<trans-unit id="pages.after_course">
+			<trans-unit id="pages.after_program">
 				<source>After graduation</source>
 			</trans-unit>
 			<trans-unit id="pages.application">
 				<source>Application</source>
 			</trans-unit>
-			<trans-unit id="pages.before_course">
+			<trans-unit id="pages.before_program">
 				<source>Before beginning studies</source>
 			</trans-unit>
 			<trans-unit id="pages.contact">
 				<source>Contact</source>
 			</trans-unit>
-			<trans-unit id="sys_category.courses">
+			<trans-unit id="sys_category.programs">
 				<source>Course category types</source>
 			</trans-unit>
 			<trans-unit id="sys_category.type.admission_restriction">
@@ -67,8 +67,8 @@
 			<trans-unit id="sys_category.type.application_period">
 				<source>Application period</source>
 			</trans-unit>
-			<trans-unit id="sys_category.type.begin_course">
-				<source>Begin of course</source>
+			<trans-unit id="sys_category.type.begin_program">
+				<source>Begin of program</source>
 			</trans-unit>
 			<trans-unit id="sys_category.type.costs">
 				<source>Costs</source>
@@ -82,8 +82,8 @@
 			<trans-unit id="sys_category.type.standard_period">
 				<source>Standard period</source>
 			</trans-unit>
-			<trans-unit id="sys_category.type.course_type">
-				<source>Type of course</source>
+			<trans-unit id="sys_category.type.program_type">
+				<source>Type of program</source>
 			</trans-unit>
 			<trans-unit id="sys_category.type.teaching_language">
 				<source>Teaching language</source>

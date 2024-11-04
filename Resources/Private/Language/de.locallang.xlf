@@ -26,11 +26,11 @@
 				<source>Structured data</source>
 				<target>Strukturierte Daten</target>
 			</trans-unit>
-			<trans-unit id="pages.course">
+			<trans-unit id="pages.program">
 				<source>Studies</source>
 				<target>Studien</target>
 			</trans-unit>
-			<trans-unit id="pages.div.course_information">
+			<trans-unit id="pages.div.program_information">
 				<source>Educational Course information</source>
 				<target>Informationen zum Bildungskurs</target>
 			</trans-unit>
@@ -58,7 +58,7 @@
 				<source>Study contents</source>
 				<target>Studieninhalte</target>
 			</trans-unit>
-			<trans-unit id="pages.after_course">
+			<trans-unit id="pages.after_program">
 				<source>After graduation</source>
 				<target>Nach dem Studium</target>
 			</trans-unit>
@@ -66,7 +66,7 @@
 				<source>Application</source>
 				<target>Bewerbung</target>
 			</trans-unit>
-			<trans-unit id="pages.before_course">
+			<trans-unit id="pages.before_program">
 				<source>Before beginning studies</source>
 				<target>Vor Studienbeginn</target>
 			</trans-unit>
@@ -74,7 +74,7 @@
 				<source>Contact</source>
 				<target>Kontakt</target>
 			</trans-unit>
-			<trans-unit id="sys_category.courses">
+			<trans-unit id="sys_category.programs">
 				<source>Course category types</source>
 				<target>Typen von Kurskategorien</target>
 			</trans-unit>
@@ -86,8 +86,8 @@
 				<source>Application period</source>
 				<target>Bewerbungszeitraum</target>
 			</trans-unit>
-			<trans-unit id="sys_category.type.begin_course">
-				<source>Begin of course</source>
+			<trans-unit id="sys_category.type.begin_program">
+				<source>Begin of program</source>
 				<target>Studienbeginn</target>
 			</trans-unit>
 			<trans-unit id="sys_category.type.costs">
@@ -106,8 +106,8 @@
 				<source>Standard period</source>
 				<target>Regelstudienzeit</target>
 			</trans-unit>
-			<trans-unit id="sys_category.type.course_type">
-				<source>Type of course</source>
+			<trans-unit id="sys_category.type.program_type">
+				<source>Type of program</source>
 				<target>Studienform</target>
 			</trans-unit>
 			<trans-unit id="sys_category.type.teaching_language">

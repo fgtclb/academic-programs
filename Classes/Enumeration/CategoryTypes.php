@@ -12,7 +12,7 @@ class CategoryTypes extends Enumeration
 
     public const TYPE_APPLICATION_PERIOD = 'application_period';
 
-    public const TYPE_BEGIN_COURSE = 'begin_course';
+    public const TYPE_BEGIN_COURSE = 'begin_program';
 
     public const TYPE_COSTS = 'costs';
 
@@ -26,7 +26,7 @@ class CategoryTypes extends Enumeration
 
     public const TYPE_LOCATION = 'location';
 
-    public const TYPE_COURSE_TYPE = 'course_type';
+    public const TYPE_COURSE_TYPE = 'program_type';
 
     public const TYPE_TEACHING_LANGUAGE = 'teaching_language';
 

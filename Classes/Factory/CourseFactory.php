@@ -9,7 +9,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Persistence\Generic\Mapper\DataMapper;
 
 /**
- * Factory class for courses
+ * Factory class for programs
  */
 class CourseFactory
 {
@@ -20,7 +20,7 @@ class CourseFactory
     public function get(array $properties): Course
     {
         $dataMapper = GeneralUtility::makeInstance(DataMapper::class);
-        $courseModels = $dataMapper->map(Course::class, [$properties]);
-        return $courseModels[0];
+        $programModels = $dataMapper->map(Course::class, [$properties]);
+        return $programModels[0];
     }
 }

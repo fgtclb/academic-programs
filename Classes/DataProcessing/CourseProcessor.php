@@ -8,12 +8,12 @@ use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 use TYPO3\CMS\Frontend\ContentObject\DataProcessorInterface;
 
 /**
- * Processor class for course page types
+ * Processor class for program page types
  */
 class CourseProcessor implements DataProcessorInterface
 {
     /**
-     * Make course data accessable in Fluid
+     * Make program data accessable in Fluid
      *
      * @param ContentObjectRenderer $cObj The data of the content element or page
      * @param array<string, mixed> $contentObjectConfiguration The configuration of Content Object
@@ -27,8 +27,8 @@ class CourseProcessor implements DataProcessorInterface
         array $processorConfiguration,
         array $processedData
     ) {
-        $courseFactory = GeneralUtility::makeInstance(CourseFactory::class);
-        $processedData['course'] = $courseFactory->get($processedData['data']);
+        $programFactory = GeneralUtility::makeInstance(CourseFactory::class);
+        $processedData['program'] = $programFactory->get($processedData['data']);
         return $processedData;
     }
 }
