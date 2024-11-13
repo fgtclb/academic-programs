@@ -2,42 +2,35 @@
 
 declare(strict_types=1);
 
-(static function (): void {
-    $llBackendType = function (string $label) {
-        return sprintf('LLL:EXT:academic_programs/Resources/Private/Language/locallang.xlf:sys_category.type.%s', $label);
-    };
+use FGTCLB\AcademicPrograms\Enumeration\CategoryTypes;
+use TYPO3\CMS\Core\Utility\ArrayUtility;
+use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 
-    $iconType = function (string $iconType) {
-        return sprintf(
-            'academic-programs-%s',
-            $iconType
-        );
-    };
+$ll = static fn (string $key): string => sprintf('LLL:EXT:academic_programs/Resources/Private/Language/locallang.xlf:%s', $key);
+$iconIdentifier = static fn (string $key): string => 'academic-programs-' . $key;
 
-    // create new group
-    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTcaSelectItemGroup(
+// Add academic programs group to type select
+ExtensionManagementUtility::addTcaSelectItemGroup(
+    'sys_category',
+    'type',
+    'programs',
+    $ll('sys_category.academic_programs.group'),
+);
+
+$typeIconClasses = [];
+foreach (CategoryTypes::getConstants() as $type) {
+    ExtensionManagementUtility::addTcaSelectItem(
         'sys_category',
         'type',
-        'programs',
-        'LLL:EXT:academic_programs/Resources/Private/Language/locallang.xlf:sys_category.programs',
+        [
+            $ll('sys_category.academic_programs.' . $type),
+            $type,
+            $iconIdentifier($type),
+            'programs',
+        ]
     );
-
-    $typeIconClasses = [];
-    $constants = \FGTCLB\AcademicPrograms\Enumeration\CategoryTypes::getConstants();
-    foreach ($constants as $constant) {
-        \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTcaSelectItem(
-            'sys_category',
-            'type',
-            [
-                $llBackendType($constant),
-                $constant,
-                $iconType($constant),
-                'programs',
-            ]
-        );
-
-        $typeIconClasses[$constant] = $iconType($constant);
-    }
+    $typeIconClasses[$type] = $iconIdentifier($type);
+}
 
 ArrayUtility::mergeRecursiveWithOverrule(
     $GLOBALS['TCA']['sys_category'],
@@ -49,9 +42,4 @@ ArrayUtility::mergeRecursiveWithOverrule(
     ]
 );
 
-    $GLOBALS['TCA']['sys_category']['columns']['tx_migrations_version'] = [
-        'config' => [
-            'type' => 'passthrough',
-        ],
-    ];
-})();
+

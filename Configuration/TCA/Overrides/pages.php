@@ -2,96 +2,111 @@
 
 declare(strict_types=1);
 
-(static function (): void {
-    // Add doktype to select
-    $studyProgrammeDokType = \FGTCLB\AcademicPrograms\Enumeration\PageTypes::TYPE_EDUCATIONAL_COURSE;
+use FGTCLB\AcademicPrograms\Enumeration\PageTypes;
+use TYPO3\CMS\Core\Domain\Repository\PageRepository;
+use TYPO3\CMS\Core\Utility\ArrayUtility;
+use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 
-    // Create new option group
-    // TODO: Harmonize with otheer academical extensions
-    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTcaSelectItemGroup(
-        'pages',
-        'doktype',
-        'study',
-        'LLL:EXT:academic_programs/Resources/Private/Language/locallang.xlf:pages.study',
-        'after:default'
-    );
+defined('TYPO3') or die;
 
-    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTcaSelectItem(
-        'pages',
-        'doktype',
-        [
-            'LLL:EXT:academic_programs/Resources/Private/Language/locallang.xlf:pages.academic_programs',
-            $studyProgrammeDokType,
-            'actions-graduation-cap',
-            'study',
-        ]
-    );
+$ll = static fn (string $key): string => sprintf('LLL:EXT:academic_programs/Resources/Private/Language/locallang.xlf:%s', $key);
 
-    // Add type and typeicon
-    \TYPO3\CMS\Core\Utility\ArrayUtility::mergeRecursiveWithOverrule(
-        $GLOBALS['TCA']['pages'],
-        [
-            'ctrl' => [
-                'typeicon_classes' => [
-                    $studyProgrammeDokType => 'actions-graduation-cap',
-                ],
-            ],
-            'types' => [
-                $studyProgrammeDokType => [
-                    'showitem' => $GLOBALS['TCA']['pages']['types'][\TYPO3\CMS\Core\Domain\Repository\PageRepository::DOKTYPE_DEFAULT]['showitem'],
-                ],
-            ],
-        ]
-    );
+// Add doktype to select
+$academicProgramDoktype = PageTypes::TYPE_ACADEMIC_PROGRAM;
 
-    // Adds study programme fields
-    $newTcaFields = [
-        'job_profile' => [
-            'label' => 'LLL:EXT:academic_programs/Resources/Private/Language/locallang.xlf:pages.job_profile',
-            'config' => [
-                'type' => 'text',
-                'enableRichtext' => true,
+// Add academic option group to doktype select
+ExtensionManagementUtility::addTcaSelectItemGroup(
+    'pages',
+    'doktype',
+    'academic',
+    $ll('pages.doktype.groups.academic'),
+    'after:default'
+);
+
+// Add academic programs doktype to doktype select
+ExtensionManagementUtility::addTcaSelectItem(
+    'pages',
+    'doktype',
+    [
+        $ll('pages.doktype.items.academic_program'),
+        $academicProgramDoktype,
+        'academic-programs',
+        'academic',
+    ]
+);
+
+// Add type and typeicon
+ArrayUtility::mergeRecursiveWithOverrule(
+    $GLOBALS['TCA']['pages'],
+    [
+        'ctrl' => [
+            'typeicon_classes' => [
+                $academicProgramDoktype => 'academic-programs',
             ],
         ],
-        'performance_scope' => [
-            'label' => 'LLL:EXT:academic_programs/Resources/Private/Language/locallang.xlf:pages.performance_scope',
-            'config' => [
-                'type' => 'text',
-                'enableRichtext' => true,
+        'types' => [
+            $academicProgramDoktype => [
+                'showitem' => $GLOBALS['TCA']['pages']['types'][PageRepository::DOKTYPE_DEFAULT]['showitem'],
             ],
         ],
-        'prerequisites' => [
-            'label' => 'LLL:EXT:academic_programs/Resources/Private/Language/locallang.xlf:pages.prerequisites',
-            'config' => [
-                'type' => 'text',
-                'enableRichtext' => true,
-            ],
+    ]
+);
+
+// Define academic programs specific columns
+$additionalTCAcolumns = [
+    'job_profile' => [
+        'label' => $ll('pages.job_profile'),
+        'config' => [
+            'type' => 'text',
+            'enableRichtext' => true,
         ],
-        'shortcut_overwrite' => [
-            'label' => 'LLL:EXT:academic_programs/Resources/Private/Language/locallang.xlf:pages.shortcut_overwrite',
-            'config' => [
-                'type' => 'check',
-            ],
-            'exclude' => 1,
+    ],
+    'performance_scope' => [
+        'label' => $ll('pages.performance_scope'),
+        'config' => [
+            'type' => 'text',
+            'enableRichtext' => true,
+        ],
+    ],
+    'prerequisites' => [
+        'label' => $ll('pages.prerequisites'),
+        'config' => [
+            'type' => 'text',
+            'enableRichtext' => true,
+        ],
+    ],
+    'shortcut_overwrite' => [
+        'exclude' => 1,
+        'label' => $ll('pages.shortcut_overwrite'),
+        'config' => [
+            'type' => 'check',
             'default' => 0,
         ],
-    ];
+    ],
+];
 
-    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTCAcolumns(
-        'pages',
-        $newTcaFields
-    );
+ExtensionManagementUtility::addTCAcolumns(
+    'pages',
+    $additionalTCAcolumns
+);
 
-    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes(
-        'pages',
-        '--div--;LLL:EXT:academic_programs/Resources/Private/Language/locallang.xlf:pages.div.program_information,job_profile,performance_scope,prerequisites',
-        '20',
-        'after:rowDescription'
-    );
-    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes(
-        'pages',
-        'shortcut_overwrite',
-        '4',
-        'after:title'
-    );
-})();
+ExtensionManagementUtility::addToAllTCAtypes(
+    'pages',
+    '--div--;'
+        . $ll('pages.div.program_information')
+        . ','
+        . implode(',', [
+            'job_profile',
+            'performance_scope',
+            'prerequisites'
+        ]),
+    (string)$academicProgramDoktype,
+    'after:rowDescription'
+);
+
+ExtensionManagementUtility::addToAllTCAtypes(
+    'pages',
+    'shortcut_overwrite',
+    '4',
+    'after:title'
+);
