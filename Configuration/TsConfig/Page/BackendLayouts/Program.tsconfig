@@ -1,0 +1,26 @@
+mod {
+  web_layout {
+    BackendLayouts {
+      AcademicPrograms {
+        title = LLL:EXT:academic_programs/Resources/Private/Language/locallang.xlf:backend_layout.academic_programs
+        config {
+          backend_layout {
+            colCount = 1
+            rowCount = 1
+            rows {
+              1 {
+                columns {
+                  1 {
+                    name = LLL:EXT:academic_programs/Resources/Private/Language/locallang.xlf:pages.contents
+                    colPos = 0
+                  }
+                }
+              }
+            }
+          }
+        }
+        icon = academic-programs
+      }
+    }
+  }
+}

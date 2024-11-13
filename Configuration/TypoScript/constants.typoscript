@@ -1,2 +1,7 @@
-# cat=educational/program/b1; type=int; label=Set categories storages folder
-programs.storages =
+plugin.tx_academicprograms {
+  view {
+    templateRootPath = EXT:academic_programs/Resources/Private/Templates/
+    partialRootPath = EXT:academic_programs/Resources/Private/Partials/
+    layoutRootPath = EXT:academic_programs/Resources/Private/Layouts/
+  }
+}

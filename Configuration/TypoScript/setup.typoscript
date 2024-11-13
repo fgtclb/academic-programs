@@ -1,8 +1,23 @@
 @import 'EXT:academic_programs/Configuration/TypoScript/Content/'
 @import 'EXT:academic_programs/Configuration/TypoScript/Page/'
 
-plugin.tx_AcademicPrograms {
+plugin.tx_academicprograms {
   features {
     skipDefaultArguments = 1
+  }
+}
+
+plugin.tx_academicprograms {
+  view {
+    templateRootPaths {
+      0 = EXT:academic_programs/Resources/Private/Templates/
+    }
+
+    partialRootPaths {
+      0 = EXT:academic_programs/Resources/Private/Partials/
+    }
+
+    layoutRootPaths {
+      0 = EXT:academic_programs/Resources/Private/Layouts/
   }
 }

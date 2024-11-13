@@ -1,3 +1,21 @@
+page {
+  10 {
+    paths {
+      100 = EXT:site/Resources/Private/
+      1730899518 = EXT:academic_programs/Resources/Private/Templates/
+    }
+  }
+}
+
+lib.contentElement {
+  templateRootPaths {
+    edu = EXT:academic_programs/Resources/Private/Content/Templates/
+  }
+  layoutRootPaths {
+    edu = EXT:academic_programs/Resources/Private/Content/Layouts/
+  }
+}
+
 [traverse(page, "doktype") == 20]
   page {
     10 {
