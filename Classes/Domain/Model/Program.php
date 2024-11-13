@@ -82,6 +82,9 @@ class Program extends AbstractEntity
         return GeneralUtility::makeInstance(CategoryRepository::class)->findAllByPageId($this->uid);
     }
 
+    /**
+     * @return ObjectStorage<FileReference>
+     */
     public function getMedia(): ObjectStorage
     {
         return $this->media;
