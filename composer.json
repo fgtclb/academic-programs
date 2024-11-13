@@ -5,16 +5,6 @@
 	"minimum-stability": "stable",
 	"license": "GPL-2.0-or-later",
 	"version": "1.0.0",
-	"repositories": {
-		"category-types": {
-			"type": "vcs",
-			"url": "https://github.com/fgtclb/typo3-category-types"
-		},
-		"typo3-ext-migrations": {
-			"type": "vcs",
-			"url": "https://github.com/andreaswolf/typo3-ext-migrations"
-		}
-	},
 	"config": {
 		"vendor-dir": ".Build/vendor",
 		"bin-dir": ".Build/bin",
@@ -37,6 +27,7 @@
 	"require": {
 		"php": "^7.4 || ^8.0 || ^8.1 || ^8.2 || ^8.3",
 		"fgtclb/category-types": "^1.0",
+		"fgtclb/page-backend-layout": "^1.0",
 		"typo3/cms-backend": "^11.5 || ^12.4 || ^13.4",
 		"typo3/cms-core": "^11.5 || ^12.4 || ^13.4",
 		"typo3/cms-extbase": "^11.5 || ^12.4 || ^13.4",
@@ -46,10 +37,10 @@
 		"fakerphp/faker": "^1.23",
 		"fgtclb/page-backend-layout": "^1.0",
 		"friendsofphp/php-cs-fixer": "^3.14",
-		"helhum/typo3-console": "^7.1",
+		"helhum/typo3-console": "^7.1.6 || ^8.0.2",
 		"helmich/typo3-typoscript-lint": "^3.1.0",
-		"kaystrobach/migrations": "^0.11",
 		"phpstan/phpstan": "^1.10",
+		"phpunit/phpunit": "^10.1",
 		"saschaegerer/phpstan-typo3": "^1.8",
 		"typo3/cms-extensionmanager": "^11.5 || ^12.4 || ^13.4",
 		"typo3/cms-fluid-styled-content": "^11.5 || ^12.4 || ^13.4",
@@ -62,8 +53,7 @@
 	},
 	"autoload": {
 		"psr-4": {
-			"FGTCLB\\AcademicPrograms\\": "Classes/",
-			"FGTCLB\\AcademicPrograms\\Migrations\\": "Migrations/"
+			"FGTCLB\\AcademicPrograms\\": "Classes/"
 		}
 	},
 	"autoload-dev": {
