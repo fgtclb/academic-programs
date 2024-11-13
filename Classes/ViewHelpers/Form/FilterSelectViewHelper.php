@@ -112,7 +112,7 @@ class FilterSelectViewHelper extends AbstractSelectViewHelper
      * @param array<int, mixed> $options
      * @return string
      */
-    protected function renderOptionTags($options)
+    protected function renderOptionTags($options): string
     {
         $output = '';
         foreach ($options as $value => $option) {
