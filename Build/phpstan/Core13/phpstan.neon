@@ -9,7 +9,6 @@ parameters:
     - ../../Classes
     - ../../Tests
     - ../../Configuration
-    - ../../Migrations
   inferPrivatePropertyTypeFromConstructor: true
   ignoreErrors:
   excludes_analyse:
