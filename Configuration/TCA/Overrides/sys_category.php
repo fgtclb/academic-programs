@@ -39,14 +39,15 @@ declare(strict_types=1);
         $typeIconClasses[$constant] = $iconType($constant);
     }
 
-    \TYPO3\CMS\Core\Utility\ArrayUtility::mergeRecursiveWithOverrule(
-        $GLOBALS['TCA']['sys_category'],
-        [
-            'ctrl' => [
-                'typeicon_classes' => $typeIconClasses,
-            ],
-        ]
-    );
+ArrayUtility::mergeRecursiveWithOverrule(
+    $GLOBALS['TCA']['sys_category'],
+    [
+        'ctrl' => [
+            'label_userFunc' => \FGTCLB\AcademicPrograms\Backend\Tca\Labels::class . '->category',
+            'typeicon_classes' => $typeIconClasses,
+        ],
+    ]
+);
 
     $GLOBALS['TCA']['sys_category']['columns']['tx_migrations_version'] = [
         'config' => [

@@ -8,18 +8,34 @@ use FGTCLB\AcademicPrograms\Collection\CategoryCollection;
 use FGTCLB\AcademicPrograms\Domain\Model\Category;
 use FGTCLB\AcademicPrograms\Domain\Model\Program;
 use FGTCLB\AcademicPrograms\Enumeration\CategoryTypes;
+use TYPO3\CMS\Core\Context\Context;
 use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Database\Query\QueryBuilder;
+use TYPO3\CMS\Core\Database\Query\Restriction\DeletedRestriction;
 use TYPO3\CMS\Core\Domain\Repository\PageRepository;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Persistence\Generic\QueryResult;
 
 class CategoryRepository
 {
+    protected int $languageUid = 0;
+
+    protected int $workspaceUid = 0;
+
+    /**
+     * Query context
+     */
+    protected Context $context;
+
     public function __construct(
         protected ConnectionPool $connectionPool,
         protected PageRepository $pageRepository
     ) {
+        $this->context = GeneralUtility::makeInstance(Context::class);
+        $this->pageRepository = GeneralUtility::makeInstance(PageRepository::class, $this->context);
+        $this->languageUid = $this->context->getPropertyFromAspect('language', 'id', 0);
+        $this->workspaceUid = (int)$this->context->getPropertyFromAspect('workspace', 'id', 0);
     }
 
     /**
@@ -419,6 +435,51 @@ class CategoryRepository
             'sys_category.sys_language_uid',
             [$defaultLanguageUid, -1]
         );
+    }
+
+    /**
+     * @param array<int, mixed> $rootline
+     * @return array<int, mixed>
+     */
+    public function getCategoryRootline(int $uid, array $rootline = []): array
+    {
+        $category = $this->getCategoryArray($uid);
+        $rootline[] = $category;
+
+        if ($category['parent'] !== 0) {
+            $rootline = $this->getCategoryRootline($category['parent'], $rootline);
+        } else {
+            $rootline = array_reverse($rootline);
+        }
+
+        return $rootline;
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    public function getCategoryArray(int $uid): array
+    {
+        $queryBuilder = $this->buildQueryBuilder();
+        $queryBuilder->getRestrictions()->removeAll()->add(GeneralUtility::makeInstance(DeletedRestriction::class));
+        $category = $queryBuilder->select('*')
+            ->from('sys_category')
+            ->where(
+                $queryBuilder->expr()->eq(
+                    'uid',
+                    $queryBuilder->createNamedParameter($uid, Connection::PARAM_INT)
+                ),
+                $queryBuilder->expr()->in(
+                    't3ver_wsid',
+                    $queryBuilder->createNamedParameter([0, $this->workspaceUid], Connection::PARAM_INT_ARRAY)
+                )
+            )
+            ->executeQuery()
+            ->fetchAssociative();
+        $this->pageRepository->versionOL('sys_category', $category, false, true);
+        $category = $this->pageRepository->getLanguageOverlay('sys_category', $category, $this->context->getAspect('language'));
+
+        return $category;
     }
 
     /**
