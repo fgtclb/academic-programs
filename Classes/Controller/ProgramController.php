@@ -8,6 +8,8 @@ use FGTCLB\AcademicPrograms\Domain\Repository\CategoryRepository;
 use FGTCLB\AcademicPrograms\Domain\Repository\ProgramRepository;
 use FGTCLB\AcademicPrograms\Factory\DemandFactory;
 use Psr\Http\Message\ResponseInterface;
+use TYPO3\CMS\Core\Information\Typo3Version;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 
@@ -26,8 +28,17 @@ class ProgramController extends ActionController
      */
     public function listAction(?array $demand = null): ResponseInterface
     {
+        $versionInformation = GeneralUtility::makeInstance(Typo3Version::class);
+
+        // With version TYPO3 v12 the access to the content object renderer has changed
+        // @see https://docs.typo3.org/m/typo3/reference-coreapi/12.4/en-us/ApiOverview/RequestLifeCycle/RequestAttributes/CurrentContentObject.html
+        if ($versionInformation->getMajorVersion() < 12) {
+            $contentObjectRenderer = $this->configurationManager->getContentObject();
+        } else {
+            $contentObjectRenderer = $this->request->getAttribute('currentContentObject');
+        }
+
         /** @var ContentObjectRenderer $contentObjectRenderer */
-        $contentObjectRenderer = $this->configurationManager->getContentObject();
         $contentElementData = $contentObjectRenderer->data;
 
         $demandObject = $this->programDemandFactory->createDemandObject(
