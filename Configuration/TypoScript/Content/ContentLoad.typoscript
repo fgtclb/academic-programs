@@ -3,28 +3,4 @@ styles.content {
   getContent {
     select.where = {#colPos}=0
   }
-  getOverview < styles.content.get
-  getOverview {
-    select.where = {#colPos}=1
-  }
-  getAfterStudy < styles.content.get
-  getAfterStudy {
-    select.where = {#colPos}=2
-  }
-  getApplication < styles.content.getContent
-  getApplication {
-    select.where = {#colPos}=3
-  }
-  getBeforeStudy < styles.content.get
-  getBeforeStudy {
-    select.where = {#colPos}=4
-  }
-  getContact < styles.content.get
-  getContact {
-    select.where = {#colPos}=5
-  }
-  getIntro < styles.content.get
-  getIntro {
-    select.where = {#colPos}=6
-  }
 }
