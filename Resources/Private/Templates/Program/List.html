@@ -12,13 +12,9 @@
     <div class="program-list">
         <f:if condition="{programs}">
             <f:for each="{programs}" as="program">
-                <div
-                    class="program"
-                    data-application=""
-                >
+                <div class="program">
                     <f:link.page pageUid="{program.uid}">
-                        <h3>{program.title}</h3>
-                        <p>
+                        <h1>{program.title}</h1>
                             <f:for each="{program.categories.degree}" as="degree">
                                 {degree.title}
                             </f:for>
