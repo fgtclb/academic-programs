@@ -26,7 +26,7 @@ class ProgramRepository extends Repository
         $query->getQuerySettings()->setRespectStoragePage(false);
 
         $constraints = [];
-        $constraints[] = $query->equals('doktype', PageTypes::TYPE_EDUCATIONAL_COURSE);
+        $constraints[] = $query->equals('doktype', PageTypes::TYPE_ACADEMIC_PROGRAM);
 
         if (!empty($demand->getPages())) {
             $constraints[] = $query->in('pid', $demand->getPages());
@@ -38,8 +38,10 @@ class ProgramRepository extends Repository
             }
         }
 
+        // The method signature of logicalAnd and logicalOr has changed in TYPO3 v12
+        // @see https://docs.typo3.org/c/typo3/cms-core/main/en-us/Changelog/12.0/Breaking-96044-HardenMethodSignatureOfLogicalAndAndLogicalOr.html
         $query->matching(
-            $query->logicalAnd($constraints)
+            $query->logicalAnd(...array_values($constraints))
         );
 
         $query->setOrderings(

@@ -8,5 +8,5 @@ use TYPO3\CMS\Core\Type\Enumeration;
 
 class PageTypes extends Enumeration
 {
-    public const TYPE_EDUCATIONAL_COURSE = 20;
+    public const TYPE_ACADEMIC_PROGRAM = 20;
 }
