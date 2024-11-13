@@ -3,29 +3,26 @@
 declare(strict_types=1);
 
 use FGTCLB\AcademicPrograms\Enumeration\CategoryTypes;
+use TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
-return (function () {
-    $sourceString = function (string $icon) {
-        return sprintf(
-            'EXT:academic_programs/Resources/Public/Icons/%s.svg',
-            \TYPO3\CMS\Core\Utility\GeneralUtility::underscoredToLowerCamelCase($icon)
-        );
-    };
+$iconIdentifier = static fn (string $key): string => 'academic-programs-' . $key;
 
-    $identifierString = function (string $identifier) {
-        return sprintf(
-            'academic-programs-%s',
-            $identifier
-        );
-    };
+$iconList = [];
+foreach (CategoryTypes::getConstants() as $type) {
+    $identifier = $iconIdentifier($type);
+    $iconList[$identifier] = [
+        'provider' => SvgIconProvider::class,
+        'source' => sprintf(
+            'EXT:academic_programs/Resources/Public/Icons/CategoryTypes/%s.svg',
+            GeneralUtility::underscoredToUpperCamelCase($type)
+        ),
+    ];
+}
 
-    $icons = [];
-    foreach (CategoryTypes::getConstants() as $constant) {
-        $icons[$identifierString($constant)] = [
-            'provider' => \TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider::class,
-            'source' => $sourceString($constant),
-        ];
-    }
+$iconList['academic-programs'] = [
+    'provider' => SvgIconProvider::class,
+    'source' => 'EXT:academic_programs/Resources/Public/Icons/Extension.svg',
+];
 
-    return $icons;
-})();
+return $iconList;
