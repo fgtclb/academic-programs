@@ -13,13 +13,29 @@ class SortingSelectViewHelper extends AbstractSelectViewHelper
     public function initializeArguments(): void
     {
         parent::initializeArguments();
-        $this->registerArgument('fieldsOnly', 'boolean', 'If true, the select only lists the sorting field options.', false, false);
-        $this->registerArgument('directionsOnly', 'boolean', 'If ture, the select only lists the sorting direction options.', false, false);
-        $this->registerArgument('l10n', 'string', 'If specified, will call the correct label specified in locallang file.');
+
+        $arguments = [
+            'fieldsOnly' => [
+                'type' => 'boolean',
+                'defaultValue' => false,
+                'description' => 'If true, the select only lists the sorting field options.',
+            ],
+            'directionsOnly' => [
+                'type' => 'boolean',
+                'defaultValue' => false,
+                'description' => 'If ture, the select only lists the sorting direction options.',
+            ],
+            'l10n' => [
+                'type' => 'string',
+                'description' => 'If specified, will call the correct label specified in locallang file.',
+            ],
+        ];
+
+        $this->registerArguments($arguments);
     }
 
     /**
-     * @return array<int, mixed>
+     * @return array<int|string, mixed>
      */
     protected function getOptions(): array
     {
@@ -29,6 +45,9 @@ class SortingSelectViewHelper extends AbstractSelectViewHelper
             && !$this->arguments['options'] instanceof \Traversable
         ) {
             foreach (SortingOptions::getConstants() as $sortingValue) {
+                $value = $sortingValue;
+                $labelKey = str_replace(' ', '.', $sortingValue);
+
                 if ($this->arguments['fieldsOnly'] || $this->arguments['directionsOnly']) {
                     [$sortingField, $sortingDirection] = GeneralUtility::trimExplode(' ', $sortingValue);
                     if ($this->arguments['fieldsOnly']) {
@@ -38,9 +57,6 @@ class SortingSelectViewHelper extends AbstractSelectViewHelper
                         $value = $sortingDirection;
                         $labelKey = 'direction.' . $sortingDirection;
                     }
-                } else {
-                    $value = $sortingValue;
-                    $labelKey = str_replace(' ', '.', $sortingValue);
                 }
 
                 $options[$value] = [
@@ -76,7 +92,7 @@ class SortingSelectViewHelper extends AbstractSelectViewHelper
      * @param array<int, mixed> $options
      * @return string
      */
-    protected function renderOptionTags($options)
+    protected function renderOptionTags($options): string
     {
         $output = '';
         foreach ($options as $option) {
