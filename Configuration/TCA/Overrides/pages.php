@@ -75,14 +75,6 @@ $additionalTCAcolumns = [
             'enableRichtext' => true,
         ],
     ],
-    'shortcut_overwrite' => [
-        'exclude' => 1,
-        'label' => $ll('pages.shortcut_overwrite'),
-        'config' => [
-            'type' => 'check',
-            'default' => 0,
-        ],
-    ],
 ];
 
 ExtensionManagementUtility::addTCAcolumns(
@@ -102,11 +94,4 @@ ExtensionManagementUtility::addToAllTCAtypes(
         ]),
     (string)$academicProgramDoktype,
     'after:rowDescription'
-);
-
-ExtensionManagementUtility::addToAllTCAtypes(
-    'pages',
-    'shortcut_overwrite',
-    '4',
-    'after:title'
 );

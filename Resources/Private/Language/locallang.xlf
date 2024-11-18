@@ -41,9 +41,6 @@
 			<trans-unit id="pages.performance_scope">
 				<source>Performance scope</source>
 			</trans-unit>
-			<trans-unit id="pages.shortcut_overwrite">
-				<source>Overwrite fields</source>
-			</trans-unit>
 			<trans-unit id="pages.overview">
 				<source>Overview</source>
 			</trans-unit>
