@@ -477,7 +477,9 @@ class CategoryRepository
             ->executeQuery()
             ->fetchAssociative();
         $this->pageRepository->versionOL('sys_category', $category, false, true);
-        $category = $this->pageRepository->getLanguageOverlay('sys_category', $category, $this->context->getAspect('language'));
+        if ($category['l10n_parent'] > 0) {
+            $category = $this->pageRepository->getLanguageOverlay('sys_category', $category);
+        }
 
         return $category;
     }
