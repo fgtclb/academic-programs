@@ -7,10 +7,11 @@ $EM_CONF['academic_programs'] = [
     'description' => 'Educational Program page for TYPO3 with structured data based on sys_category',
     'category' => 'fe',
     'state' => 'beta',
-    'version' => '2.1.0',
+    'version' => '1.0.0',
     'constraints' => [
         'depends' => [
-            'typo3' => '11.5.0-11.5.99',
+            'typo3' => '11.5.0-13.4.99',
+            'page_backend_layout' => '*',
             'category_types' => '*',
         ],
         'conflicts' => [],
