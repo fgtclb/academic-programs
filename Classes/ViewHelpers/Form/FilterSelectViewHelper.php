@@ -34,7 +34,7 @@ class FilterSelectViewHelper extends AbstractSelectViewHelper
                 'parentId' => $option->getParentId(),
                 'isRoot' => $option->isRoot(),
                 'type' => (string)$option->getType(),
-                'isSelected' => $this->isSelected($option->getUid()),
+                'isSelected' => $this->isSelected((string)$option->getUid()),
                 'isDisabled' => $option->isDisabled(),
                 'level' => 0,
                 'children' => [],

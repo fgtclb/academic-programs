@@ -3,12 +3,12 @@
     xmlns:fe="http://typo3.org/ns/FGTCLB/AcademicPrograms/ViewHelpers"
     data-namespace-typo3-fluid="true"
 >
-    <label for="sortingDirection">Sortierfeld</label>
+    <label for="sortingField">Sortierfeld</label>
     <fe:form.sortingSelect
         id="sortingField"
         property="sortingField"
         value="{demand.sortingField}"
-        options="{demand.sortingFieldOptions}"
+        type="fields"
         additionalAttributes="{'onchange': 'this.form.submit()'}"
         l10n="filter.sortingField" 
     />
@@ -17,7 +17,7 @@
         id="sortingDirection"
         property="sortingDirection"
         value="{demand.sortingDirection}"
-        options="{demand.sortingDirectionOptions}"
+        type="directions"
         additionalAttributes="{'onchange': 'this.form.submit()'}"
         l10n="filter.sortingDirection" 
     />

@@ -15,15 +15,10 @@ class SortingSelectViewHelper extends AbstractSelectViewHelper
         parent::initializeArguments();
 
         $arguments = [
-            'fieldsOnly' => [
-                'type' => 'boolean',
-                'defaultValue' => false,
-                'description' => 'If true, the select only lists the sorting field options.',
-            ],
-            'directionsOnly' => [
-                'type' => 'boolean',
-                'defaultValue' => false,
-                'description' => 'If ture, the select only lists the sorting direction options.',
+            'type' => [
+                'type' => 'string',
+                'defaultValue' => 'combined',
+                'description' => 'Allowed values are combined, fields or directions.',
             ],
             'l10n' => [
                 'type' => 'string',
@@ -42,18 +37,18 @@ class SortingSelectViewHelper extends AbstractSelectViewHelper
         $options = [];
 
         if (!is_array($this->arguments['options'])
-            && !$this->arguments['options'] instanceof \Traversable
+            || empty($this->arguments['options'])
         ) {
             foreach (SortingOptions::getConstants() as $sortingValue) {
                 $value = $sortingValue;
                 $labelKey = str_replace(' ', '.', $sortingValue);
 
-                if ($this->arguments['fieldsOnly'] || $this->arguments['directionsOnly']) {
+                if ($this->arguments['type'] !== 'combined') {
                     [$sortingField, $sortingDirection] = GeneralUtility::trimExplode(' ', $sortingValue);
-                    if ($this->arguments['fieldsOnly']) {
+                    if ($this->arguments['type'] === 'fields') {
                         $value = $sortingField;
                         $labelKey = 'field.' . $sortingField;
-                    } elseif ($this->arguments['directionsOnly']) {
+                    } elseif ($this->arguments['type'] === 'directions') {
                         $value = $sortingDirection;
                         $labelKey = 'direction.' . $sortingDirection;
                     }
