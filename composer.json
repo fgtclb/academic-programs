@@ -26,8 +26,8 @@
 	},
 	"require": {
 		"php": "^7.4 || ^8.0 || ^8.1 || ^8.2 || ^8.3",
-		"fgtclb/category-types": "^1.0",
-		"fgtclb/page-backend-layout": "^1.0",
+		"fgtclb/category-types": "*",
+		"fgtclb/page-backend-layout": "*",
 		"typo3/cms-backend": "^11.5 || ^12.4 || ^13.4",
 		"typo3/cms-core": "^11.5 || ^12.4 || ^13.4",
 		"typo3/cms-extbase": "^11.5 || ^12.4 || ^13.4",
