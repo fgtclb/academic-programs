@@ -90,7 +90,7 @@ ExtensionManagementUtility::addToAllTCAtypes(
         . implode(',', [
             'job_profile',
             'performance_scope',
-            'prerequisites'
+            'prerequisites',
         ]),
     (string)$academicProgramDoktype,
     'after:rowDescription'

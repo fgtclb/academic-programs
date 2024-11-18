@@ -1,7 +1,9 @@
 <?php
 
+use FGTCLB\AcademicPrograms\Enumeration\PageTypes;
+
 (static function (): void {
-    $studyProgrammeDokType = \FGTCLB\AcademicPrograms\Enumeration\PageTypes::TYPE_ACADEMIC_PROGRAM;
+    $studyProgrammeDokType = PageTypes::TYPE_ACADEMIC_PROGRAM;
 
     $GLOBALS['PAGES_TYPES'][$studyProgrammeDokType] = [
         'type' => 'web',

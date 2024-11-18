@@ -15,7 +15,7 @@ class AbstractSelectViewHelper extends AbstractFormFieldViewHelper
     protected $tagName = 'select';
 
     /**
-     * @var mixed
+     * @var string
      */
     protected $selectedValue;
 
@@ -126,9 +126,6 @@ class AbstractSelectViewHelper extends AbstractFormFieldViewHelper
         return $content;
     }
 
-    /**
-     * Render prepended option tag
-     */
     protected function renderPrependOptionTag(): string
     {
         $output = '';
@@ -157,53 +154,13 @@ class AbstractSelectViewHelper extends AbstractFormFieldViewHelper
         }
     }
 
-    /**
-     * Retrieves the selected value(s)
-     *
-     * @return mixed value string or an array of strings
-     */
-    protected function getSelectedValue()
+    protected function getSelectedValue(): string
     {
         $this->setRespectSubmittedDataValue(true);
-        $value = $this->getValueAttribute();
-        if (!is_array($value) && !$value instanceof \Traversable) {
-            return $this->getOptionValueScalar($value);
-        }
-        $selectedValues = [];
-        foreach ($value as $selectedValueElement) {
-            $selectedValues[] = $this->getOptionValueScalar($selectedValueElement);
-        }
-        return $selectedValues;
+        return $this->getValueAttribute();
     }
 
-    /**
-     * Get the option value for an object
-     *
-     * @param mixed $valueElement
-     * @return string
-     */
-    protected function getOptionValueScalar($valueElement)
-    {
-        if (is_object($valueElement)) {
-            if ($this->hasArgument('optionValueField')) {
-                return ObjectAccess::getPropertyPath($valueElement, $this->arguments['optionValueField']);
-            }
-            // @todo use $this->persistenceManager->isNewObject() once it is implemented
-            if ($this->persistenceManager->getIdentifierByObject($valueElement) !== null) {
-                return $this->persistenceManager->getIdentifierByObject($valueElement);
-            }
-            return (string)$valueElement;
-        }
-        return $valueElement;
-    }
-
-    /**
-     * Render the option tags.
-     *
-     * @param mixed $value Value to check for
-     * @return bool TRUE if the value should be marked a s selected; FALSE otherwise
-     */
-    protected function isSelected($value)
+    protected function isSelected(string $value): bool
     {
         $selectedValue = $this->getSelectedValue();
 
@@ -215,12 +172,9 @@ class AbstractSelectViewHelper extends AbstractFormFieldViewHelper
     }
 
     /**
-     * Render the option tags.
-     *
-     * @param array $options the options for the form.
-     * @return string rendered tags.
+     * @param array<int, mixed> $options
      */
-    protected function renderOptionTags($options)
+    protected function renderOptionTags($options): string
     {
         $output = '';
         foreach ($options as $option) {
@@ -233,15 +187,7 @@ class AbstractSelectViewHelper extends AbstractFormFieldViewHelper
         return $output;
     }
 
-    /**
-     * Render one option tag
-     *
-     * @param string $value value attribute of the option tag (will be escaped)
-     * @param string $label content of the option tag (will be escaped)
-     * @param bool $isSelected specifies whether or not to add selected attribute
-     * @return string the rendered option tag
-     */
-    protected function renderOptionTag($value, $label, $isSelected)
+    protected function renderOptionTag(string $value, string $label, bool $isSelected): string
     {
         $output = '<option value="' . htmlspecialchars((string)$value) . '"';
         if ($isSelected) {
@@ -252,9 +198,7 @@ class AbstractSelectViewHelper extends AbstractFormFieldViewHelper
     }
 
     /**
-     * Render the option tags.
-     *
-     * @return array an associative array of options, key will be the value of the option tag
+     * @return array<int, mixed>
      */
     protected function getOptions()
     {
