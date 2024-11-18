@@ -10,14 +10,16 @@ $EM_CONF['academic_programs'] = [
     'version' => '0.0.1',
     'constraints' => [
         'depends' => [
-            'typo3' => '11.5.0-12.4.99',
-            'backend' => '11.5.0-12.4.99',
-            'extbase' => '11.5.0-12.4.99',
-            'frontend' => '11.5.0-12.4.99',
-            'fluid' => '11.5.0-12.4.99',
+            'typo3' => '11.5.0-13.4.99',
+            'backend' => '11.5.0-13.4.99',
+            'extbase' => '11.5.0-13.4.99',
+            'frontend' => '11.5.0-13.4.99',
+            'fluid' => '11.5.0-13.4.99',
             'category_types' => '1.1.0-1.99.99',
         ],
         'conflicts' => [],
-        'suggests' => [],
+        'suggests' => [
+            'page_backend_layout' => '*',
+        ],
     ],
 ];
