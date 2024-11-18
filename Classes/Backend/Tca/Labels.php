@@ -20,9 +20,12 @@ class Labels
         if ($record !== null) {
             $categoryRepository = GeneralUtility::makeInstance(CategoryRepository::class);
             $categoryRootline = $categoryRepository->getCategoryRootline($record['uid']);
+
+            $titleParts = [];
             foreach ($categoryRootline as $category) {
                 $titleParts[] = $category['title'];
             }
+
             $params['title'] = implode(' > ', $titleParts);
         }
     }
