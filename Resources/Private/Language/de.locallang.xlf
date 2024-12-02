@@ -13,12 +13,12 @@
 			<!-- Doktype -->
 
 			<trans-unit id="pages.doktype.groups.academic">
-				<source>Academic Extensions</source>
-				<target>Academic-Erweiterungen</target>
+				<source>Academic Pages</source>
+				<target>Academische Seiten</target>
 			</trans-unit>
 			<trans-unit id="pages.doktype.items.academic_program">
-				<source>[Academic] Program</source>
-				<target>[Academic] Programm</target>
+				<source>Academic Program</source>
+				<target>Academisches Programm</target>
 			</trans-unit>
 
 			<!-- Labels	for pages -->
