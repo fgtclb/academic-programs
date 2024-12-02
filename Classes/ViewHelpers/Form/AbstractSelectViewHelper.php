@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace FGTCLB\AcademicPrograms\ViewHelpers\Form;
 
+use TYPO3\CMS\Extbase\Reflection\ObjectAccess;
 use TYPO3\CMS\Fluid\ViewHelpers\Form\AbstractFormFieldViewHelper;
 
 class AbstractSelectViewHelper extends AbstractFormFieldViewHelper
@@ -14,7 +15,7 @@ class AbstractSelectViewHelper extends AbstractFormFieldViewHelper
     protected $tagName = 'select';
 
     /**
-     * @var string
+     * @var mixed
      */
     protected $selectedValue;
 
@@ -153,18 +154,47 @@ class AbstractSelectViewHelper extends AbstractFormFieldViewHelper
         }
     }
 
-    protected function getSelectedValue(): string
+    /**
+     * @return mixed
+     */
+    protected function getSelectedValue()
     {
         $this->setRespectSubmittedDataValue(true);
-        $selectedValue =(string)$this->getValueAttribute();
-        return $selectedValue;
+        $value = $this->getValueAttribute();
+        if (!is_array($value) && !$value instanceof \Traversable) {
+            return $this->getOptionValueScalar($value);
+        }
+        $selectedValues = [];
+        foreach ($value as $selectedValueElement) {
+            $selectedValues[] = $this->getOptionValueScalar($selectedValueElement);
+        }
+        return $selectedValues;
+    }
+
+    /**
+     * @param mixed $valueElement
+     * @return string
+     */
+    protected function getOptionValueScalar($valueElement)
+    {
+        if (is_object($valueElement)) {
+            if ($this->hasArgument('optionValueField')) {
+                return ObjectAccess::getPropertyPath($valueElement, $this->arguments['optionValueField']);
+            }
+            // @todo use $this->persistenceManager->isNewObject() once it is implemented
+            if ($this->persistenceManager->getIdentifierByObject($valueElement) !== null) {
+                return $this->persistenceManager->getIdentifierByObject($valueElement);
+            }
+            return (string)$valueElement;
+        }
+        return $valueElement;
     }
 
     protected function isSelected(string $value): bool
     {
         $selectedValue = $this->getSelectedValue();
 
-        if ($value === $selectedValue || (string)$value === $selectedValue) {
+        if ($value === $selectedValue) {
             return true;
         }
 
