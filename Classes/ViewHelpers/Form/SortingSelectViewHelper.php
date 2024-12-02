@@ -24,6 +24,11 @@ class SortingSelectViewHelper extends AbstractSelectViewHelper
                 'type' => 'string',
                 'description' => 'If specified, will call the correct label specified in locallang file.',
             ],
+            'extensionName' => [
+                'type' => 'string',
+                'defaultValue' => 'academic_programs',
+                'description' => 'If set, the translation function will use the language labels from the given extension.',
+            ],
         ];
 
         $this->registerArguments($arguments);
@@ -110,11 +115,9 @@ class SortingSelectViewHelper extends AbstractSelectViewHelper
             $labelKey
         );
 
-        $extensionName = $this->arguments['extensionName'] === null ? 'academic_programs' : $this->arguments['extensionName'];
-
         $translatedLabel = LocalizationUtility::translate(
             $key,
-            $extensionName
+            $this->arguments['extensionName']
         );
 
         if ($translatedLabel === null) {
