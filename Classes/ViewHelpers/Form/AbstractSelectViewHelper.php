@@ -126,6 +126,9 @@ class AbstractSelectViewHelper extends AbstractFormFieldViewHelper
         return $content;
     }
 
+    /**
+     * Render prepended option tag
+     */
     protected function renderPrependOptionTag(): string
     {
         $output = '';
@@ -155,7 +158,9 @@ class AbstractSelectViewHelper extends AbstractFormFieldViewHelper
     }
 
     /**
-     * @return mixed
+     * Retrieves the selected value(s)
+     *
+     * @return mixed value string or an array of strings
      */
     protected function getSelectedValue()
     {
@@ -172,6 +177,8 @@ class AbstractSelectViewHelper extends AbstractFormFieldViewHelper
     }
 
     /**
+     * Get the option value for an object
+     *
      * @param mixed $valueElement
      * @return string
      */
@@ -190,11 +197,17 @@ class AbstractSelectViewHelper extends AbstractFormFieldViewHelper
         return $valueElement;
     }
 
-    protected function isSelected(string $value): bool
+    /**
+     * Render the option tags.
+     *
+     * @param mixed $value Value to check for
+     * @return bool TRUE if the value should be marked a s selected; FALSE otherwise
+     */
+    protected function isSelected($value)
     {
         $selectedValue = $this->getSelectedValue();
 
-        if ($value === $selectedValue) {
+        if ($value === $selectedValue || (string)$value === $selectedValue) {
             return true;
         }
 
@@ -202,9 +215,12 @@ class AbstractSelectViewHelper extends AbstractFormFieldViewHelper
     }
 
     /**
-     * @param array<int, mixed> $options
+     * Render the option tags.
+     *
+     * @param array $options the options for the form.
+     * @return string rendered tags.
      */
-    protected function renderOptionTags($options): string
+    protected function renderOptionTags($options)
     {
         $output = '';
         foreach ($options as $option) {
@@ -217,7 +233,15 @@ class AbstractSelectViewHelper extends AbstractFormFieldViewHelper
         return $output;
     }
 
-    protected function renderOptionTag(string $value, string $label, bool $isSelected): string
+    /**
+     * Render one option tag
+     *
+     * @param string $value value attribute of the option tag (will be escaped)
+     * @param string $label content of the option tag (will be escaped)
+     * @param bool $isSelected specifies whether or not to add selected attribute
+     * @return string the rendered option tag
+     */
+    protected function renderOptionTag($value, $label, $isSelected)
     {
         $output = '<option value="' . htmlspecialchars((string)$value) . '"';
         if ($isSelected) {
@@ -228,7 +252,9 @@ class AbstractSelectViewHelper extends AbstractFormFieldViewHelper
     }
 
     /**
-     * @return array<int, mixed>
+     * Render the option tags.
+     *
+     * @return array an associative array of options, key will be the value of the option tag
      */
     protected function getOptions()
     {
