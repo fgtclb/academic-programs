@@ -32,11 +32,17 @@ class Program extends AbstractEntity
     /** @var ObjectStorage<FileReference> */
     protected $media;
 
-    public function getPid(): int
+    /**
+     * @return int<0, max>|null
+     */
+    public function getPid(): ?int
     {
         return $this->pid;
     }
 
+    /**
+     * @return int<0, max>|null
+     */
     public function getUid(): int
     {
         return $this->uid;
