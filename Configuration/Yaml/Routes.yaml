@@ -1,0 +1,6 @@
+routeEnhancers:
+	AacdemicPrograms:
+		type: Extbase
+		extension: AcademicPrograms
+		plugin: List
+    defaultController: 'Program::list'
