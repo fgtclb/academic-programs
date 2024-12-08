@@ -1,4 +1,5 @@
 <?php
+
 /**
  * $ php-cs-fixer fix --config .php-cs-rules.php
  *
@@ -29,8 +30,8 @@ return (new PhpCsFixer\Config())
         '@DoctrineAnnotation' => true,
         'general_phpdoc_annotation_remove' => [
             'annotations' => [
-                'author'
-            ]
+                'author',
+            ],
         ],
         'blank_line_after_opening_tag' => true,
         'no_leading_import_slash' => true,
