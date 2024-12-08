@@ -6,34 +6,6 @@
 			<generator>PhpStorm</generator>
 		</header>
 		<body>
-			<trans-unit id="container.all_semesters.label">
-				<source>Semester wrapper</source>
-				<target>Semester-Behälter</target>
-			</trans-unit>
-			<trans-unit id="container.all_semesters.description">
-				<source>A container wrapper for semesters. Contains one to fourteen semester containers.</source>
-				<target>Ein Behälter für die Semester. Enthält ein bis vierzehn Semester-Container.</target>
-			</trans-unit>
-			<trans-unit id="container.all_semesters.column.title">
-				<source>Semester</source>
-				<target>Semester</target>
-			</trans-unit>
-			<trans-unit id="container.semester.label">
-				<source>Semester container</source>
-				<target>Semester Container</target>
-			</trans-unit>
-			<trans-unit id="container.semester.description">
-				<source>Container for a single semester. Can take care of all content elements.</source>
-				<target>Container für ein einzelnes Semester. Kann sich um alle Inhaltselemente kümmern.</target>
-			</trans-unit>
-			<trans-unit id="container.semester.column.title">
-				<source>Semester content</source>
-				<target>Semesterinhalt</target>
-			</trans-unit>
-			<trans-unit id="container.semester.header">
-				<source>Semester header, usually the number of the semester</source>
-				<target>Semester-Überschrift, normalerweise die Nummer des Semesters</target>
-			</trans-unit>
 			<trans-unit id="flexform.filter.options.title">
 				<source>Deactivate filters</source>
 				<target>Filterung deaktivieren</target>
