@@ -12,6 +12,7 @@ mod {
                 columns {
                   1 {
                     name = LLL:EXT:academic_programs/Resources/Private/Language/locallang.xlf:pages.contents
+                    identifier = main
                     colPos = 0
                   }
                 }
