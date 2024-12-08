@@ -32,10 +32,10 @@ class ProgramController extends ActionController
 
         // With version TYPO3 v12 the access to the content object renderer has changed
         // @see https://docs.typo3.org/m/typo3/reference-coreapi/12.4/en-us/ApiOverview/RequestLifeCycle/RequestAttributes/CurrentContentObject.html
-        if ($versionInformation->getMajorVersion() < 12) {
-            $contentObjectRenderer = $this->configurationManager->getContentObject();
-        } else {
+        if (version_compare($versionInformation->getVersion(), '12.0.0', '>=')) {
             $contentObjectRenderer = $this->request->getAttribute('currentContentObject');
+        } else {
+            $contentObjectRenderer = $this->configurationManager->getContentObject();
         }
 
         /** @var ContentObjectRenderer $contentObjectRenderer */
