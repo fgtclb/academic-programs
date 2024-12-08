@@ -1,50 +1,24 @@
 <html
+    lang="en"
     xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
     data-namespace-typo3-fluid="true"
 >
-<f:if condition="{degree}">
-    <f:render partial="Categories/Degree" arguments="{_all}"/>
-</f:if>
-<f:if condition="{programType}">
-    <f:render partial="Categories/ProgramType" arguments="{_all}"/>
-</f:if>
-<f:if condition="{teachingLanguage}">
-    <f:render partial="Categories/TeachingLanguage" arguments="{_all}"/>
-</f:if>
-<f:if condition="{standardPeriod}">
-    <f:render partial="Categories/StandardPeriod" arguments="{_all}"/>
-</f:if>
-<f:if condition="{beginProgram}">
-    <f:render partial="Categories/BeginProgram" arguments="{_all}"/>
-</f:if>
-<f:if condition="{applicationPeriod}">
-    <f:render partial="Categories/ApplicationPeriod" arguments="{_all}"/>
-</f:if>
-<f:if condition="{admissionRestriction}">
-    <f:render partial="Categories/AdmissionRestriction" arguments="{_all}"/>
-</f:if>
-<f:if condition="{data.prerequisites}">
-    <f:render partial="Categories/Prerequisites" arguments="{_all}"/>
-</f:if>
-<f:if condition="{data.performance_scope}">
-    <f:render partial="Categories/PerformanceScope" arguments="{_all}"/>
-</f:if>
-<f:if condition="{data.job_profile}">
-    <f:render partial="Categories/JobProfile" arguments="{_all}"/>
-</f:if>
-<f:if condition="{costs}">
-    <f:render partial="Categories/Costs" arguments="{_all}"/>
-</f:if>
-<f:if condition="{topic}">
-    <f:render partial="Categories/Topic" arguments="{_all}"/>
-</f:if>
-<f:if condition="{department}">
-    <f:render partial="Categories/Department" arguments="{_all}"/>
-</f:if>
-<f:if condition="{location}">
-    <f:render partial="Categories/Location" arguments="{_all}"/>
-</f:if>
-<f:if condition="{paying}">
-    <f:render partial="Categories/Paying" arguments="{_all}"/>
-</f:if>
+<dl>
+    <f:for each="{program.categories.allCategoriesByType}" key="type" as="categories">
+        <f:if condition="{categories}">
+            <dt>
+                <core:icon identifier="academic-programs-{type}"/>
+                {f:translate(
+                    key: 'sys_category.academic_programs.{type}',
+                    extensionName: 'academic_programs'
+                )}:
+            </dt>
+            <dd>
+                <f:for each="{categories}" as="category">
+                    {category.title}
+                </f:for>
+            </dd>
+        </f:if>
+    </f:for>
+</dl>
 </html>
