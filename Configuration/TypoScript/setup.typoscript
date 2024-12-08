@@ -3,21 +3,24 @@
 
 plugin.tx_academicprograms {
   features {
+    // Deprecated since version 12.4
     skipDefaultArguments = 1
   }
-}
 
-plugin.tx_academicprograms {
   view {
     templateRootPaths {
       0 = EXT:academic_programs/Resources/Private/Templates/
+      1 = {$plugin.tx_academicprograms.view.templateRootPath}
     }
 
     partialRootPaths {
       0 = EXT:academic_programs/Resources/Private/Partials/
+      1 = {$plugin.tx_academicprograms.view.partialRootPath}
     }
 
     layoutRootPaths {
       0 = EXT:academic_programs/Resources/Private/Layouts/
+      1 = {$plugin.tx_academicprograms.view.layoutRootPath}
+    }
   }
 }
