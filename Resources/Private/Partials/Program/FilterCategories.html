@@ -6,7 +6,9 @@
 >
     <f:if condition="{categories}">
         <f:if condition="{categories.admissionRestriction}">
-            <label for="admissionRestriction">{f:translate(key: 'sys_category.type.admission_restriction')}</label>
+            <label for="admissionRestriction">
+                {f:translate(key: 'sys_category.type.admission_restriction')}
+            </label>
             <fe:form.filterSelect
                 id="admissionRestriction"
                 property="filterCollection.admissionRestriction"
@@ -14,13 +16,15 @@
                 options="{categories.admissionRestriction}"
                 optionValueField="uid"
                 optionLabelField="title"
-                prependOptionLabel=""
+                prependOptionLabel="All options"
                 prependOptionValue=""
                 additionalAttributes="{'onchange': 'this.form.submit()'}"
             />
         </f:if>
         <f:if condition="{categories.applicationPeriod}">
-            <label for="applicationPeriod">{f:translate(key: 'sys_category.type.application_period')}</label>
+            <label for="applicationPeriod">
+                {f:translate(key: 'sys_category.type.application_period')}
+            </label>
             <fe:form.filterSelect
                 id="applicationPeriod"
                 property="filterCollection.applicationPeriod"
@@ -28,13 +32,15 @@
                 options="{categories.applicationPeriod}"
                 optionValueField="uid"
                 optionLabelField="title"
-                prependOptionLabel=""
+                prependOptionLabel="All options"
                 prependOptionValue=""
                 additionalAttributes="{'onchange': 'this.form.submit()'}"
             />
         </f:if>
         <f:if condition="{categories.beginProgram}">
-            <label for="beginProgram">{f:translate(key: 'sys_category.type.begin_program')}</label>
+            <label for="beginProgram">
+                {f:translate(key: 'sys_category.type.begin_program')}
+            </label>
             <fe:form.filterSelect
                 id="beginProgram"
                 property="filterCollection.beginProgram"
@@ -42,13 +48,15 @@
                 options="{categories.beginProgram}"
                 optionValueField="uid"
                 optionLabelField="title"
-                prependOptionLabel=""
+                prependOptionLabel="All options"
                 prependOptionValue=""
                 additionalAttributes="{'onchange': 'this.form.submit()'}"
             />
         </f:if>
         <f:if condition="{categories.costs}">
-            <label for="costs">{f:translate(key: 'sys_category.type.costs')}</label>
+            <label for="costs">
+                {f:translate(key: 'sys_category.type.costs')}
+            </label>
             <fe:form.filterSelect
                 id="costs"
                 property="filterCollection.costs"
@@ -56,13 +64,15 @@
                 options="{categories.costs}"
                 optionValueField="uid"
                 optionLabelField="title"
-                prependOptionLabel=""
+                prependOptionLabel="All options"
                 prependOptionValue=""
                 additionalAttributes="{'onchange': 'this.form.submit()'}"
             />
         </f:if>
         <f:if condition="{categories.degree}">
-            <label for="degree">{f:translate(key: 'sys_category.type.degree')}</label>
+            <label for="degree">
+                {f:translate(key: 'sys_category.type.degree')}
+            </label>
             <fe:form.filterSelect
                 id="degree"
                 property="filterCollection.degree"
@@ -70,13 +80,15 @@
                 options="{categories.degree}"
                 optionValueField="uid"
                 optionLabelField="title"
-                prependOptionLabel=""
+                prependOptionLabel="All options"
                 prependOptionValue=""
                 additionalAttributes="{'onchange': 'this.form.submit()'}"
             />
         </f:if>
         <f:if condition="{categories.department}">
-            <label for="department">{f:translate(key: 'sys_category.type.department')}</label>
+            <label for="department">
+                {f:translate(key: 'sys_category.type.department')}
+            </label>
             <fe:form.filterSelect
                 id="department"
                 property="filterCollection.department"
@@ -84,13 +96,15 @@
                 options="{categories.department}"
                 optionValueField="uid"
                 optionLabelField="title"
-                prependOptionLabel=""
+                prependOptionLabel="All options"
                 prependOptionValue=""
                 additionalAttributes="{'onchange': 'this.form.submit()'}"
             />
         </f:if>
         <f:if condition="{categories.standardPeriod}">
-            <label for="standardPeriod">{f:translate(key: 'sys_category.type.standard_period')}</label>
+            <label for="standardPeriod">
+                {f:translate(key: 'sys_category.type.standard_period')}
+            </label>
             <fe:form.filterSelect
                 id="standardPeriod"
                 property="filterCollection.standardPeriod"
@@ -98,13 +112,15 @@
                 options="{categories.standardPeriod}"
                 optionValueField="uid"
                 optionLabelField="title"
-                prependOptionLabel=""
+                prependOptionLabel="All options"
                 prependOptionValue=""
                 additionalAttributes="{'onchange': 'this.form.submit()'}"
             />
         </f:if>
         <f:if condition="{categories.programType}">
-            <label for="programType">{f:translate(key: 'sys_category.type.program_type')}</label>
+            <label for="programType">
+                {f:translate(key: 'sys_category.type.program_type')}
+            </label>
             <fe:form.filterSelect
                 id="programType"
                 property="filterCollection.programType"
@@ -112,13 +128,15 @@
                 options="{categories.programType}"
                 optionValueField="uid"
                 optionLabelField="title"
-                prependOptionLabel=""
+                prependOptionLabel="All options"
                 prependOptionValue=""
                 additionalAttributes="{'onchange': 'this.form.submit()'}"
             />
         </f:if>
         <f:if condition="{categories.teachingLanguage}">
-            <label for="teachingLanguage">{f:translate(key: 'sys_category.type.teaching_language')}</label>
+            <label for="teachingLanguage">
+                {f:translate(key: 'sys_category.type.teaching_language')}
+            </label>
             <fe:form.filterSelect
                 id="teachingLanguage"
                 property="filterCollection.teachingLanguage"
@@ -126,13 +144,15 @@
                 options="{categories.teachingLanguage}"
                 optionValueField="uid"
                 optionLabelField="title"
-                prependOptionLabel=""
+                prependOptionLabel="All options"
                 prependOptionValue=""
                 additionalAttributes="{'onchange': 'this.form.submit()'}"
             />
         </f:if>
         <f:if condition="{categories.topic}">
-            <label for="topic">{f:translate(key: 'sys_category.type.topic')}</label>
+            <label for="topic">
+                {f:translate(key: 'sys_category.type.topic')}
+            </label>
             <fe:form.filterSelect
                 id="topic"
                 property="filterCollection.topic"
@@ -140,13 +160,15 @@
                 options="{categories.topic}"
                 optionValueField="uid"
                 optionLabelField="title"
-                prependOptionLabel=""
+                prependOptionLabel="All options"
                 prependOptionValue=""
                 additionalAttributes="{'onchange': 'this.form.submit()'}"
             />
         </f:if>
         <f:if condition="{categories.location}">
-            <label for="location">{f:translate(key: 'sys_category.type.location')}</label>
+            <label for="location">
+                {f:translate(key: 'sys_category.type.location')}
+            </label>
             <fe:form.filterSelect
                 id="location"
                 property="filterCollection.location"
@@ -154,13 +176,15 @@
                 options="{categories.location}"
                 optionValueField="uid"
                 optionLabelField="title"
-                prependOptionLabel=""
+                prependOptionLabel="All options"
                 prependOptionValue=""
                 additionalAttributes="{'onchange': 'this.form.submit()'}"
             />
         </f:if>
         <f:if condition="{categories.paying}">
-            <label for="location">{f:translate(key: 'sys_category.type.paying')}</label>
+            <label for="location">
+                {f:translate(key: 'sys_category.type.paying')}
+            </label>
             <fe:form.filterSelect
                 id="paying"
                 property="filterCollection.paying"
@@ -168,7 +192,7 @@
                 options="{categories.paying}"
                 optionValueField="uid"
                 optionLabelField="title"
-                prependOptionLabel=""
+                prependOptionLabel="All options"
                 prependOptionValue=""
                 additionalAttributes="{'onchange': 'this.form.submit()'}"
             />
