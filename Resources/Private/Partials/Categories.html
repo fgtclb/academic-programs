@@ -4,7 +4,11 @@
     data-namespace-typo3-fluid="true"
 >
 <dl>
-    <f:for each="{program.categories.allCategoriesByType}" key="type" as="categories">
+    <f:for
+        each="{program.categories.allCategoriesByType}"
+        key="type"
+        as="categories"
+    >
         <f:if condition="{categories}">
             <dt>
                 <core:icon identifier="academic-programs-{type}"/>
