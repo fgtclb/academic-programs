@@ -11,17 +11,34 @@
     </f:if>
     <div class="program-list">
         <f:if condition="{programs}">
-            <f:for each="{programs}" as="program">
-                <div class="program">
-                    <f:link.page pageUid="{program.uid}">
-                        <h1>{program.title}</h1>
-                            <f:for each="{program.categories.degree}" as="degree">
-                                {degree.title}
-                            </f:for>
-                        </p>
-                    </f:link.page>
-                </div>
-            </f:for>
+            <f:then>
+                <div class="row">
+                <f:for each="{programs}" as="program">
+                    <div class="col-12 col-md-6 col-xxl-4">
+                        <f:link.page pageUid="{program.uid}">
+                            <f:if condition="{program.media.0}">
+                                <f:image
+                                    image="{program.media.0}"
+                                    alt="{program.media.alternative}"
+                                    title="{program.media.title}"
+                                    style="width: 100%; height: auto;"
+                                />
+                            </f:if>
+                            <h3>{program.title}</h3>
+                                <f:for
+                                    each="{program.attributes.degree}"
+                                    as="degree"
+                                >
+                                    {degree.title}
+                                </f:for>
+                            </p>
+                        </f:link.page>
+                    </div>
+                </f:for>
+            </f:then>
+            <f:else>
+                <p>No programs found.</p>
+            </f:else>
         </f:if>
     </div>
 </html>

@@ -6,38 +6,43 @@
     data-namespace-typo3-fluid="true"
 >
 <f:if condition="{context.pageRecord.doktype} == 20">
-    <div class="callout callout-notice">
-        <div class="media">
-            <div class="media-left">
-                <core:icon identifier="actions-lightbulb-on"/>
-            </div>
-            <div class="media-right">
+    <f:comment><!--<div class="callout callout-warning">--></f:comment>
+    <div>
+        <table class="table table-striped">
+            <tbody>
                 <fec:be.category page="{context.pageId}">
-                    <f:for as="categories" key="category" each="{category.allCategoriesByType}">
-                        <div class="row">
-                            <p class="col-md-4">
+                    <f:for each="{category.allCategoriesByType}" as="categories" key="type">
+                        <tr>
+                            <td style="text-wrap: nowrap;">
+                                <core:icon identifier="academic-programs-{type}"/>
+                            </td>
+                            <td style="text-wrap: nowrap;">
                                 <strong>
-                                    <core:icon identifier="academic-programs-{category}"/>
-                                    {f:translate(key: 'sys_category.academic_programs.{category}', extensionName: 'academic_programs')}
+                                    {f:translate(
+                                        key: 'sys_category.academic_programs.{type}',
+                                        extensionName: 'academic_programs'
+                                    )}
                                 </strong>
-                            </p>
-                            <f:if condition="{categories -> f:count()} > 0">
-                                <f:then>
-                                    <ul class="col-md-8">
-                                        <f:for each="{categories}" as="category">
-                                            <li>{category.title}</li>
-                                        </f:for>
-                                    </ul>
-                                </f:then>
-                                <f:else>
-                                    <p class="col-md-8">{f:translate(extensionName: 'category_types', key: 'sys_category.not_set')}</p>
-                                </f:else>
-                            </f:if>
-                        </div>
+                            </td>
+                            <td style="width: 100%">
+                                <f:if condition="{categories -> f:count()} > 0">
+                                    <f:then>
+                                        <ul>
+                                            <f:for each="{categories}" as="category">
+                                                <li>{category.title}</li>
+                                            </f:for>
+                                        </ul>
+                                    </f:then>
+                                    <f:else>
+                                        <p>{f:translate(extensionName: 'category_types', key: 'sys_category.not_set')}</p>
+                                    </f:else>
+                                </f:if>
+                            </td>
+                        </tr>
                     </f:for>
                 </fec:be.category>
-            </div>
-        </div>
+            </tbody>
+        </table>
     </div>
 </f:if>
 </html>
