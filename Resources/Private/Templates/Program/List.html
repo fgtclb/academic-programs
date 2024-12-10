@@ -3,21 +3,25 @@
     xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
     xmlns:ec="http://typo3.org/ns/FGTCLB/AcademicPrograms/ViewHelpers"
 >
-    <f:if condition="{settings.filter.options} == 0 && !{settings.categories}" >
+    <f:if condition="{settings.hideFilter} == 0 || {settings.hideSorting} == 0" >
         <f:form
             action="list"
             object="{demand}"
             name="demand"
             objectName="demand"
         >
-            <f:render 
-                partial="Program/FilterSorting"
-                arguments="{_all}"
-            />
-            <f:render
-                partial="Program/FilterCategories"
-                arguments="{_all}"
-            />
+            <f:if condition="{settings.hideSorting} == 0">
+                <f:render 
+                    partial="Program/FilterSorting"
+                    arguments="{_all}"
+                />
+            </f:if>
+            <f:if condition="{settings.hideFilter} == 0">
+                <f:render
+                    partial="Program/FilterCategories"
+                    arguments="{_all}"
+                />
+            </f:if>
         </f:form>
     </f:if>
     <div class="program-list">
