@@ -3,12 +3,16 @@
     xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
     data-namespace-typo3-fluid="true"
 >
+<f:if condition="{program.attributes}">
+    <f:then>
+        <f:variable name="cateoriesByType" value="{program.attributes.allCategoriesByType}" />
+    </f:then>
+    <f:else>
+        <f:variable name="cateoriesByType" value="{program.categories.allCategoriesByType}" />
+    </f:else>
+</f:if>
 <dl>
-    <f:for
-        each="{program.categories.allCategoriesByType}"
-        key="type"
-        as="categories"
-    >
+    <f:for each="{cateoriesByType}" key="type" as="categories">
         <f:if condition="{categories}">
             <dt>
                 <core:icon identifier="academic-programs-{type}"/>

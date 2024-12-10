@@ -15,6 +15,13 @@
 				<source>Configuration</source>
 			</trans-unit>
 
+			<trans-unit id="plugin.program_details.title">
+				<source>Academic program details</source>
+			</trans-unit>
+			<trans-unit id="plugin.program_details.description">
+				<source>Displays the details of an academic program</source>
+			</trans-unit>
+
 			<!-- Flexform -->
 
 			<trans-unit id="flexform.categories.label">
