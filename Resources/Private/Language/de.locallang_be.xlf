@@ -18,6 +18,15 @@
 				<target>Konfiguration</target>
 			</trans-unit>
 
+			<trans-unit id="plugin.program_details.title">
+				<source>Academic program details</source>
+				<target>Akademische Programm-Details</target>
+			</trans-unit>
+			<trans-unit id="plugin.program_details.description">
+				<source>Displays the details of an academic program</source>
+				<target>Zeigt die Details eines akademischen Programms an.</target>
+			</trans-unit>
+
 			<!-- Flexform -->
 
 			<trans-unit id="flexform.categories.label">
