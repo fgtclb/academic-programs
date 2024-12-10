@@ -1,50 +1,76 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <xliff version="1.0">
-	<file source-language="en" target-language="" datatype="plaintext"
-		  original="messages" date="2023-04-24T15:52:42Z">
-		<header>
-			<generator>PhpStorm</generator>
-		</header>
+	<file source-language="en" target-language="" datatype="plaintext" original="messages" date="2023-04-24T15:52:42Z">
+		<header/>
 		<body>
-			<trans-unit id="flexform.filter.options.title">
-				<source>Deactivate filters</source>
-				<target>Filterung deaktivieren</target>
+			<!-- Plugin -->
+
+			<trans-unit id="plugin.program_list.title">
+				<source>Academic programs list</source>
+				<target>Akademische Programme-Liste</target>
 			</trans-unit>
-			<trans-unit id="flexform.filter.options.description">
-				<source>If the option is enabled, options with filters will not be visible in the frontend</source>
-				<target>Wenn diese Option aktiviert ist, werden die Filteroptionen im Frontend nicht sichtbar</target>
+			<trans-unit id="plugin.program_list.description">
+				<source>Display a sortable and filterable list of academic programs.</source>
+				<target>Zeigt eine sortierbare und filterbare Liste von akademischen Programmen an.</target>
 			</trans-unit>
-			<trans-unit id="flexform.sorting">
-				<source>Sorting</source>
-				<target>Sortierung</target>
+			<trans-unit id="plugin.program_list.configuration">
+				<source>Configuration</source>
+				<target>Konfiguration</target>
+			</trans-unit>
+
+			<!-- Flexform -->
+
+			<trans-unit id="flexform.categories.label">
+				<source>Default categories</source>
+				<target>Standard-Kategorien</target>
+			</trans-unit>
+			<trans-unit id="flexform.categories.description">
+				<source>Selected categories of the same type (e.g. ‘Degree’) are checked as alternatives (OR). If a category has subcategories (e.g. ‘Master’ with ‘Master of Arts’), these are automatically added to the list of alternatives. In addition, the pages found for each category type must also be able to be found in all other selected category types (AND).</source>
+				<target>Ausgewählte Kategorien desselben Typs (z. B. "Abschluss") werden als Alternativen geprüft (ODER). Wenn eine Kategorie über Unterkategorien verfügt (z.B. "Master" mit "Master of Arts"), werden diese automatisch zur Liste der Alternativen hinzugefügt. Zusätzlich müssen die gefundenen Seiten für jeden Kategorietyp auch in allen anderen ausgewählten Kategorietypen gefunden werden können (UND).</target>
+			</trans-unit>
+			<trans-unit id="flexform.hide_filtering.label">
+				<source>Hide category filtering</source>
+				<target>Kategorienfilter ausblenden</target>
+			</trans-unit>
+			<trans-unit id="flexform.hide_filtering.description">
+				<source>If the option is enabled, options for filtering by categories will not be visible in the frontend.</source>
+				<target>Wenn diese Option aktiviert ist, werden die Filteroptionen nach Kategorien im Frontend nicht sichtbar sein.</target>
+			</trans-unit>
+			<trans-unit id="flexform.hide_sorting.label">
+				<source>Hide sorting</source>
+				<target>Sortierung ausblenden</target>
+			</trans-unit>
+			<trans-unit id="flexform.hide_sorting.description">
+				<source>If the option is enabled, options for sorting will not be visible in the frontend.</source>
+				<target>Wenn diese Option aktiviert ist, werden die Sortieroptionen im Frontend nicht sichtbar sein.</target>
+			</trans-unit>
+			<trans-unit id="flexform.sorting.label">
+				<source>Default sorting</source>
+				<target>Standard-Sortierung</target>
 			</trans-unit>
 			<trans-unit id="flexform.sorting.description">
-				<source>Define sorting in frontend. Sort by page sorting doesn't respect multiple mounts as sort</source>
-				<target>Sortierung im Frontend. Sortierung nach Seitensortierung respektiert keine multiplen Mountpoints</target>
+				<source>Default sorting in frontend which can be changed by user if sorting options are visible.</source>
+				<target>Standard-Sortierung im Frontend, die vom Benutzer geändert werden kann, wenn die Sortieroptionen sichtbar sind.</target>
 			</trans-unit>
 			<trans-unit id="flexform.sorting.title.asc">
 				<source>Title A-Z</source>
 				<target>Titel A-Z</target>
 			</trans-unit>
-			<trans-unit id="flexform.sorting.desc">
+			<trans-unit id="flexform.sorting.title.desc">
 				<source>Title Z-A</source>
 				<target>Titel Z-A</target>
 			</trans-unit>
 			<trans-unit id="flexform.sorting.update">
 				<source>Last updated (latest first)</source>
-				<target>Letztes Update (Neueste zuerst)</target>
+				<target>Zuletzt aktualisiert (neueste zuerst)</target>
 			</trans-unit>
 			<trans-unit id="flexform.sorting.update.asc">
 				<source>Last updated (latest last)</source>
-				<target>Letztes Update (Älteste zuerst)</target>
+				<target>Zuletzt aktualisiert (älteste zuerst)</target>
 			</trans-unit>
 			<trans-unit id="flexform.sorting.sorting.asc">
 				<source>Page sorting (Result may be unexpected)</source>
-				<target>Seitensortierung (Ergebnis ist eventuell unerwartet)</target>
-			</trans-unit>
-			<trans-unit id="flexform.category.description">
-				<source>Select categories. Selected categories of the same type (e.g. ‘Degree’) are checked as alternatives (OR). If a category has subcategories (e.g. ‘Master’ with ‘Master of Arts’), these are automatically added to the list of alternatives. In addition, the pages found for each category type must also be able to be found in all other selected category types (AND).</source>
-				<target>Kategorien auswählen. Ausgewählte Kategorien desselben Typs (z. B. "Abschluss") werden als Alternativen geprüft (ODER). Wenn eine Kategorie über Unterkategorien verfügt (z.B. "Master" mit "Master of Arts"), werden diese automatisch zur Liste der Alternativen hinzugefügt. Zusätzlich müssen die gefundenen Seiten für jeden Kategorietyp auch in allen anderen ausgewählten Kategorietypen gefunden werden können (UND).</target>
+				<target>Seitensortierung (Ergebnis kann unerwartet sein)</target>
 			</trans-unit>
 		</body>
 	</file>
