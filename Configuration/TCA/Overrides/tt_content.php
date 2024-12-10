@@ -31,4 +31,13 @@ defined('TYPO3') or die;
         'FILE:EXT:academic_programs/Configuration/FlexForms/ProgramListSettings.xml',
         $pluginSignature,
     );
+
+    $pluginSignature = ExtensionUtility::registerPlugin(
+        'AcademicPrograms',
+        'ProgramDetails',
+        $ll('plugin.program_details.title'),
+        'EXT:academic_programs/Resources/Public/Icons/Extension.svg',
+        'plugins',
+        $ll('plugin.program_details.decription'),
+    );
 })();
