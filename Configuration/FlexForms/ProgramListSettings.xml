@@ -1,0 +1,74 @@
+<T3DataStructure>
+    <ROOT>
+        <TCEforms>
+            <sheetTitle>Filter</sheetTitle>
+        </TCEforms>
+        <type>array</type>
+        <el>
+            <settings.hideFilter>
+                <label>LLL:EXT:academic_programs/Resources/Private/Language/locallang_be.xlf:flexform.hide_filtering.label</label>
+                <description>LLL:EXT:academic_programs/Resources/Private/Language/locallang_be.xlf:flexform.hide_filtering.description</description>
+                <config>
+                    <type>check</type>
+                    <renderType>checkboxToggle</renderType>
+                </config>
+            </settings.hideFilter>
+            <settings.hideSorting>
+                <label>LLL:EXT:academic_programs/Resources/Private/Language/locallang_be.xlf:flexform.hide_sorting.label</label>
+                <description>LLL:EXT:academic_programs/Resources/Private/Language/locallang_be.xlf:flexform.hide_sorting.description</description>
+                <config>
+                    <type>check</type>
+                    <renderType>checkboxToggle</renderType>
+                </config>
+            </settings.hideSorting>
+            <settings.sorting>
+                <label>LLL:EXT:academic_programs/Resources/Private/Language/locallang_be.xlf:flexform.sorting.label</label>
+                <description>LLL:EXT:academic_programs/Resources/Private/Language/locallang_be.xlf:flexform.sorting.description</description>
+                <config>
+                    <type>select</type>
+                    <renderType>selectSingle</renderType>
+                    <items>
+                        <numIndex index="0" type="array">
+                            <numIndex index="0">LLL:EXT:academic_programs/Resources/Private/Language/locallang_be.xlf:flexform.sorting.title.asc</numIndex>
+                            <numIndex index="1">title asc</numIndex>
+                        </numIndex>
+                        <numIndex index="1" type="array">
+                            <numIndex index="0">LLL:EXT:academic_programs/Resources/Private/Language/locallang_be.xlf:flexform.sorting.title.desc</numIndex>
+                            <numIndex index="1">title desc</numIndex>
+                        </numIndex>
+                        <numIndex index="2" type="array">
+                            <numIndex index="0">LLL:EXT:academic_programs/Resources/Private/Language/locallang_be.xlf:flexform.sorting.update</numIndex>
+                            <numIndex index="1">lastUpdated desc</numIndex>
+                        </numIndex>
+                        <numIndex index="3" type="array">
+                            <numIndex index="0">LLL:EXT:academic_programs/Resources/Private/Language/locallang_be.xlf:flexform.sorting.update.asc</numIndex>
+                            <numIndex index="1">lastUpdated asc</numIndex>
+                        </numIndex>
+                        <numIndex index="4" type="array">
+                            <numIndex index="0">LLL:EXT:academic_programs/Resources/Private/Language/locallang_be.xlf:flexform.sorting.sorting.asc</numIndex>
+                            <numIndex index="1">sorting asc</numIndex>
+                        </numIndex>
+                    </items>
+                </config>
+            </settings.sorting>
+            <settings.categories>
+                <label>LLL:EXT:academic_programs/Resources/Private/Language/locallang_be.xlf:flexform.categories.label</label>
+                <description>LLL:EXT:academic_programs/Resources/Private/Language/locallang_be.xlf:flexform.category.description</description>
+                <config>
+                    <type>category</type>
+                    <default>0</default>
+                    <relationship>oneToMany</relationship>
+                    <foreign_table>sys_category</foreign_table>
+                    <foreign_table_where>AND {#sys_category}.{#type} != '' AND {#sys_category}.{#sys_language_uid} IN (-1, 0)</foreign_table_where>
+                    <maxitems>9999</maxitems>
+                    <MM>sys_category_record_mm</MM>
+                    <MM_match_fields>
+                        <fieldname>pi_flexform</fieldname>
+                        <tablenames>tt_content</tablenames>
+                    </MM_match_fields>
+                    <MM_opposite_field>items</MM_opposite_field>
+                </config>
+            </settings.categories>
+        </el>
+    </ROOT>
+</T3DataStructure>
