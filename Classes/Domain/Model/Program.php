@@ -43,7 +43,7 @@ class Program extends AbstractEntity
     /**
      * @return int<0, max>|null
      */
-    public function getUid(): int
+    public function getUid(): ?int
     {
         return $this->uid;
     }
@@ -85,7 +85,11 @@ class Program extends AbstractEntity
 
     public function getAttributes(): ?CategoryCollection
     {
-        return GeneralUtility::makeInstance(CategoryRepository::class)->findAllByPageId($this->uid);
+        $attributes = GeneralUtility::makeInstance(CategoryCollection::class);
+        if ($this->uid !== null) {
+            $attributes = GeneralUtility::makeInstance(CategoryRepository::class)->findAllByPageId($this->uid);
+        }
+        return $attributes;
     }
 
     /**
