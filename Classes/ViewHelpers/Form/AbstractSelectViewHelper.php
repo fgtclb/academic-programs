@@ -15,9 +15,9 @@ class AbstractSelectViewHelper extends AbstractFormFieldViewHelper
     protected $tagName = 'select';
 
     /**
-     * @var mixed
+     * @var string[]
      */
-    protected $selectedValue;
+    protected $selectedValues;
 
     public function initializeArguments(): void
     {
@@ -76,6 +76,7 @@ class AbstractSelectViewHelper extends AbstractFormFieldViewHelper
         $name = $this->getName();
         $this->tag->addAttribute('name', $name);
 
+        $this->initSelectedValues();
         $options = $this->getOptions();
 
         if (isset($this->arguments['renderOptions'])
@@ -102,7 +103,7 @@ class AbstractSelectViewHelper extends AbstractFormFieldViewHelper
             $tagContent = $this->renderOptionTags($options);
         }
 
-        $viewHelperVariableContainer->addOrUpdate(self::class, 'selectedValue', $this->getSelectedValue());
+        $viewHelperVariableContainer->addOrUpdate(self::class, 'selectedValue', $this->selectedValues);
 
         $childContent = $this->renderChildren();
 
@@ -158,22 +159,24 @@ class AbstractSelectViewHelper extends AbstractFormFieldViewHelper
     }
 
     /**
-     * Retrieves the selected value(s)
-     *
-     * @return mixed value string or an array of strings
+     * Inits the selected value(s) property
      */
-    protected function getSelectedValue()
+    protected function initSelectedValues(): void
     {
+        $selectedValues = [];
+
         $this->setRespectSubmittedDataValue(true);
         $value = $this->getValueAttribute();
+
         if (!is_array($value) && !$value instanceof \Traversable) {
-            return $this->getOptionValueScalar($value);
+            $selectedValues[] = $this->getOptionValueScalar($value);
+        } else {
+            foreach ($value as $selectedValueElement) {
+                $selectedValues[] = $this->getOptionValueScalar($selectedValueElement);
+            }
         }
-        $selectedValues = [];
-        foreach ($value as $selectedValueElement) {
-            $selectedValues[] = $this->getOptionValueScalar($selectedValueElement);
-        }
-        return $selectedValues;
+
+        $this->selectedValues = $selectedValues;
     }
 
     /**
@@ -194,7 +197,7 @@ class AbstractSelectViewHelper extends AbstractFormFieldViewHelper
             }
             return (string)$valueElement;
         }
-        return $valueElement;
+        return (string)$valueElement;
     }
 
     /**
@@ -205,9 +208,7 @@ class AbstractSelectViewHelper extends AbstractFormFieldViewHelper
      */
     protected function isSelected($value)
     {
-        $selectedValue = $this->getSelectedValue();
-
-        if ($value === $selectedValue || (string)$value === $selectedValue) {
+        if (in_array((string)$value, $this->selectedValues)) {
             return true;
         }
 
