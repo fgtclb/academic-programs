@@ -14,7 +14,7 @@ class ProgramDataFactory
 {
     /**
      * @param array<int|string, mixed> $properties page properties of the current page
-     * @return Program
+     * @return ProgramData
      */
     public function get(array $properties): ProgramData
     {
