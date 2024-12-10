@@ -24,16 +24,8 @@
 			<!-- Labels	for pages -->
 
 			<trans-unit id="pages.academic_programs">
-				<source>[Academic] Program Page</source>
-				<target>[Academic] Programmseite</target>
-			</trans-unit>
-			<trans-unit id="pages.structured">
-				<source>Structured data</source>
-				<target>Strukturierte Daten</target>
-			</trans-unit>
-			<trans-unit id="pages.program">
-				<source>Program</source>
-				<target>Programm</target>
+				<source>Academic Program Page</source>
+				<target>Academic Programmseite</target>
 			</trans-unit>
 			<trans-unit id="pages.div.program_information">
 				<source>Program information</source>
@@ -56,7 +48,7 @@
 				<target>Überblick</target>
 			</trans-unit>
 			<trans-unit id="pages.contents">
-				<source>Programminhalte</source>
+				<source>Programm contents</source>
 				<target>Programminhalte</target>
 			</trans-unit>
 			<trans-unit id="pages.application">
@@ -67,8 +59,8 @@
 			<!-- Labels for SysCategories -->
 
 			<trans-unit id="sys_category.academic_programs.group">
-				<source>[Academic] Programs</source>
-				<target>[Academic] Programme</target>
+				<source>Academic Programs</source>
+				<target>Akademische Programme</target>
 			</trans-unit>
 			<trans-unit id="sys_category.academic_programs.admission_restriction">
 				<source>Admission restriction</source>
