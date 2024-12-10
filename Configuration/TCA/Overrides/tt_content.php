@@ -2,19 +2,33 @@
 
 declare(strict_types=1);
 
+use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
+use TYPO3\CMS\Extbase\Utility\ExtensionUtility;
+
+defined('TYPO3') or die;
+
 (static function (): void {
-    \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
+    $ll = static fn (string $key): string => sprintf('LLL:EXT:academic_programs/Resources/Private/Language/locallang_be.xlf:%s', $key);
+
+    $pluginSignature = ExtensionUtility::registerPlugin(
         'AcademicPrograms',
         'ProgramList',
-        'Educational Program',
-        'academic-programs-studiesIcon'
+        $ll('plugin.program_list.title'),
+        'EXT:academic_programs/Resources/Public/Icons/Extension.svg',
+        'plugins',
+        $ll('plugin.program_list.decription'),
     );
 
-    $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_excludelist']['AcademicPrograms_programlist'] = 'layout,recursive';
-    $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_addlist']['AcademicPrograms_programlist'] = 'pi_flexform';
+    ExtensionManagementUtility::addToAllTCAtypes(
+        'tt_content',
+        '--div--;' . $ll('plugin.program_list.configuration') . ',pi_flexform,',
+        $pluginSignature,
+        'after:subheader',
+    );
 
-    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPiFlexFormValue(
-        'AcademicPrograms_programlist',
-        'FILE:EXT:academic_programs/Configuration/FlexForms/ProgramSettings.xml'
+    ExtensionManagementUtility::addPiFlexFormValue(
+        '*',
+        'FILE:EXT:academic_programs/Configuration/FlexForms/ProgramListSettings.xml',
+        $pluginSignature,
     );
 })();
