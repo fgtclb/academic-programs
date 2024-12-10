@@ -3,6 +3,7 @@ mod {
     BackendLayouts {
       AcademicPrograms {
         title = LLL:EXT:academic_programs/Resources/Private/Language/locallang.xlf:backend_layout.academic_programs
+        icon = EXT:academic_programs/Resources/Public/Icons/BackendLayout.png
         config {
           backend_layout {
             colCount = 1
@@ -20,7 +21,6 @@ mod {
             }
           }
         }
-        icon = academic-programs
       }
     }
   }
