@@ -29,6 +29,9 @@
 			<trans-unit id="pages.prerequisites">
 				<source>Prerequisites</source>
 			</trans-unit>
+			<trans-unit id="pages.credit_points">
+				<source>Credit points</source>
+			</trans-unit>
 			<trans-unit id="pages.job_profile">
 				<source>Job profile</source>
 			</trans-unit>

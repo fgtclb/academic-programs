@@ -35,6 +35,10 @@
 				<source>Prerequisites</source>
 				<target>Voraussetzungen</target>
 			</trans-unit>
+			<trans-unit id="pages.credit_points">
+				<source>Credit points</source>
+				<target>Leistungspunkte</target>
+			</trans-unit>
 			<trans-unit id="pages.job_profile">
 				<source>Job profile</source>
 				<target>Berufsprofil</target>
