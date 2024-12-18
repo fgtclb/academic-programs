@@ -25,6 +25,7 @@ class ProgramDataFactory
         $program->setTitle((string)$properties['title']);
         $program->setSubtitle((string)$properties['subtitle']);
         $program->setAbstract((string)$properties['abstract']);
+        $program->setCreditPoints((int)$properties['credit_points']);
         $program->setJobProfile((string)$properties['job_profile']);
         $program->setPerformanceScope((string)$properties['performance_scope']);
         $program->setPrerequisites((string)$properties['prerequisites']);
