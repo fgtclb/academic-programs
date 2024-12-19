@@ -22,6 +22,8 @@ class ProgramData
 
     protected string $abstract = '';
 
+    protected int $creditPoints = 0;
+
     protected string $jobProfile = '';
 
     protected string $performanceScope = '';
@@ -86,6 +88,16 @@ class ProgramData
     public function getAbstract(): string
     {
         return $this->abstract;
+    }
+
+    public function setCreditPoints(int $creditPoints): void
+    {
+        $this->creditPoints = $creditPoints;
+    }
+
+    public function getCreditPoints(): int
+    {
+        return $this->creditPoints;
     }
 
     public function setJobProfile(string $jobProfile): void

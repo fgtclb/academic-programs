@@ -55,6 +55,13 @@ defined('TYPO3') or die;
 
     // Define academic programs specific columns
     $additionalTCAcolumns = [
+        'credit_points' => [
+            'label' => $ll('pages.credit_points'),
+            'config' => [
+                'type' => 'input',
+                'eval' => 'trim,int',
+            ],
+        ],
         'job_profile' => [
             'label' => $ll('pages.job_profile'),
             'config' => [
@@ -89,6 +96,7 @@ defined('TYPO3') or die;
             . $ll('pages.div.program_information')
             . ','
             . implode(',', [
+                'credit_points',
                 'job_profile',
                 'performance_scope',
                 'prerequisites',

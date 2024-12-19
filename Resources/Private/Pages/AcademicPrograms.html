@@ -46,16 +46,21 @@
         <h1>[INFO FROM PAGE PROPERTIES]</h1>
         <hr />
         <div class="row">
-            <div class="col-12 col-md-6 col-xxl-4">
+            <div class="col-12 col-md-6 col-xxl-3">
+                <h2>Credit Points</h2>
+                {program.creditPoints}
+
+            </div>
+            <div class="col-12 col-md-6 col-xxl-3">
                 <h2>Job Profile</h2>
                 {program.jobProfile -> f:format.raw()}
 
             </div>
-            <div class="col-12 col-md-6 col-xxl-4">
+            <div class="col-12 col-md-6 col-xxl-3">
                 <h2>Performance Scope</h2>
                 {program.performanceScope -> f:format.raw()}
             </div>
-            <div class="col-12 col-md-6 col-xxl-4">
+            <div class="col-12 col-md-6 col-xxl-3">
                 <h2>Prerequisites</h2>
                 {program.prerequisites -> f:format.raw()}
             </div>

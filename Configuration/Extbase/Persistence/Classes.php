@@ -17,7 +17,10 @@ return [
             'media' => [
                 'fieldName' => 'media',
             ],
-            'job_profile' => [
+            'creditPoints' => [
+                'fieldName' => 'credit_points',
+            ],
+            'jobProfile' => [
                 'fieldName' => 'job_profile',
             ],
             'performanceScope' => [
