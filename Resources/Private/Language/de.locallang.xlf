@@ -114,6 +114,10 @@
 				<source>Topic</source>
 				<target>Thema</target>
 			</trans-unit>
+			<trans-unit id="sys_category.academic_programs.allOptions">
+				<source>All options</source>
+				<target>Alle Optionen</target>
+			</trans-unit>
 
 			<!-- Sorting field and direction options -->
 
@@ -159,6 +163,21 @@
 			<trans-unit id="sorting.sorting.asc">
 				<source>Page sorting (Result may be unexpected)</source>
 				<target>Seitensortierung (Ergebnis kann unerwartet sein)</target>
+			</trans-unit>
+
+			<!-- List -->
+
+			<trans-unit id="list.noProgramsFound">
+				<source>No programs found.</source>
+				<target>Keine Studiengänge gefunden.</target>
+			</trans-unit>
+			<trans-unit id="list.sortingField">
+				<source>Sorting field</source>
+				<target>Sortierfeld</target>
+			</trans-unit>
+			<trans-unit id="list.sortingDirection">
+				<source>Sorting direction</source>
+				<target>Sortierreihenfolge</target>
 			</trans-unit>
 		</body>
 	</file>
