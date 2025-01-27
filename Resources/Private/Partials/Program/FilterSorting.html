@@ -3,22 +3,27 @@
     xmlns:fe="http://typo3.org/ns/FGTCLB/AcademicPrograms/ViewHelpers"
     data-namespace-typo3-fluid="true"
 >
-    <label for="sortingField">Sortierfeld</label>
+    <label for="sortingField">
+        {f:translate(key: 'list.sortingField', extensionName: 'academic_programs')}
+    </label>
     <fe:form.sortingSelect
         id="sortingField"
         property="sortingField"
         value="{demand.sortingField}"
         type="fields"
         additionalAttributes="{'onchange': 'this.form.submit()'}"
-        l10n="filter.sortingField" 
+        l10n="filter.sortingField"
     />
-    <label for="sortingDirection">Sortierreihenfolge</label>
+
+    <label for="sortingDirection">
+        {f:translate(key: 'list.sortingDirection', extensionName: 'academic_programs')}
+    </label>
     <fe:form.sortingSelect
         id="sortingDirection"
         property="sortingDirection"
         value="{demand.sortingDirection}"
         type="directions"
         additionalAttributes="{'onchange': 'this.form.submit()'}"
-        l10n="filter.sortingDirection" 
+        l10n="filter.sortingDirection"
     />
 </html>
