@@ -1,0 +1,25 @@
+mod.wizards.newContentElement.wizardItems.academic {
+  header = LLL:EXT:academic_programs/Resources/Private/Language/locallang_be.xlf:content.ctype.group.label
+  after = special
+  elements {
+    academicprograms_programlist {
+      iconIdentifier = academic-programs
+      title = LLL:EXT:academic_programs/Resources/Private/Language/locallang_be.xlf:plugin.program_list.title
+      description = LLL:EXT:academic_programs/Resources/Private/Language/locallang_be.xlf:plugin.program_list.description
+      tt_content_defValues {
+        CType = academicprograms_programlist
+      }
+    }
+
+    academicprograms_programdetails {
+      iconIdentifier = academic-programs
+      title = LLL:EXT:academic_programs/Resources/Private/Language/locallang_be.xlf:plugin.program_details.title
+      description = LLL:EXT:academic_programs/Resources/Private/Language/locallang_be.xlf:plugin.program_details.description
+      tt_content_defValues {
+        CType = academicprograms_programdetails
+      }
+    }
+  }
+
+  show := addToList(academicprograms_programlist,academicprograms_programdetails)
+}
