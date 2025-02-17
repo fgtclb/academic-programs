@@ -10,7 +10,6 @@ defined('TYPO3') or die;
 (static function (): void {
     $ll = static fn (string $key): string => sprintf('LLL:EXT:academic_programs/Resources/Private/Language/locallang_be.xlf:%s', $key);
 
-
     ExtensionManagementUtility::addTcaSelectItemGroup(
         'tt_content',
         'CType',
@@ -43,13 +42,13 @@ defined('TYPO3') or die;
     ExtensionManagementUtility::addToAllTCAtypes(
         'tt_content',
         '--div--;' . $ll('plugin.program_list.configuration') . ',pi_flexform,',
-        $pluginSignature,
+        $contentIdentifier,
         'after:subheader',
     );
 
     ExtensionManagementUtility::addPiFlexFormValue(
         '*',
         'FILE:EXT:academic_programs/Configuration/FlexForms/ProgramListSettings.xml',
-        $pluginSignature,
+        $contentIdentifier,
     );
 })();
