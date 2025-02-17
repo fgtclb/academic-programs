@@ -26,6 +26,10 @@
 				<source>Displays the details of an academic program</source>
 				<target>Zeigt die Details eines akademischen Programms an.</target>
 			</trans-unit>
+			<trans-unit id="content.ctype.group.label">
+                <source>Academic</source>
+                <target>Academic</target>
+            </trans-unit>
 
 			<!-- Flexform -->
 
