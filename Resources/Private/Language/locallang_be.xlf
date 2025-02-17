@@ -21,6 +21,9 @@
 			<trans-unit id="plugin.program_details.description">
 				<source>Displays the details of an academic program</source>
 			</trans-unit>
+			<trans-unit id="content.ctype.group.label">
+                <source>Academic</source>
+            </trans-unit>
 
 			<!-- Flexform -->
 
