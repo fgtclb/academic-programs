@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace FGTCLB\AcademicPrograms\Controller;
 
-use FGTCLB\AcademicPrograms\Domain\Repository\CategoryRepository;
 use FGTCLB\AcademicPrograms\Domain\Repository\ProgramRepository;
 use FGTCLB\AcademicPrograms\Factory\DemandFactory;
+use FGTCLB\CategoryTypes\Domain\Repository\CategoryRepository;
 use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Core\Information\Typo3Version;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -48,7 +48,7 @@ class ProgramController extends ActionController
         );
 
         $programs = $this->programRepository->findByDemand($demandObject);
-        $categories = $this->categoryRepository->findAllApplicable($programs);
+        $categories = $this->categoryRepository->findAllApplicable('programs', $programs);
 
         $this->view->assignMultiple([
             'programs' => $programs,

@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace FGTCLB\AcademicPrograms\Domain\Model;
 
-use FGTCLB\AcademicPrograms\Collection\CategoryCollection;
-use FGTCLB\AcademicPrograms\Domain\Repository\CategoryRepository;
+use FGTCLB\CategoryTypes\Collection\CategoryCollection;
+use FGTCLB\CategoryTypes\Domain\Repository\CategoryRepository;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Domain\Model\FileReference;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
@@ -92,11 +92,8 @@ class Program extends AbstractEntity
 
     public function getAttributes(): ?CategoryCollection
     {
-        $attributes = GeneralUtility::makeInstance(CategoryCollection::class);
-        if ($this->uid !== null) {
-            $attributes = GeneralUtility::makeInstance(CategoryRepository::class)->findAllByPageId($this->uid);
-        }
-        return $attributes;
+        $categoryRepository = GeneralUtility::makeInstance(CategoryRepository::class);
+        return $categoryRepository->findByGroupAndPageId('programs', $this->getUid());
     }
 
     /**

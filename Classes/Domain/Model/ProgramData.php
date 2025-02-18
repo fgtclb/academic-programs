@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace FGTCLB\AcademicPrograms\Domain\Model;
 
-use FGTCLB\AcademicPrograms\Collection\CategoryCollection;
-use FGTCLB\AcademicPrograms\Domain\Repository\CategoryRepository;
+use FGTCLB\CategoryTypes\Collection\CategoryCollection;
+use FGTCLB\CategoryTypes\Domain\Repository\CategoryRepository;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class ProgramData

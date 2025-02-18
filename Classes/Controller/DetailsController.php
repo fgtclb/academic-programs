@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace FGTCLB\AcademicPrograms\Controller;
 
-use FGTCLB\AcademicPrograms\Domain\Repository\CategoryRepository;
 use FGTCLB\AcademicPrograms\Domain\Repository\ProgramRepository;
 use FGTCLB\AcademicPrograms\Factory\DemandFactory;
 use Psr\Http\Message\ResponseInterface;
@@ -16,7 +15,6 @@ class DetailsController extends ActionController
 {
     public function __construct(
         protected ProgramRepository $programRepository,
-        protected CategoryRepository $categoryRepository,
         protected DemandFactory $programDemandFactory
     ) {
     }
