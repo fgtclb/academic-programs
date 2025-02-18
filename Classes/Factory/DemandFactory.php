@@ -4,11 +4,10 @@ declare(strict_types=1);
 
 namespace FGTCLB\AcademicPrograms\Factory;
 
-use FGTCLB\AcademicPrograms\Collection\CategoryCollection;
-use FGTCLB\AcademicPrograms\Collection\FilterCollection;
 use FGTCLB\AcademicPrograms\Domain\Model\Dto\ProgramDemand;
-use FGTCLB\AcademicPrograms\Domain\Repository\CategoryRepository;
-use FGTCLB\AcademicPrograms\Enumeration\CategoryTypes;
+use FGTCLB\CategoryTypes\Collection\CategoryCollection;
+use FGTCLB\CategoryTypes\Collection\FilterCollection;
+use FGTCLB\CategoryTypes\Domain\Repository\CategoryRepository;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class DemandFactory

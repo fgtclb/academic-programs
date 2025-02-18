@@ -2,9 +2,7 @@
 
 namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 
-use FGTCLB\AcademicPrograms\Collection\FilterCollection;
 use FGTCLB\AcademicPrograms\DataProcessing\ProgramDataProcessor;
-use FGTCLB\AcademicPrograms\Domain\Repository\CategoryRepository;
 use FGTCLB\AcademicPrograms\Domain\Repository\ProgramRepository;
 use TYPO3\CMS\Core\Information\Typo3Version;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -21,14 +19,6 @@ return function (ContainerConfigurator $containerConfigurator) {
     $services
         ->load('FGTCLB\\AcademicPrograms\\', '../Classes/')
         ->exclude('../Classes/Domain/Model/');
-
-    $services
-        ->set(FilterCollection::class)
-        ->public();
-
-    $services
-        ->set(CategoryRepository::class)
-        ->public();
 
     $services
         ->set(ProgramRepository::class)
