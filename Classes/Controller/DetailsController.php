@@ -40,6 +40,7 @@ class DetailsController extends ActionController
         $program = $this->programRepository->findByUid($contentElementData['pid']);
 
         $this->view->assignMultiple([
+            'data' => $contentElementData,
             'program' => $program,
         ]);
 
