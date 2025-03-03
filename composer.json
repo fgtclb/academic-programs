@@ -31,7 +31,6 @@
 	"require": {
 		"php": "^7.4 || ^8.0 || ^8.1 || ^8.2 || ^8.3",
 		"fgtclb/category-types": "^1.1.0 || 1.*.*@dev",
-		"fgtclb/page-backend-layout": "^1.1.0 || 1.*.*@dev",
 		"typo3/cms-backend": "^11.5 || ^12.4",
 		"typo3/cms-core": "^11.5 || ^12.4",
 		"typo3/cms-extbase": "^11.5 || ^12.4",
@@ -87,5 +86,11 @@
 		],
 		"test:php:unit": ".Build/bin/phpunit --colors=always --configuration Build/phpunit/UnitTests.xml",
 		"test:php:functional": "@test:php:unit --configuration Build/phpunit/FunctionalTests.xml"
+	},
+	"suggest": {
+		"fgtclb/page-backend-layout": "Add backend category preview"
+	},
+	"conflict": {
+		"fgtclb/page-backend-layout": "<1.0.0 || >=2.0.0"
 	}
 }
