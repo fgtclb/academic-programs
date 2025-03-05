@@ -22,6 +22,10 @@
 			"ignore-as-root": false,
 			"web-dir": ".Build/public",
 			"app-dir": ".Build"
+		},
+		"branch-alias": {
+			"dev-main": "1.x.x-dev",
+			"dev-compatibility": "2.x.x-dev"
 		}
 	},
 	"require": {
