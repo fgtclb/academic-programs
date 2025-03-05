@@ -6,3 +6,5 @@
 !.Build/Web/.gitkeep
 composer.lock
 *.cache
+/tailor-version-artefact/
+/tailor-version-upload/
