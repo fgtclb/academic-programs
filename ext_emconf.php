@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 $EM_CONF[$_EXTKEY] = [
     'title' => '(FGTCLB) University Educational Program',
     'description' => 'Educational Program page for TYPO3 with structured data based on sys_category',
