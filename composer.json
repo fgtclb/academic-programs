@@ -4,7 +4,6 @@
 	"description": "Add structured data for academic programs to pages",
 	"minimum-stability": "stable",
 	"license": "GPL-2.0-or-later",
-	"version": "1.0.0",
 	"config": {
 		"vendor-dir": ".Build/vendor",
 		"bin-dir": ".Build/bin",
