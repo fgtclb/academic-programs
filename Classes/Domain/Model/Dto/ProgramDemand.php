@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace FGTCLB\AcademicPrograms\Domain\Model\Dto;
 
-use FGTCLB\AcademicPrograms\Collection\FilterCollection;
 use FGTCLB\AcademicPrograms\Enumeration\SortingOptions;
+use FGTCLB\CategoryTypes\Collection\FilterCollection;
 
 class ProgramDemand
 {

@@ -1,12 +1,12 @@
 <html
     xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
-    xmlns:fe="http://typo3.org/ns/FGTCLB/AcademicPrograms/ViewHelpers"
+    xmlns:ap="http://typo3.org/ns/FGTCLB/AcademicPrograms/ViewHelpers"
     data-namespace-typo3-fluid="true"
 >
     <label for="sortingField">
         {f:translate(key: 'list.sortingField', extensionName: 'academic_programs')}
     </label>
-    <fe:form.sortingSelect
+    <ap:form.sortingSelect
         id="sortingField"
         property="sortingField"
         value="{demand.sortingField}"
@@ -18,7 +18,7 @@
     <label for="sortingDirection">
         {f:translate(key: 'list.sortingDirection', extensionName: 'academic_programs')}
     </label>
-    <fe:form.sortingSelect
+    <ap:form.sortingSelect
         id="sortingDirection"
         property="sortingDirection"
         value="{demand.sortingDirection}"

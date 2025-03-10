@@ -76,6 +76,13 @@ defined('TYPO3') or die;
                 'enableRichtext' => true,
             ],
         ],
+        'performance_scope' => [
+            'label' => $ll('pages.performance_scope'),
+            'config' => [
+                'type' => 'text',
+                'enableRichtext' => true,
+            ],
+        ],
         'prerequisites' => [
             'label' => $ll('pages.prerequisites'),
             'config' => [

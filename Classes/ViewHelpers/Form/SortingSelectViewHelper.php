@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace FGTCLB\AcademicPrograms\ViewHelpers\Form;
 
 use FGTCLB\AcademicPrograms\Enumeration\SortingOptions;
+use FGTCLB\CategoryTypes\ViewHelpers\Form\AbstractSelectViewHelper;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 

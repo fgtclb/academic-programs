@@ -4,17 +4,18 @@ declare(strict_types=1);
 
 namespace FGTCLB\AcademicPrograms\Factory;
 
-use FGTCLB\AcademicPrograms\Collection\CategoryCollection;
-use FGTCLB\AcademicPrograms\Collection\FilterCollection;
 use FGTCLB\AcademicPrograms\Domain\Model\Dto\ProgramDemand;
-use FGTCLB\AcademicPrograms\Domain\Repository\CategoryRepository;
-use FGTCLB\AcademicPrograms\Enumeration\CategoryTypes;
+use FGTCLB\CategoryTypes\Collection\CategoryCollection;
+use FGTCLB\CategoryTypes\Collection\FilterCollection;
+use FGTCLB\CategoryTypes\Domain\Repository\CategoryRepository;
+use FGTCLB\CategoryTypes\Registry\CategoryTypeRegistry;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class DemandFactory
 {
     public function __construct(
-        private CategoryRepository $categoryRepository
+        private CategoryRepository $categoryRepository,
+        private CategoryTypeRegistry $categoryTypeRegistry
     ) {
     }
 
@@ -42,7 +43,7 @@ class DemandFactory
             if (isset($settings['categories'])
                 && (int)$settings['categories'] > 0
             ) {
-                $categoryCollection = $this->categoryRepository->getByDatabaseFields($contentElementData['uid']);
+                $categoryCollection = $this->categoryRepository->getByDatabaseFields('programs', $contentElementData['uid']);
                 $filterCollection = FilterCollection::createByCategoryCollection($categoryCollection);
             }
         } else {
@@ -65,9 +66,10 @@ class DemandFactory
                 foreach ($demandFromForm['filterCollection'] as $type => $categoriesIds) {
                     $formatType = GeneralUtility::camelCaseToLowerCaseUnderscored($type);
                     $categoriesIdList = GeneralUtility::intExplode(',', $categoriesIds);
-                    $categoryFilterObject = $this->categoryRepository->findByUidListAndType(
-                        $categoriesIdList,
-                        CategoryTypes::cast($formatType)
+                    $categoryFilterObject = $this->categoryRepository->findByTypeAndUidList(
+                        'programs',
+                        $type,
+                        $categoriesIdList
                     );
 
                     if ($categoryFilterObject === null) {
@@ -80,6 +82,7 @@ class DemandFactory
                 }
 
                 $filterCollection = FilterCollection::createByCategoryCollection($categoryCollection);
+                $categoryCollection->setTypeIdentifiers($this->categoryTypeRegistry->getCategoryTypeIdentifierByGroup('programs'));
             }
         }
 

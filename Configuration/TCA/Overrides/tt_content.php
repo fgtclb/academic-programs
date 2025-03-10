@@ -17,17 +17,26 @@ defined('TYPO3') or die;
         $ll('content.ctype.group.label'),
     );
 
-    $contentIdentifier = 'academicprograms_programlist';
+    $contentIdentifier = 'academicprograms_programdetails';
     // ToDo: After drop v11 Support transform first parameter to @see TYPO3\CMS\Core\Schema\Struct\SelectItem
     \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPlugin(
         [
-            ((new \TYPO3\CMS\Core\Information\Typo3Version())->getMajorVersion() >= 12 ? 'label' : 0) => $ll('plugin.program_list.title'),
+            ((new \TYPO3\CMS\Core\Information\Typo3Version())->getMajorVersion() >= 12 ? 'label' : 0) => $ll('plugin.program_details.title'),
             ((new \TYPO3\CMS\Core\Information\Typo3Version())->getMajorVersion() >= 12 ? 'value' : 1) => $contentIdentifier,
             ((new \TYPO3\CMS\Core\Information\Typo3Version())->getMajorVersion() >= 12 ? 'icon' : 2) => 'EXT:academic_programs/Resources/Public/Icons/Extension.svg',
             ((new \TYPO3\CMS\Core\Information\Typo3Version())->getMajorVersion() >= 12 ? 'group' : 3) => 'academic',
         ],
         ExtensionUtility::PLUGIN_TYPE_CONTENT_ELEMENT,
         'academic_programs'
+    );
+
+    $pluginSignature = ExtensionUtility::registerPlugin(
+        'AcademicPrograms',
+        'ProgramList',
+        $ll('plugin.program_list.title'),
+        'EXT:academic_programs/Resources/Public/Icons/Extension.svg',
+        'academic',
+        $ll('plugin.program_list.decription'),
     );
 
     ExtensionManagementUtility::addToAllTCAtypes(
@@ -41,18 +50,5 @@ defined('TYPO3') or die;
         '*',
         'FILE:EXT:academic_programs/Configuration/FlexForms/ProgramListSettings.xml',
         $contentIdentifier,
-    );
-
-    $contentIdentifier = 'academicprograms_programdetails';
-    // ToDo: After drop v11 Support transform first parameter to @see TYPO3\CMS\Core\Schema\Struct\SelectItem
-    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPlugin(
-        [
-            ((new \TYPO3\CMS\Core\Information\Typo3Version())->getMajorVersion() >= 12 ? 'label' : 0) => $ll('plugin.program_details.title'),
-            ((new \TYPO3\CMS\Core\Information\Typo3Version())->getMajorVersion() >= 12 ? 'value' : 1) => $contentIdentifier,
-            ((new \TYPO3\CMS\Core\Information\Typo3Version())->getMajorVersion() >= 12 ? 'icon' : 2) => 'EXT:academic_programs/Resources/Public/Icons/Extension.svg',
-            ((new \TYPO3\CMS\Core\Information\Typo3Version())->getMajorVersion() >= 12 ? 'group' : 3) => 'academic',
-        ],
-        ExtensionUtility::PLUGIN_TYPE_CONTENT_ELEMENT,
-        'academic_programs'
     );
 })();
