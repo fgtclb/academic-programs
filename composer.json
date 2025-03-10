@@ -1,95 +1,93 @@
 {
-	"name": "fgtclb/academic-programs",
-	"type": "typo3-cms-extension",
-	"description": "Add structured data for academic programs to pages",
-	"minimum-stability": "stable",
-	"license": "GPL-2.0-or-later",
-	"config": {
-		"vendor-dir": ".Build/vendor",
-		"bin-dir": ".Build/bin",
-		"optimize-autoloader": true,
-		"sort-packages": true,
-		"allow-plugins": {
-			"typo3/class-alias-loader": true,
-			"typo3/cms-composer-installers": true
-		}
-	},
-	"extra": {
-		"typo3/cms": {
-			"cms-package-dir": "{$vendor-dir}/typo3/cms",
-			"extension-key": "academic_programs",
-			"ignore-as-root": false,
-			"web-dir": ".Build/public",
-			"app-dir": ".Build"
-		},
-		"branch-alias": {
-			"dev-main": "1.x.x-dev",
-			"dev-compatibility": "2.x.x-dev"
-		}
-	},
-	"require": {
-		"php": "^7.4 || ^8.0 || ^8.1 || ^8.2 || ^8.3",
-		"fgtclb/category-types": "^1.1.0 || 1.*.*@dev",
-		"typo3/cms-backend": "^11.5 || ^12.4",
-		"typo3/cms-core": "^11.5 || ^12.4",
-		"typo3/cms-extbase": "^11.5 || ^12.4",
-		"typo3/cms-fluid": "^11.5 || ^12.4",
-		"typo3/cms-frontend": "^11.5 || ^12.4"
-	},
-	"require-dev": {
-		"fakerphp/faker": "^1.23",
-		"friendsofphp/php-cs-fixer": "^3.14",
-		"helhum/typo3-console": "^7.1.6 || ^8.0.2",
-		"helmich/typo3-typoscript-lint": "^3.1.0",
-		"phpstan/phpstan": "^1.10",
-		"phpunit/phpunit": "^10.1",
-		"saschaegerer/phpstan-typo3": "^1.8",
-		"typo3/cms-extensionmanager": "^11.5 || ^12.4",
-		"typo3/cms-fluid-styled-content": "^11.5 || ^12.4",
-		"typo3/cms-frontend": "^11.5 || ^12.4",
-		"typo3/cms-info": "^11.5 || ^12.4",
-		"typo3/cms-install": "^11.5 || ^12.4",
-		"typo3/cms-lowlevel": "^11.5 || ^12.4",
-		"typo3/cms-tstemplate": "^11.5 || ^12.4",
-		"typo3/coding-standards": "^0.7.1",
-		"typo3/testing-framework": "^7.0"
-	},
-	"autoload": {
-		"psr-4": {
-			"FGTCLB\\AcademicPrograms\\": "Classes/"
-		}
-	},
-	"autoload-dev": {
-		"psr-4": {
-			"FGTCLB\\AcademicPrograms\\Tests\\": "Tests/"
-		}
-	},
-	"scripts": {
-		"cs": "php-cs-fixer fix --config Build/php-cs-fixer/php-cs-rules.php --ansi",
-		"tl": ".Build/bin/typoscript-lint",
-		"phpstan": ".Build/bin/phpstan",
-		"phpunit": ".Build/bin/phpunit",
-		"cs:check": "@cs --diff --verbose --dry-run",
-		"cs:fix": "@cs",
-		"analyze:php": "@phpstan analyse --ansi --no-progress --memory-limit=768M",
-		"analyze:php:11": "@analyze:php --configuration=Build/phpstan/Core11/phpstan.neon",
-		"analyze:baseline:11": "@analyze:php --configuration=Build/phpstan/Core11/phpstan.neon --generate-baseline=Build/phpstan/Core11/phpstan-baseline.neon",
-		"analyze:php:12": "@analyze:php --configuration=Build/phpstan/Core12/phpstan.neon",
-		"analyze:baseline:12": "@analyze:php --configuration=Build/phpstan/Core12/phpstan.neon --generate-baseline=Build/phpstan/Core12/phpstan-baseline.neon",
-		"analyze:php:13": "@analyze:php --configuration=Build/phpstan/Core13/phpstan.neon",
-		"analyze:baseline:13": "@analyze:php --configuration=Build/phpstan/Core13/phpstan.neon --generate-baseline=Build/phpstan/Core12/phpstan-baseline.neon",
-		"lint:typoscript": "@tl --ansi --config=./Build/typoscript-lint/typoscript-lint.yml",
-		"test:php": [
-			"@test:php:unit",
-			"@test:php:functional"
-		],
-		"test:php:unit": ".Build/bin/phpunit --colors=always --configuration Build/phpunit/UnitTests.xml",
-		"test:php:functional": "@test:php:unit --configuration Build/phpunit/FunctionalTests.xml"
-	},
-	"suggest": {
-		"fgtclb/page-backend-layout": "Add backend category preview"
-	},
-	"conflict": {
-		"fgtclb/page-backend-layout": "<1.0.0 || >=2.0.0"
-	}
+    "name": "fgtclb/academic-programs",
+    "type": "typo3-cms-extension",
+    "description": "Add structured data for academic programs to pages",
+    "minimum-stability": "stable",
+    "license": "GPL-2.0-or-later",
+    "config": {
+        "vendor-dir": ".Build/vendor",
+        "bin-dir": ".Build/bin",
+        "optimize-autoloader": true,
+        "sort-packages": true,
+        "allow-plugins": {
+            "typo3/class-alias-loader": true,
+            "typo3/cms-composer-installers": true
+        }
+    },
+    "extra": {
+        "typo3/cms": {
+            "cms-package-dir": "{$vendor-dir}/typo3/cms",
+            "extension-key": "academic_programs",
+            "ignore-as-root": false,
+            "web-dir": ".Build/public",
+            "app-dir": ".Build"
+        },
+        "branch-alias": {
+            "dev-main": "1.x.x-dev",
+            "dev-compatibility": "2.x.x-dev"
+        }
+    },
+    "require": {
+        "php": "^8.1 || ^8.2 || ^8.3",
+        "fgtclb/category-types": "^2.0 || 2.*.*@dev",
+        "typo3/cms-backend": "^12.4 || ^13.4",
+        "typo3/cms-core": "^12.4 || ^13.4",
+        "typo3/cms-extbase": "^12.4 || ^13.4",
+        "typo3/cms-fluid": "^12.4 || ^13.4",
+        "typo3/cms-frontend": "^12.4 || ^13.4"
+    },
+    "require-dev": {
+        "fakerphp/faker": "^1.23",
+        "friendsofphp/php-cs-fixer": "^3.14",
+        "helhum/typo3-console": "^7.1.6 || ^8.0.2",
+        "helmich/typo3-typoscript-lint": "^3.1.0",
+        "phpstan/phpstan": "^1.10",
+        "phpunit/phpunit": "^10.1",
+        "saschaegerer/phpstan-typo3": "^1.8",
+        "typo3/cms-extensionmanager": "^12.4 || ^13.4",
+        "typo3/cms-fluid-styled-content": "^12.4 || ^13.4",
+        "typo3/cms-info": "^12.4 || ^13.4",
+        "typo3/cms-install": "^12.4 || ^13.4",
+        "typo3/cms-lowlevel": "^12.4 || ^13.4",
+        "typo3/cms-tstemplate": "^12.4 || ^13.4",
+        "typo3/coding-standards": "^0.7.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "FGTCLB\\AcademicPrograms\\": "Classes/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "FGTCLB\\AcademicPrograms\\Tests\\": "Tests/"
+        }
+    },
+    "scripts": {
+        "cs": "php-cs-fixer fix --config Build/php-cs-fixer/php-cs-rules.php --ansi",
+        "tl": ".Build/bin/typoscript-lint",
+        "phpstan": ".Build/bin/phpstan",
+        "phpunit": ".Build/bin/phpunit",
+        "cs:check": "@cs --diff --verbose --dry-run",
+        "cs:fix": "@cs",
+        "analyze:php": "@phpstan analyse --ansi --no-progress --memory-limit=768M",
+        "analyze:php:11": "@analyze:php --configuration=Build/phpstan/Core11/phpstan.neon",
+        "analyze:baseline:11": "@analyze:php --configuration=Build/phpstan/Core11/phpstan.neon --generate-baseline=Build/phpstan/Core11/phpstan-baseline.neon",
+        "analyze:php:12": "@analyze:php --configuration=Build/phpstan/Core12/phpstan.neon",
+        "analyze:baseline:12": "@analyze:php --configuration=Build/phpstan/Core12/phpstan.neon --generate-baseline=Build/phpstan/Core12/phpstan-baseline.neon",
+        "analyze:php:13": "@analyze:php --configuration=Build/phpstan/Core13/phpstan.neon",
+        "analyze:baseline:13": "@analyze:php --configuration=Build/phpstan/Core13/phpstan.neon --generate-baseline=Build/phpstan/Core12/phpstan-baseline.neon",
+        "lint:typoscript": "@tl --ansi --config=./Build/typoscript-lint/typoscript-lint.yml",
+        "test:php": [
+            "@test:php:unit",
+            "@test:php:functional"
+        ],
+        "test:php:unit": ".Build/bin/phpunit --colors=always --configuration Build/phpunit/UnitTests.xml",
+        "test:php:functional": "@test:php:unit --configuration Build/phpunit/FunctionalTests.xml"
+    },
+    "suggest": {
+        "fgtclb/page-backend-layout": "Add backend category preview"
+    },
+    "conflict": {
+        "fgtclb/page-backend-layout": "<2.0.0 || >=3.0.0"
+    }
 }
