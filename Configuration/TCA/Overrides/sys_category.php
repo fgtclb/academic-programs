@@ -9,8 +9,8 @@ use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 defined('TYPO3') or die;
 
 (static function (): void {
-    $ll = static fn (string $key): string => sprintf('LLL:EXT:academic_programs/Resources/Private/Language/locallang.xlf:%s', $key);
-    $iconIdentifier = static fn (string $key): string => 'academic-programs-' . $key;
+    $ll = static fn(string $key): string => sprintf('LLL:EXT:academic_programs/Resources/Private/Language/locallang.xlf:%s', $key);
+    $iconIdentifier = static fn(string $key): string => 'academic-programs-' . $key;
 
     // Add academic programs group to type select
     ExtensionManagementUtility::addTcaSelectItemGroup(

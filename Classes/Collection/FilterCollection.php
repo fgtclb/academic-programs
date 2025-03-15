@@ -6,12 +6,11 @@ namespace FGTCLB\AcademicPrograms\Collection;
 
 use ArrayAccess;
 use FGTCLB\AcademicPrograms\Domain\Model\Category;
-use InvalidArgumentException;
 
 /**
  * @implements ArrayAccess<string, Category[]>
  */
-class FilterCollection implements ArrayAccess
+class FilterCollection implements \ArrayAccess
 {
     protected CategoryCollection $filterCategories;
 
@@ -38,7 +37,7 @@ class FilterCollection implements ArrayAccess
     {
         try {
             $this->filterCategories->getCategoriesByTypeName($offset);
-        } catch (InvalidArgumentException $e) {
+        } catch (\InvalidArgumentException $e) {
             return false;
         }
         return true;
@@ -52,7 +51,7 @@ class FilterCollection implements ArrayAccess
     {
         try {
             $categories = $this->filterCategories->getCategoriesByTypeName($offset);
-        } catch (InvalidArgumentException $e) {
+        } catch (\InvalidArgumentException $e) {
             return false;
         }
         return $categories;
@@ -60,7 +59,7 @@ class FilterCollection implements ArrayAccess
 
     public function offsetSet(mixed $offset, mixed $value): void
     {
-        throw new InvalidArgumentException(
+        throw new \InvalidArgumentException(
             'Method should never be called',
             1683633632593
         );
@@ -68,7 +67,7 @@ class FilterCollection implements ArrayAccess
 
     public function offsetUnset(mixed $offset): void
     {
-        throw new InvalidArgumentException(
+        throw new \InvalidArgumentException(
             'Method should never be called',
             1683633656658
         );

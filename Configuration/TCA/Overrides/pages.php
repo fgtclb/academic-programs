@@ -10,7 +10,7 @@ use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 defined('TYPO3') or die;
 
 (static function (): void {
-    $ll = static fn (string $key): string => sprintf('LLL:EXT:academic_programs/Resources/Private/Language/locallang.xlf:%s', $key);
+    $ll = static fn(string $key): string => sprintf('LLL:EXT:academic_programs/Resources/Private/Language/locallang.xlf:%s', $key);
 
     // Add doktype to select
     $doktype = PageTypes::TYPE_ACADEMIC_PROGRAM;

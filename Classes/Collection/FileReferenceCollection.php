@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace FGTCLB\AcademicPrograms\Collection;
 
-use Countable;
 use Doctrine\DBAL\Driver\Exception;
 use Iterator;
 use TYPO3\CMS\Core\Database\Connection;
@@ -17,7 +16,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 /**
  * @implements Iterator<int, FileReference>
  */
-final class FileReferenceCollection implements Countable, Iterator
+final class FileReferenceCollection implements \Countable, \Iterator
 {
     /**
      * @var FileReference[]

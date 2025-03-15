@@ -8,7 +8,7 @@ use TYPO3\CMS\Extbase\Utility\ExtensionUtility;
 defined('TYPO3') or die;
 
 (static function (): void {
-    $ll = static fn (string $key): string => sprintf('LLL:EXT:academic_programs/Resources/Private/Language/locallang_be.xlf:%s', $key);
+    $ll = static fn(string $key): string => sprintf('LLL:EXT:academic_programs/Resources/Private/Language/locallang_be.xlf:%s', $key);
 
     ExtensionManagementUtility::addTcaSelectItemGroup(
         'tt_content',

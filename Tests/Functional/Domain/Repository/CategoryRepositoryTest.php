@@ -34,8 +34,8 @@ class CategoryRepositoryTest extends FunctionalTestCase
         $repository = GeneralUtility::makeInstance(CategoryRepository::class);
         $categories = $repository->findChildren(4);
 
-        static::assertInstanceOf(CategoryCollection::class, $categories);
-        static::assertEquals(1, $categories->count());
+        $this->assertInstanceOf(CategoryCollection::class, $categories);
+        $this->assertEquals(1, $categories->count());
     }
 
     /**
@@ -46,7 +46,7 @@ class CategoryRepositoryTest extends FunctionalTestCase
         $repository = GeneralUtility::makeInstance(CategoryRepository::class);
         $categories = $repository->findChildren(5);
 
-        static::assertNull($categories);
+        $this->assertNull($categories);
     }
 
     /**
@@ -57,9 +57,9 @@ class CategoryRepositoryTest extends FunctionalTestCase
         $repository = GeneralUtility::makeInstance(CategoryRepository::class);
         $category = $repository->findParent(1);
 
-        static::assertInstanceOf(CategoryTypes::class, $category);
-        static::assertEquals('Category 1', $category->getTitle());
-        static::assertNull($category->getType());
+        $this->assertInstanceOf(CategoryTypes::class, $category);
+        $this->assertEquals('Category 1', $category->getTitle());
+        $this->assertNull($category->getType());
     }
 
     /**
@@ -70,8 +70,8 @@ class CategoryRepositoryTest extends FunctionalTestCase
         $repository = GeneralUtility::makeInstance(CategoryRepository::class);
         $category = $repository->findByType(3, new CategoryTypes(CategoryTypes::TYPE_DEPARTMENT));
 
-        static::assertInstanceOf(CategoryCollection::class, $category);
-        static::assertEquals(3, $category->count());
+        $this->assertInstanceOf(CategoryCollection::class, $category);
+        $this->assertEquals(3, $category->count());
     }
 
     /**
@@ -82,14 +82,14 @@ class CategoryRepositoryTest extends FunctionalTestCase
         $repository = GeneralUtility::makeInstance(CategoryRepository::class);
         $category = $repository->findByType(2, new CategoryTypes(CategoryTypes::TYPE_DEPARTMENT));
 
-        static::assertInstanceOf(CategoryCollection::class, $category);
-        static::assertEquals(0, $category->count());
+        $this->assertInstanceOf(CategoryCollection::class, $category);
+        $this->assertEquals(0, $category->count());
 
         unset($category);
         $category = $repository->findByType(2, new CategoryTypes(CategoryTypes::TYPE_COURSE_TYPE));
 
-        static::assertInstanceOf(CategoryCollection::class, $category);
-        static::assertEquals(0, $category->count());
+        $this->assertInstanceOf(CategoryCollection::class, $category);
+        $this->assertEquals(0, $category->count());
     }
 
     /**
@@ -100,10 +100,10 @@ class CategoryRepositoryTest extends FunctionalTestCase
         $repository = GeneralUtility::makeInstance(CategoryRepository::class);
         $categories = $repository->findAllByPageId(3);
 
-        static::assertCount(3, $categories);
+        $this->assertCount(3, $categories);
 
         foreach ($categories as $category) {
-            static::assertEquals(CategoryTypes::TYPE_DEPARTMENT, $category->getType());
+            $this->assertEquals(CategoryTypes::TYPE_DEPARTMENT, $category->getType());
         }
     }
 
@@ -115,8 +115,8 @@ class CategoryRepositoryTest extends FunctionalTestCase
         $repository = GeneralUtility::makeInstance(CategoryRepository::class);
         $categories = $repository->findAllByPageId(10);
 
-        static::assertInstanceOf(CategoryCollection::class, $categories);
-        static::assertEquals(0, $categories->count());
+        $this->assertInstanceOf(CategoryCollection::class, $categories);
+        $this->assertEquals(0, $categories->count());
     }
 
     /**
@@ -127,8 +127,8 @@ class CategoryRepositoryTest extends FunctionalTestCase
         $repository = GeneralUtility::makeInstance(CategoryRepository::class);
         $categories = $repository->getByDatabaseFields(1);
 
-        static::assertInstanceOf(CategoryCollection::class, $categories);
-        static::assertEquals(1, $categories->count());
+        $this->assertInstanceOf(CategoryCollection::class, $categories);
+        $this->assertEquals(1, $categories->count());
     }
 
     /**
@@ -142,8 +142,8 @@ class CategoryRepositoryTest extends FunctionalTestCase
         $repository = GeneralUtility::makeInstance(CategoryRepository::class);
         $categories = $repository->getByDatabaseFields(1);
 
-        static::assertInstanceOf(CategoryCollection::class, $categories);
-        static::assertEquals(0, $categories->count());
+        $this->assertInstanceOf(CategoryCollection::class, $categories);
+        $this->assertEquals(0, $categories->count());
     }
 
     /**
@@ -154,10 +154,10 @@ class CategoryRepositoryTest extends FunctionalTestCase
         $repository = GeneralUtility::makeInstance(CategoryRepository::class);
         $category = $repository->findByUidListAndType([2, 3], new CategoryTypes(CategoryTypes::TYPE_DEPARTMENT));
 
-        static::assertIsArray($category);
-        static::assertContainsOnlyInstancesOf(CategoryTypes::class, $category);
-        static::assertCount(2, $category);
-        static::assertEquals(CategoryTypes::TYPE_DEPARTMENT, $category[0]->getType());
-        static::assertEquals(CategoryTypes::TYPE_DEPARTMENT, $category[1]->getType());
+        $this->assertIsArray($category);
+        $this->assertContainsOnlyInstancesOf(CategoryTypes::class, $category);
+        $this->assertCount(2, $category);
+        $this->assertEquals(CategoryTypes::TYPE_DEPARTMENT, $category[0]->getType());
+        $this->assertEquals(CategoryTypes::TYPE_DEPARTMENT, $category[1]->getType());
     }
 }

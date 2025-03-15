@@ -18,8 +18,7 @@ class DetailsController extends ActionController
         protected ProgramRepository $programRepository,
         protected CategoryRepository $categoryRepository,
         protected DemandFactory $programDemandFactory
-    ) {
-    }
+    ) {}
 
     /**
      * @return ResponseInterface

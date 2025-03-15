@@ -6,7 +6,7 @@ use FGTCLB\AcademicPrograms\Enumeration\CategoryTypes;
 use TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
-$iconIdentifier = static fn (string $key): string => 'academic-programs-' . $key;
+$iconIdentifier = static fn(string $key): string => 'academic-programs-' . $key;
 
 $iconList = [];
 foreach (CategoryTypes::getConstants() as $type) {

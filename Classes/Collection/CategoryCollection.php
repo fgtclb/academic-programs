@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace FGTCLB\AcademicPrograms\Collection;
 
 use ArrayAccess;
-use Countable;
 use FGTCLB\AcademicPrograms\Domain\Model\Category;
 use FGTCLB\AcademicPrograms\Enumeration\CategoryTypes;
 use FGTCLB\AcademicPrograms\Exception\Domain\CategoryExistException;
@@ -17,7 +16,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  * @implements ArrayAccess<string, Category[]>
  * @implements Iterator<int, Category>
  */
-class CategoryCollection implements Countable, Iterator, ArrayAccess
+class CategoryCollection implements \Countable, \Iterator, \ArrayAccess
 {
     /**
      * @var Category[]

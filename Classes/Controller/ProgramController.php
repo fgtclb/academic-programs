@@ -19,8 +19,7 @@ class ProgramController extends ActionController
         protected ProgramRepository $programRepository,
         protected CategoryRepository $categoryRepository,
         protected DemandFactory $programDemandFactory
-    ) {
-    }
+    ) {}
 
     /**
      * @param array<string, mixed>|null $demand

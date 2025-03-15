@@ -31,7 +31,7 @@ class CategoryTest extends FunctionalTestCase
     public function createCategoryObject(): void
     {
         $subject = new Category(2, 1, 'Test', CategoryTypes::TYPE_DEPARTMENT);
-        static::assertEquals(CategoryTypes::TYPE_DEPARTMENT, (string)$subject->getType());
+        $this->assertEquals(CategoryTypes::TYPE_DEPARTMENT, (string)$subject->getType());
     }
 
     /**
@@ -40,7 +40,7 @@ class CategoryTest extends FunctionalTestCase
     public function createCategoryObjectWithoutType(): void
     {
         $subject = new Category(2, 1, 'Test', '');
-        static::assertNull($subject->getType());
+        $this->assertNull($subject->getType());
     }
 
     /**
@@ -49,7 +49,7 @@ class CategoryTest extends FunctionalTestCase
     public function createCategoryObjectWithTypeDefault(): void
     {
         $subject = new Category(2, 1, 'Test', 'default');
-        static::assertNull($subject->getType());
+        $this->assertNull($subject->getType());
     }
 
     /**
@@ -60,12 +60,12 @@ class CategoryTest extends FunctionalTestCase
         $subject = new Category(1, 0, 'Test', '');
 
         $children = $subject->getChildren();
-        static::assertInstanceOf(CategoryCollection::class, $children);
-        static::assertEquals(2, $children->count());
+        $this->assertInstanceOf(CategoryCollection::class, $children);
+        $this->assertEquals(2, $children->count());
 
         foreach ($children as $child) {
-            static::assertInstanceOf(CategoryTypes::class, $child->getType());
-            static::assertEquals(CategoryTypes::TYPE_DEPARTMENT, $child->getType());
+            $this->assertInstanceOf(CategoryTypes::class, $child->getType());
+            $this->assertEquals(CategoryTypes::TYPE_DEPARTMENT, $child->getType());
         }
     }
 
@@ -76,12 +76,12 @@ class CategoryTest extends FunctionalTestCase
     {
         $subject = new Category(2, 1, 'Test', CategoryTypes::TYPE_DEPARTMENT);
 
-        static::assertTrue($subject->hasParent());
-        static::assertInstanceOf(CategoryTypes::class, $subject->getParent());
+        $this->assertTrue($subject->hasParent());
+        $this->assertInstanceOf(CategoryTypes::class, $subject->getParent());
 
         $parent = $subject->getParent();
-        static::assertInstanceOf(CategoryTypes::class, $parent);
-        static::assertEquals('Category 1', $parent->getTitle());
-        static::assertNull($parent->getType());
+        $this->assertInstanceOf(CategoryTypes::class, $parent);
+        $this->assertEquals('Category 1', $parent->getTitle());
+        $this->assertNull($parent->getType());
     }
 }
