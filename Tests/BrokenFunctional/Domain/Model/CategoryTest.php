@@ -15,8 +15,8 @@ class CategoryTest extends FunctionalTestCase
      * @var non-empty-string[]
      */
     protected array $testExtensionsToLoad = [
-        'typo3conf/ext/category_types',
-        'typo3conf/ext/academic_programs',
+        'fgtclb/category-types',
+        'fgtclb/academic-programs',
     ];
 
     protected function setUp(): void
