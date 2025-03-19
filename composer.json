@@ -1,54 +1,66 @@
 {
-	"name": "fgtclb/academic-programs",
-	"type": "typo3-cms-extension",
-	"description": "Add structured data for academic programs to pages",
-	"minimum-stability": "stable",
-	"license": "GPL-2.0-or-later",
-	"config": {
-		"vendor-dir": ".Build/vendor",
-		"bin-dir": ".Build/bin",
-		"optimize-autoloader": true,
-		"sort-packages": true,
-		"allow-plugins": {
-			"typo3/class-alias-loader": true,
-			"typo3/cms-composer-installers": true
-		}
-	},
-	"extra": {
-		"typo3/cms": {
-			"cms-package-dir": "{$vendor-dir}/typo3/cms",
-			"extension-key": "academic_programs",
-			"ignore-as-root": false,
-			"web-dir": ".Build/public",
-			"app-dir": ".Build"
-		},
-		"branch-alias": {
-			"dev-main": "1.2.x-dev"
-		}
-	},
-	"require": {
-		"php": "^8.1 || ^8.2 || ^8.3 || ^8.4",
-		"fgtclb/category-types": "1.2.*@dev",
-		"typo3/cms-backend": "^11.5 || ^12.4",
-		"typo3/cms-core": "^11.5 || ^12.4",
-		"typo3/cms-extbase": "^11.5 || ^12.4",
-		"typo3/cms-fluid": "^11.5 || ^12.4",
-		"typo3/cms-frontend": "^11.5 || ^12.4"
-	},
-	"autoload": {
-		"psr-4": {
-			"FGTCLB\\AcademicPrograms\\": "Classes/"
-		}
-	},
-	"autoload-dev": {
-		"psr-4": {
-			"FGTCLB\\AcademicPrograms\\Tests\\": "Tests/"
-		}
-	},
-	"suggest": {
-		"fgtclb/page-backend-layout": "Add backend category preview"
-	},
-	"conflict": {
-		"fgtclb/page-backend-layout": "<1.0.0 || >=2.0.0"
-	}
+    "name": "fgtclb/academic-programs",
+    "type": "typo3-cms-extension",
+    "description": "Add structured data for academic programs to pages",
+    "minimum-stability": "stable",
+    "license": "GPL-2.0-or-later",
+    "config": {
+        "vendor-dir": ".Build/vendor",
+        "bin-dir": ".Build/bin",
+        "optimize-autoloader": true,
+        "sort-packages": true,
+        "allow-plugins": {
+            "typo3/class-alias-loader": true,
+            "typo3/cms-composer-installers": true
+        }
+    },
+    "extra": {
+        "typo3/cms": {
+            "cms-package-dir": "{$vendor-dir}/typo3/cms",
+            "extension-key": "academic_programs",
+            "ignore-as-root": false,
+            "web-dir": ".Build/public",
+            "app-dir": ".Build"
+        },
+        "branch-alias": {
+            "dev-main": "1.2.x-dev"
+        }
+    },
+    "require": {
+        "php": "^8.1 || ^8.2 || ^8.3 || ^8.4",
+        "fgtclb/category-types": "1.2.*@dev",
+        "typo3/cms-backend": "^11.5 || ^12.4",
+        "typo3/cms-core": "^11.5 || ^12.4",
+        "typo3/cms-extbase": "^11.5 || ^12.4",
+        "typo3/cms-fluid": "^11.5 || ^12.4",
+        "typo3/cms-frontend": "^11.5 || ^12.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "FGTCLB\\AcademicPrograms\\": "Classes/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "FGTCLB\\AcademicPrograms\\Tests\\": "Tests/"
+        }
+    },
+    "suggest": {
+        "fgtclb/page-backend-layout": "Add backend category preview"
+    },
+    "conflict": {
+        "fgtclb/page-backend-layout": "<1.0.0 || >=2.0.0"
+    },
+    "authors": [
+        {
+            "name": "FGTCLB GmbH",
+            "email": "hello@fgtclb.com"
+        }
+    ],
+    "support": {
+        "issues": "https://github.com/fgtclb/academic-extensions/issues",
+        "source": "https://github.com/fgtclb/academic-extensions",
+        "email": "hello@fgtclb.com"
+    },
+    "homepage": "https://www.fgtclb.com/"
 }
