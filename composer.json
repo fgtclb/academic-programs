@@ -23,8 +23,7 @@
 			"app-dir": ".Build"
 		},
 		"branch-alias": {
-			"dev-main": "1.x.x-dev",
-			"dev-compatibility": "2.x.x-dev"
+			"dev-main": "1.2.x-dev"
 		}
 	},
 	"require": {
