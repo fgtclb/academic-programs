@@ -1,6 +1,5 @@
 @import 'EXT:academic_programs/Configuration/TsConfig/Page/BackendLayouts/*.tsconfig'
 @import 'EXT:academic_programs/Configuration/TsConfig/Page/*.tsconfig'
 
-# Following only works in TYPO3 v12+ and has no impact in TYPO3 v11
-# and therefore no condition is needed here to cover this.
+# Register `EXT:backend` template overrides in backend context
 templates.typo3/cms-backend.1730990129 = fgtclb/academic-programs:Resources/Private/Backend
