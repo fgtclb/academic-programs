@@ -10,7 +10,7 @@ use FGTCLB\AcademicPrograms\Domain\Model\Category;
 /**
  * @implements ArrayAccess<string, Category[]>
  */
-class FilterCollection implements \ArrayAccess
+class FilterCollection implements \ArrayAccess, \Stringable
 {
     protected CategoryCollection $filterCategories;
 
@@ -37,21 +37,20 @@ class FilterCollection implements \ArrayAccess
     {
         try {
             $this->filterCategories->getCategoriesByTypeName($offset);
-        } catch (\InvalidArgumentException $e) {
+        } catch (\InvalidArgumentException) {
             return false;
         }
         return true;
     }
 
     /**
-     * @param mixed $offset
      * @return array<int, Category>|false
      */
     public function offsetGet(mixed $offset): array|false
     {
         try {
             $categories = $this->filterCategories->getCategoriesByTypeName($offset);
-        } catch (\InvalidArgumentException $e) {
+        } catch (\InvalidArgumentException) {
             return false;
         }
         return $categories;

@@ -16,7 +16,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  * @implements ArrayAccess<string, Category[]>
  * @implements Iterator<int, Category>
  */
-class CategoryCollection implements \Countable, \Iterator, \ArrayAccess
+class CategoryCollection implements \Countable, \Iterator, \ArrayAccess, \Stringable
 {
     /**
      * @var Category[]
@@ -143,13 +143,12 @@ class CategoryCollection implements \Countable, \Iterator, \ArrayAccess
         try {
             $enum = new CategoryTypes($lowerName);
             return true;
-        } catch (InvalidEnumerationValueException $e) {
+        } catch (InvalidEnumerationValueException) {
             return false;
         }
     }
 
     /**
-     * @param mixed $offset
      * @return Category[]|false
      */
     public function offsetGet(mixed $offset): array|false

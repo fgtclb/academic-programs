@@ -9,30 +9,19 @@ use FGTCLB\AcademicPrograms\Domain\Repository\CategoryRepository;
 use FGTCLB\AcademicPrograms\Enumeration\CategoryTypes;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
-class Category
+class Category implements \Stringable
 {
-    protected int $uid;
-
-    protected int $parentId;
-
     protected ?CategoryTypes $type;
-
-    protected string $title;
-
-    protected bool $disabled = false;
 
     protected ?CategoryCollection $children = null;
 
     public function __construct(
-        int $uid,
-        int $parentId,
-        string $title,
+        protected int $uid,
+        protected int $parentId,
+        protected string $title,
         string $type = '',
-        bool $disabled = false
+        protected bool $disabled = false
     ) {
-        $this->uid = $uid;
-        $this->parentId = $parentId;
-
         if ($type === 'default' || $type === '') {
             $type = null;
         } else {
@@ -40,8 +29,6 @@ class Category
         }
 
         $this->type = $type;
-        $this->title = $title;
-        $this->disabled = $disabled;
 
         /** @var CategoryRepository $categoryRepository */
         $categoryRepository = GeneralUtility::makeInstance(CategoryRepository::class);

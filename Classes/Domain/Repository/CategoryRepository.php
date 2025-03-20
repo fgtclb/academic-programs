@@ -412,9 +412,7 @@ class CategoryRepository
     {
         return $queryBuilder->expr()->in(
             'sys_category.type',
-            array_map(function (string $value) {
-                return '\'' . $value . '\'';
-            }, array_values(CategoryTypes::getConstants()))
+            array_map(fn(string $value) => '\'' . $value . '\'', array_values(CategoryTypes::getConstants()))
         );
     }
 

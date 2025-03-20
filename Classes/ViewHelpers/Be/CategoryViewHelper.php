@@ -68,7 +68,7 @@ class CategoryViewHelper extends AbstractViewHelper
             } else {
                 throw new CategoryTypeException(sprintf('The category type "%s" not exist', $arguments['type']), 1694770343759);
             }
-        } catch (\Exception $exception) {
+        } catch (\Exception) {
             $categories = $repository->findAllByPageId($arguments['page']);
         }
 

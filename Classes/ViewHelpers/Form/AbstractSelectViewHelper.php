@@ -182,10 +182,9 @@ class AbstractSelectViewHelper extends AbstractFormFieldViewHelper
     /**
      * Get the option value for an object
      *
-     * @param mixed $valueElement
      * @return string
      */
-    protected function getOptionValueScalar($valueElement)
+    protected function getOptionValueScalar(mixed $valueElement)
     {
         if (is_object($valueElement)) {
             if ($this->hasArgument('optionValueField')) {
@@ -206,7 +205,7 @@ class AbstractSelectViewHelper extends AbstractFormFieldViewHelper
      * @param mixed $value Value to check for
      * @return bool TRUE if the value should be marked a s selected; FALSE otherwise
      */
-    protected function isSelected($value)
+    protected function isSelected(mixed $value)
     {
         if (in_array((string)$value, $this->selectedValues)) {
             return true;

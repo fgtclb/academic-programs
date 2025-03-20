@@ -14,7 +14,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 class DemandFactory
 {
     public function __construct(
-        private CategoryRepository $categoryRepository
+        private readonly CategoryRepository $categoryRepository
     ) {}
 
     /**
