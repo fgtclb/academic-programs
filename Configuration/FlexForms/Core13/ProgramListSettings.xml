@@ -1,8 +1,6 @@
 <T3DataStructure>
     <ROOT>
-        <TCEforms>
-            <sheetTitle>Filter</sheetTitle>
-        </TCEforms>
+        <sheetTitle>Filter</sheetTitle>
         <type>array</type>
         <el>
             <settings.hideFilter>
@@ -29,24 +27,24 @@
                     <renderType>selectSingle</renderType>
                     <items>
                         <numIndex index="0" type="array">
-                            <numIndex index="0">LLL:EXT:academic_programs/Resources/Private/Language/locallang_be.xlf:flexform.sorting.title.asc</numIndex>
-                            <numIndex index="1">title asc</numIndex>
+                            <label>LLL:EXT:academic_programs/Resources/Private/Language/locallang_be.xlf:flexform.sorting.title.asc</label>
+                            <label>title asc</label>
                         </numIndex>
                         <numIndex index="1" type="array">
-                            <numIndex index="0">LLL:EXT:academic_programs/Resources/Private/Language/locallang_be.xlf:flexform.sorting.title.desc</numIndex>
-                            <numIndex index="1">title desc</numIndex>
+                            <label>LLL:EXT:academic_programs/Resources/Private/Language/locallang_be.xlf:flexform.sorting.title.desc</label>
+                            <value>title desc</value>
                         </numIndex>
                         <numIndex index="2" type="array">
-                            <numIndex index="0">LLL:EXT:academic_programs/Resources/Private/Language/locallang_be.xlf:flexform.sorting.update</numIndex>
-                            <numIndex index="1">lastUpdated desc</numIndex>
+                            <label>LLL:EXT:academic_programs/Resources/Private/Language/locallang_be.xlf:flexform.sorting.update</label>
+                            <value>lastUpdated desc</value>
                         </numIndex>
                         <numIndex index="3" type="array">
-                            <numIndex index="0">LLL:EXT:academic_programs/Resources/Private/Language/locallang_be.xlf:flexform.sorting.update.asc</numIndex>
-                            <numIndex index="1">lastUpdated asc</numIndex>
+                            <label>LLL:EXT:academic_programs/Resources/Private/Language/locallang_be.xlf:flexform.sorting.update.asc</label>
+                            <value>lastUpdated asc</value>
                         </numIndex>
                         <numIndex index="4" type="array">
-                            <numIndex index="0">LLL:EXT:academic_programs/Resources/Private/Language/locallang_be.xlf:flexform.sorting.sorting.asc</numIndex>
-                            <numIndex index="1">sorting asc</numIndex>
+                            <label>LLL:EXT:academic_programs/Resources/Private/Language/locallang_be.xlf:flexform.sorting.sorting.asc</label>
+                            <value>sorting asc</value>
                         </numIndex>
                     </items>
                 </config>

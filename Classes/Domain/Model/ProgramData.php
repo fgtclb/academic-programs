@@ -4,30 +4,21 @@ declare(strict_types=1);
 
 namespace FGTCLB\AcademicPrograms\Domain\Model;
 
-use FGTCLB\AcademicPrograms\Collection\CategoryCollection;
-use FGTCLB\AcademicPrograms\Domain\Repository\CategoryRepository;
+use FGTCLB\CategoryTypes\Collection\CategoryCollection;
+use FGTCLB\CategoryTypes\Domain\Repository\CategoryRepository;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class ProgramData
 {
-    protected int $pid;
-
-    protected int $uid;
-
-    protected int $doktype;
-
+    protected int $pid = 0;
+    protected int $uid = 0;
+    protected int $doktype = 0;
     protected string $title = '';
-
     protected string $subtitle = '';
-
     protected string $abstract = '';
-
     protected int $creditPoints = 0;
-
     protected string $jobProfile = '';
-
     protected string $performanceScope = '';
-
     protected string $prerequisites = '';
 
     public function setPid(int $pid): void
@@ -132,6 +123,6 @@ class ProgramData
 
     public function getCategories(): ?CategoryCollection
     {
-        return GeneralUtility::makeInstance(CategoryRepository::class)->findAllByPageId($this->uid);
+        return GeneralUtility::makeInstance(CategoryRepository::class)->findByGroupAndPageId('programs', $this->uid);
     }
 }

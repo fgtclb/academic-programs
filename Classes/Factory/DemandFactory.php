@@ -4,17 +4,15 @@ declare(strict_types=1);
 
 namespace FGTCLB\AcademicPrograms\Factory;
 
-use FGTCLB\AcademicPrograms\Collection\CategoryCollection;
-use FGTCLB\AcademicPrograms\Collection\FilterCollection;
 use FGTCLB\AcademicPrograms\Domain\Model\Dto\ProgramDemand;
-use FGTCLB\AcademicPrograms\Domain\Repository\CategoryRepository;
-use FGTCLB\AcademicPrograms\Enumeration\CategoryTypes;
+use FGTCLB\CategoryTypes\Collection\FilterCollection;
+use FGTCLB\CategoryTypes\Domain\Repository\CategoryRepository;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class DemandFactory
 {
     public function __construct(
-        private readonly CategoryRepository $categoryRepository
+        private readonly CategoryRepository $categoryRepository,
     ) {}
 
     /**
@@ -28,9 +26,9 @@ class DemandFactory
         array $contentElementData
     ): ProgramDemand {
         $demand = GeneralUtility::makeInstance(ProgramDemand::class);
-        $filterCollection = GeneralUtility::makeInstance(FilterCollection::class);
+        $categoryCollection = null;
 
-        // Intitialise demand from settings if there is no demand from form
+        // Initialise demand from settings if there is no demand from form
         if ($demandFromForm === null) {
             if (isset($settings['sorting'])) {
                 [$sortingField, $sortingDirection] = GeneralUtility::trimExplode(' ', $settings['sorting']);
@@ -41,8 +39,7 @@ class DemandFactory
             if (isset($settings['categories'])
                 && (int)$settings['categories'] > 0
             ) {
-                $categoryCollection = $this->categoryRepository->getByDatabaseFields($contentElementData['uid']);
-                $filterCollection = FilterCollection::createByCategoryCollection($categoryCollection);
+                $categoryCollection = $this->categoryRepository->getByDatabaseFields('programs', (int)$contentElementData['uid']);
             }
         } else {
             // Either use combined sorting or separate sorting field and direction
@@ -57,32 +54,22 @@ class DemandFactory
                 }
             }
 
-            if ($demandFromForm['filterCollection'] !== null) {
-                // Find by selected type categories
-                $categoryCollection = new CategoryCollection();
-
-                foreach ($demandFromForm['filterCollection'] as $type => $categoriesIds) {
-                    $formatType = GeneralUtility::camelCaseToLowerCaseUnderscored($type);
-                    $categoriesIdList = GeneralUtility::intExplode(',', $categoriesIds);
-                    $categoryFilterObject = $this->categoryRepository->findByUidListAndType(
-                        $categoriesIdList,
-                        CategoryTypes::cast($formatType)
-                    );
-
-                    if ($categoryFilterObject === null) {
-                        continue;
-                    }
-
-                    foreach ($categoryFilterObject as $Category) {
-                        $categoryCollection->attach($Category);
-                    }
+            if (isset($demandFromForm['filterCollection'])) {
+                $categoryUids = [];
+                foreach ($demandFromForm['filterCollection'] as $uids) {
+                    $categoryUids = array_merge($categoryUids, GeneralUtility::intExplode(',', $uids));
                 }
 
-                $filterCollection = FilterCollection::createByCategoryCollection($categoryCollection);
+                $categoryCollection = $this->categoryRepository->findByGroupAndUidList(
+                    'programs',
+                    $categoryUids,
+                );
             }
         }
 
-        $demand->setFilterCollection($filterCollection);
+        if ($categoryCollection !== null) {
+            $demand->setFilterCollection(new FilterCollection($categoryCollection));
+        }
 
         return $demand;
     }

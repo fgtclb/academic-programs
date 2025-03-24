@@ -10,17 +10,12 @@ use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 defined('TYPO3') or die;
 
 (static function (): void {
-    $ll = static fn(string $key): string => sprintf('LLL:EXT:academic_programs/Resources/Private/Language/locallang.xlf:%s', $key);
-
-    // Add doktype to select
-    $doktype = PageTypes::TYPE_ACADEMIC_PROGRAM;
-
     // Add academic option group to doktype select
     ExtensionManagementUtility::addTcaSelectItemGroup(
         'pages',
         'doktype',
         'academic',
-        $ll('pages.doktype.groups.academic'),
+        'LLL:EXT:academic_programs/Resources/Private/Language/locallang.xlf:pages.doktype.groups.academic',
         'after:default'
     );
 
@@ -29,10 +24,10 @@ defined('TYPO3') or die;
         'pages',
         'doktype',
         [
-            $ll('pages.doktype.items.academic_program'),
-            $doktype,
-            'academic-programs',
-            'academic',
+            'label' => 'LLL:EXT:academic_programs/Resources/Private/Language/locallang.xlf:pages.doktype.items.academic_program',
+            'value' => PageTypes::TYPE_ACADEMIC_PROGRAM,
+            'icon' => 'academic-programs',
+            'group' => 'academic',
         ]
     );
 
@@ -42,11 +37,11 @@ defined('TYPO3') or die;
         [
             'ctrl' => [
                 'typeicon_classes' => [
-                    $doktype => 'academic-programs',
+                    PageTypes::TYPE_ACADEMIC_PROGRAM => 'academic-programs',
                 ],
             ],
             'types' => [
-                $doktype => [
+                PageTypes::TYPE_ACADEMIC_PROGRAM => [
                     'showitem' => $GLOBALS['TCA']['pages']['types'][PageRepository::DOKTYPE_DEFAULT]['showitem'],
                 ],
             ],
@@ -56,28 +51,28 @@ defined('TYPO3') or die;
     // Define academic programs specific columns
     $additionalTCAcolumns = [
         'credit_points' => [
-            'label' => $ll('pages.credit_points'),
+            'label' => 'LLL:EXT:academic_programs/Resources/Private/Language/locallang.xlf:pages.credit_points',
             'config' => [
-                'type' => 'input',
-                'eval' => 'trim,int',
+                'type' => 'number',
+                'eval' => 'trim',
             ],
         ],
         'job_profile' => [
-            'label' => $ll('pages.job_profile'),
+            'label' => 'LLL:EXT:academic_programs/Resources/Private/Language/locallang.xlf:pages.job_profile',
             'config' => [
                 'type' => 'text',
                 'enableRichtext' => true,
             ],
         ],
         'performance_scope' => [
-            'label' => $ll('pages.performance_scope'),
+            'label' => 'LLL:EXT:academic_programs/Resources/Private/Language/locallang.xlf:pages.performance_scope',
             'config' => [
                 'type' => 'text',
                 'enableRichtext' => true,
             ],
         ],
         'prerequisites' => [
-            'label' => $ll('pages.prerequisites'),
+            'label' => 'LLL:EXT:academic_programs/Resources/Private/Language/locallang.xlf:pages.prerequisites',
             'config' => [
                 'type' => 'text',
                 'enableRichtext' => true,
@@ -93,7 +88,7 @@ defined('TYPO3') or die;
     ExtensionManagementUtility::addToAllTCAtypes(
         'pages',
         '--div--;'
-            . $ll('pages.div.program_information')
+            . 'LLL:EXT:academic_programs/Resources/Private/Language/locallang.xlf:pages.div.program_information'
             . ','
             . implode(',', [
                 'credit_points',
@@ -101,7 +96,7 @@ defined('TYPO3') or die;
                 'performance_scope',
                 'prerequisites',
             ]),
-        (string)$doktype,
+        (string)PageTypes::TYPE_ACADEMIC_PROGRAM,
         'after:title'
     );
 })();

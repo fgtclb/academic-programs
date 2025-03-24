@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace FGTCLB\AcademicPrograms\ViewHelpers\Form;
 
 use FGTCLB\AcademicPrograms\Enumeration\SortingOptions;
+use FGTCLB\CategoryTypes\ViewHelpers\Form\AbstractSelectViewHelper;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
@@ -80,7 +81,9 @@ class SortingSelectViewHelper extends AbstractSelectViewHelper
         }
 
         if ($this->arguments['sortByOptionLabel'] !== false) {
-            usort($options, fn($a, $b) => strcoll((string)$a['label'], (string)$b['label']));
+            usort($options, function ($a, $b) {
+                return strcoll($a['label'], $b['label']);
+            });
         }
 
         return $options;

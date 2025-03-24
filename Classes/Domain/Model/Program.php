@@ -4,14 +4,15 @@ declare(strict_types=1);
 
 namespace FGTCLB\AcademicPrograms\Domain\Model;
 
-use FGTCLB\AcademicPrograms\Collection\CategoryCollection;
-use FGTCLB\AcademicPrograms\Domain\Repository\CategoryRepository;
+use FGTCLB\CategoryTypes\Collection\CategoryCollection;
+use FGTCLB\CategoryTypes\Collection\GetCategoryCollectionInterface;
+use FGTCLB\CategoryTypes\Domain\Repository\CategoryRepository;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Domain\Model\FileReference;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
-class Program extends AbstractEntity
+class Program extends AbstractEntity implements GetCategoryCollectionInterface
 {
     protected int $doktype;
 
@@ -90,13 +91,10 @@ class Program extends AbstractEntity
         return $this->prerequisites;
     }
 
-    public function getAttributes(): ?CategoryCollection
+    public function getAttributes(): CategoryCollection
     {
-        $attributes = GeneralUtility::makeInstance(CategoryCollection::class);
-        if ($this->uid !== null) {
-            $attributes = GeneralUtility::makeInstance(CategoryRepository::class)->findAllByPageId($this->uid);
-        }
-        return $attributes;
+        return $this->attributes ??= GeneralUtility::makeInstance(CategoryRepository::class)
+            ->findByGroupAndPageId('programs', (int)$this->getUid());
     }
 
     /**
@@ -105,5 +103,10 @@ class Program extends AbstractEntity
     public function getMedia(): ObjectStorage
     {
         return $this->media;
+    }
+
+    public function getCategoryCollection(): CategoryCollection
+    {
+        return $this->getAttributes();
     }
 }

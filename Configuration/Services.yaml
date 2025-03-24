@@ -1,0 +1,16 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+    public: false
+
+  FGTCLB\AcademicPrograms\:
+    resource: '../Classes/*'
+    exclude: '../Classes/Domain/Model/*.php'
+
+  FGTCLB\AcademicPrograms\Domain\Repository\ProgramRepository:
+    public: true
+
+  FGTCLB\AcademicPrograms\DataProcessing\ProgramDataProcessor:
+    tags:
+      - {name: 'data.processor', identifier: 'program-data', label: 'Programs Data Processor'}

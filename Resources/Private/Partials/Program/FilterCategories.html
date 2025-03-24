@@ -1,23 +1,33 @@
 <html
     lang="en"
     xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
-    xmlns:fe="http://typo3.org/ns/FGTCLB/AcademicPrograms/ViewHelpers"
+    xmlns:ct="http://typo3.org/ns/FGTCLB/CategoryTypes/ViewHelpers"
     data-namespace-typo3-fluid="true"
 >
-    <f:for each="{categories.allCategoriesByType}" as="category" key="categoryKey">
+    <f:for
+        each="{categories.allCategoriesByType}"
+        as="category"
+        key="categoryKey"
+    >
         <f:if condition="{category}">
             <label for="{categoryKey}">
-                {f:translate(key: 'sys_category.academic_programs.{categoryKey}', extensionName: 'academic_programs')}
+                {f:translate(
+                    key: 'sys_category.academic_programs.{categoryKey}',
+                    extensionName: 'academic_programs'
+                )}
             </label>
 
-            <fe:form.filterSelect
+            <ct:form.filterSelect
                 id="{categoryKey}"
                 property="filterCollection.{categoryKey}"
                 value="{demand.filterCollection.filterCategories.{categoryKey}}"
                 options="{categories.{categoryKey}}"
                 optionValueField="uid"
                 optionLabelField="title"
-                prependOptionLabel="{f:translate(key: 'sys_category.academic_programs.allOptions', extensionName: 'academic_programs')}"
+                prependOptionLabel="{f:translate(
+                    key: 'sys_category.academic_programs.allOptions',
+                    extensionName: 'academic_programs'
+                )}"
                 prependOptionValue=""
                 additionalAttributes="{'onchange': 'this.form.submit()'}"
             />

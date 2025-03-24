@@ -1,0 +1,3 @@
+
+
+options.pageTree.doktypesToShowInNewPageDragArea := addToList(20)

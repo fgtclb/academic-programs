@@ -2,11 +2,6 @@
 @import 'EXT:academic_programs/Configuration/TypoScript/Page/'
 
 plugin.tx_academicprograms {
-  features {
-    // Deprecated since version 12.4
-    skipDefaultArguments = 1
-  }
-
   view {
     templateRootPaths {
       0 = EXT:academic_programs/Resources/Private/Templates/

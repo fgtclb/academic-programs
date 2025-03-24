@@ -1,47 +1,29 @@
-page {
-  10 {
-    paths {
-      1 = EXT:academic_programs/Resources/Private/
-    }
-  }
-}
-
-lib.contentElement {
-  templateRootPaths {
-    edu = EXT:academic_programs/Resources/Private/Content/Templates/
-  }
-  layoutRootPaths {
-    edu = EXT:academic_programs/Resources/Private/Content/Layouts/
-  }
-}
-
-[traverse(page, "doktype") == 20 && typo3.version < "12.1.0"]
+[traverse(page, "doktype") == 20]
   page {
     10 {
+      paths {
+        10 = EXT:academic_programs/Resources/Private/
+      }
       dataProcessing {
-        200 = FGTCLB\AcademicPrograms\DataProcessing\ProgramDataProcessor
-        201 = TYPO3\CMS\Frontend\DataProcessing\FilesProcessor
-        201 {
+        100 = program-data
+        110 = files
+        110 {
           references.fieldName = media
           as = images
         }
       }
     }
   }
-[END]
 
-// With TYPO3 version 12.1 an alias can be registered for the data processor
-[traverse(page, "doktype") == 20 && typo3.version >= "12.0.0"]
-  page {
-    10 {
-      dataProcessing {
-        200 = program-data
-        201 = files
-        201 {
-          references.fieldName = media
-          as = images
-        }
-      }
+  lib.contentElement {
+    templateRootPaths {
+      10 = EXT:academic_programs/Resources/Private/Content/Templates/
+    }
+    layoutRootPaths {
+      10 = EXT:academic_programs/Resources/Private/Content/Layouts/
     }
   }
 [END]
+
+
+
