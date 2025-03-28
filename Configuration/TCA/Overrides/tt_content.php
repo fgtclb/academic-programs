@@ -2,13 +2,14 @@
 
 declare(strict_types=1);
 
+use TYPO3\CMS\Core\Information\Typo3Version;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Extbase\Utility\ExtensionUtility;
 
 defined('TYPO3') or die;
 
 (static function (): void {
-    $typo3MajorVersion = (new \TYPO3\CMS\Core\Information\Typo3Version())->getMajorVersion();
+    $typo3MajorVersion = (new Typo3Version())->getMajorVersion();
     ExtensionManagementUtility::addTcaSelectItemGroup(
         'tt_content',
         'CType',

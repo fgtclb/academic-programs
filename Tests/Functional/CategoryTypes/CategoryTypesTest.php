@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace FGTCLB\AcademicPrograms\Tests\Functional\CategoryTypes;
 
+use PHPUnit\Framework\Attributes\Test;
 use FGTCLB\CategoryTypes\Registry\CategoryTypeRegistry;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
@@ -14,7 +15,7 @@ final class CategoryTypesTest extends FunctionalTestCase
         'fgtclb/academic-programs',
     ];
 
-    #[\PHPUnit\Framework\Attributes\Test]
+    #[Test]
     public function extensionCategoryTypesYamlIsLoaded(): void
     {
         /** @var CategoryTypeRegistry $categoryTypeRegistry */
