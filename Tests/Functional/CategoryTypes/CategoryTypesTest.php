@@ -14,9 +14,7 @@ final class CategoryTypesTest extends FunctionalTestCase
         'fgtclb/academic-programs',
     ];
 
-    /**
-     * @test
-     */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function extensionCategoryTypesYamlIsLoaded(): void
     {
         /** @var CategoryTypeRegistry $categoryTypeRegistry */
