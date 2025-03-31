@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace FGTCLB\AcademicPrograms\Tests\Functional\CategoryTypes;
 
-use PHPUnit\Framework\Attributes\Test;
 use FGTCLB\CategoryTypes\Registry\CategoryTypeRegistry;
+use PHPUnit\Framework\Attributes\Test;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
 final class CategoryTypesTest extends FunctionalTestCase
