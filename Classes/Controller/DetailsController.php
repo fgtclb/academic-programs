@@ -22,7 +22,8 @@ class DetailsController extends ActionController
      */
     public function showAction(): ResponseInterface
     {
-        $contentElementData = $this->getContentObject()?->data ?? [];
+        /** @var array<string, mixed> $contentElementData */
+        $contentElementData = $this->getCurrentContentObjectRenderer()?->data ?? [];
         $program = $this->programRepository->findByUid((int)($contentElementData['pid'] ?? 0));
 
         $this->view->assignMultiple([
@@ -33,7 +34,7 @@ class DetailsController extends ActionController
         return $this->htmlResponse();
     }
 
-    private function getContentObject(): ?ContentObjectRenderer
+    private function getCurrentContentObjectRenderer(): ?ContentObjectRenderer
     {
         return $this->request->getAttribute('currentContentObject');
     }
