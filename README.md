@@ -35,9 +35,43 @@ Install with your flavour:
 * composer
 
 We prefer composer installation:
+
 ```bash
-composer req fgtclb/academic-programs
+composer req \
+  'fgtclb/category-types' \
+  'fgtclb/academic-programs'
 ```
+
+> [!IMPORTANT]
+> `2.x.x` is still in development and not all academics extension are fully tested in v12 and v13,
+> but can be installed in composer instances to use, test them. Testing and reporting are welcome.
+
+**Testing 2.x.x extension version in projects (composer mode)**
+
+It is already possible to use and test the `2.x` version in composer based instances,
+which is encouraged and feedback of issues not detected by us (or pull-requests).
+
+Your project should configure `minimum-stabilty: dev` and `prefer-stable` to allow
+requiring each extension but still use stable versions over development versions:
+
+```shell
+composer config minimum-stability "dev" \
+&& composer config "prefer-stable" true
+```
+
+and installed with:
+
+```shell
+composer require \
+  'fgtclb/category-types':'2.*.*@dev' \
+  'fgtclb/academic-programs':'2.*.*@dev'
+```
+
+## Upgrade from `1.x`
+
+Upgrading from `1.x` to `2.x` includes breaking changes, which needs to be
+addressed manualy in case not automatic upgrade path is available. See the
+[UPGRADE.md](./UPGRADE.md) file for details.
 
 ## Credits
 
