@@ -1,6 +1,4 @@
-[typo3.version >= "12"]
-    templates.typo3/cms-backend.academic-programs = fgtclb/academic-programs:Resources/Private/Backend
-[END]
+templates.typo3/cms-backend.academic-programs = fgtclb/academic-programs:Resources/Private/Backend
 
 mod.wizards.newContentElement.wizardItems.academic {
   header = LLL:EXT:academic_programs/Resources/Private/Language/locallang_be.xlf:content.ctype.group.label
