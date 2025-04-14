@@ -6,7 +6,6 @@
     data-namespace-typo3-fluid="true"
 >
 <f:if condition="{context.pageRecord.doktype} == 20">
-    <f:comment><!--<div class="callout callout-warning">--></f:comment>
     <div>
         <table class="table table-striped">
             <tbody>
@@ -39,7 +38,10 @@
                                                 each="{categories}"
                                                 as="category"
                                             >
-                                                <li>{category.title}</li>
+                                                <li>
+                                                    <core:icon identifier="{f:if(condition: '{category.hidden}  == 1', then: 'overlay-hidden', else: 'category_types.programs.{type}')}" />
+                                                    {category.title}
+                                                </li>
                                             </f:for>
                                         </ul>
                                     </f:then>
