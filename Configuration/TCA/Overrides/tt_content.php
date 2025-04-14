@@ -27,12 +27,18 @@ defined('TYPO3') or die;
         ExtensionUtility::PLUGIN_TYPE_CONTENT_ELEMENT,
         'academic_programs'
     );
+
     ExtensionManagementUtility::addToAllTCAtypes(
         'tt_content',
-        '--div--;LLL:EXT:academic_programs/Resources/Private/Language/locallang_be.xlf:plugin.program_list.configuration,pi_flexform,',
+        implode(',', [
+            '--div--;LLL:EXT:academic_programs/Resources/Private/Language/locallang_be.xlf:plugin.program_list.configuration',
+            'pi_flexform',
+            'pages',
+        ]),
         'academicprograms_programlist',
         'after:subheader',
     );
+
     ExtensionManagementUtility::addPiFlexFormValue(
         '*',
         sprintf('FILE:EXT:academic_programs/Configuration/FlexForms/Core%s/ProgramListSettings.xml', $typo3MajorVersion),

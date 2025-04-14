@@ -71,6 +71,15 @@ class DemandFactory
             $demand->setFilterCollection(new FilterCollection($categoryCollection));
         }
 
+        // Set demand properties, which are always defined by plugin settings
+        $demand->setPages([]);
+        if (isset($contentElementData['pages'])
+            && is_string($contentElementData['pages'])
+            && $contentElementData['pages'] !== ''
+        ) {
+            $demand->setPages(GeneralUtility::intExplode(',', $contentElementData['pages']));
+        }
+
         return $demand;
     }
 }
