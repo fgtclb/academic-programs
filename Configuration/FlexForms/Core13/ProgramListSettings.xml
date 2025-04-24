@@ -28,7 +28,7 @@
                     <items>
                         <numIndex index="0" type="array">
                             <label>LLL:EXT:academic_programs/Resources/Private/Language/locallang_be.xlf:flexform.sorting.title.asc</label>
-                            <label>title asc</label>
+                            <value>title asc</value>
                         </numIndex>
                         <numIndex index="1" type="array">
                             <label>LLL:EXT:academic_programs/Resources/Private/Language/locallang_be.xlf:flexform.sorting.title.desc</label>
