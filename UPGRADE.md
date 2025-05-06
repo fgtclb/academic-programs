@@ -1,6 +1,8 @@
 # Upgrade 2.0
 
-## Switch to `EXT:category_types` 2.0
+## 2.0.0
+
+### Switch to `EXT:category_types` 2.0
 
 Category type based handling has been streamlined and centralized within the `EXT:category_types` extension
 and the known implementation based on deprecated TYPO3 Enumeration has been replaced with a modern PHP API
