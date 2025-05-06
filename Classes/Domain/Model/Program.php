@@ -14,26 +14,31 @@ use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
 class Program extends AbstractEntity implements GetCategoryCollectionInterface
 {
-    protected int $doktype;
-
+    protected int $doktype = 0;
     protected string $title = '';
-
     protected string $subtitle = '';
-
     protected string $abstract = '';
-
     protected int $creditPoints = 0;
-
     protected string $jobProfile = '';
-
     protected string $performanceScope = '';
-
     protected string $prerequisites = '';
-
     protected ?CategoryCollection $attributes = null;
 
     /** @var ObjectStorage<FileReference> */
-    protected $media;
+    protected ObjectStorage $media;
+
+    public function __construct()
+    {
+        $this->initializeObject();
+    }
+
+    /**
+     * @link https://docs.typo3.org/m/typo3/reference-coreapi/main/en-us/ExtensionArchitecture/Extbase/Reference/Domain/Model/Index.html#good-use-initializeobject-for-setup
+     */
+    public function initializeObject(): void
+    {
+        $this->media = new ObjectStorage();
+    }
 
     /**
      * @return int<0, max>|null
