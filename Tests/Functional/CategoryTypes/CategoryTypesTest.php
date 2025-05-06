@@ -6,7 +6,7 @@ namespace FGTCLB\AcademicPrograms\Tests\Functional\CategoryTypes;
 
 use FGTCLB\CategoryTypes\Registry\CategoryTypeRegistry;
 use PHPUnit\Framework\Attributes\Test;
-use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
+use SBUERK\TYPO3\Testing\TestCase\FunctionalTestCase;
 
 final class CategoryTypesTest extends FunctionalTestCase
 {
