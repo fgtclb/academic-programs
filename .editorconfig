@@ -19,6 +19,11 @@ indent_size = 2
 # JSON-Files
 [*.json]
 indent_style = tab
+indent_size = 4
+
+[composer.json]
+indent_style = space
+indent_size = 4
 
 # ReST-Files
 [*.{rst,rst.txt}]
