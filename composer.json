@@ -4,6 +4,18 @@
     "description": "Add structured data for academic programs to pages",
     "minimum-stability": "stable",
     "license": "GPL-2.0-or-later",
+    "authors": [
+        {
+            "name": "FGTCLB GmbH",
+            "email": "hello@fgtclb.com"
+        }
+    ],
+    "support": {
+        "issues": "https://github.com/fgtclb/academic-extensions/issues",
+        "source": "https://github.com/fgtclb/academic-extensions",
+        "email": "hello@fgtclb.com"
+    },
+    "homepage": "https://www.fgtclb.com/",
     "config": {
         "vendor-dir": ".Build/vendor",
         "bin-dir": ".Build/bin",
@@ -51,17 +63,5 @@
     "conflict": {
         "fgtclb/category-types": "<2.0.0",
         "fgtclb/page-backend-layout": "<2.0.0 || >=3.0.0"
-    },
-    "authors": [
-        {
-            "name": "FGTCLB GmbH",
-            "email": "hello@fgtclb.com"
-        }
-    ],
-    "support": {
-        "issues": "https://github.com/fgtclb/academic-extensions/issues",
-        "source": "https://github.com/fgtclb/academic-extensions",
-        "email": "hello@fgtclb.com"
-    },
-    "homepage": "https://www.fgtclb.com/"
+    }
 }
