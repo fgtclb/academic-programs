@@ -1,9 +1,22 @@
 [traverse(page, "doktype") == 20]
   page {
     10 {
+      // Template path for PAGEVIEW based configurations
       paths {
-        10 = EXT:academic_programs/Resources/Private/
+        100 = EXT:academic_programs/Resources/Private/
       }
+
+      // Template paths for FLUIDTEMPLATE based configurations
+      templateRootPaths {
+        100 = EXT:academic_programs/Resources/Private/Pages/
+      }
+      layoutRootPaths {
+        100 = EXT:academic_programs/Resources/Private/Layouts/
+      }
+      partialRootPaths {
+        100 = EXT:academic_programs/Resources/Private/Partials/
+      }
+
       dataProcessing {
         100 = program-data
         110 = files

@@ -3,7 +3,6 @@
 namespace FGTCLB\AcademicPrograms\DataProcessing;
 
 use FGTCLB\AcademicPrograms\Factory\ProgramDataFactory;
-use TYPO3\CMS\Core\Information\Typo3Version;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 use TYPO3\CMS\Frontend\ContentObject\DataProcessorInterface;
@@ -28,17 +27,16 @@ class ProgramDataProcessor implements DataProcessorInterface
         array $processorConfiguration,
         array $processedData
     ) {
-        $versionInformation = GeneralUtility::makeInstance(Typo3Version::class);
-        $programDataFactory = GeneralUtility::makeInstance(ProgramDataFactory::class);
-
-        // TODO: Check which version exactly changed this...
-        if (version_compare($versionInformation->getVersion(), '12.0.0', '>=')) {
-            $pageData = $processedData['page']->getPageRecord();
-        } else {
-            $pageData = $processedData['data'];
+        // Try to fetch page data for FLUIDTEMPLATE
+        $pageData = $processedData['data'] ?? [];
+        if ($pageData === []) {
+            // If no page data is available in FLUIDTEMPLATE, try to fetch page data from PAGEVIEW
+            $pageData = $processedData['page']->getPageRecord() ?? [];
         }
-        $processedData['program'] = $programDataFactory->get($pageData);
-
+        if ($pageData !== []) {
+            $programDataFactory = GeneralUtility::makeInstance(ProgramDataFactory::class);
+            $processedData['program'] = $programDataFactory->get($pageData);
+        }
         return $processedData;
     }
 }
