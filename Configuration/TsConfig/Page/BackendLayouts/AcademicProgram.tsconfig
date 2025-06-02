@@ -1,8 +1,8 @@
 mod {
   web_layout {
     BackendLayouts {
-      AcademicPrograms {
-        title = LLL:EXT:academic_programs/Resources/Private/Language/locallang.xlf:backend_layout.academic_programs
+      AcademicProgram {
+        title = LLL:EXT:academic_programs/Resources/Private/Language/locallang_be.xlf:backend_layout.academic_program
         icon = EXT:academic_programs/Resources/Public/Icons/BackendLayout.png
         config {
           backend_layout {
@@ -12,7 +12,7 @@ mod {
               1 {
                 columns {
                   1 {
-                    name = LLL:EXT:academic_programs/Resources/Private/Language/locallang.xlf:pages.contents
+                    name = LLL:EXT:academic_programs/Resources/Private/Language/locallang_be.xlf:backend_layout.academic_program.column.content
                     identifier = main
                     colPos = 0
                   }

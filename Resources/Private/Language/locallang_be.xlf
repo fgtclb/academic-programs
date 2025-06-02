@@ -1,32 +1,25 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <xliff version="1.0">
-	<file source-language="en" target-language="" datatype="plaintext" original="messages" date="2023-04-24T15:52:42Z">
+	<file source-language="en" datatype="plaintext" original="messages" date="2023-04-24T15:52:42Z">
 		<header/>
 		<body>
-			<!-- Plugin -->
+			<!-- Backend Layout -->
 
-			<trans-unit id="plugin.program_list.title">
-				<source>Academic programs list</source>
+			<trans-unit id="backend_layout.academic_program">
+				<source>Academic Program</source>
 			</trans-unit>
-			<trans-unit id="plugin.program_list.description">
-				<source>Display a sortable and filterable list of academic programs</source>
+			<trans-unit id="backend_layout.academic_program.column.content">
+				<source>Content</source>
 			</trans-unit>
-			<trans-unit id="plugin.program_list.configuration">
+
+			<!-- Plugin configuration -->
+
+			<trans-unit id="content.ctype.group.label">
+				<source>Academic</source>
+			</trans-unit>
+			<trans-unit id="element.tab.configuration">
 				<source>Configuration</source>
 			</trans-unit>
-
-			<trans-unit id="plugin.program_details.title">
-				<source>Academic program details</source>
-			</trans-unit>
-			<trans-unit id="plugin.program_details.description">
-				<source>Displays the details of an academic program</source>
-			</trans-unit>
-			<trans-unit id="content.ctype.group.label">
-                <source>Academic</source>
-            </trans-unit>
-
-			<!-- Flexform -->
-
 			<trans-unit id="flexform.categories.label">
 				<source>Default categories</source>
 			</trans-unit>
@@ -49,7 +42,7 @@
 				<source>Default sorting</source>
 			</trans-unit>
 			<trans-unit id="flexform.sorting.description">
-				<source>Define default sorting in frontend which can be changed by user if sorting options are visible.</source>
+				<source>Default sorting in frontend which can be changed by user if sorting options are visible.</source>
 			</trans-unit>
 			<trans-unit id="flexform.sorting.title.asc">
 				<source>Title A-Z</source>
@@ -65,6 +58,102 @@
 			</trans-unit>
 			<trans-unit id="flexform.sorting.sorting.asc">
 				<source>Page sorting (Result may be unexpected)</source>
+			</trans-unit>
+
+			<!-- Wizard -->
+
+			<trans-unit id="wizard_items.academic">
+				<source>Academic</source>
+			</trans-unit>
+			<trans-unit id="plugin.program_list.title">
+				<source>Program List</source>
+			</trans-unit>
+			<trans-unit id="plugin.program_list.description">
+				<source>Display a sortable and filterable list of academic programs.</source>
+			</trans-unit>
+			<trans-unit id="plugin.program_details.title">
+				<source>Program Details</source>
+			</trans-unit>
+			<trans-unit id="plugin.program_details.description">
+				<source>Displays the details of an academic program</source>
+			</trans-unit>
+
+			<!-- Doktype -->
+
+			<trans-unit id="pages.doktype.item_group.academic">
+				<source>Academic Pages</source>
+			</trans-unit>
+			<trans-unit id="pages.doktype.item.academic_program">
+				<source>Program</source>
+			</trans-unit>
+
+			<!-- Labels for SysCategories -->
+
+			<trans-unit id="sys_category.programs.group">
+				<source>Academic Programs</source>
+			</trans-unit>
+			<trans-unit id="sys_category.programs.admission_restriction">
+				<source>Admission restriction</source>
+			</trans-unit>
+			<trans-unit id="sys_category.programs.application_period">
+				<source>Application period</source>
+			</trans-unit>
+			<trans-unit id="sys_category.programs.begin_program">
+				<source>Begin of program</source>
+			</trans-unit>
+			<trans-unit id="sys_category.programs.costs">
+				<source>Costs</source>
+			</trans-unit>
+			<trans-unit id="sys_category.programs.degree">
+				<source>Degree</source>
+			</trans-unit>
+			<trans-unit id="sys_category.programs.department">
+				<source>Department / Faculty</source>
+			</trans-unit>
+			<trans-unit id="sys_category.programs.location">
+				<source>Location</source>
+			</trans-unit>
+			<trans-unit id="sys_category.programs.paying">
+				<source>Paying?</source>
+			</trans-unit>
+			<trans-unit id="sys_category.programs.program_type">
+				<source>Type of program</source>
+			</trans-unit>
+			<trans-unit id="sys_category.programs.standard_period">
+				<source>Standard period</source>
+			</trans-unit>
+			<trans-unit id="sys_category.programs.teaching_language">
+				<source>Teaching language</source>
+			</trans-unit>
+			<trans-unit id="sys_category.programs.topic">
+				<source>Topic</source>
+			</trans-unit>
+
+			<!-- TCA -->
+
+			<trans-unit id="pages.div.program">
+				<source>Program</source>
+			</trans-unit>
+			<trans-unit id="pages.prerequisites">
+				<source>Prerequisites</source>
+			</trans-unit>
+			<trans-unit id="pages.credit_points">
+				<source>Credit points</source>
+			</trans-unit>
+			<trans-unit id="pages.job_profile">
+				<source>Job profile</source>
+			</trans-unit>
+			<trans-unit id="pages.performance_scope">
+				<source>Performance scope</source>
+			</trans-unit>
+			<trans-unit id="pages.overview">
+				<source>Overview</source>
+			</trans-unit>
+			<trans-unit id="pages.contents">
+				<source>Programm contents</source>
+			</trans-unit>
+			<trans-unit id="pages.application">
+				<source>Application</source>
 			</trans-unit>
 		</body>
 	</file>

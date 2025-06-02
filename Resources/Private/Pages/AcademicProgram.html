@@ -1,0 +1,46 @@
+<html
+    lang="en"
+    xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+    data-namespace-typo3-fluid="true"
+>
+
+<div class="academic-programs-detail container">
+    <div class="d-flex flex-column-reverse">
+        <h1>{program.title}</h1>
+
+        <f:for each="{images}" as="image" iteration="i">
+            <f:if condition="{i.isFirst}">
+                <f:image image="{image}" class="img-fluid"/>
+            </f:if>
+        </f:for>
+    </div>
+
+    <f:render
+        partial="Program/Categories"
+        arguments="{_all}"
+    />
+
+    <ul>
+        <f:for
+            each="{
+                0: 'creditPoints',
+                1: 'jobProfile',
+                2: 'performanceScope',
+                3: 'prerequisites'
+            }"
+            as="attribute"
+        >
+            <f:if condition="{program.{attribute}}">
+                <li>
+                    <b>{f:translate(key: 'program.{attribute}', extensionName: 'academic_programs')}</b>
+
+                    <span>{program.{attribute} -> f:format.raw()}</span>
+                </li>
+            </f:if>
+        </f:for>
+    </ul>
+
+    <f:cObject typoscriptObjectPath="styles.content.getContent"/>
+</div>
+
+</html>

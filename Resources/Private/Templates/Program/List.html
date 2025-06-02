@@ -1,62 +1,19 @@
 <html
-    data-namespace-typo3-fluid="true"
+    lang="en"
     xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+    data-namespace-typo3-fluid="true"
 >
+
 <div class="academic-programs-list">
-    <f:if condition="{settings.hideFilter} == 0 || {settings.hideSorting} == 0" >
-        <f:form
-            action="list"
-            object="{demand}"
-            name="demand"
-            objectName="demand"
-        >
-            <f:if condition="{settings.hideSorting} == 0">
-                <f:render
-                    partial="Program/FilterSorting"
-                    arguments="{_all}"
-                />
-            </f:if>
-            <f:if condition="{settings.hideFilter} == 0">
-                <f:render
-                    partial="Program/FilterCategories"
-                    arguments="{_all}"
-                />
-            </f:if>
-        </f:form>
-    </f:if>
+    <f:render
+        partial="Program/SortingAndFilters"
+        arguments="{_all}"
+    />
 
-    <div class="program-list">
-        <f:if condition="{programs}">
-            <f:then>
-                <div class="row">
-                    <f:for each="{programs}" as="program">
-                        <div class="col-12 col-md-6 col-xxl-4">
-                            <f:link.page pageUid="{program.uid}">
-                                <f:if condition="{program.media.0}">
-                                    <f:image
-                                        image="{program.media.0}"
-                                        alt="{program.media.alternative}"
-                                        title="{program.media.title}"
-                                    />
-                                </f:if>
-
-                                <h3>{program.title}</h3>
-
-                                <f:for
-                                    each="{program.attributes.degree}"
-                                    as="degree"
-                                >
-                                    {degree.title}
-                                </f:for>
-                            </f:link.page>
-                        </div>
-                    </f:for>
-                </div>
-            </f:then>
-            <f:else>
-                <p>{f:translate(key: 'list.noProgramsFound', extensionName: 'academic_programs')}</p>
-            </f:else>
-        </f:if>
-    </div>
+    <f:render
+        partial="Program/ItemList"
+        arguments="{_all}"
+    />
 </div>
+
 </html>

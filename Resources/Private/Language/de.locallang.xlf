@@ -3,135 +3,85 @@
 	<file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2023-03-15T11:39:25Z" product-name="academic-programs">
 		<header/>
 		<body>
-			<!-- Backend Layout -->
-
-			<trans-unit id="backend_layout.academic_programs">
-				<source>Academic Programs</source>
-				<target>Akademische Programme</target>
-			</trans-unit>
-
-			<!-- Doktype -->
-
-			<trans-unit id="pages.doktype.groups.academic">
-				<source>Academic Pages</source>
-				<target>Academische Seiten</target>
-			</trans-unit>
-			<trans-unit id="pages.doktype.items.academic_program">
-				<source>Academic Program</source>
-				<target>Academisches Programm</target>
-			</trans-unit>
-
-			<!-- Labels	for pages -->
-
-			<trans-unit id="pages.academic_programs">
-				<source>Academic Program Page</source>
-				<target>Academic Programmseite</target>
-			</trans-unit>
-			<trans-unit id="pages.div.program_information">
-				<source>Program information</source>
-				<target>Programminformationen</target>
-			</trans-unit>
-			<trans-unit id="pages.prerequisites">
-				<source>Prerequisites</source>
-				<target>Voraussetzungen</target>
-			</trans-unit>
-			<trans-unit id="pages.credit_points">
-				<source>Credit points</source>
-				<target>Leistungspunkte</target>
-			</trans-unit>
-			<trans-unit id="pages.job_profile">
-				<source>Job profile</source>
-				<target>Berufsprofil</target>
-			</trans-unit>
-			<trans-unit id="pages.performance_scope">
-				<source>Performance scope</source>
-				<target>Leistungsumfang</target>
-			</trans-unit>
-			<trans-unit id="pages.overview">
-				<source>Overview</source>
-				<target>Überblick</target>
-			</trans-unit>
-			<trans-unit id="pages.contents">
-				<source>Programm contents</source>
-				<target>Programminhalte</target>
-			</trans-unit>
-			<trans-unit id="pages.application">
-				<source>Application</source>
-				<target>Bewerbung</target>
-			</trans-unit>
-
 			<!-- Labels for SysCategories -->
 
-			<trans-unit id="sys_category.academic_programs.group">
+			<trans-unit id="sys_category.programs.group">
 				<source>Academic Programs</source>
 				<target>Akademische Programme</target>
 			</trans-unit>
-			<trans-unit id="sys_category.academic_programs.admission_restriction">
+			<trans-unit id="sys_category.programs.admission_restriction">
 				<source>Admission restriction</source>
 				<target>Zulassungsbeschränkung</target>
 			</trans-unit>
-			<trans-unit id="sys_category.academic_programs.application_period">
+			<trans-unit id="sys_category.programs.application_period">
 				<source>Application period</source>
 				<target>Bewerbungszeitraum</target>
 			</trans-unit>
-			<trans-unit id="sys_category.academic_programs.begin_program">
+			<trans-unit id="sys_category.programs.begin_program">
 				<source>Begin of program</source>
 				<target>Programmbeginn</target>
 			</trans-unit>
-			<trans-unit id="sys_category.academic_programs.costs">
+			<trans-unit id="sys_category.programs.costs">
 				<source>Costs</source>
 				<target>Kosten</target>
 			</trans-unit>
-			<trans-unit id="sys_category.academic_programs.degree">
+			<trans-unit id="sys_category.programs.degree">
 				<source>Degree</source>
 				<target>Abschluss</target>
 			</trans-unit>
-			<trans-unit id="sys_category.academic_programs.department">
+			<trans-unit id="sys_category.programs.department">
 				<source>Department / Faculty</source>
 				<target>Abteilung / Fakultät</target>
 			</trans-unit>
-			<trans-unit id="sys_category.academic_programs.location">
+			<trans-unit id="sys_category.programs.location">
 				<source>Location</source>
 				<target>Standort</target>
 			</trans-unit>
-			<trans-unit id="sys_category.academic_programs.paying">
+			<trans-unit id="sys_category.programs.paying">
 				<source>Paying?</source>
 				<target>Zahlungspflichtig?</target>
 			</trans-unit>
-			<trans-unit id="sys_category.academic_programs.program_type">
+			<trans-unit id="sys_category.programs.program_type">
 				<source>Type of program</source>
 				<target>Art des Programms</target>
 			</trans-unit>
-			<trans-unit id="sys_category.academic_programs.standard_period">
+			<trans-unit id="sys_category.programs.standard_period">
 				<source>Standard period</source>
 				<target>Regelstudienzeit</target>
 			</trans-unit>
-			<trans-unit id="sys_category.academic_programs.teaching_language">
+			<trans-unit id="sys_category.programs.teaching_language">
 				<source>Teaching language</source>
 				<target>Unterrichtssprache</target>
 			</trans-unit>
-			<trans-unit id="sys_category.academic_programs.topic">
+			<trans-unit id="sys_category.programs.topic">
 				<source>Topic</source>
 				<target>Thema</target>
 			</trans-unit>
-			<trans-unit id="sys_category.academic_programs.allOptions">
+			<trans-unit id="sys_category.programs.allOptions">
 				<source>All options</source>
 				<target>Alle Optionen</target>
 			</trans-unit>
 
-			<!-- Sorting field and direction options -->
+			<!-- Sorting direction options -->
 
+			<trans-unit id="sorting.direction.label">
+				<source>Sorting direction</source>
+				<target>Sortierungsrichtung</target>
+			</trans-unit>
 			<trans-unit id="sorting.direction.asc">
-				<source>ascending</source>
-				<target>aufssteigend</target>
+				<source>Ascending</source>
+				<target>Aufsteigend</target>
 			</trans-unit>
 			<trans-unit id="sorting.direction.desc">
-				<source>descending</source>
-				<target>absteigend</target>
+				<source>Descending</source>
+				<target>Absteigend</target>
 			</trans-unit>
-			<trans-unit id="sorting.field.title">
-				<source>Title</source>
-				<target>Titel</target>
+
+			<!-- Sorting field options -->
+
+			<trans-unit id="sorting.field.label">
+				<source>Sorting field</source>
+				<target>Sortierungsfeld</target>
 			</trans-unit>
 			<trans-unit id="sorting.field.lastUpdated">
 				<source>Last updated</source>
@@ -141,28 +91,9 @@
 				<source>Sorting</source>
 				<target>Sortierung</target>
 			</trans-unit>
-
-			<!-- Combined sorting options -->
-
-			<trans-unit id="sorting.title.asc">
-				<source>Title A-Z</source>
-				<target>Titel A-Z</target>
-			</trans-unit>
-			<trans-unit id="sorting.title.desc">
-				<source>Title Z-A</source>
-				<target>Titel Z-A</target>
-			</trans-unit>
-			<trans-unit id="sorting.lastUpdated.asc">
-				<source>Last updated (latest last)</source>
-				<target>Zuletzt aktualisiert (älteste zuerst)</target>
-			</trans-unit>
-			<trans-unit id="sorting.lastUpdated.desc">
-				<source>Last updated (latest first)</source>
-				<target>Zuletzt aktualisiert (neueste zuerst)</target>
-			</trans-unit>
-			<trans-unit id="sorting.sorting.asc">
-				<source>Page sorting (Result may be unexpected)</source>
-				<target>Seitensortierung (Ergebnis kann unerwartet sein)</target>
+			<trans-unit id="sorting.field.title">
+				<source>Title</source>
+				<target>Titel</target>
 			</trans-unit>
 
 			<!-- List -->
@@ -171,13 +102,24 @@
 				<source>No programs found.</source>
 				<target>Keine Studiengänge gefunden.</target>
 			</trans-unit>
-			<trans-unit id="list.sortingField">
-				<source>Sorting field</source>
-				<target>Sortierfeld</target>
+
+			<!-- Detail -->
+
+			<trans-unit id="program.prerequisites">
+				<source>Prerequisites</source>
+				<target>Voraussetzungen</target>
 			</trans-unit>
-			<trans-unit id="list.sortingDirection">
-				<source>Sorting direction</source>
-				<target>Sortierreihenfolge</target>
+			<trans-unit id="program.creditPoints">
+				<source>Credit points</source>
+				<target>Leistungspunkte</target>
+			</trans-unit>
+			<trans-unit id="program.jobProfile">
+				<source>Job profile</source>
+				<target>Berufsprofil</target>
+			</trans-unit>
+			<trans-unit id="program.performanceScope">
+				<source>Performance scope</source>
+				<target>Leistungsumfang</target>
 			</trans-unit>
 		</body>
 	</file>

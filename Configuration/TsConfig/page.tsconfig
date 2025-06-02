@@ -1,7 +1,7 @@
 templates.typo3/cms-backend.academic-programs = fgtclb/academic-programs:Resources/Private/Backend
 
 mod.wizards.newContentElement.wizardItems.academic {
-  header = LLL:EXT:academic_programs/Resources/Private/Language/locallang_be.xlf:content.ctype.group.label
+  header = LLL:EXT:academic_programs/Resources/Private/Language/locallang_be.xlf:wizard_items.academic
   after = special
   elements {
     academicprograms_programlist {

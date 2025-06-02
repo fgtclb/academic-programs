@@ -1,0 +1,37 @@
+<html
+    lang="en"
+    xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+    xmlns:core="http://typo3.org/ns/TYPO3/CMS/Core/ViewHelpers"
+    data-namespace-typo3-fluid="true"
+>
+
+<f:if condition="{program.attributes}">
+    <f:then>
+        <f:variable name="categoriesByType" value="{program.attributes.allCategoriesByType}" />
+    </f:then>
+    <f:else if="{program.categories}">
+        <f:variable name="categoriesByType" value="{program.categories.allCategoriesByType}" />
+    </f:else>
+</f:if>
+
+<f:if condition="{categoriesByType}">
+    <ul>
+        <f:for each="{categoriesByType}" as="categories" key="type">
+            <f:if condition="{categories}">
+                <li>
+                    <core:icon identifier="category_types.programs.{type}"/>
+
+                    <b>{f:translate(key: 'sys_category.programs.{type}', extensionName: 'academic_programs')}:</b>
+
+                    <span>
+                        <f:for each="{categories}" as="category" iteration="i">
+                            {category.title}{f:if(condition: '!{i.isLast}', then: ', ')}
+                        </f:for>
+                    </span>
+                </li>
+            </f:if>
+        </f:for>
+    </ul>
+</f:if>
+
+</html>

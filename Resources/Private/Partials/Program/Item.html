@@ -1,0 +1,52 @@
+<html
+    lang="en"
+    xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+    xmlns:core="http://typo3.org/ns/TYPO3/CMS/Core/ViewHelpers"
+    data-namespace-typo3-fluid="true"
+>
+
+<div class="card flex-column-reverse academic-programs-item mt-4">
+    <div class="card-content">
+        <div class="card-body">
+            <f:render
+                partial="Program/Header"
+                arguments="{
+                    header: '{program.title}',
+                    layout: '{data.header_layout}',
+                    positionClass: 'card-title',
+                    link: '{f:uri.page(pageUid: program.uid)}',
+                    subheader: '{data.subheader}'
+                }"
+            />
+        </div>
+
+        <f:if condition="{program.attributes.allCategoriesByType.degree}">
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">
+                    <core:icon identifier="category_types.programs.degree"/>
+
+                    <b>
+                        {f:translate(
+                            key: 'sys_category.programs.degree',
+                            extensionName: 'academic_programs'
+                        )}:
+                    </b>
+
+                    <span>
+                        <f:for each="{program.attributes.allCategoriesByType.degree}" as="degree" iteration="i">
+                            {degree.title}{f:if(condition: '!{i.isLast}', then: ', ')}
+                        </f:for>
+                    </span>
+                </li>
+            </ul>
+        </f:if>
+    </div>
+
+    <f:for each="{program.media}" as="image" iteration="i">
+        <f:if condition="{i.isFirst}">
+            <f:image image="{image}" class="card-img-top img-fluid" />
+        </f:if>
+    </f:for>
+</div>
+
+</html>

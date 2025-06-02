@@ -15,7 +15,7 @@ defined('TYPO3') or die;
         'pages',
         'doktype',
         'academic',
-        'LLL:EXT:academic_programs/Resources/Private/Language/locallang.xlf:pages.doktype.groups.academic',
+        'LLL:EXT:academic_programs/Resources/Private/Language/locallang_be.xlf:pages.doktype.item_group.academic',
         'after:default'
     );
 
@@ -24,7 +24,7 @@ defined('TYPO3') or die;
         'pages',
         'doktype',
         [
-            'label' => 'LLL:EXT:academic_programs/Resources/Private/Language/locallang.xlf:pages.doktype.items.academic_program',
+            'label' => 'LLL:EXT:academic_programs/Resources/Private/Language/locallang_be.xlf:pages.doktype.item.academic_program',
             'value' => PageTypes::TYPE_ACADEMIC_PROGRAM,
             'icon' => 'academic-programs',
             'group' => 'academic',
@@ -51,28 +51,28 @@ defined('TYPO3') or die;
     // Define academic programs specific columns
     $additionalTCAcolumns = [
         'credit_points' => [
-            'label' => 'LLL:EXT:academic_programs/Resources/Private/Language/locallang.xlf:pages.credit_points',
+            'label' => 'LLL:EXT:academic_programs/Resources/Private/Language/locallang_be.xlf:pages.credit_points',
             'config' => [
                 'type' => 'number',
                 'eval' => 'trim',
             ],
         ],
         'job_profile' => [
-            'label' => 'LLL:EXT:academic_programs/Resources/Private/Language/locallang.xlf:pages.job_profile',
+            'label' => 'LLL:EXT:academic_programs/Resources/Private/Language/locallang_be.xlf:pages.job_profile',
             'config' => [
                 'type' => 'text',
                 'enableRichtext' => true,
             ],
         ],
         'performance_scope' => [
-            'label' => 'LLL:EXT:academic_programs/Resources/Private/Language/locallang.xlf:pages.performance_scope',
+            'label' => 'LLL:EXT:academic_programs/Resources/Private/Language/locallang_be.xlf:pages.performance_scope',
             'config' => [
                 'type' => 'text',
                 'enableRichtext' => true,
             ],
         ],
         'prerequisites' => [
-            'label' => 'LLL:EXT:academic_programs/Resources/Private/Language/locallang.xlf:pages.prerequisites',
+            'label' => 'LLL:EXT:academic_programs/Resources/Private/Language/locallang_be.xlf:pages.prerequisites',
             'config' => [
                 'type' => 'text',
                 'enableRichtext' => true,
@@ -88,7 +88,7 @@ defined('TYPO3') or die;
     ExtensionManagementUtility::addToAllTCAtypes(
         'pages',
         '--div--;'
-            . 'LLL:EXT:academic_programs/Resources/Private/Language/locallang.xlf:pages.div.program_information'
+            . 'LLL:EXT:academic_programs/Resources/Private/Language/locallang_be.xlf:pages.div.program'
             . ','
             . implode(',', [
                 'credit_points',

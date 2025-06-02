@@ -1,0 +1,25 @@
+<html
+    lang="en"
+    xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+    data-namespace-typo3-fluid="true"
+>
+
+<f:if condition="{programs}">
+    <f:then>
+        <div class="row academic-programs-itemlist">
+            <f:for each="{programs}" as="program">
+                <div class="col-12 col-md-6 col-lg-4 col-xl-3">
+                    <f:render
+                        partial="Program/Item"
+                        arguments="{_all}"
+                    />
+                </div>
+            </f:for>
+        </div>
+    </f:then>
+    <f:else>
+        <span>{f:translate(key: 'list.noProgramsFound', extensionName: 'academic_programs')}</span>
+    </f:else>
+</f:if>
+
+</html>

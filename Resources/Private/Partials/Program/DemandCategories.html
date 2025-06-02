@@ -4,17 +4,12 @@
     xmlns:ct="http://typo3.org/ns/FGTCLB/CategoryTypes/ViewHelpers"
     data-namespace-typo3-fluid="true"
 >
-    <f:for
-        each="{categories.allCategoriesByType}"
-        as="category"
-        key="categoryKey"
-    >
-        <f:if condition="{category}">
-            <label for="{categoryKey}">
-                {f:translate(
-                    key: 'sys_category.academic_programs.{categoryKey}',
-                    extensionName: 'academic_programs'
-                )}
+
+<f:for each="{categories.allCategoriesByType}" as="category" key="categoryKey">
+    <f:if condition="{category}">
+        <div class="col-12 col-md-6 col-lg-4 col-xl-3">
+            <label for="{categoryKey}" class="form-label">
+                {f:translate(key: 'sys_category.programs.{categoryKey}', extensionName: 'academic_programs')}
             </label>
 
             <ct:form.filterSelect
@@ -25,12 +20,15 @@
                 optionValueField="uid"
                 optionLabelField="title"
                 prependOptionLabel="{f:translate(
-                    key: 'sys_category.academic_programs.allOptions',
+                    key: 'sys_category.programs.allOptions',
                     extensionName: 'academic_programs'
                 )}"
                 prependOptionValue=""
                 additionalAttributes="{'onchange': 'this.form.submit()'}"
+                class="form-select"
             />
-        </f:if>
-    </f:for>
+        </div>
+    </f:if>
+</f:for>
+
 </html>

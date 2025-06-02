@@ -31,7 +31,7 @@ defined('TYPO3') or die;
     ExtensionManagementUtility::addToAllTCAtypes(
         'tt_content',
         implode(',', [
-            '--div--;LLL:EXT:academic_programs/Resources/Private/Language/locallang_be.xlf:plugin.program_list.configuration',
+            '--div--;LLL:EXT:academic_programs/Resources/Private/Language/locallang_be.xlf:element.tab.configuration',
             'pi_flexform',
             'pages',
         ]),
