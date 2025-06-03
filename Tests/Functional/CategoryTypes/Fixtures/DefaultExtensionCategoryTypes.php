@@ -5,7 +5,7 @@ return [
         0 => [
             'identifier' => 'admission_restriction',
             'extensionKey' => 'academic_programs',
-            'title' => 'LLL:EXT:academic_programs/Resources/Private/Language/locallang.xlf:sys_category.academic_programs.admission_restriction',
+            'title' => 'LLL:EXT:academic_programs/Resources/Private/Language/locallang_be.xlf:sys_category.programs.admission_restriction',
             'group' => 'programs',
             'icon' => 'EXT:academic_programs/Resources/Public/Icons/CategoryTypes/AdmissionRestriction.svg',
             'priority' => 0,
@@ -13,7 +13,7 @@ return [
         1 => [
             'identifier' => 'application_period',
             'extensionKey' => 'academic_programs',
-            'title' => 'LLL:EXT:academic_programs/Resources/Private/Language/locallang.xlf:sys_category.academic_programs.application_period',
+            'title' => 'LLL:EXT:academic_programs/Resources/Private/Language/locallang_be.xlf:sys_category.programs.application_period',
             'group' => 'programs',
             'icon' => 'EXT:academic_programs/Resources/Public/Icons/CategoryTypes/ApplicationPeriod.svg',
             'priority' => 0,
@@ -21,7 +21,7 @@ return [
         2 => [
             'identifier' => 'begin_program',
             'extensionKey' => 'academic_programs',
-            'title' => 'LLL:EXT:academic_programs/Resources/Private/Language/locallang.xlf:sys_category.academic_programs.begin_program',
+            'title' => 'LLL:EXT:academic_programs/Resources/Private/Language/locallang_be.xlf:sys_category.programs.begin_program',
             'group' => 'programs',
             'icon' => 'EXT:academic_programs/Resources/Public/Icons/CategoryTypes/BeginProgram.svg',
             'priority' => 0,
@@ -29,7 +29,7 @@ return [
         3 => [
             'identifier' => 'costs',
             'extensionKey' => 'academic_programs',
-            'title' => 'LLL:EXT:academic_programs/Resources/Private/Language/locallang.xlf:sys_category.academic_programs.costs',
+            'title' => 'LLL:EXT:academic_programs/Resources/Private/Language/locallang_be.xlf:sys_category.programs.costs',
             'group' => 'programs',
             'icon' => 'EXT:academic_programs/Resources/Public/Icons/CategoryTypes/Costs.svg',
             'priority' => 0,
@@ -37,7 +37,7 @@ return [
         4 => [
             'identifier' => 'paying',
             'extensionKey' => 'academic_programs',
-            'title' => 'LLL:EXT:academic_programs/Resources/Private/Language/locallang.xlf:sys_category.academic_programs.paying',
+            'title' => 'LLL:EXT:academic_programs/Resources/Private/Language/locallang_be.xlf:sys_category.programs.paying',
             'group' => 'programs',
             'icon' => 'EXT:academic_programs/Resources/Public/Icons/CategoryTypes/Paying.svg',
             'priority' => 0,
@@ -45,7 +45,7 @@ return [
         5 => [
             'identifier' => 'degree',
             'extensionKey' => 'academic_programs',
-            'title' => 'LLL:EXT:academic_programs/Resources/Private/Language/locallang.xlf:sys_category.academic_programs.degree',
+            'title' => 'LLL:EXT:academic_programs/Resources/Private/Language/locallang_be.xlf:sys_category.programs.degree',
             'group' => 'programs',
             'icon' => 'EXT:academic_programs/Resources/Public/Icons/CategoryTypes/Degree.svg',
             'priority' => 0,
@@ -53,7 +53,7 @@ return [
         6 => [
             'identifier' => 'department',
             'extensionKey' => 'academic_programs',
-            'title' => 'LLL:EXT:academic_programs/Resources/Private/Language/locallang.xlf:sys_category.academic_programs.department',
+            'title' => 'LLL:EXT:academic_programs/Resources/Private/Language/locallang_be.xlf:sys_category.programs.department',
             'group' => 'programs',
             'icon' => 'EXT:academic_programs/Resources/Public/Icons/CategoryTypes/Department.svg',
             'priority' => 0,
@@ -61,7 +61,7 @@ return [
         7 => [
             'identifier' => 'standard_period',
             'extensionKey' => 'academic_programs',
-            'title' => 'LLL:EXT:academic_programs/Resources/Private/Language/locallang.xlf:sys_category.academic_programs.standard_period',
+            'title' => 'LLL:EXT:academic_programs/Resources/Private/Language/locallang_be.xlf:sys_category.programs.standard_period',
             'group' => 'programs',
             'icon' => 'EXT:academic_programs/Resources/Public/Icons/CategoryTypes/StandardPeriod.svg',
             'priority' => 0,
@@ -69,7 +69,7 @@ return [
         8 => [
             'identifier' => 'location',
             'extensionKey' => 'academic_programs',
-            'title' => 'LLL:EXT:academic_programs/Resources/Private/Language/locallang.xlf:sys_category.academic_programs.location',
+            'title' => 'LLL:EXT:academic_programs/Resources/Private/Language/locallang_be.xlf:sys_category.programs.location',
             'group' => 'programs',
             'icon' => 'EXT:academic_programs/Resources/Public/Icons/CategoryTypes/Location.svg',
             'priority' => 0,
@@ -77,7 +77,7 @@ return [
         9 => [
             'identifier' => 'program_type',
             'extensionKey' => 'academic_programs',
-            'title' => 'LLL:EXT:academic_programs/Resources/Private/Language/locallang.xlf:sys_category.academic_programs.program_type',
+            'title' => 'LLL:EXT:academic_programs/Resources/Private/Language/locallang_be.xlf:sys_category.programs.program_type',
             'group' => 'programs',
             'icon' => 'EXT:academic_programs/Resources/Public/Icons/CategoryTypes/ProgramType.svg',
             'priority' => 0,
@@ -85,7 +85,7 @@ return [
         10 => [
             'identifier' => 'teaching_language',
             'extensionKey' => 'academic_programs',
-            'title' => 'LLL:EXT:academic_programs/Resources/Private/Language/locallang.xlf:sys_category.academic_programs.teaching_language',
+            'title' => 'LLL:EXT:academic_programs/Resources/Private/Language/locallang_be.xlf:sys_category.programs.teaching_language',
             'group' => 'programs',
             'icon' => 'EXT:academic_programs/Resources/Public/Icons/CategoryTypes/TeachingLanguage.svg',
             'priority' => 0,
@@ -93,7 +93,7 @@ return [
         11 => [
             'identifier' => 'topic',
             'extensionKey' => 'academic_programs',
-            'title' => 'LLL:EXT:academic_programs/Resources/Private/Language/locallang.xlf:sys_category.academic_programs.topic',
+            'title' => 'LLL:EXT:academic_programs/Resources/Private/Language/locallang_be.xlf:sys_category.programs.topic',
             'group' => 'programs',
             'icon' => 'EXT:academic_programs/Resources/Public/Icons/CategoryTypes/Topic.svg',
             'priority' => 0,
