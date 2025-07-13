@@ -1,4 +1,4 @@
-[traverse(page, "doktype") == 20]
+[page && traverse(page, "doktype") == 20]
   page {
     10 {
       // Template path for PAGEVIEW based configurations

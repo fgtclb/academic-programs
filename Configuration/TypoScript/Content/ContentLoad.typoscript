@@ -1,3 +1,6 @@
+# @todo Recheck this. Is this really safe to be enabled per default ? Or does this eventually need documentation for
+# @todo systems not using default fluid-styled-content rendering or bootstrap package or similar ?
+# @todo Also duplicated in other academic extensions ?!
 styles.content {
   getContent < styles.content.get
   getContent {
