@@ -2,10 +2,12 @@
 
 declare(strict_types=1);
 
+use FGTCLB\AcademicBase\TcaManipulator;
 use FGTCLB\AcademicPrograms\Enumeration\PageTypes;
 use TYPO3\CMS\Core\Domain\Repository\PageRepository;
 use TYPO3\CMS\Core\Utility\ArrayUtility;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 defined('TYPO3') or die;
 
@@ -85,18 +87,15 @@ defined('TYPO3') or die;
         $additionalTCAcolumns
     );
 
-    ExtensionManagementUtility::addToAllTCAtypes(
-        'pages',
-        '--div--;'
-            . 'LLL:EXT:academic_programs/Resources/Private/Language/locallang_be.xlf:pages.div.program'
-            . ','
-            . implode(',', [
-                'credit_points',
-                'job_profile',
-                'performance_scope',
-                'prerequisites',
-            ]),
-        (string)PageTypes::TYPE_ACADEMIC_PROGRAM,
-        'after:title'
+    $GLOBALS['TCA'] = GeneralUtility::makeInstance(TcaManipulator::class)->addToPageTypesGeneralTab(
+        $GLOBALS['TCA'],
+        implode(',', [
+            '--div--;LLL:EXT:academic_programs/Resources/Private/Language/locallang_be.xlf:pages.div.program',
+            'credit_points',
+            'job_profile',
+            'performance_scope',
+            'prerequisites',
+        ]),
+        [PageTypes::TYPE_ACADEMIC_PROGRAM]
     );
 })();
