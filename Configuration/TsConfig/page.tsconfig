@@ -1,8 +1,6 @@
 templates.typo3/cms-backend.academic-programs = fgtclb/academic-programs:Resources/Private/Backend
 
 mod.wizards.newContentElement.wizardItems.academic {
-  header = LLL:EXT:academic_programs/Resources/Private/Language/locallang_be.xlf:wizard_items.academic
-  after = special
   elements {
     academicprograms_programlist {
       iconIdentifier = academic-programs
@@ -12,7 +10,6 @@ mod.wizards.newContentElement.wizardItems.academic {
         CType = academicprograms_programlist
       }
     }
-
     academicprograms_programdetails {
       iconIdentifier = academic-programs
       title = LLL:EXT:academic_programs/Resources/Private/Language/locallang_be.xlf:plugin.program_details.title
@@ -22,6 +19,5 @@ mod.wizards.newContentElement.wizardItems.academic {
       }
     }
   }
-
   show := addToList(academicprograms_programlist,academicprograms_programdetails)
 }

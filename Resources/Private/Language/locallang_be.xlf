@@ -14,9 +14,6 @@
 
 			<!-- Plugin configuration -->
 
-			<trans-unit id="content.ctype.group.label">
-				<source>Academic</source>
-			</trans-unit>
 			<trans-unit id="element.tab.configuration">
 				<source>Configuration</source>
 			</trans-unit>
