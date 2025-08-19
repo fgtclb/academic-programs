@@ -1,6 +1,13 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
-<xliff version="1.0">
-	<file source-language="en" target-language="" datatype="plaintext" original="messages" date="2023-04-24T15:52:42Z">
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+	<file
+		source-language="en"
+		target-language="de"
+		datatype="plaintext"
+		original="EXT:academic_programs/Resources/Private/Language/locallang_be.xlf"
+		date="2023-04-24T15:52:42Z"
+		product-name="academic_programs"
+	>
 		<header/>
 		<body>
 			<!-- Backend Layout -->
@@ -25,8 +32,14 @@
 				<target>Standard-Kategorien</target>
 			</trans-unit>
 			<trans-unit id="flexform.categories.description">
-				<source>Selected categories of the same type (e.g. ‘Degree’) are checked as alternatives (OR). If a category has subcategories (e.g. ‘Master’ with ‘Master of Arts’), these are automatically added to the list of alternatives. In addition, the pages found for each category type must also be able to be found in all other selected category types (AND).</source>
-				<target>Ausgewählte Kategorien desselben Typs (z. B. "Abschluss") werden als Alternativen geprüft (ODER). Wenn eine Kategorie über Unterkategorien verfügt (z.B. "Master" mit "Master of Arts"), werden diese automatisch zur Liste der Alternativen hinzugefügt. Zusätzlich müssen die gefundenen Seiten für jeden Kategorietyp auch in allen anderen ausgewählten Kategorietypen gefunden werden können (UND).</target>
+				<source>Selected categories of the same type (e.g. ‘Degree’) are checked as alternatives (OR). If a category has subcategories (e.g. ‘Master’ with ‘Master of
+					Arts’), these are automatically added to the list of alternatives. In addition, the pages found for each category type must also be able to be found in all
+					other selected category types (AND).
+				</source>
+				<target>Ausgewählte Kategorien desselben Typs (z. B. "Abschluss") werden als Alternativen geprüft (ODER). Wenn eine Kategorie über Unterkategorien verfügt (z.B.
+					"Master" mit "Master of Arts"), werden diese automatisch zur Liste der Alternativen hinzugefügt. Zusätzlich müssen die gefundenen Seiten für jeden Kategorietyp
+					auch in allen anderen ausgewählten Kategorietypen gefunden werden können (UND).
+				</target>
 			</trans-unit>
 			<trans-unit id="flexform.hide_filtering.label">
 				<source>Hide category filtering</source>

@@ -1,6 +1,12 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
-<xliff version="1.0">
-	<file source-language="en" datatype="plaintext" original="messages" date="2023-03-15T11:39:25Z" product-name="academic-programs">
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+	<file
+		source-language="en"
+		datatype="plaintext"
+		original="EXT:academic_programs/Resources/Private/Language/locallang.xlf"
+		date="2023-03-15T11:39:25Z"
+		product-name="academic_programs"
+	>
 		<header/>
 		<body>
 			<!-- Labels for SysCategories -->
