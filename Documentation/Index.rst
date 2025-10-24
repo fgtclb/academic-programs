@@ -45,3 +45,4 @@ TYPO3 extension.
     Introduction/Index
     Installation/Index
     KnownProblems/Index
+    Changelog/Changelog-2
