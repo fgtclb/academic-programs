@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace FGTCLB\AcademicPrograms\Factory;
 
 use FGTCLB\AcademicPrograms\Domain\Model\Dto\ProgramDemand;
+use FGTCLB\AcademicPrograms\Utility\PagesUtility;
 use FGTCLB\CategoryTypes\Collection\FilterCollection;
 use FGTCLB\CategoryTypes\Domain\Repository\CategoryRepository;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -77,7 +78,26 @@ class DemandFactory
             && is_string($contentElementData['pages'])
             && $contentElementData['pages'] !== ''
         ) {
-            $demand->setPages(GeneralUtility::intExplode(',', $contentElementData['pages']));
+            $pageIds = GeneralUtility::intExplode(',', $contentElementData['pages']);
+            // Handle recursive page selection
+            if ($pageIds !== []) {
+                // Resolve recursive depth option from content element record with fallbacks.
+                $recursiveDepth = (int)($contentElementData['recursive']
+                    // First fallback to defined TCA default value
+                    ?? $GLOBALS['TCA']['tt_content']['recursive']['config']['default']
+                    // Second fallback to integer 0, which is the expected default doing nothing.
+                    ?? 0);
+                // 250 means infinite depth, reset to `null` for depth
+                if ($recursiveDepth === 250) {
+                    $recursiveDepth = null;
+                }
+                // Get $pageIds sub-pages ids.
+                $subPageIds = PagesUtility::getPagesRecursively($pageIds, $recursiveDepth);
+                // Merge original pages with subpages
+                $pageIds = array_unique(array_merge($pageIds, $subPageIds));
+                // Set merged page ids to the demand object
+                $demand->setPages($pageIds);
+            }
         }
 
         return $demand;

@@ -28,6 +28,7 @@ defined('TYPO3') or die;
             '--div--;LLL:EXT:academic_programs/Resources/Private/Language/locallang_be.xlf:element.tab.configuration',
             'pi_flexform',
             'pages',
+            'recursive',
         ]),
         'academicprograms_programlist',
         'after:subheader',
