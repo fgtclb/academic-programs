@@ -1,5 +1,5 @@
 @import 'EXT:academic_programs/Configuration/TsConfig/Page/BackendLayouts/*.tsconfig'
-@import 'EXT:academic_programs/Configuration/TsConfig/Page/*.tsconfig'
+@import 'EXT:academic_programs/Configuration/TsConfig/*.tsconfig'
 
 # Register `EXT:backend` template overrides in backend context
 templates.typo3/cms-backend.1730990129 = fgtclb/academic-programs:Resources/Private/Backend
