@@ -1,0 +1,53 @@
+__variables:
+  - &pageStandard 0
+  - &pageShortcut 4
+  - &pageFolder 254
+  - &idSiteRootPage 1000
+  - &idFirstPage 1100
+  - &idStorageFolder 9000
+  - &idProgramsStorageFolder 10000
+
+entitySettings:
+  '*':
+    nodeColumnName: 'pid'
+    columnNames: {id: 'uid', language: 'sys_language_uid'}
+    defaultValues: {pid: 0}
+  page:
+    isNode: true
+    tableName: 'pages'
+    parentColumnName: 'pid'
+    languageColumnNames: ['l10n_parent', 'l10n_source']
+    columnNames: {type: 'doktype', root: 'is_siteroot'}
+    defaultValues: {hidden: 0, doktype: *pageStandard}
+    valueInstructions:
+      shortcut:
+        first: {shortcut: 0, shortcut_mode: 1}
+  content:
+    tableName: 'tt_content'
+    languageColumnNames: ['l18n_parent', 'l10n_source']
+    columnNames: {title: 'header', type: 'CType'}
+  typoscript:
+    tableName: 'sys_template'
+    valueInstructions:
+      type:
+        site: {root: 1, clear: 1}
+
+entities:
+  page:
+    - self: {id: *idSiteRootPage, title: '[EN] root', type: *pageShortcut, shortcut: 'first', root: true, slug: '/'}
+      languageVariants:
+        - self: {id: 1001, title: '[DE] root', type: *pageShortcut, shortcut: 'first', root: true, slug: '/', language: 1}
+        - self: {id: 1002, title: '[FR] root', type: *pageShortcut, shortcut: 'first', root: true, slug: '/', language: 2}
+      children:
+        - self: {id: *idFirstPage, title: 'EN: Welcome', slug: '/welcome', subtitle: 'hello-and-welcome'}
+          languageVariants:
+            - self: {id: 1101, title: 'DE: Willkommen', language: 1, slug: '/willkommen', subtitle: 'gruesse-and-hallo'}
+            - self: {id: 1102, title: 'FR: Welcome', language: 2, slug: '/bienvenue', subtitle: 'salut-et-bienvenue'}
+    - self: {id: *idStorageFolder, title: '[EN] Storage', type: *pageFolder, slug: '/internal/storage'}
+      languageVariants:
+        - self: {id: 9001, title: '[DE] Storage', type: *pageFolder, slug: '/internal/storage', language: 1}
+        - self: {id: 9002, title: '[FR] Storage', type: *pageFolder, slug: '/internal/storage', language: 2}
+    - self: {id: *idProgramsStorageFolder, type: *pageFolder, title: '[EN] Storage: Programs', subtitle: '[EN] Storage: Programs'}
+      languageVariants:
+        - self: {id: 10001, type: *pageFolder, title: '[DE] Speicher: Programme', subtitle: '[DE] Speicher: Programme', language: 1}
+        - self: {id: 10002, type: *pageFolder, title: '[FR] Storage: Programs', subtitle: '[FR] Storage: Programs', language: 2}

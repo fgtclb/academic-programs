@@ -8,8 +8,10 @@ use FGTCLB\AcademicPrograms\Domain\Model\Dto\ProgramDemand;
 use FGTCLB\AcademicPrograms\Utility\PagesUtility;
 use FGTCLB\CategoryTypes\Collection\FilterCollection;
 use FGTCLB\CategoryTypes\Domain\Repository\CategoryRepository;
+use Symfony\Component\DependencyInjection\Attribute\Autoconfigure;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
+#[Autoconfigure(public: true)]
 class DemandFactory
 {
     public function __construct(
