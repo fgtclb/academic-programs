@@ -21,9 +21,9 @@ and auto-register these files.
 `EXT:academic_programs` now ships a default set of partner related category
 types, which can be found in `./Configuration/CategoryTypes.yaml`
 
-`EXT:academic_partners` related category types can be extended by any other
+`EXT:academic_programs` related category types can be extended by any other
 TYPO3 extension providing a `Configuration/CategoryTypes.yaml` file containing
-category-types using the group-identifier `partners`.
+category-types using the group-identifier `programs`.
 
 `Configuration/CategoryTypes.yaml` format uses following syntax:
 
@@ -35,5 +35,11 @@ category-types using the group-identifier `partners`.
           title: '<type-translation-lable-using-full-LLL-syntax'
           group: programs
           icon: '<icon-file-using-EXT-syntax-needs-to-be-an-as-svg>'
+
+..  important::
+
+    TYPO3 Enumeration based classes has been removed from the extension codebase
+    and is considerable breaking, allowed to be done for a major version upgrade.
+    Please adopt accordingly to the new handling.
 
 .. index:: Backend
