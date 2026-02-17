@@ -8,3 +8,4 @@ composer.lock
 *.cache
 /tailor-version-artefact/
 /tailor-version-upload/
+/Documentation-GENERATED-temp
