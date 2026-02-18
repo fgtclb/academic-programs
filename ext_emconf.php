@@ -12,8 +12,8 @@ $EM_CONF[$_EXTKEY] = [
             'extbase' => '12.4.22-13.4.99',
             'frontend' => '12.4.22-13.4.99',
             'fluid' => '12.4.22-13.4.99',
-            'academic_base' => '2.1.1',
-            'category_types' => '2.1.1',
+            'academic_base' => '2.1.2',
+            'category_types' => '2.1.2',
         ],
         'conflicts' => [],
         'suggests' => [
@@ -23,5 +23,5 @@ $EM_CONF[$_EXTKEY] = [
     'description' => 'Educational Program page for TYPO3 with structured data based on sys_category',
     'state' => 'beta',
     'title' => 'FGTCLB: University Educational Program',
-    'version' => '2.1.1',
+    'version' => '2.1.2',
 ];
