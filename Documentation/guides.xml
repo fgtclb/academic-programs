@@ -13,7 +13,7 @@
                edit-on-github="fgtclb/academic-extensions"
                edit-on-github-directory="packages/fgtclb/academic-programs/Documentation"
                typo3-core-preferred="stable"/>
-    <project title="Academic Programs" release="2.1.0" copyright="since 2023 by FGTCLB GmbH"/>
+    <project title="Academic Programs" release="2.1.1" copyright="since 2023 by FGTCLB GmbH"/>
     <inventory id="t3coreapi" url="https://docs.typo3.org/m/typo3/reference-coreapi/main/en-us/"/>
     <inventory id="t3install" url="https://docs.typo3.org/m/typo3/guide-installation/main/en-us/"/>
     <inventory id="t3sitepackage" url="https://docs.typo3.org/m/typo3/tutorial-sitepackage/main/en-us/"/>
