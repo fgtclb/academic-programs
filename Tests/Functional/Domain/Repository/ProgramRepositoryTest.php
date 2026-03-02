@@ -70,6 +70,7 @@ final class ProgramRepositoryTest extends AbstractAcademicProgramsTestCase
 
     protected function tearDown(): void
     {
+        GeneralUtility::makeInstance(StateManagerInterface::class)->reset();
         GeneralUtility::rmdir($this->instancePath . '/typo3conf/sites', true);
         parent::tearDown();
     }
