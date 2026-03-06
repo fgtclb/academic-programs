@@ -11,6 +11,7 @@ Every change to the Academic Programs extension is documented here.
 .. toctree::
    :titlesonly:
 
+   2.2/Index
    2.1/Index
    2.0/Index
 
