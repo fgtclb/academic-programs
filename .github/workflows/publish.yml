@@ -15,7 +15,7 @@ jobs:
       contents: write
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Verify tag
         run: |
@@ -45,7 +45,7 @@ jobs:
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: 8.0
+          php-version: 8.1
           extensions: intl, mbstring, json, zip, curl
           tools: composer:v2
 
@@ -65,6 +65,7 @@ jobs:
         with:
           name: "[RELEASE] ${{ env.version }}"
           generate_release_notes: true
+          make_latest: "false"
           files: |
             tailor-version-artefact/${{ env.DETECTED_EXTENSION_KEY }}_${{ env.version }}.zip
             LICENSE
