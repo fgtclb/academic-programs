@@ -1,10 +1,14 @@
 <?php
 
 $EM_CONF[$_EXTKEY] = [
-    'author' => 'FGTCLB',
-    'author_company' => 'FGTCLB GmbH',
-    'author_email' => 'hello@fgtclb.com',
+    'title' => 'FGTCLB: University Educational Program',
+    'description' => 'Educational Program page for TYPO3 with structured data based on sys_category',
+    'version' => '2.3.2',
     'category' => 'fe',
+    'state' => 'beta',
+    'author' => 'FGTCLB',
+    'author_email' => 'hello@fgtclb.com',
+    'author_company' => 'FGTCLB GmbH',
     'constraints' => [
         'depends' => [
             'typo3' => '12.4.22-13.4.99',
@@ -15,13 +19,8 @@ $EM_CONF[$_EXTKEY] = [
             'academic_base' => '2.3.2',
             'category_types' => '2.3.2',
         ],
-        'conflicts' => [],
         'suggests' => [
             'page_backend_layout' => '2.0.0-2.99.99',
         ],
     ],
-    'description' => 'Educational Program page for TYPO3 with structured data based on sys_category',
-    'state' => 'beta',
-    'title' => 'FGTCLB: University Educational Program',
-    'version' => '2.3.2',
 ];
