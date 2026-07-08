@@ -75,6 +75,7 @@ class DemandFactory
         }
 
         // Set demand properties, which are always defined by plugin settings
+        $demand->setShowHiddenRecords((bool)($settings['showHiddenRecords'] ?? false));
         $demand->setPages([]);
         if (isset($contentElementData['pages'])
             && is_string($contentElementData['pages'])

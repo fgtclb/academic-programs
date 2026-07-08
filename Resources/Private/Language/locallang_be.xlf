@@ -32,6 +32,12 @@
 					other selected category types (AND).
 				</source>
 			</trans-unit>
+			<trans-unit id="flexform.showHiddenRecords.label">
+				<source>Show hidden records</source>
+			</trans-unit>
+			<trans-unit id="flexform.showHiddenRecords.description">
+				<source>If enabled, hidden (disabled) records are shown in the frontend, independent of the backend preview settings.</source>
+			</trans-unit>
 			<trans-unit id="flexform.hide_filtering.label">
 				<source>Hide category filtering</source>
 			</trans-unit>

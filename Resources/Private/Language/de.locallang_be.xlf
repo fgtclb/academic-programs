@@ -41,6 +41,14 @@
 					auch in allen anderen ausgewählten Kategorietypen gefunden werden können (UND).
 				</target>
 			</trans-unit>
+			<trans-unit id="flexform.showHiddenRecords.label">
+				<source>Show hidden records</source>
+				<target>Versteckte Datensätze anzeigen</target>
+			</trans-unit>
+			<trans-unit id="flexform.showHiddenRecords.description">
+				<source>If enabled, hidden (disabled) records are shown in the frontend, independent of the backend preview settings.</source>
+				<target>Wenn aktiviert, werden versteckte (deaktivierte) Datensätze unabhängig von den Backend-Vorschaueinstellungen im Frontend ausgegeben.</target>
+			</trans-unit>
 			<trans-unit id="flexform.hide_filtering.label">
 				<source>Hide category filtering</source>
 				<target>Kategorienfilter ausblenden</target>

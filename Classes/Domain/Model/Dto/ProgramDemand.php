@@ -12,6 +12,7 @@ class ProgramDemand
     /** @var int[] */
     protected array $pages = [];
     protected ?FilterCollection $filterCollection = null;
+    protected bool $showHiddenRecords = false;
     protected string $sorting = '';
     protected string $sortingField = '';
     protected string $sortingDirection = '';
@@ -48,6 +49,16 @@ class ProgramDemand
     public function getFilterCollection(): ?FilterCollection
     {
         return $this->filterCollection;
+    }
+
+    public function setShowHiddenRecords(bool $showHiddenRecords): void
+    {
+        $this->showHiddenRecords = $showHiddenRecords;
+    }
+
+    public function getShowHiddenRecords(): bool
+    {
+        return $this->showHiddenRecords;
     }
 
     public function setFilterCollection(?FilterCollection $filterCollection): void

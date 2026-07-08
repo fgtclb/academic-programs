@@ -1,0 +1,8 @@
+"pages",
+,"uid","pid","doktype","sys_language_uid","hidden","deleted","starttime","endtime","title","slug",
+,1,0,20,0,0,0,0,0,"Visible program A","/visible-a",
+,2,0,20,0,1,0,0,0,"Hidden program B","/hidden-b",
+,3,0,20,0,0,0,0,0,"Visible program C","/visible-c",
+,4,0,20,0,1,0,0,0,"Hidden program D","/hidden-d",
+,5,0,20,0,0,1,0,0,"Deleted program E","/deleted-e",
+,6,0,1,0,0,0,0,0,"Regular page","/regular-page",

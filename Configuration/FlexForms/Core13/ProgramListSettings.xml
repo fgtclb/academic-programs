@@ -67,6 +67,21 @@
                     <MM_opposite_field>items</MM_opposite_field>
                 </config>
             </settings.categories>
+            <settings.showHiddenRecords>
+                <label>LLL:EXT:academic_programs/Resources/Private/Language/locallang_be.xlf:flexform.showHiddenRecords.label</label>
+                <description>LLL:EXT:academic_programs/Resources/Private/Language/locallang_be.xlf:flexform.showHiddenRecords.description</description>
+                <config>
+                    <type>check</type>
+                    <renderType>checkboxToggle</renderType>
+                    <default>0</default>
+                    <items>
+                        <numIndex index="0" type="array">
+                            <label></label>
+                            <value>1</value>
+                        </numIndex>
+                    </items>
+                </config>
+            </settings.showHiddenRecords>
         </el>
     </ROOT>
 </T3DataStructure>
