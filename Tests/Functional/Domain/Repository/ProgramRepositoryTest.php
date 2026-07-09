@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace FGTCLB\AcademicPrograms\Tests\Functional\Domain\Repository;
 
-use FGTCLB\AcademicBase\Environment\EnvironmentBuilderFactoryInterface;
-use FGTCLB\AcademicBase\Environment\StateBuildContext;
-use FGTCLB\AcademicBase\Environment\StateManagerInterface;
 use FGTCLB\AcademicPrograms\Domain\Model\Program;
 use FGTCLB\AcademicPrograms\Domain\Repository\ProgramRepository;
 use FGTCLB\AcademicPrograms\Factory\DemandFactory;
 use FGTCLB\AcademicPrograms\Tests\Functional\AbstractAcademicProgramsTestCase;
+use FGTCLB\EnvironmentStateManager\EnvironmentBuilderFactoryInterface;
+use FGTCLB\EnvironmentStateManager\StateBuildContext;
+use FGTCLB\EnvironmentStateManager\StateManagerInterface;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
 use SBUERK\TYPO3\Testing\SiteHandling\SiteBasedTestTrait;

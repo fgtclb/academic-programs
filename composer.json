@@ -48,6 +48,9 @@
         "typo3/cms-fluid": "^12.4.22 || ^13.4",
         "typo3/cms-frontend": "^12.4.22 || ^13.4"
     },
+    "require-dev": {
+        "fgtclb/environment-state-manager": "^1.0"
+    },
     "autoload": {
         "psr-4": {
             "FGTCLB\\AcademicPrograms\\": "Classes/"
