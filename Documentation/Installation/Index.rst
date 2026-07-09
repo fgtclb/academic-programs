@@ -18,21 +18,20 @@ download and install it using one of the following methods.
 
         ..  tip::
 
-            The ``2.x`` version can already be used and tested in Composer based
-            instances. Configure ``minimum-stability: dev`` and ``prefer-stable``
-            in your root :file:`composer.json` so requiring the extension still
-            prefers stable releases over development versions:
+            We recommend to pin academic extensions on minor level to mitigate
+            possible issues in projects in case `composer update` is used based
+            on the fact that projects commonly tends to override fluid templates
+            and changes for otherwise non-breaking changes are possible promoted
+            to be breaking in case template changes are not adopted why it has
+            been considered to mark template changes as breaking changes on
+            minor version updates. That means, we suggest to use for example
+            following command to ensure that we stay in the minor version range
+            but have the hightest patchlevel enforced for it and keep possible
+            bugfix releases for that minor version possible to install:
 
             ..  code-block:: bash
 
-                composer config minimum-stability "dev" \
-                    && composer config "prefer-stable" true
-
-            and install the development version with:
-
-            ..  code-block:: bash
-
-                composer require 'fgtclb/academic-programs':'2.*.*@dev'
+                composer require 'fgtclb/academic-programs':'~2.3.1@dev'
 
     ..  group-tab:: Extension Manager
 
