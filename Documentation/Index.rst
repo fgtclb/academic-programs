@@ -1,6 +1,4 @@
-..  include:: /Includes.rst.txt
-
-.. _start:
+..  _start:
 
 =================
 Academic Programs
@@ -31,18 +29,50 @@ Academic Programs
 
 ----
 
-TYPO3 extension.
+TYPO3 extension for presenting the study programs of universities with
+structured data and typified system categories, including filterable list and
+detail views in the frontend.
 
 ----
 
-**Table of Contents:**
+..  card-grid::
+    :columns: 1
+    :columns-md: 2
+    :gap: 4
+    :class: pb-4
+    :card-height: 100
+
+    ..  card:: :ref:`Introduction <introduction>`
+
+        What the extension does and the main concepts behind it.
+
+    ..  card:: :ref:`Installation <installation>`
+
+        Install :guilabel:`academic_programs` via Composer, the Extension
+        Manager or a TER upload.
+
+    ..  card:: :ref:`Known problems <known-problems>`
+
+        Known issues and information about them.
+
+    ..  card:: :ref:`Changelog <changelog-v2>`
+
+        Learn about what has changed and which actions are required to
+        upgrade.
 
 ..  toctree::
-    :maxdepth: 5
+    :maxdepth: 2
     :titlesonly:
-    :glob:
+    :hidden:
 
     Introduction/Index
     Installation/Index
     KnownProblems/Index
     Changelog/Changelog-2
+
+..  Meta Menu
+
+..  toctree::
+    :hidden:
+
+    Sitemap

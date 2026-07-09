@@ -1,5 +1,3 @@
-.. include:: /Includes.rst.txt
-
 .. _important-ace-250-academic-programs:
 
 ===========================================================

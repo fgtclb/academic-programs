@@ -1,5 +1,3 @@
-.. include:: /Includes.rst.txt
-
 ..  _changelog-v2-byType:
 
 ===================
