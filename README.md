@@ -37,10 +37,10 @@ composer req \
 ```
 
 > [!IMPORTANT]
-> `2.x.x` is still in development and not all academics extension are fully tested in v12 and v13,
+> `3.x.x` is still in development and not all academics extension are fully tested in v13,
 > but can be installed in composer instances to use, test them. Testing and reporting are welcome.
 
-**Testing 2.x.x extension version in projects (composer mode)**
+**Testing 3.x.x extension version in projects (composer mode)**
 
 It is already possible to use and test the `2.x` version in composer based instances,
 which is encouraged and feedback of issues not detected by us (or pull-requests).
@@ -57,8 +57,8 @@ and installed with:
 
 ```shell
 composer require \
-  'fgtclb/category-types':'2.*.*@dev' \
-  'fgtclb/academic-programs':'2.*.*@dev'
+  'fgtclb/category-types':'3.*.*@dev' \
+  'fgtclb/academic-programs':'3.*.*@dev'
 ```
 
 ## Upgrade from `1.x`
