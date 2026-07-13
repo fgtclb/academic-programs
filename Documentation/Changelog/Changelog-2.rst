@@ -10,6 +10,7 @@ Every change to the Academic Programs extension is documented here.
    :titlesonly:
 
    2.4/Index
+   2.3/Index
    2.2/Index
    2.1/Index
    2.0/Index
