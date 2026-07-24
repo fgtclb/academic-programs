@@ -2,20 +2,19 @@
 
 declare(strict_types=1);
 
+use FGTCLB\AcademicBase\TcaManipulator;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
-use TYPO3\CMS\Extbase\Utility\ExtensionUtility;
 
 defined('TYPO3') or die;
 
 (static function (): void {
-    ExtensionManagementUtility::addPlugin(
+    (new TcaManipulator())->addContentElementPlugin(
         [
             'label' => 'LLL:EXT:academic_programs/Resources/Private/Language/locallang_be.xlf:plugin.program_list.title',
             'value' => 'academicprograms_programlist',
             'icon' => 'EXT:academic_programs/Resources/Public/Icons/Extension.svg',
             'group' => 'academic',
         ],
-        ExtensionUtility::PLUGIN_TYPE_CONTENT_ELEMENT,
         'academic_programs'
     );
 
@@ -37,14 +36,13 @@ defined('TYPO3') or die;
         'academicprograms_programlist',
     );
 
-    ExtensionManagementUtility::addPlugin(
+    (new TcaManipulator())->addContentElementPlugin(
         [
             'label' => 'LLL:EXT:academic_programs/Resources/Private/Language/locallang_be.xlf:plugin.program_details.title',
             'value' => 'academicprograms_programdetails',
             'icon' => 'EXT:academic_programs/Resources/Public/Icons/Extension.svg',
             'group' => 'academic',
         ],
-        ExtensionUtility::PLUGIN_TYPE_CONTENT_ELEMENT,
         'academic_programs'
     );
 })();
