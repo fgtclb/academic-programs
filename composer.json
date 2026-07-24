@@ -49,7 +49,7 @@
         "typo3/cms-frontend": "^13.4"
     },
     "require-dev": {
-        "fgtclb/environment-state-manager": "^1.0"
+        "fgtclb/environment-state-manager": "^2.0.1@dev"
     },
     "autoload": {
         "psr-4": {
