@@ -27,10 +27,7 @@
 				<source>Default categories</source>
 			</trans-unit>
 			<trans-unit id="flexform.categories.description">
-				<source>Selected categories of the same type (e.g. ‘Degree’) are checked as alternatives (OR). If a category has subcategories (e.g. ‘Master’ with ‘Master of
-					Arts’), these are automatically added to the list of alternatives. In addition, the pages found for each category type must also be able to be found in all
-					other selected category types (AND).
-				</source>
+				<source>Selected categories of the same type (e.g. ‘Degree’) are checked as alternatives (OR). If a category has subcategories (e.g. ‘Master’ with ‘Master of Arts’), these are automatically added to the list of alternatives. In addition, the pages found for each category type must also be able to be found in all other selected category types (AND).</source>
 			</trans-unit>
 			<trans-unit id="flexform.showHiddenRecords.label">
 				<source>Show hidden records</source>
