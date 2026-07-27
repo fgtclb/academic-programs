@@ -30,8 +30,10 @@ defined('TYPO3') or die;
         'after:subheader',
     );
 
-    $GLOBALS['TCA']['tt_content']['types']['academicprograms_programlist']['columnsOverrides']['pi_flexform']['config']['ds']
-        = 'FILE:EXT:academic_programs/Configuration/FlexForms/ProgramListSettings.xml';
+    (new TcaManipulator())->addContentElementPluginFlexForm(
+        'academicprograms_programlist',
+        'FILE:EXT:academic_programs/Configuration/FlexForms/ProgramListSettings.xml',
+    );
 
     (new TcaManipulator())->addContentElementPlugin(
         [
