@@ -1,216 +1,216 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
-	<file
-		source-language="en"
-		target-language="de"
-		datatype="plaintext"
-		original="EXT:academic_programs/Resources/Private/Language/locallang_be.xlf"
-		date="2023-04-24T15:52:42Z"
-		product-name="academic_programs"
-	>
-		<header/>
-		<body>
-			<!-- Backend Layout -->
+  <file
+    source-language="en"
+    target-language="de"
+    datatype="plaintext"
+    original="EXT:academic_programs/Resources/Private/Language/locallang_be.xlf"
+    date="2023-04-24T15:52:42Z"
+    product-name="academic_programs"
+  >
+    <header/>
+    <body>
+      <!-- Backend Layout -->
 
-			<trans-unit id="backend_layout.academic_program">
-				<source>Academic Program</source>
-				<target>Akademisches Programm</target>
-			</trans-unit>
-			<trans-unit id="backend_layout.academic_program.column.content">
-				<source>Content</source>
-				<target>Inhalt</target>
-			</trans-unit>
+      <trans-unit id="backend_layout.academic_program">
+        <source>Academic Program</source>
+        <target>Akademisches Programm</target>
+      </trans-unit>
+      <trans-unit id="backend_layout.academic_program.column.content">
+        <source>Content</source>
+        <target>Inhalt</target>
+      </trans-unit>
 
-			<!-- Plugin configuration -->
+      <!-- Plugin configuration -->
 
-			<trans-unit id="element.tab.configuration">
-				<source>Configuration</source>
-				<target>Konfiguration</target>
-			</trans-unit>
-			<trans-unit id="flexform.categories.label">
-				<source>Default categories</source>
-				<target>Standard-Kategorien</target>
-			</trans-unit>
-			<trans-unit id="flexform.categories.description">
-				<source>Selected categories of the same type (e.g. ‘Degree’) are checked as alternatives (OR). If a category has subcategories (e.g. ‘Master’ with ‘Master of Arts’), these are automatically added to the list of alternatives. In addition, the pages found for each category type must also be able to be found in all other selected category types (AND).</source>
-				<target>Ausgewählte Kategorien desselben Typs (z. B. "Abschluss") werden als Alternativen geprüft (ODER). Wenn eine Kategorie über Unterkategorien verfügt (z.B. "Master" mit "Master of Arts"), werden diese automatisch zur Liste der Alternativen hinzugefügt. Zusätzlich müssen die gefundenen Seiten für jeden Kategorietyp auch in allen anderen ausgewählten Kategorietypen gefunden werden können (UND).</target>
-			</trans-unit>
-			<trans-unit id="flexform.showHiddenRecords.label">
-				<source>Show hidden records</source>
-				<target>Versteckte Datensätze anzeigen</target>
-			</trans-unit>
-			<trans-unit id="flexform.showHiddenRecords.description">
-				<source>If enabled, hidden (disabled) records are shown in the frontend, independent of the backend preview settings.</source>
-				<target>Wenn aktiviert, werden versteckte (deaktivierte) Datensätze unabhängig von den Backend-Vorschaueinstellungen im Frontend ausgegeben.</target>
-			</trans-unit>
-			<trans-unit id="flexform.hide_filtering.label">
-				<source>Hide category filtering</source>
-				<target>Kategorienfilter ausblenden</target>
-			</trans-unit>
-			<trans-unit id="flexform.hide_filtering.description">
-				<source>If the option is enabled, options for filtering by categories will not be visible in the frontend.</source>
-				<target>Wenn diese Option aktiviert ist, werden die Filteroptionen nach Kategorien im Frontend nicht sichtbar sein.</target>
-			</trans-unit>
-			<trans-unit id="flexform.hide_sorting.label">
-				<source>Hide sorting</source>
-				<target>Sortierung ausblenden</target>
-			</trans-unit>
-			<trans-unit id="flexform.hide_sorting.description">
-				<source>If the option is enabled, options for sorting will not be visible in the frontend.</source>
-				<target>Wenn diese Option aktiviert ist, werden die Sortieroptionen im Frontend nicht sichtbar sein.</target>
-			</trans-unit>
-			<trans-unit id="flexform.sorting.label">
-				<source>Default sorting</source>
-				<target>Standard-Sortierung</target>
-			</trans-unit>
-			<trans-unit id="flexform.sorting.description">
-				<source>Default sorting in frontend which can be changed by user if sorting options are visible.</source>
-				<target>Standard-Sortierung im Frontend, die vom Benutzer geändert werden kann, wenn die Sortieroptionen sichtbar sind.</target>
-			</trans-unit>
-			<trans-unit id="flexform.sorting.title.asc">
-				<source>Title A-Z</source>
-				<target>Titel A-Z</target>
-			</trans-unit>
-			<trans-unit id="flexform.sorting.title.desc">
-				<source>Title Z-A</source>
-				<target>Titel Z-A</target>
-			</trans-unit>
-			<trans-unit id="flexform.sorting.update">
-				<source>Last updated (latest first)</source>
-				<target>Zuletzt aktualisiert (neueste zuerst)</target>
-			</trans-unit>
-			<trans-unit id="flexform.sorting.update.asc">
-				<source>Last updated (latest last)</source>
-				<target>Zuletzt aktualisiert (älteste zuerst)</target>
-			</trans-unit>
-			<trans-unit id="flexform.sorting.sorting.asc">
-				<source>Page sorting (Result may be unexpected)</source>
-				<target>Seitensortierung (Ergebnis kann unerwartet sein)</target>
-			</trans-unit>
+      <trans-unit id="element.tab.configuration">
+        <source>Configuration</source>
+        <target>Konfiguration</target>
+      </trans-unit>
+      <trans-unit id="flexform.categories.label">
+        <source>Default categories</source>
+        <target>Standard-Kategorien</target>
+      </trans-unit>
+      <trans-unit id="flexform.categories.description">
+        <source>Selected categories of the same type (e.g. ‘Degree’) are checked as alternatives (OR). If a category has subcategories (e.g. ‘Master’ with ‘Master of Arts’), these are automatically added to the list of alternatives. In addition, the pages found for each category type must also be able to be found in all other selected category types (AND).</source>
+        <target>Ausgewählte Kategorien desselben Typs (z. B. "Abschluss") werden als Alternativen geprüft (ODER). Wenn eine Kategorie über Unterkategorien verfügt (z.B. "Master" mit "Master of Arts"), werden diese automatisch zur Liste der Alternativen hinzugefügt. Zusätzlich müssen die gefundenen Seiten für jeden Kategorietyp auch in allen anderen ausgewählten Kategorietypen gefunden werden können (UND).</target>
+      </trans-unit>
+      <trans-unit id="flexform.showHiddenRecords.label">
+        <source>Show hidden records</source>
+        <target>Versteckte Datensätze anzeigen</target>
+      </trans-unit>
+      <trans-unit id="flexform.showHiddenRecords.description">
+        <source>If enabled, hidden (disabled) records are shown in the frontend, independent of the backend preview settings.</source>
+        <target>Wenn aktiviert, werden versteckte (deaktivierte) Datensätze unabhängig von den Backend-Vorschaueinstellungen im Frontend ausgegeben.</target>
+      </trans-unit>
+      <trans-unit id="flexform.hide_filtering.label">
+        <source>Hide category filtering</source>
+        <target>Kategorienfilter ausblenden</target>
+      </trans-unit>
+      <trans-unit id="flexform.hide_filtering.description">
+        <source>If the option is enabled, options for filtering by categories will not be visible in the frontend.</source>
+        <target>Wenn diese Option aktiviert ist, werden die Filteroptionen nach Kategorien im Frontend nicht sichtbar sein.</target>
+      </trans-unit>
+      <trans-unit id="flexform.hide_sorting.label">
+        <source>Hide sorting</source>
+        <target>Sortierung ausblenden</target>
+      </trans-unit>
+      <trans-unit id="flexform.hide_sorting.description">
+        <source>If the option is enabled, options for sorting will not be visible in the frontend.</source>
+        <target>Wenn diese Option aktiviert ist, werden die Sortieroptionen im Frontend nicht sichtbar sein.</target>
+      </trans-unit>
+      <trans-unit id="flexform.sorting.label">
+        <source>Default sorting</source>
+        <target>Standard-Sortierung</target>
+      </trans-unit>
+      <trans-unit id="flexform.sorting.description">
+        <source>Default sorting in frontend which can be changed by user if sorting options are visible.</source>
+        <target>Standard-Sortierung im Frontend, die vom Benutzer geändert werden kann, wenn die Sortieroptionen sichtbar sind.</target>
+      </trans-unit>
+      <trans-unit id="flexform.sorting.title.asc">
+        <source>Title A-Z</source>
+        <target>Titel A-Z</target>
+      </trans-unit>
+      <trans-unit id="flexform.sorting.title.desc">
+        <source>Title Z-A</source>
+        <target>Titel Z-A</target>
+      </trans-unit>
+      <trans-unit id="flexform.sorting.update">
+        <source>Last updated (latest first)</source>
+        <target>Zuletzt aktualisiert (neueste zuerst)</target>
+      </trans-unit>
+      <trans-unit id="flexform.sorting.update.asc">
+        <source>Last updated (latest last)</source>
+        <target>Zuletzt aktualisiert (älteste zuerst)</target>
+      </trans-unit>
+      <trans-unit id="flexform.sorting.sorting.asc">
+        <source>Page sorting (Result may be unexpected)</source>
+        <target>Seitensortierung (Ergebnis kann unerwartet sein)</target>
+      </trans-unit>
 
-			<!-- Wizard -->
+      <!-- Wizard -->
 
-			<trans-unit id="wizard_items.academic">
-				<source>Academic</source>
-				<target>Akademisch</target>
-			</trans-unit>
-			<trans-unit id="plugin.program_list.title">
-				<source>Program List</source>
-				<target>Programmliste</target>
-			</trans-unit>
-			<trans-unit id="plugin.program_list.description">
-				<source>Display a sortable and filterable list of academic programs.</source>
-				<target>Zeigt eine sortierbare und filterbare Liste von akademischen Programmen an.</target>
-			</trans-unit>
-			<trans-unit id="plugin.program_details.title">
-				<source>Program Details</source>
-				<target>Programmdetails</target>
-			</trans-unit>
-			<trans-unit id="plugin.program_details.description">
-				<source>Displays the details of an academic program</source>
-				<target>Zeigt die Details eines akademischen Programms an.</target>
-			</trans-unit>
+      <trans-unit id="wizard_items.academic">
+        <source>Academic</source>
+        <target>Akademisch</target>
+      </trans-unit>
+      <trans-unit id="plugin.program_list.title">
+        <source>Program List</source>
+        <target>Programmliste</target>
+      </trans-unit>
+      <trans-unit id="plugin.program_list.description">
+        <source>Display a sortable and filterable list of academic programs.</source>
+        <target>Zeigt eine sortierbare und filterbare Liste von akademischen Programmen an.</target>
+      </trans-unit>
+      <trans-unit id="plugin.program_details.title">
+        <source>Program Details</source>
+        <target>Programmdetails</target>
+      </trans-unit>
+      <trans-unit id="plugin.program_details.description">
+        <source>Displays the details of an academic program</source>
+        <target>Zeigt die Details eines akademischen Programms an.</target>
+      </trans-unit>
 
-			<!-- Doktype -->
+      <!-- Doktype -->
 
-			<trans-unit id="pages.doktype.item_group.academic">
-				<source>Academic Pages</source>
-				<target>Akademische Seiten</target>
-			</trans-unit>
-			<trans-unit id="pages.doktype.item.academic_program">
-				<source>Program</source>
-				<target>Programm</target>
-			</trans-unit>
+      <trans-unit id="pages.doktype.item_group.academic">
+        <source>Academic Pages</source>
+        <target>Akademische Seiten</target>
+      </trans-unit>
+      <trans-unit id="pages.doktype.item.academic_program">
+        <source>Program</source>
+        <target>Programm</target>
+      </trans-unit>
 
-			<!-- Labels for SysCategories -->
+      <!-- Labels for SysCategories -->
 
-			<trans-unit id="sys_category.programs.group">
-				<source>Academic Programs</source>
-				<target>Akademische Programme</target>
-			</trans-unit>
-			<trans-unit id="sys_category.programs.admission_restriction">
-				<source>Admission restriction</source>
-				<target>Zulassungsbeschränkung</target>
-			</trans-unit>
-			<trans-unit id="sys_category.programs.application_period">
-				<source>Application period</source>
-				<target>Bewerbungszeitraum</target>
-			</trans-unit>
-			<trans-unit id="sys_category.programs.begin_program">
-				<source>Begin of program</source>
-				<target>Programmbeginn</target>
-			</trans-unit>
-			<trans-unit id="sys_category.programs.costs">
-				<source>Costs</source>
-				<target>Kosten</target>
-			</trans-unit>
-			<trans-unit id="sys_category.programs.degree">
-				<source>Degree</source>
-				<target>Abschluss</target>
-			</trans-unit>
-			<trans-unit id="sys_category.programs.department">
-				<source>Department / Faculty</source>
-				<target>Abteilung / Fakultät</target>
-			</trans-unit>
-			<trans-unit id="sys_category.programs.location">
-				<source>Location</source>
-				<target>Standort</target>
-			</trans-unit>
-			<trans-unit id="sys_category.programs.paying">
-				<source>Paying?</source>
-				<target>Zahlungspflichtig?</target>
-			</trans-unit>
-			<trans-unit id="sys_category.programs.program_type">
-				<source>Type of program</source>
-				<target>Art des Programms</target>
-			</trans-unit>
-			<trans-unit id="sys_category.programs.standard_period">
-				<source>Standard period</source>
-				<target>Regelstudienzeit</target>
-			</trans-unit>
-			<trans-unit id="sys_category.programs.teaching_language">
-				<source>Teaching language</source>
-				<target>Unterrichtssprache</target>
-			</trans-unit>
-			<trans-unit id="sys_category.programs.topic">
-				<source>Topic</source>
-				<target>Thema</target>
-			</trans-unit>
+      <trans-unit id="sys_category.programs.group">
+        <source>Academic Programs</source>
+        <target>Akademische Programme</target>
+      </trans-unit>
+      <trans-unit id="sys_category.programs.admission_restriction">
+        <source>Admission restriction</source>
+        <target>Zulassungsbeschränkung</target>
+      </trans-unit>
+      <trans-unit id="sys_category.programs.application_period">
+        <source>Application period</source>
+        <target>Bewerbungszeitraum</target>
+      </trans-unit>
+      <trans-unit id="sys_category.programs.begin_program">
+        <source>Begin of program</source>
+        <target>Programmbeginn</target>
+      </trans-unit>
+      <trans-unit id="sys_category.programs.costs">
+        <source>Costs</source>
+        <target>Kosten</target>
+      </trans-unit>
+      <trans-unit id="sys_category.programs.degree">
+        <source>Degree</source>
+        <target>Abschluss</target>
+      </trans-unit>
+      <trans-unit id="sys_category.programs.department">
+        <source>Department / Faculty</source>
+        <target>Abteilung / Fakultät</target>
+      </trans-unit>
+      <trans-unit id="sys_category.programs.location">
+        <source>Location</source>
+        <target>Standort</target>
+      </trans-unit>
+      <trans-unit id="sys_category.programs.paying">
+        <source>Paying?</source>
+        <target>Zahlungspflichtig?</target>
+      </trans-unit>
+      <trans-unit id="sys_category.programs.program_type">
+        <source>Type of program</source>
+        <target>Art des Programms</target>
+      </trans-unit>
+      <trans-unit id="sys_category.programs.standard_period">
+        <source>Standard period</source>
+        <target>Regelstudienzeit</target>
+      </trans-unit>
+      <trans-unit id="sys_category.programs.teaching_language">
+        <source>Teaching language</source>
+        <target>Unterrichtssprache</target>
+      </trans-unit>
+      <trans-unit id="sys_category.programs.topic">
+        <source>Topic</source>
+        <target>Thema</target>
+      </trans-unit>
 
-			<!-- TCA -->
+      <!-- TCA -->
 
-			<trans-unit id="pages.div.program">
-				<source>Program</source>
-				<target>Programm</target>
-			</trans-unit>
-			<trans-unit id="pages.prerequisites">
-				<source>Prerequisites</source>
-				<target>Voraussetzungen</target>
-			</trans-unit>
-			<trans-unit id="pages.credit_points">
-				<source>Credit points</source>
-				<target>Leistungspunkte</target>
-			</trans-unit>
-			<trans-unit id="pages.job_profile">
-				<source>Job profile</source>
-				<target>Berufsprofil</target>
-			</trans-unit>
-			<trans-unit id="pages.performance_scope">
-				<source>Performance scope</source>
-				<target>Leistungsumfang</target>
-			</trans-unit>
-			<trans-unit id="pages.overview">
-				<source>Overview</source>
-				<target>Überblick</target>
-			</trans-unit>
-			<trans-unit id="pages.contents">
-				<source>Programm contents</source>
-				<target>Programminhalte</target>
-			</trans-unit>
-			<trans-unit id="pages.application">
-				<source>Application</source>
-				<target>Bewerbung</target>
-			</trans-unit>
-		</body>
-	</file>
+      <trans-unit id="pages.div.program">
+        <source>Program</source>
+        <target>Programm</target>
+      </trans-unit>
+      <trans-unit id="pages.prerequisites">
+        <source>Prerequisites</source>
+        <target>Voraussetzungen</target>
+      </trans-unit>
+      <trans-unit id="pages.credit_points">
+        <source>Credit points</source>
+        <target>Leistungspunkte</target>
+      </trans-unit>
+      <trans-unit id="pages.job_profile">
+        <source>Job profile</source>
+        <target>Berufsprofil</target>
+      </trans-unit>
+      <trans-unit id="pages.performance_scope">
+        <source>Performance scope</source>
+        <target>Leistungsumfang</target>
+      </trans-unit>
+      <trans-unit id="pages.overview">
+        <source>Overview</source>
+        <target>Überblick</target>
+      </trans-unit>
+      <trans-unit id="pages.contents">
+        <source>Programm contents</source>
+        <target>Programminhalte</target>
+      </trans-unit>
+      <trans-unit id="pages.application">
+        <source>Application</source>
+        <target>Bewerbung</target>
+      </trans-unit>
+    </body>
+  </file>
 </xliff>

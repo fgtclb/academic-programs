@@ -53,8 +53,12 @@ indent_size = 2
 
 # XLF-Files
 [*.xlf]
-indent_style = tab
-max_line_length = 180
+indent_style = space
+indent_size = 2
+# Label content is a single line by design. Wrapping it embeds literal
+# whitespace in the rendered label on TYPO3 v13 and older, which do not
+# collapse it (see TYPO3 #70867).
+max_line_length = off
 
 # SQL-Files
 [*.sql]
