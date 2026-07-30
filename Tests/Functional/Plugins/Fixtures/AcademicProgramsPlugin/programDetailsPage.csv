@@ -1,0 +1,25 @@
+"pages",
+,"uid","pid","doktype","deleted","hidden","sys_language_uid","l10n_parent","l18n_cfg","slug","title","abstract","credit_points","categories"
+,1,0,1,0,0,0,0,0,"/","Site Root","",0,0
+,2,1,1,0,0,0,0,0,"/home","Home (EN)","",0,0
+,3,1,1,0,0,0,0,0,"/departments","Departments","",0,0
+,4,3,1,0,0,0,0,0,"/departments/physics","Physics Department","",0,0
+,5,1,254,0,0,0,0,0,"/categories","Categories","",0,0
+,10,1,20,0,0,0,0,0,"/applied-physics","Applied Physics","Optics, photonics and applied quantum mechanics.",180,2
+,11,1,20,0,0,0,0,0,"/molecular-chemistry","Molecular Chemistry","Synthesis and analysis of molecular structures.",120,1
+,12,1,20,0,1,0,0,0,"/archived-studies","Archived Studies","",0,0
+,13,3,20,0,0,0,0,0,"/regional-teaching","Regional Teaching","Teaching degree offered with regional partners.",240,0
+,14,4,20,0,0,0,0,0,"/quantum-optics","Quantum Optics","Research oriented specialisation.",120,0
+"sys_category",
+,"uid","pid","deleted","hidden","parent","type","title","sys_language_uid","l10n_parent"
+,1,5,0,0,0,"degree","Bachelor of Science",0,0
+,2,5,0,0,0,"degree","Master of Science",0,0
+,3,5,0,0,0,"program_type","Full-time",0,0
+"sys_category_record_mm",
+,"uid_local","uid_foreign","tablenames","fieldname","sorting","sorting_foreign"
+,1,10,"pages","categories",0,1
+,3,10,"pages","categories",0,2
+,2,11,"pages","categories",0,1
+"tt_content",
+,"uid","pid","deleted","hidden","sys_language_uid","l18n_parent","CType","header","pages","recursive","pi_flexform"
+,1,10,0,0,0,0,"academicprograms_programdetails","","",0,""
