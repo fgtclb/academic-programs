@@ -1,0 +1,5 @@
+"sys_category",
+,"uid","pid","deleted","hidden","parent","type","title","sys_language_uid","l10n_parent"
+,1,0,0,0,0,"admission_restriction","First Category",0,0
+,2,0,0,0,0,"admission_restriction","Second Category",0,0
+,3,0,0,0,0,"application_period","Third Category",0,0
