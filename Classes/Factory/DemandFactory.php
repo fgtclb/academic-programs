@@ -8,6 +8,7 @@ use FGTCLB\AcademicPrograms\Domain\Model\Dto\ProgramDemand;
 use FGTCLB\AcademicPrograms\Utility\PagesUtility;
 use FGTCLB\CategoryTypes\Collection\FilterCollection;
 use FGTCLB\CategoryTypes\Domain\Repository\CategoryRepository;
+use FGTCLB\CategoryTypes\Filter\CategoryFilterNormalizer;
 use Symfony\Component\DependencyInjection\Attribute\Autoconfigure;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
@@ -16,6 +17,7 @@ class DemandFactory
 {
     public function __construct(
         private readonly CategoryRepository $categoryRepository,
+        private readonly CategoryFilterNormalizer $categoryFilterNormalizer,
     ) {}
 
     /**
@@ -58,14 +60,9 @@ class DemandFactory
             }
 
             if (isset($demandFromForm['filterCollection'])) {
-                $categoryUids = [];
-                foreach ($demandFromForm['filterCollection'] as $uids) {
-                    $categoryUids = array_merge($categoryUids, GeneralUtility::intExplode(',', $uids));
-                }
-
                 $categoryCollection = $this->categoryRepository->findByGroupAndUidList(
                     'programs',
-                    $categoryUids,
+                    $this->categoryFilterNormalizer->toUidList($demandFromForm['filterCollection']),
                 );
             }
         }
