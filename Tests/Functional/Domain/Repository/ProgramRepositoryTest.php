@@ -785,18 +785,4 @@ ENDOFCONFIG,
         $this->assertArrays($expectedRecords, $resultRecords, '_localizedUid');
     }
 
-    /**
-     * @todo debug helper, must be removed before merge
-     * @return array<int, array<string, mixed>>
-     */
-    public function debugGetPageRecords(): array
-    {
-        $queryBuilder = $this->getConnectionPool()->getQueryBuilderForTable('pages');
-        $queryBuilder->getRestrictions()->removeAll();
-        return $queryBuilder
-            ->select('uid', 'pid', 'doktype', 'title', 'subtitle', 'sys_language_uid')
-            ->from('pages')
-            ->executeQuery()
-            ->fetchAllAssociative();
-    }
 }
