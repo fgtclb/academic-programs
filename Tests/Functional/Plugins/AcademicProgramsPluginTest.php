@@ -152,6 +152,13 @@ final class AcademicProgramsPluginTest extends AbstractAcademicProgramsTestCase
         // programs, so both types assigned in the fixture become a filter.
         $this->assertStringContainsString('id="degree"', $content);
         $this->assertStringContainsString('id="program_type"', $content);
+        // Both selects are written by `CategoryTypes\ViewHelpers\Form\AbstractSelectViewHelper`,
+        // which neither `ViewHelpers\Form\SortingSelectViewHelper` nor
+        // `CategoryTypes\ViewHelpers\Form\FilterSelectViewHelper` overrides any more - this is
+        // what covers the sorting one, the class has no test of its own.
+        $this->assertStringContainsString('<option value="title" selected="selected">Title</option>', $content);
+        $this->assertStringContainsString('<option value="asc" selected="selected">Ascending</option>', $content);
+        $this->assertStringContainsString('<option value="1" class="level-0">Bachelor of Science</option>', $content);
     }
 
     #[Test]
