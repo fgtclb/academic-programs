@@ -32,7 +32,8 @@
             "extension-key": "academic_programs",
             "ignore-as-root": false,
             "web-dir": ".Build/public",
-            "app-dir": ".Build"
+            "app-dir": ".Build",
+            "version": "2.4.0-dev"
         },
         "branch-alias": {
             "dev-2": "2.4.x-dev"
