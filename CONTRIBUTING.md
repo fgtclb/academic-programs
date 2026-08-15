@@ -7,4 +7,3 @@ For issues, contact and overview of the development, or if you want to contribut
 [academic-extensions mono-repository](https://github.com/fgtclb/academic-extensions).
 
 * [1] [https://github.com/fgtclb/academic-extensions](https://github.com/fgtclb/academic-extensions)
-
