@@ -1,0 +1,27 @@
+"pages",
+,"uid","pid","doktype","deleted","hidden","sys_language_uid","l10n_parent","slug","title"
+,1,0,20,0,0,0,0,"/program-with-media","Program with media"
+,2,0,20,0,0,0,0,"/program-without-media","Program without media"
+,3,0,20,0,0,0,0,"/program-with-removed-media","Program with removed media"
+,4,0,20,0,0,0,0,"/translated-program","Translated program"
+"tt_content",
+,"uid","pid","deleted","hidden","sys_language_uid","CType","header"
+,1,1,0,0,0,"textmedia","Content element on the program page"
+"sys_file",
+,"uid","pid","storage","type","mime_type","missing","extension","name","identifier","identifier_hash","folder_hash","sha1","size","creation_date","modification_date"
+,1,0,1,2,"image/png",0,"png","program-flyer.png","/images/program-flyer.png","d82b65d423fe4a234ed73529a68b8262c1f763dc","ca306f2df2823c083069873158fd3b91fd4ebe01","0f4c7ac72a6360b0be1b82c2a9bc5837fafddd6c",1024,1700000000,1700000000
+,2,0,1,2,"image/png",0,"png","campus.png","/images/campus.png","cc166139799b16b634fd8a3afa35ac4bca188fbe","ca306f2df2823c083069873158fd3b91fd4ebe01","cace595ea1f5c0b2311e7e88ffeb21025d7c7d5c",2048,1700000000,1700000000
+,3,0,1,5,"application/pdf",0,"pdf","module-handbook.pdf","/documents/module-handbook.pdf","5820bffb7c2cec7a2ab205a36b83004df574df80","52eb14154f48adc08e24efe6370add6d331d6038","179bd5eee4540325b85aa2fddc40966070ed4e56",4096,1700000000,1700000000
+"sys_file_metadata",
+,"uid","pid","file","sys_language_uid","l10n_parent","title","alternative","description"
+,1,0,2,0,0,"Campus from the file metadata","Campus alternative from the file metadata","Campus description from the file metadata"
+"sys_file_reference",
+,"uid","pid","deleted","hidden","sys_language_uid","l10n_parent","uid_local","uid_foreign","tablenames","fieldname","sorting_foreign","title","alternative","description","link"
+,1,1,0,0,0,0,1,1,"pages","media",2,"Flyer title from the reference","Flyer alternative from the reference","",""
+,2,1,0,0,0,0,2,1,"pages","media",1,\NULL,\NULL,\NULL,""
+,3,1,0,0,0,0,3,1,"pages","og_image",1,"Same page, other field","","",""
+,4,1,0,0,0,0,3,1,"tt_content","media",1,"Other table, same field","","",""
+,5,3,1,0,0,0,1,3,"pages","media",1,"Deleted reference","","",""
+,6,3,0,1,0,0,2,3,"pages","media",2,"Hidden reference","","",""
+,7,4,0,0,0,0,1,4,"pages","media",1,"Default language reference","","",""
+,8,4,0,0,1,7,2,4,"pages","media",1,"Translated reference","","",""

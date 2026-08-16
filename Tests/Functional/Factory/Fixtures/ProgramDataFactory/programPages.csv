@@ -1,0 +1,14 @@
+"pages",
+,"uid","pid","doktype","deleted","hidden","sys_language_uid","l10n_parent","slug","title","subtitle","abstract","credit_points","job_profile","performance_scope","prerequisites","categories"
+,5,0,1,0,0,0,0,"/programs","Programs","","",\NULL,\NULL,\NULL,\NULL,0
+,1,5,20,0,0,0,0,"/programs/applied-physics","Applied Physics","Bachelor of Science","Optics, photonics and applied quantum mechanics.",180,"<p>Research and development in industry.</p>","<p>Six semesters, 30 credit points each.</p>","<p>General qualification for university entrance.</p>",2
+,2,5,20,0,0,0,0,"/programs/untouched","Untouched Program","","",\NULL,\NULL,\NULL,\NULL,0
+,3,5,1,0,0,0,0,"/programs/regular-page","Regular Page","","",\NULL,\NULL,\NULL,\NULL,0
+"sys_category",
+,"uid","pid","deleted","hidden","parent","type","title","sys_language_uid","l10n_parent"
+,1,5,0,0,0,"admission_restriction","Restricted admission",0,0
+,2,5,0,0,0,"application_period","Winter term",0,0
+"sys_category_record_mm",
+,"uid_local","uid_foreign","tablenames","fieldname","sorting","sorting_foreign"
+,1,1,"pages","categories",0,1
+,2,1,"pages","categories",0,2
