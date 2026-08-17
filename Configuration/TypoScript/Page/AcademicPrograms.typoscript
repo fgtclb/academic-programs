@@ -1,6 +1,29 @@
 [page && traverse(page, "doktype") == 20]
   page {
     10 {
+      // The page template of this page type.
+      //
+      // The name has to be set explicitly, because the identifier of the
+      // backend layout does not survive every derivation a site package may
+      // use. bk2k/bootstrap-package builds the name from the layout with
+      // "case = uppercamelcase", which is
+      // GeneralUtility::underscoredToUpperCamelCase() - and that lowercases
+      // the whole string before it camel cases it on underscores. The
+      // registered layout "pagets__AcademicProgram" therefore resolves to
+      // "Academicprogram.html" and the page dies with an
+      // InvalidTemplateResourceException.
+      //
+      // The clear is not decoration: bootstrap package assigns
+      // "templateName.cObject", and a cObject overwrites the plain value in
+      // ContentObjectRenderer::stdWrapValue(), so assigning without clearing
+      // changes nothing.
+      //
+      // A PAGEVIEW page object ignores "templateName" and resolves the file
+      // from "paths" below, so this is inert for that integration rather than
+      // in its way.
+      templateName >
+      templateName = AcademicProgram
+
       // Template path for PAGEVIEW based configurations
       paths {
         100 = EXT:academic_programs/Resources/Private/

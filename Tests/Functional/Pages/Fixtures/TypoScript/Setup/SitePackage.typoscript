@@ -1,0 +1,36 @@
+# A site package page object that derives the Fluid template name from the
+# backend layout of the page, the way bk2k/bootstrap-package does.
+#
+# The block below "templateName" is a faithful copy of that package's
+# "page.10.templateName" - reproduced here rather than depended on, because what
+# the test pins is the mechanism, not one third party release of it.
+# "case = uppercamelcase" is GeneralUtility::underscoredToUpperCamelCase(),
+# which lowercases the whole string before it camel cases it on underscores, and
+# "split" runs before "case" in the stdWrap order. So "pagets__AcademicProgram" arrives at
+# Fluid as "Academicprogram" unless the extension sets the name itself.
+#
+# This file is included *before* the TypoScript of the extension, which is the
+# order a site package and an extension static template have in an installation:
+# the theme defines the page object, the extension refines it.
+page = PAGE
+page {
+  10 = FLUIDTEMPLATE
+  10 {
+    templateRootPaths.10 = EXT:academic_programs/Tests/Functional/Pages/Fixtures/Templates/
+    templateName = TEXT
+    templateName {
+      cObject = TEXT
+      cObject {
+        data = pagelayout
+        required = 1
+        case = uppercamelcase
+        split {
+          token = pagets__
+          cObjNum = 1
+          1.current = 1
+        }
+      }
+      ifEmpty = Default
+    }
+  }
+}
