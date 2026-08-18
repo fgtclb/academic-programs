@@ -1,0 +1,9 @@
+"pages",
+,"uid","pid","doktype","deleted","hidden","sys_language_uid","l10n_parent","l18n_cfg","slug","title","abstract","credit_points","categories"
+,1,0,1,0,0,0,0,0,"/","Site Root","",0,0
+,2,1,1,0,0,0,0,0,"/home","Home (EN)","",0,0
+,10,1,20,0,0,0,0,0,"/applied-physics","Applied Physics","Optics, photonics and applied quantum mechanics.",180,0
+,11,1,20,0,0,0,0,0,"/molecular-chemistry","Molecular Chemistry","Synthesis and analysis of molecular structures.",120,0
+"tt_content",
+,"uid","pid","deleted","hidden","sys_language_uid","l18n_parent","CType","header","pages","recursive","pi_flexform"
+,1,2,0,0,0,0,"academicprograms_programlist","","",0,"<?xml version=""1.0"" encoding=""utf-8"" standalone=""yes"" ?><T3FlexForms><data><sheet index=""sDEF""><language index=""lDEF""><field index=""settings.hideFilter""><value index=""vDEF"">0</value></field><field index=""settings.hideSorting""><value index=""vDEF"">0</value></field><field index=""settings.sorting""><value index=""vDEF"">lastUpdated desc</value></field><field index=""settings.categories""><value index=""vDEF"">0</value></field><field index=""settings.showHiddenRecords""><value index=""vDEF"">0</value></field></language></sheet></data></T3FlexForms>"
