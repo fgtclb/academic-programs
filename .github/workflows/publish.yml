@@ -4,6 +4,28 @@ on:
     tags:
       - '*'
 
+# Composer fetches every dist archive from "api.github.com" and
+# "codeload.github.com". Unauthenticated that is 60 requests per hour and per
+# runner IP, which took out the pull request pipeline in bursts (ACE-452).
+#
+# The same limit applies to "composer global require" below, which installs
+# tailor on the runner host rather than in a container - so "runTests.sh"
+# forwards nothing to it and this workflow needs its own token.
+#
+# "setup-php" does write a "github-oauth" entry into composer's "auth.json"
+# from the token its "github-token" input already defaults to, which is why
+# this has not been observed failing. It is not something to rely on: the
+# action deliberately writes nothing for the composer versions affected by
+# GHSA-f9f8-rm49-7jv2, and "tools: composer:v2" is a floating tag that has
+# pointed into that range before. "COMPOSER_AUTH" is independent of both and
+# reaches composer directly.
+#
+# "github.token" rather than "secrets.GITHUB_TOKEN": the two are the same
+# installation token, and the "github" context is available to a workflow level
+# "env" block.
+env:
+  COMPOSER_AUTH: '{"github-oauth":{"github.com":"${{ github.token }}"}}'
+
 jobs:
   publish:
     name: Ensure GitHub Release with extension TER artifact and publishing to TER
