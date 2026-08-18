@@ -51,6 +51,10 @@ detail views in the frontend.
         Install :guilabel:`academic_programs` via Composer, the Extension
         Manager or a TER upload.
 
+    ..  card:: :ref:`Configuration <configuration>`
+
+        Configure the extension and its plugins for your installation.
+
     ..  card:: :ref:`Known problems <known-problems>`
 
         Known issues and information about them.
@@ -67,6 +71,7 @@ detail views in the frontend.
 
     Introduction/Index
     Installation/Index
+    Configuration/Index
     KnownProblems/Index
     Changelog/Changelog-2
 

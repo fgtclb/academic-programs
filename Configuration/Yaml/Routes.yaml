@@ -1,6 +1,52 @@
+# Route enhancer for the program list plugin of this extension.
+#
+# This file is not read by TYPO3 on its own. Import it from the site
+# configuration of a site that shows the plugin:
+#
+#   imports:
+#     - resource: 'EXT:academic_programs/Configuration/Yaml/Routes.yaml'
+#
+# It maps the sorting of the list into the path, so that
+# "?tx_academicprograms_programlist[demand][sortingField]=lastUpdated" becomes
+# "/last-updated/desc". The values come from
+# "FGTCLB\AcademicPrograms\Enumeration\SortingOptions", which is also what the
+# select fields of the plugin offer.
+#
+# Note that the sorting and filter form shipped with the plugin submits by POST,
+# so its own requests carry no arguments in the URL and are not enhanced. This
+# enhancer takes effect for links built with the arguments as GET parameters.
 routeEnhancers:
-	AacdemicPrograms:
-		type: Extbase
-		extension: AcademicPrograms
-		plugin: List
+  AcademicPrograms:
+    type: Extbase
+    extension: AcademicPrograms
+    plugin: ProgramList
+    routes:
+      - routePath: '/{sorting_field}/{sorting_direction}'
+        _controller: 'Program::list'
+        _arguments:
+          sorting_field: demand/sortingField
+          sorting_direction: demand/sortingDirection
     defaultController: 'Program::list'
+    defaults:
+      sorting_field: 'title'
+      sorting_direction: 'asc'
+    # Both segments are optional through "defaults", and an aspect makes
+    # AbstractEnhancer::applyRequirements() default a variable to ".+" - which
+    # is greedy, so "/last-updated/desc" would be swallowed by the first
+    # segment and resolve to nothing. Pinning the patterns here keeps the two
+    # apart; the values are those of the maps below.
+    requirements:
+      sorting_field: 'title|last-updated|sorting'
+      sorting_direction: 'asc|desc'
+    aspects:
+      sorting_field:
+        type: StaticValueMapper
+        map:
+          title: 'title'
+          last-updated: 'lastUpdated'
+          sorting: 'sorting'
+      sorting_direction:
+        type: StaticValueMapper
+        map:
+          asc: 'asc'
+          desc: 'desc'
