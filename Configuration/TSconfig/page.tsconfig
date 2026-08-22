@@ -19,5 +19,4 @@ mod.wizards.newContentElement.wizardItems.academic {
       }
     }
   }
-  show := addToList(academicprograms_programlist,academicprograms_programdetails)
 }
