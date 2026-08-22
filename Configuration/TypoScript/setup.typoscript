@@ -1,4 +1,16 @@
-@import 'EXT:academic_programs/Configuration/TypoScript/Content/'
+# The shared TypoScript block of this extension.
+#
+# Both content elements are driven by the one Extbase plugin namespace
+# "plugin.tx_academicprograms", so the block is shipped once and every component
+# folder names this folder in its "include_static_file.txt" instead of carrying
+# a copy. The folder is the one "Configuration/TCA/Overrides/sys_template.php"
+# has registered all along, so a "sys_template" record that stored it keeps
+# working.
+#
+# It also carries the page object of the page type this extension registers.
+# That block is conditioned on the doktype, so it is inert on every other page,
+# and it belongs with the plugin configuration rather than with any single
+# content element.
 @import 'EXT:academic_programs/Configuration/TypoScript/Page/'
 
 plugin.tx_academicprograms {

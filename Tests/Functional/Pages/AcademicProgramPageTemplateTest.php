@@ -60,6 +60,12 @@ final class AcademicProgramPageTemplateTest extends AbstractAcademicProgramsTest
                     // The site package first, the extension after it - see the fixture.
                     'EXT:academic_programs/Tests/Functional/Pages/Fixtures/TypoScript/Setup/SitePackage.typoscript',
                     'EXT:academic_programs/Configuration/TypoScript/setup.typoscript',
+                    // The page template of this page type renders
+                    // "styles.content.getContent" through "f:cObject", and that ViewHelper
+                    // throws when the path is undefined. The override that defines it is a
+                    // component of its own since 2.4, so a site that renders this page type
+                    // has to include it - which is what this line is.
+                    'EXT:academic_programs/Configuration/TypoScript/ContentLoad/setup.typoscript',
                 ],
             ],
         );

@@ -1,0 +1,18 @@
+# Aggregate set: everything this extension ships, in one dependency.
+#
+# It carries no TypoScript and no page TSconfig of its own - each component is
+# delivered by the set that owns it, and listing a payload here would parse the
+# same files a second time.
+#
+# The name is the one this extension published before the configuration was cut
+# per component, so a site configuration that depends on it needs no change. No
+# site in this repository does - the development instances of this branch are
+# driven by a root "sys_template" record because site sets arrived in TYPO3 v13.1
+# and this branch also supports v12 - but installations of the released 2.x line
+# do, and a set that is not found is not an error: the site simply gets nothing.
+name: fgtclb/academic-programs
+label: Academic Programs
+dependencies:
+  - fgtclb/academic-programs-program-list
+  - fgtclb/academic-programs-program-details
+  - fgtclb/academic-programs-content-load

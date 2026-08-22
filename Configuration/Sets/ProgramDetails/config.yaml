@@ -1,0 +1,17 @@
+# The program details content element.
+#
+# "typoscript" points at the folder that "Configuration/TCA/Overrides/sys_template.php"
+# registers as a static template, and "pagets" at the file that
+# "Configuration/TCA/Overrides/pages.php" registers - there is exactly one
+# physical copy of each, so the two delivery mechanisms can never drift apart.
+#
+# The TypoScript folder holds nothing but an "include_static_file.txt" naming
+# "Configuration/TypoScript": both content elements of this extension are driven
+# by the one plugin namespace "plugin.tx_academicprograms", and that block is
+# shipped once instead of twice.
+name: fgtclb/academic-programs-program-details
+label: 'Academic Programs: Program Details'
+dependencies:
+  - fgtclb/academic-base-ctype-group
+typoscript: 'EXT:academic_programs/Configuration/TypoScript/ProgramDetails/'
+pagets: 'EXT:academic_programs/Configuration/TSconfig/ProgramDetails/page.tsconfig'

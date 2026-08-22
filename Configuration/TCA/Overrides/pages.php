@@ -98,4 +98,32 @@ defined('TYPO3') or die;
         ]),
         [PageTypes::TYPE_ACADEMIC_PROGRAM]
     );
+
+    //==================================================================================================================
+    // Page TSconfig, selectable in the page field "Page TSconfig" for installations that do not use site sets.
+    //
+    // The files are the same ones the sets of this extension deliver. Use one mechanism per site, not both. On TYPO3
+    // v12 this is the only mechanism there is - site sets arrived in TYPO3 v13.1.
+    //
+    // The page type registered above and its backend layout are deliberately NOT part of this: they are stored on page
+    // records, so they have to resolve on every installation. The page type is registered in TCA and the backend layout
+    // is imported by the always included "Configuration/page.tsconfig".
+    //==================================================================================================================
+    ExtensionManagementUtility::registerPageTSConfigFile(
+        'academic_programs',
+        'Configuration/TSconfig/ProgramList/page.tsconfig',
+        'Academic Programs: Program List',
+    );
+
+    ExtensionManagementUtility::registerPageTSConfigFile(
+        'academic_programs',
+        'Configuration/TSconfig/ProgramDetails/page.tsconfig',
+        'Academic Programs: Program Details',
+    );
+
+    ExtensionManagementUtility::registerPageTSConfigFile(
+        'academic_programs',
+        'Configuration/TSconfig/Full/page.tsconfig',
+        'Academic Programs: All components',
+    );
 })();

@@ -1,0 +1,7 @@
+# Aggregate page TSconfig: every component this extension ships.
+#
+# The counterpart of the set "fgtclb/academic-programs" for installations that
+# include page TSconfig through the page field "Page TSconfig" instead of
+# through a site set.
+@import 'EXT:academic_programs/Configuration/TSconfig/ProgramList/page.tsconfig'
+@import 'EXT:academic_programs/Configuration/TSconfig/ProgramDetails/page.tsconfig'

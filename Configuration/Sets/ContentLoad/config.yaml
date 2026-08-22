@@ -1,0 +1,14 @@
+# The "styles.content.getContent" override.
+#
+# It is opt-in on its own because it is not a content element and not scoped to
+# one: it redefines a global TypoScript object path for every page of the site.
+# The aggregate set depends on it, so a site that names "fgtclb/academic-programs"
+# keeps exactly what it had - a site that wants the content elements without the
+# override names the component sets instead.
+#
+# The page template of the page type this extension registers renders that path
+# with "f:cObject", which throws when the path is undefined. A site opting out
+# has to define "styles.content.getContent" itself before it uses the page type.
+name: fgtclb/academic-programs-content-load
+label: 'Academic Programs: Content load override'
+typoscript: 'EXT:academic_programs/Configuration/TypoScript/ContentLoad/'
