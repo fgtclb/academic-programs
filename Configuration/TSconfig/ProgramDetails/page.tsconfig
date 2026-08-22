@@ -1,0 +1,23 @@
+# Page TSconfig of the program details content element.
+#
+# Delivered by the set "fgtclb/academic-programs-program-details" and
+# registered for the page field "Page TSconfig" by
+# "Configuration/TCA/Overrides/pages.php" - one physical copy, two ways to it.
+#
+# The content element is hidden for the whole installation by
+# "Configuration/page.tsconfig"; this file is what makes it selectable again,
+# so it applies where the component is actually wanted instead of everywhere.
+TCEFORM.tt_content.CType.removeItems := removeFromList(academicprograms_programdetails)
+
+mod.wizards.newContentElement.wizardItems.academic {
+  elements {
+    academicprograms_programdetails {
+      iconIdentifier = academic-programs
+      title = LLL:EXT:academic_programs/Resources/Private/Language/locallang_be.xlf:plugin.program_details.title
+      description = LLL:EXT:academic_programs/Resources/Private/Language/locallang_be.xlf:plugin.program_details.description
+      tt_content_defValues {
+        CType = academicprograms_programdetails
+      }
+    }
+  }
+}

@@ -1,0 +1,15 @@
+# Aggregate set: everything this extension ships, in one dependency.
+#
+# It carries no TypoScript and no page TSconfig of its own - each component is
+# delivered by the set that owns it, and listing a payload here would parse the
+# same files a second time.
+#
+# The name is the one this extension published before the configuration was cut
+# per component, so a site configuration that depends on it needs no change -
+# both development instances of this repository do.
+name: fgtclb/academic-programs
+label: Academic Programs
+dependencies:
+  - fgtclb/academic-programs-program-list
+  - fgtclb/academic-programs-program-details
+  - fgtclb/academic-programs-content-load

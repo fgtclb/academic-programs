@@ -1,0 +1,1 @@
+EXT:academic_programs/Configuration/TypoScript

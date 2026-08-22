@@ -1,0 +1,23 @@
+# The "styles.content.getContent" override, as an opt-in component of its own.
+#
+# It is an installation wide rendering change: it redefines a global TypoScript
+# object path for every page of the site, not only for the pages of this
+# extension. Three academic extensions ship a byte identical copy of it, so a
+# site that enables all three used to assign it three times. It is therefore a
+# component set of its own - "fgtclb/academic-programs-content-load" - which the
+# aggregate set depends on so that a site using the aggregate keeps what it had.
+#
+# The page template of the page type this extension registers renders this very
+# path with "f:cObject", and that ViewHelper throws when the path is undefined.
+# A site that takes the content elements without this component therefore has to
+# define "styles.content.getContent" itself before it uses the page type.
+#
+# @todo Recheck this. Is this really safe to be enabled per default ? Or does this eventually need documentation for
+# @todo systems not using default fluid-styled-content rendering or bootstrap package or similar ?
+# @todo Also duplicated in other academic extensions ?!
+styles.content {
+  getContent < styles.content.get
+  getContent {
+    select.where = {#colPos}=0
+  }
+}

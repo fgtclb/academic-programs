@@ -1,5 +1,27 @@
-@import 'EXT:academic_programs/Configuration/TSconfig/Page/BackendLayouts/*.tsconfig'
-@import 'EXT:academic_programs/Configuration/TSconfig/*.tsconfig'
+# Page TSconfig of this extension, auto-included for the whole installation.
+#
+# TYPO3 reads "Configuration/page.tsconfig" of every active extension since
+# v12.0 (Feature: #96614). A site set does not replace that file, it adds to it
+# for the sites that enable the set - so anything an installation needs
+# regardless of its site configuration belongs here, not in the set.
+#
+# The backend layout in particular: it is the layout of the page type this
+# extension registers, so a page carrying "pagets__AcademicProgram" has to find
+# it on every installation. Registered only in the set, the value resolves
+# nowhere, the page properties show "[ MISSING LABEL ]" for it and the layout
+# cannot be selected for a new page at all. The same holds for the page type
+# itself, which is registered in TCA and is equally installation wide.
+@import 'EXT:academic_programs/Configuration/TSconfig/BackendLayouts/*.tsconfig'
 
 # Register `EXT:backend` template overrides in backend context
-templates.typo3/cms-backend.1730990129 = fgtclb/academic-programs:Resources/Private/Backend
+templates.typo3/cms-backend.academic-programs = fgtclb/academic-programs:Resources/Private/Backend
+
+# The content elements of this extension are hidden here, and re-enabled per
+# component by the page TSconfig the component set delivers.
+#
+# The order TYPO3 merges page TSconfig in is package files first, then set
+# files, then the site, then the page field "Page TSconfig", then the page
+# record - so both ways to re-enable a content element come after this file and
+# win over it.
+TCEFORM.tt_content.CType.removeItems := addToList(academicprograms_programlist)
+TCEFORM.tt_content.CType.removeItems := addToList(academicprograms_programdetails)

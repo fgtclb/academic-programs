@@ -1,0 +1,3 @@
+EXT:academic_programs/Configuration/TypoScript/ProgramList,
+EXT:academic_programs/Configuration/TypoScript/ProgramDetails,
+EXT:academic_programs/Configuration/TypoScript/ContentLoad
