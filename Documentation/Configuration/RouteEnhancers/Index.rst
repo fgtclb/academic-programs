@@ -61,7 +61,49 @@ the program list plugin:
 
 The import is merged into the site configuration, so an installation that
 already defines other enhancers keeps them as long as no key is named
-:yaml:`AcademicPrograms` twice.
+:yaml:`AcademicPrograms` twice. That is a statement about the merge and about
+nothing else: distinct keys keep the entries, they do not keep two enhancers
+from producing routes which match the same URL.
+
+Limiting the enhancer to its page
+---------------------------------
+
+TYPO3 offers every enhancer declared in a site configuration to **every** page
+of that site unless the enhancer says otherwise, and it takes the first
+candidate route whose path matches *and* whose aspects resolve. The order the
+candidates are tried in is the order of the :yaml:`imports`.
+
+The route of this extension is comparatively hard to collide with, and that is
+owed to its mappers rather than to its key: both path variables are handled by
+a :yaml:`StaticValueMapper`, so a candidate is only accepted when the segments
+are one of the three sorting fields followed by :yaml:`asc` or :yaml:`desc`.
+Anything else is rejected and the next enhancer gets its turn. A route variable
+that is mapped less narrowly — one whose aspect comes without an explicit
+:yaml:`requirements` entry compiles to :yaml:`.+` and crosses slashes — has no
+such protection, and even here a second extension mapping values of the same
+spelling is enough to make the two compete.
+
+:yaml:`limitToPages` settles it by naming the pages the enhancer applies to:
+
+..  code-block:: yaml
+    :caption: config/sites/my_site/config.yaml
+
+    imports:
+      - resource: 'EXT:academic_programs/Configuration/Yaml/Routes.yaml'
+
+    routeEnhancers:
+      AcademicPrograms:
+        limitToPages: [23]
+
+The uid is the one of the page carrying the list plugin, and it is the uid of
+the **default language**: matching derives the page as :php:`l10n_parent ?: uid`,
+so a single entry covers every translation of that page. Plain page uids work
+on every TYPO3 version this extension supports.
+
+In :guilabel:`academic_persons` the same mechanism is not a precaution but a
+requirement — that extension ships three enhancers whose routes overlap each
+other by construction. See `its route enhancer documentation
+<https://docs.typo3.org/p/fgtclb/academic-persons/main/en-us/Configuration/RouteEnhancers/Index.html>`__.
 
 What the URLs look like
 -----------------------
