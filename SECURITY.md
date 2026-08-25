@@ -14,9 +14,12 @@ reporting an issue against them.
 
 | Version        | Supported           |
 | -------------- | ------------------- |
+| 3.x            | :white_check_mark:  |
 | 2.x            | :white_check_mark:  |
 | 1.x            | :x:                 |
 | < 1.0          | :x:                 |
+
+The newest line listed above is under development on the default branch and has not been released yet.
 
 Planned end of support for this product: **30 June 2029 (end of regular TYPO3 14 LTS support)**.
 
