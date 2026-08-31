@@ -25,9 +25,9 @@ use TYPO3\CMS\Core\Resource\FileReference;
  * the reference leaves it `NULL`. That fallback is the behaviour a caller gets for free
  * here and would not get from the Extbase model.
  *
- * Not asserted: the order of the collection. The query carries no `ORDER BY`, so
- * `sorting_foreign` is ignored and the order is whatever the DBMS returns - see the
- * report on the method rather than a test that only passes on SQLite.
+ * The collection follows `sorting_foreign` - the order the editor arranged the images
+ * in - with `uid` settling ties, since ACE-491; before that the query carried no
+ * `ORDER BY` and the order was whatever the DBMS returned.
  */
 final class FileReferenceCollectionTest extends AbstractAcademicProgramsTestCase
 {
@@ -57,6 +57,22 @@ final class FileReferenceCollectionTest extends AbstractAcademicProgramsTestCase
         $collection = FileReferenceCollection::getCollectionByPageIdAndField(self::PAGE_WITH_MEDIA, 'media');
 
         $this->assertSame([1, 2], $this->referenceUids($collection));
+    }
+
+    /**
+     * The fixture contradicts creation order on purpose: reference 2 carries
+     * `sorting_foreign` 1 and reference 1 carries 2, so this fails on every DBMS -
+     * SQLite included - as soon as the ordering is dropped (ACE-491).
+     */
+    #[Test]
+    public function referencesFollowTheOrderTheEditorArranged(): void
+    {
+        $uids = [];
+        foreach (FileReferenceCollection::getCollectionByPageIdAndField(self::PAGE_WITH_MEDIA, 'media') as $reference) {
+            $uids[] = $reference->getUid();
+        }
+
+        $this->assertSame([2, 1], $uids);
     }
 
     /**

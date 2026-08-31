@@ -9,6 +9,7 @@ use FGTCLB\AcademicPrograms\Domain\Model\Program;
 use FGTCLB\AcademicPrograms\Enumeration\PageTypes;
 use TYPO3\CMS\Core\Type\Exception\InvalidEnumerationValueException;
 use TYPO3\CMS\Extbase\Persistence\Generic\QueryResult;
+use TYPO3\CMS\Extbase\Persistence\QueryInterface;
 use TYPO3\CMS\Extbase\Persistence\Repository;
 
 /**
@@ -50,6 +51,10 @@ class ProgramRepository extends Repository
         $query->setOrderings(
             [
                 $demand->getSortingField() => strtoupper($demand->getSortingDirection()),
+                // Records equal in the demanded ordering would otherwise follow the DBMS
+                // row order, which is not the same list twice (ACE-491). None of the
+                // `SortingOptions` sorts by `uid`, so the tiebreaker never collides.
+                'uid' => QueryInterface::ORDER_ASCENDING,
             ]
         );
         return $query->execute();
