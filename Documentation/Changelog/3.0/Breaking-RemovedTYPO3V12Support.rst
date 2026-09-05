@@ -32,5 +32,5 @@ upgrade to the `3.x` version line.
 Migration
 =========
 
-Upgrade the TYPO3 installation to a supported version (TYPO3 v13) beforehand
-or within the same upgrade step.
+Upgrade the TYPO3 installation to a supported version - TYPO3 v13 or v14 -
+beforehand or within the same upgrade step.
