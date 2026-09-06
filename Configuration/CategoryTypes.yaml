@@ -7,47 +7,59 @@ types:
     title: 'LLL:EXT:academic_programs/Resources/Private/Language/locallang_be.xlf:sys_category.programs.admission_restriction'
     group: programs
     icon: 'EXT:academic_programs/Resources/Public/Icons/CategoryTypes/AdmissionRestriction.svg'
+    inlineIcon: true
   - identifier: application_period
     title: 'LLL:EXT:academic_programs/Resources/Private/Language/locallang_be.xlf:sys_category.programs.application_period'
     group: programs
     icon: 'EXT:academic_programs/Resources/Public/Icons/CategoryTypes/ApplicationPeriod.svg'
+    inlineIcon: true
   - identifier: begin_program
     title: 'LLL:EXT:academic_programs/Resources/Private/Language/locallang_be.xlf:sys_category.programs.begin_program'
     group: programs
     icon: 'EXT:academic_programs/Resources/Public/Icons/CategoryTypes/BeginProgram.svg'
+    inlineIcon: true
   - identifier: costs
     title: 'LLL:EXT:academic_programs/Resources/Private/Language/locallang_be.xlf:sys_category.programs.costs'
     group: programs
     icon: 'EXT:academic_programs/Resources/Public/Icons/CategoryTypes/Costs.svg'
+    inlineIcon: true
   - identifier: paying
     title: 'LLL:EXT:academic_programs/Resources/Private/Language/locallang_be.xlf:sys_category.programs.paying'
     group: programs
     icon: 'EXT:academic_programs/Resources/Public/Icons/CategoryTypes/Paying.svg'
+    inlineIcon: true
   - identifier: degree
     title: 'LLL:EXT:academic_programs/Resources/Private/Language/locallang_be.xlf:sys_category.programs.degree'
     group: programs
     icon: 'EXT:academic_programs/Resources/Public/Icons/CategoryTypes/Degree.svg'
+    inlineIcon: true
   - identifier: department
     title: 'LLL:EXT:academic_programs/Resources/Private/Language/locallang_be.xlf:sys_category.programs.department'
     group: programs
     icon: 'EXT:academic_programs/Resources/Public/Icons/CategoryTypes/Department.svg'
+    inlineIcon: true
   - identifier: standard_period
     title: 'LLL:EXT:academic_programs/Resources/Private/Language/locallang_be.xlf:sys_category.programs.standard_period'
     group: programs
     icon: 'EXT:academic_programs/Resources/Public/Icons/CategoryTypes/StandardPeriod.svg'
+    inlineIcon: true
   - identifier: location
     title: 'LLL:EXT:academic_programs/Resources/Private/Language/locallang_be.xlf:sys_category.programs.location'
     group: programs
     icon: 'EXT:academic_programs/Resources/Public/Icons/CategoryTypes/Location.svg'
+    inlineIcon: true
   - identifier: program_type
     title: 'LLL:EXT:academic_programs/Resources/Private/Language/locallang_be.xlf:sys_category.programs.program_type'
     group: programs
     icon: 'EXT:academic_programs/Resources/Public/Icons/CategoryTypes/ProgramType.svg'
+    inlineIcon: true
   - identifier: teaching_language
     title: 'LLL:EXT:academic_programs/Resources/Private/Language/locallang_be.xlf:sys_category.programs.teaching_language'
     group: programs
     icon: 'EXT:academic_programs/Resources/Public/Icons/CategoryTypes/TeachingLanguage.svg'
+    inlineIcon: true
   - identifier: topic
     title: 'LLL:EXT:academic_programs/Resources/Private/Language/locallang_be.xlf:sys_category.programs.topic'
     group: programs
     icon: 'EXT:academic_programs/Resources/Public/Icons/CategoryTypes/Topic.svg'
+    inlineIcon: true

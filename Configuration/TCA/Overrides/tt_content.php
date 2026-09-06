@@ -12,7 +12,7 @@ defined('TYPO3') or die;
         [
             'label' => 'LLL:EXT:academic_programs/Resources/Private/Language/locallang_be.xlf:plugin.program_list.title',
             'value' => 'academicprograms_programlist',
-            'icon' => 'EXT:academic_programs/Resources/Public/Icons/Extension.svg',
+            'icon' => 'academic-programs',
             'group' => 'academic',
         ],
         'academic_programs'
@@ -39,7 +39,7 @@ defined('TYPO3') or die;
         [
             'label' => 'LLL:EXT:academic_programs/Resources/Private/Language/locallang_be.xlf:plugin.program_details.title',
             'value' => 'academicprograms_programdetails',
-            'icon' => 'EXT:academic_programs/Resources/Public/Icons/Extension.svg',
+            'icon' => 'academic-programs',
             'group' => 'academic',
         ],
         'academic_programs'
