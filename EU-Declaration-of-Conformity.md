@@ -1,11 +1,11 @@
 # EU Declaration of Conformity
 
-**Product:** FGTCLB: University Educational Program
+**Product:** FGTCLB: Academic Programs
 **Reference:** DoC-academic_programs-3.0.0
 
 ## 1. Product identification
 
-- **Product name:** FGTCLB: University Educational Program
+- **Product name:** FGTCLB: Academic Programs
 - **Type:** TYPO3 Extension
 - **Extension key / package:** academic_programs (fgtclb/academic-programs)
 - **Version:** 3.0.0 (initial issuance of this declaration)
@@ -26,7 +26,7 @@ of the manufacturer, web-vision GmbH.
 
 ## 4. Object of the declaration
 
-FGTCLB: University Educational Program, version 3.0.0, as distributed
+FGTCLB: Academic Programs, version 3.0.0, as distributed
 via the TYPO3 Extension Repository (TER) and Packagist.
 
 ## 5. Statement of conformity
@@ -60,7 +60,7 @@ Signed for and on behalf of: web-vision GmbH
 ## Simplified EU Declaration of Conformity (Annex VI)
 
 > Hereby, web-vision GmbH declares that the product with digital elements
-> type FGTCLB: University Educational Program is in compliance with Regulation (EU) 2024/2847.
+> type FGTCLB: Academic Programs is in compliance with Regulation (EU) 2024/2847.
 >
 > The full text of the EU declaration of conformity is available at the
 > following internet address:
