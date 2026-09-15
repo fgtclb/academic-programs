@@ -1,7 +1,7 @@
 {
     "name": "fgtclb/academic-programs",
     "type": "typo3-cms-extension",
-    "description": "Add structured data for academic programs to pages",
+    "description": "FGTCLB: Academic Programs - Educational Program page for TYPO3 with structured data based on sys_category",
     "minimum-stability": "stable",
     "license": "GPL-2.0-or-later",
     "authors": [
