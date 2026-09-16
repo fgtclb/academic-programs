@@ -18,6 +18,8 @@ final class SortingOptions
 
     public const SORT_BY_SORTING_ASC = 'sorting asc';
 
+    public const SORT_BY_SORTING_DESC = 'sorting desc';
+
     /**
      * Returns all sorting option constants (excluding the `__default` alias),
      * keyed by constant name. Replaces the removed

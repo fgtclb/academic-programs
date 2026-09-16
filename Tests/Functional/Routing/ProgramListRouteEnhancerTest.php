@@ -40,9 +40,13 @@ final class ProgramListRouteEnhancerTest extends AbstractAcademicProgramsTestCas
 
     /**
      * Every combination `FGTCLB\AcademicPrograms\Enumeration\SortingOptions` offers, split
-     * into the two arguments the enhancer maps. There is deliberately no `sorting desc`:
-     * the enum does not have it, and `ProgramDemand::setSorting()` silently drops a pair it
-     * does not know — so a path carrying it would resolve and then be ignored.
+     * into the two arguments the enhancer maps. `sorting desc` joined them with ACE-625;
+     * before that the enum did not have it and `ProgramDemand::setSorting()` dropped the
+     * pair, so a path carrying it resolved and was then ignored.
+     *
+     * The list is spelled out rather than derived from the enum, which keeps a renamed
+     * option visible here - but it also means nothing makes this list fail when an option
+     * is added. A new option stops being covered silently; it has to be added by hand.
      *
      * @var list<array{0: string, 1: string}>
      */
@@ -52,6 +56,7 @@ final class ProgramListRouteEnhancerTest extends AbstractAcademicProgramsTestCas
         ['lastUpdated', 'asc'],
         ['lastUpdated', 'desc'],
         ['sorting', 'asc'],
+        ['sorting', 'desc'],
     ];
 
     protected const LANGUAGE_PRESETS = [

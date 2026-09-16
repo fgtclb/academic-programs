@@ -8,6 +8,8 @@ use FGTCLB\AcademicPrograms\Tests\Functional\AbstractAcademicProgramsTestCase;
 use FGTCLB\TestingHelper\FunctionalTestCase\FrontendPluginRenderingTrait;
 use PHPUnit\Framework\Attributes\Test;
 use SBUERK\TYPO3\Testing\SiteHandling\SiteBasedTestTrait;
+use TYPO3\CMS\Core\Http\Stream;
+use TYPO3\TestingFramework\Core\Functional\Framework\Frontend\InternalRequest;
 
 /**
  * Renders both plugins of this extension in the frontend: `academicprograms_programlist`
@@ -205,6 +207,71 @@ final class AcademicProgramsPluginTest extends AbstractAcademicProgramsTestCase
         $this->setUpTestCase('programListPage_sortingTitleDescending');
 
         $this->assertRenderedInOrder($this->renderHomePage(), 'Quantum Optics', 'Applied Physics');
+    }
+
+    /**
+     * The visitor picks the field and the direction independently, and the two selects
+     * offer both directions for every field. Until ACE-625 `sorting desc` was not a known
+     * option: `ProgramDemand` discarded the posted pair, kept `sorting asc`, and rendered
+     * the direction select back as "ascending" - the choice vanished without a message.
+     */
+    #[Test]
+    public function programListPluginReversesTheManualOrderWhenDemanded(): void
+    {
+        $this->setUpTestCase('programListPage_sortingManualOrder');
+
+        $content = $this->renderHomePageWithDemand([
+            'sortingField' => 'sorting',
+            'sortingDirection' => 'desc',
+        ]);
+
+        // The fixture's `sorting` values are deliberately unrelated to uid and to title
+        // order, so neither the configured default nor an accidental ordering produces
+        // this list.
+        $this->assertRenderedInOrder($content, 'Molecular Chemistry', 'Quantum Optics');
+        $this->assertRenderedInOrder($content, 'Quantum Optics', 'Applied Physics');
+        $this->assertRenderedInOrder($content, 'Applied Physics', 'Regional Teaching');
+        // The select renders the demanded direction back instead of snapping to ascending.
+        $this->assertStringContainsString('<option value="desc" selected="selected">Descending</option>', $content);
+    }
+
+    #[Test]
+    public function programListPluginSortsProgramsByReversedManualOrderWhenConfigured(): void
+    {
+        $this->setUpTestCase('programListPage_sortingManualDescending');
+
+        $content = $this->renderHomePage();
+
+        $this->assertRenderedInOrder($content, 'Molecular Chemistry', 'Quantum Optics');
+        $this->assertRenderedInOrder($content, 'Quantum Optics', 'Applied Physics');
+        $this->assertRenderedInOrder($content, 'Applied Physics', 'Regional Teaching');
+    }
+
+    /**
+     * The sorting and filter form submits by POST, so a demand is posted rather than
+     * passed as a query argument - which is also why no cHash is involved here.
+     *
+     * The body is written explicitly: the testing framework otherwise serialises the
+     * parsed body with `GuzzleHttp\Psr7\Query::build()`, which cannot handle the nested
+     * plugin arguments and emits an "Array to string conversion" warning.
+     *
+     * @param array<string, string> $demand
+     */
+    private function renderHomePageWithDemand(array $demand): string
+    {
+        $parsedBody = ['tx_academicprograms_programlist' => ['demand' => $demand]];
+
+        $body = new Stream('php://temp', 'rw');
+        $body->write(http_build_query($parsedBody));
+        $body->rewind();
+
+        return $this->renderFrontendPage(
+            (new InternalRequest('https://www.acme.com/home'))
+                ->withMethod('POST')
+                ->withAddedHeader('Content-Type', 'application/x-www-form-urlencoded')
+                ->withBody($body)
+                ->withParsedBody($parsedBody),
+        );
     }
 
     #[Test]

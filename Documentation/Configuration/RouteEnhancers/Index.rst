@@ -138,6 +138,8 @@ Two further points are worth knowing:
 *   The enhancer covers the list plugin only. The detail plugin
     (:yaml:`ProgramDetails`) takes no arguments — it renders the program of the
     page it sits on — so there is nothing to map into a path for it.
-*   The two mappers are independent, which makes six combinations reachable
-    while :php:`SortingOptions` only defines five. :file:`/sorting/desc`
-    resolves although the plugin never offers it as an option.
+*   The two mappers are independent, so every one of the six combinations they
+    can spell is reachable — and :php:`SortingOptions` defines exactly those
+    six, so each path the enhancer resolves is an ordering the plugin really
+    renders. Until the reversed page sorting was added, :file:`/sorting/desc`
+    resolved to an option that did not exist and was silently dropped.

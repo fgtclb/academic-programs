@@ -20,8 +20,9 @@ final class SortingOptionsTest extends UnitTestCase
      * a changed ordering string has to show up here, since both are part of what a
      * stored FlexForm value refers to.
      *
-     * Note the asymmetry - `sorting` is offered ascending only, unlike the two other
-     * fields. `ProgramDemandTest` covers what that means for `setSortingDirection()`.
+     * Every field is offered in both directions (ACE-625). That is what the two selects
+     * of the list plugin can produce, so anything less means an offered combination is
+     * silently discarded - `ProgramDemandTest` covers the reassembly.
      */
     #[Test]
     public function everySortingOptionIsOffered(): void
@@ -33,6 +34,7 @@ final class SortingOptionsTest extends UnitTestCase
                 'SORT_BY_LASTUPDATED_ASC' => 'lastUpdated asc',
                 'SORT_BY_LASTUPDATED_DESC' => 'lastUpdated desc',
                 'SORT_BY_SORTING_ASC' => 'sorting asc',
+                'SORT_BY_SORTING_DESC' => 'sorting desc',
             ],
             SortingOptions::getConstants(),
         );

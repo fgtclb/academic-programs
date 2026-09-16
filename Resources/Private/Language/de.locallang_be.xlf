@@ -87,6 +87,10 @@
         <source>Page sorting (Result may be unexpected)</source>
         <target>Seitensortierung (Ergebnis kann unerwartet sein)</target>
       </trans-unit>
+      <trans-unit id="flexform.sorting.sorting.desc">
+        <source>Page sorting, reversed (Result may be unexpected)</source>
+        <target>Seitensortierung umgekehrt (Ergebnis kann unerwartet sein)</target>
+      </trans-unit>
 
       <!-- Wizard -->
 
