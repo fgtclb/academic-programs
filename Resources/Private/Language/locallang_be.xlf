@@ -68,6 +68,9 @@
 			<trans-unit id="flexform.sorting.sorting.asc">
 				<source>Page sorting (Result may be unexpected)</source>
 			</trans-unit>
+			<trans-unit id="flexform.sorting.sorting.desc">
+				<source>Page sorting, reversed (Result may be unexpected)</source>
+			</trans-unit>
 
 			<!-- Wizard -->
 

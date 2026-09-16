@@ -19,4 +19,6 @@ final class SortingOptions extends Enumeration
     public const SORT_BY_LASTUPDATED_DESC = 'lastUpdated desc';
 
     public const SORT_BY_SORTING_ASC = 'sorting asc';
+
+    public const SORT_BY_SORTING_DESC = 'sorting desc';
 }

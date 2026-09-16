@@ -46,6 +46,10 @@
                             <label>LLL:EXT:academic_programs/Resources/Private/Language/locallang_be.xlf:flexform.sorting.sorting.asc</label>
                             <value>sorting asc</value>
                         </numIndex>
+                        <numIndex index="5" type="array">
+                            <label>LLL:EXT:academic_programs/Resources/Private/Language/locallang_be.xlf:flexform.sorting.sorting.desc</label>
+                            <value>sorting desc</value>
+                        </numIndex>
                     </items>
                 </config>
             </settings.sorting>

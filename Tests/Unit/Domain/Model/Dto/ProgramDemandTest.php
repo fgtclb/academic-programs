@@ -60,6 +60,7 @@ final class ProgramDemandTest extends UnitTestCase
         yield 'last updated ascending' => [SortingOptions::SORT_BY_LASTUPDATED_ASC, 'lastUpdated', 'asc'];
         yield 'last updated descending' => [SortingOptions::SORT_BY_LASTUPDATED_DESC, 'lastUpdated', 'desc'];
         yield 'backend sorting' => [SortingOptions::SORT_BY_SORTING_ASC, 'sorting', 'asc'];
+        yield 'backend sorting reversed' => [SortingOptions::SORT_BY_SORTING_DESC, 'sorting', 'desc'];
     }
 
     /**
@@ -126,24 +127,23 @@ final class ProgramDemandTest extends UnitTestCase
     }
 
     /**
-     * `sorting` is the one field offered ascending only, so asking for it descending
-     * reassembles to an option that does not exist and is dropped. The demand keeps
-     * the ordering it had - it does not end up sorting by `sorting asc` either.
-     *
-     * This is the asymmetry `SortingOptionsTest` points at, and it is what a list
-     * plugin offering "backend order, reversed" would silently run into.
+     * Every field is offered in both directions, so reversing the manual order
+     * reassembles into an option that exists. Until ACE-625 it did not: `sorting desc`
+     * was missing from the enumeration, the pair was dropped, and the direction select
+     * of the list plugin snapped back to "ascending" without a message - while the
+     * two selects kept offering the combination.
      */
     #[Test]
-    public function aFieldOfferedInOneDirectionOnlyRejectsTheOther(): void
+    public function theManualOrderCanBeReversed(): void
     {
         $subject = new ProgramDemand();
         $subject->setSorting(SortingOptions::SORT_BY_SORTING_ASC);
 
         $subject->setSortingDirection('desc');
 
-        $this->assertSame(SortingOptions::SORT_BY_SORTING_ASC, $subject->getSorting());
+        $this->assertSame(SortingOptions::SORT_BY_SORTING_DESC, $subject->getSorting());
         $this->assertSame('sorting', $subject->getSortingField());
-        $this->assertSame('asc', $subject->getSortingDirection());
+        $this->assertSame('desc', $subject->getSortingDirection());
     }
 
     /**
