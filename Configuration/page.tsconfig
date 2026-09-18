@@ -13,9 +13,6 @@
 # itself, which is registered in TCA and is equally installation wide.
 @import 'EXT:academic_programs/Configuration/TSconfig/BackendLayouts/*.tsconfig'
 
-# Register `EXT:backend` template overrides in backend context
-templates.typo3/cms-backend.academic-programs = fgtclb/academic-programs:Resources/Private/Backend
-
 # The content elements of this extension are hidden here, and re-enabled per
 # component by the page TSconfig the component set delivers.
 #

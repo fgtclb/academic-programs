@@ -1,0 +1,11 @@
+# A type an installation adds to the shipped `programs` group, the way one of the
+# analysed projects adds an "internship" type of its own.
+#
+# The title is a literal string and not an `LLL:` reference on purpose: that is the
+# shape `f:translate` cannot resolve, and it is why the summary resolves the title
+# with `LanguageService::sL()` instead.
+types:
+  - identifier: internship
+    title: 'Internship Placement'
+    group: programs
+    icon: 'EXT:core/Resources/Public/Icons/T3Icons/svgs/apps/apps-pagetree-folder-contains-category.svg'
