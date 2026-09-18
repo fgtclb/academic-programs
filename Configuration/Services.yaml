@@ -14,3 +14,13 @@ services:
   FGTCLB\AcademicPrograms\DataProcessing\ProgramDataProcessor:
     tags:
       - {name: 'data.processor', identifier: 'program-data', label: 'Programs Data Processor'}
+
+  # TYPO3's `Core\Attribute\AsEventListener` does not exist on TYPO3 v12, which this
+  # branch supports, so the listener is registered here. Symfony's attribute of the same
+  # name is not a substitute: it registers nothing in TYPO3 and the listener would
+  # silently never fire.
+  FGTCLB\AcademicPrograms\EventListener\AddPageModuleCategorySummary:
+    tags:
+      - name: event.listener
+        identifier: 'academic-programs/page-module-category-summary'
+        event: TYPO3\CMS\Backend\Controller\Event\ModifyPageLayoutContentEvent

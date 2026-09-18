@@ -1,0 +1,23 @@
+{
+    "name": "tests/programs-extra-category-type",
+    "description": "Extension adding a category type to the programs group for tests",
+    "type": "typo3-cms-extension",
+    "license": "GPL-2.0-or-later",
+    "authors": [
+        {
+            "name": "Stefan B\u00fcrk",
+            "email": "stefan@buerk.tech",
+            "role": "Maintainer"
+        }
+    ],
+    "require": {
+        "typo3/cms-core": "^12.4.22 || ^13.4",
+        "fgtclb/category-types": "~2.4.0@dev",
+        "fgtclb/academic-programs": "~2.4.0@dev"
+    },
+    "extra": {
+        "typo3/cms": {
+            "extension-key": "test_programs_extra_category_type"
+        }
+    }
+}

@@ -96,28 +96,52 @@ final class InstallationWideRegistrationTest extends AbstractAcademicProgramsTes
     }
 
     /**
-     * The backend template override of this extension used to be registered twice, under
+     * This extension registers no backend template override of `EXT:backend` at all any more.
+     *
+     * The history is worth keeping, because this test has guarded two different things. The
+     * override used to be registered **twice**, under
      * `templates.typo3/cms-backend.1730990129` in `Configuration/page.tsconfig` and under
-     * `templates.typo3/cms-backend.academic-programs` in the file that one globbed in.
-     * `BackendViewFactory` does not deduplicate, so the same directory was appended twice
-     * to every backend template root path on every render. One of the two was removed with
-     * the restructuring, and this is what keeps it removed.
+     * `templates.typo3/cms-backend.academic-programs` in the file that one globbed in;
+     * `BackendViewFactory` does not deduplicate, so the same directory was appended twice to
+     * every backend template root path on every render. One of the two was removed with the
+     * restructuring and this test kept it removed.
+     *
+     * ACE-688 removed the other one. The directory it pointed at held a single partial,
+     * `PageLayout/Doktype20.html`, that no template of `EXT:backend` renders, so the
+     * registration delivered nothing; the page module summary it was meant to produce is an
+     * event listener now. An empty result is therefore the correct state, and a re-appearing
+     * entry means somebody restored a registration whose target no longer exists.
+     *
+     * The backend layout is asserted alongside it, and that is not decoration: on its own,
+     * `assertSame([], ...)` would also pass when page TSconfig resolves to nothing at all -
+     * a broken fixture would read as success. The layout entry comes from the same
+     * `Configuration/page.tsconfig` of this extension, so it proves the file was loaded and
+     * the empty result above means "removed" rather than "never looked".
      */
     #[Test]
-    public function backendTemplateOverrideIsRegisteredOnce(): void
+    public function noBackendTemplateOverrideIsRegistered(): void
     {
         $this->importCSVDataSet(__DIR__ . '/Fixtures/InstallationWideRegistration/pages.csv');
 
-        $templates = BackendUtility::getPagesTSconfig(1)['templates.']['typo3/cms-backend.'] ?? [];
+        $pageTsConfig = BackendUtility::getPagesTSconfig(1);
+
+        $this->assertArrayHasKey(
+            'AcademicProgram.',
+            $pageTsConfig['mod.']['web_layout.']['BackendLayouts.'] ?? [],
+            'The page TSconfig of this extension was not loaded, so the assertion below '
+            . 'would pass without measuring anything.',
+        );
+
+        $templates = $pageTsConfig['templates.']['typo3/cms-backend.'] ?? [];
         $ownEntries = array_filter(
             $templates,
             static fn(string $value): bool => str_starts_with($value, 'fgtclb/academic-programs:'),
         );
 
         $this->assertSame(
-            ['academic-programs' => 'fgtclb/academic-programs:Resources/Private/Backend'],
+            [],
             $ownEntries,
-            'The backend template override of this extension is not registered exactly once.',
+            'This extension registers a backend template override of EXT:backend again.',
         );
     }
 
