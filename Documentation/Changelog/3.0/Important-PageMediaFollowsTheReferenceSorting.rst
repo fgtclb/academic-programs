@@ -17,10 +17,10 @@ The query now orders by :sql:`sorting_foreign` with :sql:`uid` settling ties.
 Impact
 ======
 
-Galleries and download lists built from this collection now render the images
-in the order the editor arranged them on the page — which is what every
-supported database happened to deliver for references that were never
-reordered, and what editors expressed but never got for references that were.
+Galleries and download lists built from this collection now render the images in
+the order the editor arranged them on the page — which is what SQLite, MySQL and
+MariaDB delivered in practice for references that were never reordered, and what
+editors expressed but never got for references that were.
 
 Affected Installations
 ======================
