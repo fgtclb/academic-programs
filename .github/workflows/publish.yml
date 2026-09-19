@@ -30,7 +30,7 @@ jobs:
   publish:
     name: Ensure GitHub Release with extension TER artifact and publishing to TER
     if: startsWith(github.ref, 'refs/tags/')
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-26.04
     env:
       TYPO3_API_TOKEN: ${{ secrets.TYPO3_API_TOKEN }}
     permissions:
