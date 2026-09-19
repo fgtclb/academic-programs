@@ -16,9 +16,10 @@ same list twice. The query now appends :sql:`uid` ascending as a tiebreaker.
 Impact
 ======
 
-No visible change is expected: within records equal in the demanded ordering,
-:sql:`uid` ascending is the order every supported database returned in
-practice, it is simply guaranteed now rather than coincidental.
+No visible change is expected on SQLite, MySQL and MariaDB: within records equal
+in the demanded ordering, :sql:`uid` ascending is the order they return in
+practice, and it is guaranteed now rather than coincidental. PostgreSQL promises
+no order without one, so an installation on it may see such a list change once.
 
 Affected Installations
 ======================
