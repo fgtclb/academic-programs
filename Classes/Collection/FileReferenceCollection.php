@@ -50,6 +50,12 @@ final class FileReferenceCollection implements \Countable, \Iterator
                     $queryBuilder->createNamedParameter($field)
                 )
             )
+            // The order the editor arranged the images in - `sorting_foreign` is the
+            // per-relation counterpart of a `sortby` column. Without an ORDER BY the
+            // gallery order belonged to the DBMS and could differ between two renders
+            // of the same page on PostgreSQL (ACE-491). `uid` settles ties.
+            ->orderBy('sys_file_reference.sorting_foreign', 'ASC')
+            ->addOrderBy('sys_file_reference.uid', 'ASC')
             ->executeQuery()
             ->fetchAllAssociative();
 
