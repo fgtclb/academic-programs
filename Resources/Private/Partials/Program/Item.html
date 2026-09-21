@@ -44,7 +44,15 @@
 
     <f:for each="{program.media}" as="image" iteration="i">
         <f:if condition="{i.isFirst}">
-            <f:image image="{image}" class="card-img-top img-fluid" />
+            <f:comment>The shared partial of EXT:academic_base.</f:comment>
+            <f:render
+                partial="Academic/Image"
+                arguments="{
+                    image: image,
+                    preset: 'card',
+                    class: 'card-img-top img-fluid'
+                }"
+            />
         </f:if>
     </f:for>
 </div>

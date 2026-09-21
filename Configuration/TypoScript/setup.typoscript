@@ -21,6 +21,9 @@ plugin.tx_academicprograms {
     }
 
     partialRootPaths {
+      # The shared partials of EXT:academic_base ("Academic/Image"). The key sorts below
+      # every other one, so a partial of this extension or of the project wins over them.
+      -1 = EXT:academic_base/Resources/Private/Partials/
       0 = EXT:academic_programs/Resources/Private/Partials/
       1 = {$plugin.tx_academicprograms.view.partialRootPath}
     }

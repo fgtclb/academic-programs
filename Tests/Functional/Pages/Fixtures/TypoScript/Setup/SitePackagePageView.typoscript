@@ -1,0 +1,20 @@
+# A site package page object of the other shape: PAGEVIEW instead of FLUIDTEMPLATE.
+#
+# It reads neither "templateName" nor "partialRootPaths" - it resolves the template as
+# "Pages/<page layout without the pagets__ prefix>" below "paths", and derives its partial
+# and layout root paths from the same "paths" by appending "Partials/" respectively
+# "Layouts/" (PageViewContentObject::render()). An extension that registers a partial root
+# path only under "partialRootPaths" is therefore invisible here, which is what this
+# fixture is for.
+#
+# Included before the TypoScript of the extension, like the FLUIDTEMPLATE fixture next to
+# it.
+page = PAGE
+page {
+  10 = PAGEVIEW
+  10 {
+    paths {
+      10 = EXT:academic_programs/Tests/Functional/Pages/Fixtures/PageViewTheme/
+    }
+  }
+}

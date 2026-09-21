@@ -1,0 +1,21 @@
+"pages",
+,"uid","pid","doktype","deleted","hidden","sys_language_uid","l10n_parent","l18n_cfg","slug","title","abstract","credit_points","categories"
+,1,0,1,0,0,0,0,0,"/","Site Root","",0,0
+,2,1,1,0,0,0,0,0,"/home","Home (EN)","",0,0
+,10,1,20,0,0,0,0,0,"/applied-physics","Applied Physics","Optics, photonics and applied quantum mechanics.",180,0
+,11,1,20,0,0,0,0,0,"/molecular-chemistry","Molecular Chemistry","Synthesis and analysis of molecular structures.",120,0
+"sys_file_storage",
+,"uid","pid","name","driver","configuration","is_browsable","is_public","is_writable","is_online","is_default","processingfolder"
+,1,0,"fileadmin","Local","<?xml version=""1.0"" encoding=""utf-8"" standalone=""yes"" ?><T3FlexForms><data><sheet index=""sDEF""><language index=""lDEF""><field index=""basePath""><value index=""vDEF"">fileadmin/</value></field><field index=""pathType""><value index=""vDEF"">relative</value></field><field index=""caseSensitive""><value index=""vDEF"">1</value></field></language></sheet></data></T3FlexForms>",1,1,1,1,1,""
+"sys_file",
+,"uid","pid","storage","type","mime_type","missing","extension","name","identifier","identifier_hash","folder_hash","sha1","size","creation_date","modification_date"
+,1,0,1,2,"image/jpeg",0,"jpg","landscape.jpg","/images/landscape.jpg","860f54915db2bcdc50fc3aad2a80cb2b5103cc7d","ca306f2df2823c083069873158fd3b91fd4ebe01","683fca5d5576daac0adc2fc288107af9de30c3c7",8491,1700000000,1700000000
+"sys_file_metadata",
+,"uid","pid","file","sys_language_uid","width","height"
+,1,0,1,0,800,600
+"sys_file_reference",
+,"uid","pid","deleted","hidden","sys_language_uid","uid_local","uid_foreign","tablenames","fieldname","sorting_foreign","alternative"
+,1,1,0,0,0,1,10,"pages","media",1,"The campus of Applied Physics"
+"tt_content",
+,"uid","pid","deleted","hidden","sys_language_uid","l18n_parent","CType","header","pages","recursive","pi_flexform"
+,1,2,0,0,0,0,"academicprograms_programlist","","",0,"<?xml version=""1.0"" encoding=""utf-8"" standalone=""yes"" ?><T3FlexForms><data><sheet index=""sDEF""><language index=""lDEF""><field index=""settings.hideFilter""><value index=""vDEF"">1</value></field><field index=""settings.hideSorting""><value index=""vDEF"">1</value></field><field index=""settings.sorting""><value index=""vDEF"">title asc</value></field><field index=""settings.categories""><value index=""vDEF"">0</value></field><field index=""settings.showHiddenRecords""><value index=""vDEF"">0</value></field></language></sheet></data></T3FlexForms>"

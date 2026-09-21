@@ -10,7 +10,15 @@
 
         <f:for each="{images}" as="image" iteration="i">
             <f:if condition="{i.isFirst}">
-                <f:image image="{image}" class="img-fluid"/>
+                <f:comment>The shared partial of EXT:academic_base.</f:comment>
+                <f:render
+                    partial="Academic/Image"
+                    arguments="{
+                        image: image,
+                        preset: 'detail',
+                        class: 'img-fluid'
+                    }"
+                />
             </f:if>
         </f:for>
     </div>

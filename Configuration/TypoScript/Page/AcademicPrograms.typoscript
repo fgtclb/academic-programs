@@ -26,6 +26,16 @@
 
       // Template path for PAGEVIEW based configurations
       paths {
+        // The shared partials of EXT:academic_base ("Academic/Image"), which the page
+        // template renders. A PAGEVIEW page object derives its partial and layout root
+        // paths from "paths" and reads no "partialRootPaths" at all
+        // (PageViewContentObject::render()), so the path is listed here as well - as
+        // the directory above "Partials/", which is what that derivation appends.
+        //
+        // The key is the same negative one as below: it sorts under 100, and Fluid
+        // takes a file from the highest key that has it, so the templates and partials
+        // of this extension and of the project still win.
+        -1758484802 = EXT:academic_base/Resources/Private/
         100 = EXT:academic_programs/Resources/Private/
       }
 
@@ -37,6 +47,13 @@
         100 = EXT:academic_programs/Resources/Private/Layouts/
       }
       partialRootPaths {
+        // The shared partials of EXT:academic_base ("Academic/Image"), which the page
+        // template renders. "page.10" belongs to the site package rather than to this
+        // extension, so the key is a negative one of its own: it sorts below every
+        // theme and project path, and it is unique across the academic extensions, so
+        // it can neither replace one of those paths nor win over an override of
+        // "Academic/Image".
+        -1758484802 = EXT:academic_base/Resources/Private/Partials/
         100 = EXT:academic_programs/Resources/Private/Partials/
       }
 

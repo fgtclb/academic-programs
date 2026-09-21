@@ -1,0 +1,13 @@
+# Renders the partial root paths the site package contributed to "page.10", after the
+# extension added its own. A key the extension replaced renders the wrong value here.
+#
+# This file is included last, so what it copies is the assembled array.
+page {
+  1000 = TEXT
+  1000.value < page.10.partialRootPaths.0
+  1000.wrap = <div id="theme-partial-path">|</div>
+
+  1010 = TEXT
+  1010.value < page.10.partialRootPaths.1
+  1010.wrap = <div id="project-partial-path">|</div>
+}

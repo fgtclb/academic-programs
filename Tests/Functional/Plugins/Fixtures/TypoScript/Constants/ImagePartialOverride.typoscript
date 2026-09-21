@@ -1,0 +1,3 @@
+# A project that overrides the shared image partial of academic_base through the partial
+# root path constant of this extension, the way it overrides any other partial.
+plugin.tx_academicprograms.view.partialRootPath = EXT:academic_programs/Tests/Functional/Plugins/Fixtures/AcademicProgramsImage/Partials/

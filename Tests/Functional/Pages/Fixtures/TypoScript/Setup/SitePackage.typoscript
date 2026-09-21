@@ -17,6 +17,14 @@ page {
   10 = FLUIDTEMPLATE
   10 {
     templateRootPaths.10 = EXT:academic_programs/Tests/Functional/Pages/Fixtures/Templates/
+
+    # The two partial root paths of a Bootstrap Package shaped page object: its own at the
+    # key 0 and the one of the site package at 1. The extension adds its paths to the same
+    # array, and this test is what keeps it from replacing one of these two.
+    partialRootPaths {
+      0 = EXT:academic_programs/Tests/Functional/Pages/Fixtures/ThemePartials/
+      1 = EXT:academic_programs/Tests/Functional/Pages/Fixtures/ProjectPartials/
+    }
     templateName = TEXT
     templateName {
       cObject = TEXT
