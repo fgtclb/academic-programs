@@ -1,8 +1,8 @@
 # Renders what the extension contributed to the TypoScript of this site, and nothing
 # else. The constant is what "constants.typoscript" of the shared block assigns, the
-# copied value is what its "setup.typoscript" assigns, and the last one is what the
-# "content load" component assigns - so a delivery mechanism that did not reach this site
-# renders an empty value here.
+# copied value is what its "setup.typoscript" assigns - so a delivery mechanism that did
+# not reach this site renders an empty value here. The last one is what the removed
+# "content load" component assigned, and has to stay empty.
 #
 # The constant is deliberately one that no "settings.definitions.yaml" declares. A site
 # set contributes its settings as constants after it contributed the constants of its

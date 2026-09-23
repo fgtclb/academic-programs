@@ -10,6 +10,7 @@ use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
 use SBUERK\TYPO3\Testing\SiteHandling\SiteBasedTestTrait;
 use TYPO3\CMS\Backend\Utility\BackendUtility;
+use TYPO3\CMS\Core\Error\Http\InternalServerErrorException;
 use TYPO3\CMS\Core\Site\Set\SetDefinition;
 use TYPO3\CMS\Core\Site\Set\SetRegistry;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -30,8 +31,8 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  * file is comma separated and is read by the very same code path for a set as for a
  * `sys_template` record, so a component set that delivers nothing at all is a plausible
  * outcome of getting it wrong - and an invisible one. And the `styles.content` override
- * this extension used to assign unconditionally is a component of its own now, so it has
- * to arrive with the aggregate and with nothing else.
+ * this extension assigned unconditionally up to 2.3, and through a set of its own after
+ * that, is gone: no set and no static template may deliver it any more.
  *
  * The `sys_template` record the probe is imported from carries `clear = 0` on purpose:
  * the backend button "Create a root TypoScript record" writes `clear = 3`, which discards
@@ -48,6 +49,9 @@ final class SiteSetDeliveryTest extends AbstractAcademicProgramsTestCase
     ];
 
     private const AGGREGATE_SET = 'fgtclb/academic-programs';
+    /**
+     * The set that delivered the `styles.content` override up to 2.x. It is removed.
+     */
     private const CONTENT_LOAD_SET = 'fgtclb/academic-programs-content-load';
 
     /**
@@ -63,7 +67,7 @@ final class SiteSetDeliveryTest extends AbstractAcademicProgramsTestCase
     private const SHARED_SETUP = '<div id="setup">EXT:academic_programs/Resources/Private/Templates/</div>';
 
     /**
-     * What the "content load" component assigns, and the only thing that assigns it.
+     * What the removed "content load" component assigned.
      */
     private const CONTENT_LOAD = '<div id="contentLoad">{#colPos}=0</div>';
 
@@ -192,19 +196,22 @@ final class SiteSetDeliveryTest extends AbstractAcademicProgramsTestCase
     }
 
     /**
-     * The `styles.content.getContent` override is the one payload of this extension that
-     * changes how a site renders pages that have nothing to do with this extension. It is
-     * therefore a component of its own, the aggregate depends on it, and a site that
-     * names only the content elements it wants must not get it.
+     * The `styles.content.getContent` override changed how a site renders pages that have
+     * nothing to do with this extension, and the program page type no longer needs it. No
+     * delivery mechanism of this extension may assign it.
      *
-     * @return \Generator<string, array{0: list<string>, 1: bool}>
+     * The aggregate set and the aggregate static template assigned it before, so those two
+     * rows fail on the unchanged code. The component set and the shared static template
+     * never did - they are guards.
+     *
+     * @return \Generator<string, array{0: list<string>, 1: string}>
      */
     public static function contentLoadDataProvider(): \Generator
     {
-        yield 'aggregate set' => [[self::AGGREGATE_SET], true];
-        yield 'content load set' => [[self::CONTENT_LOAD_SET], true];
-        yield 'component set alone' => [['fgtclb/academic-programs-program-list'], false];
-        yield 'no set at all' => [[], false];
+        yield 'aggregate set' => [[self::AGGREGATE_SET], ''];
+        yield 'component set alone' => [['fgtclb/academic-programs-program-list'], ''];
+        yield 'aggregate static template' => [[], 'EXT:academic_programs/Configuration/TypoScript/Full'];
+        yield 'shared static template' => [[], 'EXT:academic_programs/Configuration/TypoScript/'];
     }
 
     /**
@@ -212,25 +219,46 @@ final class SiteSetDeliveryTest extends AbstractAcademicProgramsTestCase
      */
     #[Test]
     #[DataProvider('contentLoadDataProvider')]
-    public function contentLoadOverrideIsDeliveredByItsOwnSetOnly(array $dependencies, bool $expected): void
+    public function contentLoadOverrideIsNotDelivered(array $dependencies, string $includeStaticFile): void
     {
-        $this->setUpSite(dependencies: $dependencies);
+        $this->setUpSite(dependencies: $dependencies, includeStaticFile: $includeStaticFile);
 
         $body = $this->renderFrontendPage(self::FRONTEND_PLUGIN_TEST_BASE);
 
-        if ($expected) {
-            $this->assertStringContainsString(
-                self::CONTENT_LOAD,
-                $body,
-                'The "styles.content.getContent" override was not delivered.',
-            );
-
-            return;
-        }
+        // The probe renders, so the site is delivered: an empty value is the result, not
+        // a page that never got that far.
+        $this->assertStringContainsString('<div id="contentLoad"></div>', $body);
         $this->assertStringNotContainsString(
             self::CONTENT_LOAD,
             $body,
-            'The "styles.content.getContent" override was delivered although nothing asked for it.',
+            'The "styles.content.getContent" override was delivered.',
+        );
+    }
+
+    /**
+     * A site that still names the removed set is not delivered at all: core marks the name
+     * as an unavailable set (`SiteConfiguration::determineInvalidSets()`) and `SiteResolver`
+     * answers every request of the site through the error controller - HTTP 500 in an
+     * installation, the exception here. The Breaking changelog entry and the
+     * `unavailable-set` finding of `academic:upgrade:check` both rest on this.
+     */
+    #[Test]
+    public function siteNamingTheRemovedSetIsNotDelivered(): void
+    {
+        $this->setUpSite(dependencies: [self::CONTENT_LOAD_SET]);
+
+        $this->expectException(InternalServerErrorException::class);
+        $this->expectExceptionMessage('depends on unavailable sets: ' . self::CONTENT_LOAD_SET);
+
+        $this->requestFrontendPage(self::FRONTEND_PLUGIN_TEST_BASE);
+    }
+
+    #[Test]
+    public function contentLoadSetIsNotRegistered(): void
+    {
+        $this->assertFalse(
+            $this->setRegistry()->hasSet(self::CONTENT_LOAD_SET),
+            sprintf('The removed set "%s" is registered.', self::CONTENT_LOAD_SET),
         );
     }
 
@@ -350,10 +378,10 @@ final class SiteSetDeliveryTest extends AbstractAcademicProgramsTestCase
         foreach (self::componentDataProvider() as $component) {
             $this->assertContains($component[0], $aggregate->dependencies);
         }
-        $this->assertContains(
+        $this->assertNotContains(
             self::CONTENT_LOAD_SET,
             $aggregate->dependencies,
-            'The aggregate stopped delivering the "styles.content" override a site on it had before.',
+            'The aggregate depends on the removed "styles.content" override.',
         );
         $this->assertSetCarriesNoPayload($aggregate);
     }

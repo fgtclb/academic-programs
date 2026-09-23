@@ -19,9 +19,8 @@ Pick one of them per site and stay with it — see
 What the sets contain
 =====================
 
-This extension ships two content elements, so it ships two component sets, one
-set for the :typoscript:`styles.content` override described below, and one
-aggregate set that depends on all of them.
+This extension ships two content elements, so it ships two component sets and
+one aggregate set that depends on both.
 
 Both content elements are driven by one Extbase plugin, so they share one
 TypoScript block, :typoscript:`plugin.tx_academicprograms`. That block is
@@ -38,10 +37,6 @@ the backend offers, not how much TypoScript is loaded.
         -   The :guilabel:`Program List` content element.
     *   -   `fgtclb/academic-programs-program-details`
         -   The :guilabel:`Program Details` content element.
-    *   -   `fgtclb/academic-programs-content-load`
-        -   The :typoscript:`styles.content.getContent` override only. No content
-            element, and nothing this extension is otherwise made of — see
-            :ref:`The content load override <content-load-override>`.
     *   -   `fgtclb/academic-programs`
         -   Everything above. This is the set to use unless you deliberately
             want a subset, and it is the name this extension published before
@@ -96,30 +91,44 @@ What a set does deliver for that page type is its **frontend rendering**: the
 of the shared TypoScript block, so a site that includes no set of this extension
 renders such a page with whatever its own site package defines.
 
-..  _content-load-override:
+..  _program-page-content:
 
-The content load override
-=========================
+The content of a program page
+=============================
 
-:file:`Configuration/TypoScript/ContentLoad/setup.typoscript` redefines
-:typoscript:`styles.content.getContent` for the whole site so that it selects
-:typoscript:`colPos = 0` only. This is an installation-wide rendering change, it
-applies to every page of the site and not only to the pages of this extension,
-and three academic extensions ship the same override.
+A program page renders the content elements of its main column
+(:typoscript:`colPos = 0`) below the program data, in their manual order and in
+the language of the page. Any set of this extension, or the static template of
+the shared block, delivers that, and no other set is needed for it.
 
-It is therefore a set of its own, `fgtclb/academic-programs-content-load`. The
-aggregate set depends on it, so a site on `fgtclb/academic-programs` keeps what
-it had; a site that wants the content elements without the override names the
-component sets it needs instead of the aggregate.
+The content is the variable :typoscript:`programContent` of the page object,
+defined inside the condition on the program page type, so it exists on program
+pages only. It is a :typoscript:`CONTENT` object that renders the records
+through the :typoscript:`tt_content` object of the site, and it works for a
+:typoscript:`FLUIDTEMPLATE` and a :typoscript:`PAGEVIEW` page object alike.
 
-..  warning::
+To render another column, or to slide the content from the parent pages, change
+the variable inside the same condition:
 
-    The Fluid template of the page type renders
-    :typoscript:`styles.content.getContent` through
-    :html:`<f:cObject typoscriptObjectPath="styles.content.getContent"/>`, and
-    that ViewHelper throws when the path is undefined. A site that opts out of
-    this set and still uses the page type has to define
-    :typoscript:`styles.content.getContent` itself.
+..  code-block:: typoscript
+    :caption: EXT:my_sitepackage/Configuration/TypoScript/setup.typoscript
+
+    [page && traverse(page, "doktype") == 20]
+      page.10.variables.programContent {
+        select.where = {#colPos}=1
+      }
+    [END]
+
+A page template of your own renders it as
+:html:`{programContent -> f:format.raw()}`.
+
+..  versionchanged:: 3.0
+
+    Up to 2.x the page template rendered the global object
+    :typoscript:`styles.content.getContent`, which only the set
+    `fgtclb/academic-programs-content-load` defined for the whole site. The set
+    and its static template are removed, see
+    :ref:`breaking-programs-content-load-set-removed`.
 
 ..  _site-set:
 
@@ -176,8 +185,6 @@ Edit the :sql:`sys_template` record of the site root and add the entry to
         -   The TypoScript of the :guilabel:`Program List` content element.
     *   -   :guilabel:`Academic Programs: Program Details (academic_programs)`
         -   The same for :guilabel:`Program Details`.
-    *   -   :guilabel:`Academic Programs: Content load override (academic_programs)`
-        -   The :typoscript:`styles.content.getContent` override on its own.
     *   -   :guilabel:`Academic Programs: All components (academic_programs)`
         -   Every component this extension ships, in one entry.
     *   -   :guilabel:`Academic Programs: Shared plugin settings and page
@@ -186,8 +193,7 @@ Edit the :sql:`sys_template` record of the site root and add the entry to
             :typoscript:`page` object of the page type, on their own. This is
             the entry an installation stored before the configuration was cut
             per component, and it keeps working — but it does not make any
-            content element selectable, which the page TSconfig below does, and
-            it no longer carries the content load override.
+            content element selectable, which the page TSconfig below does.
 
 ..  _static-pagetsconfig:
 

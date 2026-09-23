@@ -12,4 +12,3 @@ label: Academic Programs
 dependencies:
   - fgtclb/academic-programs-program-list
   - fgtclb/academic-programs-program-details
-  - fgtclb/academic-programs-content-load
