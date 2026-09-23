@@ -302,11 +302,10 @@ final class SiteSetDeliveryTest extends AbstractAcademicProgramsTestCase
      * The aggregate carries no payload of its own on purpose: it delivers through the
      * component sets, and a `typoscript:` of its own would parse the same files twice.
      * The name is the one this extension published before the split, so a site
-     * configuration that depends on it needs no change. No site in this repository does -
-     * the development instances of this branch are driven by a root `sys_template` record
-     * because this branch also supports TYPO3 v12 - so this test is the only thing that
-     * keeps the published name resolvable, and a set that is not found is not an error:
-     * the site simply gets nothing.
+     * configuration that depends on it needs no change. Installations of the released 2.x
+     * line do, and so does the site configuration of the core-13 development instance. A
+     * set that is not found is anything but silent: TYPO3 v13 answers every page of such a
+     * site with HTTP 500 ("depends on unavailable sets").
      */
     #[Test]
     public function aggregateSetDependsOnEveryComponentAndCarriesNoPayload(): void
