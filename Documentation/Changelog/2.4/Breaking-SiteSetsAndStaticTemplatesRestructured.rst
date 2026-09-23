@@ -96,14 +96,12 @@ page field :guilabel:`Page TSconfig`.
     Include the page TSconfig of the component on every page tree that holds
     such records, and do it before editing them.
 
-..  warning::
-
-    The Fluid template of the page type renders
-    :typoscript:`styles.content.getContent` through
-    :html:`<f:cObject typoscriptObjectPath="styles.content.getContent"/>`, and
-    that ViewHelper throws when the path is undefined. A site that deliberately
-    opts out of `fgtclb/academic-programs-content-load` and still uses the page
-    type has to define :typoscript:`styles.content.getContent` itself.
+The page type does not depend on that component: its template renders a
+content variable of its own page object, see
+:ref:`important-program-page-renders-its-own-content`. A site that opts out of
+`fgtclb/academic-programs-content-load` needs
+:typoscript:`styles.content.getContent` only for a template of its own that
+renders it.
 
 The set :yaml:`fgtclb/academic-programs` keeps its name and keeps delivering
 everything, so a site configuration that depends on it needs no change.

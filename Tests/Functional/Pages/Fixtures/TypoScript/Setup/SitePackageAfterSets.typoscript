@@ -1,0 +1,13 @@
+# The page object of a site package on a site configured through site sets.
+#
+# A "sys_template" record is included after the sets of its site, so this file
+# comes after the page object refinement of the extension - unlike the other two
+# site package fixtures. Assigning the content object types again keeps what the
+# extension assigned below them, which is what makes this order work.
+page = PAGE
+page {
+  10 = FLUIDTEMPLATE
+  10 {
+    templateRootPaths.10 = EXT:academic_programs/Tests/Functional/Pages/Fixtures/Templates/
+  }
+}

@@ -1,0 +1,17 @@
+"pages",
+,"uid","pid","doktype","deleted","hidden","sys_language_uid","l10n_parent","l18n_cfg","slug","title","backend_layout","abstract","credit_points"
+,11,1,20,0,0,1,10,0,"/angewandte-physik","Angewandte Physik","pagets__AcademicProgram","Optik und Photonik.",180
+"tt_content",
+,"uid","pid","deleted","hidden","sys_language_uid","l18n_parent","colPos","sorting","CType","header","header_layout","bodytext"
+,1,1,0,0,0,0,0,256,"text","","100","<p>Welcome to the root page.</p>"
+,2,10,0,0,0,0,0,512,"text","","100","<p>Admission requires a bachelor degree.</p>"
+,3,10,0,0,0,0,0,256,"text","","100","<p>The programme covers optics and photonics.</p>"
+,4,10,0,0,0,0,1,128,"text","","100","<p>A note in the side column.</p>"
+,5,10,0,1,0,0,0,384,"text","","100","<p>A hidden draft.</p>"
+,6,10,0,0,1,2,0,512,"text","","100","<p>Die Zulassung setzt einen Bachelor voraus.</p>"
+,7,10,0,0,1,3,0,256,"text","","100","<p>Das Studium umfasst Optik und Photonik.</p>"
+,8,10,0,0,0,0,0,768,"text","","100","<p>A tie, the lower uid.</p>"
+,9,10,0,0,0,0,0,768,"text","","100","<p>A tie, the higher uid.</p>"
+,12,10,0,0,0,0,0,896,"text","","100","<p>A second tie, the higher uid.</p>"
+,11,10,0,0,0,0,0,896,"text","","100","<p>A second tie, the lower uid.</p>"
+,10,1,0,0,0,0,1,256,"text","","100","<p>A note in the side column of the root page.</p>"

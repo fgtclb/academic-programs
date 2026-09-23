@@ -112,14 +112,49 @@ aggregate set depends on it, so a site on `fgtclb/academic-programs` keeps what
 it had; a site that wants the content elements without the override names the
 component sets it needs instead of the aggregate.
 
-..  warning::
+The page type of this extension does not need the override: it renders its
+content itself, see :ref:`The content of a program page <program-page-content>`.
+A site needs the set only for a template of its own that renders
+:typoscript:`styles.content.getContent`. Version 3.0 removes it.
 
-    The Fluid template of the page type renders
-    :typoscript:`styles.content.getContent` through
-    :html:`<f:cObject typoscriptObjectPath="styles.content.getContent"/>`, and
-    that ViewHelper throws when the path is undefined. A site that opts out of
-    this set and still uses the page type has to define
-    :typoscript:`styles.content.getContent` itself.
+..  _program-page-content:
+
+The content of a program page
+=============================
+
+A program page renders the content elements of its main column
+(:typoscript:`colPos = 0`) below the program data, in their manual order and in
+the language of the page. Every set and every static template of this extension
+delivers that, except the content load override on its own, which is not
+needed for it.
+
+The content is the variable :typoscript:`programContent` of the page object,
+defined inside the condition on the program page type, so it exists on program
+pages only. It is a :typoscript:`CONTENT` object that renders the records
+through the :typoscript:`tt_content` object of the site, and it works for a
+:typoscript:`FLUIDTEMPLATE` page object and, on TYPO3 v13, for a
+:typoscript:`PAGEVIEW` one alike.
+
+To render another column, or to slide the content from the parent pages, change
+the variable inside the same condition:
+
+..  code-block:: typoscript
+    :caption: EXT:my_sitepackage/Configuration/TypoScript/setup.typoscript
+
+    [page && traverse(page, "doktype") == 20]
+      page.10.variables.programContent {
+        select.where = {#colPos}=1
+      }
+    [END]
+
+A page template of your own renders it as
+:html:`{programContent -> f:format.raw()}`.
+
+..  versionchanged:: 2.4
+
+    The page template rendered the global object
+    :typoscript:`styles.content.getContent` before, see
+    :ref:`important-program-page-renders-its-own-content`.
 
 ..  _site-set:
 

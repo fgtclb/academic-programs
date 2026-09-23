@@ -6,9 +6,10 @@
 # keeps exactly what it had - a site that wants the content elements without the
 # override names the component sets instead.
 #
-# The page template of the page type this extension registers renders that path
-# with "f:cObject", which throws when the path is undefined. A site opting out
-# has to define "styles.content.getContent" itself before it uses the page type.
+# The page template of the page type this extension registers does not need it:
+# it renders the variable "programContent" of its own page object. The set is
+# kept for site templates that render "styles.content.getContent" themselves;
+# 3.0 removes it.
 name: fgtclb/academic-programs-content-load
 label: 'Academic Programs: Content load override'
 typoscript: 'EXT:academic_programs/Configuration/TypoScript/ContentLoad/'

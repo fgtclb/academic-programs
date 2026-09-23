@@ -40,6 +40,28 @@
         100 = EXT:academic_programs/Resources/Private/Partials/
       }
 
+      // The content elements of the main column, rendered through the "tt_content"
+      // object of the site. A variable of the page object rather than a global
+      // object path, so it exists on program pages only and needs no content
+      // load set: FLUIDTEMPLATE and, on TYPO3 v13, PAGEVIEW both assign
+      // "variables".
+      //
+      // CONTENT applies the language and workspace overlays itself. "sorting"
+      // is the manual order, "uid" the tiebreaker for equal values.
+      //
+      // To render another column, or to slide the content, change this
+      // variable inside the same condition.
+      variables {
+        programContent = CONTENT
+        programContent {
+          table = tt_content
+          select {
+            orderBy = sorting, uid
+            where = {#colPos}=0
+          }
+        }
+      }
+
       dataProcessing {
         100 = program-data
         110 = files

@@ -5,6 +5,10 @@
     It exists so that a page whose template name does not resolve renders this
     instead of throwing, which keeps the failure readable: the assertion then
     names the missing page template rather than an exception from inside Fluid.
+
+    It also renders the content variable of the program page type, so a variable that
+    reached pages of other types would show up here.
 -->
 <div class="site-package-default-template"></div>
+{programContent -> f:format.raw()}
 </html>
