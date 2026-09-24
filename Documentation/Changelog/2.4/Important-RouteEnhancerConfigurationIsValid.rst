@@ -46,9 +46,23 @@ speaking URLs for the sorting arguments of the program list — for example
 are those of :php:`FGTCLB\AcademicPrograms\Enumeration\SortingOptions`, which is
 also what the select fields of the plugin offer.
 
-Note that the sorting and filter form shipped with the plugin submits by POST,
-so its own requests carry no arguments in the URL and are not enhanced. The
-enhancer takes effect for links built with the arguments as GET parameters.
+Both path segments are required, and the enhancer declares no `defaults`: the
+default sorting is generated as :file:`/programs/title/asc` like every other
+one. With defaults, a link asking for the title, ascending, would be generated
+as the plain page URL, and that shows the sorting configured in the content
+element instead. A path with the sorting field alone, such as
+:file:`/programs/last-updated`, does not resolve. Version 3.0 keeps the same
+shape, so a path the enhancer generates with 2.4 still resolves after the
+update.
+
+A link to the list without any sorting does not enter the route either, and
+keeps the plugin's action, controller and a cache hash in its query string. That
+includes the URL the sorting and filter form shipped with the plugin submits to:
+the form posts, so its own requests are not enhanced, and after a submit the
+address bar shows
+:file:`/programs?tx_academicprograms_programlist[action]=list&…&cHash=…` — the
+same URL as without the enhancer. The enhancer takes effect for links built with
+the sorting as GET parameters.
 
 Affected Installations
 ======================

@@ -203,18 +203,67 @@ final class ProgramListRouteEnhancerTest extends AbstractAcademicProgramsTestCas
     }
 
     /**
-     * `defaults` in the enhancer makes trailing segments optional for generation, so a
-     * value that equals its default is dropped from the end of the path: the pair the
-     * plugin uses anyway produces the plain page URL rather than `/title/asc`.
+     * The enhancer declares no `defaults`, so the sorting the plugin uses by default is
+     * written into the path like every other one. With a default it would be left out,
+     * and the link would be the plain page URL - where the sorting configured in the
+     * content element applies instead of the one the link asks for.
      */
     #[Test]
-    public function defaultSortingValuesAreOmittedFromTheEndOfTheGeneratedPath(): void
+    public function defaultSortingValuesStayInTheGeneratedPath(): void
     {
         $this->setUpTestCase();
 
-        $this->assertSame('https://www.acme.com/home', $this->generateListPluginUri('title', 'asc'));
-        $this->assertSame('https://www.acme.com/home/sorting', $this->generateListPluginUri('sorting', 'asc'));
-        $this->assertSame('https://www.acme.com/home/last-updated', $this->generateListPluginUri('lastUpdated', 'asc'));
+        $this->assertSame('https://www.acme.com/home/title/asc', $this->generateListPluginUri('title', 'asc'));
+        $this->assertSame('https://www.acme.com/home/sorting/asc', $this->generateListPluginUri('sorting', 'asc'));
+        $this->assertSame('https://www.acme.com/home/last-updated/asc', $this->generateListPluginUri('lastUpdated', 'asc'));
+    }
+
+    /**
+     * The content element sorts by last update, descending. A link that asks for the
+     * title, ascending, has to show that sorting, not the configured one.
+     */
+    #[Test]
+    public function aLinkWithTheDefaultSortingOverridesTheConfiguredOne(): void
+    {
+        $this->setUpTestCase('programListPage_sortedByLastUpdatedDescending');
+
+        $this->assertSelectedSorting(
+            $this->renderFrontendPage($this->generateListPluginUri('title', 'asc')),
+            'title',
+            'asc',
+        );
+    }
+
+    /**
+     * Without `defaults` the route needs both segments, so a link to the list that carries
+     * no sorting - the action URL of the plugin's own form among them - does not enter the
+     * enhancer and keeps its plugin arguments in the query string, with a cache hash. It
+     * still shows the list as the content element configures it.
+     */
+    #[Test]
+    public function aListLinkWithoutSortingKeepsItsQueryString(): void
+    {
+        $this->setUpTestCase('programListPage_sortedByLastUpdatedDescending');
+
+        $uri = (string)$this->get(SiteFinder::class)
+            ->getSiteByIdentifier('acme')
+            ->getRouter()
+            ->generateUri(2, [self::PLUGIN_NAMESPACE => ['action' => 'list', 'controller' => 'Program']]);
+
+        $this->assertStringStartsWith('https://www.acme.com/home?', $uri);
+        $this->assertStringContainsString('cHash=', $uri);
+        $this->assertSelectedSorting($this->renderFrontendPage($uri), 'lastUpdated', 'desc');
+    }
+
+    /**
+     * Both segments are required: a path with the sorting field alone is no list URL.
+     */
+    #[Test]
+    public function aPathWithTheSortingFieldAloneDoesNotResolve(): void
+    {
+        $this->setUpTestCase();
+
+        $this->assertSame(404, $this->requestFrontendPage('https://www.acme.com/home/last-updated')->getStatusCode());
     }
 
     #[Test]
@@ -242,10 +291,10 @@ final class ProgramListRouteEnhancerTest extends AbstractAcademicProgramsTestCas
     }
 
     /**
-     * The enhanced route must not take over the plain page URL. If it did, its `defaults`
-     * would reach the controller as a demand and overrule the sorting configured in the
-     * FlexForm of the content element — which is the sorting a visitor sees before they
-     * ever touch the form.
+     * The enhanced route must not take over the plain page URL. If it did - through
+     * `defaults`, which the enhancer used to declare - they would reach the controller as
+     * a demand and overrule the sorting configured in the FlexForm of the content element,
+     * which is the sorting a visitor sees before they ever touch the form.
      */
     #[Test]
     public function plainPageUriKeepsTheSortingConfiguredInThePlugin(): void

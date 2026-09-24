@@ -12,9 +12,11 @@
 # "FGTCLB\AcademicPrograms\Enumeration\SortingOptions", which is also what the
 # select fields of the plugin offer.
 #
-# Note that the sorting and filter form shipped with the plugin submits by POST,
-# so its own requests carry no arguments in the URL and are not enhanced. This
-# enhancer takes effect for links built with the arguments as GET parameters.
+# The sorting and filter form shipped with the plugin submits by POST to a URL
+# without any sorting, so its own requests are not enhanced: the address bar
+# shows that URL, with the plugin's action, controller and cache hash in the
+# query string. This enhancer takes effect for links built with the sorting
+# as GET parameters.
 routeEnhancers:
   AcademicPrograms:
     type: Extbase
@@ -27,14 +29,16 @@ routeEnhancers:
           sorting_field: demand/sortingField
           sorting_direction: demand/sortingDirection
     defaultController: 'Program::list'
-    defaults:
-      sorting_field: 'title'
-      sorting_direction: 'asc'
-    # Both segments are optional through "defaults", and an aspect makes
-    # AbstractEnhancer::applyRequirements() default a variable to ".+" - which
-    # is greedy, so "/last-updated/desc" would be swallowed by the first
-    # segment and resolve to nothing. Pinning the patterns here keeps the two
-    # apart; the values are those of the maps below.
+    # Deliberately no "defaults". A default is left out of a generated path, so
+    # a link asking for "title" and "asc" would end on the bare page - and the
+    # bare page is where the sorting configured in the content element applies,
+    # not the one the link asks for. Version 3 relies on the same: its filter
+    # form redirects to the sorted URL.
+    #
+    # An aspect makes AbstractEnhancer::applyRequirements() default a variable
+    # to ".+" - which is greedy, so "/last-updated/desc" would be swallowed by
+    # the first segment and resolve to nothing. Pinning the patterns here keeps
+    # the two apart; the values are those of the maps below.
     requirements:
       sorting_field: 'title|last-updated|sorting'
       sorting_direction: 'asc|desc'
