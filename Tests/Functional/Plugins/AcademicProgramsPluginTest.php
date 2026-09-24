@@ -8,8 +8,6 @@ use FGTCLB\AcademicPrograms\Tests\Functional\AbstractAcademicProgramsTestCase;
 use FGTCLB\TestingHelper\FunctionalTestCase\FrontendPluginRenderingTrait;
 use PHPUnit\Framework\Attributes\Test;
 use SBUERK\TYPO3\Testing\SiteHandling\SiteBasedTestTrait;
-use TYPO3\CMS\Core\Http\Stream;
-use TYPO3\TestingFramework\Core\Functional\Framework\Frontend\InternalRequest;
 
 /**
  * Renders both plugins of this extension in the frontend: `academicprograms_programlist`
@@ -248,30 +246,20 @@ final class AcademicProgramsPluginTest extends AbstractAcademicProgramsTestCase
     }
 
     /**
-     * The sorting and filter form submits by POST, so a demand is posted rather than
-     * passed as a query argument - which is also why no cHash is involved here.
-     *
-     * The body is written explicitly: the testing framework otherwise serialises the
-     * parsed body with `GuzzleHttp\Psr7\Query::build()`, which cannot handle the nested
-     * plugin arguments and emits an "Array to string conversion" warning.
+     * The sorting and filter form submits by POST, and the plugin answers with a redirect
+     * to the list carrying the demand as GET arguments. This follows it the way a browser
+     * does, so the list rendered is the one a visitor ends up on.
      *
      * @param array<string, string> $demand
      */
     private function renderHomePageWithDemand(array $demand): string
     {
-        $parsedBody = ['tx_academicprograms_programlist' => ['demand' => $demand]];
+        $response = $this->requestFrontendPage($this->frontendPostRequest(
+            'https://www.acme.com/home',
+            ['tx_academicprograms_programlist' => ['demand' => $demand]],
+        ));
 
-        $body = new Stream('php://temp', 'rw');
-        $body->write(http_build_query($parsedBody));
-        $body->rewind();
-
-        return $this->renderFrontendPage(
-            (new InternalRequest('https://www.acme.com/home'))
-                ->withMethod('POST')
-                ->withAddedHeader('Content-Type', 'application/x-www-form-urlencoded')
-                ->withBody($body)
-                ->withParsedBody($parsedBody),
-        );
+        return $this->renderFrontendPage($this->assertSeeOtherWithCacheHash($response));
     }
 
     #[Test]

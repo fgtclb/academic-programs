@@ -46,9 +46,8 @@ speaking URLs for the sorting arguments of the program list — for example
 are those of :php:`FGTCLB\AcademicPrograms\Enumeration\SortingOptions`, which is
 also what the select fields of the plugin offer.
 
-Note that the sorting and filter form shipped with the plugin submits by POST,
-so its own requests carry no arguments in the URL and are not enhanced. The
-enhancer takes effect for links built with the arguments as GET parameters.
+The sorting and filter form shipped with the plugin submits by POST, and the
+plugin answers with a redirect to such a URL, see :ref:`feature-1790226102`.
 
 Affected Installations
 ======================

@@ -43,9 +43,17 @@ Those are the values of
 :php:`FGTCLB\AcademicPrograms\Enumeration\SortingOptions`, which is also what
 the sorting select field of the plugin offers.
 
-Both variables carry a default — :yaml:`title` and :yaml:`asc`. They are the
-trailing segments of the route path, so a link that uses the default sorting
-generates the plain page URL rather than :file:`/title/asc`.
+Neither variable carries a default, on purpose: a link that uses the default
+sorting generates :file:`/title/asc`, not the plain page URL. The plain page URL
+is where the content element's preset categories and sorting apply, and the
+list redirects every form submission to a URL with the sorting in it so that a
+visitor who cleared a preset category does not get it back. A default would
+turn that redirect into the plain page URL again. The same holds for an
+enhancer a site writes for this plugin itself. A path with the field alone,
+such as :file:`/last-updated`, does not resolve, and a link to the list that
+carries no sorting at all - the action URL of the plugin's own form, for
+example - does not enter the route and keeps its plugin arguments in the query
+string.
 
 Importing it into a site configuration
 --------------------------------------
@@ -109,11 +117,16 @@ What the URLs look like
 -----------------------
 
 Assuming the plugin sits on a page with the slug :file:`/programs`, a link that
-sorts by the last update, descending, is built without the enhancer as:
+sorts by the last update, descending, is built without the enhancer as (line
+breaks added, and the brackets not encoded, for reading):
 
 ..  code-block:: text
 
-    /programs?tx_academicprograms_programlist%5Bdemand%5D%5BsortingField%5D=lastUpdated&tx_academicprograms_programlist%5Bdemand%5D%5BsortingDirection%5D=desc
+    /programs?tx_academicprograms_programlist[action]=list
+        &tx_academicprograms_programlist[controller]=Program
+        &tx_academicprograms_programlist[demand][sortingDirection]=desc
+        &tx_academicprograms_programlist[demand][sortingField]=lastUpdated
+        &cHash=…
 
 and with the enhancer imported as:
 
@@ -121,19 +134,20 @@ and with the enhancer imported as:
 
     /programs/last-updated/desc
 
+The sorting and filter form of the plugin submits by POST, and the plugin
+answers with a redirect to such a URL, so the address bar shows the enhanced
+path after a submit. A category filter is not part of the route and stays in the
+query string; it needs no cache hash, because the demand is excluded from it
+(:ref:`important-1790226107`):
+
+..  code-block:: text
+
+    /programs/title/asc?tx_academicprograms_programlist[demand][filterCollection][categories]=2
+
 Caveats
 -------
 
-..  warning::
-
-    The sorting and filter form shipped with the list plugin submits by
-    **POST**. Its own requests therefore carry no arguments in the URL at all
-    and are not enhanced — the address bar keeps showing the plain page URL
-    after a submit. The enhancer takes effect for links that are built with the
-    arguments as GET parameters, for example a ``f:link.action`` in an own
-    template override or a hand written link.
-
-Two further points are worth knowing:
+Two points are worth knowing:
 
 *   The enhancer covers the list plugin only. The detail plugin
     (:yaml:`ProgramDetails`) takes no arguments — it renders the program of the

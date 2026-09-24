@@ -7,14 +7,15 @@
 #     - resource: 'EXT:academic_programs/Configuration/Yaml/Routes.yaml'
 #
 # It maps the sorting of the list into the path, so that
-# "?tx_academicprograms_programlist[demand][sortingField]=lastUpdated" becomes
-# "/last-updated/desc". The values come from
+# "?tx_academicprograms_programlist[demand][sortingField]=lastUpdated&…[sortingDirection]=desc"
+# becomes "/last-updated/desc". The values come from
 # "FGTCLB\AcademicPrograms\Enumeration\SortingOptions", which is also what the
 # select fields of the plugin offer.
 #
-# Note that the sorting and filter form shipped with the plugin submits by POST,
-# so its own requests carry no arguments in the URL and are not enhanced. This
-# enhancer takes effect for links built with the arguments as GET parameters.
+# The sorting and filter form of the plugin submits by POST, and the plugin
+# answers with a redirect to the list carrying the selection as GET arguments.
+# That redirect is what this enhancer turns into a path; a category filter stays
+# in the query string.
 routeEnhancers:
   AcademicPrograms:
     type: Extbase
@@ -27,14 +28,15 @@ routeEnhancers:
           sorting_field: demand/sortingField
           sorting_direction: demand/sortingDirection
     defaultController: 'Program::list'
-    defaults:
-      sorting_field: 'title'
-      sorting_direction: 'asc'
-    # Both segments are optional through "defaults", and an aspect makes
-    # AbstractEnhancer::applyRequirements() default a variable to ".+" - which
-    # is greedy, so "/last-updated/desc" would be swallowed by the first
-    # segment and resolve to nothing. Pinning the patterns here keeps the two
-    # apart; the values are those of the maps below.
+    # Deliberately no "defaults". A default is left out of a generated path, so
+    # the redirect for "title" and "asc" would end on the bare page - and the
+    # bare page is where the content element's preset categories and sorting
+    # apply. A visitor who cleared a preset category would get it back.
+    #
+    # An aspect makes AbstractEnhancer::applyRequirements() default a variable
+    # to ".+" - which is greedy, so "/last-updated/desc" would be swallowed by
+    # the first segment and resolve to nothing. Pinning the patterns here keeps
+    # the two apart; the values are those of the maps below.
     requirements:
       sorting_field: 'title|last-updated|sorting'
       sorting_direction: 'asc|desc'
