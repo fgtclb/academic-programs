@@ -1,0 +1,8 @@
+# A FLUIDTEMPLATE site package whose page templates render inside a layout, the way
+# bk2k/bootstrap-package does: its layouts at the key 10, and the template name derived
+# from the backend layout exactly as in "SitePackage.typoscript".
+#
+# Included before the TypoScript of the extension, like the other site package fixtures.
+@import 'EXT:academic_programs/Tests/Functional/Pages/Fixtures/TypoScript/Setup/SitePackage.typoscript'
+
+page.10.layoutRootPaths.10 = EXT:academic_programs/Tests/Functional/Pages/Fixtures/SiteLayouts/

@@ -7,4 +7,13 @@ plugin.tx_academicprograms {
     # cat=plugin.tx_academicprograms/file; type=string; label=Path to template layouts (FE)
     layoutRootPath = EXT:academic_programs/Resources/Private/Layouts/
   }
+
+  # The page of the program page type. Declared for site sets in
+  # "Configuration/Sets/Full/settings.definitions.yaml" with the same defaults.
+  page {
+    # cat=plugin.tx_academicprograms/page; type=string; label=Page layout of program pages: the Fluid layout the program page renders its section "Main" into
+    layout = Default
+    # cat=plugin.tx_academicprograms/page; type=int+; label=Program list page: the page the header of a program page links back to, 0 for no link
+    listPid = 0
+  }
 }

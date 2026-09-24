@@ -1,0 +1,7 @@
+# An integrator overriding the whole program page template at the key 75, for both
+# shapes of the page object - see "HeaderOverrideAt75.typoscript". Included after the
+# TypoScript of the extension.
+page.10 {
+  templateRootPaths.75 = EXT:academic_programs/Tests/Functional/Pages/Fixtures/TemplateOverride/Pages/
+  paths.75 = EXT:academic_programs/Tests/Functional/Pages/Fixtures/TemplateOverride/
+}

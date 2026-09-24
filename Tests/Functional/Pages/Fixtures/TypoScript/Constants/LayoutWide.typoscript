@@ -1,0 +1,2 @@
+# An integrator naming another page layout for program pages.
+plugin.tx_academicprograms.page.layout = Wide

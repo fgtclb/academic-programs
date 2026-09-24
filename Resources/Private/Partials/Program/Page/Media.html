@@ -1,0 +1,25 @@
+<html
+    lang="en"
+    xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+    data-namespace-typo3-fluid="true"
+>
+
+<f:comment>
+    The media of the program page: its first image, through the shared partial of
+    EXT:academic_base.
+</f:comment>
+
+<f:for each="{images}" as="image" iteration="i">
+    <f:if condition="{i.isFirst}">
+        <f:render
+            partial="Academic/Image"
+            arguments="{
+                image: image,
+                preset: 'detail',
+                class: 'img-fluid'
+            }"
+        />
+    </f:if>
+</f:for>
+
+</html>

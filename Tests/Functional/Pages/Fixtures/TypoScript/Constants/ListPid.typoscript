@@ -1,0 +1,2 @@
+# An integrator naming the list page the program pages link back to.
+plugin.tx_academicprograms.page.listPid = 2

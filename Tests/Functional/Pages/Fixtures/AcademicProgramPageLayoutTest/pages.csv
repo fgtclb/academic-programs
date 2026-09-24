@@ -1,0 +1,22 @@
+"pages",
+,"uid","pid","doktype","deleted","hidden","sys_language_uid","l10n_parent","l18n_cfg","slug","title","subtitle","backend_layout","abstract","credit_points"
+,1,0,1,0,0,0,0,0,"/","Site Root","","","",0
+,2,1,1,0,0,0,0,0,"/programs","Programs","","","",0
+,3,1,1,0,1,0,0,0,"/archived-programs","Archived programs","","","",0
+,10,1,20,0,0,0,0,0,"/applied-physics","Applied Physics","Master of Science","pagets__AcademicProgram","Optics and photonics.",180
+,11,1,20,0,0,0,0,0,"/chemistry","Chemistry","","pagets__AcademicProgram","",0
+"tt_content",
+,"uid","pid","deleted","hidden","sys_language_uid","l18n_parent","colPos","sorting","CType","header","header_layout","bodytext"
+,1,10,0,0,0,0,0,256,"text","","100","<p>The programme covers optics and photonics.</p>"
+"sys_file_storage",
+,"uid","pid","name","driver","configuration","is_browsable","is_public","is_writable","is_online","is_default","processingfolder"
+,1,0,"fileadmin","Local","<?xml version=""1.0"" encoding=""utf-8"" standalone=""yes"" ?><T3FlexForms><data><sheet index=""sDEF""><language index=""lDEF""><field index=""basePath""><value index=""vDEF"">fileadmin/</value></field><field index=""pathType""><value index=""vDEF"">relative</value></field><field index=""caseSensitive""><value index=""vDEF"">1</value></field></language></sheet></data></T3FlexForms>",1,1,1,1,1,""
+"sys_file",
+,"uid","pid","storage","type","mime_type","missing","extension","name","identifier","identifier_hash","folder_hash","sha1","size","creation_date","modification_date"
+,1,0,1,2,"image/jpeg",0,"jpg","landscape.jpg","/images/landscape.jpg","860f54915db2bcdc50fc3aad2a80cb2b5103cc7d","ca306f2df2823c083069873158fd3b91fd4ebe01","683fca5d5576daac0adc2fc288107af9de30c3c7",8491,1700000000,1700000000
+"sys_file_metadata",
+,"uid","pid","file","sys_language_uid","width","height"
+,1,0,1,0,800,600
+"sys_file_reference",
+,"uid","pid","deleted","hidden","sys_language_uid","uid_local","uid_foreign","tablenames","fieldname","sorting_foreign","alternative"
+,1,1,0,0,0,1,10,"pages","media",1,"The laboratory of the Applied Physics programme"

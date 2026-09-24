@@ -24,6 +24,20 @@
       templateName >
       templateName = AcademicProgram
 
+      // The paths of this extension sit at the key 50, below the 100 a site package
+      // typically registers its own paths with. Two reasons:
+      //
+      // - A PAGEVIEW page object derives its layout and partial root paths from
+      //   "paths", so a key of ours equal to the site package's replaced its whole
+      //   directory on program pages: the page lost the layouts and partials of the
+      //   site. A key of our own replaces nothing.
+      // - An override of a project between 50 and 100 wins over this extension, and
+      //   the site package's templates at 100 win over it as well - which is what an
+      //   override of "Pages/AcademicProgram.html" in the site package means.
+      //
+      // The layout comes from the site package: this extension registers no layout at
+      // 50, only the fallback below every other key.
+
       // Template path for PAGEVIEW based configurations
       paths {
         // The shared partials of EXT:academic_base ("Academic/Image"), which the page
@@ -32,19 +46,23 @@
         // (PageViewContentObject::render()), so the path is listed here as well - as
         // the directory above "Partials/", which is what that derivation appends.
         //
-        // The key is the same negative one as below: it sorts under 100, and Fluid
-        // takes a file from the highest key that has it, so the templates and partials
-        // of this extension and of the project still win.
+        // The key is the same negative one as below: it sorts under every key a theme
+        // or project uses, and Fluid takes a file from the highest key that has it, so
+        // the templates and partials of this extension and of the project still win.
         -1758484802 = EXT:academic_base/Resources/Private/
-        100 = EXT:academic_programs/Resources/Private/
+        // The fallback layout "Default", for a site package that ships none. Its own
+        // directory at a key below every other one - see the layout itself.
+        -1758484902 = EXT:academic_programs/Resources/Private/PageLayoutFallback/
+        50 = EXT:academic_programs/Resources/Private/
       }
 
       // Template paths for FLUIDTEMPLATE based configurations
       templateRootPaths {
-        100 = EXT:academic_programs/Resources/Private/Pages/
+        50 = EXT:academic_programs/Resources/Private/Pages/
       }
       layoutRootPaths {
-        100 = EXT:academic_programs/Resources/Private/Layouts/
+        // The fallback layout, as under "paths" above.
+        -1758484902 = EXT:academic_programs/Resources/Private/PageLayoutFallback/Layouts/
       }
       partialRootPaths {
         // The shared partials of EXT:academic_base ("Academic/Image"), which the page
@@ -54,7 +72,7 @@
         // it can neither replace one of those paths nor win over an override of
         // "Academic/Image".
         -1758484802 = EXT:academic_base/Resources/Private/Partials/
-        100 = EXT:academic_programs/Resources/Private/Partials/
+        50 = EXT:academic_programs/Resources/Private/Partials/
       }
 
       // The content elements of the main column, rendered through the "tt_content"
@@ -68,6 +86,22 @@
       // To render another column, or to slide the content, change this
       // variable inside the same condition.
       variables {
+        // The page layout the page template renders its section "Main" into, from the
+        // site setting or constant "plugin.tx_academicprograms.page.layout". Empty
+        // falls back to "Default" rather than to a layout without a name.
+        programPageLayout = TEXT
+        programPageLayout {
+          value = {$plugin.tx_academicprograms.page.layout}
+          ifEmpty = Default
+        }
+
+        // The list page the header links back to, "0" for no link.
+        programListPid = TEXT
+        programListPid {
+          value = {$plugin.tx_academicprograms.page.listPid}
+          intval = 1
+        }
+
         programContent = CONTENT
         programContent {
           table = tt_content

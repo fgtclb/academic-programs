@@ -1,0 +1,13 @@
+# A PAGEVIEW site package that registers its templates, layouts and partials at the
+# key 100 of "paths" - the directory holds "Pages/", "Layouts/" and "Partials/".
+#
+# Included before the TypoScript of the extension, like the other site package fixtures.
+page = PAGE
+page {
+  10 = PAGEVIEW
+  10 {
+    paths {
+      100 = EXT:academic_programs/Tests/Functional/Pages/Fixtures/PageViewSitePackage/
+    }
+  }
+}

@@ -1,0 +1,40 @@
+<html
+    lang="en"
+    xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+    data-namespace-typo3-fluid="true"
+>
+
+<f:comment>
+    The header of the program page: a link back to the program list, the title and the
+    subtitle. The link is rendered when the site setting
+    "plugin.tx_academicprograms.page.listPid" names a page that can be linked;
+    "programListPid" is that page, or "0".
+
+    One element, because the page template renders it inside a reversed flex column
+    together with the media: the image is shown above the header, the heading stays
+    first in the document.
+</f:comment>
+
+<div class="academic-programs-detail__header">
+    <f:if condition="{programListPid}">
+        <f:comment>
+            Resolved first, so a list page that cannot be linked - hidden, or not
+            translated - renders no link rather than the bare label.
+        </f:comment>
+        <f:variable name="backToListUri" value="{f:uri.page(pageUid: programListPid)}" />
+        <f:if condition="{backToListUri}">
+            <a
+                href="{backToListUri}"
+                class="academic-programs-detail__back"
+            >{f:translate(key: 'page.backToList', extensionName: 'academic_programs')}</a>
+        </f:if>
+    </f:if>
+
+    <h1>{program.title}</h1>
+
+    <f:if condition="{program.subtitle}">
+        <p class="academic-programs-detail__subtitle">{program.subtitle}</p>
+    </f:if>
+</div>
+
+</html>

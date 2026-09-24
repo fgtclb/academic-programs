@@ -1,0 +1,10 @@
+# An integrator overriding the header of the program page at the key 75: below the
+# key 100 a site package typically uses, above the key the extension registers.
+#
+# Both shapes of the page object are served by the same file - FLUIDTEMPLATE reads
+# "partialRootPaths", PAGEVIEW derives "Partials/" from "paths" - and each ignores
+# the key it does not read. Included after the TypoScript of the extension.
+page.10 {
+  partialRootPaths.75 = EXT:academic_programs/Tests/Functional/Pages/Fixtures/HeaderOverride/Partials/
+  paths.75 = EXT:academic_programs/Tests/Functional/Pages/Fixtures/HeaderOverride/
+}

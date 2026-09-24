@@ -1,0 +1,14 @@
+<html
+    lang="en"
+    xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+    data-namespace-typo3-fluid="true"
+>
+
+<f:comment>
+    The content elements of the program page, as "page.10.variables.programContent"
+    renders them - the main column unless the site configures another one.
+</f:comment>
+
+{programContent -> f:format.raw()}
+
+</html>

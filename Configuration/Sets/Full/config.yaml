@@ -4,6 +4,14 @@
 # delivered by the set that owns it, and listing a payload here would parse the
 # same files a second time.
 #
+# What it does carry is "settings.definitions.yaml": the settings belong to the
+# page type, which the shared TypoScript block of both components delivers, not
+# to either content element, and a set definition can only declare them next to
+# its own "config.yaml". A site that depends on a component set alone therefore
+# still gets the defaults of "Configuration/TypoScript/constants.typoscript",
+# but the settings are not declared for it: the site settings editor does not
+# offer them and nothing validates them - depend on this set for that.
+#
 # The name is the one this extension published before the configuration was cut
 # per component, so a site configuration that depends on it needs no change -
 # both development instances of this repository do.

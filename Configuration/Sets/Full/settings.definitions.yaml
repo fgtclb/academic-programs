@@ -1,0 +1,30 @@
+# Site settings of the program page type.
+#
+# Every path below is also assigned in
+# "Configuration/TypoScript/constants.typoscript", and the default has to be the
+# same in both files: a site that uses the site set and the static template
+# reads the constants after the site settings, so a differing default resets
+# what the integrator configured, silently.
+#
+# The file is declared with the aggregate set only - see "config.yaml" next to
+# it for what that means for a site that depends on a single component.
+categories:
+  academic:
+    label: 'Academic'
+  academic.programs:
+    label: 'Programs'
+    parent: academic
+
+settings:
+  plugin.tx_academicprograms.page.layout:
+    label: 'Program page | Page layout'
+    description: 'The Fluid layout of the site package the program page renders its section "Main" into. The layout has to exist; only for "Default" does the extension bring a fallback, which renders the page without the frame of the site.'
+    category: academic.programs
+    type: string
+    default: 'Default'
+  plugin.tx_academicprograms.page.listPid:
+    label: 'Program page | List page'
+    description: 'The page the header of a program page links back to. 0 renders no link.'
+    category: academic.programs
+    type: int
+    default: 0

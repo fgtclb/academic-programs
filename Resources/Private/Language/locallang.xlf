@@ -105,6 +105,9 @@
         <source>Performance scope</source>
         <target>Leistungsumfang</target>
       </trans-unit>
+      <trans-unit id="page.backToList">
+        <source>Back to all programs</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>

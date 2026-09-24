@@ -1,0 +1,4 @@
+# "SitePackageAfterSets.typoscript" with the layouts of the fixture site package.
+@import 'EXT:academic_programs/Tests/Functional/Pages/Fixtures/TypoScript/Setup/SitePackageAfterSets.typoscript'
+
+page.10.layoutRootPaths.10 = EXT:academic_programs/Tests/Functional/Pages/Fixtures/SiteLayouts/

@@ -1,0 +1,17 @@
+<html
+    data-namespace-typo3-fluid="true"
+    xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+>
+
+<f:comment>
+    The page layout "Default" of a PAGEVIEW site package. Its footer is a partial of the
+    site package, so a page that lost the site package's path cannot render it.
+</f:comment>
+
+<header class="site-layout-default-header"></header>
+<main>
+    <f:render section="Main" />
+</main>
+<f:render partial="Site/Footer" />
+
+</html>

@@ -4,51 +4,30 @@
     data-namespace-typo3-fluid="true"
 >
 
-<div class="academic-programs-detail container">
-    <div class="d-flex flex-column-reverse">
-        <h1>{program.title}</h1>
+<f:comment>
+    The page template of the program page type. It renders the section "Main" of the page
+    layout of the site, "Default" unless the site setting
+    "plugin.tx_academicprograms.page.layout" names another one. A site without a layout
+    "Default" gets the fallback layout of this extension, which renders the section alone;
+    a layout the setting names has to exist.
 
-        <f:for each="{images}" as="image" iteration="i">
-            <f:if condition="{i.isFirst}">
-                <f:comment>The shared partial of EXT:academic_base.</f:comment>
-                <f:render
-                    partial="Academic/Image"
-                    arguments="{
-                        image: image,
-                        preset: 'detail',
-                        class: 'img-fluid'
-                    }"
-                />
-            </f:if>
-        </f:for>
+    Each part is a partial below "Program/Page/", so a project replaces one of them rather
+    than this file.
+</f:comment>
+
+<f:layout name="{programPageLayout}" />
+
+<f:section name="Main">
+    <div class="academic-programs-detail container">
+        <div class="d-flex flex-column-reverse">
+            <f:render partial="Program/Page/Header" arguments="{_all}" />
+            <f:render partial="Program/Page/Media" arguments="{_all}" />
+        </div>
+
+        <f:render partial="Program/Page/Facts" arguments="{_all}" />
+
+        <f:render partial="Program/Page/Content" arguments="{_all}" />
     </div>
-
-    <f:render
-        partial="Program/Categories"
-        arguments="{_all}"
-    />
-
-    <ul>
-        <f:for
-            each="{
-                0: 'creditPoints',
-                1: 'jobProfile',
-                2: 'performanceScope',
-                3: 'prerequisites'
-            }"
-            as="attribute"
-        >
-            <f:if condition="{program.{attribute}}">
-                <li>
-                    <b>{f:translate(key: 'program.{attribute}', extensionName: 'academic_programs')}</b>
-
-                    <span>{program.{attribute} -> f:format.raw()}</span>
-                </li>
-            </f:if>
-        </f:for>
-    </ul>
-
-    {programContent -> f:format.raw()}
-</div>
+</f:section>
 
 </html>

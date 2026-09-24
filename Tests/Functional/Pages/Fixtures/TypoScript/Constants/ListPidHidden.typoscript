@@ -1,0 +1,2 @@
+# An integrator naming a list page that is hidden, so no link to it can be built.
+plugin.tx_academicprograms.page.listPid = 3

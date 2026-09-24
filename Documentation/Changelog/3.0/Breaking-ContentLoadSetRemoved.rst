@@ -36,7 +36,7 @@ itself, as the variable :typoscript:`programContent`:
       }
     [END]
 
-:file:`Resources/Private/Pages/AcademicProgram.html` renders it as
+The page template renders it as
 :html:`{programContent -> f:format.raw()}`, on a :typoscript:`FLUIDTEMPLATE`
 and on a :typoscript:`PAGEVIEW` page object alike. Every set of this extension
 delivers it.

@@ -130,6 +130,105 @@ A page template of your own renders it as
     and its static template are removed, see
     :ref:`breaking-programs-content-load-set-removed`.
 
+..  _program-page-layout:
+
+The layout of a program page
+============================
+
+A program page renders inside the page layout of the site package, the way the
+other pages of the site do: the page template declares a layout and fills its
+section :html:`Main`. The layout is :file:`Default` unless a setting names
+another one, which is what :composer:`bk2k/bootstrap-package` and most site
+packages provide.
+
+..  list-table::
+    :header-rows: 1
+
+    *   -   Site setting / constant
+        -   Default
+        -   Meaning
+    *   -   :typoscript:`plugin.tx_academicprograms.page.layout`
+        -   `Default`
+        -   The Fluid layout of the site package the program page renders its
+            section :html:`Main` into. An empty value is read as `Default`.
+    *   -   :typoscript:`plugin.tx_academicprograms.page.listPid`
+        -   `0`
+        -   The page the header of a program page links back to, the program
+            list. `0` renders no link.
+
+Both are site settings of the aggregate set `fgtclb/academic-programs`, and
+constants of the same name for a site on the static templates. A site that
+depends on a component set alone gets the defaults, but the site settings
+editor does not offer the settings there; depend on the aggregate set to
+configure them.
+
+The page template reaches both as variables of the page object,
+:typoscript:`programPageLayout` and :typoscript:`programListPid`, so they work
+on a :typoscript:`FLUIDTEMPLATE` and a :typoscript:`PAGEVIEW` page object alike.
+
+A site package without a layout :file:`Default` gets the fallback layout of this
+extension, which renders the section :html:`Main` and nothing else: the page
+renders without the header, navigation and footer of the site, as it did up to
+2.x, rather than failing. A layout :file:`Default` of the site package wins over
+it. The fallback exists for :file:`Default` only: a layout the setting names
+has to exist in the site package, or the program page fails as any page with a
+missing Fluid layout does.
+
+..  _program-page-partials:
+
+The parts of a program page
+---------------------------
+
+The section :html:`Main` renders four partials, each of which can be replaced
+on its own:
+
+..  list-table::
+    :header-rows: 1
+
+    *   -   Partial
+        -   Renders
+    *   -   :file:`Program/Page/Header.html`
+        -   The link back to the program list, the title and the subtitle, in
+            one element with the class `academic-programs-detail__header`.
+    *   -   :file:`Program/Page/Media.html`
+        -   The first image of the page, through the shared image partial of
+            :guilabel:`EXT:academic_base`.
+    *   -   :file:`Program/Page/Facts.html`
+        -   The categories and the program fields credit points, job profile,
+            performance scope and prerequisites.
+    *   -   :file:`Program/Page/Content.html`
+        -   The content elements, the variable :typoscript:`programContent`
+            described above.
+
+Every partial receives all variables of the page: :html:`{program}`,
+:html:`{images}`, :html:`{programContent}`, :html:`{programListPid}` and those
+of the site package's page object.
+
+The templates and partials of the page type are registered at the key `50` of
+the page object. Register a directory of your own with a higher key, and its
+files win:
+
+..  code-block:: typoscript
+    :caption: EXT:my_sitepackage/Configuration/TypoScript/setup.typoscript
+
+    # FLUIDTEMPLATE: a directory holding Program/Page/Header.html
+    page.10.partialRootPaths.75 = EXT:my_sitepackage/Resources/Private/Partials/
+
+    # PAGEVIEW: a directory holding Partials/Program/Page/Header.html
+    page.10.paths.75 = EXT:my_sitepackage/Resources/Private/
+
+A site package that registers its own paths above `50` needs no line at all -
+a :typoscript:`PAGEVIEW` site package at :typoscript:`paths.100`, for example:
+a :file:`Partials/Program/Page/Header.html` of its own wins already. An override of
+the whole :file:`Pages/AcademicProgram.html` keeps working the same way, and
+renders as before.
+
+..  versionchanged:: 3.0
+
+    Up to 2.x the page template declared no layout and rendered every part
+    inline, and its paths used the key `100`. See
+    :ref:`breaking-program-page-renders-inside-the-site-layout`.
+
 ..  _site-set:
 
 Include the site set
@@ -228,8 +327,8 @@ files twice. The site set is applied before the :sql:`sys_template` record, so
 the second read happens after the site settings and after
 :file:`config/sites/<site>/constants.typoscript` — and it resets every constant
 the extension ships a default for back to that default. For this extension that
-is the :typoscript:`plugin.tx_academicprograms` constants block, the three Fluid
-root paths.
+is the :typoscript:`plugin.tx_academicprograms` constants block: the three Fluid
+root paths, the page layout and the list page of the program page.
 
 Nothing else is damaged: the :guilabel:`Constants` and :guilabel:`Setup` fields
 of the :sql:`sys_template` record, the page TSconfig of a page and the page

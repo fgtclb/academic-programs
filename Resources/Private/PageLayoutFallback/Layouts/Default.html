@@ -1,0 +1,22 @@
+<html
+    lang="en"
+    xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+    data-namespace-typo3-fluid="true"
+>
+
+<f:comment>
+    The fallback page layout of the program page type: the section "Main" and nothing
+    else.
+
+    It is used only on a site whose package ships no layout "Default" - the page then
+    renders as it did before the page template had a layout, without the frame of the
+    site, instead of failing. It is registered with a key below every path a site
+    package or project uses, so any layout "Default" of theirs wins. The directory is
+    its own and not "Resources/Private/Layouts/": a PAGEVIEW page object derives
+    "Layouts/" from the key 50 the templates of this extension are registered with,
+    which would put this file above a site package at a lower key.
+</f:comment>
+
+<f:render section="Main" />
+
+</html>
