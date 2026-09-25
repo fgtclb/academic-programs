@@ -21,7 +21,7 @@ Two places now decide it:
     *   -   Where
         -   Applies to
     *   -   Field :guilabel:`Filter types` of the :guilabel:`Program List`
-            content element, tab :guilabel:`Filter`
+            content element, tab :guilabel:`Configuration`
         -   That element. The editor picks the category types and arranges
             them in the order the form offers them.
     *   -   Site setting / constant

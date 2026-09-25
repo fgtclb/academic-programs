@@ -6,9 +6,9 @@
 # physical copy of each, so the two delivery mechanisms can never drift apart.
 #
 # The TypoScript folder holds nothing but an "include_static_file.txt" naming
-# "Configuration/TypoScript": both content elements of this extension are driven
+# "Configuration/TypoScript": every content element of this extension is driven
 # by the one plugin namespace "plugin.tx_academicprograms", and that block is
-# shipped once instead of twice.
+# shipped once instead of once per component.
 name: fgtclb/academic-programs-program-details
 label: 'Academic Programs: Program Details'
 dependencies:

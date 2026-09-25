@@ -54,6 +54,12 @@
         <source>All options</source>
       </trans-unit>
 
+      <!-- Program finder -->
+
+      <trans-unit id="finder.submit">
+        <source>Show programs</source>
+      </trans-unit>
+
       <!-- Sorting direction options -->
 
       <trans-unit id="sorting.direction.label">

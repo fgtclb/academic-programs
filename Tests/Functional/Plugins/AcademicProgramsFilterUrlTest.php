@@ -268,6 +268,44 @@ final class AcademicProgramsFilterUrlTest extends AbstractAcademicProgramsTestCa
         $this->assertStringContainsString('Molecular Chemistry', $content);
     }
 
+    /**
+     * A list whose sorting select is hidden submits its filter without a sorting. The
+     * redirect keeps the default ordering of the element instead of falling back to the
+     * default of the extension, title ascending.
+     */
+    #[Test]
+    public function aFilterSubmissionWithoutASortingKeepsTheSortingOfTheElement(): void
+    {
+        $this->getConnectionPool()->getConnectionForTable('tt_content')->update(
+            'tt_content',
+            [
+                'pi_flexform' => '<?xml version="1.0" encoding="utf-8" standalone="yes" ?><T3FlexForms><data><sheet index="sDEF"><language index="lDEF">'
+                    . '<field index="settings.hideFilter"><value index="vDEF">0</value></field>'
+                    . '<field index="settings.hideSorting"><value index="vDEF">1</value></field>'
+                    . '<field index="settings.sorting"><value index="vDEF">title desc</value></field>'
+                    . '<field index="settings.showHiddenRecords"><value index="vDEF">0</value></field>'
+                    . '</language></sheet></data></T3FlexForms>',
+            ],
+            ['uid' => 1],
+        );
+
+        $response = $this->submitFrontendForm('https://www.acme.com/home', self::FORM_CLASS, [
+            self::PLUGIN_NAMESPACE => ['demand' => ['filterCollection' => ['degree' => '']]],
+        ]);
+        $location = $this->assertSeeOtherWithCacheHash($response);
+
+        $this->assertSame(
+            ['sortingDirection' => 'desc', 'sortingField' => 'title'],
+            $this->demandArguments($location),
+        );
+        $content = $this->renderFrontendPage($location);
+        $regional = strpos($content, 'Regional Teaching');
+        $applied = strpos($content, 'Applied Physics');
+        $this->assertIsInt($regional);
+        $this->assertIsInt($applied);
+        $this->assertLessThan($applied, $regional);
+    }
+
     private function filteredListUrl(string $uid): string
     {
         return $this->assertSeeOtherWithCacheHash($this->submitFrontendForm('https://www.acme.com/home', self::FORM_CLASS, [

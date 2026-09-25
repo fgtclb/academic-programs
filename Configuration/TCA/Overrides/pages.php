@@ -127,6 +127,12 @@ defined('TYPO3') or die;
 
     ExtensionManagementUtility::registerPageTSConfigFile(
         'academic_programs',
+        'Configuration/TSconfig/ProgramFinder/page.tsconfig',
+        'Academic Programs: Program Finder',
+    );
+
+    ExtensionManagementUtility::registerPageTSConfigFile(
+        'academic_programs',
         'Configuration/TSconfig/Full/page.tsconfig',
         'Academic Programs: All components',
     );

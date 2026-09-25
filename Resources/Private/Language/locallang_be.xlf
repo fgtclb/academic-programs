@@ -77,6 +77,21 @@
       <trans-unit id="flexform.sorting.sorting.desc">
         <source>Page sorting, reversed (Result may be unexpected)</source>
       </trans-unit>
+      <trans-unit id="flexform.finder.listPid.label">
+        <source>Program list page</source>
+      </trans-unit>
+      <trans-unit id="flexform.finder.listPid.description">
+        <source>The page with the program list the finder opens. Point the list and the finder at the same storage, or the finder offers categories the list does not show.</source>
+      </trans-unit>
+      <trans-unit id="flexform.finder.categoryTypes.description">
+        <source>A select for each chosen type, in this order. A chosen type without categories is left out. Empty: the filter types of the program list for the site, or the degree and the topic.</source>
+      </trans-unit>
+      <trans-unit id="flexform.finder.preselectedCategories.label">
+        <source>Preselected categories</source>
+      </trans-unit>
+      <trans-unit id="flexform.finder.preselectedCategories.description">
+        <source>Selected when the page loads, one per type: of two categories of one type the one higher in the category tree counts. A category of a type the finder does not offer, or one no program carries, is not preselected.</source>
+      </trans-unit>
 
       <!-- Wizard -->
 
@@ -94,6 +109,12 @@
       </trans-unit>
       <trans-unit id="plugin.program_details.description">
         <source>Displays the details of an academic program</source>
+      </trans-unit>
+      <trans-unit id="plugin.program_finder.title">
+        <source>Program Finder</source>
+      </trans-unit>
+      <trans-unit id="plugin.program_finder.description">
+        <source>A compact form of category selects that opens a program list with the selection applied.</source>
       </trans-unit>
 
       <!-- Doktype -->

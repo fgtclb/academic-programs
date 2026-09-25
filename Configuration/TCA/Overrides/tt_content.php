@@ -44,4 +44,33 @@ defined('TYPO3') or die;
         ],
         'academic_programs'
     );
+
+    (new TcaManipulator())->addContentElementPlugin(
+        [
+            'label' => 'LLL:EXT:academic_programs/Resources/Private/Language/locallang_be.xlf:plugin.program_finder.title',
+            'value' => 'academicprograms_programfinder',
+            'icon' => 'academic-programs',
+            'group' => 'academic',
+        ],
+        'academic_programs'
+    );
+
+    // The finder takes its options from the programs in its own storage, which is
+    // meant to be the storage of the list it targets - see the documentation.
+    ExtensionManagementUtility::addToAllTCAtypes(
+        'tt_content',
+        implode(',', [
+            '--div--;LLL:EXT:academic_programs/Resources/Private/Language/locallang_be.xlf:element.tab.configuration',
+            'pi_flexform',
+            'pages',
+            'recursive',
+        ]),
+        'academicprograms_programfinder',
+        'after:subheader',
+    );
+
+    (new TcaManipulator())->addContentElementPluginFlexForm(
+        'academicprograms_programfinder',
+        'FILE:EXT:academic_programs/Configuration/FlexForms/ProgramFinderSettings.xml',
+    );
 })();

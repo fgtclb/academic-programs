@@ -25,6 +25,7 @@ final class PluginFlexFormTest extends AbstractAcademicProgramsTestCase
     public static function pluginContentTypeDataProvider(): \Generator
     {
         yield 'Program list' => ['academicprograms_programlist'];
+        yield 'Program finder' => ['academicprograms_programfinder'];
     }
 
     #[Test]

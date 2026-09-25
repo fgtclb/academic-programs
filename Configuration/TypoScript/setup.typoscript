@@ -1,6 +1,6 @@
 # The shared TypoScript block of this extension.
 #
-# Both content elements are driven by the one Extbase plugin namespace
+# Every content element is driven by the one Extbase plugin namespace
 # "plugin.tx_academicprograms", so the block is shipped once and every component
 # folder names this folder in its "include_static_file.txt" instead of carrying
 # a copy. The folder is the one "Configuration/TCA/Overrides/sys_template.php"
@@ -20,14 +20,14 @@ plugin.tx_academicprograms {
     # "factsFields" of its data processor instead.
     facts.fields = {$plugin.tx_academicprograms.facts.fields}
     card.fields = {$plugin.tx_academicprograms.card.fields}
-    # The filter types of the list, see "constants.typoscript". The field of the same
-    # name in the FlexForm of a list element overrides them.
+    # The filter types of the list and the finder, see "constants.typoscript". The
+    # field of the same name in the FlexForm of either element overrides them.
     filter.categoryTypes = {$plugin.tx_academicprograms.filter.categoryTypes}
   }
 
-  # An element that leaves the field "Filter types" empty keeps the value above:
-  # Extbase drops an empty FlexForm value of a setting listed here before it merges the
-  # FlexForm over the TypoScript settings.
+  # A list or finder element that leaves the field "Filter types" empty keeps the
+  # value above: Extbase drops an empty FlexForm value of a setting listed here
+  # before it merges the FlexForm over the TypoScript settings.
   ignoreFlexFormSettingsIfEmpty := addToList(filter.categoryTypes)
 
   view {

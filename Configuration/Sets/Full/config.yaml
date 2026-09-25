@@ -5,10 +5,10 @@
 # same files a second time.
 #
 # What it does carry is "settings.definitions.yaml": the settings are read
-# through the shared TypoScript block of both components - by the page type, by
-# both content elements or by the list - and a set definition can only declare
-# them next to its own "config.yaml". A site that depends on a component set
-# alone therefore still gets the defaults of
+# through the shared TypoScript block of every component - by the page type, by
+# every content element, or by the list and the finder - and a set definition
+# can only declare them next to its own "config.yaml". A site that depends on a
+# component set alone therefore still gets the defaults of
 # "Configuration/TypoScript/constants.typoscript",
 # but the settings are not declared for it: the site settings editor does not
 # offer them and nothing validates them - depend on this set for that.
@@ -21,3 +21,4 @@ label: Academic Programs
 dependencies:
   - fgtclb/academic-programs-program-list
   - fgtclb/academic-programs-program-details
+  - fgtclb/academic-programs-program-finder

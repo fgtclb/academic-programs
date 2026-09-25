@@ -31,6 +31,20 @@ defined('TYPO3') or die;
         ExtensionUtility::PLUGIN_TYPE_CONTENT_ELEMENT,
     );
 
+    // Not cacheable for the same reason as the list: the options depend on program pages
+    // elsewhere in the tree, and no cache tag ties the page of the finder to them.
+    ExtensionUtility::configurePlugin(
+        'AcademicPrograms',
+        'ProgramFinder',
+        [
+            ProgramController::class => 'finder',
+        ],
+        [
+            ProgramController::class => 'finder',
+        ],
+        ExtensionUtility::PLUGIN_TYPE_CONTENT_ELEMENT,
+    );
+
     // The list actions are not cacheable, so the cached page around them never depends on
     // the demand. Kept out of the cache hash, every filter URL of a list shares that one page
     // cache entry, rather than the redirect of a filter submission signing one entry per

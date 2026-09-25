@@ -33,6 +33,10 @@ final class StaticRegistrationTest extends AbstractAcademicProgramsTestCase
             'EXT:academic_programs/Configuration/TypoScript/ProgramDetails',
             'Academic Programs: Program Details (academic_programs)',
         ];
+        yield 'program finder' => [
+            'EXT:academic_programs/Configuration/TypoScript/ProgramFinder',
+            'Academic Programs: Program Finder (academic_programs)',
+        ];
         yield 'all components' => [
             'EXT:academic_programs/Configuration/TypoScript/Full',
             'Academic Programs: All components (academic_programs)',
@@ -118,6 +122,10 @@ final class StaticRegistrationTest extends AbstractAcademicProgramsTestCase
         yield 'program details' => [
             'EXT:academic_programs/Configuration/TSconfig/ProgramDetails/page.tsconfig',
             'Academic Programs: Program Details (academic_programs)',
+        ];
+        yield 'program finder' => [
+            'EXT:academic_programs/Configuration/TSconfig/ProgramFinder/page.tsconfig',
+            'Academic Programs: Program Finder (academic_programs)',
         ];
         yield 'all components' => [
             'EXT:academic_programs/Configuration/TSconfig/Full/page.tsconfig',

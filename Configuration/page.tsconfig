@@ -22,3 +22,4 @@
 # win over it.
 TCEFORM.tt_content.CType.removeItems := addToList(academicprograms_programlist)
 TCEFORM.tt_content.CType.removeItems := addToList(academicprograms_programdetails)
+TCEFORM.tt_content.CType.removeItems := addToList(academicprograms_programfinder)

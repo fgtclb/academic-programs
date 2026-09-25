@@ -1,4 +1,4 @@
-# The program list content element.
+# The program finder content element.
 #
 # "typoscript" points at the folder that "Configuration/TCA/Overrides/sys_template.php"
 # registers as a static template, and "pagets" at the file that
@@ -9,9 +9,9 @@
 # "Configuration/TypoScript": every content element of this extension is driven
 # by the one plugin namespace "plugin.tx_academicprograms", and that block is
 # shipped once instead of once per component.
-name: fgtclb/academic-programs-program-list
-label: 'Academic Programs: Program List'
+name: fgtclb/academic-programs-program-finder
+label: 'Academic Programs: Program Finder'
 dependencies:
   - fgtclb/academic-base-ctype-group
-typoscript: 'EXT:academic_programs/Configuration/TypoScript/ProgramList/'
-pagets: 'EXT:academic_programs/Configuration/TSconfig/ProgramList/page.tsconfig'
+typoscript: 'EXT:academic_programs/Configuration/TypoScript/ProgramFinder/'
+pagets: 'EXT:academic_programs/Configuration/TSconfig/ProgramFinder/page.tsconfig'

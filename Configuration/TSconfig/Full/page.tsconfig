@@ -5,3 +5,4 @@
 # through a site set.
 @import 'EXT:academic_programs/Configuration/TSconfig/ProgramList/page.tsconfig'
 @import 'EXT:academic_programs/Configuration/TSconfig/ProgramDetails/page.tsconfig'
+@import 'EXT:academic_programs/Configuration/TSconfig/ProgramFinder/page.tsconfig'

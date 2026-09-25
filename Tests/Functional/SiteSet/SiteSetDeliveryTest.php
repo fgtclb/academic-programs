@@ -26,7 +26,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  * the integrator expects - which is the whole reason this restructuring exists.
  *
  * This extension adds two failure modes the reference implementation does not have. Its
- * two content elements share one `plugin.tx_academicprograms` block, so a component
+ * content elements share one `plugin.tx_academicprograms` block, so a component
  * folder holds nothing but an `include_static_file.txt` naming the shared folder; that
  * file is comma separated and is read by the very same code path for a set as for a
  * `sys_template` record, so a component set that delivers nothing at all is a plausible
@@ -87,6 +87,12 @@ final class SiteSetDeliveryTest extends AbstractAcademicProgramsTestCase
             'academicprograms_programdetails',
             'EXT:academic_programs/Configuration/TypoScript/ProgramDetails/',
             'EXT:academic_programs/Configuration/TSconfig/ProgramDetails/page.tsconfig',
+        ];
+        yield 'program finder' => [
+            'fgtclb/academic-programs-program-finder',
+            'academicprograms_programfinder',
+            'EXT:academic_programs/Configuration/TypoScript/ProgramFinder/',
+            'EXT:academic_programs/Configuration/TSconfig/ProgramFinder/page.tsconfig',
         ];
     }
 
@@ -315,7 +321,7 @@ final class SiteSetDeliveryTest extends AbstractAcademicProgramsTestCase
     /**
      * A component set re-enables its own content element and nothing else. Without this
      * the whole per-component split is decoration: one page TSconfig file that re-enabled
-     * both would pass every other assertion here.
+     * all of them would pass every other assertion here.
      */
     #[Test]
     #[DataProvider('componentDataProvider')]
@@ -388,7 +394,7 @@ final class SiteSetDeliveryTest extends AbstractAcademicProgramsTestCase
     }
 
     /**
-     * The settings belong to the page type and to both content elements, so they are
+     * The settings belong to the page type and to every content element, so they are
      * declared once, with the aggregate. The defaults asserted here are the values
      * `constants.typoscript` assigns for the same paths - kept equal by hand, so that a
      * site using both delivery mechanisms does not have its configuration reset by the

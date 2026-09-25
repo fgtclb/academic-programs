@@ -33,11 +33,11 @@ plugin.tx_academicprograms {
 
   # The category filters of the program list: comma-separated category type
   # identifiers of the group "programs", in the order the filter form offers them.
-  # The field "Filter types" of a list element overrides it for that element.
-  # Declared for site sets in "Configuration/Sets/Full/settings.definitions.yaml"
-  # with the same default.
+  # The program finder offers the same selects. The field "Filter types" of a list
+  # or finder element overrides it for that element. Declared for site sets in
+  # "Configuration/Sets/Full/settings.definitions.yaml" with the same default.
   filter {
-    # cat=plugin.tx_academicprograms/filter; type=string; label=Filter types of the program list: empty offers every category type with categories
+    # cat=plugin.tx_academicprograms/filter; type=string; label=Filter types of the program list and the program finder: empty offers every category type with categories, and the degree and the topic in the finder
     categoryTypes =
   }
 }

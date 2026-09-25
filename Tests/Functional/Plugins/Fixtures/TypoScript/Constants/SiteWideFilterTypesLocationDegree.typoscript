@@ -1,0 +1,2 @@
+# The site-wide filter types of the program list and the finder: location, then degree.
+plugin.tx_academicprograms.filter.categoryTypes = location,degree

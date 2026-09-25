@@ -69,6 +69,13 @@
         <target>Alle Optionen</target>
       </trans-unit>
 
+      <!-- Program finder -->
+
+      <trans-unit id="finder.submit">
+        <source>Show programs</source>
+        <target>Programme anzeigen</target>
+      </trans-unit>
+
       <!-- Sorting direction options -->
 
       <trans-unit id="sorting.direction.label">

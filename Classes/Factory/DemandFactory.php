@@ -35,11 +35,7 @@ class DemandFactory
 
         // Initialise demand from settings if there is no demand from form
         if ($demandFromForm === null) {
-            if (isset($settings['sorting'])) {
-                [$sortingField, $sortingDirection] = GeneralUtility::trimExplode(' ', $settings['sorting']);
-                $demand->setSortingField($sortingField);
-                $demand->setSortingDirection($sortingDirection);
-            }
+            $this->applySortingFromSettings($demand, $settings);
 
             if (isset($settings['categories'])
                 && (int)$settings['categories'] > 0
@@ -47,16 +43,20 @@ class DemandFactory
                 $categoryCollection = $this->categoryRepository->getByDatabaseFields('programs', (int)$contentElementData['uid']);
             }
         } else {
-            // Either use combined sorting or separate sorting field and direction
+            // Either use combined sorting or separate sorting field and direction. A demand
+            // without any sorting - the filter form of a list whose sorting select is hidden,
+            // or the program finder - keeps the sorting of the element.
             if (isset($demandFromForm['sorting'])) {
                 $demand->setSorting($demandFromForm['sorting']);
-            } else {
+            } elseif (isset($demandFromForm['sortingField']) || isset($demandFromForm['sortingDirection'])) {
                 if (isset($demandFromForm['sortingField'])) {
                     $demand->setSortingField($demandFromForm['sortingField']);
                 }
                 if (isset($demandFromForm['sortingDirection'])) {
                     $demand->setSortingDirection($demandFromForm['sortingDirection']);
                 }
+            } else {
+                $this->applySortingFromSettings($demand, $settings);
             }
 
             if (isset($demandFromForm['filterCollection'])) {
@@ -101,6 +101,24 @@ class DemandFactory
         }
 
         return $demand;
+    }
+
+    /**
+     * @param array<string, mixed> $settings
+     */
+    private function applySortingFromSettings(ProgramDemand $demand, array $settings): void
+    {
+        $sorting = $settings['sorting'] ?? null;
+        if (!is_string($sorting)) {
+            return;
+        }
+        // A field and a direction, as the FlexForm stores them. Anything else keeps the
+        // default of the demand rather than raising "Undefined array key".
+        $parts = GeneralUtility::trimExplode(' ', $sorting, true);
+        if (count($parts) === 2) {
+            $demand->setSortingField($parts[0]);
+            $demand->setSortingDirection($parts[1]);
+        }
     }
 
     /**

@@ -28,6 +28,12 @@ defined('TYPO3') or die;
 
     ExtensionManagementUtility::addStaticFile(
         'academic_programs',
+        'Configuration/TypoScript/ProgramFinder',
+        'Academic Programs: Program Finder',
+    );
+
+    ExtensionManagementUtility::addStaticFile(
+        'academic_programs',
         'Configuration/TypoScript/Full',
         'Academic Programs: All components',
     );

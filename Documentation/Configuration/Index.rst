@@ -19,10 +19,10 @@ Pick one of them per site and stay with it — see
 What the sets contain
 =====================
 
-This extension ships two content elements, so it ships two component sets and
-one aggregate set that depends on both.
+This extension ships three content elements, so it ships three component sets
+and one aggregate set that depends on all of them.
 
-Both content elements are driven by one Extbase plugin, so they share one
+The content elements are Extbase plugins of one extension, so they share one
 TypoScript block, :typoscript:`plugin.tx_academicprograms`. That block is
 shipped once, in :file:`Configuration/TypoScript/`, and every component includes
 it. Which component sets a site names therefore decides which content elements
@@ -37,6 +37,9 @@ the backend offers, not how much TypoScript is loaded.
         -   The :guilabel:`Program List` content element.
     *   -   `fgtclb/academic-programs-program-details`
         -   The :guilabel:`Program Details` content element.
+    *   -   `fgtclb/academic-programs-program-finder`
+        -   The :guilabel:`Program Finder` content element, see
+            :ref:`program-finder`.
     *   -   `fgtclb/academic-programs`
         -   Everything above. This is the set to use unless you deliberately
             want a subset, and it is the name this extension published before
@@ -52,7 +55,7 @@ academic extensions sort their elements into.
 The content elements are hidden by default
 ==========================================
 
-:guilabel:`EXT:academic_programs` hides both of its content elements for the
+:guilabel:`EXT:academic_programs` hides its content elements for the
 whole installation and brings them back per component. Whichever of the two
 mechanisms below you use, it is what makes an element selectable in the backend
 again — without one of them the content element is not offered, and existing
@@ -358,7 +361,7 @@ in two places:
     *   -   Where
         -   Applies to
     *   -   Field :guilabel:`Filter types` of the :guilabel:`Program List`
-            content element, tab :guilabel:`Filter`
+            content element, tab :guilabel:`Configuration`
         -   That element. The editor picks the types and orders them.
     *   -   Site setting / constant
             :typoscript:`plugin.tx_academicprograms.filter.categoryTypes`,
@@ -412,10 +415,88 @@ pass :html:`filterTypes` on in a template that renders the partial. A project th
 overrides the partial itself and still loops
 :html:`{categories.allCategoriesByType}` keeps its own list as well.
 
+The :guilabel:`Program Finder` reads the same setting when its own field is
+empty, see :ref:`program-finder`.
+
 ..  versionadded:: 3.0
 
     Up to 2.x the form offered every type with a category, and a different
     set or order needed an override of the partial.
+
+..  _program-finder:
+
+The program finder
+==================
+
+The :guilabel:`Program Finder` content element is a compact entry into a
+program list, for a home page hero for example: a few selects and a button that
+open the list page with the selection applied.
+
+..  code-block:: text
+    :caption: What the finder renders, unstyled
+
+    Degree   [ Bachelor of Science v ]   Topic [ All options v ]   [ Show programs ]
+
+It is enabled by the set `fgtclb/academic-programs-program-finder`, which the
+aggregate set includes, or by its static template and page TSconfig of the same
+name. Its settings, tab :guilabel:`Configuration`:
+
+..  list-table::
+    :header-rows: 1
+
+    *   -   Field
+        -   Meaning
+    *   -   :guilabel:`Program list page`
+        -   Required. The page whose :guilabel:`Program List` the finder opens.
+    *   -   :guilabel:`Filter types`
+        -   One select per chosen category type, in the chosen order, as the
+            field of the same name of the list. Empty: the site setting
+            :typoscript:`plugin.tx_academicprograms.filter.categoryTypes` of
+            :ref:`program-list-filter-types`, and the degree followed by the
+            topic when that is empty as well.
+    *   -   :guilabel:`Preselected categories`
+        -   Selected when the page loads, one per select. Of two categories of
+            one type the one higher in the category tree counts; a category of a
+            type the finder does not offer, and one no program carries, is not
+            preselected.
+
+The options of each select are the categories of its type. A category that no
+program in the storage of the finder carries is offered disabled, as in the
+filter of the list. The storage is the :guilabel:`Startingpoint` and
+:guilabel:`Recursive` of the finder element, and it should be the storage of
+the list the finder targets — the finder cannot read the storage of another
+element, and a finder pointing elsewhere offers categories the list does not
+show, or disables ones it does. An empty :guilabel:`Startingpoint` means every
+program page of the installation, of every site, for the finder as for the
+list.
+
+Submitting the form posts the selection to the list plugin of the target page,
+in the argument shape of the list's own filter form:
+:html:`tx_academicprograms_programlist[demand][filterCollection][<type>]`, one
+category uid per type. The list answers with a redirect to its filtered URL, so
+the target page opens with the programs that carry every selected category, and
+with the selection shown in its own filter, unless that list hides its filter.
+
+The selection of the finder replaces the :guilabel:`Default categories` of the
+target list, as a selection in the list's own filter does. The list keeps its
+:guilabel:`Default sorting`: the finder submits no sorting, and a submission
+without one is sorted the way the element is configured.
+
+A finder renders no form without a target page, with a target page that cannot
+be linked - hidden, deleted or access restricted - and when none of its category
+types has a category; the frame and the header of the element still render.
+The backend does not save a finder without a target page, but a record written
+by an import or an upgrade can lack it, and a page can be hidden later.
+
+The finder renders the template :file:`Program/Finder.html`, uncached like the
+list: which options are disabled depends on program pages elsewhere in the page
+tree, and a cached finder would keep offering what changed there.
+
+..  versionadded:: 3.0
+
+    Up to 2.x a project that wanted a finder registered one itself. See
+    :ref:`breaking-program-finder-registered-upstream` for what such a project
+    removes.
 
 ..  _site-set:
 
@@ -472,6 +553,8 @@ Edit the :sql:`sys_template` record of the site root and add the entry to
         -   The TypoScript of the :guilabel:`Program List` content element.
     *   -   :guilabel:`Academic Programs: Program Details (academic_programs)`
         -   The same for :guilabel:`Program Details`.
+    *   -   :guilabel:`Academic Programs: Program Finder (academic_programs)`
+        -   The same for :guilabel:`Program Finder`.
     *   -   :guilabel:`Academic Programs: All components (academic_programs)`
         -   Every component this extension ships, in one entry.
     *   -   :guilabel:`Academic Programs: Shared plugin settings and page
@@ -500,6 +583,8 @@ Edit the page record of the site root, tab :guilabel:`Resources`, field
             configures its entry in the new content element wizard.
     *   -   :guilabel:`Academic Programs: Program Details (academic_programs)`
         -   The same for :guilabel:`Program Details`.
+    *   -   :guilabel:`Academic Programs: Program Finder (academic_programs)`
+        -   The same for :guilabel:`Program Finder`.
     *   -   :guilabel:`Academic Programs: All components (academic_programs)`
         -   Every component this extension ships, in one entry.
 
@@ -517,7 +602,7 @@ the second read happens after the site settings and after
 the extension ships a default for back to that default. For this extension that
 is the :typoscript:`plugin.tx_academicprograms` constants block: the three Fluid
 root paths, the page layout and the list page of the program page, the two
-facts lists and the filter types of the program list.
+facts lists and the filter types of the program list and the program finder.
 
 Nothing else is damaged: the :guilabel:`Constants` and :guilabel:`Setup` fields
 of the :sql:`sys_template` record, the page TSconfig of a page and the page

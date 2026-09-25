@@ -99,6 +99,26 @@
         <source>Page sorting, reversed (Result may be unexpected)</source>
         <target>Seitensortierung umgekehrt (Ergebnis kann unerwartet sein)</target>
       </trans-unit>
+      <trans-unit id="flexform.finder.listPid.label">
+        <source>Program list page</source>
+        <target>Seite der Programmliste</target>
+      </trans-unit>
+      <trans-unit id="flexform.finder.listPid.description">
+        <source>The page with the program list the finder opens. Point the list and the finder at the same storage, or the finder offers categories the list does not show.</source>
+        <target>Die Seite mit der Programmliste, die der Finder öffnet. Liste und Finder sollten denselben Datensatzspeicher verwenden, sonst bietet der Finder Kategorien an, die die Liste nicht zeigt.</target>
+      </trans-unit>
+      <trans-unit id="flexform.finder.categoryTypes.description">
+        <source>A select for each chosen type, in this order. A chosen type without categories is left out. Empty: the filter types of the program list for the site, or the degree and the topic.</source>
+        <target>Eine Auswahlliste je gewähltem Typ, in dieser Reihenfolge. Ein gewählter Typ ohne Kategorien entfällt. Leer: die Filtertypen der Programmliste der Website oder Abschluss und Thema.</target>
+      </trans-unit>
+      <trans-unit id="flexform.finder.preselectedCategories.label">
+        <source>Preselected categories</source>
+        <target>Vorausgewählte Kategorien</target>
+      </trans-unit>
+      <trans-unit id="flexform.finder.preselectedCategories.description">
+        <source>Selected when the page loads, one per type: of two categories of one type the one higher in the category tree counts. A category of a type the finder does not offer, or one no program carries, is not preselected.</source>
+        <target>Beim Laden der Seite ausgewählt, eine je Typ: Von zwei Kategorien eines Typs zählt die im Kategoriebaum höhere. Eine Kategorie eines Typs, den der Finder nicht anbietet, oder eine, die kein Programm trägt, wird nicht vorausgewählt.</target>
+      </trans-unit>
 
       <!-- Wizard -->
 
@@ -121,6 +141,14 @@
       <trans-unit id="plugin.program_details.description">
         <source>Displays the details of an academic program</source>
         <target>Zeigt die Details eines akademischen Programms an.</target>
+      </trans-unit>
+      <trans-unit id="plugin.program_finder.title">
+        <source>Program Finder</source>
+        <target>Programmfinder</target>
+      </trans-unit>
+      <trans-unit id="plugin.program_finder.description">
+        <source>A compact form of category selects that opens a program list with the selection applied.</source>
+        <target>Ein kompaktes Formular mit Kategorieauswahlen, das eine Programmliste mit dieser Auswahl gefiltert öffnet.</target>
       </trans-unit>
 
       <!-- Doktype -->

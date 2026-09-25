@@ -1,0 +1,44 @@
+<T3DataStructure>
+    <ROOT>
+        <sheetTitle>Finder</sheetTitle>
+        <type>array</type>
+        <el>
+            <settings.listPid>
+                <label>LLL:EXT:academic_programs/Resources/Private/Language/locallang_be.xlf:flexform.finder.listPid.label</label>
+                <description>LLL:EXT:academic_programs/Resources/Private/Language/locallang_be.xlf:flexform.finder.listPid.description</description>
+                <config>
+                    <type>group</type>
+                    <allowed>pages</allowed>
+                    <size>1</size>
+                    <minitems>1</minitems>
+                    <maxitems>1</maxitems>
+                    <required>1</required>
+                </config>
+            </settings.listPid>
+            <settings.filter.categoryTypes>
+                <label>LLL:EXT:academic_programs/Resources/Private/Language/locallang_be.xlf:flexform.filter.categoryTypes.label</label>
+                <description>LLL:EXT:academic_programs/Resources/Private/Language/locallang_be.xlf:flexform.finder.categoryTypes.description</description>
+                <config>
+                    <type>select</type>
+                    <renderType>selectMultipleSideBySide</renderType>
+                    <itemsProcFunc>FGTCLB\CategoryTypes\Backend\FormEngine\CategoryTypeItemsProcFunc->itemsForGroup</itemsProcFunc>
+                    <itemsProcConfig>
+                        <group>programs</group>
+                    </itemsProcConfig>
+                    <size>6</size>
+                    <maxitems>999</maxitems>
+                </config>
+            </settings.filter.categoryTypes>
+            <settings.preselectedCategories>
+                <label>LLL:EXT:academic_programs/Resources/Private/Language/locallang_be.xlf:flexform.finder.preselectedCategories.label</label>
+                <description>LLL:EXT:academic_programs/Resources/Private/Language/locallang_be.xlf:flexform.finder.preselectedCategories.description</description>
+                <config>
+                    <type>category</type>
+                    <relationship>oneToMany</relationship>
+                    <foreign_table_where>AND {#sys_category}.{#type} != '' AND {#sys_category}.{#sys_language_uid} IN (-1, 0)</foreign_table_where>
+                    <maxitems>99</maxitems>
+                </config>
+            </settings.preselectedCategories>
+        </el>
+    </ROOT>
+</T3DataStructure>
