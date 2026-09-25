@@ -1,0 +1,6 @@
+# An installation that does not use a shipped type of the `programs` group removes
+# it, the way several of the analysed projects remove the ones they have no use for.
+types:
+  - identifier: costs
+    group: programs
+    remove: true

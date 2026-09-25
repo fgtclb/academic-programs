@@ -1,0 +1,27 @@
+{
+    "name": "tests/programs-removed-category-type",
+    "description": "Extension removing a category type from the programs group for tests",
+    "type": "typo3-cms-extension",
+    "license": "GPL-2.0-or-later",
+    "authors": [
+        {
+            "name": "Stefan Bürk",
+            "email": "stefan@buerk.tech",
+            "role": "Maintainer"
+        }
+    ],
+    "require": {
+        "typo3/cms-core": "~13.4.0@dev || ~14.3.6@dev",
+        "fgtclb/category-types": "~3.0.0@dev",
+        "fgtclb/academic-programs": "~3.0.0@dev"
+    },
+    "extra": {
+        "typo3/cms": {
+            "extension-key": "test_programs_removed_category_type",
+            "version": "3.0.0-dev",
+            "Package": {
+                "providesPackages": []
+            }
+        }
+    }
+}

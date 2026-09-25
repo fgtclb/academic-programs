@@ -343,6 +343,80 @@ helper builds them for a program:
     :file:`Program/Categories.html` rendered the categories. See
     :ref:`breaking-program-categories-partial-removed`.
 
+..  _program-list-filter-types:
+
+The filters of the program list
+===============================
+
+The filter form of the :guilabel:`Program List` offers one select per category
+type of the group `programs`. Which types it offers, and in which order, is set
+in two places:
+
+..  list-table::
+    :header-rows: 1
+
+    *   -   Where
+        -   Applies to
+    *   -   Field :guilabel:`Filter types` of the :guilabel:`Program List`
+            content element, tab :guilabel:`Filter`
+        -   That element. The editor picks the types and orders them.
+    *   -   Site setting / constant
+            :typoscript:`plugin.tx_academicprograms.filter.categoryTypes`,
+            default empty
+        -   Every program list of the site whose field is empty. A comma
+            separated list of type identifiers, for example
+            `degree,location,program_type`.
+
+..  code-block:: yaml
+    :caption: config/sites/my-site/settings.yaml
+
+    plugin:
+      tx_academicprograms:
+        filter:
+          categoryTypes: 'degree,location'
+
+The setting is a site setting of the aggregate set `fgtclb/academic-programs`
+and a constant of the same name for a site on the static templates, like the
+settings of :ref:`program-page-layout`. A site that depends on the
+:guilabel:`Program List` component set alone gets the default, but the site
+settings editor does not offer the setting there.
+
+With both empty the form offers every category type of the group that has a
+category, in the order the types are registered in — what it offered before
+the setting existed.
+
+A type is offered only when at least one category of that type exists. A
+category of an offered type that no listed program carries is still offered,
+as a disabled option. A type the project removed from the group later is
+ignored, and so is an identifier that is no type of the group. The field only
+offers the types the group has, including those a project adds in its own
+:file:`Configuration/CategoryTypes.yaml`.
+
+The filter types decide what the form offers, not what the list accepts: a
+link that filters by a category of a type the form does not offer still
+filters the list.
+
+The field is labelled with the title of each type. A type a project adds shows
+the title its :file:`CategoryTypes.yaml` gives it, and the filter select in the
+frontend is labelled with :xml:`sys_category.programs.<identifier>` of this
+extension's :file:`locallang.xlf`, as before.
+
+The partial :file:`Program/DemandCategories.html` renders the selects from the
+variable :html:`{filterTypes.visible}`, the identifiers of the offered types in
+their order. Where that variable does not reach the partial — a project
+controller that overrides :php:`listAction()`, or a template that renders the
+partial with arguments of its own instead of :html:`{_all}` — it offers every
+type with a category, as before, and the field and the setting have no effect.
+To use them, let the overriding action call :php:`parent::listAction()`, and
+pass :html:`filterTypes` on in a template that renders the partial. A project that
+overrides the partial itself and still loops
+:html:`{categories.allCategoriesByType}` keeps its own list as well.
+
+..  versionadded:: 3.0
+
+    Up to 2.x the form offered every type with a category, and a different
+    set or order needed an override of the partial.
+
 ..  _site-set:
 
 Include the site set
@@ -442,8 +516,8 @@ the second read happens after the site settings and after
 :file:`config/sites/<site>/constants.typoscript` — and it resets every constant
 the extension ships a default for back to that default. For this extension that
 is the :typoscript:`plugin.tx_academicprograms` constants block: the three Fluid
-root paths, the page layout and the list page of the program page, and the two
-facts lists.
+root paths, the page layout and the list page of the program page, the two
+facts lists and the filter types of the program list.
 
 Nothing else is damaged: the :guilabel:`Constants` and :guilabel:`Setup` fields
 of the :sql:`sys_template` record, the page TSconfig of a page and the page

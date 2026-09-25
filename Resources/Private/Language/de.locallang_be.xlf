@@ -51,6 +51,14 @@
         <source>If the option is enabled, options for filtering by categories will not be visible in the frontend.</source>
         <target>Wenn diese Option aktiviert ist, werden die Filteroptionen nach Kategorien im Frontend nicht sichtbar sein.</target>
       </trans-unit>
+      <trans-unit id="flexform.filter.categoryTypes.label">
+        <source>Filter types</source>
+        <target>Filtertypen</target>
+      </trans-unit>
+      <trans-unit id="flexform.filter.categoryTypes.description">
+        <source>The category filters the list offers, in this order. A chosen type without categories is left out. Empty: the filter types of the site, or every type with categories.</source>
+        <target>Die Kategorienfilter, die die Liste anbietet, in dieser Reihenfolge. Ein gewählter Typ ohne Kategorien entfällt. Leer: die Filtertypen der Website oder jeder Typ mit Kategorien.</target>
+      </trans-unit>
       <trans-unit id="flexform.hide_sorting.label">
         <source>Hide sorting</source>
         <target>Sortierung ausblenden</target>

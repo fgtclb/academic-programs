@@ -1,0 +1,3 @@
+# A project that overrides the sorting and filter partial with one that renders the filter
+# partial with explicit arguments.
+plugin.tx_academicprograms.view.partialRootPath = EXT:academic_programs/Tests/Functional/Plugins/Fixtures/AcademicProgramsListFilterTypes/Partials/

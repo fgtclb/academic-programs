@@ -7,6 +7,7 @@ namespace FGTCLB\AcademicPrograms\Controller;
 use FGTCLB\AcademicPrograms\Domain\Repository\ProgramRepository;
 use FGTCLB\AcademicPrograms\Factory\DemandFactory;
 use FGTCLB\CategoryTypes\Domain\Repository\CategoryRepository;
+use FGTCLB\CategoryTypes\Filter\FilterTypeResolver;
 use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Core\Http\PropagateResponseException;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
@@ -16,6 +17,8 @@ use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 class ProgramController extends ActionController
 {
     private ExtensionService $filterRedirectExtensionService;
+
+    private FilterTypeResolver $filterTypeResolver;
 
     public function __construct(
         protected ProgramRepository $programRepository,
@@ -40,12 +43,14 @@ class ProgramController extends ActionController
 
         $programs = $this->programRepository->findByDemand($demandObject);
         $categories = $this->categoryRepository->findAllApplicable('programs', ...array_values($programs->toArray()));
+        $filterTypes = $this->filterTypeResolver->resolve($categories, $this->filterCategoryTypes());
 
         $this->view->assignMultiple([
             'programs' => $programs,
             'data' => $contentElementData,
             'demand' => $demandObject,
             'categories' => $categories,
+            'filterTypes' => $filterTypes,
         ]);
 
         return $this->htmlResponse();
@@ -58,6 +63,27 @@ class ProgramController extends ActionController
     final public function injectFilterRedirectExtensionService(ExtensionService $extensionService): void
     {
         $this->filterRedirectExtensionService = $extensionService;
+    }
+
+    /**
+     * Method injection for the same reason as {@see injectFilterRedirectExtensionService()}.
+     */
+    final public function injectFilterTypeResolver(FilterTypeResolver $filterTypeResolver): void
+    {
+        $this->filterTypeResolver = $filterTypeResolver;
+    }
+
+    /**
+     * The filter types of the element, or the site-wide ones when the element leaves its
+     * field empty - Extbase has already dropped an empty field, see
+     * `ignoreFlexFormSettingsIfEmpty` in `setup.typoscript`.
+     */
+    private function filterCategoryTypes(): string
+    {
+        $filter = $this->settings['filter'] ?? null;
+        $categoryTypes = is_array($filter) ? ($filter['categoryTypes'] ?? '') : '';
+
+        return is_string($categoryTypes) ? $categoryTypes : '';
     }
 
     /**

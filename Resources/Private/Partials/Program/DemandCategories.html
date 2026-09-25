@@ -5,30 +5,53 @@
     data-namespace-typo3-fluid="true"
 >
 
-<f:for each="{categories.allCategoriesByType}" as="category" key="categoryKey">
-    <f:if condition="{category}">
-        <div class="col-12 col-md-6 col-lg-4 col-xl-3">
-            <label for="{categoryKey}" class="form-label">
-                {f:translate(key: 'sys_category.programs.{categoryKey}', extensionName: 'academic_programs')}
-            </label>
+<f:comment>
+    `filterTypes.visible` holds the category types to offer, in the order to offer them, and
+    only types with categories: the filter types of the element or the site, or every type
+    of the group with categories when neither sets any.
 
-            <ct:form.filterSelect
-                id="{categoryKey}"
-                property="filterCollection.{categoryKey}"
-                value="{demand.filterCollection.filterCategories.{categoryKey}}"
-                options="{categories.{categoryKey}}"
-                optionValueField="uid"
-                optionLabelField="title"
-                prependOptionLabel="{f:translate(
-                    key: 'sys_category.programs.allOptions',
-                    extensionName: 'academic_programs'
-                )}"
-                prependOptionValue=""
-                additionalAttributes="{'onchange': 'this.form.submit()'}"
-                class="form-select"
-            />
-        </div>
-    </f:if>
-</f:for>
+    Without `filterTypes` - a project controller that overrides `listAction()`, or a
+    template that renders this partial with arguments of its own - every type with
+    categories is offered in the type order of the group, as before the filter types
+    existed.
+</f:comment>
+<f:if condition="{filterTypes}">
+    <f:then>
+        <f:for each="{filterTypes.visible}" as="categoryKey">
+            <f:render section="Filter" arguments="{categoryKey: categoryKey, categories: categories, demand: demand}"/>
+        </f:for>
+    </f:then>
+    <f:else>
+        <f:for each="{categories.allCategoriesByType}" as="category" key="categoryKey">
+            <f:if condition="{category}">
+                <f:render section="Filter" arguments="{categoryKey: categoryKey, categories: categories, demand: demand}"/>
+            </f:if>
+        </f:for>
+    </f:else>
+</f:if>
+
+<f:section name="Filter">
+    <div class="col-12 col-md-6 col-lg-4 col-xl-3">
+        <label for="{categoryKey}" class="form-label">
+            {f:translate(key: 'sys_category.programs.{categoryKey}', extensionName: 'academic_programs')}
+        </label>
+
+        <ct:form.filterSelect
+            id="{categoryKey}"
+            property="filterCollection.{categoryKey}"
+            value="{demand.filterCollection.filterCategories.{categoryKey}}"
+            options="{categories.{categoryKey}}"
+            optionValueField="uid"
+            optionLabelField="title"
+            prependOptionLabel="{f:translate(
+                key: 'sys_category.programs.allOptions',
+                extensionName: 'academic_programs'
+            )}"
+            prependOptionValue=""
+            additionalAttributes="{'onchange': 'this.form.submit()'}"
+            class="form-select"
+        />
+    </div>
+</f:section>
 
 </html>

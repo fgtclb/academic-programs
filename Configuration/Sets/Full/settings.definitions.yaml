@@ -1,4 +1,5 @@
-# Site settings of the program page type and of the facts of a program.
+# Site settings of the program page type, of the facts of a program and of the
+# filters of the program list.
 #
 # Every path below is also assigned in
 # "Configuration/TypoScript/constants.typoscript", and the default has to be the
@@ -40,3 +41,9 @@ settings:
     category: academic.programs
     type: string
     default: 'degree'
+  plugin.tx_academicprograms.filter.categoryTypes:
+    label: 'Program list | Filter types'
+    description: 'The category filters the program list offers, in this order, comma-separated: category type identifiers of the group "programs" (degree, location, program_type, ...). A type without categories is left out. The field "Filter types" of a list element overrides this for the element. Empty: every category type with categories, in the type order of the group.'
+    category: academic.programs
+    type: string
+    default: ''

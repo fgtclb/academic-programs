@@ -1,0 +1,2 @@
+# The site-wide filter types of the program list: only the degree.
+plugin.tx_academicprograms.filter.categoryTypes = degree

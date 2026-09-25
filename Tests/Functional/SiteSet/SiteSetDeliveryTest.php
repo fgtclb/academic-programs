@@ -411,6 +411,7 @@ final class SiteSetDeliveryTest extends AbstractAcademicProgramsTestCase
                 'plugin.tx_academicprograms.page.listPid' => 0,
                 'plugin.tx_academicprograms.facts.fields' => '',
                 'plugin.tx_academicprograms.card.fields' => 'degree',
+                'plugin.tx_academicprograms.filter.categoryTypes' => '',
             ],
             $definitions,
         );

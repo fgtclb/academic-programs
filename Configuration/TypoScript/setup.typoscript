@@ -20,7 +20,15 @@ plugin.tx_academicprograms {
     # "factsFields" of its data processor instead.
     facts.fields = {$plugin.tx_academicprograms.facts.fields}
     card.fields = {$plugin.tx_academicprograms.card.fields}
+    # The filter types of the list, see "constants.typoscript". The field of the same
+    # name in the FlexForm of a list element overrides them.
+    filter.categoryTypes = {$plugin.tx_academicprograms.filter.categoryTypes}
   }
+
+  # An element that leaves the field "Filter types" empty keeps the value above:
+  # Extbase drops an empty FlexForm value of a setting listed here before it merges the
+  # FlexForm over the TypoScript settings.
+  ignoreFlexFormSettingsIfEmpty := addToList(filter.categoryTypes)
 
   view {
     templateRootPaths {

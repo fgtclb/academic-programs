@@ -11,6 +11,20 @@
                     <renderType>checkboxToggle</renderType>
                 </config>
             </settings.hideFilter>
+            <settings.filter.categoryTypes>
+                <label>LLL:EXT:academic_programs/Resources/Private/Language/locallang_be.xlf:flexform.filter.categoryTypes.label</label>
+                <description>LLL:EXT:academic_programs/Resources/Private/Language/locallang_be.xlf:flexform.filter.categoryTypes.description</description>
+                <config>
+                    <type>select</type>
+                    <renderType>selectMultipleSideBySide</renderType>
+                    <itemsProcFunc>FGTCLB\CategoryTypes\Backend\FormEngine\CategoryTypeItemsProcFunc->itemsForGroup</itemsProcFunc>
+                    <itemsProcConfig>
+                        <group>programs</group>
+                    </itemsProcConfig>
+                    <size>6</size>
+                    <maxitems>999</maxitems>
+                </config>
+            </settings.filter.categoryTypes>
             <settings.hideSorting>
                 <label>LLL:EXT:academic_programs/Resources/Private/Language/locallang_be.xlf:flexform.hide_sorting.label</label>
                 <description>LLL:EXT:academic_programs/Resources/Private/Language/locallang_be.xlf:flexform.hide_sorting.description</description>

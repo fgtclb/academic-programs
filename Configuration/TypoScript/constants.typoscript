@@ -30,4 +30,14 @@ plugin.tx_academicprograms {
     # cat=plugin.tx_academicprograms/facts; type=string; label=Facts of the program card in the list: empty shows the degree
     fields = degree
   }
+
+  # The category filters of the program list: comma-separated category type
+  # identifiers of the group "programs", in the order the filter form offers them.
+  # The field "Filter types" of a list element overrides it for that element.
+  # Declared for site sets in "Configuration/Sets/Full/settings.definitions.yaml"
+  # with the same default.
+  filter {
+    # cat=plugin.tx_academicprograms/filter; type=string; label=Filter types of the program list: empty offers every category type with categories
+    categoryTypes =
+  }
 }
