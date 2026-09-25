@@ -11,6 +11,11 @@ services:
   FGTCLB\AcademicPrograms\Domain\Repository\ProgramRepository:
     public: true
 
+  # Public, so a page object that names the processor by its class name rather than by
+  # "program-data" gets the service with its constructor argument: TYPO3 resolves a
+  # class name through GeneralUtility::makeInstance(), which only takes public services
+  # from the container.
   FGTCLB\AcademicPrograms\DataProcessing\ProgramDataProcessor:
+    public: true
     tags:
       - {name: 'data.processor', identifier: 'program-data', label: 'Programs Data Processor'}

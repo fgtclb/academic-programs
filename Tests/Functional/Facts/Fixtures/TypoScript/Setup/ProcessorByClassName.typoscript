@@ -1,0 +1,6 @@
+# A project page object that names the data processor of the program page by its class
+# name rather than by its identifier "program-data", as the extension itself does.
+# Included after the TypoScript of the extension, so the option "factsFields" is kept.
+[page && traverse(page, "doktype") == 20]
+  page.10.dataProcessing.100 = FGTCLB\AcademicPrograms\DataProcessing\ProgramDataProcessor
+[END]

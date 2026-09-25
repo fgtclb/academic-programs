@@ -12,7 +12,7 @@ use TYPO3\CMS\Extbase\Domain\Model\FileReference;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
-class Program extends AbstractEntity implements GetCategoryCollectionInterface
+class Program extends AbstractEntity implements GetCategoryCollectionInterface, ProgramFactsSourceInterface
 {
     protected int $doktype = 0;
     protected string $title = '';

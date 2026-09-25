@@ -1,7 +1,7 @@
 <html
     lang="en"
     xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
-    xmlns:core="http://typo3.org/ns/TYPO3/CMS/Core/ViewHelpers"
+    xmlns:ace="http://typo3.org/ns/FGTCLB/AcademicPrograms/ViewHelpers"
     data-namespace-typo3-fluid="true"
 >
 
@@ -20,26 +20,19 @@
             />
         </div>
 
-        <f:if condition="{program.attributes.allCategoriesByType.degree}">
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item">
-                    <core:icon identifier="category_types.programs.degree"/>
-
-                    <b>
-                        {f:translate(
-                            key: 'sys_category.programs.degree',
-                            extensionName: 'academic_programs'
-                        )}:
-                    </b>
-
-                    <span>
-                        <f:for each="{program.attributes.allCategoriesByType.degree}" as="degree" iteration="i">
-                            {degree.title}{f:if(condition: '!{i.isLast}', then: ', ')}
-                        </f:for>
-                    </span>
-                </li>
-            </ul>
-        </f:if>
+        <f:comment>
+            The facts of the card, from the setting "plugin.tx_academicprograms.card.fields":
+            the degree unless the setting names others.
+        </f:comment>
+        <f:variable name="cardFacts" value="{ace:program.facts(program: program, fields: settings.card.fields)}" />
+        <f:render
+            partial="Program/Facts"
+            arguments="{
+                facts: cardFacts,
+                listClass: 'list-group list-group-flush',
+                itemClass: 'list-group-item'
+            }"
+        />
     </div>
 
     <f:for each="{program.media}" as="image" iteration="i">

@@ -4,9 +4,15 @@
     data-namespace-typo3-fluid="true"
 >
 
+<f:comment>
+    The facts of the program the content element sits on, from the setting
+    "plugin.tx_academicprograms.facts.fields": every category type unless the setting
+    names others.
+</f:comment>
+
 <div class="academic-programs-detail-categories">
     <f:render
-        partial="Program/Categories"
+        partial="Program/Facts"
         arguments="{_all}"
     />
 </div>

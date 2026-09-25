@@ -1,0 +1,38 @@
+<html
+    lang="en"
+    xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+    xmlns:core="http://typo3.org/ns/TYPO3/CMS/Core/ViewHelpers"
+    data-namespace-typo3-fluid="true"
+>
+
+<f:comment>
+    One fact of a program. A category type fact lists the titles of its categories, a
+    program field fact renders the value of its field raw: the text fields are rich text
+    edited in the backend, as the program page rendered them before.
+
+    "fact.identifier" is the identifier from the field list - a category type, or
+    "creditPoints", "jobProfile", "performanceScope", "prerequisites".
+</f:comment>
+
+<li class="academic-programs-facts__item academic-programs-facts__item--{fact.identifier}{f:if(condition: itemClass, then: ' {itemClass}')}">
+    <f:if condition="{fact.iconIdentifier}">
+        <core:icon identifier="{fact.iconIdentifier}" />
+    </f:if>
+
+    <b>{f:translate(key: fact.labelKey, extensionName: 'academic_programs')}:</b>
+
+    <span>
+        <f:if condition="{fact.isCategoryType}">
+            <f:then>
+                <f:for each="{fact.categories}" as="category" iteration="i">
+                    {category.title}{f:if(condition: '!{i.isLast}', then: ', ')}
+                </f:for>
+            </f:then>
+            <f:else>
+                {fact.value -> f:format.raw()}
+            </f:else>
+        </f:if>
+    </span>
+</li>
+
+</html>

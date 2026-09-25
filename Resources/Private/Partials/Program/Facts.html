@@ -1,0 +1,31 @@
+<html
+    lang="en"
+    xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+    data-namespace-typo3-fluid="true"
+>
+
+<f:comment>
+    The facts of a program, in the order given: the program page, the details content
+    element and the program card render them through this partial. "facts" is the list of
+    ProgramFact objects built from the field list of the place, "listClass" and
+    "itemClass" are classes added to the list and to each of its items.
+
+    One fact is one "Program/Facts/Item", so a project that changes one row overrides that
+    partial rather than this one.
+</f:comment>
+
+<f:if condition="{facts}">
+    <ul class="academic-programs-facts{f:if(condition: listClass, then: ' {listClass}')}">
+        <f:for each="{facts}" as="fact">
+            <f:render
+                partial="Program/Facts/Item"
+                arguments="{
+                    fact: fact,
+                    itemClass: itemClass
+                }"
+            />
+        </f:for>
+    </ul>
+</f:if>
+
+</html>

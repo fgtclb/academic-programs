@@ -113,7 +113,10 @@
       }
 
       dataProcessing {
+        // "program" and "facts". The facts take their field list through the processor,
+        // because a PAGEVIEW page object ignores "settings" of its own.
         100 = program-data
+        100.factsFields = {$plugin.tx_academicprograms.facts.fields}
         110 = files
         110 {
           references.fieldName = media

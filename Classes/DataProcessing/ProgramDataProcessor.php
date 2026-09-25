@@ -1,17 +1,30 @@
 <?php
 
+declare(strict_types=1);
+
 namespace FGTCLB\AcademicPrograms\DataProcessing;
 
+use FGTCLB\AcademicPrograms\Enumeration\ProgramFactsPlace;
 use FGTCLB\AcademicPrograms\Factory\ProgramDataFactory;
+use FGTCLB\AcademicPrograms\Service\ProgramFactsBuilder;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 use TYPO3\CMS\Frontend\ContentObject\DataProcessorInterface;
 
 /**
  * Processor class for program page types
+ *
+ * Adds the variables `program` and `facts`. `facts` are the facts of the program page, in
+ * the order of the option `factsFields` - a comma-separated field list, see
+ * {@see ProgramFactsBuilder}. The option takes the field list through the processor rather
+ * than through `settings`, which a PAGEVIEW page object does not read.
  */
 class ProgramDataProcessor implements DataProcessorInterface
 {
+    public function __construct(
+        private readonly ProgramFactsBuilder $programFactsBuilder,
+    ) {}
+
     /**
      * Make program data accessable in Fluid
      *
@@ -35,7 +48,13 @@ class ProgramDataProcessor implements DataProcessorInterface
         }
         if ($pageData !== []) {
             $programDataFactory = GeneralUtility::makeInstance(ProgramDataFactory::class);
-            $processedData['program'] = $programDataFactory->get($pageData);
+            $program = $programDataFactory->get($pageData);
+            $processedData['program'] = $program;
+            $processedData['facts'] = $this->programFactsBuilder->build(
+                $program,
+                (string)$cObj->stdWrapValue('factsFields', $processorConfiguration),
+                ProgramFactsPlace::Page,
+            );
         }
         return $processedData;
     }

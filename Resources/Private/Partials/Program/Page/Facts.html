@@ -5,32 +5,14 @@
 >
 
 <f:comment>
-    The facts of the program page: its categories and the fixed list of program fields.
+    The facts of the program page, as the data processor built them from the setting
+    "plugin.tx_academicprograms.facts.fields": every category type followed by the four
+    program fields unless the setting names others.
 </f:comment>
 
 <f:render
-    partial="Program/Categories"
+    partial="Program/Facts"
     arguments="{_all}"
 />
-
-<ul>
-    <f:for
-        each="{
-            0: 'creditPoints',
-            1: 'jobProfile',
-            2: 'performanceScope',
-            3: 'prerequisites'
-        }"
-        as="attribute"
-    >
-        <f:if condition="{program.{attribute}}">
-            <li>
-                <b>{f:translate(key: 'program.{attribute}', extensionName: 'academic_programs')}</b>
-
-                <span>{program.{attribute} -> f:format.raw()}</span>
-            </li>
-        </f:if>
-    </f:for>
-</ul>
 
 </html>

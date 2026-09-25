@@ -16,4 +16,18 @@ plugin.tx_academicprograms {
     # cat=plugin.tx_academicprograms/page; type=int+; label=Program list page: the page the header of a program page links back to, 0 for no link
     listPid = 0
   }
+
+  # The facts of a program: comma-separated category type identifiers of the group
+  # "programs" and the program fields creditPoints, jobProfile, performanceScope and
+  # prerequisites, in display order. Declared for site sets in
+  # "Configuration/Sets/Full/settings.definitions.yaml" with the same defaults.
+  facts {
+    # cat=plugin.tx_academicprograms/facts; type=string; label=Facts of the program page and the details element: empty shows every category type, and on the program page the four program fields after them
+    fields =
+  }
+
+  card {
+    # cat=plugin.tx_academicprograms/facts; type=string; label=Facts of the program card in the list: empty shows the degree
+    fields = degree
+  }
 }

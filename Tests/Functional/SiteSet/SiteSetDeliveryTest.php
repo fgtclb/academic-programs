@@ -387,6 +387,45 @@ final class SiteSetDeliveryTest extends AbstractAcademicProgramsTestCase
         $this->assertSetCarriesNoPayload($aggregate);
     }
 
+    /**
+     * The settings belong to the page type and to both content elements, so they are
+     * declared once, with the aggregate. The defaults asserted here are the values
+     * `constants.typoscript` assigns for the same paths - kept equal by hand, so that a
+     * site using both delivery mechanisms does not have its configuration reset by the
+     * second parse; this test reads the declarations only.
+     */
+    #[Test]
+    public function settingsAreDeclaredWithTheAggregateSetOnly(): void
+    {
+        $aggregate = $this->setRegistry()->getSet(self::AGGREGATE_SET);
+        $this->assertNotNull($aggregate);
+
+        $definitions = [];
+        foreach ($aggregate->settingsDefinitions as $definition) {
+            $definitions[$definition->key] = $definition->default;
+        }
+
+        $this->assertSame(
+            [
+                'plugin.tx_academicprograms.page.layout' => 'Default',
+                'plugin.tx_academicprograms.page.listPid' => 0,
+                'plugin.tx_academicprograms.facts.fields' => '',
+                'plugin.tx_academicprograms.card.fields' => 'degree',
+            ],
+            $definitions,
+        );
+
+        foreach (self::componentDataProvider() as $component) {
+            $set = $this->setRegistry()->getSet($component[0]);
+            $this->assertNotNull($set);
+            $this->assertSame(
+                [],
+                $set->settingsDefinitions,
+                sprintf('The set "%s" declares settings of its own.', $component[0]),
+            );
+        }
+    }
+
     private function setRegistry(): SetRegistry
     {
         $setRegistry = $this->get(SetRegistry::class);

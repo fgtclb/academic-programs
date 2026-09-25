@@ -1,0 +1,22 @@
+Font Awesome Free icons
+=======================
+
+The SVG files listed below are icons of Font Awesome Free 7.3.1
+by Fonticons, Inc. - https://fontawesome.com
+
+Copyright 2026 Fonticons, Inc.
+
+The icons are licensed under the Creative Commons Attribution 4.0
+International license (CC BY 4.0):
+https://creativecommons.org/licenses/by/4.0/
+The license text includes the disclaimer of warranties that applies to them.
+Font Awesome Free license overview: https://fontawesome.com/license/free
+
+Modifications: each file is the solid style from the fixed-width set
+(`svgs-full/solid/`, viewBox 0 0 640 640). The `fill="currentColor"` of the
+path was moved to the root element, `width="1em" height="1em"` was added to
+it, and the file was renamed after its purpose in this extension. The drawing
+is unchanged and the original attribution comment is kept inside every file.
+
+File (below Resources/Public/Icons/)  Font Awesome icon (solid)
+  info/credit-points.svg                   certificate

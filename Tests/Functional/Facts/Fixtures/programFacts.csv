@@ -1,0 +1,29 @@
+"pages",
+,"uid","pid","doktype","deleted","hidden","sys_language_uid","l10n_parent","l18n_cfg","slug","title","backend_layout","credit_points","job_profile","performance_scope","prerequisites","categories"
+,1,0,1,0,0,0,0,0,"/","Site Root","",0,"","","",0
+,2,1,1,0,0,0,0,0,"/programs","Programs","",0,"","","",0
+,5,1,254,0,0,0,0,0,"/categories","Categories","",0,"","","",0
+,10,1,20,0,0,0,0,0,"/applied-physics","Applied Physics","pagets__AcademicProgram",180,"<p>Research and development in industry.</p>","<p>Six semesters of lectures and laboratory work.</p>","<p>General qualification for university entrance.</p>",3
+,11,1,20,0,0,0,0,0,"/chemistry","Chemistry","pagets__AcademicProgram",0,"","","",1
+,12,1,20,0,0,0,0,0,"/applied-physics-details","Applied Physics Details","pagets__AcademicProgram",180,"<p>Research and development in industry.</p>","<p>Six semesters of lectures and laboratory work.</p>","<p>General qualification for university entrance.</p>",3
+"sys_category",
+,"uid","pid","deleted","hidden","parent","type","title","sys_language_uid","l10n_parent"
+,1,5,0,0,0,"degree","Bachelor of Science",0,0
+,2,5,0,0,0,"standard_period","6 semesters",0,0
+,3,5,0,0,0,"location","Campus A",0,0
+,4,5,0,0,0,"topic","Optics & Photonics",0,0
+"sys_category_record_mm",
+,"uid_local","uid_foreign","tablenames","fieldname","sorting","sorting_foreign"
+,1,10,"pages","categories",0,1
+,2,10,"pages","categories",0,2
+,3,10,"pages","categories",0,3
+,4,10,"pages","categories",0,4
+,1,11,"pages","categories",0,1
+,1,12,"pages","categories",0,1
+,2,12,"pages","categories",0,2
+,3,12,"pages","categories",0,3
+,4,12,"pages","categories",0,4
+"tt_content",
+,"uid","pid","deleted","hidden","sys_language_uid","l18n_parent","colPos","sorting","CType","header","pages","recursive","pi_flexform"
+,1,12,0,0,0,0,0,256,"academicprograms_programdetails","","",0,""
+,2,2,0,0,0,0,0,256,"academicprograms_programlist","","",0,"<?xml version=""1.0"" encoding=""utf-8"" standalone=""yes"" ?><T3FlexForms><data><sheet index=""sDEF""><language index=""lDEF""><field index=""settings.hideFilter""><value index=""vDEF"">1</value></field><field index=""settings.hideSorting""><value index=""vDEF"">1</value></field><field index=""settings.sorting""><value index=""vDEF"">title asc</value></field><field index=""settings.categories""><value index=""vDEF"">0</value></field><field index=""settings.showHiddenRecords""><value index=""vDEF"">0</value></field></language></sheet></data></T3FlexForms>"

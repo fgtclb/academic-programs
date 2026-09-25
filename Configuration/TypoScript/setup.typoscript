@@ -14,6 +14,14 @@
 @import 'EXT:academic_programs/Configuration/TypoScript/Page/'
 
 plugin.tx_academicprograms {
+  settings {
+    # The facts of the details content element and of the program card, see
+    # "constants.typoscript". The program page reads its facts through the option
+    # "factsFields" of its data processor instead.
+    facts.fields = {$plugin.tx_academicprograms.facts.fields}
+    card.fields = {$plugin.tx_academicprograms.card.fields}
+  }
+
   view {
     templateRootPaths {
       0 = EXT:academic_programs/Resources/Private/Templates/

@@ -17,4 +17,15 @@ return [
         'provider' => CurrentColorSvgIconProvider::class,
         'source' => 'EXT:academic_programs/Resources/Public/Icons/Extension.svg',
     ],
+    /*
+     * The icon of the credit points fact of a program, which is a program field rather than
+     * a category type and therefore has no icon from Configuration/CategoryTypes.yaml. Font
+     * Awesome Free solid, named `tx-<extkey>-<group>-<name>` with the file at
+     * `Icons/<group>/<name>.svg`. Licence and origin:
+     * Resources/Public/Icons/LICENSE-font-awesome.txt.
+     */
+    'tx-academicprograms-info-credit-points' => [
+        'provider' => CurrentColorSvgIconProvider::class,
+        'source' => 'EXT:academic_programs/Resources/Public/Icons/info/credit-points.svg',
+    ],
 ];

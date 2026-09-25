@@ -1,0 +1,9 @@
+# A project that still overrides the partial "Program/Categories" at the key 75, for the
+# page object of the program page and for the plugins. Included after the TypoScript of
+# the extension. FLUIDTEMPLATE reads "partialRootPaths", PAGEVIEW derives "Partials/"
+# from "paths", and each ignores the key it does not read.
+page.10 {
+  partialRootPaths.75 = EXT:academic_programs/Tests/Functional/Facts/Fixtures/CategoriesOverride/Partials/
+  paths.75 = EXT:academic_programs/Tests/Functional/Facts/Fixtures/CategoriesOverride/
+}
+plugin.tx_academicprograms.view.partialRootPaths.75 = EXT:academic_programs/Tests/Functional/Facts/Fixtures/CategoriesOverride/Partials/

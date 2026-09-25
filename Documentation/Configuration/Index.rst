@@ -194,15 +194,15 @@ on its own:
         -   The first image of the page, through the shared image partial of
             :guilabel:`EXT:academic_base`.
     *   -   :file:`Program/Page/Facts.html`
-        -   The categories and the program fields credit points, job profile,
-            performance scope and prerequisites.
+        -   The facts of the program, through :file:`Program/Facts.html` - see
+            :ref:`program-facts`.
     *   -   :file:`Program/Page/Content.html`
         -   The content elements, the variable :typoscript:`programContent`
             described above.
 
 Every partial receives all variables of the page: :html:`{program}`,
-:html:`{images}`, :html:`{programContent}`, :html:`{programListPid}` and those
-of the site package's page object.
+:html:`{facts}`, :html:`{images}`, :html:`{programContent}`,
+:html:`{programListPid}` and those of the site package's page object.
 
 The templates and partials of the page type are registered at the key `50` of
 the page object. Register a directory of your own with a higher key, and its
@@ -228,6 +228,120 @@ renders as before.
     Up to 2.x the page template declared no layout and rendered every part
     inline, and its paths used the key `100`. See
     :ref:`breaking-program-page-renders-inside-the-site-layout`.
+
+..  _program-facts:
+
+The facts of a program
+======================
+
+The program page, the :guilabel:`Program Details` content element and each
+card of the :guilabel:`Program List` show facts about a program: its
+categories per category type, and the program fields credit points, job
+profile, performance scope and prerequisites. Two settings decide which facts
+a place shows and in which order:
+
+..  list-table::
+    :header-rows: 1
+
+    *   -   Site setting / constant
+        -   Default
+        -   Facts of
+    *   -   :typoscript:`plugin.tx_academicprograms.facts.fields`
+        -   empty
+        -   the program page and the :guilabel:`Program Details` content
+            element
+    *   -   :typoscript:`plugin.tx_academicprograms.card.fields`
+        -   `degree`
+        -   each card of the :guilabel:`Program List`
+
+Both are site settings of the aggregate set `fgtclb/academic-programs` and
+constants of the same name for a site on the static templates, like the
+settings of :ref:`program-page-layout`.
+
+Each is a comma separated list, shown in its order. An item is
+
+*   the identifier of a category type of the group `programs`:
+    `admission_restriction`, `application_period`, `begin_program`, `costs`,
+    `paying`, `degree`, `department`, `standard_period`, `location`,
+    `program_type`, `teaching_language`, `topic`, or a type another extension
+    registers for the group - its label is looked up as
+    `sys_category.programs.<identifier>` in :file:`locallang.xlf` of this
+    extension, so such a type needs that label added, for example through
+    :php:`$GLOBALS['TYPO3_CONF_VARS']['SYS']['locallangXMLOverride']`, or its
+    row shows no label;
+*   or one of the program fields `creditPoints`, `jobProfile`,
+    `performanceScope` and `prerequisites`.
+
+..  code-block:: yaml
+    :caption: config/sites/my-site/settings.yaml
+
+    plugin:
+      tx_academicprograms:
+        facts:
+          fields: 'degree,creditPoints,standard_period,location'
+        card:
+          fields: 'degree,standard_period'
+
+An item that is neither is skipped, and so is a repeated one. A fact the
+program has no value for is not shown: a category type without a category, an
+empty text field, credit points of `0`.
+
+An empty list shows what the place showed before the settings existed:
+
+*   the program page every category type, followed by credit points, job
+    profile, performance scope and prerequisites;
+*   the details content element every category type;
+*   the card the degree.
+
+"Every category type" follows the order of the category type configuration of
+the group, the order every other output of category types follows. A list
+that names category types shows them in the order it names them.
+
+The facts are rendered by two partials, which a project can override like any
+other partial of this extension:
+
+..  list-table::
+    :header-rows: 1
+
+    *   -   Partial
+        -   Renders
+    *   -   :file:`Program/Facts.html`
+        -   The list, :html:`<ul class="academic-programs-facts">`, from
+            :html:`{facts}`. The card hands in the additional classes
+            :html:`listClass` and :html:`itemClass`.
+    *   -   :file:`Program/Facts/Item.html`
+        -   One fact, :html:`{fact}`: an icon if it has one, the label and the
+            categories or the value. A program field value is the rich text of
+            the field, rendered as it is stored.
+
+:html:`{fact}` carries :html:`identifier`, :html:`labelKey` (a key of
+:file:`locallang.xlf` of this extension), :html:`iconIdentifier` (empty for a
+fact without an icon), :html:`isCategoryType`, :html:`categories` for a
+category type and :html:`value` for a program field. The icon of the credit
+points fact is `tx-academicprograms-info-credit-points`; the category types
+use their own icons, the other three program fields have none.
+
+A template of your own gets the facts from the variable :html:`{facts}` on the
+program page and in the details content element. Anywhere else, the view
+helper builds them for a program:
+
+..  code-block:: html
+    :caption: EXT:my_sitepackage/Resources/Private/Partials/Program/Item.html
+
+    <html xmlns:ace="http://typo3.org/ns/FGTCLB/AcademicPrograms/ViewHelpers"
+          data-namespace-typo3-fluid="true">
+
+    <f:variable name="cardFacts"
+                value="{ace:program.facts(program: program, fields: settings.card.fields)}" />
+    <f:render partial="Program/Facts" arguments="{facts: cardFacts}" />
+
+    </html>
+
+..  versionchanged:: 3.0
+
+    Up to 2.x the facts were fixed in the templates, and the partial
+    :file:`Program/Categories.html` rendered the categories. See
+    :ref:`breaking-program-categories-partial-removed`.
 
 ..  _site-set:
 
@@ -328,7 +442,8 @@ the second read happens after the site settings and after
 :file:`config/sites/<site>/constants.typoscript` — and it resets every constant
 the extension ships a default for back to that default. For this extension that
 is the :typoscript:`plugin.tx_academicprograms` constants block: the three Fluid
-root paths, the page layout and the list page of the program page.
+root paths, the page layout and the list page of the program page, and the two
+facts lists.
 
 Nothing else is damaged: the :guilabel:`Constants` and :guilabel:`Setup` fields
 of the :sql:`sys_template` record, the page TSconfig of a page and the page

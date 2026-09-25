@@ -1,4 +1,4 @@
-# Site settings of the program page type.
+# Site settings of the program page type and of the facts of a program.
 #
 # Every path below is also assigned in
 # "Configuration/TypoScript/constants.typoscript", and the default has to be the
@@ -28,3 +28,15 @@ settings:
     category: academic.programs
     type: int
     default: 0
+  plugin.tx_academicprograms.facts.fields:
+    label: 'Program facts | Facts of the program page and the details element'
+    description: 'The facts the program page and the program details content element show, in this order, comma-separated: category type identifiers of the group "programs" (degree, standard_period, location, ...) and creditPoints, jobProfile, performanceScope, prerequisites. Empty: every category type, followed by the four program fields on the program page only.'
+    category: academic.programs
+    type: string
+    default: ''
+  plugin.tx_academicprograms.card.fields:
+    label: 'Program facts | Facts of the program card'
+    description: 'The facts each program card of the program list shows, in this order, with the same identifiers as the facts of the program page. Empty shows the degree.'
+    category: academic.programs
+    type: string
+    default: 'degree'

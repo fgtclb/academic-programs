@@ -8,7 +8,7 @@ use FGTCLB\CategoryTypes\Collection\CategoryCollection;
 use FGTCLB\CategoryTypes\Domain\Repository\CategoryRepository;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
-class ProgramData
+class ProgramData implements ProgramFactsSourceInterface
 {
     protected int $pid = 0;
     protected int $uid = 0;
@@ -132,6 +132,11 @@ class ProgramData
     }
 
     public function getCategories(): ?CategoryCollection
+    {
+        return $this->getCategoryCollection();
+    }
+
+    public function getCategoryCollection(): CategoryCollection
     {
         return GeneralUtility::makeInstance(CategoryRepository::class)->findByGroupAndPageId('programs', $this->uid);
     }
