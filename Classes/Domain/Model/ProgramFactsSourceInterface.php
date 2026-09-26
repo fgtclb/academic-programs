@@ -11,6 +11,8 @@ use FGTCLB\CategoryTypes\Collection\CategoryCollection;
  * that are facts of their own. Implemented by the Extbase model of the list and details
  * content elements and by the data object of the program page, so both feed the same
  * {@see \FGTCLB\AcademicPrograms\Service\ProgramFactsBuilder}.
+ *
+ * @api
  */
 interface ProgramFactsSourceInterface
 {
