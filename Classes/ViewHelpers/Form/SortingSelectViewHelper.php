@@ -27,7 +27,7 @@ class SortingSelectViewHelper extends AbstractSelectViewHelper
             ],
             'extensionName' => [
                 'type' => 'string',
-                'defaultValue' => 'academic_programs',
+                'defaultValue' => 'AcademicPrograms',
                 'description' => 'If set, the translation function will use the language labels from the given extension.',
             ],
         ];

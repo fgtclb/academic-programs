@@ -27,19 +27,16 @@ Impact
 
 On TYPO3 v12 and v13, an override of one of these labels under
 :typoscript:`plugin.tx_academic_programs._LOCAL_LANG` no longer reaches the
-filter form. Set it under :typoscript:`plugin.tx_academicprograms._LOCAL_LANG`
-as well:
+filter form. Move it to
+:typoscript:`plugin.tx_academicprograms._LOCAL_LANG`:
 
 ..  code-block:: typoscript
 
     plugin.tx_academicprograms._LOCAL_LANG.default.sys_category.programs.allOptions = All
     plugin.tx_academicprograms._LOCAL_LANG.de.sys_category.programs.allOptions = Alle
 
-Copy an override of a type label, :xml:`sys_category.programs.<type>`, rather
-than move it: the program cards of the list, the program details content element
-and the program page render the same label and still read it from the old path
-on TYPO3 v12 and v13.
-
-Other templates of the extension are not affected by this change.
+The other templates of the extension read their label overrides from the same
+path since :ref:`important-label-overrides-use-the-documented-path`. An override of
+a type label, which they render too, therefore moves as a whole.
 
 ..  index:: Frontend, Fluid, TypoScript, ext:academic_programs
