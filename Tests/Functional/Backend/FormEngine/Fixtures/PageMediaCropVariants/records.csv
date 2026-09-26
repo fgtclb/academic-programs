@@ -1,0 +1,20 @@
+"be_users"
+,"uid","pid","username","password","admin"
+,1,0,"admin","$1$tCrlLajZ$C0sikFQQ3SWaFAZ1Me0Z/1",1
+"pages"
+,"uid","pid","doktype","sys_language_uid","l10n_parent","hidden","deleted","sorting","is_siteroot","title","slug"
+,1,0,1,0,0,0,0,16,1,"Root","/"
+,10,1,20,0,0,0,0,32,0,"Applied Physics","/applied-physics"
+"sys_file_storage"
+,"uid","pid","name","driver","configuration","is_browsable","is_public","is_writable","is_online","is_default","processingfolder"
+,1,0,"fileadmin","Local","<?xml version=""1.0"" encoding=""utf-8"" standalone=""yes"" ?><T3FlexForms><data><sheet index=""sDEF""><language index=""lDEF""><field index=""basePath""><value index=""vDEF"">fileadmin/</value></field><field index=""pathType""><value index=""vDEF"">relative</value></field><field index=""caseSensitive""><value index=""vDEF"">1</value></field></language></sheet></data></T3FlexForms>",1,1,1,1,1,""
+"sys_file"
+,"uid","pid","storage","type","mime_type","missing","extension","name","identifier","identifier_hash","folder_hash","sha1","size","creation_date","modification_date"
+,1,0,1,2,"image/jpeg",0,"jpg","landscape.jpg","/images/landscape.jpg","860f54915db2bcdc50fc3aad2a80cb2b5103cc7d","ca306f2df2823c083069873158fd3b91fd4ebe01","683fca5d5576daac0adc2fc288107af9de30c3c7",8491,1700000000,1700000000
+"sys_file_metadata"
+,"uid","pid","file","sys_language_uid","width","height"
+,1,0,1,0,800,600
+"sys_file_reference"
+,"uid","pid","deleted","hidden","sys_language_uid","l10n_parent","uid_local","uid_foreign","tablenames","fieldname","sorting_foreign","crop"
+,1,1,0,0,0,0,1,1,"pages","media",1,""
+,2,10,0,0,0,0,1,10,"pages","media",1,"{""default"":{""cropArea"":{""x"":0.1,""y"":0.2,""width"":0.5,""height"":0.3},""selectedRatio"":""NaN"",""focusArea"":null}}"

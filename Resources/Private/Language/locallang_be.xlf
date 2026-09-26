@@ -173,6 +173,15 @@
       <trans-unit id="pages.div.program">
         <source>Program</source>
       </trans-unit>
+      <trans-unit id="pages.media.crop_variant.landscape">
+        <source>Landscape</source>
+      </trans-unit>
+      <trans-unit id="pages.media.crop_variant.portrait">
+        <source>Portrait</source>
+      </trans-unit>
+      <trans-unit id="pages.media.aspect_ratio.3_4" translate="no">
+        <source>3:4</source>
+      </trans-unit>
       <trans-unit id="pages.prerequisites">
         <source>Prerequisites</source>
       </trans-unit>

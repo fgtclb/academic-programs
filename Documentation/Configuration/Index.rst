@@ -570,6 +570,66 @@ tree, and a cached finder would keep offering what changed there.
     :ref:`breaking-program-finder-registered-upstream` for what such a project
     removes.
 
+..  _configuration-crop-variants:
+
+The crop variants of the program page media
+===========================================
+
+The image cropper of the media of a program page offers three crop variants. A
+template requests one by its name, through the `cropVariant` argument of
+:html:`<f:image>` or of the image partial of :guilabel:`EXT:academic_base`:
+
+..  list-table::
+    :header-rows: 1
+
+    *   -   Name
+        -   Aspect ratio
+    *   -   `default`
+        -   Free, 16:9, 3:2, 4:3 and 1:1
+    *   -   `landscape`
+        -   16:9
+    *   -   `portrait`
+        -   3:4
+
+`default` is the variant TYPO3 offers when a file field configures none, with
+the same ratios, and the templates of this extension render it. A crop an editor
+stored before the update is stored under that name and keeps its meaning.
+
+The variants belong to the program page type. The media of a standard page keeps
+what TYPO3 offers.
+
+An image stores a crop for the new variants once an editor opens it in the
+backend form and saves the record. Until then a template that requests
+`landscape` or `portrait` renders the image uncropped. Where the image already
+has a crop for `default`, the cropper starts `landscape` from that crop, fitted
+into its ratio, and `portrait` from the whole image, fitted and centred; an
+image without a crop starts both from the whole image.
+
+A site that does not want a variant disables it in TCA, on this field only. The
+extension configures the variants in its own TCA overrides, so the site package
+has to depend on academic_programs for its line to load later:
+
+..  code-block:: php
+    :caption: Configuration/TCA/Overrides of the site package
+
+    $GLOBALS['TCA']['pages']['types'][20]['columnsOverrides']['media']['config']['overrideChildTca']['columns']['crop']['config']['cropVariants']['portrait']['disabled'] = true;
+
+Page TSconfig is not the way to do that.
+`TCEFORM.sys_file_reference.crop.config.cropVariants` reaches every image below
+the page it is set on, and on an image field that configures no variants of its
+own it leaves the cropper with no variant at all, not even `default`.
+
+A project that defines crop variants of its own for the program page media does
+so at the same path. A variant it sets by name replaces the one of the same name
+and leaves the others; assigning the whole array replaces all of them.
+
+Crop variants a project configures on the media field of every page, or on
+`sys_file_reference` for every image, are merged with these on the program page:
+the values of this extension win key by key, and a ratio the project adds to a
+variant of the same name stays. A project that restricted `default` to a fixed
+ratio that way therefore finds all the ratios of the TYPO3 default offered on
+program pages again, and the free ratio preselected on an image without a crop.
+
 ..  _configuration-content-element-header:
 
 The header of the content elements

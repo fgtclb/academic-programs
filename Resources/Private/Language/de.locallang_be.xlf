@@ -223,6 +223,14 @@
         <source>Program</source>
         <target>Programm</target>
       </trans-unit>
+      <trans-unit id="pages.media.crop_variant.landscape">
+        <source>Landscape</source>
+        <target>Querformat</target>
+      </trans-unit>
+      <trans-unit id="pages.media.crop_variant.portrait">
+        <source>Portrait</source>
+        <target>Hochformat</target>
+      </trans-unit>
       <trans-unit id="pages.prerequisites">
         <source>Prerequisites</source>
         <target>Voraussetzungen</target>
