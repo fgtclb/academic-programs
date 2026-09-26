@@ -7,7 +7,8 @@ namespace FGTCLB\AcademicPrograms\ViewHelpers\Form;
 use FGTCLB\AcademicPrograms\Enumeration\SortingOptions;
 use FGTCLB\CategoryTypes\ViewHelpers\Form\AbstractSelectViewHelper;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
+use TYPO3\CMS\Fluid\ViewHelpers\TranslateViewHelper;
+use TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface;
 
 class SortingSelectViewHelper extends AbstractSelectViewHelper
 {
@@ -27,7 +28,7 @@ class SortingSelectViewHelper extends AbstractSelectViewHelper
             ],
             'extensionName' => [
                 'type' => 'string',
-                'defaultValue' => 'academic_programs',
+                'defaultValue' => 'AcademicPrograms',
                 'description' => 'If set, the translation function will use the language labels from the given extension.',
             ],
         ];
@@ -97,15 +98,19 @@ class SortingSelectViewHelper extends AbstractSelectViewHelper
             $labelKey
         );
 
-        $translatedLabel = LocalizationUtility::translate(
-            $key,
-            $this->arguments['extensionName']
-        );
-
-        if ($translatedLabel === null) {
+        if (!($this->renderingContext instanceof RenderingContextInterface)) {
             return $labelKey;
         }
-
-        return $translatedLabel;
+        // Rendered through the core view helper rather than translated here: it hands the
+        // plugin request on, and TYPO3 v14 reads the override of the plugin only from that.
+        return (string)$this->renderingContext->getViewHelperInvoker()->invoke(
+            TranslateViewHelper::class,
+            [
+                'key' => $key,
+                'extensionName' => $this->arguments['extensionName'],
+                'default' => $labelKey,
+            ],
+            $this->renderingContext,
+        );
     }
 }

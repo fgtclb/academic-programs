@@ -270,8 +270,8 @@ Each is a comma separated list, shown in its order. An item is
     registers for the group - its label is looked up as
     `sys_category.programs.<identifier>` in :file:`locallang.xlf` of this
     extension, so such a type needs that label added, for example through
-    :php:`$GLOBALS['TYPO3_CONF_VARS']['SYS']['locallangXMLOverride']`, or its
-    row shows no label;
+    :typoscript:`plugin.tx_academicprograms._LOCAL_LANG` (see
+    :ref:`configuration-labels`), or its row shows no label;
 *   or one of the program fields `creditPoints`, `jobProfile`,
     `performanceScope` and `prerequisites`.
 
@@ -687,3 +687,4 @@ one mechanism per site and the question does not arise.
    :titlesonly:
 
    RouteEnhancers/Index
+   Labels/Index

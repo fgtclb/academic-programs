@@ -1,0 +1,21 @@
+<html
+    lang="en"
+    xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+    xmlns:ace="http://typo3.org/ns/FGTCLB/AcademicPrograms/ViewHelpers"
+    data-namespace-typo3-fluid="true"
+>
+
+<f:comment>
+    The sorting select alone, without the labels of the shipped partial: its options are
+    then the first translation of the language file in the request.
+</f:comment>
+<ace:form.sortingSelect
+    id="sortingField"
+    property="sortingField"
+    value="{demand.sortingField}"
+    type="fields"
+    l10n="filter.sortingField"
+    class="form-select"
+/>
+
+</html>
