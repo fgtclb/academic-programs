@@ -7,4 +7,16 @@ plugin.tx_academicprograms {
     # cat=plugin.tx_academicprograms/file; type=string; label=Path to template layouts (FE)
     layoutRootPath = EXT:academic_programs/Resources/Private/Layouts/
   }
+
+  # The category filters of the program list. Also site settings of the set
+  # "fgtclb/academic-programs", with the same defaults - see
+  # "Configuration/Sets/Full/settings.definitions.yaml".
+  filter {
+    # cat=plugin.tx_academicprograms/filter; type=string; label=Filter types: comma-separated category type identifiers of the group "programs", in the order the filter form offers them; empty offers every type with categories
+    categoryTypes =
+    # cat=plugin.tx_academicprograms/filter; type=int+; label=Visible filters: how many filters are shown right away, the others behind "More filters"; 0 shows every filter
+    visibleCount = 0
+    # cat=plugin.tx_academicprograms/filter; type=boolean; label=Hide options without results: leave out the categories no listed program carries instead of showing them disabled
+    hideDisabledOptions = 0
+  }
 }

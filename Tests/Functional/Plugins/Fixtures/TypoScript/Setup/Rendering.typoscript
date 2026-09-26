@@ -1,0 +1,7 @@
+# The minimal page object a plugin rendering test needs: this extension ships page
+# TypoScript for its own page type only, and the plugin under test sits on an ordinary
+# page of the site.
+page = PAGE
+page {
+  10 < styles.content.get
+}

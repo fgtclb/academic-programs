@@ -256,6 +256,106 @@ Edit the page record of the site root, tab :guilabel:`Resources`, field
 
 The setting is inherited by every page below the one it is set on.
 
+..  _configuration-list-filter:
+
+The category filters
+====================
+
+The filter form of the :guilabel:`Program List` offers one select per category
+type of the group `programs`. Three settings change which of them it offers and
+how, for the whole site:
+
+..  list-table::
+    :header-rows: 1
+
+    *   -   Site setting and constant
+        -   Default
+        -   Meaning
+    *   -   :typoscript:`plugin.tx_academicprograms.filter.categoryTypes`
+        -   empty
+        -   The category types to offer, in this order, as a comma separated
+            list of type identifiers, for example
+            `degree,location`. Empty offers every type that has a
+            category, in the order the types are registered in.
+    *   -   :typoscript:`plugin.tx_academicprograms.filter.visibleCount`
+        -   0
+        -   How many filters the form shows right away. The others follow in a
+            :guilabel:`More filters` section the visitor opens, which is open
+            already while one of its filters has a value. 0 shows every filter.
+    *   -   :typoscript:`plugin.tx_academicprograms.filter.hideDisabledOptions`
+        -   0
+        -   Leaves out a category no listed program carries, instead of offering
+            it as a disabled option. A selected category is always offered. A
+            filter whose categories are all left out still renders, with its
+            "All" option only.
+
+..  code-block:: yaml
+    :caption: config/sites/my-site/settings.yaml
+
+    plugin:
+      tx_academicprograms:
+        filter:
+          categoryTypes: 'degree,location'
+          visibleCount: 1
+          hideDisabledOptions: true
+
+The settings are site settings of the aggregate set `fgtclb/academic-programs`
+and constants of the same names for a site on static templates. A site that
+depends on `fgtclb/academic-programs-program-list` alone gets the defaults, but
+the site settings editor does not offer the settings there.
+
+Site settings exist from TYPO3 v13 on. On TYPO3 v12, set the constants.
+
+A type is offered only when at least one category of that type exists, and an
+identifier that is no type of the group is ignored. The settings decide what
+the form offers, not what the list accepts: a link that filters by a category
+of a type the form does not offer still filters the list.
+
+The "All" option of a filter
+----------------------------
+
+The first option of each filter, the one that selects no category, reads the
+label :xml:`sys_category.programs.allOptions.<type>` of this extension, and
+falls back to :xml:`sys_category.programs.allOptions` ("All options") where a
+type has none. The extension ships no label per type; a site adds them in
+TypoScript, for every content element of the extension or for one plugin:
+
+..  code-block:: typoscript
+    :caption: EXT:my_sitepackage/Configuration/TypoScript/setup.typoscript
+
+    plugin.tx_academicprograms._LOCAL_LANG {
+      default.sys_category.programs.allOptions.degree = All degrees
+      de.sys_category.programs.allOptions.degree = Alle Abschlüsse
+    }
+
+    # Only in the program list:
+    plugin.tx_academicprograms_programlist._LOCAL_LANG.default.sys_category.programs.allOptions.degree = All degrees
+
+A language file override works as well, as for any label of this extension:
+:php:`$GLOBALS['TYPO3_CONF_VARS']['SYS']['locallangXMLOverride']`, pointing
+from :file:`EXT:academic_programs/Resources/Private/Language/locallang.xlf`
+to a file of the site package.
+
+Templates
+---------
+
+The partial :file:`Program/DemandCategories.html` renders the selects from the
+variable :html:`{filterTypes}`: :html:`{filterTypes.visible}` and
+:html:`{filterTypes.more}` hold the identifiers of the offered types, in their
+order, before and behind :guilabel:`More filters`. Where that variable does not
+reach the partial — a project controller that overrides :php:`listAction()`, or
+a template that renders the partial with arguments of its own instead of
+:html:`{_all}` — it offers every type with a category, as before, and the filter
+types and the visible count have no effect there. To use them, let the
+overriding action call the parent action, and pass :html:`filterTypes` on in a
+template that renders the partial.
+
+..  versionadded:: 2.4
+
+    Up to 2.3 the form offered every type with a category, all of them right
+    away and with one "All" label, and anything else needed an override of the
+    partial.
+
 ..  _one-mechanism-per-site:
 
 Do not combine both
@@ -266,8 +366,9 @@ files twice. The site set is applied before the :sql:`sys_template` record, so
 the second read happens after the site settings and after
 :file:`config/sites/<site>/constants.typoscript` — and it resets every constant
 the extension ships a default for back to that default. For this extension that
-is the :typoscript:`plugin.tx_academicprograms` constants block, the three Fluid
-root paths.
+is the :typoscript:`plugin.tx_academicprograms` constants block: the three Fluid
+root paths and the settings of :ref:`the category filters
+<configuration-list-filter>`.
 
 Nothing else is damaged: the :guilabel:`Constants` and :guilabel:`Setup` fields
 of the :sql:`sys_template` record, the page TSconfig of a page and the page

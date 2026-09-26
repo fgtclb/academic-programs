@@ -53,6 +53,9 @@
 			<trans-unit id="sys_category.programs.allOptions">
 				<source>All options</source>
 			</trans-unit>
+			<trans-unit id="filter.moreFilters">
+				<source>More filters</source>
+			</trans-unit>
 
 			<!-- Sorting direction options -->
 

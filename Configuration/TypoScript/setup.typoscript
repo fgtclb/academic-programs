@@ -14,6 +14,15 @@
 @import 'EXT:academic_programs/Configuration/TypoScript/Page/'
 
 plugin.tx_academicprograms {
+  settings {
+    # The category filters of the program list, see "constants.typoscript".
+    filter {
+      categoryTypes = {$plugin.tx_academicprograms.filter.categoryTypes}
+      visibleCount = {$plugin.tx_academicprograms.filter.visibleCount}
+      hideDisabledOptions = {$plugin.tx_academicprograms.filter.hideDisabledOptions}
+    }
+  }
+
   view {
     templateRootPaths {
       0 = EXT:academic_programs/Resources/Private/Templates/

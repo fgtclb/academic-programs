@@ -1,0 +1,38 @@
+# Site settings of the category filters of the program list.
+#
+# Every path below is also assigned in
+# "Configuration/TypoScript/constants.typoscript", and the default has to be the
+# same in both files: a site that uses the site set and the static template
+# reads the constants after the site settings, so a differing default resets
+# what the integrator configured, silently.
+#
+# Declared with the aggregate set, as the other academic extensions declare
+# their settings: a site that depends on "fgtclb/academic-programs-program-list"
+# alone still gets the defaults of the constants, but the site settings editor
+# does not offer the settings - depend on this set for that.
+categories:
+  academic:
+    label: 'Academic'
+  academic.programs:
+    label: 'Programs'
+    parent: academic
+
+settings:
+  plugin.tx_academicprograms.filter.categoryTypes:
+    label: 'Program list | Filter types'
+    description: 'The category filters the program list offers, in this order, comma-separated: category type identifiers of the group "programs" (degree, location, program_type, ...). A type without categories is left out. Empty: every category type with categories, in the type order of the group.'
+    category: academic.programs
+    type: string
+    default: ''
+  plugin.tx_academicprograms.filter.visibleCount:
+    label: 'Program list | Visible filters'
+    description: 'How many category filters the program list shows right away. The others are shown behind "More filters", which the visitor opens, and which is open while one of its filters is in use. 0 shows every filter.'
+    category: academic.programs
+    type: int
+    default: 0
+  plugin.tx_academicprograms.filter.hideDisabledOptions:
+    label: 'Program list | Hide options without results'
+    description: 'Leaves out the categories no listed program carries, instead of showing them as disabled options. A selected category is always shown.'
+    category: academic.programs
+    type: bool
+    default: false
