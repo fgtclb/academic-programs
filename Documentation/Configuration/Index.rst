@@ -570,6 +570,43 @@ tree, and a cached finder would keep offering what changed there.
     :ref:`breaking-program-finder-registered-upstream` for what such a project
     removes.
 
+..  _configuration-content-element-header:
+
+The header of the content elements
+==================================
+
+The header and the subheader an editor enters on a :guilabel:`Program List`,
+:guilabel:`Program Details` or :guilabel:`Program Finder` content element are
+rendered by the content element layout of the site, as for any other content
+element. The layouts of :guilabel:`EXT:fluid_styled_content` and of the
+bootstrap package do that, and the plugins render no header of their own.
+
+A site whose content element layout renders no header, because its element
+templates render it instead, lets the plugins render it:
+
+..  code-block:: typoscript
+    :caption: TypoScript constants
+
+    plugin.tx_academicprograms.renderContentElementHeader = 1
+
+On a site that uses the site set, that is the site setting :guilabel:`Render the
+content element header in the plugins` of `fgtclb/academic-programs`. The
+templates then render the header partial of :guilabel:`EXT:fluid_styled_content`
+above their output, for every header layout except :guilabel:`Hidden`. Do not
+switch it on where the layout renders the header: the header then appears twice.
+
+The extension does not require :guilabel:`EXT:fluid_styled_content`. It adds the
+partial path of that extension below every other one, so a site package that
+ships a :file:`Header/All.html` of its own renders that one instead, and a site
+without :guilabel:`EXT:fluid_styled_content` provides the partial that way.
+
+For the header layout :guilabel:`Default`, the partial takes the heading level
+from :typoscript:`plugin.tx_academicprograms.settings.defaultHeaderType`, which
+is mapped from the constant :typoscript:`styles.content.defaultHeaderType` of
+:guilabel:`EXT:fluid_styled_content`. A site that does not include the
+TypoScript of :guilabel:`EXT:fluid_styled_content` sets the setting itself;
+without it, such a header renders as an empty :html:`<header>` element.
+
 ..  _site-set:
 
 Include the site set
@@ -674,8 +711,9 @@ the second read happens after the site settings and after
 the extension ships a default for back to that default. For this extension that
 is the :typoscript:`plugin.tx_academicprograms` constants block: the three Fluid
 root paths, the page layout and the list page of the program page, the two
-facts lists and the three filter settings of the program list and the program
-finder.
+facts lists, the three filter settings of the program list and the program
+finder, and the :ref:`content element header
+<configuration-content-element-header>` switch.
 
 Nothing else is damaged: the :guilabel:`Constants` and :guilabel:`Setup` fields
 of the :sql:`sys_template` record, the page TSconfig of a page and the page

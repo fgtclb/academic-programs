@@ -8,6 +8,11 @@ plugin.tx_academicprograms {
     layoutRootPath = EXT:academic_programs/Resources/Private/Layouts/
   }
 
+  # Also a site setting of the set "fgtclb/academic-programs", with the same default -
+  # see "Configuration/Sets/Full/settings.definitions.yaml".
+  # cat=plugin.tx_academicprograms//a; type=boolean; label=Render the content element header in the plugins: only for a site whose content element layout renders no header
+  renderContentElementHeader = 0
+
   # The page of the program page type. Declared for site sets in
   # "Configuration/Sets/Full/settings.definitions.yaml" with the same defaults.
   page {

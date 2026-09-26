@@ -25,6 +25,13 @@ plugin.tx_academicprograms {
     filter.categoryTypes = {$plugin.tx_academicprograms.filter.categoryTypes}
     filter.visibleCount = {$plugin.tx_academicprograms.filter.visibleCount}
     filter.hideDisabledOptions = {$plugin.tx_academicprograms.filter.hideDisabledOptions}
+
+    # The content element layout renders the header of every content element, so the
+    # templates render it only for a site whose layout leaves it out. The header partial
+    # falls back to the type of the header layout "Default" through the setting below,
+    # which plugin settings do not carry the way the settings of `lib.contentElement` do.
+    renderContentElementHeader = {$plugin.tx_academicprograms.renderContentElementHeader}
+    defaultHeaderType = {$styles.content.defaultHeaderType}
   }
 
   # A list or finder element that leaves the field "Filter types" empty keeps the
@@ -39,8 +46,13 @@ plugin.tx_academicprograms {
     }
 
     partialRootPaths {
+      # The header partial of EXT:fluid_styled_content, which the templates render while
+      # "renderContentElementHeader" is switched on. The key sorts below every other one,
+      # the shared partials of EXT:academic_base included, so a "Header/All" of the
+      # project wins over it.
+      -2 = EXT:fluid_styled_content/Resources/Private/Partials/
       # The shared partials of EXT:academic_base ("Academic/Image"). The key sorts below
-      # every other one, so a partial of this extension or of the project wins over them.
+      # the paths of this extension and of the project, so a partial of either wins over them.
       -1 = EXT:academic_base/Resources/Private/Partials/
       0 = EXT:academic_programs/Resources/Private/Partials/
       1 = {$plugin.tx_academicprograms.view.partialRootPath}

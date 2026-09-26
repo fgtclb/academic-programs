@@ -5,6 +5,10 @@
 >
 
 <div class="academic-programs-list">
+    <f:if condition="{settings.renderContentElementHeader}">
+        <f:render partial="Header/All" arguments="{_all}" />
+    </f:if>
+
     <f:render
         partial="Program/SortingAndFilters"
         arguments="{_all}"

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace FGTCLB\AcademicPrograms\Controller;
 
+use FGTCLB\AcademicBase\Controller\GetCurrentContentRecordMethodTrait;
 use FGTCLB\AcademicPrograms\Domain\Repository\ProgramRepository;
 use FGTCLB\AcademicPrograms\Factory\DemandFactory;
 use FGTCLB\CategoryTypes\Collection\CategoryCollection;
@@ -18,6 +19,8 @@ use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 
 class ProgramController extends ActionController
 {
+    use GetCurrentContentRecordMethodTrait;
+
     /**
      * The selects of a finder whose element and site name no filter types.
      */
@@ -54,6 +57,7 @@ class ProgramController extends ActionController
         $this->view->assignMultiple([
             'programs' => $programs,
             'data' => $contentElementData,
+            'record' => $this->getCurrentContentRecord($this->getCurrentContentObjectRenderer()),
             'demand' => $demandObject,
             'categories' => $categories,
             'filterTypes' => $this->filterTypeResolver->resolveFromSettings($categories, $this->settings),
@@ -84,6 +88,7 @@ class ProgramController extends ActionController
 
         $this->view->assignMultiple([
             'data' => $contentElementData,
+            'record' => $this->getCurrentContentRecord($this->getCurrentContentObjectRenderer()),
             'categories' => $categories,
             'filterTypes' => $filterTypes,
             'listUri' => $this->finderListUri(),

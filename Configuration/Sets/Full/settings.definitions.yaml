@@ -1,5 +1,5 @@
-# Site settings of the program page type, of the facts of a program and of the
-# filters of the program list.
+# Site settings of the program page type, of the facts of a program, of the
+# filters of the program list and of the content element header of the plugins.
 #
 # Every path below is also assigned in
 # "Configuration/TypoScript/constants.typoscript", and the default has to be the
@@ -56,6 +56,12 @@ settings:
   plugin.tx_academicprograms.filter.hideDisabledOptions:
     label: 'Program list and finder | Hide options without results'
     description: 'Leaves out the categories no listed program carries, instead of showing them as disabled options - in the program finder those no program in its storage carries. A selected category is always shown.'
+    category: academic.programs
+    type: bool
+    default: false
+  plugin.tx_academicprograms.renderContentElementHeader:
+    label: 'Render the content element header in the plugins'
+    description: 'Only for a site whose content element layout renders no header. The layouts of EXT:fluid_styled_content and of the bootstrap package render it, and switched on there the header appears twice.'
     category: academic.programs
     type: bool
     default: false

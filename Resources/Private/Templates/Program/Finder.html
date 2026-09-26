@@ -15,6 +15,10 @@
     `extensionName` follow the filter of the list, see `Program/DemandCategories.html`; the
     finder shows every filter type, it has no "More filters".
 </f:comment>
+<f:if condition="{settings.renderContentElementHeader}">
+    <f:render partial="Header/All" arguments="{_all}" />
+</f:if>
+
 <f:if condition="{listUri} && {filterTypes.visible}">
     <f:form
         actionUri="{listUri}"

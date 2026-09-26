@@ -420,6 +420,7 @@ final class SiteSetDeliveryTest extends AbstractAcademicProgramsTestCase
                 'plugin.tx_academicprograms.filter.categoryTypes' => '',
                 'plugin.tx_academicprograms.filter.visibleCount' => 0,
                 'plugin.tx_academicprograms.filter.hideDisabledOptions' => false,
+                'plugin.tx_academicprograms.renderContentElementHeader' => false,
             ],
             $definitions,
         );

@@ -1,0 +1,2 @@
+# The site lets the program plugins render the header of their content element themselves.
+plugin.tx_academicprograms.renderContentElementHeader = 1

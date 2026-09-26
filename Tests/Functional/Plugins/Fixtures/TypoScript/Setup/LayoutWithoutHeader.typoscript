@@ -1,0 +1,3 @@
+# A site package whose content element layout renders no header. Every plugin content
+# element references `lib.contentElement`, so the path reaches all of them.
+lib.contentElement.layoutRootPaths.50 = EXT:academic_programs/Tests/Functional/Plugins/Fixtures/Layouts/

@@ -11,6 +11,10 @@
 </f:comment>
 
 <div class="academic-programs-detail-categories">
+    <f:if condition="{settings.renderContentElementHeader}">
+        <f:render partial="Header/All" arguments="{_all}" />
+    </f:if>
+
     <f:render
         partial="Program/Facts"
         arguments="{_all}"

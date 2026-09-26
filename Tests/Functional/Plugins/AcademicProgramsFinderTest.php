@@ -6,6 +6,7 @@ namespace FGTCLB\AcademicPrograms\Tests\Functional\Plugins;
 
 use FGTCLB\AcademicPrograms\Tests\Functional\AbstractAcademicProgramsTestCase;
 use FGTCLB\TestingHelper\FunctionalTestCase\CategoryFilterFormAssertionTrait;
+use FGTCLB\TestingHelper\FunctionalTestCase\ContentElementHeaderAssertionTrait;
 use FGTCLB\TestingHelper\FunctionalTestCase\FrontendPluginRenderingTrait;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
@@ -29,12 +30,16 @@ use SBUERK\TYPO3\Testing\SiteHandling\SiteBasedTestTrait;
 final class AcademicProgramsFinderTest extends AbstractAcademicProgramsTestCase
 {
     use CategoryFilterFormAssertionTrait;
+    use ContentElementHeaderAssertionTrait;
     use FrontendPluginRenderingTrait;
     use SiteBasedTestTrait;
 
     private const LIST_NAMESPACE = 'tx_academicprograms_programlist';
 
     private const FINDER_FORM_CLASS = 'academic-programs-finder';
+
+    private const HEADER = 'Find your program';
+    private const SUBHEADER = 'Choose a degree and a topic';
 
     protected const LANGUAGE_PRESETS = [
         'EN' => ['id' => 0, 'title' => 'English', 'locale' => 'en_US.UTF8', 'iso' => 'en', 'hrefLang' => 'en-US', 'direction' => ''],
@@ -535,5 +540,80 @@ final class AcademicProgramsFinderTest extends AbstractAcademicProgramsTestCase
 
         $this->assertStringContainsString('Home (EN)', $content);
         $this->assertStringNotContainsString(self::FINDER_FORM_CLASS, $content);
+    }
+
+    private function setContentElementHeader(int $headerLayout): void
+    {
+        $this->getConnectionPool()
+            ->getConnectionForTable('tt_content')
+            ->update(
+                'tt_content',
+                ['header' => self::HEADER, 'subheader' => self::SUBHEADER, 'header_layout' => $headerLayout],
+                ['uid' => 1],
+            );
+    }
+
+    /**
+     * The header layouts "Default", 2 and "Hidden", with the number of times the header and
+     * the subheader have to render: "Default" is the layout the header partial resolves
+     * through a setting, and the one a plugin rendering it without that setting leaves an
+     * empty `<header>` for.
+     *
+     * @return array<string, array{int, int}>
+     */
+    public static function headerLayouts(): array
+    {
+        return [
+            'header layout "Default"' => [0, 1],
+            'header layout 2' => [2, 1],
+            'header layout "Hidden"' => [100, 0],
+        ];
+    }
+
+    /**
+     * The header of the finder element renders once, from the content element layout, and
+     * not a second time from the template.
+     */
+    #[Test]
+    #[DataProvider('headerLayouts')]
+    public function theFinderLeavesTheContentElementHeaderToTheLayout(int $headerLayout, int $expectedHeadings): void
+    {
+        $this->setUpSite();
+        $this->setContentElementHeader($headerLayout);
+
+        $content = $this->renderHomePage();
+        $form = '//*[@id = "c1"]//form[contains(concat(" ", normalize-space(@class), " "), " ' . self::FINDER_FORM_CLASS . ' ")]';
+        $this->assertSame(1, $this->countContentElementHeaderNodes($content, $form));
+        $this->assertSame($expectedHeadings, $this->countHeadingsReading($content, self::HEADER));
+        $this->assertSame($expectedHeadings, $this->countHeadingsReading($content, self::SUBHEADER));
+    }
+
+    /**
+     * A site whose content element layout renders no header lets the finder render it. The
+     * template renders it in front of the form, which has no element around it.
+     */
+    #[Test]
+    #[DataProvider('headerLayouts')]
+    public function theFinderRendersTheContentElementHeaderWhenSwitchedOn(int $headerLayout, int $expectedHeadings): void
+    {
+        $this->setUpSite(
+            'RenderContentElementHeader',
+            '@import \'EXT:academic_programs/Tests/Functional/Plugins/Fixtures/TypoScript/Setup/LayoutWithoutHeader.typoscript\'',
+        );
+        $this->setContentElementHeader($headerLayout);
+
+        $content = $this->renderHomePage();
+        // The fixture layout renders no header, so a heading inside the frame of the element
+        // comes from the template.
+        $frame = '//*[@id = "c1"][contains(concat(" ", normalize-space(@class), " "), " frame-without-header ")]';
+        $this->assertSame(1, $this->countContentElementHeaderNodes($content, $frame));
+        $this->assertSame(1, $this->countContentElementHeaderNodes(
+            $content,
+            $frame . '//form[contains(concat(" ", normalize-space(@class), " "), " ' . self::FINDER_FORM_CLASS . ' ")]',
+        ));
+        $this->assertSame($expectedHeadings, $this->countHeadingsReading($content, self::HEADER));
+        $this->assertSame($expectedHeadings, $this->countHeadingsReading($content, self::HEADER, $frame));
+        $this->assertSame($expectedHeadings, $this->countHeadingsReading($content, self::SUBHEADER));
+        $this->assertSame($expectedHeadings, $this->countHeadingsReading($content, self::SUBHEADER, $frame));
     }
 }

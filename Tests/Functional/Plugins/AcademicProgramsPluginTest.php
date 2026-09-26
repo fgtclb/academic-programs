@@ -5,7 +5,9 @@ declare(strict_types=1);
 namespace FGTCLB\AcademicPrograms\Tests\Functional\Plugins;
 
 use FGTCLB\AcademicPrograms\Tests\Functional\AbstractAcademicProgramsTestCase;
+use FGTCLB\TestingHelper\FunctionalTestCase\ContentElementHeaderAssertionTrait;
 use FGTCLB\TestingHelper\FunctionalTestCase\FrontendPluginRenderingTrait;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
 use SBUERK\TYPO3\Testing\SiteHandling\SiteBasedTestTrait;
 
@@ -19,11 +21,25 @@ use SBUERK\TYPO3\Testing\SiteHandling\SiteBasedTestTrait;
  * the FlexForm of the content element plus its `pages`/`recursive` fields, while the
  * details plugin takes no configuration at all and resolves its program from the page the
  * content element sits on (`DetailsController::showAction()`).
+ *
+ * The header of a content element renders once: by default the content element layout
+ * renders it and the plugins do not. A site whose layout renders no header switches
+ * `renderContentElementHeader` on, and the templates then render the
+ * `EXT:fluid_styled_content` `Header/All` partial themselves. The switched on cases guard
+ * the `record` view variable as well: on TYPO3 v14 the partial renders the header through
+ * it, and fails without it.
  */
 final class AcademicProgramsPluginTest extends AbstractAcademicProgramsTestCase
 {
+    use ContentElementHeaderAssertionTrait;
     use FrontendPluginRenderingTrait;
     use SiteBasedTestTrait;
+
+    private const HEADER = 'Our study programs';
+    private const SUBHEADER = 'Bachelor and master';
+    private const RENDER_HEADER_CONSTANTS = 'EXT:academic_programs/Tests/Functional/Plugins/Fixtures/TypoScript/Constants/RenderContentElementHeader.typoscript';
+    private const HEADER_PARTIAL_OVERRIDE_SETUP = 'EXT:academic_programs/Tests/Functional/Plugins/Fixtures/TypoScript/Setup/HeaderPartialOverride.typoscript';
+    private const LAYOUT_WITHOUT_HEADER_SETUP = 'EXT:academic_programs/Tests/Functional/Plugins/Fixtures/TypoScript/Setup/LayoutWithoutHeader.typoscript';
 
     protected const LANGUAGE_PRESETS = [
         'EN' => ['id' => 0, 'title' => 'English', 'locale' => 'en_US.UTF8', 'iso' => 'en', 'hrefLang' => 'en-US', 'direction' => ''],
@@ -42,7 +58,11 @@ final class AcademicProgramsPluginTest extends AbstractAcademicProgramsTestCase
         parent::tearDown();
     }
 
-    private function setUpTestCase(string $dataSet): void
+    /**
+     * @param list<string> $additionalConstantFiles
+     * @param list<string> $additionalSetupFiles
+     */
+    private function setUpTestCase(string $dataSet, array $additionalConstantFiles = [], array $additionalSetupFiles = []): void
     {
         $this->importCSVDataSet(__DIR__ . '/Fixtures/AcademicProgramsPlugin/' . $dataSet . '.csv');
         $this->setUpFrontendRootPage(
@@ -51,11 +71,13 @@ final class AcademicProgramsPluginTest extends AbstractAcademicProgramsTestCase
                 'constants' => [
                     'EXT:fluid_styled_content/Configuration/TypoScript/constants.typoscript',
                     'EXT:academic_programs/Configuration/TypoScript/constants.typoscript',
+                    ...$additionalConstantFiles,
                 ],
                 'setup' => [
                     'EXT:fluid_styled_content/Configuration/TypoScript/setup.typoscript',
                     'EXT:academic_programs/Configuration/TypoScript/setup.typoscript',
                     'EXT:academic_programs/Tests/Functional/Plugins/Fixtures/TypoScript/Setup/Rendering.typoscript',
+                    ...$additionalSetupFiles,
                 ],
             ],
         );
@@ -70,19 +92,6 @@ final class AcademicProgramsPluginTest extends AbstractAcademicProgramsTestCase
     private function renderHomePage(): string
     {
         return $this->renderFrontendPage('https://www.acme.com/home');
-    }
-
-    /**
-     * The header of the content element is not part of any template of this extension — it
-     * comes from `lib.contentElement`, which is what `PLUGIN_TYPE_CONTENT_ELEMENT` wires up.
-     * On TYPO3 v14 that header partial renders through the `record` view variable, so this is
-     * the assertion that fails should the plugin ever be registered without it.
-     */
-    private function setContentElementHeader(string $header): void
-    {
-        $this->getConnectionPool()
-            ->getConnectionForTable('tt_content')
-            ->update('tt_content', ['header' => $header], ['uid' => 1]);
     }
 
     private function assertRenderedInOrder(string $content, string $first, string $second): void
@@ -170,15 +179,6 @@ final class AcademicProgramsPluginTest extends AbstractAcademicProgramsTestCase
         $this->assertStringNotContainsString('academic-programs-filtersorting', $content);
         // The list itself is unaffected by hiding the form.
         $this->assertStringContainsString('Applied Physics', $content);
-    }
-
-    #[Test]
-    public function programListPluginRendersContentElementHeader(): void
-    {
-        $this->setUpTestCase('programListPage');
-        $this->setContentElementHeader('Our study programs');
-
-        $this->assertStringContainsString('Our study programs', $this->renderHomePage());
     }
 
     #[Test]
@@ -329,15 +329,115 @@ final class AcademicProgramsPluginTest extends AbstractAcademicProgramsTestCase
         $this->assertStringNotContainsString('Master of Science', $content);
     }
 
-    #[Test]
-    public function programDetailsPluginRendersContentElementHeader(): void
+    private function setContentElementHeader(int $uid, int $headerLayout): void
     {
-        $this->setUpTestCase('programDetailsPage');
-        $this->setContentElementHeader('Program at a glance');
+        $this->getConnectionPool()
+            ->getConnectionForTable('tt_content')
+            ->update(
+                'tt_content',
+                ['header' => self::HEADER, 'subheader' => self::SUBHEADER, 'header_layout' => $headerLayout],
+                ['uid' => $uid],
+            );
+    }
 
-        $this->assertStringContainsString(
-            'Program at a glance',
-            $this->renderFrontendPage('https://www.acme.com/applied-physics'),
+    /**
+     * Every view with the header layouts "Default", 2 and "Hidden", and the number of times
+     * the header and the subheader have to render: "Default" is the layout the header
+     * partial resolves through a setting, and the one a plugin rendering it without that
+     * setting leaves an empty `<header>` for. A view names the data set, the page, the
+     * content element and the class of the element the template wraps its output in.
+     *
+     * @return \Generator<string, array{string, string, int, string, int, int}>
+     */
+    public static function viewsAndHeaderLayouts(): \Generator
+    {
+        $views = [
+            'program list' => ['programListPage', 'https://www.acme.com/home', 1, 'academic-programs-list'],
+            // The details element sits on the program page, so that page is the one to request.
+            'program details' => ['programDetailsPage', 'https://www.acme.com/applied-physics', 1, 'academic-programs-detail-categories'],
+        ];
+        $headerLayouts = [
+            'header layout "Default"' => [0, 1],
+            'header layout 2' => [2, 1],
+            'header layout "Hidden"' => [100, 0],
+        ];
+        foreach ($views as $view => [$dataSet, $url, $contentElement, $wrapperClass]) {
+            foreach ($headerLayouts as $name => [$headerLayout, $expectedHeadings]) {
+                yield $view . ', ' . $name => [$dataSet, $url, $contentElement, $wrapperClass, $headerLayout, $expectedHeadings];
+            }
+        }
+    }
+
+    #[Test]
+    #[DataProvider('viewsAndHeaderLayouts')]
+    public function aPluginLeavesTheContentElementHeaderToTheLayout(
+        string $dataSet,
+        string $url,
+        int $contentElement,
+        string $wrapperClass,
+        int $headerLayout,
+        int $expectedHeadings,
+    ): void {
+        $this->setUpTestCase($dataSet);
+        $this->setContentElementHeader($contentElement, $headerLayout);
+
+        $content = $this->renderFrontendPage($url);
+        $wrapper = sprintf(
+            '//*[@id = "c%d"]//*[contains(concat(" ", normalize-space(@class), " "), " %s ")]',
+            $contentElement,
+            $wrapperClass,
         );
+        $this->assertSame($expectedHeadings, $this->countHeadingsReading($content, self::HEADER));
+        $this->assertSame($expectedHeadings, $this->countHeadingsReading($content, self::SUBHEADER));
+        $this->assertSame(0, $this->countHeadingsReading($content, self::HEADER, $wrapper));
+        $this->assertSame(0, $this->countHeadingsReading($content, self::SUBHEADER, $wrapper));
+    }
+
+    #[Test]
+    #[DataProvider('viewsAndHeaderLayouts')]
+    public function aPluginRendersTheContentElementHeaderWhenSwitchedOn(
+        string $dataSet,
+        string $url,
+        int $contentElement,
+        string $wrapperClass,
+        int $headerLayout,
+        int $expectedHeadings,
+    ): void {
+        $this->setUpTestCase($dataSet, [self::RENDER_HEADER_CONSTANTS], [self::LAYOUT_WITHOUT_HEADER_SETUP]);
+        $this->setContentElementHeader($contentElement, $headerLayout);
+
+        $content = $this->renderFrontendPage($url);
+        $frame = sprintf('//*[@id = "c%d"]', $contentElement);
+        // The fixture layout renders no header, so a heading inside the frame of the element
+        // comes from the template. The first two assertions prove the fixture layout and the
+        // template of the view rendered.
+        $this->assertSame(1, $this->countContentElementHeaderNodes($content, $frame . '[contains(concat(" ", normalize-space(@class), " "), " frame-without-header ")]'));
+        $this->assertSame(1, $this->countContentElementHeaderNodes(
+            $content,
+            sprintf('%s//*[contains(concat(" ", normalize-space(@class), " "), " %s ")]', $frame, $wrapperClass),
+        ));
+        $this->assertSame($expectedHeadings, $this->countHeadingsReading($content, self::HEADER));
+        $this->assertSame($expectedHeadings, $this->countHeadingsReading($content, self::HEADER, $frame));
+        $this->assertSame($expectedHeadings, $this->countHeadingsReading($content, self::SUBHEADER));
+        $this->assertSame($expectedHeadings, $this->countHeadingsReading($content, self::SUBHEADER, $frame));
+    }
+
+    /**
+     * A site package that renders the header its own way registers its own `Header/All`
+     * above the paths of the extension, and that one renders instead of the partial of
+     * EXT:fluid_styled_content, whose path sorts below every other one.
+     */
+    #[Test]
+    public function aHeaderPartialOfTheSitePackageWinsOverTheShippedOne(): void
+    {
+        $this->setUpTestCase('programListPage', [self::RENDER_HEADER_CONSTANTS], [self::LAYOUT_WITHOUT_HEADER_SETUP, self::HEADER_PARTIAL_OVERRIDE_SETUP]);
+        $this->setContentElementHeader(1, 2);
+
+        $content = $this->renderFrontendPage('https://www.acme.com/home');
+        $this->assertSame(0, $this->countHeadingsReading($content, self::HEADER));
+        $this->assertSame(1, $this->countContentElementHeaderNodes(
+            $content,
+            '//*[@id = "c1"]//p[@class = "site-package-header"][normalize-space() = "' . self::HEADER . '"]',
+        ));
     }
 }

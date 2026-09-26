@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace FGTCLB\AcademicPrograms\Controller;
 
+use FGTCLB\AcademicBase\Controller\GetCurrentContentRecordMethodTrait;
 use FGTCLB\AcademicPrograms\Domain\Model\Program;
 use FGTCLB\AcademicPrograms\Domain\Repository\ProgramRepository;
 use FGTCLB\AcademicPrograms\Enumeration\ProgramFactsPlace;
@@ -15,6 +16,8 @@ use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 
 class DetailsController extends ActionController
 {
+    use GetCurrentContentRecordMethodTrait;
+
     private ProgramFactsBuilder $programFactsBuilder;
 
     public function __construct(
@@ -37,6 +40,7 @@ class DetailsController extends ActionController
 
         $this->view->assignMultiple([
             'data' => $contentElementData,
+            'record' => $this->getCurrentContentRecord($this->getCurrentContentObjectRenderer()),
             'program' => $program,
             'facts' => $facts,
         ]);

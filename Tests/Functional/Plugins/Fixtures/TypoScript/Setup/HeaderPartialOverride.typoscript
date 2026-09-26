@@ -1,0 +1,2 @@
+# A site package registering its own header partial above the shipped paths.
+plugin.tx_academicprograms.view.partialRootPaths.20 = EXT:academic_programs/Tests/Functional/Plugins/Fixtures/HeaderPartialOverride/
