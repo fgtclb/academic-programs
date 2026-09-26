@@ -34,10 +34,17 @@ plugin.tx_academicprograms {
   # The category filters of the program list: comma-separated category type
   # identifiers of the group "programs", in the order the filter form offers them.
   # The program finder offers the same selects. The field "Filter types" of a list
-  # or finder element overrides it for that element. Declared for site sets in
-  # "Configuration/Sets/Full/settings.definitions.yaml" with the same default.
+  # or finder element overrides it for that element. How many of them the list
+  # shows right away, and whether a filter leaves out the categories no listed
+  # program carries - the finder follows the list in the latter. Declared for site
+  # sets in "Configuration/Sets/Full/settings.definitions.yaml" with the same
+  # defaults.
   filter {
     # cat=plugin.tx_academicprograms/filter; type=string; label=Filter types of the program list and the program finder: empty offers every category type with categories, and the degree and the topic in the finder
     categoryTypes =
+    # cat=plugin.tx_academicprograms/filter; type=int+; label=Visible filters of the program list: how many filters are shown right away, the others behind "More filters"; 0 shows every filter
+    visibleCount = 0
+    # cat=plugin.tx_academicprograms/filter; type=boolean; label=Hide options without results in the program list and the program finder: leave out the categories no listed program carries instead of showing them disabled
+    hideDisabledOptions = 0
   }
 }

@@ -6,9 +6,11 @@
 >
 
 <f:comment>
-    `filterTypes.visible` holds the category types to offer, in the order to offer them, and
-    only types with categories: the filter types of the element or the site, or every type
-    of the group with categories when neither sets any.
+    `filterTypes.visible` holds the category types to offer right away, in the order to offer
+    them, and only types with categories: the filter types of the element or the site, or
+    every type of the group with categories when neither sets any. `filterTypes.more` holds
+    the ones after `settings.filter.visibleCount`; they go into a "More filters" disclosure,
+    which is open while one of them has a value.
 
     Without `filterTypes` - a project controller that overrides `listAction()`, or a
     template that renders this partial with arguments of its own - every type with
@@ -18,22 +20,48 @@
 <f:if condition="{filterTypes}">
     <f:then>
         <f:for each="{filterTypes.visible}" as="categoryKey">
-            <f:render section="Filter" arguments="{categoryKey: categoryKey, categories: categories, demand: demand}"/>
+            <f:render section="Filter" arguments="{categoryKey: categoryKey, categories: categories, demand: demand, settings: settings}"/>
         </f:for>
+        <f:if condition="{filterTypes.more}">
+            <f:variable name="moreFiltersActive" value="0"/>
+            <f:for each="{filterTypes.more}" as="categoryKey">
+                <f:if condition="{demand.filterCollection.filterCategories.{categoryKey}}">
+                    <f:variable name="moreFiltersActive" value="1"/>
+                </f:if>
+            </f:for>
+            <details class="col-12 academic-programs-more-filters"{f:if(condition: moreFiltersActive, then: ' open')}>
+                <summary>{f:translate(key: 'filter.moreFilters', extensionName: 'AcademicPrograms')}</summary>
+                <div class="row">
+                    <f:for each="{filterTypes.more}" as="categoryKey">
+                        <f:render section="Filter" arguments="{categoryKey: categoryKey, categories: categories, demand: demand, settings: settings}"/>
+                    </f:for>
+                </div>
+            </details>
+        </f:if>
     </f:then>
     <f:else>
         <f:for each="{categories.allCategoriesByType}" as="category" key="categoryKey">
             <f:if condition="{category}">
-                <f:render section="Filter" arguments="{categoryKey: categoryKey, categories: categories, demand: demand}"/>
+                <f:render section="Filter" arguments="{categoryKey: categoryKey, categories: categories, demand: demand, settings: settings}"/>
             </f:if>
         </f:for>
     </f:else>
 </f:if>
 
+<f:comment>
+    The "All" option reads `sys_category.programs.allOptions.<type>` and falls back to the
+    label every filter shares when a type has none of its own.
+
+    `extensionName` is the UpperCamelCase name on purpose: up to TYPO3 v13, `_LOCAL_LANG` is
+    read from `plugin.tx_` and the lowercased name as given, so `academic_programs` would look
+    in `plugin.tx_academic_programs` instead of `plugin.tx_academicprograms`. TYPO3 v14 strips
+    the underscore and reads the same path either way.
+</f:comment>
 <f:section name="Filter">
+    <f:variable name="allOptionsLabel" value="{f:translate(key: 'sys_category.programs.allOptions', extensionName: 'AcademicPrograms')}"/>
     <div class="col-12 col-md-6 col-lg-4 col-xl-3">
         <label for="{categoryKey}" class="form-label">
-            {f:translate(key: 'sys_category.programs.{categoryKey}', extensionName: 'academic_programs')}
+            {f:translate(key: 'sys_category.programs.{categoryKey}', extensionName: 'AcademicPrograms')}
         </label>
 
         <ct:form.filterSelect
@@ -44,10 +72,12 @@
             optionValueField="uid"
             optionLabelField="title"
             prependOptionLabel="{f:translate(
-                key: 'sys_category.programs.allOptions',
-                extensionName: 'academic_programs'
+                key: 'sys_category.programs.allOptions.{categoryKey}',
+                extensionName: 'AcademicPrograms',
+                default: allOptionsLabel
             )}"
             prependOptionValue=""
+            hideDisabledOptions="{settings.filter.hideDisabledOptions}"
             additionalAttributes="{'onchange': 'this.form.submit()'}"
             class="form-select"
         />

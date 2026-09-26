@@ -1,0 +1,2 @@
+# The program list shows one filter right away; the finder shows every select regardless.
+plugin.tx_academicprograms.filter.visibleCount = 1

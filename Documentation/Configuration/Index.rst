@@ -390,7 +390,8 @@ the setting existed.
 
 A type is offered only when at least one category of that type exists. A
 category of an offered type that no listed program carries is still offered,
-as a disabled option. A type the project removed from the group later is
+as a disabled option, unless the site hides options without results, see
+below. A type the project removed from the group later is
 ignored, and so is an identifier that is no type of the group. The field only
 offers the types the group has, including those a project adds in its own
 :file:`Configuration/CategoryTypes.yaml`.
@@ -418,10 +419,78 @@ overrides the partial itself and still loops
 The :guilabel:`Program Finder` reads the same setting when its own field is
 empty, see :ref:`program-finder`.
 
+Two more settings, for the whole site, change how the list offers its filters:
+
+..  list-table::
+    :header-rows: 1
+
+    *   -   Site setting and constant
+        -   Default
+        -   Meaning
+    *   -   :typoscript:`plugin.tx_academicprograms.filter.visibleCount`
+        -   0
+        -   How many filters the form shows right away. The others follow in a
+            :guilabel:`More filters` section the visitor opens, which is open
+            already while one of its filters has a value. 0 shows every filter.
+            The finder always shows all of its selects.
+    *   -   :typoscript:`plugin.tx_academicprograms.filter.hideDisabledOptions`
+        -   0
+        -   Leaves out a category no listed program carries, instead of
+            offering it as a disabled option — in the finder, one no program
+            in its storage carries. A selected category is always offered. A
+            filter whose categories are all left out still renders, with its
+            "All" option only.
+
+..  code-block:: yaml
+    :caption: config/sites/my-site/settings.yaml
+
+    plugin:
+      tx_academicprograms:
+        filter:
+          categoryTypes: 'degree,location,program_type'
+          visibleCount: 2
+          hideDisabledOptions: true
+
+Both are declared with the aggregate set, like the filter types.
+:html:`{filterTypes.more}` holds the types behind :guilabel:`More filters`;
+without :html:`{filterTypes}` the partial ignores the visible count as it
+ignores the filter types.
+
+The first option of each select, in the list and in the finder, the one that
+selects no category, reads the label
+:xml:`sys_category.programs.allOptions.<type>` of this extension, and
+falls back to :xml:`sys_category.programs.allOptions` ("All options") where a
+type has none. The extension ships no label per type; a site adds them in
+TypoScript, for every content element of the extension or for one plugin:
+
+..  code-block:: typoscript
+    :caption: EXT:my_sitepackage/Configuration/TypoScript/setup.typoscript
+
+    plugin.tx_academicprograms._LOCAL_LANG {
+      default.sys_category.programs.allOptions.degree = All degrees
+      de.sys_category.programs.allOptions.degree = Alle Abschlüsse
+    }
+
+    # Only in the program finder:
+    plugin.tx_academicprograms_programfinder._LOCAL_LANG.default.sys_category.programs.allOptions.degree = All degrees
+
+A language file override works as well, as for any label of this extension:
+:php:`$GLOBALS['TYPO3_CONF_VARS']['SYS']['locallangXMLOverride']` on TYPO3 v13,
+:php:`$GLOBALS['TYPO3_CONF_VARS']['LANG']['resourceOverrides']` on TYPO3 v14,
+each pointing from
+:file:`EXT:academic_programs/Resources/Private/Language/locallang.xlf` to a file
+of the site package.
+
+..  versionadded:: 2.4
+
+    The site setting of the filter types, the visible count, the options
+    without results and the "All" label per type. Up to 2.3 the form offered
+    every type with a category, all of them right away and with one "All"
+    label, and anything else needed an override of the partial.
+
 ..  versionadded:: 3.0
 
-    Up to 2.x the form offered every type with a category, and a different
-    set or order needed an override of the partial.
+    The field :guilabel:`Filter types` of the content element.
 
 ..  _program-finder:
 
@@ -462,7 +531,10 @@ name. Its settings, tab :guilabel:`Configuration`:
 
 The options of each select are the categories of its type. A category that no
 program in the storage of the finder carries is offered disabled, as in the
-filter of the list. The storage is the :guilabel:`Startingpoint` and
+filter of the list, or left out when the site hides options without results —
+the setting :typoscript:`plugin.tx_academicprograms.filter.hideDisabledOptions`,
+see :ref:`program-list-filter-types`. That section also describes the label of
+the "All" option, which the finder reads the same way. The storage is the :guilabel:`Startingpoint` and
 :guilabel:`Recursive` of the finder element, and it should be the storage of
 the list the finder targets — the finder cannot read the storage of another
 element, and a finder pointing elsewhere offers categories the list does not
@@ -602,7 +674,8 @@ the second read happens after the site settings and after
 the extension ships a default for back to that default. For this extension that
 is the :typoscript:`plugin.tx_academicprograms` constants block: the three Fluid
 root paths, the page layout and the list page of the program page, the two
-facts lists and the filter types of the program list and the program finder.
+facts lists and the three filter settings of the program list and the program
+finder.
 
 Nothing else is damaged: the :guilabel:`Constants` and :guilabel:`Setup` fields
 of the :sql:`sys_template` record, the page TSconfig of a page and the page

@@ -20,9 +20,11 @@ plugin.tx_academicprograms {
     # "factsFields" of its data processor instead.
     facts.fields = {$plugin.tx_academicprograms.facts.fields}
     card.fields = {$plugin.tx_academicprograms.card.fields}
-    # The filter types of the list and the finder, see "constants.typoscript". The
-    # field of the same name in the FlexForm of either element overrides them.
+    # The filters of the list and the finder, see "constants.typoscript". The field
+    # "Filter types" in the FlexForm of either element overrides the filter types.
     filter.categoryTypes = {$plugin.tx_academicprograms.filter.categoryTypes}
+    filter.visibleCount = {$plugin.tx_academicprograms.filter.visibleCount}
+    filter.hideDisabledOptions = {$plugin.tx_academicprograms.filter.hideDisabledOptions}
   }
 
   # A list or finder element that leaves the field "Filter types" empty keeps the

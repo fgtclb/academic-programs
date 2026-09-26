@@ -50,14 +50,13 @@ class ProgramController extends ActionController
 
         $programs = $this->programRepository->findByDemand($demandObject);
         $categories = $this->categoryRepository->findAllApplicable('programs', ...array_values($programs->toArray()));
-        $filterTypes = $this->filterTypeResolver->resolve($categories, $this->filterCategoryTypes());
 
         $this->view->assignMultiple([
             'programs' => $programs,
             'data' => $contentElementData,
             'demand' => $demandObject,
             'categories' => $categories,
-            'filterTypes' => $filterTypes,
+            'filterTypes' => $this->filterTypeResolver->resolveFromSettings($categories, $this->settings),
         ]);
 
         return $this->htmlResponse();
@@ -67,7 +66,8 @@ class ProgramController extends ActionController
      * The program finder: a select per category type that submits to the list plugin on the
      * page `settings.listPid`, in the argument shape of the list's own filter form. The
      * options are those the list would offer for the programs in the finder's storage, the
-     * ones no program carries disabled.
+     * ones no program carries disabled, or left out when `settings.filter.hideDisabledOptions`
+     * is set.
      */
     public function finderAction(): ResponseInterface
     {

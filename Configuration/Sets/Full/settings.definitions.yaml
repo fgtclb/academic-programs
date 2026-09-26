@@ -47,3 +47,15 @@ settings:
     category: academic.programs
     type: string
     default: ''
+  plugin.tx_academicprograms.filter.visibleCount:
+    label: 'Program list | Visible filters'
+    description: 'How many category filters the program list shows right away. The others are shown behind "More filters", which the visitor opens, and which is open while one of its filters is in use. 0 shows every filter. The program finder always shows all of its filters.'
+    category: academic.programs
+    type: int
+    default: 0
+  plugin.tx_academicprograms.filter.hideDisabledOptions:
+    label: 'Program list and finder | Hide options without results'
+    description: 'Leaves out the categories no listed program carries, instead of showing them as disabled options - in the program finder those no program in its storage carries. A selected category is always shown.'
+    category: academic.programs
+    type: bool
+    default: false

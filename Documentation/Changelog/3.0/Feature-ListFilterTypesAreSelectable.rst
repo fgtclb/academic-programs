@@ -38,6 +38,11 @@ Two places now decide it:
         filter:
           categoryTypes: 'degree,location'
 
+The site setting and the constant have existed since 2.4, together with the
+visible count and the options without results, see :ref:`feature-1790383004`.
+What 3.0 adds is the field of the content element, which overrides them for one
+element.
+
 The field offers the types of the group `programs`, including a type a project
 adds in its own :file:`Configuration/CategoryTypes.yaml` and without one it
 removes there.

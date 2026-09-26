@@ -1,0 +1,2 @@
+# Leave out the categories no program in the storage carries.
+plugin.tx_academicprograms.filter.hideDisabledOptions = 1

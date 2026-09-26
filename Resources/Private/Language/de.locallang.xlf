@@ -68,6 +68,10 @@
         <source>All options</source>
         <target>Alle Optionen</target>
       </trans-unit>
+      <trans-unit id="filter.moreFilters">
+        <source>More filters</source>
+        <target>Weitere Filter</target>
+      </trans-unit>
 
       <!-- Program finder -->
 

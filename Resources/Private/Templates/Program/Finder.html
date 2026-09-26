@@ -11,7 +11,9 @@
     with one category uid each. The list answers the POST with a redirect to its filtered URL.
     `listUri` is empty without a target page that can be linked, and `filterTypes.visible`
     without a category type that has categories: either way there is nothing to offer, so
-    no form renders.
+    no form renders. The "All" option, the options without results and the UpperCamelCase
+    `extensionName` follow the filter of the list, see `Program/DemandCategories.html`; the
+    finder shows every filter type, it has no "More filters".
 </f:comment>
 <f:if condition="{listUri} && {filterTypes.visible}">
     <f:form
@@ -21,10 +23,11 @@
         class="academic-programs-finder"
     >
         <div class="row align-items-end">
+            <f:variable name="allOptionsLabel" value="{f:translate(key: 'sys_category.programs.allOptions', extensionName: 'AcademicPrograms')}"/>
             <f:for each="{filterTypes.visible}" as="categoryKey">
                 <div class="col-12 col-md">
                     <label for="academic-programs-finder-{categoryKey}-{data.uid}" class="form-label">
-                        {f:translate(key: 'sys_category.programs.{categoryKey}', extensionName: 'academic_programs')}
+                        {f:translate(key: 'sys_category.programs.{categoryKey}', extensionName: 'AcademicPrograms')}
                     </label>
 
                     <ct:form.filterSelect
@@ -35,10 +38,12 @@
                         optionValueField="uid"
                         optionLabelField="title"
                         prependOptionLabel="{f:translate(
-                            key: 'sys_category.programs.allOptions',
-                            extensionName: 'academic_programs'
+                            key: 'sys_category.programs.allOptions.{categoryKey}',
+                            extensionName: 'AcademicPrograms',
+                            default: allOptionsLabel
                         )}"
                         prependOptionValue=""
+                        hideDisabledOptions="{settings.filter.hideDisabledOptions}"
                         class="form-select"
                     />
                 </div>
@@ -46,7 +51,7 @@
 
             <div class="col-12 col-md-auto">
                 <button type="submit" class="btn btn-primary">
-                    {f:translate(key: 'finder.submit', extensionName: 'academic_programs')}
+                    {f:translate(key: 'finder.submit', extensionName: 'AcademicPrograms')}
                 </button>
             </div>
         </div>

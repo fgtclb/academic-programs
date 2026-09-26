@@ -5,7 +5,9 @@ declare(strict_types=1);
 namespace FGTCLB\AcademicPrograms\Tests\Functional\Plugins;
 
 use FGTCLB\AcademicPrograms\Tests\Functional\AbstractAcademicProgramsTestCase;
+use FGTCLB\TestingHelper\FunctionalTestCase\CategoryFilterFormAssertionTrait;
 use FGTCLB\TestingHelper\FunctionalTestCase\FrontendPluginRenderingTrait;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
 use SBUERK\TYPO3\Testing\SiteHandling\SiteBasedTestTrait;
 
@@ -26,6 +28,7 @@ use SBUERK\TYPO3\Testing\SiteHandling\SiteBasedTestTrait;
  */
 final class AcademicProgramsFinderTest extends AbstractAcademicProgramsTestCase
 {
+    use CategoryFilterFormAssertionTrait;
     use FrontendPluginRenderingTrait;
     use SiteBasedTestTrait;
 
@@ -52,16 +55,17 @@ final class AcademicProgramsFinderTest extends AbstractAcademicProgramsTestCase
     }
 
     /**
-     * @param string $siteWideFilterTypes A constants fixture below `Fixtures/TypoScript/Constants/`, empty for none.
+     * @param string $constantsFixture A constants fixture below `Fixtures/TypoScript/Constants/`, empty for none.
+     * @param string $setup TypoScript added after the setup of the extension, the way a site package adds its own.
      */
-    private function setUpSite(string $siteWideFilterTypes = ''): void
+    private function setUpSite(string $constantsFixture = '', string $setup = ''): void
     {
         $constants = [
             'EXT:fluid_styled_content/Configuration/TypoScript/constants.typoscript',
             'EXT:academic_programs/Configuration/TypoScript/constants.typoscript',
         ];
-        if ($siteWideFilterTypes !== '') {
-            $constants[] = 'EXT:academic_programs/Tests/Functional/Plugins/Fixtures/TypoScript/Constants/' . $siteWideFilterTypes . '.typoscript';
+        if ($constantsFixture !== '') {
+            $constants[] = 'EXT:academic_programs/Tests/Functional/Plugins/Fixtures/TypoScript/Constants/' . $constantsFixture . '.typoscript';
         }
         $this->setUpFrontendRootPage(
             pageId: 1,
@@ -74,6 +78,12 @@ final class AcademicProgramsFinderTest extends AbstractAcademicProgramsTestCase
                 ],
             ],
         );
+        if ($setup !== '') {
+            $connection = $this->getConnectionPool()->getConnectionForTable('sys_template');
+            $template = $connection->select(['uid', 'config'], 'sys_template', ['pid' => 1])->fetchAssociative();
+            $this->assertIsArray($template);
+            $connection->update('sys_template', ['config' => $template['config'] . LF . $setup], ['uid' => $template['uid']]);
+        }
         $this->writeFrontendPluginTestSite([
             $this->buildDefaultLanguageConfiguration(identifier: 'EN', base: '/'),
         ]);
@@ -263,6 +273,61 @@ final class AcademicProgramsFinderTest extends AbstractAcademicProgramsTestCase
         $this->assertSame(
             ['' => 'enabled', '1' => 'enabled', '2' => 'enabled', '3' => 'disabled', '8' => 'disabled'],
             $this->finderOptions($this->renderHomePage(), 'degree'),
+        );
+    }
+
+    /**
+     * With options without results hidden, the finder leaves out the Diploma and the
+     * Doctorate, the way the filter of the list does.
+     */
+    #[Test]
+    public function anOptionNoProgramInStorageCarriesIsLeftOutOnDemand(): void
+    {
+        $this->setUpSite('HideDisabledOptions');
+
+        $this->assertSame(
+            ['' => 'enabled', '1' => 'enabled', '2' => 'enabled'],
+            $this->finderOptions($this->renderHomePage(), 'degree'),
+        );
+    }
+
+    /**
+     * @return \Generator<string, array{0: string}>
+     */
+    public static function labelOverrideDataProvider(): \Generator
+    {
+        yield 'extension' => ['plugin.tx_academicprograms'];
+        yield 'plugin' => ['plugin.tx_academicprograms_programfinder'];
+    }
+
+    /**
+     * The "All" option of the degree reads a label of its type, as the filter of the list
+     * does; the topic has none and keeps the shared one.
+     */
+    #[DataProvider('labelOverrideDataProvider')]
+    #[Test]
+    public function theAllOptionReadsALabelOfItsTypeWhenOneExists(string $typoScriptPath): void
+    {
+        $this->setUpSite(setup: $typoScriptPath . '._LOCAL_LANG.default.sys_category.programs.allOptions.degree = All degrees');
+
+        $content = $this->renderHomePage();
+
+        $this->assertSame('All degrees', $this->categoryFilterOptions($content, self::FINDER_FORM_CLASS, 'degree')[0] ?? null);
+        $this->assertSame('All options', $this->categoryFilterOptions($content, self::FINDER_FORM_CLASS, 'topic')[0] ?? null);
+    }
+
+    /**
+     * The visible count is a setting of the list: the finder, compact by design, shows each of
+     * its selects and has no "More filters".
+     */
+    #[Test]
+    public function theFinderShowsEverySelectWhateverTheVisibleCountOfTheList(): void
+    {
+        $this->setUpSite('VisibleCountOne');
+
+        $this->assertSame(
+            ['visible' => ['degree', 'topic'], 'more' => [], 'disclosure' => 'none', 'summary' => null],
+            $this->renderedCategoryFilters($this->renderHomePage(), self::FINDER_FORM_CLASS),
         );
     }
 
