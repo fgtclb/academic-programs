@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace FGTCLB\AcademicPrograms\Controller;
 
+use FGTCLB\AcademicBase\Controller\DispatchModifyPluginViewEventMethodTrait;
 use FGTCLB\AcademicBase\Controller\GetCurrentContentRecordMethodTrait;
 use FGTCLB\AcademicPrograms\Domain\Model\Program;
 use FGTCLB\AcademicPrograms\Domain\Repository\ProgramRepository;
@@ -16,6 +17,7 @@ use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 
 class DetailsController extends ActionController
 {
+    use DispatchModifyPluginViewEventMethodTrait;
     use GetCurrentContentRecordMethodTrait;
 
     private ProgramFactsBuilder $programFactsBuilder;
@@ -44,6 +46,7 @@ class DetailsController extends ActionController
             'program' => $program,
             'facts' => $facts,
         ]);
+        $this->dispatchModifyPluginViewEvent($this->request, $this->settings, $this->view, $this->eventDispatcher);
 
         return $this->htmlResponse();
     }

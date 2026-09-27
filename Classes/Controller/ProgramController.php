@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace FGTCLB\AcademicPrograms\Controller;
 
+use FGTCLB\AcademicBase\Controller\DispatchModifyPluginViewEventMethodTrait;
 use FGTCLB\AcademicBase\Controller\GetCurrentContentRecordMethodTrait;
 use FGTCLB\AcademicPrograms\Domain\Repository\ProgramRepository;
 use FGTCLB\AcademicPrograms\Factory\DemandFactory;
@@ -19,6 +20,7 @@ use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 
 class ProgramController extends ActionController
 {
+    use DispatchModifyPluginViewEventMethodTrait;
     use GetCurrentContentRecordMethodTrait;
 
     /**
@@ -62,6 +64,7 @@ class ProgramController extends ActionController
             'categories' => $categories,
             'filterTypes' => $this->filterTypeResolver->resolveFromSettings($categories, $this->settings),
         ]);
+        $this->dispatchModifyPluginViewEvent($this->request, $this->settings, $this->view, $this->eventDispatcher);
 
         return $this->htmlResponse();
     }
@@ -94,6 +97,7 @@ class ProgramController extends ActionController
             'listUri' => $this->finderListUri(),
             'preselection' => $this->finderPreselection($categories, $filterTypes->getVisible()),
         ]);
+        $this->dispatchModifyPluginViewEvent($this->request, $this->settings, $this->view, $this->eventDispatcher);
 
         return $this->htmlResponse();
     }
