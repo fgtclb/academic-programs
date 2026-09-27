@@ -2,6 +2,7 @@ groups:
   - identifier: programs
     title: 'LLL:EXT:academic_programs/Resources/Private/Language/locallang_be.xlf:sys_category.programs.group'
     icon: 'EXT:academic_programs/Resources/Public/Icons/CategoryGroups/Programs.svg'
+    inlineIcon: true
 types:
   - identifier: admission_restriction
     title: 'LLL:EXT:academic_programs/Resources/Private/Language/locallang_be.xlf:sys_category.programs.admission_restriction'
