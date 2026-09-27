@@ -1,0 +1,27 @@
+"be_users",
+,"uid","pid","username","password","admin"
+,1,0,"admin","$1$tCrlLajZ$C0sikFQQ3SWaFAZ1Me0Z/1",1
+"pages",
+,"uid","pid","doktype","deleted","hidden","sys_language_uid","l10n_parent","l18n_cfg","perms_userid","perms_everybody","slug","title","backend_layout","credit_points","categories"
+,1,0,1,0,0,0,0,0,1,31,"/","Site Root","",0,0
+,2,1,1,0,0,0,0,0,1,31,"/programs","Programs","",0,0
+,5,1,254,0,0,0,0,0,1,31,"/categories","Categories","",0,0
+,10,1,20,0,0,0,0,0,1,31,"/applied-physics","Applied Physics","pagets__AcademicProgram",180,3
+,12,1,20,0,0,0,0,0,1,31,"/applied-physics-details","Applied Physics Details","pagets__AcademicProgram",180,3
+"sys_category",
+,"uid","pid","deleted","hidden","parent","type","title","sys_language_uid","l10n_parent"
+,1,5,0,0,0,"degree","Bachelor of Science",0,0
+,2,5,0,0,0,"standard_period","6 semesters",0,0
+,3,5,0,0,0,"location","Campus A",0,0
+"sys_category_record_mm",
+,"uid_local","uid_foreign","tablenames","fieldname","sorting","sorting_foreign"
+,1,10,"pages","categories",0,1
+,2,10,"pages","categories",0,2
+,3,10,"pages","categories",0,3
+,1,12,"pages","categories",0,1
+,2,12,"pages","categories",0,2
+,3,12,"pages","categories",0,3
+"tt_content",
+,"uid","pid","deleted","hidden","sys_language_uid","l18n_parent","colPos","sorting","CType","header","pages","recursive","pi_flexform"
+,1,12,0,0,0,0,0,256,"academicprograms_programdetails","","",0,""
+,2,2,0,0,0,0,0,256,"academicprograms_programlist","","",0,"<?xml version=""1.0"" encoding=""utf-8"" standalone=""yes"" ?><T3FlexForms><data><sheet index=""sDEF""><language index=""lDEF""><field index=""settings.hideFilter""><value index=""vDEF"">0</value></field><field index=""settings.hideSorting""><value index=""vDEF"">1</value></field><field index=""settings.sorting""><value index=""vDEF"">title asc</value></field><field index=""settings.categories""><value index=""vDEF"">0</value></field><field index=""settings.showHiddenRecords""><value index=""vDEF"">0</value></field></language></sheet></data></T3FlexForms>"
