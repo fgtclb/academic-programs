@@ -28,7 +28,9 @@ use SBUERK\TYPO3\Testing\SiteHandling\SiteBasedTestTrait;
  * markup the Breaking changelog publishes is asserted on its own.
  *
  * The order of the category types is the order of the category type registry, which is the
- * order of "Configuration/CategoryTypes.yaml": degree, standard period, location, topic.
+ * order of "Configuration/CategoryTypes.yaml" while no type declares a priority: degree,
+ * standard period, location, topic. A raised priority is covered by
+ * "CategoryTypes/CategoryTypePriorityTest".
  */
 final class ProgramFactsTest extends AbstractAcademicProgramsTestCase
 {

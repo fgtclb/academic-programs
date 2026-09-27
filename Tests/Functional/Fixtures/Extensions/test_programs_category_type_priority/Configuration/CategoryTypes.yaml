@@ -1,0 +1,8 @@
+# A project that wants the location in front of every other type of the `programs`
+# group raises its priority, without redeclaring it. Everything else stays as the
+# extension declared it.
+types:
+  - identifier: location
+    group: programs
+    priority: 10
+    useExisting: true

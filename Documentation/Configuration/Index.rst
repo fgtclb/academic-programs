@@ -385,8 +385,8 @@ settings of :ref:`program-page-layout`. A site that depends on the
 settings editor does not offer the setting there.
 
 With both empty the form offers every category type of the group that has a
-category, in the order the types are registered in — what it offered before
-the setting existed.
+category, in the order of the category types of the group — what it offered
+before the setting existed.
 
 A type is offered only when at least one category of that type exists. A
 category of an offered type that no listed program carries is still offered,
