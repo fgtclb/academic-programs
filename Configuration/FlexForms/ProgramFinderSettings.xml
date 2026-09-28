@@ -29,6 +29,15 @@
                     <maxitems>999</maxitems>
                 </config>
             </settings.filter.categoryTypes>
+            <settings.filter.includeSubcategories>
+                <label>LLL:EXT:academic_programs/Resources/Private/Language/locallang_be.xlf:flexform.filter.includeSubcategories.label</label>
+                <description>LLL:EXT:academic_programs/Resources/Private/Language/locallang_be.xlf:flexform.finder.includeSubcategories.description</description>
+                <config>
+                    <type>check</type>
+                    <renderType>checkboxToggle</renderType>
+                    <default>0</default>
+                </config>
+            </settings.filter.includeSubcategories>
             <settings.preselectedCategories>
                 <label>LLL:EXT:academic_programs/Resources/Private/Language/locallang_be.xlf:flexform.finder.preselectedCategories.label</label>
                 <description>LLL:EXT:academic_programs/Resources/Private/Language/locallang_be.xlf:flexform.finder.preselectedCategories.description</description>

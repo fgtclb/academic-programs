@@ -73,6 +73,8 @@ class DemandFactory
 
         // Set demand properties, which are always defined by plugin settings
         $demand->setShowHiddenRecords((bool)($settings['showHiddenRecords'] ?? false));
+        $filterSettings = is_array($settings['filter'] ?? null) ? $settings['filter'] : [];
+        $demand->setIncludeSubcategories((bool)($filterSettings['includeSubcategories'] ?? false));
         $demand->setPages([]);
         if (isset($contentElementData['pages'])
             && is_string($contentElementData['pages'])

@@ -36,6 +36,7 @@ final class ProgramDemandTest extends UnitTestCase
         $this->assertSame([], $subject->getPages());
         $this->assertNull($subject->getFilterCollection());
         $this->assertFalse($subject->getShowHiddenRecords());
+        $this->assertFalse($subject->getIncludeSubcategories());
     }
 
     #[Test]

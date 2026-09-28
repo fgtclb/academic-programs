@@ -1,0 +1,31 @@
+"pages",
+,"uid","pid","doktype","sys_language_uid","hidden","deleted","title","slug","categories"
+,1,0,1,0,0,0,"Site Root","/",0
+,5,1,254,0,0,0,"Categories","/categories",0
+,10,1,20,0,0,0,"Applied Physics","/applied-physics",2
+,11,1,20,0,0,0,"Materials Science","/materials-science",2
+,12,1,20,0,0,0,"Business Studies","/business-studies",2
+,13,1,20,0,0,0,"Molecular Chemistry","/molecular-chemistry",2
+,14,1,20,0,0,0,"Electrical Engineering","/electrical-engineering",2
+"sys_category",
+,"uid","pid","deleted","hidden","parent","type","title","sys_language_uid","l10n_parent"
+,1,5,0,0,0,"degree","Bachelor",0,0
+,2,5,0,0,0,"degree","Master",0,0
+,3,5,0,0,1,"degree","Bachelor of Science",0,0
+,4,5,0,0,3,"degree","Bachelor of Science with Honours",0,0
+,6,5,0,0,0,"location","Berlin",0,0
+,7,5,0,0,0,"location","Potsdam",0,0
+,8,5,0,0,2,"degree","Master of Science",0,0
+,9,5,0,1,1,"degree","Bachelor of Engineering",0,0
+"sys_category_record_mm",
+,"uid_local","uid_foreign","tablenames","fieldname","sorting","sorting_foreign"
+,3,10,"pages","categories",0,1
+,6,10,"pages","categories",0,2
+,4,11,"pages","categories",0,1
+,7,11,"pages","categories",0,2
+,1,12,"pages","categories",0,1
+,7,12,"pages","categories",0,2
+,8,13,"pages","categories",0,1
+,6,13,"pages","categories",0,2
+,9,14,"pages","categories",0,1
+,6,14,"pages","categories",0,2

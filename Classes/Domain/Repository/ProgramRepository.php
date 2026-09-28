@@ -7,6 +7,7 @@ namespace FGTCLB\AcademicPrograms\Domain\Repository;
 use FGTCLB\AcademicPrograms\Domain\Model\Dto\ProgramDemand;
 use FGTCLB\AcademicPrograms\Domain\Model\Program;
 use FGTCLB\AcademicPrograms\Enumeration\PageTypes;
+use FGTCLB\CategoryTypes\Domain\Repository\CategoryRepository;
 use TYPO3\CMS\Core\Type\Exception\InvalidEnumerationValueException;
 use TYPO3\CMS\Extbase\Persistence\Generic\QueryResult;
 use TYPO3\CMS\Extbase\Persistence\QueryInterface;
@@ -17,6 +18,17 @@ use TYPO3\CMS\Extbase\Persistence\Repository;
  */
 class ProgramRepository extends Repository
 {
+    private CategoryRepository $categoryRepository;
+
+    /**
+     * Method injection keeps the constructor of the Extbase repository, which project
+     * subclasses may call, unchanged.
+     */
+    final public function injectCategoryRepository(CategoryRepository $categoryRepository): void
+    {
+        $this->categoryRepository = $categoryRepository;
+    }
+
     /**
      * @return QueryResult<Program>
      * @throws InvalidEnumerationValueException
@@ -39,8 +51,22 @@ class ProgramRepository extends Repository
             $constraints[] = $query->in('pid', $demand->getPages());
         }
         if ($demand->getFilterCollection() !== null) {
+            $categoryUids = [];
             foreach ($demand->getFilterCollection()->getFilterCategories() as $category) {
-                $constraints[] = $query->contains('categories', $category->getUid());
+                $categoryUids[] = $category->getUid();
+            }
+            // Each selection is widened by its own subtree and the selections stay joined with
+            // AND. One `in()` over all uids would not do: Extbase joins the relation once per
+            // query, so two such constraints would have to match the same category row.
+            $descendantUids = $demand->getIncludeSubcategories()
+                ? $this->categoryRepository->findDescendantUids('programs', ...$categoryUids)
+                : [];
+            foreach ($categoryUids as $categoryUid) {
+                $matches = [$query->contains('categories', $categoryUid)];
+                foreach ($descendantUids[$categoryUid] ?? [] as $descendantUid) {
+                    $matches[] = $query->contains('categories', $descendantUid);
+                }
+                $constraints[] = count($matches) === 1 ? $matches[0] : $query->logicalOr(...$matches);
             }
         }
         // The method signature of logicalAnd and logicalOr has changed in TYPO3 v12

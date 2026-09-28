@@ -13,6 +13,7 @@ class ProgramDemand
     protected array $pages = [];
     protected ?FilterCollection $filterCollection = null;
     protected bool $showHiddenRecords = false;
+    protected bool $includeSubcategories = false;
     protected string $sorting = '';
     protected string $sortingField = '';
     protected string $sortingDirection = '';
@@ -59,6 +60,20 @@ class ProgramDemand
     public function getShowHiddenRecords(): bool
     {
         return $this->showHiddenRecords;
+    }
+
+    /**
+     * Whether a category of the filter collection also matches a program that carries one
+     * of its subcategories, at any depth.
+     */
+    public function setIncludeSubcategories(bool $includeSubcategories): void
+    {
+        $this->includeSubcategories = $includeSubcategories;
+    }
+
+    public function getIncludeSubcategories(): bool
+    {
+        return $this->includeSubcategories;
     }
 
     public function setFilterCollection(?FilterCollection $filterCollection): void

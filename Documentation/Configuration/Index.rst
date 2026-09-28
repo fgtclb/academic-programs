@@ -492,6 +492,65 @@ of the site package.
 
     The field :guilabel:`Filter types` of the content element.
 
+..  _program-list-subcategories:
+
+Matching subcategories
+======================
+
+Categories of the group `programs` can form a tree, a degree for example:
+
+..  code-block:: text
+    :caption: A degree tree
+
+    Bachelor
+        Bachelor of Science
+            Bachelor of Science with Honours
+        Bachelor of Engineering
+    Master
+        Master of Science
+
+By default a selected category finds only the programs that carry that very
+category. A visitor who filters by "Bachelor" does not find a program that
+carries only "Bachelor of Science", and the filter offers "Bachelor" as a
+disabled option as long as no listed program carries it.
+
+The field :guilabel:`Include subcategories` of the :guilabel:`Program List`
+content element, tab :guilabel:`Configuration`, off by default, changes both:
+
+*   A selected category finds every program that carries the category itself
+    or a category anywhere below it. That applies to a category the visitor
+    selects in the filter and to the :guilabel:`Default categories` of the
+    element.
+*   The filter offers a category as soon as a listed program carries it or one
+    of its subcategories. With
+    :typoscript:`plugin.tx_academicprograms.filter.hideDisabledOptions` set,
+    such a category is kept as well.
+
+Several selections still all have to match: "Bachelor" and "Berlin" find the
+programs with a Bachelor degree of any kind in Berlin, not every Bachelor
+program and every program in Berlin.
+
+Only categories the visitor can see take part. A hidden category, a category of
+a type outside the group `programs`, and everything below either of them are
+not part of the tree. A category that names one of its own subcategories as its
+parent does not break the list: each of the two finds the programs of the
+other.
+
+With the field switched on, assign each program only its most specific
+category, "Bachelor of Science" rather than "Bachelor of Science" and
+"Bachelor". The parent no longer has to be assigned for the filter, and no
+longer shows up in the facts of the program.
+
+The :guilabel:`Program Finder` has the same field for the options it offers,
+see :ref:`program-finder`. The finder does not decide which programs are
+found, the list on its target page does. Switch the field on in both elements.
+
+..  versionadded:: 3.0
+
+    The field :guilabel:`Include subcategories`. Up to 2.x a category matched
+    only itself, and projects assigned both levels and hid the parent in the
+    program output again.
+
 ..  _program-finder:
 
 The program finder
@@ -526,8 +585,13 @@ name. Its settings, tab :guilabel:`Configuration`:
     *   -   :guilabel:`Preselected categories`
         -   Selected when the page loads, one per select. Of two categories of
             one type the one higher in the category tree counts; a category of a
-            type the finder does not offer, and one no program carries, is not
-            preselected.
+            type the finder does not offer, and one the finder offers disabled,
+            is not preselected.
+    *   -   :guilabel:`Include subcategories`
+        -   Offers a category as soon as a program in the storage of the finder
+            carries one of its subcategories, and preselects it as well, see
+            :ref:`program-list-subcategories`. The list on the target page needs
+            the field as well, it decides which programs are found.
 
 The options of each select are the categories of its type. A category that no
 program in the storage of the finder carries is offered disabled, as in the

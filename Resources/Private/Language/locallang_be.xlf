@@ -47,6 +47,12 @@
       <trans-unit id="flexform.filter.categoryTypes.description">
         <source>The category filters the list offers, in this order. A chosen type without categories is left out. Empty: the filter types of the site, or every type with categories.</source>
       </trans-unit>
+      <trans-unit id="flexform.filter.includeSubcategories.label">
+        <source>Include subcategories</source>
+      </trans-unit>
+      <trans-unit id="flexform.filter.includeSubcategories.description">
+        <source>A selected category also finds the programs that carry one of its subcategories, and the filter offers it as soon as a listed program carries one of them. A program then only needs its most specific category, Bachelor of Science for example, without Bachelor as well.</source>
+      </trans-unit>
       <trans-unit id="flexform.hide_sorting.label">
         <source>Hide sorting</source>
       </trans-unit>
@@ -85,6 +91,9 @@
       </trans-unit>
       <trans-unit id="flexform.finder.categoryTypes.description">
         <source>A select for each chosen type, in this order. A chosen type without categories is left out. Empty: the filter types of the program list for the site, or the degree and the topic.</source>
+      </trans-unit>
+      <trans-unit id="flexform.finder.includeSubcategories.description">
+        <source>The finder offers a category as soon as a program carries one of its subcategories. Switch the option on in the program list of the target page as well, because that list decides which programs are found.</source>
       </trans-unit>
       <trans-unit id="flexform.finder.preselectedCategories.label">
         <source>Preselected categories</source>

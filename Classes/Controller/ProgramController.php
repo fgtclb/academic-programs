@@ -6,6 +6,8 @@ namespace FGTCLB\AcademicPrograms\Controller;
 
 use FGTCLB\AcademicBase\Controller\DispatchModifyPluginViewEventMethodTrait;
 use FGTCLB\AcademicBase\Controller\GetCurrentContentRecordMethodTrait;
+use FGTCLB\AcademicPrograms\Domain\Model\Dto\ProgramDemand;
+use FGTCLB\AcademicPrograms\Domain\Model\Program;
 use FGTCLB\AcademicPrograms\Domain\Repository\ProgramRepository;
 use FGTCLB\AcademicPrograms\Factory\DemandFactory;
 use FGTCLB\CategoryTypes\Collection\CategoryCollection;
@@ -54,7 +56,7 @@ class ProgramController extends ActionController
         );
 
         $programs = $this->programRepository->findByDemand($demandObject);
-        $categories = $this->categoryRepository->findAllApplicable('programs', ...array_values($programs->toArray()));
+        $categories = $this->findApplicableCategories($demandObject, array_values($programs->toArray()));
 
         $this->view->assignMultiple([
             'programs' => $programs,
@@ -83,7 +85,7 @@ class ProgramController extends ActionController
         $demandObject = $this->programDemandFactory->createDemandObject(null, $this->settings, $contentElementData);
 
         $programs = $this->programRepository->findByDemand($demandObject);
-        $categories = $this->categoryRepository->findAllApplicable('programs', ...array_values($programs->toArray()));
+        $categories = $this->findApplicableCategories($demandObject, array_values($programs->toArray()));
         $filterTypes = $this->filterTypeResolver->resolve(
             $categories,
             $this->filterCategoryTypes() ?: self::FINDER_DEFAULT_CATEGORY_TYPES,
@@ -190,6 +192,22 @@ class ProgramController extends ActionController
         }
 
         return $preselection;
+    }
+
+    /**
+     * The categories the filter offers, with the ones no listed program carries disabled. A
+     * list or finder that includes subcategories offers a category as soon as a program
+     * carries one of its subcategories, because that program is what selecting it finds.
+     *
+     * @param list<Program> $programs
+     */
+    private function findApplicableCategories(ProgramDemand $demand, array $programs): CategoryCollection
+    {
+        if ($demand->getIncludeSubcategories()) {
+            return $this->categoryRepository->findAllApplicableWithSubcategories('programs', ...$programs);
+        }
+
+        return $this->categoryRepository->findAllApplicable('programs', ...$programs);
     }
 
     /**
