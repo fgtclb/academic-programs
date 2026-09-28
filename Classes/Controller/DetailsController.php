@@ -6,6 +6,7 @@ namespace FGTCLB\AcademicPrograms\Controller;
 
 use FGTCLB\AcademicBase\Controller\DispatchModifyPluginViewEventMethodTrait;
 use FGTCLB\AcademicBase\Controller\GetCurrentContentRecordMethodTrait;
+use FGTCLB\AcademicBase\Domain\Model\Dto\PluginControllerActionContext;
 use FGTCLB\AcademicPrograms\Domain\Model\Program;
 use FGTCLB\AcademicPrograms\Domain\Repository\ProgramRepository;
 use FGTCLB\AcademicPrograms\Enumeration\ProgramFactsPlace;
@@ -32,6 +33,7 @@ class DetailsController extends ActionController
      */
     public function showAction(): ResponseInterface
     {
+        $context = new PluginControllerActionContext($this->request, $this->settings);
         /** @var array<string, mixed> $contentElementData */
         $contentElementData = $this->getCurrentContentObjectRenderer()?->data ?? [];
         $program = $this->programRepository->findByUid((int)($contentElementData['pid'] ?? 0));
@@ -46,7 +48,7 @@ class DetailsController extends ActionController
             'program' => $program,
             'facts' => $facts,
         ]);
-        $this->dispatchModifyPluginViewEvent($this->request, $this->settings, $this->view, $this->eventDispatcher);
+        $this->dispatchModifyPluginViewEvent($context, $this->view, $this->eventDispatcher);
 
         return $this->htmlResponse();
     }

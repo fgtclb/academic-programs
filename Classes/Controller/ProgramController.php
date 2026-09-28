@@ -6,6 +6,7 @@ namespace FGTCLB\AcademicPrograms\Controller;
 
 use FGTCLB\AcademicBase\Controller\DispatchModifyPluginViewEventMethodTrait;
 use FGTCLB\AcademicBase\Controller\GetCurrentContentRecordMethodTrait;
+use FGTCLB\AcademicBase\Domain\Model\Dto\PluginControllerActionContext;
 use FGTCLB\AcademicPrograms\Domain\Model\Dto\ProgramDemand;
 use FGTCLB\AcademicPrograms\Domain\Model\Program;
 use FGTCLB\AcademicPrograms\Domain\Repository\ProgramRepository;
@@ -46,6 +47,7 @@ class ProgramController extends ActionController
      */
     public function listAction(?array $demand = null): ResponseInterface
     {
+        $context = new PluginControllerActionContext($this->request, $this->settings);
         /** @var array<string, mixed> $contentElementData */
         $contentElementData = $this->getCurrentContentObjectRenderer()?->data ?? [];
         $this->redirectFilterSubmission($contentElementData);
@@ -66,7 +68,7 @@ class ProgramController extends ActionController
             'categories' => $categories,
             'filterTypes' => $this->filterTypeResolver->resolveFromSettings($categories, $this->settings),
         ]);
-        $this->dispatchModifyPluginViewEvent($this->request, $this->settings, $this->view, $this->eventDispatcher);
+        $this->dispatchModifyPluginViewEvent($context, $this->view, $this->eventDispatcher);
 
         return $this->htmlResponse();
     }
@@ -80,6 +82,7 @@ class ProgramController extends ActionController
      */
     public function finderAction(): ResponseInterface
     {
+        $context = new PluginControllerActionContext($this->request, $this->settings);
         /** @var array<string, mixed> $contentElementData */
         $contentElementData = $this->getCurrentContentObjectRenderer()?->data ?? [];
         $demandObject = $this->programDemandFactory->createDemandObject(null, $this->settings, $contentElementData);
@@ -99,7 +102,7 @@ class ProgramController extends ActionController
             'listUri' => $this->finderListUri(),
             'preselection' => $this->finderPreselection($categories, $filterTypes->getVisible()),
         ]);
-        $this->dispatchModifyPluginViewEvent($this->request, $this->settings, $this->view, $this->eventDispatcher);
+        $this->dispatchModifyPluginViewEvent($context, $this->view, $this->eventDispatcher);
 
         return $this->htmlResponse();
     }
