@@ -92,6 +92,9 @@
                         <tablenames>tt_content</tablenames>
                     </MM_match_fields>
                     <MM_opposite_field>items</MM_opposite_field>
+                    <treeConfig>
+                        <startingPoints>###SITE:settings.plugin.tx_academicprograms.categoryRootUids###</startingPoints>
+                    </treeConfig>
                 </config>
             </settings.categories>
             <settings.showHiddenRecords>

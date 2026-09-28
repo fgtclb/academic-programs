@@ -46,6 +46,9 @@
                     <relationship>oneToMany</relationship>
                     <foreign_table_where>AND {#sys_category}.{#type} != '' AND {#sys_category}.{#sys_language_uid} IN (-1, 0)</foreign_table_where>
                     <maxitems>99</maxitems>
+                    <treeConfig>
+                        <startingPoints>###SITE:settings.plugin.tx_academicprograms.categoryRootUids###</startingPoints>
+                    </treeConfig>
                 </config>
             </settings.preselectedCategories>
         </el>

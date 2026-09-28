@@ -2,8 +2,12 @@
 
 declare(strict_types=1);
 
+use FGTCLB\AcademicPrograms\Backend\FormDataProvider\CategoryTreeRoot;
 use FGTCLB\AcademicPrograms\Controller\DetailsController;
 use FGTCLB\AcademicPrograms\Controller\ProgramController;
+use TYPO3\CMS\Backend\Form\FormDataProvider\SiteResolving;
+use TYPO3\CMS\Backend\Form\FormDataProvider\TcaCategory;
+use TYPO3\CMS\Backend\Form\FormDataProvider\TcaColumnsOverrides;
 use TYPO3\CMS\Extbase\Utility\ExtensionUtility;
 
 defined('TYPO3') or die;
@@ -50,4 +54,20 @@ defined('TYPO3') or die;
     // cache entry, rather than the redirect of a filter submission signing one entry per
     // combination of categories and sorting that anybody cares to submit.
     $GLOBALS['TYPO3_CONF_VARS']['FE']['cacheHash']['excludedParameters'][] = '^tx_academicprograms_programlist[demand]';
+
+    // The category trees of program pages, of the list and of the finder: the record form,
+    // a FlexForm field of it, and the tree the form loads afterwards. The marker of a program
+    // page arrives with the columns overrides of its page type, which "flexFormSegment" does
+    // not run, and a dependency that is not part of a group is ignored there.
+    foreach (['tcaDatabaseRecord', 'flexFormSegment', 'tcaSelectTreeAjaxFieldData'] as $formDataGroup) {
+        $GLOBALS['TYPO3_CONF_VARS']['SYS']['formEngine']['formDataGroup'][$formDataGroup][CategoryTreeRoot::class] = [
+            'depends' => [
+                SiteResolving::class,
+                TcaColumnsOverrides::class,
+            ],
+            'before' => [
+                TcaCategory::class,
+            ],
+        ];
+    }
 })();

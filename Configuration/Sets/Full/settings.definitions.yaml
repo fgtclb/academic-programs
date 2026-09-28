@@ -1,11 +1,13 @@
 # Site settings of the program page type, of the facts of a program, of the
-# filters of the program list and of the content element header of the plugins.
+# filters of the program list, of the content element header of the plugins and
+# of the category trees editors pick the categories of a program from.
 #
-# Every path below is also assigned in
+# Every path below but "categoryRootUids" is also assigned in
 # "Configuration/TypoScript/constants.typoscript", and the default has to be the
 # same in both files: a site that uses the site set and the static template
 # reads the constants after the site settings, so a differing default resets
-# what the integrator configured, silently.
+# what the integrator configured, silently. "categoryRootUids" is read by the
+# backend alone, from the site configuration, so it has no constant.
 #
 # The file is declared with the aggregate set only - see "config.yaml" next to
 # it for what that means for a site that depends on a single component.
@@ -59,6 +61,12 @@ settings:
     category: academic.programs
     type: bool
     default: false
+  plugin.tx_academicprograms.categoryRootUids:
+    label: 'Category trees | Root categories'
+    description: 'The categories the category trees of program pages, of the program list and of the program finder start at, comma-separated uids. Editors are offered these categories and their subcategories only. Empty: the whole category tree.'
+    category: academic.programs
+    type: string
+    default: ''
   plugin.tx_academicprograms.renderContentElementHeader:
     label: 'Render the content element header in the plugins'
     description: 'Only for a site whose content element layout renders no header. The layouts of EXT:fluid_styled_content and of the bootstrap package render it, and switched on there the header appears twice.'

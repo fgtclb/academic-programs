@@ -634,6 +634,67 @@ tree, and a cached finder would keep offering what changed there.
     :ref:`breaking-program-finder-registered-upstream` for what such a project
     removes.
 
+..  _configuration-category-tree-root:
+
+Category tree root
+==================
+
+Editors pick the categories of a program page, the :guilabel:`Default
+categories` of the :guilabel:`Program List` and the :guilabel:`Preselected
+categories` of the :guilabel:`Program Finder` from a category tree. By default
+that is the whole category tree of the installation, although the program
+categories are usually one branch of it.
+
+The site setting :typoscript:`plugin.tx_academicprograms.categoryRootUids`
+names the categories these three trees start at, as a comma separated list of
+uids. Editors are then offered those categories and the categories below them,
+on the pages of that site:
+
+..  code-block:: yaml
+    :caption: config/sites/my-site/settings.yaml
+
+    plugin:
+      tx_academicprograms:
+        categoryRootUids: '12'
+
+One uid shows that category as the top of the tree, and it can be selected
+itself. Several uids show each of them as a top level entry below the root of
+the tree, which cannot be selected.
+
+The setting is empty by default. An empty setting, a value that names no
+category uid, and a page that belongs to no site keep the whole tree, exactly
+as before the setting existed. Only the program page type is affected: the
+categories of a standard page keep the whole tree.
+
+The setting is read by the backend from the site configuration, so it has no
+TypoScript constant, and a site on the static templates sets it in its site
+configuration too. It is declared with the aggregate set
+`fgtclb/academic-programs`. A site that does not depend on that set, because it
+depends on a component set only or uses the static templates, is not offered
+the setting in the site settings editor and writes it to its
+:file:`settings.yaml` itself, **in the nested form shown above**. TYPO3 keeps a
+setting that no set of the site declares only when it is written as a tree, and
+a dotted key such as `plugin.tx_academicprograms.categoryRootUids: '12'` has no
+effect there. The settings editor keeps such a value when it saves the other
+settings of the site.
+
+A program page may carry a category outside of the configured branch, for
+example one assigned before the setting was made. The tree does not show it.
+Saving the page without touching the tree keeps it, but as soon as an editor
+changes the selection in the tree, the field is written from what the tree
+shows, and the category is removed without notice. Set the root before the
+editors start, or remove such categories first.
+
+Page TSconfig still wins. A site that sets
+:typoscript:`TCEFORM.pages.categories.config.treeConfig.startingPoints` for the
+same purpose keeps that value until the line is removed.
+
+..  versionadded:: 3.0
+
+    Up to 2.x a project restricted the tree in its own TCA or page TSconfig,
+    usually with a uid per environment. See
+    :ref:`feature-1790613217` for what such a project removes.
+
 ..  _configuration-crop-variants:
 
 The crop variants of the program page media

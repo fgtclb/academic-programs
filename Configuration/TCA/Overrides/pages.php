@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use FGTCLB\AcademicBase\TcaManipulator;
+use FGTCLB\AcademicPrograms\Backend\FormDataProvider\CategoryTreeRoot;
 use FGTCLB\AcademicPrograms\Enumeration\PageTypes;
 use TYPO3\CMS\Core\Domain\Repository\PageRepository;
 use TYPO3\CMS\Core\Utility\ArrayUtility;
@@ -164,6 +165,12 @@ defined('TYPO3') or die;
             'selectedRatio' => '3:4',
         ],
     ];
+
+    // The category tree of a program page starts at the categories the site setting names. The form data provider
+    // CategoryTreeRoot replaces the marker with them, and removes it where the setting names no category, so a page
+    // of a site without the setting, or outside of every site, keeps the whole tree.
+    $GLOBALS['TCA']['pages']['types'][PageTypes::TYPE_ACADEMIC_PROGRAM]['columnsOverrides']['categories']['config']['treeConfig']['startingPoints']
+        = CategoryTreeRoot::MARKER;
 
     //==================================================================================================================
     // Page TSconfig, selectable in the page field "Page TSconfig" for installations that do not use site sets.
