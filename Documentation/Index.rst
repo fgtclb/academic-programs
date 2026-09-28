@@ -59,6 +59,10 @@ for all academic extensions on the `extension points page of academic_base
 
         Configure the extension and its plugins for your installation.
 
+    ..  card:: :ref:`For developers <developers>`
+
+        The events a project listens to instead of replacing classes.
+
     ..  card:: :ref:`Known problems <known-problems>`
 
         Known issues and information about them.
@@ -76,6 +80,7 @@ for all academic extensions on the `extension points page of academic_base
     Introduction/Index
     Installation/Index
     Configuration/Index
+    Developers/Index
     KnownProblems/Index
     Changelog/Changelog-3
     Changelog/Changelog-2

@@ -1,0 +1,4 @@
+# The page data listener hands back a copy of the program data with another subtitle and
+# other credit points.
+plugin.tx_academicprograms.settings.testProgramDataSubtitle = Subtitle from a listener
+plugin.tx_academicprograms.settings.testProgramDataCreditPoints = 240

@@ -7,9 +7,12 @@ namespace FGTCLB\AcademicPrograms\Controller;
 use FGTCLB\AcademicBase\Controller\DispatchModifyPluginViewEventMethodTrait;
 use FGTCLB\AcademicBase\Controller\GetCurrentContentRecordMethodTrait;
 use FGTCLB\AcademicBase\Domain\Model\Dto\PluginControllerActionContext;
+use FGTCLB\AcademicBase\Domain\Model\Dto\PluginControllerActionContextInterface;
 use FGTCLB\AcademicPrograms\Domain\Model\Dto\ProgramDemand;
 use FGTCLB\AcademicPrograms\Domain\Model\Program;
 use FGTCLB\AcademicPrograms\Domain\Repository\ProgramRepository;
+use FGTCLB\AcademicPrograms\Event\ModifyProgramDemandEvent;
+use FGTCLB\AcademicPrograms\Event\ModifyProgramListEvent;
 use FGTCLB\AcademicPrograms\Factory\DemandFactory;
 use FGTCLB\CategoryTypes\Collection\CategoryCollection;
 use FGTCLB\CategoryTypes\Domain\Repository\CategoryRepository;
@@ -47,7 +50,7 @@ class ProgramController extends ActionController
      */
     public function listAction(?array $demand = null): ResponseInterface
     {
-        $context = new PluginControllerActionContext($this->request, $this->settings);
+        $context = $this->pluginControllerActionContext();
         /** @var array<string, mixed> $contentElementData */
         $contentElementData = $this->getCurrentContentObjectRenderer()?->data ?? [];
         $this->redirectFilterSubmission($contentElementData);
@@ -57,11 +60,25 @@ class ProgramController extends ActionController
             $contentElementData
         );
 
+        /** @var ModifyProgramDemandEvent $demandEvent */
+        $demandEvent = $this->eventDispatcher->dispatch(new ModifyProgramDemandEvent($demandObject, $context));
+        $demandObject = $demandEvent->getDemand();
+
         $programs = $this->programRepository->findByDemand($demandObject);
         $categories = $this->findApplicableCategories($demandObject, array_values($programs->toArray()));
 
+        /** @var ModifyProgramListEvent $listEvent */
+        $listEvent = $this->eventDispatcher->dispatch(new ModifyProgramListEvent(
+            programs: $programs,
+            categories: $categories,
+            demand: $demandObject,
+            view: $this->view,
+            pluginControllerActionContext: $context,
+        ));
+
+        $categories = $listEvent->getCategories();
         $this->view->assignMultiple([
-            'programs' => $programs,
+            'programs' => $listEvent->getPrograms(),
             'data' => $contentElementData,
             'record' => $this->getCurrentContentRecord($this->getCurrentContentObjectRenderer()),
             'demand' => $demandObject,
@@ -82,13 +99,28 @@ class ProgramController extends ActionController
      */
     public function finderAction(): ResponseInterface
     {
-        $context = new PluginControllerActionContext($this->request, $this->settings);
+        $context = $this->pluginControllerActionContext();
         /** @var array<string, mixed> $contentElementData */
         $contentElementData = $this->getCurrentContentObjectRenderer()?->data ?? [];
         $demandObject = $this->programDemandFactory->createDemandObject(null, $this->settings, $contentElementData);
 
+        /** @var ModifyProgramDemandEvent $demandEvent */
+        $demandEvent = $this->eventDispatcher->dispatch(new ModifyProgramDemandEvent($demandObject, $context));
+        $demandObject = $demandEvent->getDemand();
+
         $programs = $this->programRepository->findByDemand($demandObject);
         $categories = $this->findApplicableCategories($demandObject, array_values($programs->toArray()));
+
+        /** @var ModifyProgramListEvent $listEvent */
+        $listEvent = $this->eventDispatcher->dispatch(new ModifyProgramListEvent(
+            programs: $programs,
+            categories: $categories,
+            demand: $demandObject,
+            view: $this->view,
+            pluginControllerActionContext: $context,
+        ));
+
+        $categories = $listEvent->getCategories();
         $filterTypes = $this->filterTypeResolver->resolve(
             $categories,
             $this->filterCategoryTypes() ?: self::FINDER_DEFAULT_CATEGORY_TYPES,
@@ -261,6 +293,15 @@ class ProgramController extends ActionController
             ),
             1790226084,
         );
+    }
+
+    /**
+     * Protected, so a subclass that overrides an action can dispatch the events with the
+     * same context.
+     */
+    protected function pluginControllerActionContext(): PluginControllerActionContextInterface
+    {
+        return new PluginControllerActionContext($this->request, $this->settings);
     }
 
     private function getCurrentContentObjectRenderer(): ?ContentObjectRenderer

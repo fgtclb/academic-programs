@@ -5,9 +5,10 @@ declare(strict_types=1);
 namespace FGTCLB\AcademicPrograms\DataProcessing;
 
 use FGTCLB\AcademicPrograms\Enumeration\ProgramFactsPlace;
+use FGTCLB\AcademicPrograms\Event\ModifyProgramDataEvent;
 use FGTCLB\AcademicPrograms\Factory\ProgramDataFactory;
 use FGTCLB\AcademicPrograms\Service\ProgramFactsBuilder;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
+use Psr\EventDispatcher\EventDispatcherInterface;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 use TYPO3\CMS\Frontend\ContentObject\DataProcessorInterface;
 
@@ -18,11 +19,16 @@ use TYPO3\CMS\Frontend\ContentObject\DataProcessorInterface;
  * the order of the option `factsFields` - a comma-separated field list, see
  * {@see ProgramFactsBuilder}. The option takes the field list through the processor rather
  * than through `settings`, which a PAGEVIEW page object does not read.
+ *
+ * {@see ModifyProgramDataEvent} lets a listener change the data before the facts are built
+ * from it, so the facts show what the listener changed.
  */
 class ProgramDataProcessor implements DataProcessorInterface
 {
     public function __construct(
         private readonly ProgramFactsBuilder $programFactsBuilder,
+        private readonly ProgramDataFactory $programDataFactory,
+        private readonly EventDispatcherInterface $eventDispatcher,
     ) {}
 
     /**
@@ -47,8 +53,13 @@ class ProgramDataProcessor implements DataProcessorInterface
             $pageData = $processedData['page']->getPageRecord() ?? [];
         }
         if ($pageData !== []) {
-            $programDataFactory = GeneralUtility::makeInstance(ProgramDataFactory::class);
-            $program = $programDataFactory->get($pageData);
+            /** @var ModifyProgramDataEvent $event */
+            $event = $this->eventDispatcher->dispatch(new ModifyProgramDataEvent(
+                $this->programDataFactory->get($pageData),
+                $pageData,
+                $cObj->getRequest(),
+            ));
+            $program = $event->getProgram();
             $processedData['program'] = $program;
             $processedData['facts'] = $this->programFactsBuilder->build(
                 $program,

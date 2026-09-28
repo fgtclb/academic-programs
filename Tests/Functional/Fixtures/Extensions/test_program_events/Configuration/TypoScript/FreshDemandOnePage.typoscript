@@ -1,0 +1,5 @@
+# The demand listener hands back a demand it built itself, restricted to the root page.
+# A controller that queried the demand it built instead would list the programs of the
+# storage folder of the element.
+plugin.tx_academicprograms.settings.testProgramDemandReplaceWithFresh = 1
+plugin.tx_academicprograms.settings.testProgramDemandReplacementPages = 1

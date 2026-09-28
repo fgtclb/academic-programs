@@ -142,8 +142,8 @@ final class ProgramDataFactoryTest extends AbstractAcademicProgramsTestCase
 
     private function programOfPage(int $pageId): ProgramData
     {
-        // Obtained the way `ProgramDataProcessor` obtains it - the factory is not a
-        // public service, so `$this->get()` cannot be used here.
+        // Obtained through makeInstance(): the factory is not a public service, so
+        // `$this->get()` cannot be used here.
         return GeneralUtility::makeInstance(ProgramDataFactory::class)->get($this->pageRecord($pageId));
     }
 

@@ -52,11 +52,13 @@ new markup.
 
 The data processor of the program page,
 :php:`\FGTCLB\AcademicPrograms\DataProcessing\ProgramDataProcessor`, builds
-the facts and takes the builder as a constructor argument. A project subclass of
-it that declares a constructor of its own has to pass that argument on, and a
-subclass named in TypoScript by its class name is only given the argument when
-the project's own :file:`Services.yaml` registers it as a public service -
-otherwise TYPO3 creates it without arguments, which is fatal.
+the facts and takes its collaborators as constructor arguments: the facts
+builder, the data factory and the event dispatcher (see
+:ref:`feature-1790604743`). A project subclass of it that declares a
+constructor of its own has to pass them on, and a subclass named in TypoScript
+by its class name is only given the arguments when the project's own
+:file:`Services.yaml` registers it as a public service. Otherwise TYPO3 creates
+it without arguments, which is fatal.
 
 Affected Installations
 ======================

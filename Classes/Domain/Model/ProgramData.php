@@ -8,6 +8,13 @@ use FGTCLB\CategoryTypes\Collection\CategoryCollection;
 use FGTCLB\CategoryTypes\Domain\Repository\CategoryRepository;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
+/**
+ * The data of a program page, built from its page record by
+ * {@see \FGTCLB\AcademicPrograms\Factory\ProgramDataFactory} and handed to the page template as
+ * `program`.
+ *
+ * @api
+ */
 class ProgramData implements ProgramFactsSourceInterface
 {
     protected int $pid = 0;

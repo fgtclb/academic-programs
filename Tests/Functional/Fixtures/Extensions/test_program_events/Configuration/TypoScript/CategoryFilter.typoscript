@@ -1,0 +1,3 @@
+# The demand listener hands back a copy of the demand restricted to the degree
+# "Master of Science".
+plugin.tx_academicprograms.settings.testProgramDemandCategory = 2

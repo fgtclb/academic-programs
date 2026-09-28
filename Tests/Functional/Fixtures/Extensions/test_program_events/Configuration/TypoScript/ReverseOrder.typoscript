@@ -1,0 +1,2 @@
+# The list listener replaces the queried programs with the same query in reverse order.
+plugin.tx_academicprograms.settings.testProgramListReverse = 1
