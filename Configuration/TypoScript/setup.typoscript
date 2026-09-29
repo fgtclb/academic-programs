@@ -16,9 +16,10 @@
 plugin.tx_academicprograms {
   settings {
     # The facts of the details content element and of the program card, see
-    # "constants.typoscript". The program page reads its facts through the option
-    # "factsFields" of its data processor instead.
+    # "constants.typoscript". The program page reads them through the options
+    # "factsFields" and "factsMostSpecificOnly" of its data processor instead.
     facts.fields = {$plugin.tx_academicprograms.facts.fields}
+    facts.mostSpecificOnly = {$plugin.tx_academicprograms.facts.mostSpecificOnly}
     card.fields = {$plugin.tx_academicprograms.card.fields}
     # The filters of the list and the finder, see "constants.typoscript". The field
     # "Filter types" in the FlexForm of either element overrides the filter types.

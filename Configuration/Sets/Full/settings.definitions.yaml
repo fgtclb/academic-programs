@@ -37,6 +37,12 @@ settings:
     category: academic.programs
     type: string
     default: ''
+  plugin.tx_academicprograms.facts.mostSpecificOnly:
+    label: 'Program facts | Most specific category only'
+    description: 'Leaves a category out of the facts of the program page, the program details content element and the program card when the program also carries a descendant of it of the same category type: with "Bachelor" and its subcategory "Bachelor of Science" assigned, only "Bachelor of Science" is shown. Only assigned categories are compared, so a level that is not assigned breaks the line. Filters are not affected.'
+    category: academic.programs
+    type: bool
+    default: false
   plugin.tx_academicprograms.card.fields:
     label: 'Program facts | Facts of the program card'
     description: 'The facts each program card of the program list shows, in this order, with the same identifiers as the facts of the program page. Empty shows the degree.'

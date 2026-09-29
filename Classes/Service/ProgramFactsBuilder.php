@@ -25,6 +25,10 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  * - the details content element: every category type;
  * - the card: the degree.
  *
+ * With `$mostSpecificCategoriesOnly`, a category type fact leaves out every category that is
+ * an ancestor of another category of the same type the program carries, see
+ * {@see \FGTCLB\CategoryTypes\Collection\CategoryCollection::getMostSpecificCategoriesByType()}.
+ *
  * "Every category type" is taken in the order of
  * {@see \FGTCLB\CategoryTypes\Collection\CategoryCollection::getAllCategoriesByType()},
  * which is the order of the category type registry for the group. This class keeps no type
@@ -40,9 +44,16 @@ final readonly class ProgramFactsBuilder
     /**
      * @return list<ProgramFact>
      */
-    public function build(ProgramFactsSourceInterface $program, string $fields, ProgramFactsPlace $place): array
-    {
-        $categoriesByType = $program->getCategoryCollection()->getAllCategoriesByType();
+    public function build(
+        ProgramFactsSourceInterface $program,
+        string $fields,
+        ProgramFactsPlace $place,
+        bool $mostSpecificCategoriesOnly = false,
+    ): array {
+        $categoryCollection = $program->getCategoryCollection();
+        $categoriesByType = $mostSpecificCategoriesOnly
+            ? $categoryCollection->getMostSpecificCategoriesByType()
+            : $categoryCollection->getAllCategoriesByType();
         $identifiers = GeneralUtility::trimExplode(',', $fields, true);
         if ($identifiers === []) {
             $identifiers = match ($place) {

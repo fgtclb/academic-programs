@@ -17,8 +17,10 @@ use TYPO3\CMS\Frontend\ContentObject\DataProcessorInterface;
  *
  * Adds the variables `program` and `facts`. `facts` are the facts of the program page, in
  * the order of the option `factsFields` - a comma-separated field list, see
- * {@see ProgramFactsBuilder}. The option takes the field list through the processor rather
- * than through `settings`, which a PAGEVIEW page object does not read.
+ * {@see ProgramFactsBuilder}. With the option `factsMostSpecificOnly` set, a category is left
+ * out of the facts when the program carries a descendant of it of the same type. The options
+ * reach the processor directly rather than through `settings`, which a PAGEVIEW page object
+ * does not read.
  *
  * {@see ModifyProgramDataEvent} lets a listener change the data before the facts are built
  * from it, so the facts show what the listener changed.
@@ -65,6 +67,7 @@ class ProgramDataProcessor implements DataProcessorInterface
                 $program,
                 (string)$cObj->stdWrapValue('factsFields', $processorConfiguration),
                 ProgramFactsPlace::Page,
+                (bool)$cObj->stdWrapValue('factsMostSpecificOnly', $processorConfiguration),
             );
         }
         return $processedData;

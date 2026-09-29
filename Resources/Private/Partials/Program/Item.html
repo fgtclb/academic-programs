@@ -22,9 +22,10 @@
 
         <f:comment>
             The facts of the card, from the setting "plugin.tx_academicprograms.card.fields":
-            the degree unless the setting names others.
+            the degree unless the setting names others. "facts.mostSpecificOnly" leaves out
+            a category whose descendant the program carries as well.
         </f:comment>
-        <f:variable name="cardFacts" value="{ace:program.facts(program: program, fields: settings.card.fields)}" />
+        <f:variable name="cardFacts" value="{ace:program.facts(program: program, fields: settings.card.fields, mostSpecificOnly: settings.facts.mostSpecificOnly)}" />
         <f:render
             partial="Program/Facts"
             arguments="{

@@ -335,7 +335,7 @@ helper builds them for a program:
           data-namespace-typo3-fluid="true">
 
     <f:variable name="cardFacts"
-                value="{ace:program.facts(program: program, fields: settings.card.fields)}" />
+                value="{ace:program.facts(program: program, fields: settings.card.fields, mostSpecificOnly: settings.facts.mostSpecificOnly)}" />
     <f:render partial="Program/Facts" arguments="{facts: cardFacts}" />
 
     </html>
@@ -345,6 +345,48 @@ helper builds them for a program:
     Up to 2.x the facts were fixed in the templates, and the partial
     :file:`Program/Categories.html` rendered the categories. See
     :ref:`breaking-program-categories-partial-removed`.
+
+..  _program-facts-most-specific-category:
+
+Only the most specific category
+-------------------------------
+
+Editors often assign a parent category together with its subcategory, "Bachelor"
+and "Bachelor of Science" for example, so that a filter on the parent finds the
+program. The facts then show both. The setting
+:typoscript:`plugin.tx_academicprograms.facts.mostSpecificOnly` leaves a
+category out when the program carries a descendant of it of the same category
+type as well:
+
+..  list-table::
+    :header-rows: 1
+
+    *   -   Site setting / constant
+        -   Default
+        -   Applies to
+    *   -   :typoscript:`plugin.tx_academicprograms.facts.mostSpecificOnly`
+        -   `false`
+        -   the program page, the :guilabel:`Program Details` content element
+            and each card of the :guilabel:`Program List`
+
+..  code-block:: yaml
+    :caption: config/sites/my-site/settings.yaml
+
+    plugin:
+      tx_academicprograms:
+        facts:
+          mostSpecificOnly: true
+
+*   Only the categories assigned to the program are compared. A level that is
+    not assigned breaks the line: with "Bachelor" and a subcategory two levels
+    below it assigned, but not the level between them, both are shown.
+*   A parent of another category type is shown, under its own type.
+*   A program that carries the parent alone shows the parent.
+*   Filters are not affected. The list and the finder find a program by every
+    category it carries, and offer the same options with the setting on.
+
+The view helper takes the setting as its argument :html:`mostSpecificOnly`, see
+above.
 
 ..  _program-list-filter-types:
 

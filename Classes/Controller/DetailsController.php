@@ -39,7 +39,12 @@ class DetailsController extends ActionController
         $program = $this->programRepository->findByUid((int)($contentElementData['pid'] ?? 0));
 
         $facts = $program instanceof Program
-            ? $this->programFactsBuilder->build($program, $this->factsFields(), ProgramFactsPlace::Details)
+            ? $this->programFactsBuilder->build(
+                $program,
+                $this->factsFields(),
+                ProgramFactsPlace::Details,
+                $this->mostSpecificCategoriesOnly(),
+            )
             : [];
 
         $this->view->assignMultiple([
@@ -69,6 +74,15 @@ class DetailsController extends ActionController
     {
         $facts = $this->settings['facts'] ?? [];
         return is_array($facts) && is_string($facts['fields'] ?? null) ? $facts['fields'] : '';
+    }
+
+    /**
+     * The switch "plugin.tx_academicprograms.settings.facts.mostSpecificOnly".
+     */
+    private function mostSpecificCategoriesOnly(): bool
+    {
+        $facts = $this->settings['facts'] ?? [];
+        return is_array($facts) && (bool)($facts['mostSpecificOnly'] ?? false);
     }
 
     private function getCurrentContentObjectRenderer(): ?ContentObjectRenderer

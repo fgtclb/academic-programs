@@ -17,7 +17,7 @@ use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
  * ```html
  * <html xmlns:ace="http://typo3.org/ns/FGTCLB/AcademicPrograms/ViewHelpers" data-namespace-typo3-fluid="true">
  *
- * <f:variable name="facts" value="{ace:program.facts(program: program, fields: settings.card.fields)}" />
+ * <f:variable name="facts" value="{ace:program.facts(program: program, fields: settings.card.fields, mostSpecificOnly: settings.facts.mostSpecificOnly)}" />
  * <f:render partial="Program/Facts" arguments="{facts: facts}" />
  * ```
  *
@@ -42,6 +42,7 @@ final class FactsViewHelper extends AbstractViewHelper
         $this->registerArgument('program', ProgramFactsSourceInterface::class, 'The program whose facts are built.', false);
         $this->registerArgument('fields', 'string', 'The comma-separated field list, "settings.card.fields" for the card.', false, '');
         $this->registerArgument('place', 'string', 'One of "page", "details" and "card"; any other value is read as "card".', false, ProgramFactsPlace::Card->value);
+        $this->registerArgument('mostSpecificOnly', 'bool', 'Leaves out a category the program also carries a descendant of, within the same type: "settings.facts.mostSpecificOnly".', false, false);
     }
 
     /**
@@ -57,6 +58,7 @@ final class FactsViewHelper extends AbstractViewHelper
             $program,
             (string)($this->arguments['fields'] ?? ''),
             ProgramFactsPlace::tryFrom((string)$this->arguments['place']) ?? ProgramFactsPlace::Card,
+            (bool)($this->arguments['mostSpecificOnly'] ?? false),
         );
     }
 }
