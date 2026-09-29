@@ -197,6 +197,18 @@
       <trans-unit id="pages.credit_points">
         <source>Credit points</source>
       </trans-unit>
+      <trans-unit id="pages.application_link">
+        <source>Application link</source>
+      </trans-unit>
+      <trans-unit id="pages.application_link.description">
+        <source>The page or external address where visitors apply for this program. Without it, the program page shows no application link.</source>
+      </trans-unit>
+      <trans-unit id="pages.application_link_label">
+        <source>Label of the application link</source>
+      </trans-unit>
+      <trans-unit id="pages.application_link_label.description">
+        <source>Up to 60 characters. Without a label, the link reads "Apply now".</source>
+      </trans-unit>
       <trans-unit id="pages.job_profile">
         <source>Job profile</source>
       </trans-unit>

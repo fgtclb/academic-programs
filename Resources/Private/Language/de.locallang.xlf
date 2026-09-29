@@ -139,6 +139,10 @@
         <source>Performance scope</source>
         <target>Leistungsumfang</target>
       </trans-unit>
+      <trans-unit id="page.applicationLink.defaultLabel">
+        <source>Apply now</source>
+        <target>Jetzt bewerben</target>
+      </trans-unit>
       <trans-unit id="page.backToList">
         <source>Back to all programs</source>
         <target>Zurück zu allen Programmen</target>

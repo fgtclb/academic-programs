@@ -1,0 +1,13 @@
+"pages",
+,"uid","pid","doktype","deleted","hidden","sys_language_uid","l10n_parent","l18n_cfg","slug","title","abstract","credit_points","categories","application_link","application_link_label"
+,1,0,1,0,0,0,0,0,"/","Site Root","",0,0,"",""
+,2,1,1,0,0,0,0,0,"/home","Home (EN)","",0,0,"",""
+,5,1,1,0,0,0,0,0,"/apply","Application","",0,0,"",""
+,6,1,1,0,1,0,0,0,"/closed-application","Closed application","",0,0,"",""
+,10,1,20,0,0,0,0,0,"/applied-physics","Applied Physics","",180,0,"t3://page?uid=5","Apply online"
+,11,1,20,0,0,0,0,0,"/molecular-chemistry","Molecular Chemistry","",120,0,"",""
+,12,1,20,0,0,0,0,0,"/nuclear-physics","Nuclear Physics","",180,0,"t3://page?uid=5",""
+,13,1,20,0,0,0,0,0,"/zoology","Zoology","",180,0,"t3://page?uid=6","Apply online"
+"tt_content",
+,"uid","pid","deleted","hidden","sys_language_uid","l18n_parent","CType","header","pages","recursive","pi_flexform"
+,1,2,0,0,0,0,"academicprograms_programlist","","",0,"<?xml version=""1.0"" encoding=""utf-8"" standalone=""yes"" ?><T3FlexForms><data><sheet index=""sDEF""><language index=""lDEF""><field index=""settings.hideFilter""><value index=""vDEF"">1</value></field><field index=""settings.hideSorting""><value index=""vDEF"">1</value></field><field index=""settings.sorting""><value index=""vDEF"">title asc</value></field><field index=""settings.categories""><value index=""vDEF"">0</value></field><field index=""settings.showHiddenRecords""><value index=""vDEF"">0</value></field></language></sheet></data></T3FlexForms>"

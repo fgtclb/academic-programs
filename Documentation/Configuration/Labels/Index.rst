@@ -70,6 +70,8 @@ or the code fills in, a category type or a field name for example.
         - :file:`Templates/Program/Finder.html`
     *   - :xml:`list.noProgramsFound`
         - :file:`Partials/Program/ItemList.html`
+    *   - :xml:`page.applicationLink.defaultLabel`
+        - :file:`Partials/Program/Page/CallToAction.html`
     *   - :xml:`page.backToList`
         - :file:`Partials/Program/Page/Header.html`
     *   - :xml:`sorting.direction.label`

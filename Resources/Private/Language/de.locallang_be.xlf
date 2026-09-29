@@ -251,6 +251,22 @@
         <source>Credit points</source>
         <target>Leistungspunkte</target>
       </trans-unit>
+      <trans-unit id="pages.application_link">
+        <source>Application link</source>
+        <target>Bewerbungslink</target>
+      </trans-unit>
+      <trans-unit id="pages.application_link.description">
+        <source>The page or external address where visitors apply for this program. Without it, the program page shows no application link.</source>
+        <target>Die Seite oder externe Adresse, auf der sich Interessierte für dieses Programm bewerben. Bleibt das Feld leer, zeigt die Programmseite keinen Bewerbungslink.</target>
+      </trans-unit>
+      <trans-unit id="pages.application_link_label">
+        <source>Label of the application link</source>
+        <target>Beschriftung des Bewerbungslinks</target>
+      </trans-unit>
+      <trans-unit id="pages.application_link_label.description">
+        <source>Up to 60 characters. Without a label, the link reads "Apply now".</source>
+        <target>Bis zu 60 Zeichen. Bleibt das Feld leer, lautet der Link „Jetzt bewerben“.</target>
+      </trans-unit>
       <trans-unit id="pages.job_profile">
         <source>Job profile</source>
         <target>Berufsprofil</target>

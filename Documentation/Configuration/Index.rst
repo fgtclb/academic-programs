@@ -182,7 +182,7 @@ missing Fluid layout does.
 The parts of a program page
 ---------------------------
 
-The section :html:`Main` renders four partials, each of which can be replaced
+The section :html:`Main` renders five partials, each of which can be replaced
 on its own:
 
 ..  list-table::
@@ -196,6 +196,8 @@ on its own:
     *   -   :file:`Program/Page/Media.html`
         -   The first image of the page, through the shared image partial of
             :guilabel:`EXT:academic_base`.
+    *   -   :file:`Program/Page/CallToAction.html`
+        -   The application link, see :ref:`program-application-link`.
     *   -   :file:`Program/Page/Facts.html`
         -   The facts of the program, through :file:`Program/Facts.html` - see
             :ref:`program-facts`.
@@ -231,6 +233,57 @@ renders as before.
     Up to 2.x the page template declared no layout and rendered every part
     inline, and its paths used the key `100`. See
     :ref:`breaking-program-page-renders-inside-the-site-layout`.
+
+..  _program-application-link:
+
+The application link of a program page
+======================================
+
+The :guilabel:`Program` tab of a program page offers two fields after the
+credit points:
+
+..  list-table::
+    :header-rows: 1
+
+    *   -   Field
+        -   Column
+        -   Meaning
+    *   -   :guilabel:`Application link`
+        -   `application_link`
+        -   A page of the installation or an external URL, picked in the link
+            browser. Without it, the page shows no application link.
+    *   -   :guilabel:`Label of the application link`
+        -   `application_link_label`
+        -   Up to 60 characters. Without a label, the link reads "Apply now",
+            translated into the language of the page.
+
+Both fields belong to the program page type alone, and both are translated
+with the page, so a translated program page can link a translated application
+form.
+
+The partial :file:`Program/Page/CallToAction.html` renders the link as a
+button right after the header and the image, before the facts. It is a partial
+of its own rather than part of the header, so an override of
+:file:`Program/Page/Header.html` keeps the link. A link whose target cannot be
+linked, such as a hidden page, renders nothing, the label included. A page
+without a translation counts as such only in a language that does not fall
+back to another one.
+
+Templates reach both values as :html:`{program.applicationLink}` and
+:html:`{program.applicationLinkLabel}`, on the program page and in a list item
+of the :guilabel:`Program List`. The label is empty where the editor left it
+empty. The default list item does not render the link. An override of
+:file:`Program/Item.html` renders the partial of the program page, which needs
+nothing but the program, and gets the same button with the same rules:
+
+..  code-block:: html
+    :caption: EXT:my_sitepackage/Resources/Private/Partials/Program/Item.html
+
+    <f:render partial="Program/Page/CallToAction" arguments="{program: program}" />
+
+The button sits in an element with the class `academic-programs-application`
+in both places. An override of :file:`Program/Page/CallToAction.html` changes
+the button of the program page and of every list item that renders it.
 
 ..  _program-facts:
 

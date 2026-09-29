@@ -1,0 +1,2 @@
+# A project that overrides the program list item to render the application link.
+plugin.tx_academicprograms.view.partialRootPath = EXT:academic_programs/Tests/Functional/Plugins/Fixtures/AcademicProgramsApplicationLink/Partials/

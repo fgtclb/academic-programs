@@ -29,6 +29,12 @@ return [
             'prerequisites' => [
                 'fieldName' => 'prerequisites',
             ],
+            'applicationLink' => [
+                'fieldName' => 'application_link',
+            ],
+            'applicationLinkLabel' => [
+                'fieldName' => 'application_link_label',
+            ],
         ],
     ],
 ];

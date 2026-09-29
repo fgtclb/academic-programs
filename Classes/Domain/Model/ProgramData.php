@@ -27,6 +27,8 @@ class ProgramData implements ProgramFactsSourceInterface
     protected string $jobProfile = '';
     protected string $performanceScope = '';
     protected string $prerequisites = '';
+    protected string $applicationLink = '';
+    protected string $applicationLinkLabel = '';
 
     public function __construct()
     {
@@ -136,6 +138,35 @@ class ProgramData implements ProgramFactsSourceInterface
     public function getPrerequisites(): string
     {
         return $this->prerequisites;
+    }
+
+    public function setApplicationLink(string $applicationLink): void
+    {
+        $this->applicationLink = $applicationLink;
+    }
+
+    /**
+     * The link to the application for the program, as the link field stores it: a
+     * `t3://` link or an external URL, for `f:link.typolink`. Empty when the editor set
+     * none.
+     */
+    public function getApplicationLink(): string
+    {
+        return $this->applicationLink;
+    }
+
+    public function setApplicationLinkLabel(string $applicationLinkLabel): void
+    {
+        $this->applicationLinkLabel = $applicationLinkLabel;
+    }
+
+    /**
+     * The label of the application link. Empty when the editor set none, the page then
+     * renders a translated default.
+     */
+    public function getApplicationLinkLabel(): string
+    {
+        return $this->applicationLinkLabel;
     }
 
     public function getCategories(): ?CategoryCollection

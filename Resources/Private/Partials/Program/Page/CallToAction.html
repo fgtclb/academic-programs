@@ -1,0 +1,39 @@
+<html
+    lang="en"
+    xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+    data-namespace-typo3-fluid="true"
+>
+
+<f:comment>
+    The application link of the program page: the page or URL of the field "Application
+    link", labelled with the field "Label of the application link", or "Apply now" when
+    the editor left the label empty. An empty link renders nothing.
+
+    A sibling of the header rather than part of it, so a project that replaces
+    "Program/Page/Header" keeps the link. It needs "program" alone, so a list item
+    renders it as well, which is why its class is a block of its own rather than an
+    element of "academic-programs-detail".
+</f:comment>
+
+<f:if condition="{program.applicationLink}">
+    <f:comment>
+        Resolved first, so a target that cannot be linked - a hidden or deleted page, or
+        an untranslated one in a language without a fallback - renders no link rather than
+        the bare label.
+    </f:comment>
+    <f:variable name="applicationUri" value="{f:uri.typolink(parameter: program.applicationLink)}" />
+    <f:if condition="{applicationUri}">
+        <f:variable name="applicationLabel" value="{f:translate(key: 'page.applicationLink.defaultLabel', extensionName: 'AcademicPrograms')}" />
+        <f:if condition="{program.applicationLinkLabel}">
+            <f:variable name="applicationLabel" value="{program.applicationLinkLabel}" />
+        </f:if>
+        <p class="academic-programs-application">
+            <f:link.typolink
+                parameter="{program.applicationLink}"
+                class="btn btn-primary"
+            >{applicationLabel}</f:link.typolink>
+        </p>
+    </f:if>
+</f:if>
+
+</html>

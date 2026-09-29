@@ -25,6 +25,8 @@ class Program extends AbstractEntity implements GetCategoryCollectionInterface, 
     protected string $jobProfile = '';
     protected string $performanceScope = '';
     protected string $prerequisites = '';
+    protected string $applicationLink = '';
+    protected string $applicationLinkLabel = '';
     protected ?CategoryCollection $attributes = null;
 
     /** @var ObjectStorage<FileReference> */
@@ -97,6 +99,23 @@ class Program extends AbstractEntity implements GetCategoryCollectionInterface, 
     public function getPrerequisites(): string
     {
         return $this->prerequisites;
+    }
+
+    /**
+     * The link to the application for the program: a `t3://` link or an external URL, for
+     * `f:link.typolink`. Empty when the editor set none.
+     */
+    public function getApplicationLink(): string
+    {
+        return $this->applicationLink;
+    }
+
+    /**
+     * The label of the application link. Empty when the editor set none.
+     */
+    public function getApplicationLinkLabel(): string
+    {
+        return $this->applicationLinkLabel;
     }
 
     public function getAttributes(): CategoryCollection

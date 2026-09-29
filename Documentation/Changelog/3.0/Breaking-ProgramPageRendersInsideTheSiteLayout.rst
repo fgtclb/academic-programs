@@ -25,7 +25,9 @@ From 3.0 on:
     layout of this extension, which renders the section alone.
 *   The section renders four partials: :file:`Program/Page/Header.html`,
     :file:`Program/Page/Media.html`, :file:`Program/Page/Facts.html` and
-    :file:`Program/Page/Content.html`.
+    :file:`Program/Page/Content.html`. A fifth one,
+    :file:`Program/Page/CallToAction.html`, came with the application link,
+    see :ref:`feature-1790703178`.
 *   The header renders the subtitle of the program, and a link back to the
     page named by the new setting :typoscript:`plugin.tx_academicprograms.page.listPid`.
 *   :typoscript:`paths`, :typoscript:`templateRootPaths` and

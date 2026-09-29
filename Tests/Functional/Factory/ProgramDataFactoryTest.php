@@ -55,6 +55,8 @@ final class ProgramDataFactoryTest extends AbstractAcademicProgramsTestCase
         $this->assertSame('<p>Research and development in industry.</p>', $program->getJobProfile());
         $this->assertSame('<p>Six semesters, 30 credit points each.</p>', $program->getPerformanceScope());
         $this->assertSame('<p>General qualification for university entrance.</p>', $program->getPrerequisites());
+        $this->assertSame('t3://page?uid=5', $program->getApplicationLink());
+        $this->assertSame('Apply online', $program->getApplicationLinkLabel());
     }
 
     /**
@@ -72,6 +74,8 @@ final class ProgramDataFactoryTest extends AbstractAcademicProgramsTestCase
         $this->assertSame('', $program->getJobProfile());
         $this->assertSame('', $program->getPerformanceScope());
         $this->assertSame('', $program->getPrerequisites());
+        $this->assertSame('', $program->getApplicationLink());
+        $this->assertSame('', $program->getApplicationLinkLabel());
         $this->assertSame('Untouched Program', $program->getTitle());
     }
 

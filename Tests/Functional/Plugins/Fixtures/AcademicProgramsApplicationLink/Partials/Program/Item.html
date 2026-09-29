@@ -1,0 +1,15 @@
+<html
+    data-namespace-typo3-fluid="true"
+    xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+>
+
+<f:comment>
+    A project override of the program list item that renders the application link of
+    each program with the line the documentation shows.
+</f:comment>
+
+<div class="project-program-item" data-title="{program.title}">
+    <f:render partial="Program/Page/CallToAction" arguments="{program: program}" />
+</div>
+
+</html>

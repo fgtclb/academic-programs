@@ -29,6 +29,10 @@ class ProgramDataFactory
         $program->setJobProfile((string)$properties['job_profile']);
         $program->setPerformanceScope((string)$properties['performance_scope']);
         $program->setPrerequisites((string)$properties['prerequisites']);
+        // Read with a fallback: code updated before the database compare meets a page
+        // record without these two columns.
+        $program->setApplicationLink((string)($properties['application_link'] ?? ''));
+        $program->setApplicationLinkLabel((string)($properties['application_link_label'] ?? ''));
 
         return $program;
     }

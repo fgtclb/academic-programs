@@ -65,6 +65,28 @@ defined('TYPO3') or die;
                 'eval' => 'trim',
             ],
         ],
+        // The link to the application of the program and its label. Neither has a line in
+        // "ext_tables.sql": TYPO3 derives a text column for "link" and a varchar(60) for an
+        // "input" with "max" 60. Both are translatable, so a translated program page can link
+        // a translated application form.
+        'application_link' => [
+            'label' => 'LLL:EXT:academic_programs/Resources/Private/Language/locallang_be.xlf:pages.application_link',
+            'description' => 'LLL:EXT:academic_programs/Resources/Private/Language/locallang_be.xlf:pages.application_link.description',
+            'config' => [
+                'type' => 'link',
+                'allowedTypes' => ['page', 'url'],
+            ],
+        ],
+        'application_link_label' => [
+            'label' => 'LLL:EXT:academic_programs/Resources/Private/Language/locallang_be.xlf:pages.application_link_label',
+            'description' => 'LLL:EXT:academic_programs/Resources/Private/Language/locallang_be.xlf:pages.application_link_label.description',
+            'config' => [
+                'type' => 'input',
+                'max' => 60,
+                'size' => 30,
+                'eval' => 'trim',
+            ],
+        ],
         'job_profile' => [
             'label' => 'LLL:EXT:academic_programs/Resources/Private/Language/locallang_be.xlf:pages.job_profile',
             'config' => [
@@ -98,6 +120,8 @@ defined('TYPO3') or die;
         implode(',', [
             '--div--;LLL:EXT:academic_programs/Resources/Private/Language/locallang_be.xlf:pages.div.program',
             'credit_points',
+            'application_link',
+            'application_link_label',
             'job_profile',
             'performance_scope',
             'prerequisites',
