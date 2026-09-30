@@ -59,18 +59,17 @@ Impact
 *   A site configuration that names `fgtclb/academic-programs-content-load` as
     a dependency, directly or through a set of the site package, fails
     completely: TYPO3 answers every page of the site with HTTP 500 and the
-    message *"Site <identifier> depends on unavailable sets:
-    fgtclb/academic-programs-content-load"*. A site that depends on the
-    aggregate `fgtclb/academic-programs` is not affected.
-*   :typoscript:`styles.content.getContent` is no longer defined by this
-    extension. On a site that includes neither the content-load set of
-    :php:`EXT:academic_partners` nor that of :php:`EXT:academic_projects` -
-    directly, through their aggregate sets or through their static
-    templates - a template of the site package that renders it through
-    :html:`f:cObject` throws the exception above.
+    message *"Site <identifier> depends on unavailable sets: ..."*, which
+    names the removed set, or the set of the site package that depends on it.
+    A site that depends on the aggregate
+    `fgtclb/academic-programs` is not affected.
+*   :typoscript:`styles.content.getContent` is no longer defined. The
+    content-load sets of :php:`EXT:academic_partners` and
+    :php:`EXT:academic_projects` are removed in 3.0 as well. A template of the
+    site package that renders it through :html:`f:cObject` throws the
+    exception above.
 *   A template override of :file:`AcademicProgram.html` that still renders
-    :typoscript:`styles.content.getContent` throws the same exception on such
-    a site.
+    :typoscript:`styles.content.getContent` throws the same exception.
 *   A customisation of :typoscript:`styles.content.getContent`, for example
     one that slides the content from the parent pages, no longer reaches
     program pages. The same holds for a customisation of
