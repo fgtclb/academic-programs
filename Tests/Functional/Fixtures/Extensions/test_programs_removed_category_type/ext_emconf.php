@@ -12,8 +12,8 @@ $EM_CONF[$_EXTKEY] = [
     'constraints' => [
         'depends' => [
             'typo3' => '13.4.0-14.3.99',
-            'category_types' => '3.0.0',
             'academic_programs' => '3.0.0',
+            'category_types' => '3.0.0',
         ],
     ],
 ];
