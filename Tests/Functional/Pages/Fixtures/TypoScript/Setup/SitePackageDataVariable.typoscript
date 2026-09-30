@@ -1,0 +1,4 @@
+# A PAGEVIEW site package that assigns a variable "data" of its own, which PAGEVIEW does
+# not reserve. The page record of the page type must still come from "page".
+page.10.variables.data = TEXT
+page.10.variables.data.value = A value of the site package

@@ -365,6 +365,34 @@ final class AcademicProgramPageLayoutTest extends AbstractAcademicProgramsTestCa
     }
 
     /**
+     * @return \Generator<string, array{0: string}>
+     */
+    public static function sitePackageDataVariableDataProvider(): \Generator
+    {
+        yield 'a text' => ['SitePackageDataVariable.typoscript'];
+        yield 'the records of a query' => ['SitePackageDataRecords.typoscript'];
+    }
+
+    /**
+     * PAGEVIEW reserves "page" but not "data", so a site package may assign a "data" of
+     * its own. The data processor reads the page record from "page" first: the heading
+     * and the subtitle, which both come from the program it builds, still show. The
+     * records of a query are an array as well, so checking the type of "data" alone
+     * would not find the page record.
+     */
+    #[Test]
+    #[DataProvider('sitePackageDataVariableDataProvider')]
+    public function headerReadsThePageRecordFromPageWhenTheSitePackageAssignsData(string $dataVariable): void
+    {
+        $this->setUpSite('SitePackagePageViewAt100.typoscript', integratorSetup: [$dataVariable]);
+
+        $content = $this->renderFrontendPage(self::PROGRAM_PAGE);
+
+        $this->assertStringContainsString('<h1>Applied Physics</h1>', $content);
+        $this->assertStringContainsString('<p class="academic-programs-detail__subtitle">Master of Science</p>', $content);
+    }
+
+    /**
      * The program content sits between the two markers of the site layout.
      */
     private function assertProgramBetween(string $content, string $headerMarker, string $footerMarker): void

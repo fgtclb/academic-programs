@@ -11,6 +11,7 @@ use FGTCLB\AcademicPrograms\Service\ProgramFactsBuilder;
 use Psr\EventDispatcher\EventDispatcherInterface;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 use TYPO3\CMS\Frontend\ContentObject\DataProcessorInterface;
+use TYPO3\CMS\Frontend\Page\PageInformation;
 
 /**
  * Processor class for program page types
@@ -48,13 +49,14 @@ class ProgramDataProcessor implements DataProcessorInterface
         array $processorConfiguration,
         array $processedData
     ) {
-        // Try to fetch page data for FLUIDTEMPLATE
-        $pageData = $processedData['data'] ?? [];
-        if ($pageData === []) {
-            // If no page data is available in FLUIDTEMPLATE, try to fetch page data from PAGEVIEW
-            $pageData = $processedData['page']->getPageRecord() ?? [];
-        }
-        if ($pageData !== []) {
+        // The page record: the one of the page information object "page" a PAGEVIEW page
+        // object assigns, or "data" of a FLUIDTEMPLATE page object. "page" first, because
+        // PAGEVIEW reserves that name, while a PAGEVIEW site package may assign a "data" of
+        // its own, even an array that is not the page record. The partner and project page
+        // processors read it in the same order.
+        $page = $processedData['page'] ?? null;
+        $pageData = $page instanceof PageInformation ? $page->getPageRecord() : ($processedData['data'] ?? []);
+        if (is_array($pageData) && $pageData !== []) {
             /** @var ModifyProgramDataEvent $event */
             $event = $this->eventDispatcher->dispatch(new ModifyProgramDataEvent(
                 $this->programDataFactory->get($pageData),
