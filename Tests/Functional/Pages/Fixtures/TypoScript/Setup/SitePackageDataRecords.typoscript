@@ -1,0 +1,9 @@
+# A PAGEVIEW site package that assigns the records of a query as "data", an array that
+# is not the page record. The page record of the page type must still come from "page".
+page.10.dataProcessing.10 = database-query
+page.10.dataProcessing.10 {
+  table = pages
+  pidInList = 1
+  orderBy = uid
+  as = data
+}

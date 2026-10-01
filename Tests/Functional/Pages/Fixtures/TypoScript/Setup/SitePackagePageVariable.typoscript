@@ -1,0 +1,5 @@
+# A FLUIDTEMPLATE site package that assigns a variable "page" of its own, which
+# FLUIDTEMPLATE does not reserve. The page record of the page type must still come
+# from "data".
+page.10.variables.page = TEXT
+page.10.variables.page.value = A value of the site package

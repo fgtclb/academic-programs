@@ -98,8 +98,10 @@ final class AcademicProgramPageTemplateTest extends AbstractAcademicProgramsTest
 
     /**
      * The same site, rendered by a PAGEVIEW page object instead of a FLUIDTEMPLATE one.
+     *
+     * @param list<string> $additionalSetup TypoScript files included after the extension.
      */
-    private function setUpPageViewTestCase(): void
+    private function setUpPageViewTestCase(array $additionalSetup = []): void
     {
         $this->importCSVDataSet(__DIR__ . '/Fixtures/AcademicProgramPageTemplateTest/page.csv');
         $this->importCSVDataSet(__DIR__ . '/Fixtures/AcademicProgramPageTemplateTest/content.csv');
@@ -115,6 +117,7 @@ final class AcademicProgramPageTemplateTest extends AbstractAcademicProgramsTest
                     // The site package first, the extension after it - see the fixture.
                     'EXT:academic_programs/Tests/Functional/Pages/Fixtures/TypoScript/Setup/SitePackagePageView.typoscript',
                     'EXT:academic_programs/Configuration/TypoScript/setup.typoscript',
+                    ...$additionalSetup,
                 ],
             ],
         );
@@ -251,6 +254,49 @@ final class AcademicProgramPageTemplateTest extends AbstractAcademicProgramsTest
 
         $this->assertMainColumnInManualOrder($content);
         $this->assertStringNotContainsString('A note in the side column.', $content);
+    }
+
+    /**
+     * @return \Generator<string, array{0: string}>
+     */
+    public static function sitePackageDataVariableDataProvider(): \Generator
+    {
+        yield 'a text' => ['SitePackageDataVariable.typoscript'];
+        yield 'the records of a query' => ['SitePackageDataRecords.typoscript'];
+    }
+
+    /**
+     * PAGEVIEW reserves "page" but not "data", so a site package may assign a "data" of
+     * its own. The data processor reads the page record from "page" first, and the
+     * heading, which comes from the program it builds, still shows. The records of a
+     * query are an array as well, so checking the type of "data" alone would not find
+     * the page record.
+     */
+    #[Test]
+    #[DataProvider('sitePackageDataVariableDataProvider')]
+    #[Group('not-core-12')]
+    public function programPageReadsThePageRecordFromPageWhenAPageViewSitePackageAssignsData(string $dataVariable): void
+    {
+        $this->setUpPageViewTestCase(['EXT:academic_programs/Tests/Functional/Pages/Fixtures/TypoScript/Setup/' . $dataVariable]);
+
+        $content = $this->renderFrontendPage('https://www.acme.com/applied-physics');
+
+        $this->assertStringContainsString('<h1>Applied Physics</h1>', $content);
+    }
+
+    /**
+     * FLUIDTEMPLATE does not reserve "page", so a site package may assign a "page" of its
+     * own. Only an object with "getPageRecord()" counts as "page", anything else leaves
+     * the page record to "data".
+     */
+    #[Test]
+    public function programPageReadsThePageRecordFromDataWhenAFluidTemplateSitePackageAssignsPage(): void
+    {
+        $this->setUpTestCase(['EXT:academic_programs/Tests/Functional/Pages/Fixtures/TypoScript/Setup/SitePackagePageVariable.typoscript']);
+
+        $content = $this->renderFrontendPage('https://www.acme.com/applied-physics');
+
+        $this->assertStringContainsString('<h1>Applied Physics</h1>', $content);
     }
 
     #[Test]

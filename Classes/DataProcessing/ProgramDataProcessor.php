@@ -27,13 +27,17 @@ class ProgramDataProcessor implements DataProcessorInterface
         array $processorConfiguration,
         array $processedData
     ) {
-        // Try to fetch page data for FLUIDTEMPLATE
-        $pageData = $processedData['data'] ?? [];
-        if ($pageData === []) {
-            // If no page data is available in FLUIDTEMPLATE, try to fetch page data from PAGEVIEW
-            $pageData = $processedData['page']->getPageRecord() ?? [];
-        }
-        if ($pageData !== []) {
+        // The page record: the one of the page information object "page" a PAGEVIEW page
+        // object assigns on TYPO3 v13, or "data" of a FLUIDTEMPLATE page object. "page"
+        // first, because PAGEVIEW reserves that name, while a PAGEVIEW site package may
+        // assign a "data" of its own, even an array that is not the page record. The class
+        // of the page information object does not exist on TYPO3 v12, so the object is
+        // recognised by its method.
+        $page = $processedData['page'] ?? null;
+        $pageData = is_object($page) && method_exists($page, 'getPageRecord')
+            ? $page->getPageRecord()
+            : ($processedData['data'] ?? []);
+        if (is_array($pageData) && $pageData !== []) {
             $programDataFactory = GeneralUtility::makeInstance(ProgramDataFactory::class);
             $processedData['program'] = $programDataFactory->get($pageData);
         }
