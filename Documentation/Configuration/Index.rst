@@ -1000,6 +1000,19 @@ of the :sql:`sys_template` record, the page TSconfig of a page and the page
 TSconfig files selected on a page are all applied afterwards and still win. Use
 one mechanism per site and the question does not arise.
 
+..  _configuration-integration:
+
+Search, permissions and the wizard
+==================================
+
+The `Integration chapter of academic_base
+<https://docs.typo3.org/p/fgtclb/academic-base/main/en-us/Integration/Index.html>`__
+covers what an installation runs beside the academic extensions: an index
+queue for program pages with EXT:solr, the tables, fields and content types
+an editor group needs as a preset for b13/permission-sets, and how to move,
+rename or order the academic content elements in the new content element
+wizard.
+
 ..  toctree::
    :maxdepth: 5
    :titlesonly:
