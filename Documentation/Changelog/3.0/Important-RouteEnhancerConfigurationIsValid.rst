@@ -35,7 +35,9 @@ Three further defects made it a no-op even once it parsed:
   else it declares.
 
 The file now carries a complete enhancer for the program list plugin, mapping
-the sorting of the list into the path.
+the sorting of the list into the path. It later moved to
+:file:`Configuration/Routes/List.yaml`, and the former file imports it, see
+:ref:`important-1791043405`.
 
 Impact
 ======

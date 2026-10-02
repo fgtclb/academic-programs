@@ -25,14 +25,16 @@ What follows from the enhancer declaring none:
     sorting, and the page URL without arguments stays the preset list.
 *   A path with the sorting field alone, such as :file:`/last-updated`, does
     not resolve; both segments are required.
-*   A link to the list that carries no sorting at all - the action URL of the
-    plugin's own form, a hand written reset link - does not enter the route
+*   A link to the list that carries no argument at all - the action URL of the
+    plugin's own form, a hand written reset link - does not enter a route
     either. It keeps its plugin arguments in the query string, with a `cHash`,
-    and shows the list as the content element presets it.
+    and shows the list as the content element presets it. A link with a filter
+    and no sorting takes the filter route of :ref:`feature-1791043404`.
 
 The file first became usable in 2.4 (:ref:`important-1787055000`), and 2.4
 ships it without `defaults` as well, so the paths it generates keep resolving
-after the update to 3.0.
+after the update to 3.0 on English pages. On a German page the sorting values
+are translated now, see :ref:`important-1791043405`.
 
 Affected Installations
 ======================

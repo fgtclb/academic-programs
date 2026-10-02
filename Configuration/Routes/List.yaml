@@ -1,0 +1,98 @@
+# Route enhancer for the program list plugin.
+#
+# TYPO3 does not read this file on its own. Import it from the configuration of
+# the site that shows the plugin, and limit the enhancer to its pages:
+#
+#   imports:
+#     - resource: 'EXT:academic_programs/Configuration/Routes/List.yaml'
+#   routeEnhancers:
+#     AcademicPrograms:
+#       limitToPages: [23]
+#
+# A list URL carries the category filter and the sorting. They become path
+# segments, in this order:
+#
+#   /programs/filter/bachelor-of-science-2/last-updated/desc
+#   /de/studiengaenge/filter/bachelor-of-science-2/zuletzt-aktualisiert/absteigend
+#
+# Symfony leaves out trailing defaults only, so a single route with defaults
+# cannot spell "only a filter" or "only a sorting": it generates a broken path
+# for one and query arguments for the other. Every combination is a route of
+# its own instead. Of the routes whose variables a link carries, TYPO3 takes
+# the one with the most of them, so the order below is for reading only.
+#
+# Deliberately no "defaults": a link with the default sorting keeps it in the
+# path. The bare page is where the content element's preset categories and
+# sorting apply, and a visitor who cleared a preset must not get it back.
+#
+# "Configuration/Yaml/Routes.yaml" imports this file, so a site that imports
+# the older path gets these routes. The enhancer keeps its key for the same
+# reason: a "limitToPages" a site set for it still applies.
+routeEnhancers:
+  AcademicPrograms:
+    type: Extbase
+    extension: AcademicPrograms
+    plugin: ProgramList
+    routes:
+      - routePath: '/{filter_key}/{categories}/{sorting_field}/{sorting_direction}'
+        _controller: 'Program::list'
+        _arguments:
+          categories: 'demand/filterCollection/categories'
+          sorting_field: 'demand/sortingField'
+          sorting_direction: 'demand/sortingDirection'
+      - routePath: '/{filter_key}/{categories}'
+        _controller: 'Program::list'
+        _arguments:
+          categories: 'demand/filterCollection/categories'
+      - routePath: '/{sorting_field}/{sorting_direction}'
+        _controller: 'Program::list'
+        _arguments:
+          sorting_field: 'demand/sortingField'
+          sorting_direction: 'demand/sortingDirection'
+    defaultController: 'Program::list'
+    # An aspect makes its variable match anything, slashes included, so every
+    # variable is pinned to one segment. The value mappers check the values in
+    # the language of the site, and a path whose values they do not know falls
+    # through to the next route. A site that adds a language therefore adds
+    # "localeMap" items to the aspects and nothing else.
+    requirements:
+      categories: '[^/]+'
+      sorting_field: '[^/]+'
+      sorting_direction: '[^/]+'
+    aspects:
+      filter_key:
+        type: LocaleModifier
+        default: 'filter'
+        localeMap:
+          - locale: 'de.*'
+            value: 'filter'
+      # Not static mappable: the filter stays a dynamic argument, excluded from the
+      # cache hash with the rest of the demand, so every filter shares one page
+      # cache entry. A category that cannot be mapped keeps its query argument.
+      categories:
+        type: CategoryFilterMapper
+        group: programs
+      # Static, so each sorting is a page cache entry of its own, per page and
+      # language. The values are those of FGTCLB\AcademicPrograms\Enumeration\SortingOptions.
+      sorting_field:
+        type: StaticValueMapper
+        map:
+          title: 'title'
+          last-updated: 'lastUpdated'
+          sorting: 'sorting'
+        localeMap:
+          - locale: 'de.*'
+            map:
+              titel: 'title'
+              zuletzt-aktualisiert: 'lastUpdated'
+              sortierung: 'sorting'
+      sorting_direction:
+        type: StaticValueMapper
+        map:
+          asc: 'asc'
+          desc: 'desc'
+        localeMap:
+          - locale: 'de.*'
+            map:
+              aufsteigend: 'asc'
+              absteigend: 'desc'

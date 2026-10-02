@@ -1,54 +1,11 @@
-# Route enhancer for the program list plugin of this extension.
-#
-# This file is not read by TYPO3 on its own. Import it from the site
-# configuration of a site that shows the plugin:
+# The route enhancer of the program list moved to
+# "Configuration/Routes/List.yaml", next to the route files of the other
+# academic extensions. This file imports it, so a site configuration that
+# imports this path keeps working and gets the filter routes as well:
 #
 #   imports:
 #     - resource: 'EXT:academic_programs/Configuration/Yaml/Routes.yaml'
 #
-# It maps the sorting of the list into the path, so that
-# "?tx_academicprograms_programlist[demand][sortingField]=lastUpdated&…[sortingDirection]=desc"
-# becomes "/last-updated/desc". The values come from
-# "FGTCLB\AcademicPrograms\Enumeration\SortingOptions", which is also what the
-# select fields of the plugin offer.
-#
-# The sorting and filter form of the plugin submits by POST, and the plugin
-# answers with a redirect to the list carrying the selection as GET arguments.
-# That redirect is what this enhancer turns into a path; a category filter stays
-# in the query string.
-routeEnhancers:
-  AcademicPrograms:
-    type: Extbase
-    extension: AcademicPrograms
-    plugin: ProgramList
-    routes:
-      - routePath: '/{sorting_field}/{sorting_direction}'
-        _controller: 'Program::list'
-        _arguments:
-          sorting_field: demand/sortingField
-          sorting_direction: demand/sortingDirection
-    defaultController: 'Program::list'
-    # Deliberately no "defaults". A default is left out of a generated path, so
-    # the redirect for "title" and "asc" would end on the bare page - and the
-    # bare page is where the content element's preset categories and sorting
-    # apply. A visitor who cleared a preset category would get it back.
-    #
-    # An aspect makes AbstractEnhancer::applyRequirements() default a variable
-    # to ".+" - which is greedy, so "/last-updated/desc" would be swallowed by
-    # the first segment and resolve to nothing. Pinning the patterns here keeps
-    # the two apart; the values are those of the maps below.
-    requirements:
-      sorting_field: 'title|last-updated|sorting'
-      sorting_direction: 'asc|desc'
-    aspects:
-      sorting_field:
-        type: StaticValueMapper
-        map:
-          title: 'title'
-          last-updated: 'lastUpdated'
-          sorting: 'sorting'
-      sorting_direction:
-        type: StaticValueMapper
-        map:
-          asc: 'asc'
-          desc: 'desc'
+# Import "Configuration/Routes/List.yaml" in a new site configuration.
+imports:
+  - resource: 'EXT:academic_programs/Configuration/Routes/List.yaml'
