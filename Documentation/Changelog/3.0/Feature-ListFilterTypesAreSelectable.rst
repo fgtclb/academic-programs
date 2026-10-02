@@ -65,14 +65,13 @@ project removed after an element was saved. The filter types decide what the
 form offers, not what the list accepts: a link that filters by a category of a
 type the form does not offer still filters the list.
 
-Where :html:`{filterTypes}` does not reach the shipped partial — a project
-controller that overrides :php:`listAction()` without assigning it, or an
-override of :file:`Program/List.html` or :file:`Program/SortingAndFilters.html`
-that renders the partial with arguments of its own instead of :html:`{_all}` —
-the partial offers every type with a category, as before, and the field and
-the setting have no effect there. To use them, let the overriding action call
-:php:`parent::listAction()`, and pass :html:`filterTypes` on in a template
-that renders the partial.
+Where :html:`{filterTypes}` does not reach the shipped partial, in an override
+of :file:`Program/List.html` or :file:`Program/SortingAndFilters.html` that
+renders the partial with arguments of its own instead of :html:`{_all}`, the
+partial offers every type with a category, as before, and the field and the
+setting have no effect there. To use them, pass :html:`filterTypes` on in a
+template that renders the partial. A controller subclass that overrides
+:php:`listAction()` no longer loads in 3.0, see :ref:`breaking-1791043408`.
 
 A project that overrides :file:`Program/DemandCategories.html` and loops
 :html:`{categories.allCategoriesByType}` keeps its own list and ignores the new

@@ -67,9 +67,11 @@ Impact
 ======
 
 Nothing changes in an installation that has no listener. A project that
-subclasses :php:`ProgramController` to adjust the demand, the result or the view
-variables, queries the database from a ViewHelper for data of the program page,
-or replaces the data processor of the program page, can listen instead.
+queries the database from a ViewHelper for data of the program page, or
+replaces the data processor of the program page, can listen instead. A project
+that subclasses :php:`ProgramController` to adjust the demand, the result or the
+view variables has to listen instead, because the controller is final in 3.0
+and the subclass no longer loads, see :ref:`breaking-1791043408`.
 
 The constructor of
 :php:`\FGTCLB\AcademicPrograms\DataProcessing\ProgramDataProcessor` takes two

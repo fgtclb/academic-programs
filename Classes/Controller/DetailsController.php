@@ -10,22 +10,19 @@ use FGTCLB\AcademicBase\Domain\Model\Dto\PluginControllerActionContext;
 use FGTCLB\AcademicPrograms\Domain\Model\Program;
 use FGTCLB\AcademicPrograms\Domain\Repository\ProgramRepository;
 use FGTCLB\AcademicPrograms\Enumeration\ProgramFactsPlace;
-use FGTCLB\AcademicPrograms\Factory\DemandFactory;
 use FGTCLB\AcademicPrograms\Service\ProgramFactsBuilder;
 use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 
-class DetailsController extends ActionController
+final class DetailsController extends ActionController
 {
     use DispatchModifyPluginViewEventMethodTrait;
     use GetCurrentContentRecordMethodTrait;
 
-    private ProgramFactsBuilder $programFactsBuilder;
-
     public function __construct(
-        protected ProgramRepository $programRepository,
-        protected DemandFactory $programDemandFactory
+        private readonly ProgramRepository $programRepository,
+        private readonly ProgramFactsBuilder $programFactsBuilder,
     ) {}
 
     /**
@@ -56,15 +53,6 @@ class DetailsController extends ActionController
         $this->dispatchModifyPluginViewEvent($context, $this->view, $this->eventDispatcher);
 
         return $this->htmlResponse();
-    }
-
-    /**
-     * Method injection keeps the constructor, which project subclasses call, unchanged.
-     * Final, and named after what it is for, so a subclass cannot collide with it.
-     */
-    final public function injectProgramFactsBuilder(ProgramFactsBuilder $programFactsBuilder): void
-    {
-        $this->programFactsBuilder = $programFactsBuilder;
     }
 
     /**

@@ -40,11 +40,11 @@ editor and the visitor get depends on how the project registered it:
     extension stays the default, and the finder of this extension renders the
     element with its own options. A template of the project is used only when
     it is the :file:`Program/Finder.html` of the last bullet.
-*   A class that extends or replaces :php:`ProgramController` - a subclass, an
-    XCLASS or a service alias - and declares a :php:`finderAction()` of its own
-    now overrides the action of this extension. With a signature that is not
-    compatible (a required parameter, another return type) PHP refuses to load
-    the class, which takes the program list down as well.
+*   A subclass or an XCLASS of :php:`ProgramController` no longer loads at
+    all, because the controller is final in 3.0, see
+    :ref:`breaking-1791043408`. A class the project registers in its place as
+    a service alias, and that declares a :php:`finderAction()` of its own, now
+    renders the finder instead of the action of this extension.
 *   A template :file:`Program/Finder.html` of the project in the template root
     path of :typoscript:`plugin.tx_academicprograms` is now rendered by the
     action of this extension, with its variables.
@@ -90,8 +90,8 @@ extension: adapt it to the variables :html:`{filterTypes}`,
 :html:`{data}`, or delete it.
 
 The upgrade check :bash:`academic:upgrade:check` of :guilabel:`EXT:academic_base`
-reports an XCLASS of the controller; it does not report a project registration
-of the content type.
+reports an XCLASS of the controller as an error. It does not report a project
+registration of the content type.
 
 A finder under a content type of its own migrates by changing the content type
 of its records to `academicprograms_programfinder` and storing its target page

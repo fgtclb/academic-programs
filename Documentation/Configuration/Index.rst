@@ -502,14 +502,12 @@ extension's :file:`locallang.xlf`, as before.
 
 The partial :file:`Program/DemandCategories.html` renders the selects from the
 variable :html:`{filterTypes.visible}`, the identifiers of the offered types in
-their order. Where that variable does not reach the partial — a project
-controller that overrides :php:`listAction()`, or a template that renders the
-partial with arguments of its own instead of :html:`{_all}` — it offers every
-type with a category, as before, and the field and the setting have no effect.
-To use them, let the overriding action call :php:`parent::listAction()`, and
-pass :html:`filterTypes` on in a template that renders the partial. A project that
-overrides the partial itself and still loops
-:html:`{categories.allCategoriesByType}` keeps its own list as well.
+their order. Where that variable does not reach the partial, in a template that
+renders the partial with arguments of its own instead of :html:`{_all}`, it
+offers every type with a category, as before, and the field and the setting
+have no effect. To use them, pass :html:`filterTypes` on in a template that
+renders the partial. A project that overrides the partial itself and still
+loops :html:`{categories.allCategoriesByType}` keeps its own list as well.
 
 The :guilabel:`Program Finder` reads the same setting when its own field is
 empty, see :ref:`program-finder`.
@@ -648,9 +646,8 @@ the same names, like the filter settings above.
     the classes `academic-programs-active-filters` (with `__tags`, `__tag`, `__remove` and
     `__reset`) and `academic-programs-result-count`, and bring no styles.
 *   The reset link needs the variable :html:`{visitorSelection}`, which the list
-    action assigns. A project controller that overrides the action without
-    calling the parent action has to assign it, or the list offers no reset
-    link.
+    action assigns. A template that renders the partials with arguments of its
+    own has to pass it on, or the list offers no reset link.
 *   The labels are :xml:`filter.activeFilters.label`,
     :xml:`filter.activeFilters.remove`, :xml:`filter.reset`,
     :xml:`list.resultCount.singular` and :xml:`list.resultCount.plural` of this

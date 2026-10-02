@@ -263,8 +263,8 @@ final class AcademicProgramsListFilterTypesTest extends AbstractAcademicPrograms
 
     /**
      * A template that renders the filter partial without `filterTypes` - an override that
-     * passes its own arguments, or a controller subclass that overrides `listAction()` - gets
-     * the filters it got before the filter types existed rather than none.
+     * passes its own arguments - gets the filters it got before the filter types existed
+     * rather than none.
      */
     #[Test]
     public function withoutTheResolvedFilterTypesThePartialOffersEveryTypeWithCategories(): void

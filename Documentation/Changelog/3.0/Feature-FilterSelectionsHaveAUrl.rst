@@ -56,11 +56,10 @@ Impact
     target carries the plugin's own arguments only: a page type, arguments of
     other plugins and campaign parameters of the submitted URL are not kept,
     so a form posted to a page type endpoint lands on the full page.
-*   A controller subclass that overrides `listAction()` keeps working, but does
-    not redirect unless it calls the parent action or the protected
-    `redirectFilterSubmission()` first, as the shipped action does. A project
-    that added its own redirect after a POST can drop it; the URLs that redirect
-    produced change their `cHash`, see :ref:`important-1790226107`.
+*   A project that added its own redirect after a POST, in a subclass of the
+    controller, can drop it together with the subclass, which no longer loads
+    in 3.0, see :ref:`breaking-1791043408`. The URLs that redirect produced
+    change their `cHash`, see :ref:`important-1790226107`.
 *   The route enhancer this extension ships puts the sorting of the redirect
     into the path, and keeps a category filter in the query string. It declares
     no `defaults` any more, see :ref:`important-1790226103`; an enhancer a site
