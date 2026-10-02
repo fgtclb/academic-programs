@@ -104,7 +104,7 @@ values a project template renders:
 
     $event->getView()->assign('programCount', count($event->getPrograms()->toArray()));
 
-The six variables the action assigns after the event win over a variable of the
+The seven variables the action assigns after the event win over a variable of the
 same name a listener assigned here. The plugin view event, which runs last, can
 replace them.
 
@@ -136,6 +136,17 @@ the categories as they were selected, and the query widens each of them by its
 subcategories (see :ref:`program-list-subcategories`). A category a listener
 adds is widened the same way, and a listener that calls
 :php:`setIncludeSubcategories()` changes how every selected category matches.
+
+**A category a listener adds is shown as an active filter.** The active filter
+tags of :ref:`configuration-active-filters` read the demand the list was
+queried with, as the selects of the filter form do. A category a listener adds
+to every request is therefore a tag the visitor cannot remove, since the
+listener adds it again on the page the tag leads to, and every other tag link
+carries it. A listener that forces a category should leave the tags switched
+off, or override :file:`Partials/Program/ActiveFilters.html`. A collection a
+listener builds without the type identifiers of the group, through
+:php:`new CategoryCollection()` and :php:`attach()`, still filters the list
+but gets no tags, because the tags are grouped by type.
 
 **A replaced demand starts from the defaults.** :php:`setDemand()` is there for
 a listener that builds its own demand, and such a demand carries none of what

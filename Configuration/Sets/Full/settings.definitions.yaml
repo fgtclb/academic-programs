@@ -67,6 +67,24 @@ settings:
     category: academic.programs
     type: bool
     default: false
+  plugin.tx_academicprograms.filter.showActiveFilters:
+    label: 'Program list | Active filter tags'
+    description: 'Shows one tag per selected filter above the program list. Each tag links to the program list without that filter and keeps every other selection and the sorting.'
+    category: academic.programs
+    type: bool
+    default: false
+  plugin.tx_academicprograms.filter.showReset:
+    label: 'Program list | Reset link'
+    description: 'Shows a link that resets every filter, back to the program list as the content element presets it. Shown while the visitor has filtered.'
+    category: academic.programs
+    type: bool
+    default: false
+  plugin.tx_academicprograms.filter.showResultCount:
+    label: 'Program list | Result count'
+    description: 'Shows the number of programs found.'
+    category: academic.programs
+    type: bool
+    default: false
   plugin.tx_academicprograms.categoryRootUids:
     label: 'Category trees | Root categories'
     description: 'The categories the category trees of program pages, of the program list and of the program finder start at, comma-separated uids. Editors are offered these categories and their subcategories only. Empty: the whole category tree.'

@@ -54,5 +54,11 @@ plugin.tx_academicprograms {
     visibleCount = 0
     # cat=plugin.tx_academicprograms/filter; type=boolean; label=Hide options without results in the program list and the program finder: leave out the categories no listed program carries instead of showing them disabled
     hideDisabledOptions = 0
+    # cat=plugin.tx_academicprograms/filter; type=boolean; label=Active filter tags: one link per selected filter above the program list, which removes that filter
+    showActiveFilters = 0
+    # cat=plugin.tx_academicprograms/filter; type=boolean; label=Reset link: a link back to the program list as the content element presets it, shown while the visitor has filtered
+    showReset = 0
+    # cat=plugin.tx_academicprograms/filter; type=boolean; label=Result count: the number of programs found
+    showResultCount = 0
   }
 }

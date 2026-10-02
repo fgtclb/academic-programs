@@ -1,0 +1,20 @@
+<html
+    lang="en"
+    xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+    data-namespace-typo3-fluid="true"
+>
+
+<f:comment>
+    The number of programs the list found.
+
+    Arguments:
+    - count:  the number of programs
+</f:comment>
+<p class="academic-programs-result-count">
+    <f:if condition="{count} == 1">
+        <f:then>{f:translate(key: 'list.resultCount.singular', extensionName: 'AcademicPrograms', arguments: {0: count})}</f:then>
+        <f:else>{f:translate(key: 'list.resultCount.plural', extensionName: 'AcademicPrograms', arguments: {0: count})}</f:else>
+    </f:if>
+</p>
+
+</html>

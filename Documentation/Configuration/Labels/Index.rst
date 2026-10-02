@@ -64,12 +64,16 @@ or the code fills in, a category type or a field name for example.
 
     *   - Key
         - Shown by
+    *   - :xml:`filter.activeFilters.label`, :xml:`filter.activeFilters.remove`, :xml:`filter.reset`
+        - :file:`Partials/Program/ActiveFilters.html`
     *   - :xml:`filter.moreFilters`
         - :file:`Partials/Program/DemandCategories.html`
     *   - :xml:`finder.submit`
         - :file:`Templates/Program/Finder.html`
     *   - :xml:`list.noProgramsFound`
         - :file:`Partials/Program/ItemList.html`
+    *   - :xml:`list.resultCount.singular`, :xml:`list.resultCount.plural`
+        - :file:`Partials/Program/ResultCount.html`
     *   - :xml:`page.applicationLink.defaultLabel`
         - :file:`Partials/Program/Page/CallToAction.html`
     *   - :xml:`page.backToList`

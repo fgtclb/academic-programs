@@ -72,6 +72,18 @@
         <source>More filters</source>
         <target>Weitere Filter</target>
       </trans-unit>
+      <trans-unit id="filter.activeFilters.label">
+        <source>Active filters</source>
+        <target>Aktive Filter</target>
+      </trans-unit>
+      <trans-unit id="filter.activeFilters.remove">
+        <source>Remove filter: %s</source>
+        <target>Filter entfernen: %s</target>
+      </trans-unit>
+      <trans-unit id="filter.reset">
+        <source>Reset all filters</source>
+        <target>Alle Filter zurücksetzen</target>
+      </trans-unit>
 
       <!-- Program finder -->
 
@@ -119,6 +131,14 @@
       <trans-unit id="list.noProgramsFound">
         <source>No programs found.</source>
         <target>Keine Studiengänge gefunden.</target>
+      </trans-unit>
+      <trans-unit id="list.resultCount.singular">
+        <source>%d program found</source>
+        <target>%d Studiengang gefunden</target>
+      </trans-unit>
+      <trans-unit id="list.resultCount.plural">
+        <source>%d programs found</source>
+        <target>%d Studiengänge gefunden</target>
       </trans-unit>
 
       <!-- Detail -->

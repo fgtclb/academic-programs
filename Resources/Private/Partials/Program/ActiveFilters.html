@@ -1,0 +1,104 @@
+<html
+    lang="en"
+    xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+    xmlns:ct="http://typo3.org/ns/FGTCLB/CategoryTypes/ViewHelpers"
+    data-namespace-typo3-fluid="true"
+>
+
+<f:comment>
+    The active filters of the program list, as tags, and the link that resets them.
+
+    Every tag links to the list with its category removed, every other category and the
+    sorting kept. Without a category left the link carries the sorting alone, which still
+    counts as a selection: only a request without any demand argument applies the categories
+    the content element presets, so the visitor does not get a preset category back that
+    they removed.
+
+    The reset link leads to the page without any argument, so the list shows what the
+    content element presets. It is offered while the list shows a visitor's selection,
+    `visitorSelection`, and a category is selected or the content element preselects one,
+    also once the visitor removed the preselected one. On the bare page it would lead to
+    what is already shown, and with nothing selected and nothing preselected it would
+    reset nothing but the sorting or the page.
+
+    Only categories of the types the collection was built for get a tag, which are all of
+    them for the collections the demand factories build. A collection a demand listener
+    builds by hand without type identifiers gets no tags.
+
+    The tags follow the type order of the category group, the order of the filters. The loop
+    reads `allCategoriesByType` rather than the category collection itself: the collection is
+    an iterator with a single position, and `ct:filterArgument` walks the same collection
+    inside the loop, which would end the loop after the first tag.
+
+    Arguments: the "SortingAndFilters" partial renders it with "{_all}".
+    - demand:            the demand of the list shown
+    - settings:          for `filter.showActiveFilters` and `filter.showReset`
+    - visitorSelection:  whether the request carried a demand
+</f:comment>
+<f:variable name="categoryTags" value="0" />
+<f:if condition="{settings.filter.showActiveFilters} && {demand.filterCollection.filterCategories}">
+    <f:for each="{demand.filterCollection.filterCategories.allCategoriesByType}" as="categoriesOfType">
+        <f:if condition="{categoriesOfType}">
+            <f:variable name="categoryTags" value="1" />
+        </f:if>
+    </f:for>
+</f:if>
+<f:variable name="resettable" value="0" />
+<f:if condition="{demand.filterCollection.filterCategories}">
+    <f:variable name="resettable" value="1" />
+</f:if>
+<f:if condition="{settings.categories}">
+    <f:variable name="resettable" value="1" />
+</f:if>
+<f:variable name="showResetLink" value="0" />
+<f:if condition="{settings.filter.showReset} && {visitorSelection} && {resettable}">
+    <f:variable name="showResetLink" value="1" />
+</f:if>
+
+<f:if condition="{categoryTags} || {showResetLink}">
+    <div class="academic-programs-active-filters">
+        <f:if condition="{categoryTags}">
+            <ul
+                class="academic-programs-active-filters__tags"
+                aria-label="{f:translate(key: 'filter.activeFilters.label', extensionName: 'AcademicPrograms')}"
+            >
+                <f:for each="{demand.filterCollection.filterCategories.allCategoriesByType}" as="categoriesOfType">
+                    <f:for each="{categoriesOfType}" as="category">
+                        <f:variable name="remainingFilter" value="{ct:filterArgument(filterCollection: demand.filterCollection, without: category)}" />
+                        <f:if condition="{remainingFilter}">
+                            <f:then>
+                                <f:variable name="tagDemand" value="{
+                                    filterCollection: {categories: remainingFilter},
+                                    sortingField: demand.sortingField,
+                                    sortingDirection: demand.sortingDirection
+                                }" />
+                            </f:then>
+                            <f:else>
+                                <f:variable name="tagDemand" value="{
+                                    sortingField: demand.sortingField,
+                                    sortingDirection: demand.sortingDirection
+                                }" />
+                            </f:else>
+                        </f:if>
+                        <f:variable name="removeLabel" value="{f:translate(key: 'filter.activeFilters.remove', extensionName: 'AcademicPrograms', arguments: {0: category.title})}" />
+                        <li class="academic-programs-active-filters__tag">
+                            <f:link.action
+                                action="list"
+                                arguments="{demand: tagDemand}"
+                                class="academic-programs-active-filters__remove"
+                                additionalAttributes="{'aria-label': removeLabel}"
+                            >{category.title}<span aria-hidden="true"> ×</span></f:link.action>
+                        </li>
+                    </f:for>
+                </f:for>
+            </ul>
+        </f:if>
+        <f:if condition="{showResetLink}">
+            <f:link.page class="academic-programs-active-filters__reset">
+                {f:translate(key: 'filter.reset', extensionName: 'AcademicPrograms')}
+            </f:link.page>
+        </f:if>
+    </div>
+</f:if>
+
+</html>

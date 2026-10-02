@@ -26,6 +26,9 @@ plugin.tx_academicprograms {
     filter.categoryTypes = {$plugin.tx_academicprograms.filter.categoryTypes}
     filter.visibleCount = {$plugin.tx_academicprograms.filter.visibleCount}
     filter.hideDisabledOptions = {$plugin.tx_academicprograms.filter.hideDisabledOptions}
+    filter.showActiveFilters = {$plugin.tx_academicprograms.filter.showActiveFilters}
+    filter.showReset = {$plugin.tx_academicprograms.filter.showReset}
+    filter.showResultCount = {$plugin.tx_academicprograms.filter.showResultCount}
 
     # The content element layout renders the header of every content element, so the
     # templates render it only for a site whose layout leaves it out. The header partial

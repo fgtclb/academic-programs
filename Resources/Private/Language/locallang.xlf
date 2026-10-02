@@ -56,6 +56,15 @@
       <trans-unit id="filter.moreFilters">
         <source>More filters</source>
       </trans-unit>
+      <trans-unit id="filter.activeFilters.label">
+        <source>Active filters</source>
+      </trans-unit>
+      <trans-unit id="filter.activeFilters.remove">
+        <source>Remove filter: %s</source>
+      </trans-unit>
+      <trans-unit id="filter.reset">
+        <source>Reset all filters</source>
+      </trans-unit>
 
       <!-- Program finder -->
 
@@ -94,6 +103,12 @@
 
       <trans-unit id="list.noProgramsFound">
         <source>No programs found.</source>
+      </trans-unit>
+      <trans-unit id="list.resultCount.singular">
+        <source>%d program found</source>
+      </trans-unit>
+      <trans-unit id="list.resultCount.plural">
+        <source>%d programs found</source>
       </trans-unit>
 
       <!-- Detail -->

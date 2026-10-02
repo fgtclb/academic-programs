@@ -24,4 +24,25 @@
     </f:form>
 </f:if>
 
+<f:comment>
+    The active filters, the reset link and the result count are switched on per site by
+    `settings.filter.showActiveFilters`, `showReset` and `showResultCount`. The first two
+    belong to the filter, so a list whose filter is hidden shows neither.
+</f:comment>
+<f:if condition="!{settings.hideFilter}">
+    <f:if condition="{settings.filter.showActiveFilters} || {settings.filter.showReset}">
+        <f:render
+            partial="Program/ActiveFilters"
+            arguments="{_all}"
+        />
+    </f:if>
+</f:if>
+
+<f:if condition="{settings.filter.showResultCount}">
+    <f:render
+        partial="Program/ResultCount"
+        arguments="{count: '{programs -> f:count()}'}"
+    />
+</f:if>
+
 </html>
