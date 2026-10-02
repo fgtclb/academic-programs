@@ -5,6 +5,14 @@
     data-namespace-typo3-fluid="true"
 >
 
+<f:comment>
+    `data-academic-programs-list-select` marks the select for the module `program-list.js`,
+    which this partial loads as well: where an override of the list template and of
+    `Program/SortingAndFilters.html` predates the module, it is the only file that does, and
+    a change of a select then submits the form as the inline handler did before.
+</f:comment>
+<f:asset.module identifier="@fgtclb/academic-programs/frontend/program-list.js" />
+
 <div class="col-12 col-md-6 col-lg-4 col-xl-3">
     <label for="sortingField" class="form-label">
         {f:translate(key: 'sorting.field.label', extensionName: 'AcademicPrograms')}
@@ -15,8 +23,8 @@
         property="sortingField"
         value="{demand.sortingField}"
         type="fields"
-        additionalAttributes="{'onchange': 'this.form.submit()'}"
         l10n="filter.sortingField"
+        additionalAttributes="{'data-academic-programs-list-select': ''}"
         class="form-select"
     />
 </div>
@@ -31,8 +39,8 @@
         property="sortingDirection"
         value="{demand.sortingDirection}"
         type="directions"
-        additionalAttributes="{'onchange': 'this.form.submit()'}"
         l10n="filter.sortingDirection"
+        additionalAttributes="{'data-academic-programs-list-select': ''}"
         class="form-select"
     />
 </div>

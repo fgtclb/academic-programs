@@ -116,6 +116,9 @@
       <trans-unit id="list.resultCount.plural">
         <source>%d programs found</source>
       </trans-unit>
+      <trans-unit id="list.submit">
+        <source>Show programs</source>
+      </trans-unit>
 
       <!-- Detail -->
 

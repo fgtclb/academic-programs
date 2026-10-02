@@ -16,6 +16,14 @@
     every type with categories is offered in the type order of the group, as before the
     filter types existed.
 </f:comment>
+<f:comment>
+    `data-academic-programs-list-select` marks the select for the module `program-list.js`,
+    which this partial loads as well: where an override of the list template and of
+    `Program/SortingAndFilters.html` predates the module, it is the only file that does, and
+    a change of a select then submits the form as the inline handler did before.
+</f:comment>
+<f:asset.module identifier="@fgtclb/academic-programs/frontend/program-list.js" />
+
 <f:if condition="{filterTypes}">
     <f:then>
         <f:for each="{filterTypes.visible}" as="categoryKey">
@@ -77,7 +85,7 @@
             )}"
             prependOptionValue=""
             hideDisabledOptions="{settings.filter.hideDisabledOptions}"
-            additionalAttributes="{'onchange': 'this.form.submit()'}"
+            additionalAttributes="{'data-academic-programs-list-select': ''}"
             class="form-select"
         />
     </div>

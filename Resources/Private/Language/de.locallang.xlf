@@ -148,6 +148,10 @@
         <source>%d programs found</source>
         <target>%d Studiengänge gefunden</target>
       </trans-unit>
+      <trans-unit id="list.submit">
+        <source>Show programs</source>
+        <target>Studiengänge anzeigen</target>
+      </trans-unit>
 
       <!-- Detail -->
 

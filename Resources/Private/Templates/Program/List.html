@@ -4,20 +4,55 @@
     data-namespace-typo3-fluid="true"
 >
 
-<div class="academic-programs-list">
+<f:comment>
+    The module `program-list.js` updates the list in place when a filter or the sorting
+    changes. It posts the form, follows the redirect to the filter URL and takes the lists
+    out of that page, each by the uid of its content element. All program lists share one
+    plugin namespace, so the filter URL filters every list of the page, and the module
+    replaces every one of them, as a reload would. It finds its parts by data attributes, so
+    an override keeps it working by keeping them:
+
+    - `data-academic-programs-list` on the wrapper, the uid of the content element, and
+      `data-academic-programs-list-count-one` and `-count-other` the patterns of the
+      sentence it announces, `%d` standing for the number of programs.
+    - `data-academic-programs-list-content` on the region it replaces, which holds the form
+      and the results, and `data-academic-programs-list-total` the number of programs it
+      shows.
+    - `data-academic-programs-list-status` on an empty `role="status"` element outside that
+      region, which receives the sentence after an update.
+
+    The form inside the region is updated in place, also the one of an override of
+    `Program/SortingAndFilters.html` that predates the module, which is why this template
+    loads the module too. The partials of the form load it as well, for a list template
+    without the region, and the asset collector loads it once. There a change submits the
+    form and reloads the page, as before.
+</f:comment>
+<f:if condition="!{settings.hideSorting} || !{settings.hideFilter}">
+    <f:asset.module identifier="@fgtclb/academic-programs/frontend/program-list.js" />
+</f:if>
+<div
+    class="academic-programs-list"
+    data-academic-programs-list="{data.uid}"
+    data-academic-programs-list-count-one="{f:translate(key: 'list.resultCount.singular', extensionName: 'AcademicPrograms')}"
+    data-academic-programs-list-count-other="{f:translate(key: 'list.resultCount.plural', extensionName: 'AcademicPrograms')}"
+>
     <f:if condition="{settings.renderContentElementHeader}">
         <f:render partial="Header/All" arguments="{_all}" />
     </f:if>
 
-    <f:render
-        partial="Program/SortingAndFilters"
-        arguments="{_all}"
-    />
+    <div data-academic-programs-list-content data-academic-programs-list-total="{programs -> f:count()}">
+        <f:render
+            partial="Program/SortingAndFilters"
+            arguments="{_all}"
+        />
 
-    <f:render
-        partial="Program/ItemList"
-        arguments="{_all}"
-    />
+        <f:render
+            partial="Program/ItemList"
+            arguments="{_all}"
+        />
+    </div>
+
+    <p class="visually-hidden" role="status" aria-live="polite" data-academic-programs-list-status></p>
 </div>
 
 </html>

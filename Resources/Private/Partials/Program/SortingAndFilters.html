@@ -4,8 +4,24 @@
     data-namespace-typo3-fluid="true"
 >
 
+<f:comment>
+    A change of a select submits nothing by itself: the module `program-list.js` updates the
+    list in place, or submits the form where the list template lacks the parts it needs, see
+    `Program/List.html`. `data-academic-programs-list-form` marks the form for the second
+    case. The module hides the column of the submit button,
+    `data-academic-programs-list-submit`, which is what a visitor without JavaScript submits
+    the form with. A select that keeps an inline `onchange` handler, from an override of a
+    filter partial, is left to that handler.
+</f:comment>
 <f:if condition="!{settings.hideSorting} || !{settings.hideFilter}">
-    <f:form action="list" name="demand" object="{demand}" class="academic-programs-filtersorting">
+    <f:asset.module identifier="@fgtclb/academic-programs/frontend/program-list.js" />
+    <f:form
+        action="list"
+        name="demand"
+        object="{demand}"
+        class="academic-programs-filtersorting"
+        additionalAttributes="{'data-academic-programs-list-form': ''}"
+    >
         <div class="row">
             <f:if condition="!{settings.hideSorting}">
                 <f:render
@@ -20,6 +36,12 @@
                     arguments="{_all}"
                 />
             </f:if>
+
+            <div class="col-12 col-md-6 col-lg-4 col-xl-3 align-self-end" data-academic-programs-list-submit>
+                <button type="submit" class="btn btn-primary">
+                    {f:translate(key: 'list.submit', extensionName: 'AcademicPrograms')}
+                </button>
+            </div>
         </div>
     </f:form>
 </f:if>

@@ -73,7 +73,9 @@ or the code fills in, a category type or a field name for example.
     *   - :xml:`list.noProgramsFound`
         - :file:`Partials/Program/ItemList.html`
     *   - :xml:`list.resultCount.singular`, :xml:`list.resultCount.plural`
-        - :file:`Partials/Program/ResultCount.html`
+        - :file:`Partials/Program/ResultCount.html`, and the announcement after an update in place, :file:`Templates/Program/List.html`
+    *   - :xml:`list.submit`
+        - :file:`Partials/Program/SortingAndFilters.html`, the submit button for a visitor without JavaScript
     *   - :xml:`page.applicationLink.defaultLabel`
         - :file:`Partials/Program/Page/CallToAction.html`
     *   - :xml:`page.backToList`

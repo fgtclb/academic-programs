@@ -658,6 +658,105 @@ the same names, like the filter settings above.
 
     The three settings and the two partials.
 
+..  _program-list-in-place:
+
+Updating the list without a reload
+==================================
+
+When a visitor changes a filter or the sorting of the
+:guilabel:`Program List`, the list updates in place: the results, the filter
+form, the active filters and the result count are replaced by the ones of the
+filtered list, without reloading the page. There is no setting for it.
+
+*   The address bar shows the URL of the filtered list afterwards, the same URL
+    a reload would show, see :ref:`feature-1790226102`. The list can still be
+    bookmarked, shared and reloaded, and the back and forward buttons of the
+    browser step through the selections.
+*   The page shows what a reload of that URL shows. All program lists of a page
+    read the selection from the same URL arguments, so with two lists on a page
+    a change in one of them filters both, with a reload as without one. That
+    holds for a list that hides its filter and its sorting as well.
+*   The select the visitor changed keeps the focus, and an opened
+    :guilabel:`More filters` stays open.
+*   Screen reader users hear the number of programs found after an update,
+    through a visually hidden element with the role `status`. It reads the
+    labels :xml:`list.resultCount.singular` and :xml:`list.resultCount.plural`,
+    and loading the page announces nothing. The element is hidden by the class
+    `visually-hidden` of Bootstrap, so a site without Bootstrap provides that
+    class itself.
+*   Without JavaScript the form shows a submit button with the label
+    :xml:`list.submit`, and submitting it opens the filtered list. With
+    JavaScript the column of the button gets the attribute :html:`hidden`. A
+    stylesheet that gives that column a `display` of its own needs
+    :css:`[hidden] { display: none }` as well, as Bootstrap has it.
+*   Where the list cannot be updated in place, because the request fails or the
+    answer lacks the list, the form is submitted as before and the page reloads.
+*   The selects carry no inline :html:`onchange` handler any more, so a site
+    with a strict content security policy no longer has to allow inline event
+    handlers for the list.
+
+The module is :js:`@fgtclb/academic-programs/frontend/program-list.js`, loaded
+on a page whose list renders a filter or a sorting. It finds its parts by
+attributes, so an override of the templates keeps the update in place by
+keeping them:
+
+..  list-table::
+    :header-rows: 1
+
+    *   -   Attribute
+        -   On
+        -   Carries
+    *   -   `data-academic-programs-list`
+        -   The wrapper of the list in :file:`Program/List.html`
+        -   The uid of the content element, which finds the same list in the
+            filtered page.
+    *   -   `data-academic-programs-list-count-one`, `data-academic-programs-list-count-other`
+        -   The wrapper
+        -   The sentences announced after an update, `%d` standing for the
+            number. Without both of them nothing is announced.
+    *   -   `data-academic-programs-list-content`
+        -   An element inside the wrapper that holds the form and the results
+        -   Nothing. It is the part that is replaced.
+            `data-academic-programs-list-total` on the same element carries the
+            number of programs it shows.
+    *   -   `data-academic-programs-list-status`
+        -   An empty element with `role="status"` inside the wrapper, outside
+            the replaced part
+        -   Nothing. The sentence is written into it after an update.
+    *   -   `data-academic-programs-list-form`
+        -   The form in :file:`Program/SortingAndFilters.html`
+        -   Nothing. A form outside the replaced part is submitted on a change,
+            and the page reloads.
+    *   -   `data-academic-programs-list-select`
+        -   Each select in :file:`Program/DemandCategories.html` and
+            :file:`Program/DemandSorting.html`
+        -   Nothing. Like the form attribute, for a form that carries neither
+            the attribute nor a place in the replaced part.
+    *   -   `data-academic-programs-list-submit`
+        -   The column around the submit button
+        -   Nothing. The module hides it.
+
+The template, the form partial and the two filter partials each load the
+module, so that it runs whichever of them a project overrides. It is loaded
+once. A template override from before 3.0 keeps working:
+
+*   An override of :file:`Program/DemandCategories.html` or
+    :file:`Program/DemandSorting.html` that keeps the inline :html:`onchange`
+    handlers reloads the page on a change of its selects, as before. The
+    module leaves those selects to their handlers and drives the others, so
+    the selects of the partial that is not overridden keep working. It hides
+    the submit button either way.
+*   An override of :file:`Program/List.html` without the wrapper reloads the
+    page on a change.
+*   An override of :file:`Program/SortingAndFilters.html` is updated in place,
+    as long as :file:`Program/List.html` is the one of the extension. It has no
+    submit button for a visitor without JavaScript until it renders one.
+*   An override of both :file:`Program/List.html` and
+    :file:`Program/SortingAndFilters.html` reloads the page on a change,
+    through the attribute of the selects of the filter partials.
+
+..  versionadded:: 3.0
+
 ..  _program-list-subcategories:
 
 Matching subcategories
