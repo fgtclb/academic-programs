@@ -1,0 +1,3 @@
+# The list listener replaces the queried programs with the same query without Molecular
+# Chemistry (11).
+plugin.tx_academicprograms.settings.testProgramListExclude = 11

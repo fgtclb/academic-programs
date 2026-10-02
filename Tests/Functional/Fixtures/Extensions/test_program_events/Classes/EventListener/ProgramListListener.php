@@ -51,6 +51,16 @@ final class ProgramListListener
             $event->setPrograms($query->execute());
         }
 
+        // Replaces the result with the same query without one program.
+        $excluded = (int)($settings['testProgramListExclude'] ?? 0);
+        if ($excluded > 0) {
+            $query = $event->getPrograms()->getQuery();
+            $constraint = $query->getConstraint();
+            $without = $query->logicalNot($query->equals('uid', $excluded));
+            $query->matching($constraint === null ? $without : $query->logicalAnd($constraint, $without));
+            $event->setPrograms($query->execute());
+        }
+
         // Replaces the applicable categories. The programs are left alone, which is what tells
         // the two setters apart.
         $category = (int)($settings['testProgramListCategory'] ?? 0);

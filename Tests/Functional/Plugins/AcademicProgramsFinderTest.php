@@ -211,6 +211,24 @@ final class AcademicProgramsFinderTest extends AbstractAcademicProgramsTestCase
     }
 
     /**
+     * The programs the finder hands to the browser: the category uids of each program, in
+     * the order of the program uids.
+     *
+     * @return list<list<int>>
+     */
+    private function finderProgramCategories(string $content): array
+    {
+        $form = $this->finderForm($this->finderXPath($content));
+        $this->assertTrue($form->hasAttribute('data-academic-programs-finder-programs'), 'The finder form carries no programs.');
+        $programCategories = json_decode($form->getAttribute('data-academic-programs-finder-programs'), true, 512, JSON_THROW_ON_ERROR);
+        $this->assertIsArray($programCategories);
+        $this->assertTrue(array_is_list($programCategories), 'The programs are not handed over as a list.');
+
+        /** @var list<list<int>> $programCategories */
+        return $programCategories;
+    }
+
+    /**
      * The action of the finder form: the target page, the action of the list plugin, and a
      * cache hash that covers them. The fields post into the namespace of the list plugin.
      */
@@ -294,6 +312,102 @@ final class AcademicProgramsFinderTest extends AbstractAcademicProgramsTestCase
             ['' => 'enabled', '1' => 'enabled', '2' => 'enabled'],
             $this->finderOptions($this->renderHomePage(), 'degree'),
         );
+    }
+
+    /**
+     * The form hands the programs of the storage to the browser with the categories of the
+     * offered selects, the degree and the topic, so the options can be narrowed without a
+     * request: Applied Physics (10), Molecular Chemistry (11) and Mechanical Engineering (12),
+     * in that order. The Doctoral Studies are outside the storage, and a hidden program in the
+     * storage is not found by the list either: neither is handed over. The patterns of the
+     * count sentence come along, each category select is marked, the count keeps the plain
+     * label of the button, and the status element stays empty until the module writes to it.
+     * The page maps the specifier of the module in its import map.
+     *
+     * The JavaScript test `Tests/JavaScript/program-finder.test.ts` drives the module on a
+     * copy of this markup and these programs.
+     */
+    #[Test]
+    public function theFormCarriesTheProgramsOfItsStorage(): void
+    {
+        $this->getConnectionPool()->getConnectionForTable('pages')->insert('pages', [
+            'uid' => 14,
+            'pid' => 4,
+            'doktype' => 20,
+            'hidden' => 1,
+            'slug' => '/study/hidden-physics',
+            'title' => 'Hidden Physics',
+            'categories' => 2,
+        ]);
+        foreach ([3, 4] as $sorting => $categoryUid) {
+            $this->getConnectionPool()->getConnectionForTable('sys_category_record_mm')->insert('sys_category_record_mm', [
+                'uid_local' => $categoryUid,
+                'uid_foreign' => 14,
+                'tablenames' => 'pages',
+                'fieldname' => 'categories',
+                'sorting' => 0,
+                'sorting_foreign' => $sorting + 1,
+            ]);
+        }
+        $this->setUpSite();
+
+        $content = $this->renderHomePage();
+
+        $this->assertSame([[1, 4], [2, 5], [2, 4]], $this->finderProgramCategories($content));
+        $xpath = $this->finderXPath($content);
+        $form = $this->finderForm($xpath);
+        $this->assertSame('Show %d program', $form->getAttribute('data-academic-programs-finder-count-one'));
+        $this->assertSame('Show %d programs', $form->getAttribute('data-academic-programs-finder-count-other'));
+        $markedSelects = [];
+        foreach ($xpath->query('.//select[@data-academic-programs-finder-select]', $form) ?: [] as $select) {
+            $this->assertInstanceOf(\DOMElement::class, $select);
+            $markedSelects[] = $select->getAttribute('name');
+        }
+        $this->assertSame([
+            self::LIST_NAMESPACE . '[demand][filterCollection][degree]',
+            self::LIST_NAMESPACE . '[demand][filterCollection][topic]',
+        ], $markedSelects);
+        $counts = $xpath->query('.//button[@type="submit"]//*[@data-academic-programs-finder-count]', $form);
+        $this->assertInstanceOf(\DOMNodeList::class, $counts);
+        $this->assertCount(1, $counts);
+        $this->assertSame('Show programs', trim((string)$counts->item(0)?->textContent));
+        $statuses = $xpath->query('.//*[@role="status"][@aria-live="polite"][@data-academic-programs-finder-status]', $form);
+        $this->assertInstanceOf(\DOMNodeList::class, $statuses);
+        $this->assertCount(1, $statuses);
+        $this->assertSame('', (string)$statuses->item(0)?->textContent);
+        $this->assertSame(1, preg_match('#<script type="importmap"[^>]*>(.*?)</script>#s', $content, $matches), 'The page has no import map.');
+        /** @var array{imports?: array<string, string>} $importMap */
+        $importMap = json_decode($matches[1], true, 512, JSON_THROW_ON_ERROR);
+        $this->assertStringContainsString(
+            'academic_programs/Resources/Public/JavaScript/frontend/',
+            $importMap['imports']['@fgtclb/academic-programs/frontend/'] ?? '',
+        );
+        $this->assertStringContainsString('@fgtclb/academic-programs/frontend/program-finder.js', $content);
+    }
+
+    /**
+     * Only the categories of the offered selects are handed over: with the degree alone the
+     * topics of the programs are left out.
+     */
+    #[Test]
+    public function theProgramsCarryOnlyTheCategoriesOfTheOfferedSelects(): void
+    {
+        $this->setFinderSettings(['settings.listPid' => '3', 'settings.filter.categoryTypes' => 'degree']);
+        $this->setUpSite();
+
+        $this->assertSame([[1], [2], [2]], $this->finderProgramCategories($this->renderHomePage()));
+    }
+
+    /**
+     * A page without a finder form does not load the module.
+     */
+    #[Test]
+    public function withoutAFormTheModuleIsNotLoaded(): void
+    {
+        $this->setFinderSettings(['settings.listPid' => '']);
+        $this->setUpSite();
+
+        $this->assertStringNotContainsString('@fgtclb/academic-programs/frontend/program-finder.js', $this->renderHomePage());
     }
 
     /**

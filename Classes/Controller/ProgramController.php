@@ -99,6 +99,9 @@ final class ProgramController extends ActionController
      * options are those the list would offer for the programs in the finder's storage, the
      * ones no program carries disabled, or left out when `settings.filter.hideDisabledOptions`
      * is set.
+     *
+     * `programCategories` hands the programs to the browser, which narrows the options to the
+     * combinations that find a program and counts them, see {@see finderProgramCategories()}.
      */
     public function finderAction(): ResponseInterface
     {
@@ -128,6 +131,12 @@ final class ProgramController extends ActionController
             $categories,
             $this->filterCategoryTypes() ?: self::FINDER_DEFAULT_CATEGORY_TYPES,
         );
+        $programCategories = $this->finderProgramCategories(
+            $demandObject,
+            $categories,
+            $filterTypes->getVisible(),
+            array_values($listEvent->getPrograms()->toArray()),
+        );
 
         $this->view->assignMultiple([
             'data' => $contentElementData,
@@ -136,6 +145,7 @@ final class ProgramController extends ActionController
             'filterTypes' => $filterTypes,
             'listUri' => $this->finderListUri(),
             'preselection' => $this->finderPreselection($categories, $filterTypes->getVisible()),
+            'programCategories' => json_encode($programCategories, JSON_THROW_ON_ERROR),
         ]);
         $this->dispatchModifyPluginViewEvent($context, $this->view, $this->eventDispatcher);
 
@@ -213,6 +223,68 @@ final class ProgramController extends ActionController
         }
 
         return $preselection;
+    }
+
+    /**
+     * The categories of the offered selects each program the finder found carries, one list
+     * per program in ascending order of the program uid, each list in ascending order as
+     * well. The browser needs no more than that, and the uids of the programs stay out of
+     * the page. A finder that includes subcategories counts a category as carried when the
+     * program carries one of its subcategories, the way the list on the target page matches
+     * it and the way {@see findApplicableCategories()} offers it. A program that carries
+     * none of them gets an empty list: it matches as long as every select shows "All".
+     *
+     * The programs are the ones of the program list event, so a listener that removes a
+     * program from the finder removes it from the narrowing and from the count as well.
+     *
+     * @param list<string> $offeredTypes
+     * @param list<Program> $programs
+     * @return list<list<int>>
+     */
+    private function finderProgramCategories(
+        ProgramDemand $demand,
+        CategoryCollection $categories,
+        array $offeredTypes,
+        array $programs,
+    ): array {
+        $categoriesByType = $categories->getAllCategoriesByType();
+        $offeredUids = [];
+        foreach ($offeredTypes as $typeIdentifier) {
+            foreach ($categoriesByType[$typeIdentifier] ?? [] as $category) {
+                $offeredUids[] = $category->getUid();
+            }
+        }
+
+        // The offered categories a carried category stands for: itself, and with subcategories
+        // included every offered category it is a subcategory of.
+        $standsFor = array_fill_keys($offeredUids, []);
+        foreach ($offeredUids as $uid) {
+            $standsFor[$uid][] = $uid;
+        }
+        if ($demand->getIncludeSubcategories() && $offeredUids !== []) {
+            $descendantUidsByAncestor = $this->categoryRepository->findDescendantUids('programs', ...$offeredUids);
+            foreach ($descendantUidsByAncestor as $ancestorUid => $descendantUids) {
+                foreach ($descendantUids as $descendantUid) {
+                    $standsFor[$descendantUid][] = $ancestorUid;
+                }
+            }
+        }
+
+        $programCategories = [];
+        foreach ($programs as $program) {
+            $carried = [];
+            foreach ($program->getAttributes() as $category) {
+                foreach ($standsFor[$category->getUid()] ?? [] as $offeredUid) {
+                    $carried[$offeredUid] = true;
+                }
+            }
+            $carried = array_keys($carried);
+            sort($carried);
+            $programCategories[(int)$program->getUid()] = $carried;
+        }
+        ksort($programCategories);
+
+        return array_values($programCategories);
     }
 
     /**

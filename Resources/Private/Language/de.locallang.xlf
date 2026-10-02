@@ -91,6 +91,14 @@
         <source>Show programs</source>
         <target>Programme anzeigen</target>
       </trans-unit>
+      <trans-unit id="finder.submit.count.one">
+        <source>Show %d program</source>
+        <target>%d Programm anzeigen</target>
+      </trans-unit>
+      <trans-unit id="finder.submit.count.other">
+        <source>Show %d programs</source>
+        <target>%d Programme anzeigen</target>
+      </trans-unit>
 
       <!-- Sorting direction options -->
 

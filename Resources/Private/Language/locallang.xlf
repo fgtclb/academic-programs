@@ -71,6 +71,12 @@
       <trans-unit id="finder.submit">
         <source>Show programs</source>
       </trans-unit>
+      <trans-unit id="finder.submit.count.one">
+        <source>Show %d program</source>
+      </trans-unit>
+      <trans-unit id="finder.submit.count.other">
+        <source>Show %d programs</source>
+      </trans-unit>
 
       <!-- Sorting direction options -->
 

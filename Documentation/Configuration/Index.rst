@@ -772,6 +772,10 @@ show, or disables ones it does. An empty :guilabel:`Startingpoint` means every
 program page of the installation, of every site, for the finder as for the
 list.
 
+In the browser the finder narrows the options further, to the combinations
+that find a program, and states the number of programs on its button, see
+:ref:`program-finder-narrowing`.
+
 Submitting the form posts the selection to the list plugin of the target page,
 in the argument shape of the list's own filter form:
 :html:`tx_academicprograms_programlist[demand][filterCollection][<type>]`, one
@@ -799,6 +803,104 @@ tree, and a cached finder would keep offering what changed there.
     Up to 2.x a project that wanted a finder registered one itself. See
     :ref:`breaking-program-finder-registered-upstream` for what such a project
     removes.
+
+..  _program-finder-narrowing:
+
+Narrowing the options in the browser
+------------------------------------
+
+The finder offers only the combinations that find a program. The selections
+of all selects have to match together, as in the list the finder opens: once a
+visitor selects a degree, every option of the other selects that no program of
+that degree carries is disabled, and enabled again as soon as the degree is
+cleared or changed. A preselected category narrows the other selects as soon
+as the page has loaded. Nothing is requested from the server for it, and the
+page does not reload.
+
+..  code-block:: text
+    :caption: The finder after selecting a degree, unstyled
+
+    Degree   [ Master of Science v ]   Topic [ All options v ]   [ Show 2 programs ]
+                                               ( Engineering, disabled )
+
+The button states how many programs the current selection finds, with the
+labels `finder.submit.count.one` and `finder.submit.count.other`, `%d` standing
+for the number. A changed number is announced to screen reader users by a
+visually hidden element with the role `status`: politely, so it waits for the
+current speech, and without moving the focus. Loading the page announces
+nothing. The element is hidden by the class `visually-hidden` of Bootstrap, so
+a site without Bootstrap provides that class itself, as it provides the other
+classes of the template.
+
+The number counts the programs of the finder's own storage, with its own
+:guilabel:`Include subcategories`. It agrees with the list on the target page
+as long as both elements share the storage and that field, the same condition
+the options of the finder already depend on.
+
+Narrowing disables an option, it never leaves one out, whatever
+:typoscript:`plugin.tx_academicprograms.filter.hideDisabledOptions` says. The
+setting decides which options the server renders: the ones no program in
+storage carries are left out. An option that only the current selection
+excludes stays in its place, so the selects do not change their length while
+the visitor works through them. An option the server rendered disabled stays
+disabled, and the option a select shows stays selectable even when the other
+selections exclude it, so a preselection whose categories exclude each other
+can still be changed.
+
+The programs come with the page: the form carries, in the attribute
+`data-academic-programs-finder-programs`, a JSON list with one entry per
+program the finder found in its storage, the uids of the categories of the
+offered selects it carries. The uids of the programs themselves are not part
+of it. With :guilabel:`Include subcategories` switched on, a program carries
+every category above its own as well, the way the server offers such a parent.
+Hidden programs, programs outside the storage and programs a listener of
+:php:`ModifyProgramListEvent` removed are not part of it. A few hundred
+programs stay in the low kilobytes.
+
+Without JavaScript the finder renders as described above, with every option
+that a program in its storage carries selectable and the plain label on the
+button. The module is
+:js:`@fgtclb/academic-programs/frontend/program-finder.js`, loaded only on a
+page whose finder renders a form.
+
+An override of :file:`Program/Finder.html` keeps the narrowing by keeping the
+attributes the module reads:
+
+..  list-table::
+    :header-rows: 1
+
+    *   -   Attribute
+        -   On
+        -   Carries
+    *   -   `data-academic-programs-finder-programs`
+        -   The form
+        -   The programs as JSON, rendered by the action as
+            `{programCategories}`. Without a list there the module does not
+            start.
+    *   -   `data-academic-programs-finder-count-one`, `data-academic-programs-finder-count-other`
+        -   The form
+        -   The patterns of the count sentence. Without both of them the
+            options are narrowed, the count keeps its label and nothing is
+            announced.
+    *   -   `data-academic-programs-finder-select`
+        -   Each category select
+        -   Nothing. Only a marked select takes part, so a select the override
+            adds for something else is left alone.
+    *   -   `data-academic-programs-finder-count`
+        -   A span inside the submit button, or any element in the form
+        -   Nothing. Its text is replaced by the count sentence, which leaves
+            an icon next to it in the button alone.
+    *   -   `data-academic-programs-finder-status`
+        -   An empty element in the form with `role="status"`
+        -   Nothing. The count sentence is written into it when the number
+            changes.
+
+An option with an empty value is the "All" option, which is never disabled.
+
+..  versionadded:: 3.0
+
+    Up to 2.x projects reloaded the whole finder on every change, through a
+    turbo frame for example, to offer only possible combinations.
 
 ..  _configuration-category-tree-root:
 

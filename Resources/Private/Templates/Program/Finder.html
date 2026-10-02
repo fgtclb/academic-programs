@@ -14,17 +14,35 @@
     no form renders. The "All" option, the options without results and the UpperCamelCase
     `extensionName` follow the filter of the list, see `Program/DemandCategories.html`; the
     finder shows every filter type, it has no "More filters".
+
+    The module `program-finder.js` narrows the options in the browser and is driven by data
+    attributes alone, so an override keeps it working by keeping them. On the form,
+    `data-academic-programs-finder-programs` carries the programs as JSON, and
+    `data-academic-programs-finder-count-one` and `data-academic-programs-finder-count-other`
+    the patterns of the count sentence. `data-academic-programs-finder-select` marks each
+    category select, `data-academic-programs-finder-count` the element whose text becomes
+    the count sentence, and `data-academic-programs-finder-status` an empty `role="status"`
+    element that announces a changed count. Without the module the button keeps its plain
+    label and the status element stays empty.
 </f:comment>
 <f:if condition="{settings.renderContentElementHeader}">
     <f:render partial="Header/All" arguments="{_all}" />
 </f:if>
 
 <f:if condition="{listUri} && {filterTypes.visible}">
+    <f:asset.module identifier="@fgtclb/academic-programs/frontend/program-finder.js" />
+    <f:variable name="countLabelOne" value="{f:translate(key: 'finder.submit.count.one', extensionName: 'AcademicPrograms')}"/>
+    <f:variable name="countLabelOther" value="{f:translate(key: 'finder.submit.count.other', extensionName: 'AcademicPrograms')}"/>
     <f:form
         actionUri="{listUri}"
         extensionName="AcademicPrograms"
         pluginName="ProgramList"
         class="academic-programs-finder"
+        additionalAttributes="{
+            'data-academic-programs-finder-programs': programCategories,
+            'data-academic-programs-finder-count-one': countLabelOne,
+            'data-academic-programs-finder-count-other': countLabelOther
+        }"
     >
         <div class="row align-items-end">
             <f:variable name="allOptionsLabel" value="{f:translate(key: 'sys_category.programs.allOptions', extensionName: 'AcademicPrograms')}"/>
@@ -48,6 +66,7 @@
                         )}"
                         prependOptionValue=""
                         hideDisabledOptions="{settings.filter.hideDisabledOptions}"
+                        additionalAttributes="{'data-academic-programs-finder-select': ''}"
                         class="form-select"
                     />
                 </div>
@@ -55,10 +74,11 @@
 
             <div class="col-12 col-md-auto">
                 <button type="submit" class="btn btn-primary">
-                    {f:translate(key: 'finder.submit', extensionName: 'AcademicPrograms')}
+                    <span data-academic-programs-finder-count>{f:translate(key: 'finder.submit', extensionName: 'AcademicPrograms')}</span>
                 </button>
             </div>
         </div>
+        <p class="visually-hidden" role="status" aria-live="polite" data-academic-programs-finder-status></p>
     </f:form>
 </f:if>
 

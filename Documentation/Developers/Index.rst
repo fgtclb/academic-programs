@@ -186,11 +186,16 @@ program carries one of its subcategories. :php:`findByGroupAndUidList()`
 returns a bare list instead, so a listener that reaches for that one drops the
 disabled options the filter otherwise shows.
 
-**The finder renders categories, not programs.** Its selects offer the
-categories the list event hands back, and its preselection is read from them.
-A listener that replaces the programs of the finder changes nothing a visitor
-sees unless it sets the categories as well. Which programs a finder submission
-finds is decided by the list on the target page and its own events.
+**In the finder, the categories decide the options and the programs narrow
+them.** Its selects offer the categories the list event hands back, and its
+preselection is read from them. The programs the event hands back are the ones
+the finder narrows its options by in the browser and counts on its button, see
+:ref:`program-finder-narrowing`. A listener that removes a program from the
+finder therefore changes the narrowing and the count. An option that only this
+program carried is still offered by the server, and the browser disables it as
+soon as the page has loaded. Without JavaScript it stays selectable, unless the
+listener sets the categories as well. Which programs a finder submission finds
+is decided by the list on the target page and its own events.
 
 ..  _developers-program-data-event:
 

@@ -264,6 +264,28 @@ final class AcademicProgramsEventsTest extends AbstractAcademicProgramsTestCase
     }
 
     /**
+     * The programs the list listener hands back are the ones the finder narrows its options
+     * by and counts in the browser: Molecular Chemistry (11), which the listener removes, is
+     * not handed over, and its categories are not either.
+     */
+    #[Test]
+    public function aListListenerRemovesAProgramFromTheFinderNarrowing(): void
+    {
+        $this->setUpSite(['ExcludeProgram.typoscript']);
+
+        $document = new \DOMDocument();
+        $this->assertTrue(@$document->loadHTML('<?xml encoding="UTF-8">' . $this->renderFinderPage()));
+        $forms = (new \DOMXPath($document))->query('//form[@data-academic-programs-finder-programs]');
+        $this->assertInstanceOf(\DOMNodeList::class, $forms);
+        $form = $forms->item(0);
+        $this->assertInstanceOf(\DOMElement::class, $form);
+        $this->assertSame(
+            [[1, 4], [2, 4]],
+            json_decode($form->getAttribute('data-academic-programs-finder-programs'), true, 512, JSON_THROW_ON_ERROR),
+        );
+    }
+
+    /**
      * The list event carries the view, so a listener assigns variables a project template
      * renders. The fixture extension ships such a template and puts it in front of the
      * shipped one. The value proves the action and the queried programs reach the listener

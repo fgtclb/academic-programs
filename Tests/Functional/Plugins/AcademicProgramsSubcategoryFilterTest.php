@@ -289,6 +289,44 @@ final class AcademicProgramsSubcategoryFilterTest extends AbstractAcademicProgra
     }
 
     /**
+     * @return \Generator<string, array{0: bool, 1: list<list<int>>}>
+     */
+    public static function finderProgramCategoriesDataProvider(): \Generator
+    {
+        yield 'option off, each program with its own categories' => [
+            false,
+            [[3], [4], [1], [8]],
+        ];
+        yield 'option on, each program with the ancestors of its categories as well' => [
+            true,
+            [[1, 3], [1, 3, 4], [1], [2, 8]],
+        ];
+    }
+
+    /**
+     * The programs the finder hands to the browser for narrowing its options, Applied Physics,
+     * Materials Science, Business Studies and Molecular Chemistry in that order. With the
+     * option on, a program carries every ancestor of its categories as well, so the browser keeps
+     * "Master" selectable for Molecular Chemistry, whose Master of Science is below it, the
+     * way the server offers it. Engineering is offered and carried by no program, the
+     * locations are not offered.
+     *
+     * @param list<list<int>> $expected
+     */
+    #[DataProvider('finderProgramCategoriesDataProvider')]
+    #[Test]
+    public function theFinderHandsOverTheAncestorsOfACarriedCategoryWithTheOptionOnly(bool $includeSubcategories, array $expected): void
+    {
+        $this->setFinderSettings($includeSubcategories);
+        $this->setUpSite();
+
+        $content = $this->renderFrontendPage('https://www.acme.com/home');
+
+        $this->assertSame(1, preg_match('#<form[^>]*\sdata-academic-programs-finder-programs="([^"]*)"#', $content, $matches), 'The finder form carries no programs.');
+        $this->assertSame($expected, json_decode(htmlspecialchars_decode($matches[1]), true, 512, JSON_THROW_ON_ERROR));
+    }
+
+    /**
      * @return \Generator<string, array{0: bool, 1: bool}>
      */
     public static function finderPreselectionDataProvider(): \Generator
