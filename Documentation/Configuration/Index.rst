@@ -322,9 +322,8 @@ Each is a comma separated list, shown in its order. An item is
     `program_type`, `teaching_language`, `topic`, or a type another extension
     registers for the group - its label is looked up as
     `sys_category.programs.<identifier>` in :file:`locallang.xlf` of this
-    extension, so such a type needs that label added, for example through
-    :typoscript:`plugin.tx_academicprograms._LOCAL_LANG` (see
-    :ref:`configuration-labels`), or its row shows no label;
+    extension, and a type that has none there is named by the title it is
+    registered with (see :ref:`configuration-labels-category-types`);
 *   or one of the program fields `creditPoints`, `jobProfile`,
     `performanceScope` and `prerequisites`.
 
@@ -497,8 +496,9 @@ filters the list.
 
 The field is labelled with the title of each type. A type a project adds shows
 the title its :file:`CategoryTypes.yaml` gives it, and the filter select in the
-frontend is labelled with :xml:`sys_category.programs.<identifier>` of this
-extension's :file:`locallang.xlf`, as before.
+frontend is labelled with :xml:`sys_category.programs.<identifier>` when the
+extension or the site has that label, and with the registered title otherwise,
+see :ref:`configuration-labels-category-types`.
 
 The partial :file:`Program/DemandCategories.html` renders the selects from the
 variable :html:`{filterTypes.visible}`, the identifiers of the offered types in

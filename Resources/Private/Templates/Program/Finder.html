@@ -49,7 +49,7 @@
             <f:for each="{filterTypes.visible}" as="categoryKey">
                 <div class="col-12 col-md">
                     <label for="academic-programs-finder-{categoryKey}-{data.uid}" class="form-label">
-                        {f:translate(key: 'sys_category.programs.{categoryKey}', extensionName: 'AcademicPrograms')}
+                        {f:translate(key: 'sys_category.programs.{categoryKey}', extensionName: 'AcademicPrograms') -> ct:categoryTypeTitle(group: 'programs', identifier: categoryKey)}
                     </label>
 
                     <ct:form.filterSelect

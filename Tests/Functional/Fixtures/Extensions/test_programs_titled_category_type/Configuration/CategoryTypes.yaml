@@ -1,0 +1,14 @@
+# A type a project adds to the shipped `programs` group, with a title of its own and no
+# label `sys_category.programs.teaching_form` in the language file of the extension. The title is
+# a label reference with a German translation.
+types:
+  - identifier: teaching_form
+    title: 'LLL:EXT:test_programs_titled_category_type/Resources/Private/Language/locallang.xlf:teaching_form'
+    group: programs
+    icon: 'EXT:core/Resources/Public/Icons/T3Icons/svgs/apps/apps-pagetree-folder-contains-category.svg'
+  # The shipped degree, retitled the way a project may retitle it for the backend. Its
+  # label in the language file of the extension still names it in the frontend.
+  - identifier: degree
+    group: programs
+    title: 'Qualification'
+    useExisting: true

@@ -1,6 +1,7 @@
 <html
     lang="en"
     xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+    xmlns:ct="http://typo3.org/ns/FGTCLB/CategoryTypes/ViewHelpers"
     xmlns:core="http://typo3.org/ns/TYPO3/CMS/Core/ViewHelpers"
     data-namespace-typo3-fluid="true"
 >
@@ -19,7 +20,7 @@
         <core:icon identifier="{fact.iconIdentifier}" />
     </f:if>
 
-    <b>{f:translate(key: fact.labelKey, extensionName: 'AcademicPrograms')}:</b>
+    <b>{f:translate(key: fact.labelKey, extensionName: 'AcademicPrograms') -> ct:categoryTypeTitle(group: 'programs', identifier: fact.identifier)}:</b>
 
     <span>
         <f:if condition="{fact.isCategoryType}">
