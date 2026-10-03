@@ -10,6 +10,8 @@ return [
             'icon' => 'EXT:academic_programs/Resources/Public/Icons/CategoryTypes/AdmissionRestriction.svg',
             'priority' => 0,
             'inlineIcon' => true,
+            'frontendIcon' => '',
+            'frontendInlineIcon' => null,
         ],
         1 => [
             'identifier' => 'application_period',
@@ -19,6 +21,8 @@ return [
             'icon' => 'EXT:academic_programs/Resources/Public/Icons/CategoryTypes/ApplicationPeriod.svg',
             'priority' => 0,
             'inlineIcon' => true,
+            'frontendIcon' => '',
+            'frontendInlineIcon' => null,
         ],
         2 => [
             'identifier' => 'begin_program',
@@ -28,6 +32,8 @@ return [
             'icon' => 'EXT:academic_programs/Resources/Public/Icons/CategoryTypes/BeginProgram.svg',
             'priority' => 0,
             'inlineIcon' => true,
+            'frontendIcon' => '',
+            'frontendInlineIcon' => null,
         ],
         3 => [
             'identifier' => 'costs',
@@ -37,6 +43,8 @@ return [
             'icon' => 'EXT:academic_programs/Resources/Public/Icons/CategoryTypes/Costs.svg',
             'priority' => 0,
             'inlineIcon' => true,
+            'frontendIcon' => '',
+            'frontendInlineIcon' => null,
         ],
         4 => [
             'identifier' => 'paying',
@@ -46,6 +54,8 @@ return [
             'icon' => 'EXT:academic_programs/Resources/Public/Icons/CategoryTypes/Paying.svg',
             'priority' => 0,
             'inlineIcon' => true,
+            'frontendIcon' => '',
+            'frontendInlineIcon' => null,
         ],
         5 => [
             'identifier' => 'degree',
@@ -55,6 +65,8 @@ return [
             'icon' => 'EXT:academic_programs/Resources/Public/Icons/CategoryTypes/Degree.svg',
             'priority' => 0,
             'inlineIcon' => true,
+            'frontendIcon' => '',
+            'frontendInlineIcon' => null,
         ],
         6 => [
             'identifier' => 'department',
@@ -64,6 +76,8 @@ return [
             'icon' => 'EXT:academic_programs/Resources/Public/Icons/CategoryTypes/Department.svg',
             'priority' => 0,
             'inlineIcon' => true,
+            'frontendIcon' => '',
+            'frontendInlineIcon' => null,
         ],
         7 => [
             'identifier' => 'standard_period',
@@ -73,6 +87,8 @@ return [
             'icon' => 'EXT:academic_programs/Resources/Public/Icons/CategoryTypes/StandardPeriod.svg',
             'priority' => 0,
             'inlineIcon' => true,
+            'frontendIcon' => '',
+            'frontendInlineIcon' => null,
         ],
         8 => [
             'identifier' => 'location',
@@ -82,6 +98,8 @@ return [
             'icon' => 'EXT:academic_programs/Resources/Public/Icons/CategoryTypes/Location.svg',
             'priority' => 0,
             'inlineIcon' => true,
+            'frontendIcon' => '',
+            'frontendInlineIcon' => null,
         ],
         9 => [
             'identifier' => 'program_type',
@@ -91,6 +109,8 @@ return [
             'icon' => 'EXT:academic_programs/Resources/Public/Icons/CategoryTypes/ProgramType.svg',
             'priority' => 0,
             'inlineIcon' => true,
+            'frontendIcon' => '',
+            'frontendInlineIcon' => null,
         ],
         10 => [
             'identifier' => 'teaching_language',
@@ -100,6 +120,8 @@ return [
             'icon' => 'EXT:academic_programs/Resources/Public/Icons/CategoryTypes/TeachingLanguage.svg',
             'priority' => 0,
             'inlineIcon' => true,
+            'frontendIcon' => '',
+            'frontendInlineIcon' => null,
         ],
         11 => [
             'identifier' => 'topic',
@@ -109,6 +131,8 @@ return [
             'icon' => 'EXT:academic_programs/Resources/Public/Icons/CategoryTypes/Topic.svg',
             'priority' => 0,
             'inlineIcon' => true,
+            'frontendIcon' => '',
+            'frontendInlineIcon' => null,
         ],
     ],
 ];
