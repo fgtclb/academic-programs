@@ -19,18 +19,17 @@ They are now registered with
 which inlines the file in both markups, and the files themselves are drawn in
 `currentColor` with no colour of their own.
 
-That covers the academic program page type icon :php:`academic-programs` and
-the twelve category type icons of this extension, which
+That covers the icon of the academic program page type and the twelve category
+type icons of this extension, which
 :php:`EXT:category_types` registers as :php:`category_types.programs.*`. The
 twelve category types ask for it with `inlineIcon: true` in
 :file:`Configuration/CategoryTypes.yaml`; without that flag a category type
 icon keeps the core provider.
 
 Two of those twelve were Font Awesome Pro files, which this project has no
-licence for. :file:`Location.svg` and :file:`Paying.svg` are replaced by the
-Bootstrap Icons `geo-alt` and `cash-coin` (MIT, see
-:file:`Resources/Public/Icons/LICENSE-bootstrap-icons.txt`). The drawing changes
-with them; the identifiers do not.
+licence for. Every drawing of this extension has since been replaced by a Font
+Awesome Free icon, see
+:ref:`breaking-programs-credit-points-icon-is-a-frontend-icon`.
 
 The two content elements of this extension named their icon by file path rather
 than by identifier. :php:`ExtensionManagementUtility::addPlugin()` writes that
@@ -38,8 +37,8 @@ value into :php:`typeicon_classes` verbatim, and
 :php:`IconRegistry::registerTCAIcons()` registers icons from :php:`ctrl.iconfile`
 only, so the path was never a registered identifier and
 :php:`IconFactory::getIcon()` answered with the :php:`default-not-found`
-placeholder. They now name :php:`academic-programs`, which is the same icon as
-the page type.
+placeholder. They now name a registered identifier, see
+:ref:`breaking-programs-credit-points-icon-is-a-frontend-icon`.
 
 Impact
 ======
@@ -63,16 +62,14 @@ to address the :html:`<svg>` instead.
 
 In the backend, the page type icon and the twelve category type icons take the
 text colour around them, so they stay legible in a dark backend colour scheme.
-The two content elements show the extension icon in the page module and the
-record list instead of the red not-found placeholder.
+The content elements show their icon in the page module and the record list
+instead of the red not-found placeholder.
 
 Affected Installations
 ======================
 
 Every installation of this extension. Installations that render the program
-plugins in the frontend are affected visibly, and installations that show the
-:guilabel:`Location` or :guilabel:`Paying` category type see a different
-drawing.
+plugins in the frontend are affected visibly.
 
 Migration
 =========

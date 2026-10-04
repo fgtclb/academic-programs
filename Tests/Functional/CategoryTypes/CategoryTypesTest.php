@@ -9,6 +9,7 @@ use FGTCLB\AcademicPrograms\Tests\Functional\AbstractAcademicProgramsTestCase;
 use FGTCLB\CategoryTypes\Registry\CategoryTypeRegistry;
 use FGTCLB\TestingHelper\FunctionalTestCase\FrontendIconsAssertionTrait;
 use PHPUnit\Framework\Attributes\Test;
+use Symfony\Component\Yaml\Yaml;
 use TYPO3\CMS\Core\Imaging\IconRegistry;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
@@ -50,6 +51,7 @@ final class CategoryTypesTest extends AbstractAcademicProgramsTestCase
     {
         $group = $this->get(CategoryTypeRegistry::class)->getGroup('programs');
         $this->assertNotNull($group);
+        $this->assertSame('EXT:academic_programs/Resources/Public/Icons/category-group/programs.svg', $group->getIcon());
         $this->assertFileExists(GeneralUtility::getFileAbsFileName($group->getIcon()));
 
         $iconRegistry = $this->get(IconRegistry::class);
@@ -58,5 +60,27 @@ final class CategoryTypesTest extends AbstractAcademicProgramsTestCase
             $iconRegistry->getIconConfigurationByIdentifier('category_types_group.programs')['provider'] ?? null,
         );
         $this->assertIconIsRegisteredInBothRegistries('category_types_group.programs');
+    }
+
+    /**
+     * The registry reads the paths and never opens the files, so an icon of a type pointing
+     * at a missing file fails only where the icon is rendered. Every icon declared for the
+     * group and its types has to be there, the ones in academic_base included.
+     */
+    #[Test]
+    public function everyIconDeclaredInCategoryTypesYamlExists(): void
+    {
+        $configuration = Yaml::parseFile(__DIR__ . '/../../../Configuration/CategoryTypes.yaml');
+        $entries = [...($configuration['groups'] ?? []), ...($configuration['types'] ?? [])];
+
+        $this->assertCount(13, $entries);
+        foreach ($entries as $entry) {
+            $icon = (string)($entry['icon'] ?? '');
+            $this->assertNotSame('', $icon, sprintf('"%s" declares no icon.', $entry['identifier'] ?? ''));
+            $this->assertFileExists(
+                GeneralUtility::getFileAbsFileName($icon),
+                sprintf('The icon of "%s" does not exist.', $entry['identifier'] ?? ''),
+            );
+        }
     }
 }

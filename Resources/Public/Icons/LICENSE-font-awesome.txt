@@ -19,5 +19,14 @@ it, and the file was renamed after its purpose in this extension. The drawing
 is unchanged and the original attribution comment is kept inside every file.
 
 File (below Resources/Public/Icons/)  Font Awesome icon (solid)
-  CategoryGroups/Programs.svg              book-open-reader
+  category-group/programs.svg              book-open-reader
+  category-type/admission-restriction.svg  lock
+  category-type/application-period.svg     hourglass-half
+  category-type/begin-program.svg          flag
+  category-type/costs.svg                  piggy-bank
+  category-type/paying.svg                 money-bill-1
+  category-type/program-type.svg           layer-group
+  category-type/teaching-language.svg      language
+  category-type/topic.svg                  lightbulb
   info/credit-points.svg                   certificate
+  plugin/programs.svg                      book-open-reader

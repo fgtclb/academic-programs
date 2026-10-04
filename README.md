@@ -106,3 +106,7 @@ The full declarations are also included in this repository:
 ## License
 
 This extension is released under the [GPL-2.0-or-later](LICENSE) license.
+
+The SVG icons below `Resources/Public/Icons/`, except `Extension.svg`, are
+Font Awesome Free icons licensed under CC BY 4.0, see
+[LICENSE-font-awesome.txt](Resources/Public/Icons/LICENSE-font-awesome.txt).

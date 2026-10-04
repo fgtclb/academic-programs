@@ -8,6 +8,7 @@ use FGTCLB\AcademicBase\Imaging\FrontendIconRegistry;
 use FGTCLB\AcademicBase\Imaging\IconProvider\CurrentColorSvgIconProvider;
 use FGTCLB\AcademicPrograms\Tests\Functional\AbstractAcademicProgramsTestCase;
 use FGTCLB\TestingHelper\FunctionalTestCase\FrontendIconsAssertionTrait;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
 use TYPO3\CMS\Core\Imaging\IconFactory;
 use TYPO3\CMS\Core\Imaging\IconProvider\AbstractSvgIconProvider;
@@ -20,8 +21,8 @@ use TYPO3\CMS\Core\Imaging\IconSize;
  * facts of a program. The backend never shows it, so the icon registry of the backend
  * must not know it, or a site that replaces it in `Configuration/Icons.php` sees no effect
  * and no error. It is drawn in `currentColor` and inlined, so it takes the text colour of
- * the facts it stands in. The icon of the page type is the opposite case, a backend icon
- * only.
+ * the facts it stands in. The icons of the page type and of the content elements are the
+ * opposite case, backend icons only.
  *
  * The identifier and the file are spelled out rather than read from the builder, so a
  * rename has to be made twice instead of silently agreeing with itself.
@@ -81,10 +82,20 @@ final class FactIconsTest extends AbstractAcademicProgramsTestCase
         );
     }
 
-    #[Test]
-    public function pageTypeIconIsNoFrontendIcon(): void
+    /**
+     * @return \Generator<string, array{0: string}>
+     */
+    public static function backendIconIdentifiers(): \Generator
     {
-        $this->assertTrue($this->get(IconRegistry::class)->isRegistered('academic-programs'));
-        $this->assertFalse($this->get(FrontendIconRegistry::class)->isRegistered('academic-programs'));
+        yield 'page type' => ['tx-academicprograms-doktype-program'];
+        yield 'content elements' => ['tx-academicprograms-plugin-programs'];
+    }
+
+    #[Test]
+    #[DataProvider('backendIconIdentifiers')]
+    public function pageTypeAndContentElementIconsAreNoFrontendIcons(string $identifier): void
+    {
+        $this->assertTrue($this->get(IconRegistry::class)->isRegistered($identifier));
+        $this->assertFalse($this->get(FrontendIconRegistry::class)->isRegistered($identifier));
     }
 }

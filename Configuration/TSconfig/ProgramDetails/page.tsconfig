@@ -12,7 +12,7 @@ TCEFORM.tt_content.CType.removeItems := removeFromList(academicprograms_programd
 mod.wizards.newContentElement.wizardItems.academic {
   elements {
     academicprograms_programdetails {
-      iconIdentifier = academic-programs
+      iconIdentifier = tx-academicprograms-plugin-programs
       title = LLL:EXT:academic_programs/Resources/Private/Language/locallang_be.xlf:plugin.program_details.title
       description = LLL:EXT:academic_programs/Resources/Private/Language/locallang_be.xlf:plugin.program_details.description
       tt_content_defValues {

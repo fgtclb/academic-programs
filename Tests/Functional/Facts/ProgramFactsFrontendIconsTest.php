@@ -57,10 +57,11 @@ final class ProgramFactsFrontendIconsTest extends AbstractAcademicProgramsTestCa
     private const TYPE_FRONTEND = 'x="4" y="4" width="8" height="8"';
 
     /**
-     * Parts of the shipped `Degree.svg` and `StandardPeriod.svg`.
+     * Parts of the shipped degree icon, `info/degree.svg` of academic_base, and of the
+     * standard period icon, `info/time.svg` of academic_base.
      */
-    private const SHIPPED_DEGREE = 'x1="22.29" y1="28.02"';
-    private const SHIPPED_STANDARD_PERIOD = 'd="M58.05,23.65c10,10-2,18-2,18h-43';
+    private const SHIPPED_DEGREE = 'd="M80 259.8L289.2 345.9';
+    private const SHIPPED_STANDARD_PERIOD = 'd="M320 64C461.4 64 576 178.6 576 320';
 
     protected function setUp(): void
     {
@@ -209,7 +210,7 @@ final class ProgramFactsFrontendIconsTest extends AbstractAcademicProgramsTestCa
             $iconRegistry->getIconConfigurationByIdentifier('category_types.programs.accreditation')['options']['source'] ?? null,
         );
         $this->assertSame(
-            'EXT:academic_programs/Resources/Public/Icons/CategoryTypes/Degree.svg',
+            'EXT:academic_base/Resources/Public/Icons/info/degree.svg',
             $iconRegistry->getIconConfigurationByIdentifier('category_types.programs.degree')['options']['source'] ?? null,
         );
         $this->assertSame(

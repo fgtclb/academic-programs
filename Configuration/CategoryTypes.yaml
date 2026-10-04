@@ -1,66 +1,66 @@
 groups:
   - identifier: programs
     title: 'LLL:EXT:academic_programs/Resources/Private/Language/locallang_be.xlf:sys_category.programs.group'
-    icon: 'EXT:academic_programs/Resources/Public/Icons/CategoryGroups/Programs.svg'
+    icon: 'EXT:academic_programs/Resources/Public/Icons/category-group/programs.svg'
     inlineIcon: true
 types:
   - identifier: admission_restriction
     title: 'LLL:EXT:academic_programs/Resources/Private/Language/locallang_be.xlf:sys_category.programs.admission_restriction'
     group: programs
-    icon: 'EXT:academic_programs/Resources/Public/Icons/CategoryTypes/AdmissionRestriction.svg'
+    icon: 'EXT:academic_programs/Resources/Public/Icons/category-type/admission-restriction.svg'
     inlineIcon: true
   - identifier: application_period
     title: 'LLL:EXT:academic_programs/Resources/Private/Language/locallang_be.xlf:sys_category.programs.application_period'
     group: programs
-    icon: 'EXT:academic_programs/Resources/Public/Icons/CategoryTypes/ApplicationPeriod.svg'
+    icon: 'EXT:academic_programs/Resources/Public/Icons/category-type/application-period.svg'
     inlineIcon: true
   - identifier: begin_program
     title: 'LLL:EXT:academic_programs/Resources/Private/Language/locallang_be.xlf:sys_category.programs.begin_program'
     group: programs
-    icon: 'EXT:academic_programs/Resources/Public/Icons/CategoryTypes/BeginProgram.svg'
+    icon: 'EXT:academic_programs/Resources/Public/Icons/category-type/begin-program.svg'
     inlineIcon: true
   - identifier: costs
     title: 'LLL:EXT:academic_programs/Resources/Private/Language/locallang_be.xlf:sys_category.programs.costs'
     group: programs
-    icon: 'EXT:academic_programs/Resources/Public/Icons/CategoryTypes/Costs.svg'
+    icon: 'EXT:academic_programs/Resources/Public/Icons/category-type/costs.svg'
     inlineIcon: true
   - identifier: paying
     title: 'LLL:EXT:academic_programs/Resources/Private/Language/locallang_be.xlf:sys_category.programs.paying'
     group: programs
-    icon: 'EXT:academic_programs/Resources/Public/Icons/CategoryTypes/Paying.svg'
+    icon: 'EXT:academic_programs/Resources/Public/Icons/category-type/paying.svg'
     inlineIcon: true
   - identifier: degree
     title: 'LLL:EXT:academic_programs/Resources/Private/Language/locallang_be.xlf:sys_category.programs.degree'
     group: programs
-    icon: 'EXT:academic_programs/Resources/Public/Icons/CategoryTypes/Degree.svg'
+    icon: 'EXT:academic_base/Resources/Public/Icons/info/degree.svg'
     inlineIcon: true
   - identifier: department
     title: 'LLL:EXT:academic_programs/Resources/Private/Language/locallang_be.xlf:sys_category.programs.department'
     group: programs
-    icon: 'EXT:academic_programs/Resources/Public/Icons/CategoryTypes/Department.svg'
+    icon: 'EXT:academic_base/Resources/Public/Icons/info/department.svg'
     inlineIcon: true
   - identifier: standard_period
     title: 'LLL:EXT:academic_programs/Resources/Private/Language/locallang_be.xlf:sys_category.programs.standard_period'
     group: programs
-    icon: 'EXT:academic_programs/Resources/Public/Icons/CategoryTypes/StandardPeriod.svg'
+    icon: 'EXT:academic_base/Resources/Public/Icons/info/time.svg'
     inlineIcon: true
   - identifier: location
     title: 'LLL:EXT:academic_programs/Resources/Private/Language/locallang_be.xlf:sys_category.programs.location'
     group: programs
-    icon: 'EXT:academic_programs/Resources/Public/Icons/CategoryTypes/Location.svg'
+    icon: 'EXT:academic_base/Resources/Public/Icons/info/location.svg'
     inlineIcon: true
   - identifier: program_type
     title: 'LLL:EXT:academic_programs/Resources/Private/Language/locallang_be.xlf:sys_category.programs.program_type'
     group: programs
-    icon: 'EXT:academic_programs/Resources/Public/Icons/CategoryTypes/ProgramType.svg'
+    icon: 'EXT:academic_programs/Resources/Public/Icons/category-type/program-type.svg'
     inlineIcon: true
   - identifier: teaching_language
     title: 'LLL:EXT:academic_programs/Resources/Private/Language/locallang_be.xlf:sys_category.programs.teaching_language'
     group: programs
-    icon: 'EXT:academic_programs/Resources/Public/Icons/CategoryTypes/TeachingLanguage.svg'
+    icon: 'EXT:academic_programs/Resources/Public/Icons/category-type/teaching-language.svg'
     inlineIcon: true
   - identifier: topic
     title: 'LLL:EXT:academic_programs/Resources/Private/Language/locallang_be.xlf:sys_category.programs.topic'
     group: programs
-    icon: 'EXT:academic_programs/Resources/Public/Icons/CategoryTypes/Topic.svg'
+    icon: 'EXT:academic_programs/Resources/Public/Icons/category-type/topic.svg'
     inlineIcon: true

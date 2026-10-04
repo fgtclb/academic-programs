@@ -29,7 +29,7 @@ defined('TYPO3') or die;
         [
             'label' => 'LLL:EXT:academic_programs/Resources/Private/Language/locallang_be.xlf:pages.doktype.item.academic_program',
             'value' => PageTypes::TYPE_ACADEMIC_PROGRAM,
-            'icon' => 'academic-programs',
+            'icon' => 'tx-academicprograms-doktype-program',
             'group' => 'academic',
         ]
     );
@@ -40,7 +40,7 @@ defined('TYPO3') or die;
         [
             'ctrl' => [
                 'typeicon_classes' => [
-                    PageTypes::TYPE_ACADEMIC_PROGRAM => 'academic-programs',
+                    PageTypes::TYPE_ACADEMIC_PROGRAM => 'tx-academicprograms-doktype-program',
                 ],
             ],
             'types' => [

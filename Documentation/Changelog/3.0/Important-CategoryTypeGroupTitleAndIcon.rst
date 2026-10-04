@@ -17,7 +17,7 @@ Impact
 ======
 
 The type select now heads them with the title :guilabel:`Academic Programs`.
-The icon ships as :file:`Resources/Public/Icons/CategoryGroups/Programs.svg`, a
+The icon ships as :file:`Resources/Public/Icons/category-group/programs.svg`, a
 Font Awesome Free icon listed in
 :file:`Resources/Public/Icons/LICENSE-font-awesome.txt`, and is registered as
 :php:`category_types_group.programs`, in the icon registry of the backend and in
