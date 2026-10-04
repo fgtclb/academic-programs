@@ -1,0 +1,10 @@
+# A type a site package adds to the shipped `programs` group, with one drawing for the
+# backend and another one for the frontend.
+types:
+  - identifier: accreditation
+    title: 'Accreditation'
+    group: programs
+    icon: 'EXT:test_programs_frontend_icons/Resources/Public/Icons/TypeBackend.svg'
+    inlineIcon: true
+    frontendIcon: 'EXT:test_programs_frontend_icons/Resources/Public/Icons/TypeFrontend.svg'
+    frontendInlineIcon: true

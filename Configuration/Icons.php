@@ -11,21 +11,13 @@ use FGTCLB\AcademicBase\Imaging\IconProvider\CurrentColorSvgIconProvider;
  * its file, so an icon drawn in a dark ink stays dark on the dark cards of the
  * backend colour scheme. Inlined and drawn in `currentColor` it follows the text
  * colour.
+ *
+ * The icon of the credit points fact is a frontend icon and registered in
+ * `Configuration/FrontendIcons.php`.
  */
 return [
     'academic-programs' => [
         'provider' => CurrentColorSvgIconProvider::class,
         'source' => 'EXT:academic_programs/Resources/Public/Icons/Extension.svg',
-    ],
-    /*
-     * The icon of the credit points fact of a program, which is a program field rather than
-     * a category type and therefore has no icon from Configuration/CategoryTypes.yaml. Font
-     * Awesome Free solid, named `tx-<extkey>-<group>-<name>` with the file at
-     * `Icons/<group>/<name>.svg`. Licence and origin:
-     * Resources/Public/Icons/LICENSE-font-awesome.txt.
-     */
-    'tx-academicprograms-info-credit-points' => [
-        'provider' => CurrentColorSvgIconProvider::class,
-        'source' => 'EXT:academic_programs/Resources/Public/Icons/info/credit-points.svg',
     ],
 ];

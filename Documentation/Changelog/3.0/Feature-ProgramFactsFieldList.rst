@@ -46,7 +46,8 @@ fields `creditPoints`, `jobProfile`, `performanceScope` and `prerequisites`:
           fields: 'degree,standard_period'
 
 The credit points fact has an icon of its own,
-`tx-academicprograms-info-credit-points`.
+`tx-academicprograms-info-credit-points`, a frontend icon, see
+:ref:`breaking-programs-credit-points-icon-is-a-frontend-icon`.
 
 All three places render their facts through the partials
 :file:`Program/Facts.html` and :file:`Program/Facts/Item.html`, so a project

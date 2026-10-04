@@ -46,9 +46,13 @@ Impact
 
 The twelve category type icons reach the **frontend**, in the facts of a
 program: :file:`Partials/Program/Facts/Item.html` renders
-:html:`<core:icon identifier="{fact.iconIdentifier}" />`, which is
-:html:`category_types.programs.{type}` for a category type. The call does not
-ask for the `inline` markup, so their rendered markup changes: an
+:html:`<ab:icon identifier="{fact.iconIdentifier}" />` with the icon ViewHelper
+of :guilabel:`academic_base`. The identifier is
+:html:`category_types.programs.{type}` for a category type.
+:guilabel:`category_types` registers them in the frontend icon
+registry as well, with the same provider, see
+:ref:`breaking-programs-credit-points-icon-is-a-frontend-icon`. The call does
+not ask for the `inline` markup, so their rendered markup changes: an
 :html:`<img>` of a fixed pixel size becomes an inlined :html:`<svg>` with
 :html:`width="1em" height="1em"`, which follows the font size and the colour of
 the text around it. Every site using the program plugins sees those icons resize

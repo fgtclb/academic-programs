@@ -2,7 +2,7 @@
     lang="en"
     xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
     xmlns:ct="http://typo3.org/ns/FGTCLB/CategoryTypes/ViewHelpers"
-    xmlns:core="http://typo3.org/ns/TYPO3/CMS/Core/ViewHelpers"
+    xmlns:ab="http://typo3.org/ns/FGTCLB/AcademicBase/ViewHelpers"
     data-namespace-typo3-fluid="true"
 >
 
@@ -17,7 +17,7 @@
 
 <li class="academic-programs-facts__item academic-programs-facts__item--{fact.identifier}{f:if(condition: itemClass, then: ' {itemClass}')}">
     <f:if condition="{fact.iconIdentifier}">
-        <core:icon identifier="{fact.iconIdentifier}" />
+        <ab:icon identifier="{fact.iconIdentifier}" />
     </f:if>
 
     <b>{f:translate(key: fact.labelKey, extensionName: 'AcademicPrograms') -> ct:categoryTypeTitle(group: 'programs', identifier: fact.identifier)}:</b>

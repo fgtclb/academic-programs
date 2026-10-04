@@ -11,7 +11,11 @@ use FGTCLB\CategoryTypes\Domain\Model\Category;
  *
  * A category type fact carries the categories of the program of that type, a built-in fact
  * the value of its program field. `labelKey` is a key of `locallang.xlf` of this extension,
- * and `iconIdentifier` is empty for a fact without an icon.
+ * and `iconIdentifier` is empty for a fact without an icon. An icon identifier is one of the
+ * frontend icon registry of EXT:academic_base, which the partial renders with `ab:icon`:
+ * `category_types.programs.<type>` for a category type fact, which EXT:category_types
+ * registers there, and {@see \FGTCLB\AcademicPrograms\Service\ProgramFactsBuilder::CREDIT_POINTS_ICON}
+ * for the credit points.
  */
 final readonly class ProgramFact
 {

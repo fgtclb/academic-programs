@@ -39,6 +39,10 @@ final readonly class ProgramFactsBuilder
 {
     public const BUILT_IN_FACTS = ['creditPoints', 'jobProfile', 'performanceScope', 'prerequisites'];
 
+    /**
+     * The icon of the credit points fact, an identifier of the frontend icon registry of
+     * EXT:academic_base. This extension registers it in `Configuration/FrontendIcons.php`.
+     */
     public const CREDIT_POINTS_ICON = 'tx-academicprograms-info-credit-points';
 
     /**

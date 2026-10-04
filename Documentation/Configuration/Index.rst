@@ -372,9 +372,49 @@ other partial of this extension:
 :html:`{fact}` carries :html:`identifier`, :html:`labelKey` (a key of
 :file:`locallang.xlf` of this extension), :html:`iconIdentifier` (empty for a
 fact without an icon), :html:`isCategoryType`, :html:`categories` for a
-category type and :html:`value` for a program field. The icon of the credit
-points fact is `tx-academicprograms-info-credit-points`; the category types
-use their own icons, the other three program fields have none.
+category type and :html:`value` for a program field.
+
+:file:`Program/Facts/Item.html` renders the icon with the ``ab:icon``
+ViewHelper of :guilabel:`academic_base`, from its frontend icon registry. The
+credit points fact has the icon `tx-academicprograms-info-credit-points`, which
+this extension registers in its :file:`Configuration/FrontendIcons.php`. A
+category type fact has the icon of its type, `category_types.programs.<type>`,
+which :guilabel:`category_types` registers from
+:file:`Configuration/CategoryTypes.yaml`: the ``frontendIcon`` of the type when
+it declares one, its ``icon`` otherwise. The other three program fields have
+no icon.
+
+A site package replaces one of these icons for the frontend by registering its
+identifier in its own :file:`Configuration/FrontendIcons.php`, which has the
+format of :file:`Icons.php`. The site package has to depend on
+:guilabel:`academic_programs`, so its entry is read after the shipped one:
+
+..  code-block:: php
+    :caption: EXT:my_sitepackage/Configuration/FrontendIcons.php
+
+    <?php
+
+    use FGTCLB\AcademicBase\Imaging\IconProvider\CurrentColorSvgIconProvider;
+
+    return [
+        'tx-academicprograms-info-credit-points' => [
+            'provider' => CurrentColorSvgIconProvider::class,
+            'source' => 'EXT:my_sitepackage/Resources/Public/Icons/CreditPoints.svg',
+        ],
+        'category_types.programs.degree' => [
+            'provider' => CurrentColorSvgIconProvider::class,
+            'source' => 'EXT:my_sitepackage/Resources/Public/Icons/Degree.svg',
+        ],
+    ];
+
+A replacement in :file:`Configuration/Icons.php` does not reach the facts, and
+a replaced category type icon keeps its declared drawing in the backend.
+
+..  versionchanged:: 3.0
+
+    The credit points icon is a frontend icon and the facts render their icons
+    from the frontend icon registry, see
+    :ref:`breaking-programs-credit-points-icon-is-a-frontend-icon`.
 
 A template of your own gets the facts from the variable :html:`{facts}` on the
 program page and in the details content element. Anywhere else, the view
