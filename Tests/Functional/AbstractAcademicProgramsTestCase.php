@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace FGTCLB\AcademicPrograms\Tests\Functional;
 
-use SBUERK\TYPO3\Testing\TestCase\FunctionalTestCase;
+use FGTCLB\TestingHelper\TestCase\FunctionalTestCase;
 
 abstract class AbstractAcademicProgramsTestCase extends FunctionalTestCase
 {

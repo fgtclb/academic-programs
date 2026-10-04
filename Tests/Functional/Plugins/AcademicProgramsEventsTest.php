@@ -8,7 +8,6 @@ use FGTCLB\AcademicPrograms\Tests\Functional\AbstractAcademicProgramsTestCase;
 use FGTCLB\TestingHelper\FunctionalTestCase\FrontendPluginRenderingTrait;
 use PHPUnit\Framework\Attributes\Test;
 use SBUERK\TYPO3\Testing\SiteHandling\SiteBasedTestTrait;
-use TYPO3\CMS\Core\Cache\Backend\TransientMemoryBackend;
 
 /**
  * What an installed extension can do to the program list and the program finder, through
@@ -28,9 +27,7 @@ use TYPO3\CMS\Core\Cache\Backend\TransientMemoryBackend;
  */
 final class AcademicProgramsEventsTest extends AbstractAcademicProgramsTestCase
 {
-    use FrontendPluginRenderingTrait {
-        frontendPluginTestConfiguration as sharedFrontendPluginTestConfiguration;
-    }
+    use FrontendPluginRenderingTrait;
     use SiteBasedTestTrait;
 
     private const LIST_NAMESPACE = 'tx_academicprograms_programlist';
@@ -56,30 +53,6 @@ final class AcademicProgramsEventsTest extends AbstractAcademicProgramsTestCase
     {
         $this->removeWrittenSiteConfiguration();
         parent::tearDown();
-    }
-
-    /**
-     * The Extbase class schema cache stays in memory for this class, as for the partner and
-     * project event tests: TYPO3 core writes it from the destructor of the reflection
-     * service, and a garbage collector run inside another serialize() leaves a payload that
-     * cannot be read back (ACE-725, ACE-729, ACE-740). An in-memory cache is never serialized.
-     *
-     * @param array<string, mixed> $additionalConfiguration
-     * @return array<string, mixed>
-     */
-    protected function frontendPluginTestConfiguration(array $additionalConfiguration = []): array
-    {
-        return $this->sharedFrontendPluginTestConfiguration(array_replace_recursive([
-            'SYS' => [
-                'caching' => [
-                    'cacheConfigurations' => [
-                        'extbase' => [
-                            'backend' => TransientMemoryBackend::class,
-                        ],
-                    ],
-                ],
-            ],
-        ], $additionalConfiguration));
     }
 
     /**
