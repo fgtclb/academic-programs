@@ -15,7 +15,7 @@
     first in the document.
 </f:comment>
 
-<div class="academic-programs-detail__header">
+<div>
     <f:if condition="{programListPid}">
         <f:comment>
             Resolved first, so a list page that cannot be linked - hidden, or not
@@ -25,7 +25,6 @@
         <f:if condition="{backToListUri}">
             <a
                 href="{backToListUri}"
-                class="academic-programs-detail__back"
             >{f:translate(key: 'page.backToList', extensionName: 'AcademicPrograms')}</a>
         </f:if>
     </f:if>
@@ -33,7 +32,7 @@
     <h1>{program.title}</h1>
 
     <f:if condition="{program.subtitle}">
-        <p class="academic-programs-detail__subtitle">{program.subtitle}</p>
+        <p>{program.subtitle}</p>
     </f:if>
 </div>
 

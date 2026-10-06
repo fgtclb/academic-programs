@@ -5,15 +5,14 @@
     data-namespace-typo3-fluid="true"
 >
 
-<div class="card flex-column-reverse academic-programs-item mt-4">
-    <div class="card-content">
-        <div class="card-body">
+<div>
+    <div>
+        <div>
             <f:render
                 partial="Program/Header"
                 arguments="{
                     header: '{program.title}',
                     layout: '{data.header_layout}',
-                    positionClass: 'card-title',
                     link: '{f:uri.page(pageUid: program.uid)}',
                     subheader: '{data.subheader}'
                 }"
@@ -44,7 +43,6 @@
                 arguments="{
                     image: image,
                     preset: 'card',
-                    class: 'card-img-top img-fluid'
                 }"
             />
         </f:if>

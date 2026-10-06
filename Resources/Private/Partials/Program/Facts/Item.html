@@ -18,7 +18,7 @@
     "creditPoints", "jobProfile", "performanceScope", "prerequisites".
 </f:comment>
 
-<li class="academic-programs-facts__item academic-programs-facts__item--{fact.identifier}{f:if(condition: itemClass, then: ' {itemClass}')}">
+<li class="change-me-{fact.identifier} {f:if(condition: itemClass, then: '{itemClass}')}">
     <f:if condition="{fact.iconIdentifier}">
         <ab:icon identifier="{fact.iconIdentifier}" />
     </f:if>

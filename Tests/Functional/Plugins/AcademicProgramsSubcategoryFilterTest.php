@@ -35,8 +35,8 @@ final class AcademicProgramsSubcategoryFilterTest extends AbstractAcademicProgra
     use SiteBasedTestTrait;
 
     private const LIST_NAMESPACE = 'tx_academicprograms_programlist';
-    private const LIST_FORM_CLASS = 'academic-programs-filtersorting';
-    private const FINDER_FORM_CLASS = 'academic-programs-finder';
+    private const LIST_FORM = '//form[@name="demand"]';
+    private const FINDER_FORM = '//form[contains(concat(" ", normalize-space(@class), " "), " academic-programs-finder ")]';
 
     protected const LANGUAGE_PRESETS = [
         'EN' => ['id' => 0, 'title' => 'English', 'locale' => 'en_US.UTF8', 'iso' => 'en', 'hrefLang' => 'en-US', 'direction' => ''],
@@ -174,7 +174,7 @@ final class AcademicProgramsSubcategoryFilterTest extends AbstractAcademicProgra
         $this->setListSettings($includeSubcategories);
         $this->setUpSite();
 
-        $options = $this->categoryFilterOptions($this->renderFrontendPage('https://www.acme.com/programs'), self::LIST_FORM_CLASS, 'degree');
+        $options = $this->categoryFilterOptions($this->renderFrontendPage('https://www.acme.com/programs'), self::LIST_FORM, 'degree');
 
         $this->assertSame($expected, $this->withoutAllOptionLabel($options));
     }
@@ -197,7 +197,7 @@ final class AcademicProgramsSubcategoryFilterTest extends AbstractAcademicProgra
     {
         $this->setUpSite();
 
-        $options = $this->categoryFilterOptions($this->renderFrontendPage('https://www.acme.com/programs'), self::LIST_FORM_CLASS, 'degree');
+        $options = $this->categoryFilterOptions($this->renderFrontendPage('https://www.acme.com/programs'), self::LIST_FORM, 'degree');
 
         $this->assertContains('Master (disabled)', $options);
     }
@@ -209,7 +209,7 @@ final class AcademicProgramsSubcategoryFilterTest extends AbstractAcademicProgra
         $this->setListSettings($includeSubcategories);
         $this->setUpSite(hideDisabledOptions: true);
 
-        $options = $this->categoryFilterOptions($this->renderFrontendPage('https://www.acme.com/programs'), self::LIST_FORM_CLASS, 'degree');
+        $options = $this->categoryFilterOptions($this->renderFrontendPage('https://www.acme.com/programs'), self::LIST_FORM, 'degree');
 
         $this->assertSame($offered, in_array('Master', $options, true));
         $this->assertNotContains('Master (disabled)', $options);
@@ -283,7 +283,7 @@ final class AcademicProgramsSubcategoryFilterTest extends AbstractAcademicProgra
         $this->setFinderSettings($includeSubcategories);
         $this->setUpSite();
 
-        $options = $this->categoryFilterOptions($this->renderFrontendPage('https://www.acme.com/home'), self::FINDER_FORM_CLASS, 'degree');
+        $options = $this->categoryFilterOptions($this->renderFrontendPage('https://www.acme.com/home'), self::FINDER_FORM, 'degree');
 
         $this->assertContains('Master' . ($state === 'disabled' ? ' (disabled)' : ''), $options);
     }
@@ -368,7 +368,7 @@ final class AcademicProgramsSubcategoryFilterTest extends AbstractAcademicProgra
 
         $response = $this->submitFrontendForm(
             'https://www.acme.com/home',
-            self::FINDER_FORM_CLASS,
+            self::FINDER_FORM,
             [self::LIST_NAMESPACE => ['demand' => ['filterCollection' => ['degree' => '2']]]],
         );
         $content = $this->renderFrontendPage($this->assertSeeOtherWithCacheHash($response));

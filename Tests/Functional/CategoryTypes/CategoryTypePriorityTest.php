@@ -178,7 +178,7 @@ final class CategoryTypePriorityTest extends AbstractAcademicProgramsTestCase
         $document = new \DOMDocument();
         $this->assertTrue(@$document->loadHTML($content));
         $selects = (new \DOMXPath($document))->query(
-            '//form[contains(@class, "academic-programs-filtersorting")]//select[contains(@name, "[demand][filterCollection]")]'
+            '//form[@name="demand"]//select[contains(@name, "[demand][filterCollection]")]'
         );
         $this->assertInstanceOf(\DOMNodeList::class, $selects);
 

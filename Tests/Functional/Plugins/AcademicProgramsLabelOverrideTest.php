@@ -221,7 +221,7 @@ final class AcademicProgramsLabelOverrideTest extends AbstractAcademicProgramsTe
      */
     public static function pageTranslationDataProvider(): \Generator
     {
-        yield 'link back to the list' => ['page.backToList', 'Back to all programs', 'class="academic-programs-detail__back" >%s</a>'];
+        yield 'link back to the list' => ['page.backToList', 'Back to all programs', '<a href="/home" >%s</a>'];
         yield 'category type fact, key from PHP' => [
             'sys_category.programs.degree', 'Degree', '<b>%s:</b> <span> Bachelor of Science </span>',
         ];

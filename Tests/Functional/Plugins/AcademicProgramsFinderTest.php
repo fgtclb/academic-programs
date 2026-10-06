@@ -37,6 +37,7 @@ final class AcademicProgramsFinderTest extends AbstractAcademicProgramsTestCase
     private const LIST_NAMESPACE = 'tx_academicprograms_programlist';
 
     private const FINDER_FORM_CLASS = 'academic-programs-finder';
+    private const FINDER_FORM = '//form[contains(concat(" ", normalize-space(@class), " "), " ' . self::FINDER_FORM_CLASS . ' ")]';
 
     private const HEADER = 'Find your program';
     private const SUBHEADER = 'Choose a degree and a topic';
@@ -155,7 +156,7 @@ final class AcademicProgramsFinderTest extends AbstractAcademicProgramsTestCase
 
     private function finderForm(\DOMXPath $xpath): \DOMElement
     {
-        $forms = $xpath->query('//form[contains(concat(" ", normalize-space(@class), " "), " ' . self::FINDER_FORM_CLASS . ' ")]');
+        $forms = $xpath->query(self::FINDER_FORM);
         $this->assertInstanceOf(\DOMNodeList::class, $forms);
         $this->assertCount(1, $forms, 'The page renders no single finder form.');
         $form = $forms->item(0);
@@ -431,8 +432,8 @@ final class AcademicProgramsFinderTest extends AbstractAcademicProgramsTestCase
 
         $content = $this->renderHomePage();
 
-        $this->assertSame('All degrees', $this->categoryFilterOptions($content, self::FINDER_FORM_CLASS, 'degree')[0] ?? null);
-        $this->assertSame('All options', $this->categoryFilterOptions($content, self::FINDER_FORM_CLASS, 'topic')[0] ?? null);
+        $this->assertSame('All degrees', $this->categoryFilterOptions($content, self::FINDER_FORM, 'degree')[0] ?? null);
+        $this->assertSame('All options', $this->categoryFilterOptions($content, self::FINDER_FORM, 'topic')[0] ?? null);
     }
 
     /**
@@ -446,7 +447,7 @@ final class AcademicProgramsFinderTest extends AbstractAcademicProgramsTestCase
 
         $this->assertSame(
             ['visible' => ['degree', 'topic'], 'more' => [], 'disclosure' => 'none', 'summary' => null],
-            $this->renderedCategoryFilters($this->renderHomePage(), self::FINDER_FORM_CLASS),
+            $this->renderedCategoryFilters($this->renderHomePage(), self::FINDER_FORM),
         );
     }
 
@@ -501,7 +502,7 @@ final class AcademicProgramsFinderTest extends AbstractAcademicProgramsTestCase
 
         $response = $this->submitFrontendForm(
             'https://www.acme.com/home',
-            self::FINDER_FORM_CLASS,
+            self::FINDER_FORM,
             [self::LIST_NAMESPACE => ['demand' => ['filterCollection' => ['degree' => '2']]]],
         );
         $location = $this->assertSeeOtherWithCacheHash($response);
@@ -526,7 +527,7 @@ final class AcademicProgramsFinderTest extends AbstractAcademicProgramsTestCase
 
         $response = $this->submitFrontendForm(
             'https://www.acme.com/home',
-            self::FINDER_FORM_CLASS,
+            self::FINDER_FORM,
             [self::LIST_NAMESPACE => ['demand' => ['filterCollection' => ['degree' => '2']]]],
         );
         $location = $this->assertSeeOtherWithCacheHash($response);
@@ -552,7 +553,7 @@ final class AcademicProgramsFinderTest extends AbstractAcademicProgramsTestCase
         $this->setFinderSettings(['settings.listPid' => '3', 'settings.preselectedCategories' => '1']);
         $this->setUpSite();
 
-        $response = $this->submitFrontendForm('https://www.acme.com/home', self::FINDER_FORM_CLASS);
+        $response = $this->submitFrontendForm('https://www.acme.com/home', self::FINDER_FORM);
         $content = $this->renderFrontendPage($this->assertSeeOtherWithCacheHash($response));
 
         $this->assertStringContainsString('Applied Physics', $content);
@@ -696,7 +697,7 @@ final class AcademicProgramsFinderTest extends AbstractAcademicProgramsTestCase
         $this->setContentElementHeader($headerLayout);
 
         $content = $this->renderHomePage();
-        $form = '//*[@id = "c1"]//form[contains(concat(" ", normalize-space(@class), " "), " ' . self::FINDER_FORM_CLASS . ' ")]';
+        $form = '//*[@id = "c1"]' . self::FINDER_FORM;
         $this->assertSame(1, $this->countContentElementHeaderNodes($content, $form));
         $this->assertSame($expectedHeadings, $this->countHeadingsReading($content, self::HEADER));
         $this->assertSame($expectedHeadings, $this->countHeadingsReading($content, self::SUBHEADER));
@@ -723,7 +724,7 @@ final class AcademicProgramsFinderTest extends AbstractAcademicProgramsTestCase
         $this->assertSame(1, $this->countContentElementHeaderNodes($content, $frame));
         $this->assertSame(1, $this->countContentElementHeaderNodes(
             $content,
-            $frame . '//form[contains(concat(" ", normalize-space(@class), " "), " ' . self::FINDER_FORM_CLASS . ' ")]',
+            $frame . self::FINDER_FORM,
         ));
         $this->assertSame($expectedHeadings, $this->countHeadingsReading($content, self::HEADER));
         $this->assertSame($expectedHeadings, $this->countHeadingsReading($content, self::HEADER, $frame));

@@ -210,8 +210,8 @@ final class ProgramFactsTest extends AbstractAcademicProgramsTestCase
         $content = $this->renderFrontendPage(self::PROGRAM_PAGE);
 
         $this->assertSame(1, substr_count($content, '<ul class="academic-programs-facts">'));
-        $this->assertStringContainsString('<li class="academic-programs-facts__item academic-programs-facts__item--degree">', $content);
-        $this->assertStringContainsString('<li class="academic-programs-facts__item academic-programs-facts__item--creditPoints">', $content);
+        $this->assertStringContainsString('<li class="change-me-degree ">', $content);
+        $this->assertStringContainsString('<li class="change-me-creditPoints ">', $content);
         $this->assertStringContainsString('Optics &amp; Photonics', $content);
         $this->assertStringNotContainsString('&amp;amp;', $content);
         $this->assertStringContainsString('<p>Research and development in industry.</p>', $content);
@@ -342,7 +342,7 @@ final class ProgramFactsTest extends AbstractAcademicProgramsTestCase
         foreach (['Applied Physics', 'Chemistry'] as $title) {
             $card = $this->programCard($content, $title);
             $this->assertStringContainsString('<ul class="academic-programs-facts list-group list-group-flush">', $card);
-            $this->assertStringContainsString('<li class="academic-programs-facts__item academic-programs-facts__item--degree list-group-item">', $card);
+            $this->assertStringContainsString('<li class="change-me-degree list-group-item">', $card);
             $this->assertRenderedInOrder($card, 'Degree', 'Bachelor of Science');
             $this->assertStringNotContainsString('6 semesters', $card);
             $this->assertStringNotContainsString('Campus A', $card);
@@ -438,7 +438,7 @@ final class ProgramFactsTest extends AbstractAcademicProgramsTestCase
             $this->assertStringContainsString('<span>', $this->factItem($card, $identifier));
             $this->assertStringNotContainsString('ce-bodytext', $this->factItem($card, $identifier));
         }
-        $this->assertStringNotContainsString('class=""', $card);
+        $this->assertStringNotContainsString('class=""', $this->factsList($card));
     }
 
     private function assertOnlyRichTextFactsAreMarked(string $content): void
@@ -458,7 +458,16 @@ final class ProgramFactsTest extends AbstractAcademicProgramsTestCase
             $this->assertStringContainsString('<span>', $item);
             $this->assertStringNotContainsString('ce-bodytext', $item);
         }
-        $this->assertStringNotContainsString('class=""', $content);
+        $this->assertStringNotContainsString('class=""', $this->factsList($content));
+    }
+
+    /**
+     * The facts list, from its opening tag to its end.
+     */
+    private function factsList(string $content): string
+    {
+        $this->assertSame(1, preg_match('#<ul class="academic-programs-facts[ "].*?</ul>#s', $content, $matches), 'No facts list is rendered.');
+        return $matches[0];
     }
 
     /**
@@ -466,7 +475,7 @@ final class ProgramFactsTest extends AbstractAcademicProgramsTestCase
      */
     private function factItem(string $content, string $identifier): string
     {
-        $pattern = '#<li class="academic-programs-facts__item academic-programs-facts__item--' . preg_quote($identifier, '#') . '[ "].*?</li>#s';
+        $pattern = '#<li class="change-me-' . preg_quote($identifier, '#') . '[ "].*?</li>#s';
         $this->assertSame(1, preg_match($pattern, $content, $matches), sprintf('No fact "%s" is rendered.', $identifier));
         return $matches[0];
     }
@@ -476,7 +485,7 @@ final class ProgramFactsTest extends AbstractAcademicProgramsTestCase
      */
     private function programCard(string $content, string $title): string
     {
-        foreach (explode('academic-programs-item ', $content) as $card) {
+        foreach (explode('<div class="col-12 col-md-6 col-lg-4 col-xl-3">', $content) as $card) {
             if (str_contains($card, '>' . $title . '</a>')) {
                 return $card;
             }

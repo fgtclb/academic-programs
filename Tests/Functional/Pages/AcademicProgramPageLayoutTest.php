@@ -40,6 +40,13 @@ final class AcademicProgramPageLayoutTest extends AbstractAcademicProgramsTestCa
         'EN' => ['id' => 0, 'title' => 'English', 'locale' => 'en_US.UTF8', 'iso' => 'en', 'hrefLang' => 'en-US', 'direction' => ''],
     ];
 
+    /**
+     * The header of the program page is the element around its heading, which holds the
+     * link back to the list in front of the heading and the subtitle after it.
+     */
+    private const HEADER = '//div[h1]';
+    private const BACK_LINK = self::HEADER . '/h1/preceding-sibling::a';
+    private const SUBTITLE = self::HEADER . '/h1/following-sibling::p';
     private const FIXTURES = 'EXT:academic_programs/Tests/Functional/Pages/Fixtures/';
     private const PROGRAM_PAGE = 'https://www.acme.com/applied-physics';
     private const CONTENT_ELEMENT = 'The programme covers optics and photonics.';
@@ -347,7 +354,7 @@ final class AcademicProgramPageLayoutTest extends AbstractAcademicProgramsTestCa
         $this->setUpSite('SitePackageWithLayouts.typoscript');
 
         $xpath = $this->parseRenderedPage($this->renderFrontendPage(self::PROGRAM_PAGE));
-        $subtitle = $this->nodesMatching($xpath, "//*[contains(concat(' ', normalize-space(@class), ' '), ' academic-programs-detail__subtitle ')]");
+        $subtitle = $this->nodesMatching($xpath, self::SUBTITLE);
 
         $this->assertCount(1, $subtitle);
         $this->assertSame('Master of Science', trim((string)$subtitle->item(0)?->textContent));
@@ -361,7 +368,7 @@ final class AcademicProgramPageLayoutTest extends AbstractAcademicProgramsTestCa
         $content = $this->renderFrontendPage('https://www.acme.com/chemistry');
 
         $this->assertStringContainsString('<h1>Chemistry</h1>', $content);
-        $this->assertStringNotContainsString('academic-programs-detail__subtitle', $content);
+        $this->assertCount(0, $this->nodesMatching($this->parseRenderedPage($content), self::SUBTITLE));
     }
 
     /**
@@ -389,7 +396,7 @@ final class AcademicProgramPageLayoutTest extends AbstractAcademicProgramsTestCa
         $content = $this->renderFrontendPage(self::PROGRAM_PAGE);
 
         $this->assertStringContainsString('<h1>Applied Physics</h1>', $content);
-        $this->assertStringContainsString('<p class="academic-programs-detail__subtitle">Master of Science</p>', $content);
+        $this->assertStringContainsString('<p>Master of Science</p>', $content);
     }
 
     /**
@@ -416,7 +423,7 @@ final class AcademicProgramPageLayoutTest extends AbstractAcademicProgramsTestCa
     private function backLinkOf(string $content): string
     {
         $xpath = $this->parseRenderedPage($content);
-        $links = $this->nodesMatching($xpath, "//a[contains(concat(' ', normalize-space(@class), ' '), ' academic-programs-detail__back ')]");
+        $links = $this->nodesMatching($xpath, self::BACK_LINK);
         if ($links->length === 0) {
             return '';
         }

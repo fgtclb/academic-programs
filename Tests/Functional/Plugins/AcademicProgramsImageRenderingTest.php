@@ -82,7 +82,8 @@ final class AcademicProgramsImageRenderingTest extends AbstractAcademicProgramsT
     private function items(\DOMXPath $xpath): array
     {
         $items = [];
-        foreach ($this->nodesMatching($xpath, "//*[contains(concat(' ', normalize-space(@class), ' '), ' academic-programs-item ')]") as $item) {
+        // The item is the element in a grid column of the result list.
+        foreach ($this->nodesMatching($xpath, '//*[@data-academic-programs-list-content]/div[@class="row"]/div/div') as $item) {
             $this->assertInstanceOf(\DOMElement::class, $item);
             $items[] = $item;
         }
@@ -103,7 +104,7 @@ final class AcademicProgramsImageRenderingTest extends AbstractAcademicProgramsT
             $withImage,
             self::CARD_SOURCES,
             self::CARD_FALLBACK_WIDTH,
-            'card-img-top img-fluid',
+            '',
             'The campus of Applied Physics',
         );
     }
@@ -115,7 +116,7 @@ final class AcademicProgramsImageRenderingTest extends AbstractAcademicProgramsT
 
         $xpath = $this->parseRenderedPage($this->renderFrontendPage('https://www.acme.com/home'));
         [, $withoutImage] = $this->items($xpath);
-        $this->assertRendersNoImage($xpath, $withoutImage, 'card-img-top img-fluid');
+        $this->assertRendersNoImage($xpath, $withoutImage, '');
     }
 
     /**

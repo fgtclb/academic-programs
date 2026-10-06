@@ -33,7 +33,7 @@ final class AcademicProgramsListInPlaceTest extends AbstractAcademicProgramsTest
     use SiteBasedTestTrait;
 
     private const PLUGIN_NAMESPACE = 'tx_academicprograms_programlist';
-    private const FORM_CLASS = 'academic-programs-filtersorting';
+    private const FORM = '//form[@name="demand"]';
     private const MODULE = '@fgtclb/academic-programs/frontend/program-list.js';
 
     protected const LANGUAGE_PRESETS = [
@@ -84,7 +84,7 @@ final class AcademicProgramsListInPlaceTest extends AbstractAcademicProgramsTest
 
         $region = $this->singleElement($xpath, './/*[@data-academic-programs-list-content]', $list);
         $this->assertSame('3', $region->getAttribute('data-academic-programs-list-total'));
-        $form = $this->singleElement($xpath, './/form[contains(concat(" ", normalize-space(@class), " "), " ' . self::FORM_CLASS . ' ")]', $region);
+        $form = $this->singleElement($xpath, './/form', $region);
         $this->assertSame('post', strtolower($form->getAttribute('method')));
         $this->assertTrue($form->hasAttribute('data-academic-programs-list-form'));
         $button = $this->singleElement($xpath, './/*[@data-academic-programs-list-submit]//button', $form);
@@ -122,7 +122,7 @@ final class AcademicProgramsListInPlaceTest extends AbstractAcademicProgramsTest
     #[Test]
     public function theFilteredListCountsTheProgramsItShows(): void
     {
-        $response = $this->submitFrontendForm('https://www.acme.com/home', self::FORM_CLASS, [
+        $response = $this->submitFrontendForm('https://www.acme.com/home', self::FORM, [
             self::PLUGIN_NAMESPACE => ['demand' => ['filterCollection' => ['degree' => '2']]],
         ]);
         $location = $this->assertSeeOtherWithCacheHash($response);

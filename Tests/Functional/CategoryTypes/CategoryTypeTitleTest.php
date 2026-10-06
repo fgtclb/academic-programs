@@ -191,7 +191,7 @@ final class CategoryTypeTitleTest extends AbstractAcademicProgramsTestCase
 
     private function factLabel(string $content, string $identifier): string
     {
-        $pattern = '#<li class="academic-programs-facts__item academic-programs-facts__item--' . preg_quote($identifier, '#') . '[ "].*?<b>(.*?)</b>#s';
+        $pattern = '#<li class="change-me-' . preg_quote($identifier, '#') . '[ "].*?<b>(.*?)</b>#s';
         if (preg_match($pattern, $content, $matches) !== 1) {
             $this->fail(sprintf('No fact "%s" is rendered.', $identifier));
         }

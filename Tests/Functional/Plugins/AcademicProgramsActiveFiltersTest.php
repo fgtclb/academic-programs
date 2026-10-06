@@ -28,7 +28,12 @@ final class AcademicProgramsActiveFiltersTest extends AbstractAcademicProgramsTe
     use FrontendPluginRenderingTrait;
     use SiteBasedTestTrait;
 
-    private const PREFIX = 'academic-programs';
+    /**
+     * The element of the active filters, and the one of the result count in front of the
+     * results of the list.
+     */
+    private const ACTIVE_FILTERS = '//div[contains(concat(" ", normalize-space(@class), " "), " academic-programs-active-filters ")]';
+    private const RESULT_COUNT = '//*[@data-academic-programs-list-content]/p[1]';
     private const LIST_NAMESPACE = 'tx_academicprograms_programlist';
     private const ALL_ON = "plugin.tx_academicprograms.filter.showActiveFilters = 1\n"
         . "plugin.tx_academicprograms.filter.showReset = 1\n"
@@ -59,7 +64,7 @@ final class AcademicProgramsActiveFiltersTest extends AbstractAcademicProgramsTe
 
         $content = $this->renderFrontendPage($this->listUrl('/home', '1,3'));
 
-        $tags = $this->activeFilterTags($content, self::PREFIX);
+        $tags = $this->activeFilterTags($content, self::ACTIVE_FILTERS);
         $this->assertSame(['Bachelor of Science', 'English'], array_keys($tags));
         $this->assertSame(
             ['filterCollection' => ['categories' => '3'], 'sortingDirection' => 'desc', 'sortingField' => 'title'],
@@ -70,8 +75,8 @@ final class AcademicProgramsActiveFiltersTest extends AbstractAcademicProgramsTe
             $this->activeFiltersDemand($tags['English']['href'], self::LIST_NAMESPACE),
         );
         $this->assertSame('Remove filter: English', $tags['English']['label']);
-        $this->assertSame('/home', $this->activeFiltersResetLink($content, self::PREFIX));
-        $this->assertSame('2 programs found', $this->activeFiltersResultCount($content, self::PREFIX));
+        $this->assertSame('/home', $this->activeFiltersResetLink($content, self::ACTIVE_FILTERS));
+        $this->assertSame('2 programs found', $this->activeFiltersResultCount($content, self::RESULT_COUNT));
     }
 
     #[Test]
@@ -81,13 +86,13 @@ final class AcademicProgramsActiveFiltersTest extends AbstractAcademicProgramsTe
 
         $content = $this->renderFrontendPage($this->listUrl('/home', '2'));
 
-        $tags = $this->activeFilterTags($content, self::PREFIX);
+        $tags = $this->activeFilterTags($content, self::ACTIVE_FILTERS);
         $this->assertSame(['Master of Science'], array_keys($tags));
         $this->assertSame(
             ['sortingDirection' => 'desc', 'sortingField' => 'title'],
             $this->activeFiltersDemand($tags['Master of Science']['href'], self::LIST_NAMESPACE),
         );
-        $this->assertSame('1 program found', $this->activeFiltersResultCount($content, self::PREFIX));
+        $this->assertSame('1 program found', $this->activeFiltersResultCount($content, self::RESULT_COUNT));
     }
 
     /**
@@ -100,18 +105,18 @@ final class AcademicProgramsActiveFiltersTest extends AbstractAcademicProgramsTe
         $this->setUpSite(self::ALL_ON);
 
         $preset = $this->renderFrontendPage('https://www.acme.com/bachelor');
-        $this->assertSame(['Bachelor of Science'], array_keys($this->activeFilterTags($preset, self::PREFIX)));
-        $this->assertNull($this->activeFiltersResetLink($preset, self::PREFIX));
-        $this->assertSame('2 programs found', $this->activeFiltersResultCount($preset, self::PREFIX));
+        $this->assertSame(['Bachelor of Science'], array_keys($this->activeFilterTags($preset, self::ACTIVE_FILTERS)));
+        $this->assertNull($this->activeFiltersResetLink($preset, self::ACTIVE_FILTERS));
+        $this->assertSame('2 programs found', $this->activeFiltersResultCount($preset, self::RESULT_COUNT));
 
-        $withoutPreselection = $this->renderFrontendPage('https://www.acme.com' . $this->activeFilterTags($preset, self::PREFIX)['Bachelor of Science']['href']);
-        $this->assertSame([], $this->activeFilterTags($withoutPreselection, self::PREFIX));
-        $this->assertSame('/bachelor', $this->activeFiltersResetLink($withoutPreselection, self::PREFIX));
-        $this->assertSame('3 programs found', $this->activeFiltersResultCount($withoutPreselection, self::PREFIX));
+        $withoutPreselection = $this->renderFrontendPage('https://www.acme.com' . $this->activeFilterTags($preset, self::ACTIVE_FILTERS)['Bachelor of Science']['href']);
+        $this->assertSame([], $this->activeFilterTags($withoutPreselection, self::ACTIVE_FILTERS));
+        $this->assertSame('/bachelor', $this->activeFiltersResetLink($withoutPreselection, self::ACTIVE_FILTERS));
+        $this->assertSame('3 programs found', $this->activeFiltersResultCount($withoutPreselection, self::RESULT_COUNT));
 
         $selected = $this->renderFrontendPage($this->listUrl('/bachelor', '4'));
-        $this->assertSame(['German'], array_keys($this->activeFilterTags($selected, self::PREFIX)));
-        $this->assertSame('/bachelor', $this->activeFiltersResetLink($selected, self::PREFIX));
+        $this->assertSame(['German'], array_keys($this->activeFilterTags($selected, self::ACTIVE_FILTERS)));
+        $this->assertSame('/bachelor', $this->activeFiltersResetLink($selected, self::ACTIVE_FILTERS));
     }
 
     #[Test]
@@ -122,7 +127,7 @@ final class AcademicProgramsActiveFiltersTest extends AbstractAcademicProgramsTe
         $content = $this->renderFrontendPage($this->listUrl('/filter-hidden', '1,3'));
 
         $this->assertStringNotContainsString('academic-programs-active-filters', $content);
-        $this->assertSame('2 programs found', $this->activeFiltersResultCount($content, self::PREFIX));
+        $this->assertSame('2 programs found', $this->activeFiltersResultCount($content, self::RESULT_COUNT));
     }
 
     /**
@@ -137,7 +142,7 @@ final class AcademicProgramsActiveFiltersTest extends AbstractAcademicProgramsTe
         $content = $this->renderFrontendPage($this->listUrl('/home', '1,3'));
 
         $this->assertStringNotContainsString('academic-programs-active-filters', $content);
-        $this->assertStringNotContainsString('academic-programs-result-count', $content);
+        $this->assertSame(0, $this->activeFiltersQuery($content, self::RESULT_COUNT)->length);
     }
 
     #[Test]
@@ -173,9 +178,9 @@ final class AcademicProgramsActiveFiltersTest extends AbstractAcademicProgramsTe
 
         $content = $this->renderFrontendPage($this->listUrl('/home', '1,3'));
 
-        $this->assertSame(['Bachelor of Science', 'English'], array_keys($this->activeFilterTags($content, self::PREFIX)));
-        $this->assertSame('/home', $this->activeFiltersResetLink($content, self::PREFIX));
-        $this->assertSame('2 programs found', $this->activeFiltersResultCount($content, self::PREFIX));
+        $this->assertSame(['Bachelor of Science', 'English'], array_keys($this->activeFilterTags($content, self::ACTIVE_FILTERS)));
+        $this->assertSame('/home', $this->activeFiltersResetLink($content, self::ACTIVE_FILTERS));
+        $this->assertSame('2 programs found', $this->activeFiltersResultCount($content, self::RESULT_COUNT));
     }
 
     /**

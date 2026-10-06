@@ -42,7 +42,7 @@ final class ProgramFactsMostSpecificCategoryTest extends AbstractAcademicProgram
     private const LIST_PAGE = 'https://www.acme.com/programs';
 
     private const LIST_NAMESPACE = 'tx_academicprograms_programlist';
-    private const LIST_FORM_CLASS = 'academic-programs-filtersorting';
+    private const LIST_FORM = '//form[@name="demand"]';
 
     private const PAGES_FIXTURES = 'EXT:academic_programs/Tests/Functional/Pages/Fixtures/TypoScript/Setup/';
     private const PLUGIN_RENDERING = 'EXT:academic_programs/Tests/Functional/Plugins/Fixtures/TypoScript/Setup/Rendering.typoscript';
@@ -281,7 +281,7 @@ final class ProgramFactsMostSpecificCategoryTest extends AbstractAcademicProgram
 
         $this->assertSame(
             ['All', 'Bachelor', 'Bachelor of Science', 'Master'],
-            $this->withoutAllOptionLabel($this->categoryFilterOptions($this->renderFrontendPage(self::LIST_PAGE), self::LIST_FORM_CLASS, 'degree')),
+            $this->withoutAllOptionLabel($this->categoryFilterOptions($this->renderFrontendPage(self::LIST_PAGE), self::LIST_FORM, 'degree')),
         );
 
         $response = $this->requestFrontendPage($this->frontendPostRequest(
@@ -299,7 +299,7 @@ final class ProgramFactsMostSpecificCategoryTest extends AbstractAcademicProgram
      */
     private function factValue(string $content, string $identifier): string
     {
-        $pattern = '#<li class="academic-programs-facts__item academic-programs-facts__item--' . preg_quote($identifier, '#') . '[ "].*?<span>(.*?)</span>#s';
+        $pattern = '#<li class="change-me-' . preg_quote($identifier, '#') . '[ "].*?<span>(.*?)</span>#s';
         if (preg_match($pattern, $content, $matches) !== 1) {
             $this->fail(sprintf('No fact "%s" is rendered.', $identifier));
         }
@@ -311,7 +311,7 @@ final class ProgramFactsMostSpecificCategoryTest extends AbstractAcademicProgram
      */
     private function programCard(string $content, string $title): string
     {
-        foreach (explode('academic-programs-item ', $content) as $card) {
+        foreach (explode('<div class="col-12 col-md-6 col-lg-4 col-xl-3">', $content) as $card) {
             if (str_contains($card, '>' . $title . '</a>')) {
                 return $card;
             }

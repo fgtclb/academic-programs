@@ -44,11 +44,11 @@
             'data-academic-programs-finder-count-other': countLabelOther
         }"
     >
-        <div class="row align-items-end">
+        <div class="row">
             <f:variable name="allOptionsLabel" value="{f:translate(key: 'sys_category.programs.allOptions', extensionName: 'AcademicPrograms')}"/>
             <f:for each="{filterTypes.visible}" as="categoryKey">
                 <div class="col-12 col-md">
-                    <label for="academic-programs-finder-{categoryKey}-{data.uid}" class="form-label">
+                    <label for="academic-programs-finder-{categoryKey}-{data.uid}">
                         {f:translate(key: 'sys_category.programs.{categoryKey}', extensionName: 'AcademicPrograms') -> ct:categoryTypeTitle(group: 'programs', identifier: categoryKey)}
                     </label>
 
@@ -67,7 +67,6 @@
                         prependOptionValue=""
                         hideDisabledOptions="{settings.filter.hideDisabledOptions}"
                         additionalAttributes="{'data-academic-programs-finder-select': ''}"
-                        class="form-select"
                     />
                 </div>
             </f:for>

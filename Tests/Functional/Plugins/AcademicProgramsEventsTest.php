@@ -32,7 +32,7 @@ final class AcademicProgramsEventsTest extends AbstractAcademicProgramsTestCase
 
     private const LIST_NAMESPACE = 'tx_academicprograms_programlist';
 
-    private const FINDER_FORM_CLASS = 'academic-programs-finder';
+    private const FINDER_FORM = '//form[contains(concat(" ", normalize-space(@class), " "), " academic-programs-finder ")]';
 
     private const FIXTURE_TYPOSCRIPT = 'EXT:test_program_events/Configuration/TypoScript/';
 
@@ -106,8 +106,8 @@ final class AcademicProgramsEventsTest extends AbstractAcademicProgramsTestCase
         $this->assertTrue(@$document->loadHTML('<?xml encoding="UTF-8">' . $content));
         $xpath = new \DOMXPath($document);
         $query = sprintf(
-            '//form[contains(concat(" ", normalize-space(@class), " "), " %s ")]//select[@name="%s[demand][filterCollection][%s]"]/option',
-            self::FINDER_FORM_CLASS,
+            '%s//select[@name="%s[demand][filterCollection][%s]"]/option',
+            self::FINDER_FORM,
             self::LIST_NAMESPACE,
             $type,
         );

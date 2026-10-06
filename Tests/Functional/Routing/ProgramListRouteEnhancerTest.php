@@ -44,7 +44,7 @@ final class ProgramListRouteEnhancerTest extends AbstractAcademicProgramsTestCas
      */
     private const PLUGIN_NAMESPACE = 'tx_academicprograms_programlist';
 
-    private const FORM_CLASS = 'academic-programs-filtersorting';
+    private const FORM = '//form[@name="demand"]';
 
     private const ROUTES = 'EXT:academic_programs/Configuration/Routes/List.yaml';
 
@@ -239,7 +239,7 @@ final class ProgramListRouteEnhancerTest extends AbstractAcademicProgramsTestCas
     #[Test]
     public function aSortingSubmissionRedirectsToThePath(): void
     {
-        $response = $this->submitFrontendForm('https://www.acme.com/home', self::FORM_CLASS, [
+        $response = $this->submitFrontendForm('https://www.acme.com/home', self::FORM, [
             self::PLUGIN_NAMESPACE => ['demand' => ['sortingField' => 'lastUpdated', 'sortingDirection' => 'desc']],
         ]);
 
@@ -255,7 +255,7 @@ final class ProgramListRouteEnhancerTest extends AbstractAcademicProgramsTestCas
     #[Test]
     public function aFilterSubmissionRedirectsToThePath(): void
     {
-        $response = $this->submitFrontendForm('https://www.acme.com/preset', self::FORM_CLASS, [
+        $response = $this->submitFrontendForm('https://www.acme.com/preset', self::FORM, [
             self::PLUGIN_NAMESPACE => ['demand' => ['filterCollection' => ['degree' => '2']]],
         ]);
 
@@ -274,7 +274,7 @@ final class ProgramListRouteEnhancerTest extends AbstractAcademicProgramsTestCas
     {
         $this->assertPrograms(['Applied Physics'], $this->renderFrontendPage('https://www.acme.com/preset'));
 
-        $response = $this->submitFrontendForm('https://www.acme.com/preset', self::FORM_CLASS, [
+        $response = $this->submitFrontendForm('https://www.acme.com/preset', self::FORM, [
             self::PLUGIN_NAMESPACE => ['demand' => ['filterCollection' => ['degree' => '']]],
         ]);
 

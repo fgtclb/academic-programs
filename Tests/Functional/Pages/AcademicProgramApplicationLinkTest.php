@@ -32,7 +32,10 @@ final class AcademicProgramApplicationLinkTest extends AbstractAcademicProgramsT
         'DE' => ['id' => 1, 'title' => 'Deutsch', 'locale' => 'de_DE.UTF8', 'iso' => 'de', 'hrefLang' => 'de-DE', 'direction' => ''],
     ];
 
-    private const APPLICATION_LINK = "//*[contains(concat(' ', normalize-space(@class), ' '), ' academic-programs-application ')]";
+    /**
+     * The paragraph of the link, which the page renders below the header.
+     */
+    private const APPLICATION_LINK = "//*[contains(concat(' ', normalize-space(@class), ' '), ' academic-programs-detail ')]/p";
 
     protected function setUp(): void
     {
@@ -154,7 +157,7 @@ final class AcademicProgramApplicationLinkTest extends AbstractAcademicProgramsT
         $content = $this->renderFrontendPage('https://www.acme.com/mathematics');
 
         $this->assertStringContainsString('<h1>Mathematics</h1>', $content);
-        $this->assertStringNotContainsString('academic-programs-application', $content);
+        $this->assertSame(0, $this->countNodesMatching($this->parseRenderedPage($content), self::APPLICATION_LINK));
         $this->assertStringNotContainsString('Apply online', $content);
     }
 
@@ -170,7 +173,7 @@ final class AcademicProgramApplicationLinkTest extends AbstractAcademicProgramsT
         $content = $this->renderFrontendPage('https://www.acme.com/history');
 
         $this->assertStringContainsString('<h1>History</h1>', $content);
-        $this->assertStringNotContainsString('academic-programs-application', $content);
+        $this->assertSame(0, $this->countNodesMatching($this->parseRenderedPage($content), self::APPLICATION_LINK));
         $this->assertStringNotContainsString('Apply online', $content);
     }
 

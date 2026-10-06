@@ -172,7 +172,7 @@ final class ProgramFactsPlainTextTest extends AbstractAcademicProgramsTestCase
             $this->assertStringContainsString($value, $item);
             $this->assertStringNotContainsString('ce-bodytext', $item);
         }
-        $this->assertStringNotContainsString('class=""', $content);
+        $this->assertStringNotContainsString('class=""', $this->factsList($content));
     }
 
     /**
@@ -184,7 +184,7 @@ final class ProgramFactsPlainTextTest extends AbstractAcademicProgramsTestCase
         if ($url !== self::LIST_PAGE) {
             return $content;
         }
-        foreach (explode('academic-programs-item ', $content) as $card) {
+        foreach (explode('<div class="col-12 col-md-6 col-lg-4 col-xl-3">', $content) as $card) {
             if (str_contains($card, '>Applied Physics</a>')) {
                 return $card;
             }
@@ -193,11 +193,20 @@ final class ProgramFactsPlainTextTest extends AbstractAcademicProgramsTestCase
     }
 
     /**
+     * The facts list, from its opening tag to its end.
+     */
+    private function factsList(string $content): string
+    {
+        $this->assertSame(1, preg_match('#<ul class="academic-programs-facts[ "].*?</ul>#s', $content, $matches), 'No facts list is rendered.');
+        return $matches[0];
+    }
+
+    /**
      * The list item of the fact with the given identifier, from its opening tag to its end.
      */
     private function factItem(string $content, string $identifier): string
     {
-        $pattern = '#<li class="academic-programs-facts__item academic-programs-facts__item--' . preg_quote($identifier, '#') . '[ "].*?</li>#s';
+        $pattern = '#<li class="change-me-' . preg_quote($identifier, '#') . '[ "].*?</li>#s';
         $this->assertSame(1, preg_match($pattern, $content, $matches), sprintf('No fact "%s" is rendered.', $identifier));
         return $matches[0];
     }

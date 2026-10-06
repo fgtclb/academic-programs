@@ -30,7 +30,7 @@ final class AcademicProgramsFilterUrlTest extends AbstractAcademicProgramsTestCa
     use SiteBasedTestTrait;
 
     private const PLUGIN_NAMESPACE = 'tx_academicprograms_programlist';
-    private const FORM_CLASS = 'academic-programs-filtersorting';
+    private const FORM = '//form[@name="demand"]';
 
     protected const LANGUAGE_PRESETS = [
         'EN' => ['id' => 0, 'title' => 'English', 'locale' => 'en_US.UTF8', 'iso' => 'en', 'hrefLang' => 'en-US', 'direction' => ''],
@@ -91,7 +91,7 @@ final class AcademicProgramsFilterUrlTest extends AbstractAcademicProgramsTestCa
     #[Test]
     public function submittingADegreeRedirectsToAUrlCarryingIt(): void
     {
-        $response = $this->submitFrontendForm('https://www.acme.com/home', self::FORM_CLASS, [
+        $response = $this->submitFrontendForm('https://www.acme.com/home', self::FORM, [
             self::PLUGIN_NAMESPACE => ['demand' => ['filterCollection' => ['degree' => '2']]],
         ]);
 
@@ -121,7 +121,7 @@ final class AcademicProgramsFilterUrlTest extends AbstractAcademicProgramsTestCa
     #[Test]
     public function onlyTheNormalisedSelectionReachesTheUrl(): void
     {
-        $response = $this->submitFrontendForm('https://www.acme.com/home', self::FORM_CLASS, [
+        $response = $this->submitFrontendForm('https://www.acme.com/home', self::FORM, [
             self::PLUGIN_NAMESPACE => ['demand' => ['filterCollection' => ['degree' => '1,7']]],
         ]);
 
@@ -143,7 +143,7 @@ final class AcademicProgramsFilterUrlTest extends AbstractAcademicProgramsTestCa
         $this->assertStringContainsString('Applied Physics', $content);
         $this->assertStringNotContainsString('Molecular Chemistry', $content);
 
-        $response = $this->submitFrontendForm('https://www.acme.com/bachelor', self::FORM_CLASS, [
+        $response = $this->submitFrontendForm('https://www.acme.com/bachelor', self::FORM, [
             self::PLUGIN_NAMESPACE => ['demand' => ['filterCollection' => ['degree' => '']]],
         ]);
 
@@ -289,7 +289,7 @@ final class AcademicProgramsFilterUrlTest extends AbstractAcademicProgramsTestCa
             ['uid' => 1],
         );
 
-        $response = $this->submitFrontendForm('https://www.acme.com/home', self::FORM_CLASS, [
+        $response = $this->submitFrontendForm('https://www.acme.com/home', self::FORM, [
             self::PLUGIN_NAMESPACE => ['demand' => ['filterCollection' => ['degree' => '']]],
         ]);
         $location = $this->assertSeeOtherWithCacheHash($response);
@@ -308,7 +308,7 @@ final class AcademicProgramsFilterUrlTest extends AbstractAcademicProgramsTestCa
 
     private function filteredListUrl(string $uid): string
     {
-        return $this->assertSeeOtherWithCacheHash($this->submitFrontendForm('https://www.acme.com/home', self::FORM_CLASS, [
+        return $this->assertSeeOtherWithCacheHash($this->submitFrontendForm('https://www.acme.com/home', self::FORM, [
             self::PLUGIN_NAMESPACE => ['demand' => ['filterCollection' => ['degree' => $uid]]],
         ]));
     }
