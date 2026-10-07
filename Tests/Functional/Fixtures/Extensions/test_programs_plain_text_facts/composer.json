@@ -1,0 +1,26 @@
+{
+    "name": "tests/programs-plain-text-facts",
+    "description": "Extension switching the rich text editor of program fields for tests",
+    "type": "typo3-cms-extension",
+    "license": "GPL-2.0-or-later",
+    "authors": [
+        {
+            "name": "Stefan Bürk",
+            "email": "stefan@buerk.tech",
+            "role": "Maintainer"
+        }
+    ],
+    "require": {
+        "typo3/cms-core": "~13.4.35 || ~14.3.7",
+        "fgtclb/academic-programs": "~3.0.0@dev"
+    },
+    "extra": {
+        "typo3/cms": {
+            "extension-key": "test_programs_plain_text_facts",
+            "version": "3.0.0-dev",
+            "Package": {
+                "providesPackages": []
+            }
+        }
+    }
+}

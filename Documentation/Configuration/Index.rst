@@ -366,13 +366,43 @@ other partial of this extension:
             :html:`listClass` and :html:`itemClass`.
     *   -   :file:`Program/Facts/Item.html`
         -   One fact, :html:`{fact}`: an icon if it has one, the label and the
-            categories or the value. A program field value is the rich text of
-            the field, rendered as it is stored.
+            categories or the value. A rich text value is rendered as it is
+            stored, in an element with the class :html:`ce-bodytext`, any
+            other value escaped, with its line breaks kept.
 
 :html:`{fact}` carries :html:`identifier`, :html:`labelKey` (a key of
 :file:`locallang.xlf` of this extension), :html:`iconIdentifier` (empty for a
 fact without an icon), :html:`isCategoryType`, :html:`categories` for a
-category type and :html:`value` for a program field.
+category type, :html:`value` for a program field and :html:`isRichText`.
+
+..  _program-facts-rich-text:
+
+:html:`isRichText` is true for the job profile, the performance scope and the
+prerequisites while their field has the rich text editor on program pages,
+which it has as shipped. It follows the TCA of :sql:`pages` for the program page
+type, so a site package that switches the editor off, for the field or in the
+``columnsOverrides`` of the program page type only, changes the output without
+a template of its own:
+
+..  code-block:: php
+    :caption: EXT:my_sitepackage/Configuration/TCA/Overrides/pages.php
+
+    <?php
+
+    use FGTCLB\AcademicPrograms\Enumeration\PageTypes;
+
+    $GLOBALS['TCA']['pages']['types'][PageTypes::TYPE_ACADEMIC_PROGRAM]
+        ['columnsOverrides']['job_profile']['config']['enableRichtext'] = false;
+
+The job profile is then a plain text field on program pages, and the facts show
+what an editor typed there as text: an ampersand or an angle bracket is shown
+as it is, and a line break becomes a line break. Credit points and category
+type facts are never rich text.
+
+..  versionchanged:: 3.0
+
+    The facts mark rich text and escape every other value, see
+    :ref:`feature-programs-facts-know-rich-text`.
 
 :file:`Program/Facts/Item.html` renders the icon with the ``ab:icon``
 ViewHelper of :guilabel:`academic_base`, from its frontend icon registry. The

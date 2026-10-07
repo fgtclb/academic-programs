@@ -6,7 +6,10 @@ namespace FGTCLB\AcademicPrograms\Service;
 
 use FGTCLB\AcademicPrograms\Domain\Model\ProgramFact;
 use FGTCLB\AcademicPrograms\Domain\Model\ProgramFactsSourceInterface;
+use FGTCLB\AcademicPrograms\Enumeration\PageTypes;
 use FGTCLB\AcademicPrograms\Enumeration\ProgramFactsPlace;
+use TYPO3\CMS\Core\Schema\Field\TextFieldType;
+use TYPO3\CMS\Core\Schema\TcaSchemaFactory;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
@@ -34,6 +37,13 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  * which is the order of the category type registry for the group. This class keeps no type
  * list of its own and never sorts types, so the facts follow whatever order the registry
  * defines.
+ *
+ * A text fact is rich text when its column of `pages` has the rich text editor enabled for
+ * the program page type, read from the TCA schema on every build: the sub-schema of the
+ * program page type, which carries its `columnsOverrides`, or the base schema of `pages`
+ * when a project removed that type or left the field out of its form. Every source is a
+ * program page, the interface exposes no doktype. Credit points and category type facts
+ * are never rich text.
  */
 final readonly class ProgramFactsBuilder
 {
@@ -44,6 +54,19 @@ final readonly class ProgramFactsBuilder
      * EXT:academic_base. This extension registers it in `Configuration/FrontendIcons.php`.
      */
     public const CREDIT_POINTS_ICON = 'tx-academicprograms-info-credit-points';
+
+    /**
+     * The column of `pages` behind each text fact.
+     */
+    private const TEXT_FACT_COLUMNS = [
+        'jobProfile' => 'job_profile',
+        'performanceScope' => 'performance_scope',
+        'prerequisites' => 'prerequisites',
+    ];
+
+    public function __construct(
+        private TcaSchemaFactory $tcaSchemaFactory,
+    ) {}
 
     /**
      * @return list<ProgramFact>
@@ -104,6 +127,27 @@ final readonly class ProgramFactsBuilder
             'prerequisites' => $program->getPrerequisites(),
             default => '',
         };
-        return $value !== '' ? ProgramFact::forBuiltIn($identifier, $value) : null;
+        return $value !== ''
+            ? ProgramFact::forBuiltIn($identifier, $value, isRichText: $this->isRichText(self::TEXT_FACT_COLUMNS[$identifier]))
+            : null;
+    }
+
+    private function isRichText(string $column): bool
+    {
+        if (!$this->tcaSchemaFactory->has('pages')) {
+            return false;
+        }
+        $schema = $this->tcaSchemaFactory->get('pages');
+        $programPageType = (string)PageTypes::TYPE_ACADEMIC_PROGRAM;
+        // A sub-schema holds only the fields of its form, a field left out of it is read
+        // from the base column.
+        if ($schema->hasSubSchema($programPageType) && $schema->getSubSchema($programPageType)->hasField($column)) {
+            $schema = $schema->getSubSchema($programPageType);
+        }
+        if (!$schema->hasField($column)) {
+            return false;
+        }
+        $field = $schema->getField($column);
+        return $field instanceof TextFieldType && $field->isRichText();
     }
 }

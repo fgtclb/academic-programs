@@ -16,6 +16,12 @@ use FGTCLB\CategoryTypes\Domain\Model\Category;
  * `category_types.programs.<type>` for a category type fact, which EXT:category_types
  * registers there, and {@see \FGTCLB\AcademicPrograms\Service\ProgramFactsBuilder::CREDIT_POINTS_ICON}
  * for the credit points.
+ *
+ * `isRichText` says whether `value` is HTML from a rich text field. The builder sets it for
+ * a program field whose column has the rich text editor enabled for the program page type,
+ * see {@see \FGTCLB\AcademicPrograms\Service\ProgramFactsBuilder}. It is `false` for a
+ * category type fact, for the credit points and for a text field without the editor, whose
+ * value the partial escapes.
  */
 final readonly class ProgramFact
 {
@@ -29,6 +35,7 @@ final readonly class ProgramFact
         public string $iconIdentifier,
         public array $categories,
         public string $value,
+        public bool $isRichText,
     ) {}
 
     /**
@@ -43,10 +50,11 @@ final readonly class ProgramFact
             iconIdentifier: 'category_types.programs.' . $identifier,
             categories: $categories,
             value: '',
+            isRichText: false,
         );
     }
 
-    public static function forBuiltIn(string $identifier, string $value, string $iconIdentifier = ''): self
+    public static function forBuiltIn(string $identifier, string $value, string $iconIdentifier = '', bool $isRichText = false): self
     {
         return new self(
             identifier: $identifier,
@@ -55,6 +63,7 @@ final readonly class ProgramFact
             iconIdentifier: $iconIdentifier,
             categories: [],
             value: $value,
+            isRichText: $isRichText,
         );
     }
 }

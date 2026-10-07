@@ -12,6 +12,7 @@ use FGTCLB\CategoryTypes\Collection\CategoryCollection;
 use FGTCLB\CategoryTypes\Domain\Model\Category;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
+use TYPO3\CMS\Core\Schema\TcaSchemaFactory;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**
@@ -19,6 +20,10 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
  * order degree - department - standard period - location of the collection, where the
  * department has no category. The collection is a stub, so the order is the one given here
  * and the builder must not reorder it.
+ *
+ * Whether a text fact is rich text comes from the TCA schema, which a unit test has none
+ * of: the schema factory knows no table here, so no fact is rich text. The flag is covered
+ * by "Tests/Functional/Facts/ProgramFactsBuilderRichTextTest".
  */
 final class ProgramFactsBuilderTest extends UnitTestCase
 {
@@ -46,7 +51,7 @@ final class ProgramFactsBuilderTest extends UnitTestCase
     #[DataProvider('factsDataProvider')]
     public function buildsTheListedFactsInOrder(string $fields, ProgramFactsPlace $place, array $expected): void
     {
-        $facts = (new ProgramFactsBuilder())->build($this->program(creditPoints: 180), $fields, $place);
+        $facts = $this->builder()->build($this->program(creditPoints: 180), $fields, $place);
 
         $this->assertSame($expected, array_map(static fn(ProgramFact $fact): string => $fact->identifier, $facts));
     }
@@ -68,7 +73,7 @@ final class ProgramFactsBuilderTest extends UnitTestCase
             'details' => ['location', 'degree'],
         ];
         foreach ([ProgramFactsPlace::Page, ProgramFactsPlace::Details] as $place) {
-            $facts = (new ProgramFactsBuilder())->build($this->program(creditPoints: 0, categoriesByType: $categoriesByType), '', $place);
+            $facts = $this->builder()->build($this->program(creditPoints: 0, categoriesByType: $categoriesByType), '', $place);
             $this->assertSame($expected[$place->value], array_map(static fn(ProgramFact $fact): string => $fact->identifier, $facts));
         }
     }
@@ -76,7 +81,7 @@ final class ProgramFactsBuilderTest extends UnitTestCase
     #[Test]
     public function creditPointsOfZeroAreNoFact(): void
     {
-        $facts = (new ProgramFactsBuilder())->build($this->program(creditPoints: 0), 'creditPoints,degree', ProgramFactsPlace::Page);
+        $facts = $this->builder()->build($this->program(creditPoints: 0), 'creditPoints,degree', ProgramFactsPlace::Page);
 
         $this->assertSame(['degree'], array_map(static fn(ProgramFact $fact): string => $fact->identifier, $facts));
     }
@@ -84,7 +89,7 @@ final class ProgramFactsBuilderTest extends UnitTestCase
     #[Test]
     public function categoryTypeFactCarriesItsCategoriesLabelAndIcon(): void
     {
-        $facts = (new ProgramFactsBuilder())->build($this->program(creditPoints: 180), 'location', ProgramFactsPlace::Page);
+        $facts = $this->builder()->build($this->program(creditPoints: 180), 'location', ProgramFactsPlace::Page);
 
         $this->assertCount(1, $facts);
         $this->assertTrue($facts[0]->isCategoryType);
@@ -97,7 +102,7 @@ final class ProgramFactsBuilderTest extends UnitTestCase
     #[Test]
     public function creditPointsFactCarriesItsValueLabelAndIcon(): void
     {
-        $facts = (new ProgramFactsBuilder())->build($this->program(creditPoints: 180), 'creditPoints', ProgramFactsPlace::Page);
+        $facts = $this->builder()->build($this->program(creditPoints: 180), 'creditPoints', ProgramFactsPlace::Page);
 
         $this->assertCount(1, $facts);
         $this->assertFalse($facts[0]->isCategoryType);
@@ -110,12 +115,17 @@ final class ProgramFactsBuilderTest extends UnitTestCase
     #[Test]
     public function textFactCarriesItsValueWithoutIcon(): void
     {
-        $facts = (new ProgramFactsBuilder())->build($this->program(creditPoints: 180), 'jobProfile', ProgramFactsPlace::Page);
+        $facts = $this->builder()->build($this->program(creditPoints: 180), 'jobProfile', ProgramFactsPlace::Page);
 
         $this->assertCount(1, $facts);
         $this->assertSame('program.jobProfile', $facts[0]->labelKey);
         $this->assertSame('', $facts[0]->iconIdentifier);
         $this->assertSame('<p>Research and development.</p>', $facts[0]->value);
+    }
+
+    private function builder(): ProgramFactsBuilder
+    {
+        return new ProgramFactsBuilder($this->createStub(TcaSchemaFactory::class));
     }
 
     /**

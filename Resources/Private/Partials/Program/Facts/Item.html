@@ -7,9 +7,12 @@
 >
 
 <f:comment>
-    One fact of a program. A category type fact lists the titles of its categories, a
-    program field fact renders the value of its field raw: the text fields are rich text
-    edited in the backend, as the program page rendered them before.
+    One fact of a program. A category type fact lists the titles of its categories. A
+    program field fact with "fact.isRichText" renders its value as HTML and marks it with
+    "ce-bodytext" for the content styles of the site: job profile, performance scope and
+    prerequisites, while their field has the rich text editor for the program page type.
+    Any other value, credit points and a text field without the editor, is escaped, with
+    its line breaks kept. Every fact but a rich text one keeps a plain span without class.
 
     "fact.identifier" is the identifier from the field list - a category type, or
     "creditPoints", "jobProfile", "performanceScope", "prerequisites".
@@ -22,18 +25,27 @@
 
     <b>{f:translate(key: fact.labelKey, extensionName: 'AcademicPrograms') -> ct:categoryTypeTitle(group: 'programs', identifier: fact.identifier)}:</b>
 
-    <span>
-        <f:if condition="{fact.isCategoryType}">
-            <f:then>
-                <f:for each="{fact.categories}" as="category" iteration="i">
-                    {category.title}{f:if(condition: '!{i.isLast}', then: ', ')}
-                </f:for>
-            </f:then>
-            <f:else>
+    <f:if condition="{fact.isRichText}">
+        <f:then>
+            <span class="ce-bodytext">
                 {fact.value -> f:format.raw()}
-            </f:else>
-        </f:if>
-    </span>
+            </span>
+        </f:then>
+        <f:else>
+            <span>
+                <f:if condition="{fact.isCategoryType}">
+                    <f:then>
+                        <f:for each="{fact.categories}" as="category" iteration="i">
+                            {category.title}{f:if(condition: '!{i.isLast}', then: ', ')}
+                        </f:for>
+                    </f:then>
+                    <f:else>
+                        {fact.value -> f:format.nl2br()}
+                    </f:else>
+                </f:if>
+            </span>
+        </f:else>
+    </f:if>
 </li>
 
 </html>

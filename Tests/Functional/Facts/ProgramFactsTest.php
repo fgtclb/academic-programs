@@ -404,6 +404,74 @@ final class ProgramFactsTest extends AbstractAcademicProgramsTestCase
     }
 
     /**
+     * The shipped text fields have the rich text editor, so their values carry the class of
+     * the content styles. Category types and credit points do not.
+     */
+    #[Test]
+    #[DataProvider('programPageObjectDataProvider')]
+    public function programPageMarksRichTextFactsForTheContentStyles(string $sitePackage): void
+    {
+        $this->setUpSite($sitePackage);
+
+        $this->assertOnlyRichTextFactsAreMarked($this->renderFrontendPage(self::PROGRAM_PAGE));
+    }
+
+    #[Test]
+    public function detailsElementMarksRichTextFactsForTheContentStyles(): void
+    {
+        $this->setUpPluginSite(constants: ['facts.fields' => 'degree,creditPoints,jobProfile,performanceScope,prerequisites']);
+
+        $this->assertOnlyRichTextFactsAreMarked($this->renderFrontendPage(self::DETAILS_PAGE));
+    }
+
+    #[Test]
+    public function programCardMarksRichTextFactsForTheContentStyles(): void
+    {
+        $this->setUpPluginSite(constants: ['card.fields' => 'degree,creditPoints,prerequisites']);
+
+        $card = $this->programCard($this->renderFrontendPage(self::LIST_PAGE), 'Applied Physics');
+
+        $prerequisites = $this->factItem($card, 'prerequisites');
+        $this->assertStringContainsString('<span class="ce-bodytext">', $prerequisites);
+        $this->assertStringContainsString('<p>General qualification for university entrance.</p>', $prerequisites);
+        foreach (['degree', 'creditPoints'] as $identifier) {
+            $this->assertStringContainsString('<span>', $this->factItem($card, $identifier));
+            $this->assertStringNotContainsString('ce-bodytext', $this->factItem($card, $identifier));
+        }
+        $this->assertStringNotContainsString('class=""', $card);
+    }
+
+    private function assertOnlyRichTextFactsAreMarked(string $content): void
+    {
+        $richText = [
+            'jobProfile' => '<p>Research and development in industry.</p>',
+            'performanceScope' => '<p>Six semesters of lectures and laboratory work.</p>',
+            'prerequisites' => '<p>General qualification for university entrance.</p>',
+        ];
+        foreach ($richText as $identifier => $value) {
+            $item = $this->factItem($content, $identifier);
+            $this->assertStringContainsString('<span class="ce-bodytext">', $item);
+            $this->assertStringContainsString($value, $item);
+        }
+        foreach (['degree', 'creditPoints'] as $identifier) {
+            $item = $this->factItem($content, $identifier);
+            $this->assertStringContainsString('<span>', $item);
+            $this->assertStringNotContainsString('ce-bodytext', $item);
+        }
+        $this->assertStringNotContainsString('class=""', $content);
+    }
+
+    /**
+     * The list item of the fact with the given identifier, from its opening tag to its end.
+     */
+    private function factItem(string $content, string $identifier): string
+    {
+        $pattern = '#<li class="academic-programs-facts__item academic-programs-facts__item--' . preg_quote($identifier, '#') . '[ "].*?</li>#s';
+        $this->assertSame(1, preg_match($pattern, $content, $matches), sprintf('No fact "%s" is rendered.', $identifier));
+        return $matches[0];
+    }
+
+    /**
      * The card of the program with the given title, and nothing of the cards around it.
      */
     private function programCard(string $content, string $title): string
