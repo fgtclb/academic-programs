@@ -56,10 +56,10 @@
 </f:if>
 
 <f:if condition="{categoryTags} || {showResetLink}">
-    <div class="academic-programs-active-filters">
+    <div class="ace-filters">
         <f:if condition="{categoryTags}">
             <ul
-                class="academic-programs-active-filters__tags"
+                class="ace-tags"
                 aria-label="{f:translate(key: 'filter.activeFilters.label', extensionName: 'AcademicPrograms')}"
             >
                 <f:for each="{demand.filterCollection.filterCategories.allCategoriesByType}" as="categoriesOfType">
@@ -81,20 +81,20 @@
                             </f:else>
                         </f:if>
                         <f:variable name="removeLabel" value="{f:translate(key: 'filter.activeFilters.remove', extensionName: 'AcademicPrograms', arguments: {0: category.title})}" />
-                        <li class="academic-programs-active-filters__tag">
+                        <li class="ace-tag">
                             <f:link.action
                                 action="list"
                                 arguments="{demand: tagDemand}"
-                                class="academic-programs-active-filters__remove"
+                                class="ace-remove"
                                 additionalAttributes="{'aria-label': removeLabel}"
-                            >{category.title}<span aria-hidden="true"> ×</span></f:link.action>
+                            >{category.title}<span class="ace-icon" aria-hidden="true"> ×</span></f:link.action>
                         </li>
                     </f:for>
                 </f:for>
             </ul>
         </f:if>
         <f:if condition="{showResetLink}">
-            <f:link.page class="academic-programs-active-filters__reset">
+            <f:link.page class="ace-reset">
                 {f:translate(key: 'filter.reset', extensionName: 'AcademicPrograms')}
             </f:link.page>
         </f:if>

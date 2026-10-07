@@ -93,7 +93,7 @@ final class AcademicProgramPageDataEventTest extends AbstractAcademicProgramsTes
         $document = new \DOMDocument();
         $this->assertTrue(@$document->loadHTML('<?xml encoding="UTF-8">' . $content));
         $items = (new \DOMXPath($document))->query(
-            '//li[contains(concat(" ", normalize-space(@class), " "), " change-me-creditPoints ")]',
+            '//li[@data-academic-programs-fact="creditPoints"]',
         );
         $this->assertInstanceOf(\DOMNodeList::class, $items);
         $this->assertCount(1, $items, 'The page renders no single credit points fact.');
@@ -109,7 +109,7 @@ final class AcademicProgramPageDataEventTest extends AbstractAcademicProgramsTes
 
         $content = $this->renderFrontendPage('https://www.acme.com/applied-physics');
 
-        $this->assertStringContainsString('<p>Subtitle from a listener</p>', $content);
+        $this->assertStringContainsString('<p class="ace-subtitle">Subtitle from a listener</p>', $content);
     }
 
     /**
@@ -143,7 +143,7 @@ final class AcademicProgramPageDataEventTest extends AbstractAcademicProgramsTes
         // The subtitle is the paragraph after the heading of the page header.
         $document = new \DOMDocument();
         $this->assertTrue(@$document->loadHTML('<?xml encoding="UTF-8">' . $content));
-        $subtitles = (new \DOMXPath($document))->query('//div[h1]/h1/following-sibling::p');
+        $subtitles = (new \DOMXPath($document))->query('//header[h1]/h1/following-sibling::p');
         $this->assertInstanceOf(\DOMNodeList::class, $subtitles);
         $this->assertCount(0, $subtitles);
         $this->assertStringContainsString('180', $this->creditPointsFact($content));

@@ -82,8 +82,7 @@ final class AcademicProgramsImageRenderingTest extends AbstractAcademicProgramsT
     private function items(\DOMXPath $xpath): array
     {
         $items = [];
-        // The item is the element in a grid column of the result list.
-        foreach ($this->nodesMatching($xpath, '//*[@data-academic-programs-list-content]/div[@class="row"]/div/div') as $item) {
+        foreach ($this->nodesMatching($xpath, '//*[@data-academic-programs-list-content]//div[contains(concat(" ", normalize-space(@class), " "), " ace-item ")]') as $item) {
             $this->assertInstanceOf(\DOMElement::class, $item);
             $items[] = $item;
         }

@@ -5,9 +5,9 @@
     data-namespace-typo3-fluid="true"
 >
 
-<div>
-    <div>
-        <div>
+<article class="ace-card">
+    <div class="ace-content">
+        <header class="ace-header">
             <f:render
                 partial="Program/Header"
                 arguments="{
@@ -17,7 +17,7 @@
                     subheader: '{data.subheader}'
                 }"
             />
-        </div>
+        </header>
 
         <f:comment>
             The facts of the card, from the setting "plugin.tx_academicprograms.card.fields":
@@ -29,8 +29,8 @@
             partial="Program/Facts"
             arguments="{
                 facts: cardFacts,
-                listClass: 'list-group list-group-flush',
-                itemClass: 'list-group-item'
+                listClass: 'ace-properties',
+                itemClass: 'ace-property'
             }"
         />
     </div>
@@ -38,15 +38,17 @@
     <f:for each="{program.media}" as="image" iteration="i">
         <f:if condition="{i.isFirst}">
             <f:comment>The shared partial of EXT:academic_base.</f:comment>
-            <f:render
-                partial="Academic/Image"
-                arguments="{
-                    image: image,
-                    preset: 'card',
-                }"
-            />
+            <div class="ace-media">
+                <f:render
+                    partial="Academic/Image"
+                    arguments="{
+                        image: image,
+                        preset: 'card',
+                    }"
+                />
+            </div>
         </f:if>
     </f:for>
-</div>
+</article>
 
 </html>

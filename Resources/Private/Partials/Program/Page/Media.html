@@ -11,14 +11,15 @@
 
 <f:for each="{images}" as="image" iteration="i">
     <f:if condition="{i.isFirst}">
-        <f:render
-            partial="Academic/Image"
-            arguments="{
-                image: image,
-                preset: 'detail',
-                class: 'img-fluid'
-            }"
-        />
+        <div class="ace-media">
+            <f:render
+                partial="Academic/Image"
+                arguments="{
+                    image: image,
+                    preset: 'detail'
+                }"
+            />
+        </div>
     </f:if>
 </f:for>
 

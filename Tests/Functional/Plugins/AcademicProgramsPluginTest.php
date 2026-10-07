@@ -114,8 +114,7 @@ final class AcademicProgramsPluginTest extends AbstractAcademicProgramsTestCase
 
         $content = $this->renderHomePage();
         $this->assertStringContainsString('academic-programs-list', $content);
-        // One item per program, each the element in a grid column of the result list.
-        $this->assertSame(4, $this->countContentElementHeaderNodes($content, '//*[@data-academic-programs-list-content]/div[@class="row"]/div/div'));
+        $this->assertSame(4, $this->countContentElementHeaderNodes($content, '//*[@data-academic-programs-list-content]//div[contains(concat(" ", normalize-space(@class), " "), " ace-item ")]'));
         $this->assertStringContainsString('Applied Physics', $content);
         $this->assertStringContainsString('Molecular Chemistry', $content);
         // Programs are collected across the whole site, not only below the current page.
@@ -130,7 +129,7 @@ final class AcademicProgramsPluginTest extends AbstractAcademicProgramsTestCase
         $this->setUpTestCase('programListPage');
 
         $this->assertMatchesRegularExpression(
-            '#<h2 class="">\s*<a href="/applied-physics">Applied Physics</a>\s*</h2>#',
+            '#<h2 class="ace-title ">\s*<a href="/applied-physics">Applied Physics</a>\s*</h2>#',
             $this->renderHomePage(),
         );
     }
@@ -146,7 +145,7 @@ final class AcademicProgramsPluginTest extends AbstractAcademicProgramsTestCase
         $this->assertStringContainsString('Bachelor of Science', $content);
         $this->assertStringContainsString('Master of Science', $content);
         // Assigned to a program, but of a type the item partial does not render.
-        $this->assertStringNotContainsString('<b>Type of program:</b>', $content);
+        $this->assertStringNotContainsString('<b class="ace-label">Type of program:</b>', $content);
     }
 
     #[Test]

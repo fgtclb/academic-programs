@@ -299,7 +299,7 @@ final class ProgramFactsMostSpecificCategoryTest extends AbstractAcademicProgram
      */
     private function factValue(string $content, string $identifier): string
     {
-        $pattern = '#<li class="change-me-' . preg_quote($identifier, '#') . '[ "].*?<span>(.*?)</span>#s';
+        $pattern = '#<li\s+class="[^"]*"\s+data-academic-programs-fact="' . preg_quote($identifier, '#') . '"\s*>.*?<span class="ace-value">(.*?)</span>#s';
         if (preg_match($pattern, $content, $matches) !== 1) {
             $this->fail(sprintf('No fact "%s" is rendered.', $identifier));
         }

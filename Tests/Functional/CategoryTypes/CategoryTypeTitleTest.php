@@ -191,7 +191,7 @@ final class CategoryTypeTitleTest extends AbstractAcademicProgramsTestCase
 
     private function factLabel(string $content, string $identifier): string
     {
-        $pattern = '#<li class="change-me-' . preg_quote($identifier, '#') . '[ "].*?<b>(.*?)</b>#s';
+        $pattern = '#data-academic-programs-fact="' . preg_quote($identifier, '#') . '".*?<b class="ace-label">(.*?)</b>#s';
         if (preg_match($pattern, $content, $matches) !== 1) {
             $this->fail(sprintf('No fact "%s" is rendered.', $identifier));
         }
@@ -200,7 +200,8 @@ final class CategoryTypeTitleTest extends AbstractAcademicProgramsTestCase
 
     private function selectLabel(string $content, string $selectId): string
     {
-        $pattern = '#<label for="' . preg_quote($selectId, '#') . '"[^>]*>(.*?)</label>#s';
+        // The list writes the "for" first, the finder the class.
+        $pattern = '#<label[^>]* for="' . preg_quote($selectId, '#') . '"[^>]*>(.*?)</label>#s';
         if (preg_match($pattern, $content, $matches) !== 1) {
             $this->fail(sprintf('No select "%s" is labelled.', $selectId));
         }

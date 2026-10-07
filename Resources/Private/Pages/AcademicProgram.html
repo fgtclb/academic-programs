@@ -20,7 +20,7 @@
 <f:section name="Main">
     <div class="container">
         <div class="academic-programs-detail-page">
-            <div>
+            <div class="ace-hero">
                 <f:render partial="Program/Page/Header" arguments="{_all}" />
                 <f:render partial="Program/Page/Media" arguments="{_all}" />
             </div>
@@ -31,7 +31,9 @@
         </div>
     </div>
 
-    <f:render partial="Program/Page/Content" arguments="{_all}" />
+    <div class="ace-content">
+        <f:render partial="Program/Page/Content" arguments="{_all}" />
+    </div>
 </f:section>
 
 </html>

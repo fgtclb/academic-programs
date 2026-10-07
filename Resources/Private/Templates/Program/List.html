@@ -40,7 +40,7 @@
         <f:render partial="Header/All" arguments="{_all}" />
     </f:if>
 
-    <div data-academic-programs-list-content data-academic-programs-list-total="{programs -> f:count()}">
+    <div class="ace-content" data-academic-programs-list-content data-academic-programs-list-total="{programs -> f:count()}">
         <f:render
             partial="Program/SortingAndFilters"
             arguments="{_all}"
@@ -52,7 +52,7 @@
         />
     </div>
 
-    <p class="visually-hidden" role="status" aria-live="polite" data-academic-programs-list-status></p>
+    <p class="ace-status visually-hidden" role="status" aria-live="polite" data-academic-programs-list-status></p>
 </div>
 
 </html>

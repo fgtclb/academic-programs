@@ -37,47 +37,54 @@
         actionUri="{listUri}"
         extensionName="AcademicPrograms"
         pluginName="ProgramList"
-        class="academic-programs-finder"
+        class="academic-programs-finder ace-form"
         additionalAttributes="{
             'data-academic-programs-finder-programs': programCategories,
             'data-academic-programs-finder-count-one': countLabelOne,
             'data-academic-programs-finder-count-other': countLabelOther
         }"
     >
-        <div class="row">
-            <f:variable name="allOptionsLabel" value="{f:translate(key: 'sys_category.programs.allOptions', extensionName: 'AcademicPrograms')}"/>
-            <f:for each="{filterTypes.visible}" as="categoryKey">
-                <div class="col-12 col-md">
-                    <label for="academic-programs-finder-{categoryKey}-{data.uid}">
-                        {f:translate(key: 'sys_category.programs.{categoryKey}', extensionName: 'AcademicPrograms') -> ct:categoryTypeTitle(group: 'programs', identifier: categoryKey)}
-                    </label>
+        <div class="ace-filters">
+            <div class="row">
+                <f:variable name="allOptionsLabel" value="{f:translate(key: 'sys_category.programs.allOptions', extensionName: 'AcademicPrograms')}"/>
+                <f:for each="{filterTypes.visible}" as="categoryKey">
+                    <div class="col-12 col-md">
+                        <div class="ace-filter">
+                            <label class="ace-label" for="academic-programs-finder-{categoryKey}-{data.uid}">
+                                {f:translate(key: 'sys_category.programs.{categoryKey}', extensionName: 'AcademicPrograms') -> ct:categoryTypeTitle(group: 'programs', identifier: categoryKey)}
+                            </label>
 
-                    <ct:form.filterSelect
-                        id="academic-programs-finder-{categoryKey}-{data.uid}"
-                        name="demand[filterCollection][{categoryKey}]"
-                        value="{preselection.{categoryKey}}"
-                        options="{categories.{categoryKey}}"
-                        optionValueField="uid"
-                        optionLabelField="title"
-                        prependOptionLabel="{f:translate(
-                            key: 'sys_category.programs.allOptions.{categoryKey}',
-                            extensionName: 'AcademicPrograms',
-                            default: allOptionsLabel
-                        )}"
-                        prependOptionValue=""
-                        hideDisabledOptions="{settings.filter.hideDisabledOptions}"
-                        additionalAttributes="{'data-academic-programs-finder-select': ''}"
-                    />
+                            <ct:form.filterSelect
+                                class="ace-control"
+                                id="academic-programs-finder-{categoryKey}-{data.uid}"
+                                name="demand[filterCollection][{categoryKey}]"
+                                value="{preselection.{categoryKey}}"
+                                options="{categories.{categoryKey}}"
+                                optionValueField="uid"
+                                optionLabelField="title"
+                                prependOptionLabel="{f:translate(
+                                    key: 'sys_category.programs.allOptions.{categoryKey}',
+                                    extensionName: 'AcademicPrograms',
+                                    default: allOptionsLabel
+                                )}"
+                                prependOptionValue=""
+                                hideDisabledOptions="{settings.filter.hideDisabledOptions}"
+                                additionalAttributes="{'data-academic-programs-finder-select': ''}"
+                            />
+                        </div>
+                    </div>
+                </f:for>
+
+                <div class="col-12 col-md-auto">
+                    <div class="ace-actions">
+                        <button type="submit" class="btn btn-primary">
+                            <span class="ace-count" data-academic-programs-finder-count>{f:translate(key: 'finder.submit', extensionName: 'AcademicPrograms')}</span>
+                        </button>
+                    </div>
                 </div>
-            </f:for>
-
-            <div class="col-12 col-md-auto">
-                <button type="submit" class="btn btn-primary">
-                    <span data-academic-programs-finder-count>{f:translate(key: 'finder.submit', extensionName: 'AcademicPrograms')}</span>
-                </button>
             </div>
         </div>
-        <p class="visually-hidden" role="status" aria-live="polite" data-academic-programs-finder-status></p>
+        <p class="ace-status visually-hidden" role="status" aria-live="polite" data-academic-programs-finder-status></p>
     </f:form>
 </f:if>
 

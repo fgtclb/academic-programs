@@ -199,7 +199,7 @@ final class AcademicProgramPageTemplateTest extends AbstractAcademicProgramsTest
             $detail,
             3,
             800,
-            'img-fluid',
+            '',
             'The laboratory of the Applied Physics programme',
         );
     }
@@ -246,7 +246,7 @@ final class AcademicProgramPageTemplateTest extends AbstractAcademicProgramsTest
             $detail,
             3,
             800,
-            'img-fluid',
+            '',
             'The laboratory of the Applied Physics programme',
         );
     }
@@ -402,7 +402,7 @@ final class AcademicProgramPageTemplateTest extends AbstractAcademicProgramsTest
 
         $content = $this->renderFrontendPage('https://www.acme.com/applied-physics');
 
-        $this->assertStringContainsString('<h1>Applied Physics</h1>', $content);
+        $this->assertStringContainsString('<h1 class="ace-title">Applied Physics</h1>', $content);
         $this->assertMainColumnInManualOrder($content);
         $this->assertStringNotContainsString('A note in the side column.', $content);
     }

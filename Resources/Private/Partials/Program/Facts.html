@@ -15,7 +15,7 @@
 </f:comment>
 
 <f:if condition="{facts}">
-    <ul class="academic-programs-facts{f:if(condition: listClass, then: ' {listClass}')}">
+    <ul class="ace-facts{f:if(condition: listClass, then: ' {listClass}')}">
         <f:for each="{facts}" as="fact">
             <f:render
                 partial="Program/Facts/Item"

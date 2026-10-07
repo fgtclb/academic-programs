@@ -154,7 +154,7 @@ final class AcademicProgramsLabelOverrideTest extends AbstractAcademicProgramsTe
     {
         yield 'label of the sorting partial' => [
             'https://www.acme.com/home', 'sorting.field.label', 'Sorting field',
-            '<label for="sortingField" class="form-label"> %s </label>',
+            '<label for="sortingField" class="ace-label"> %s </label>',
         ];
         yield 'sorting option, translated by the view helper' => [
             'https://www.acme.com/home', 'sorting.field.title', 'Title',
@@ -163,11 +163,11 @@ final class AcademicProgramsLabelOverrideTest extends AbstractAcademicProgramsTe
         ];
         yield 'fact of the program card, key from PHP' => [
             'https://www.acme.com/home', 'sys_category.programs.degree', 'Degree',
-            '<b>%s:</b> <span> Bachelor of Science </span>',
+            '<b class="ace-label">%s:</b> <span class="ace-value"> Bachelor of Science </span>',
         ];
         yield 'message of an empty list' => [
             'https://www.acme.com/empty', 'list.noProgramsFound', 'No programs found.',
-            '<span>%s</span>',
+            '<span class="ace-empty">%s</span>',
         ];
     }
 
@@ -221,11 +221,11 @@ final class AcademicProgramsLabelOverrideTest extends AbstractAcademicProgramsTe
      */
     public static function pageTranslationDataProvider(): \Generator
     {
-        yield 'link back to the list' => ['page.backToList', 'Back to all programs', '<a href="/home" >%s</a>'];
+        yield 'link back to the list' => ['page.backToList', 'Back to all programs', '<a class="ace-back" href="/home" >%s</a>'];
         yield 'category type fact, key from PHP' => [
-            'sys_category.programs.degree', 'Degree', '<b>%s:</b> <span> Bachelor of Science </span>',
+            'sys_category.programs.degree', 'Degree', '<b class="ace-label">%s:</b> <span class="ace-value"> Bachelor of Science </span>',
         ];
-        yield 'program field fact, key from PHP' => ['program.creditPoints', 'Credit points', '<b>%s:</b> <span> 180 </span>'];
+        yield 'program field fact, key from PHP' => ['program.creditPoints', 'Credit points', '<b class="ace-label">%s:</b> <span class="ace-value"> 180 </span>'];
     }
 
     #[DataProvider('pageTranslationDataProvider')]

@@ -156,7 +156,7 @@ final class AcademicProgramApplicationLinkTest extends AbstractAcademicProgramsT
 
         $content = $this->renderFrontendPage('https://www.acme.com/mathematics');
 
-        $this->assertStringContainsString('<h1>Mathematics</h1>', $content);
+        $this->assertStringContainsString('<h1 class="ace-title">Mathematics</h1>', $content);
         $this->assertSame(0, $this->countNodesMatching($this->parseRenderedPage($content), self::APPLICATION_LINK));
         $this->assertStringNotContainsString('Apply online', $content);
     }
@@ -172,7 +172,7 @@ final class AcademicProgramApplicationLinkTest extends AbstractAcademicProgramsT
 
         $content = $this->renderFrontendPage('https://www.acme.com/history');
 
-        $this->assertStringContainsString('<h1>History</h1>', $content);
+        $this->assertStringContainsString('<h1 class="ace-title">History</h1>', $content);
         $this->assertSame(0, $this->countNodesMatching($this->parseRenderedPage($content), self::APPLICATION_LINK));
         $this->assertStringNotContainsString('Apply online', $content);
     }

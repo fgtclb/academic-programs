@@ -18,21 +18,24 @@
     "creditPoints", "jobProfile", "performanceScope", "prerequisites".
 </f:comment>
 
-<li class="change-me-{fact.identifier} {f:if(condition: itemClass, then: '{itemClass}')}">
+<li
+    class="ace-item {f:if(condition: itemClass, then: '{itemClass}')}"
+    data-academic-programs-fact="{fact.identifier}"
+>
     <f:if condition="{fact.iconIdentifier}">
-        <ab:icon identifier="{fact.iconIdentifier}" />
+        <span class="ace-icon"><ab:icon identifier="{fact.iconIdentifier}" /></span>
     </f:if>
 
-    <b>{f:translate(key: fact.labelKey, extensionName: 'AcademicPrograms') -> ct:categoryTypeTitle(group: 'programs', identifier: fact.identifier)}:</b>
+    <b class="ace-label">{f:translate(key: fact.labelKey, extensionName: 'AcademicPrograms') -> ct:categoryTypeTitle(group: 'programs', identifier: fact.identifier)}:</b>
 
     <f:if condition="{fact.isRichText}">
         <f:then>
-            <span class="ce-bodytext">
+            <span class="ace-value ace-richtext ce-bodytext">
                 {fact.value -> f:format.raw()}
             </span>
         </f:then>
         <f:else>
-            <span>
+            <span class="ace-value">
                 <f:if condition="{fact.isCategoryType}">
                     <f:then>
                         <f:for each="{fact.categories}" as="category" iteration="i">

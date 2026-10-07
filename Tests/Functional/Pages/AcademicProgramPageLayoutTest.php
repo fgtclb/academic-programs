@@ -41,10 +41,10 @@ final class AcademicProgramPageLayoutTest extends AbstractAcademicProgramsTestCa
     ];
 
     /**
-     * The header of the program page is the element around its heading, which holds the
-     * link back to the list in front of the heading and the subtitle after it.
+     * The header of the program page holds the link back to the list in front of its
+     * heading and the subtitle after it.
      */
-    private const HEADER = '//div[h1]';
+    private const HEADER = '//header[h1]';
     private const BACK_LINK = self::HEADER . '/h1/preceding-sibling::a';
     private const SUBTITLE = self::HEADER . '/h1/following-sibling::p';
     private const FIXTURES = 'EXT:academic_programs/Tests/Functional/Pages/Fixtures/';
@@ -190,7 +190,7 @@ final class AcademicProgramPageLayoutTest extends AbstractAcademicProgramsTestCa
 
         $compiled = $this->renderFrontendPage('https://www.acme.com/chemistry');
         $header = strpos($compiled, 'site-layout-wide-header');
-        $title = strpos($compiled, '<h1>Chemistry</h1>');
+        $title = strpos($compiled, '<h1 class="ace-title">Chemistry</h1>');
         $footer = strpos($compiled, 'site-layout-wide-footer');
         $this->assertIsInt($header, 'The layout is missing on the second program page.');
         $this->assertIsInt($title, 'The program content is missing on the second program page.');
@@ -261,7 +261,7 @@ final class AcademicProgramPageLayoutTest extends AbstractAcademicProgramsTestCa
 
         $content = $this->renderFrontendPage(self::PROGRAM_PAGE);
 
-        $this->assertStringContainsString('<h1>Applied Physics</h1>', $content);
+        $this->assertStringContainsString('<h1 class="ace-title">Applied Physics</h1>', $content);
         $this->assertStringContainsString(self::CONTENT_ELEMENT, $content);
         $this->assertStringNotContainsString('site-package-default-template', $content);
     }
@@ -288,7 +288,7 @@ final class AcademicProgramPageLayoutTest extends AbstractAcademicProgramsTestCa
         $content = $this->renderFrontendPage(self::PROGRAM_PAGE);
 
         $this->assertStringContainsString('<div class="project-program-header">Applied Physics</div>', $content);
-        $this->assertStringNotContainsString('<h1>Applied Physics</h1>', $content);
+        $this->assertStringNotContainsString('<h1 class="ace-title">Applied Physics</h1>', $content);
         $this->assertStringContainsString('<picture', $content);
         $this->assertStringContainsString('Credit points', $content);
         $this->assertStringContainsString(self::CONTENT_ELEMENT, $content);
@@ -332,7 +332,7 @@ final class AcademicProgramPageLayoutTest extends AbstractAcademicProgramsTestCa
 
         $content = $this->renderFrontendPage(self::PROGRAM_PAGE);
 
-        $this->assertStringContainsString('<h1>Applied Physics</h1>', $content);
+        $this->assertStringContainsString('<h1 class="ace-title">Applied Physics</h1>', $content);
         $this->assertSame('', $this->backLinkOf($content));
         $this->assertStringNotContainsString('Back to all programs', $content);
     }
@@ -344,7 +344,7 @@ final class AcademicProgramPageLayoutTest extends AbstractAcademicProgramsTestCa
 
         $content = $this->renderFrontendPage(self::PROGRAM_PAGE);
 
-        $this->assertStringContainsString('<h1>Applied Physics</h1>', $content);
+        $this->assertStringContainsString('<h1 class="ace-title">Applied Physics</h1>', $content);
         $this->assertSame('', $this->backLinkOf($content));
     }
 
@@ -367,7 +367,7 @@ final class AcademicProgramPageLayoutTest extends AbstractAcademicProgramsTestCa
 
         $content = $this->renderFrontendPage('https://www.acme.com/chemistry');
 
-        $this->assertStringContainsString('<h1>Chemistry</h1>', $content);
+        $this->assertStringContainsString('<h1 class="ace-title">Chemistry</h1>', $content);
         $this->assertCount(0, $this->nodesMatching($this->parseRenderedPage($content), self::SUBTITLE));
     }
 
@@ -395,8 +395,8 @@ final class AcademicProgramPageLayoutTest extends AbstractAcademicProgramsTestCa
 
         $content = $this->renderFrontendPage(self::PROGRAM_PAGE);
 
-        $this->assertStringContainsString('<h1>Applied Physics</h1>', $content);
-        $this->assertStringContainsString('<p>Master of Science</p>', $content);
+        $this->assertStringContainsString('<h1 class="ace-title">Applied Physics</h1>', $content);
+        $this->assertStringContainsString('<p class="ace-subtitle">Master of Science</p>', $content);
     }
 
     /**

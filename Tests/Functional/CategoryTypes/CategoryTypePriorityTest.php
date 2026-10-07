@@ -159,7 +159,7 @@ final class CategoryTypePriorityTest extends AbstractAcademicProgramsTestCase
      */
     private function factsList(string $content): string
     {
-        $start = strpos($content, '<ul class="academic-programs-facts');
+        $start = strpos($content, '<ul class="ace-facts');
         $this->assertIsInt($start, 'The page renders no facts list.');
         $end = strpos($content, '</ul>', $start);
         $this->assertIsInt($end);
