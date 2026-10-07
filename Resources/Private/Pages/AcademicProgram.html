@@ -18,18 +18,20 @@
 <f:layout name="{programPageLayout}" />
 
 <f:section name="Main">
-    <div class="academic-programs-detail container">
-        <div class="d-flex flex-column-reverse">
-            <f:render partial="Program/Page/Header" arguments="{_all}" />
-            <f:render partial="Program/Page/Media" arguments="{_all}" />
+    <div class="container">
+        <div class="academic-programs-detail">
+            <div>
+                <f:render partial="Program/Page/Header" arguments="{_all}" />
+                <f:render partial="Program/Page/Media" arguments="{_all}" />
+            </div>
+
+            <f:render partial="Program/Page/CallToAction" arguments="{_all}" />
+
+            <f:render partial="Program/Page/Facts" arguments="{_all}" />
         </div>
-
-        <f:render partial="Program/Page/CallToAction" arguments="{_all}" />
-
-        <f:render partial="Program/Page/Facts" arguments="{_all}" />
-
-        <f:render partial="Program/Page/Content" arguments="{_all}" />
     </div>
+
+    <f:render partial="Program/Page/Content" arguments="{_all}" />
 </f:section>
 
 </html>
