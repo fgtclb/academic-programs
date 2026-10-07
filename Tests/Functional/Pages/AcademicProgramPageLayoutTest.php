@@ -405,7 +405,7 @@ final class AcademicProgramPageLayoutTest extends AbstractAcademicProgramsTestCa
     private function assertProgramBetween(string $content, string $headerMarker, string $footerMarker): void
     {
         $header = strpos($content, $headerMarker);
-        $program = strpos($content, 'academic-programs-detail');
+        $program = strpos($content, 'academic-programs-detail-page');
         $element = strpos($content, self::CONTENT_ELEMENT);
         $footer = strpos($content, $footerMarker);
         $this->assertIsInt($header, sprintf('The layout marker "%s" is missing.', $headerMarker));

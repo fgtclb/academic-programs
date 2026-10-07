@@ -35,7 +35,7 @@ final class AcademicProgramApplicationLinkTest extends AbstractAcademicProgramsT
     /**
      * The paragraph of the link, which the page renders below the header.
      */
-    private const APPLICATION_LINK = "//*[contains(concat(' ', normalize-space(@class), ' '), ' academic-programs-detail ')]/p";
+    private const APPLICATION_LINK = "//*[contains(concat(' ', normalize-space(@class), ' '), ' academic-programs-detail-page ')]/p";
 
     protected function setUp(): void
     {

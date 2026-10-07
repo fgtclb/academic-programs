@@ -178,7 +178,7 @@ final class AcademicProgramPageTemplateTest extends AbstractAcademicProgramsTest
 
         $content = $this->renderFrontendPage('https://www.acme.com/applied-physics');
 
-        $this->assertStringContainsString('academic-programs-detail', $content);
+        $this->assertStringContainsString('academic-programs-detail-page', $content);
         $this->assertStringNotContainsString('site-package-default-template', $content);
     }
 
@@ -193,7 +193,7 @@ final class AcademicProgramPageTemplateTest extends AbstractAcademicProgramsTest
         $this->setUpTestCase();
 
         $xpath = $this->parseRenderedPage($this->renderFrontendPage('https://www.acme.com/applied-physics'));
-        $detail = $this->elementMatching($xpath, "//*[contains(concat(' ', normalize-space(@class), ' '), ' academic-programs-detail ')]");
+        $detail = $this->elementMatching($xpath, "//*[contains(concat(' ', normalize-space(@class), ' '), ' academic-programs-detail-page ')]");
         $this->assertRendersResponsivePicture(
             $xpath,
             $detail,
@@ -240,7 +240,7 @@ final class AcademicProgramPageTemplateTest extends AbstractAcademicProgramsTest
         $this->setUpPageViewTestCase();
 
         $xpath = $this->parseRenderedPage($this->renderFrontendPage('https://www.acme.com/applied-physics'));
-        $detail = $this->elementMatching($xpath, "//*[contains(concat(' ', normalize-space(@class), ' '), ' academic-programs-detail ')]");
+        $detail = $this->elementMatching($xpath, "//*[contains(concat(' ', normalize-space(@class), ' '), ' academic-programs-detail-page ')]");
         $this->assertRendersResponsivePicture(
             $xpath,
             $detail,
