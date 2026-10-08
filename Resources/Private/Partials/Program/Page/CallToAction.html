@@ -21,18 +21,19 @@
         an untranslated one in a language without a fallback - renders no link rather than
         the bare label.
     </f:comment>
+
     <f:variable name="applicationUri" value="{f:uri.typolink(parameter: program.applicationLink)}" />
+
     <f:if condition="{applicationUri}">
         <f:variable name="applicationLabel" value="{f:translate(key: 'page.applicationLink.defaultLabel', extensionName: 'AcademicPrograms')}" />
+
         <f:if condition="{program.applicationLinkLabel}">
             <f:variable name="applicationLabel" value="{program.applicationLinkLabel}" />
         </f:if>
-        <p class="ace-actions">
-            <f:link.typolink
-                parameter="{program.applicationLink}"
-                class="btn btn-primary"
-            >{applicationLabel}</f:link.typolink>
-        </p>
+
+        <f:link.typolink parameter="{program.applicationLink}" class="btn btn-primary">
+            {applicationLabel}
+        </f:link.typolink>
     </f:if>
 </f:if>
 

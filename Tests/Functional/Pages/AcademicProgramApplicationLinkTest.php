@@ -33,9 +33,10 @@ final class AcademicProgramApplicationLinkTest extends AbstractAcademicProgramsT
     ];
 
     /**
-     * The paragraph of the link, which the page renders below the header.
+     * The link, a button the page renders below the header. The other link of the page is
+     * the one back to the list.
      */
-    private const APPLICATION_LINK = "//*[contains(concat(' ', normalize-space(@class), ' '), ' academic-programs-page ')]/p";
+    private const APPLICATION_LINK = "//*[contains(concat(' ', normalize-space(@class), ' '), ' academic-programs-page ')]/a[contains(concat(' ', normalize-space(@class), ' '), ' btn ')]";
 
     protected function setUp(): void
     {
@@ -80,9 +81,7 @@ final class AcademicProgramApplicationLinkTest extends AbstractAcademicProgramsT
     private function applicationLinkOf(string $url): \DOMElement
     {
         $xpath = $this->parseRenderedPage($this->renderFrontendPage($url));
-        $container = $this->elementMatching($xpath, self::APPLICATION_LINK);
-
-        return $this->elementMatching($xpath, './/a', $container);
+        return $this->elementMatching($xpath, self::APPLICATION_LINK);
     }
 
     #[Test]
@@ -192,7 +191,7 @@ final class AcademicProgramApplicationLinkTest extends AbstractAcademicProgramsT
 
         $this->assertStringContainsString('<div class="project-program-header">Applied Physics</div>', $content);
         $xpath = $this->parseRenderedPage($content);
-        $link = $this->elementMatching($xpath, './/a', $this->elementMatching($xpath, self::APPLICATION_LINK));
+        $link = $this->elementMatching($xpath, self::APPLICATION_LINK);
         $this->assertSame('/apply', $link->getAttribute('href'));
     }
 }

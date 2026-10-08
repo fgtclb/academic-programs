@@ -6,16 +6,14 @@
 
 <f:if condition="{programs}">
     <f:then>
-        <div class="ace-list">
+        <div class="ace-itemlist">
             <div class="row">
                 <f:for each="{programs}" as="program">
                     <div class="col-12 col-md-6 col-lg-4 col-xl-3">
-                        <div class="ace-item">
-                            <f:render
-                                partial="Program/Item"
-                                arguments="{_all}"
-                            />
-                        </div>
+                        <f:render
+                            partial="Program/Item"
+                            arguments="{_all}"
+                        />
                     </div>
                 </f:for>
             </div>

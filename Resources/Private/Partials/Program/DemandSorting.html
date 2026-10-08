@@ -14,7 +14,7 @@
 <f:asset.module identifier="@fgtclb/academic-programs/frontend/program-list.js" />
 
 <div class="col-12 col-md-6 col-lg-4 col-xl-3">
-    <div class="ace-field">
+    <div class="ace-filter ace-field ace-select-wrap">
         <label for="sortingField" class="ace-label">
             {f:translate(key: 'sorting.field.label', extensionName: 'AcademicPrograms')}
         </label>
@@ -26,13 +26,13 @@
             type="fields"
             l10n="filter.sortingField"
             additionalAttributes="{'data-academic-programs-list-select': ''}"
-            class="ace-control"
+            class="ace-control ace-select"
         />
     </div>
 </div>
 
 <div class="col-12 col-md-6 col-lg-4 col-xl-3">
-    <div class="ace-field">
+    <div class="ace-filter ace-field ace-select-wrap">
         <label for="sortingDirection" class="ace-label">
             {f:translate(key: 'sorting.direction.label', extensionName: 'AcademicPrograms')}
         </label>
@@ -44,7 +44,7 @@
             type="directions"
             l10n="filter.sortingDirection"
             additionalAttributes="{'data-academic-programs-list-select': ''}"
-            class="ace-control"
+            class="ace-control ace-select"
         />
     </div>
 </div>

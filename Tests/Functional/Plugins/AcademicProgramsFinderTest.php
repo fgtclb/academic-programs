@@ -583,7 +583,8 @@ final class AcademicProgramsFinderTest extends AbstractAcademicProgramsTestCase
     }
 
     /**
-     * Each select is labelled with the title of its type, and the button says what it does.
+     * Each select is labelled with the title of its type and named like a select of the list
+     * filters, and the button says what it does.
      */
     #[Test]
     public function everySelectHasALabelAndTheFormAButton(): void
@@ -598,6 +599,10 @@ final class AcademicProgramsFinderTest extends AbstractAcademicProgramsTestCase
             $select = $selects->item(0);
             $this->assertInstanceOf(\DOMElement::class, $select);
             $this->assertSame('academic-programs-finder-' . $type . '-1', $select->getAttribute('id'));
+            $this->assertSame('ace-control ace-select', $select->getAttribute('class'));
+            $cell = $select->parentNode;
+            $this->assertInstanceOf(\DOMElement::class, $cell);
+            $this->assertSame('ace-filter ace-field ace-select-wrap', $cell->getAttribute('class'));
             $labels = $xpath->query(sprintf('.//label[@for="%s"]', $select->getAttribute('id')), $form);
             $this->assertInstanceOf(\DOMNodeList::class, $labels);
             $this->assertCount(1, $labels);

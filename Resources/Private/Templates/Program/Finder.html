@@ -52,13 +52,13 @@
                     <f:variable name="allOptionsLabel" value="{f:translate(key: 'sys_category.programs.allOptions', extensionName: 'AcademicPrograms')}"/>
                     <f:for each="{filterTypes.visible}" as="categoryKey">
                         <div class="col-12 col-md">
-                            <div class="ace-filter">
+                            <div class="ace-filter ace-field ace-select-wrap">
                                 <label class="ace-label" for="academic-programs-finder-{categoryKey}-{data.uid}">
                                     {f:translate(key: 'sys_category.programs.{categoryKey}', extensionName: 'AcademicPrograms') -> ct:categoryTypeTitle(group: 'programs', identifier: categoryKey)}
                                 </label>
 
                                 <ct:form.filterSelect
-                                    class="ace-control"
+                                    class="ace-control ace-select"
                                     id="academic-programs-finder-{categoryKey}-{data.uid}"
                                     name="demand[filterCollection][{categoryKey}]"
                                     value="{preselection.{categoryKey}}"

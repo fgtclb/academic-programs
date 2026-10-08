@@ -114,7 +114,7 @@ final class AcademicProgramsPluginTest extends AbstractAcademicProgramsTestCase
 
         $content = $this->renderHomePage();
         $this->assertStringContainsString('academic-programs-list', $content);
-        $this->assertSame(4, $this->countContentElementHeaderNodes($content, '//*[@data-academic-programs-list-content]//div[contains(concat(" ", normalize-space(@class), " "), " ace-item ")]'));
+        $this->assertSame(4, $this->countContentElementHeaderNodes($content, '//*[@data-academic-programs-list-content]//div[contains(concat(" ", normalize-space(@class), " "), " ace-itemlist ")]/div[@class="row"]/div/article[contains(concat(" ", normalize-space(@class), " "), " ace-item ")]'));
         $this->assertStringContainsString('Applied Physics', $content);
         $this->assertStringContainsString('Molecular Chemistry', $content);
         // Programs are collected across the whole site, not only below the current page.

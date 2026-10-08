@@ -13,8 +13,10 @@
     the form with. A select that keeps an inline `onchange` handler, from an override of a
     filter partial, is left to that handler.
 </f:comment>
+
 <f:if condition="!{settings.hideSorting} || !{settings.hideFilter}">
     <f:asset.module identifier="@fgtclb/academic-programs/frontend/program-list.js" />
+
     <f:form
         action="list"
         class="ace-form"
@@ -39,11 +41,9 @@
                 </f:if>
 
                 <div class="col-12 col-md-6 col-lg-4 col-xl-3" data-academic-programs-list-submit>
-                    <div class="ace-actions">
-                        <button type="submit" class="btn btn-primary">
-                            {f:translate(key: 'list.submit', extensionName: 'AcademicPrograms')}
-                        </button>
-                    </div>
+                    <button type="submit" class="btn btn-primary">
+                        {f:translate(key: 'list.submit', extensionName: 'AcademicPrograms')}
+                    </button>
                 </div>
             </div>
         </div>

@@ -29,10 +29,11 @@ final class AcademicProgramsActiveFiltersTest extends AbstractAcademicProgramsTe
     use SiteBasedTestTrait;
 
     /**
-     * The element of the active filters, and the one of the result count in front of the
-     * results of the list.
+     * The element the tags, the reset link and the result count are rendered into, in front
+     * of the results of the list.
      */
-    private const ACTIVE_FILTERS = '//*[@data-academic-programs-list-content]/div[contains(concat(" ", normalize-space(@class), " "), " ace-filters ")]';
+    private const ACTIVE_FILTERS = '//*[@data-academic-programs-list-content]';
+    private const ACTIVE_FILTER_PARTS = self::ACTIVE_FILTERS . '/*[self::ul[contains(concat(" ", normalize-space(@class), " "), " ace-active-filters ")] or self::a]';
     private const RESULT_COUNT = '//*[@data-academic-programs-list-content]/p[1]';
     private const LIST_NAMESPACE = 'tx_academicprograms_programlist';
     private const ALL_ON = "plugin.tx_academicprograms.filter.showActiveFilters = 1\n"
@@ -126,7 +127,7 @@ final class AcademicProgramsActiveFiltersTest extends AbstractAcademicProgramsTe
 
         $content = $this->renderFrontendPage($this->listUrl('/filter-hidden', '1,3'));
 
-        $this->assertSame(0, $this->activeFiltersQuery($content, self::ACTIVE_FILTERS)->length);
+        $this->assertSame(0, $this->activeFiltersQuery($content, self::ACTIVE_FILTER_PARTS)->length);
         $this->assertSame('2 programs found', $this->activeFiltersResultCount($content, self::RESULT_COUNT));
     }
 
@@ -141,7 +142,7 @@ final class AcademicProgramsActiveFiltersTest extends AbstractAcademicProgramsTe
 
         $content = $this->renderFrontendPage($this->listUrl('/home', '1,3'));
 
-        $this->assertSame(0, $this->activeFiltersQuery($content, self::ACTIVE_FILTERS)->length);
+        $this->assertSame(0, $this->activeFiltersQuery($content, self::ACTIVE_FILTER_PARTS)->length);
         $this->assertSame(0, $this->activeFiltersQuery($content, self::RESULT_COUNT)->length);
     }
 

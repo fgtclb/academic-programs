@@ -5,74 +5,76 @@
 >
 
 <f:if condition="{header}">
-    <f:switch expression="{layout}">
-        <f:case value="1">
-            <f:if condition="{subheader}">
-                <f:then>
-                    <h3 class="ace-title {class}">
-                        <f:link.typolink parameter="{link}">{header}</f:link.typolink>
-                    </h3>
-                </f:then>
-                <f:else>
-                    <h2 class="ace-title {class}">
-                        <f:link.typolink parameter="{link}">{header}</f:link.typolink>
-                    </h2>
-                </f:else>
-            </f:if>
-        </f:case>
-        <f:case value="2">
-            <f:if condition="{subheader}">
-                <f:then>
-                    <h4 class="ace-title {class}">
-                        <f:link.typolink parameter="{link}">{header}</f:link.typolink>
-                    </h4>
-                </f:then>
-                <f:else>
-                    <h3 class="ace-title {class}">
-                        <f:link.typolink parameter="{link}">{header}</f:link.typolink>
-                    </h3>
-                </f:else>
-            </f:if>
-        </f:case>
-        <f:case value="3">
-            <f:if condition="{subheader}">
-                <f:then>
-                    <h5 class="ace-title {class}">
-                        <f:link.typolink parameter="{link}">{header}</f:link.typolink>
-                    </h5>
-                </f:then>
-                <f:else>
-                    <h4 class="ace-title {class}">
-                        <f:link.typolink parameter="{link}">{header}</f:link.typolink>
-                    </h4>
-                </f:else>
-            </f:if>
-        </f:case>
-        <f:case value="4">
-            <f:if condition="{subheader}">
-                <f:then>
-                    <h6 class="ace-title {class}">
-                        <f:link.typolink parameter="{link}">{header}</f:link.typolink>
-                    </h6>
-                </f:then>
-                <f:else>
-                    <h5 class="ace-title {class}">
-                        <f:link.typolink parameter="{link}">{header}</f:link.typolink>
-                    </h5>
-                </f:else>
-            </f:if>
-        </f:case>
-        <f:case value="5">
-            <h6 class="ace-title {class}">
-                <f:link.typolink parameter="{link}">{header}</f:link.typolink>
-            </h6>
-        </f:case>
-        <f:defaultCase>
-            <h2 class="ace-title {class}">
-                <f:link.typolink parameter="{link}">{header}</f:link.typolink>
-            </h2>
-        </f:defaultCase>
-    </f:switch>
+    <header class="ace-header">
+        <f:switch expression="{layout}">
+            <f:case value="1">
+                <f:if condition="{subheader}">
+                    <f:then>
+                        <h3 class="ace-title {class}">
+                            <f:link.typolink parameter="{link}">{header}</f:link.typolink>
+                        </h3>
+                    </f:then>
+                    <f:else>
+                        <h2 class="ace-title {class}">
+                            <f:link.typolink parameter="{link}">{header}</f:link.typolink>
+                        </h2>
+                    </f:else>
+                </f:if>
+            </f:case>
+            <f:case value="2">
+                <f:if condition="{subheader}">
+                    <f:then>
+                        <h4 class="ace-title {class}">
+                            <f:link.typolink parameter="{link}">{header}</f:link.typolink>
+                        </h4>
+                    </f:then>
+                    <f:else>
+                        <h3 class="ace-title {class}">
+                            <f:link.typolink parameter="{link}">{header}</f:link.typolink>
+                        </h3>
+                    </f:else>
+                </f:if>
+            </f:case>
+            <f:case value="3">
+                <f:if condition="{subheader}">
+                    <f:then>
+                        <h5 class="ace-title {class}">
+                            <f:link.typolink parameter="{link}">{header}</f:link.typolink>
+                        </h5>
+                    </f:then>
+                    <f:else>
+                        <h4 class="ace-title {class}">
+                            <f:link.typolink parameter="{link}">{header}</f:link.typolink>
+                        </h4>
+                    </f:else>
+                </f:if>
+            </f:case>
+            <f:case value="4">
+                <f:if condition="{subheader}">
+                    <f:then>
+                        <h6 class="ace-title {class}">
+                            <f:link.typolink parameter="{link}">{header}</f:link.typolink>
+                        </h6>
+                    </f:then>
+                    <f:else>
+                        <h5 class="ace-title {class}">
+                            <f:link.typolink parameter="{link}">{header}</f:link.typolink>
+                        </h5>
+                    </f:else>
+                </f:if>
+            </f:case>
+            <f:case value="5">
+                <h6 class="ace-title {class}">
+                    <f:link.typolink parameter="{link}">{header}</f:link.typolink>
+                </h6>
+            </f:case>
+            <f:defaultCase>
+                <h2 class="ace-title {class}">
+                    <f:link.typolink parameter="{link}">{header}</f:link.typolink>
+                </h2>
+            </f:defaultCase>
+        </f:switch>
+    </header>
 </f:if>
 
 </html>

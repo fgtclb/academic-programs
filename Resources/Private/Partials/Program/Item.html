@@ -5,48 +5,48 @@
     data-namespace-typo3-fluid="true"
 >
 
-<article class="ace-card">
-    <div class="ace-content">
-        <header class="ace-header">
-            <f:render
-                partial="Program/Header"
-                arguments="{
-                    header: '{program.title}',
-                    layout: '{data.header_layout}',
-                    link: '{f:uri.page(pageUid: program.uid)}',
-                    subheader: '{data.subheader}'
-                }"
-            />
-        </header>
+<article class="ace-item">
+    <div class="ace-item-content">
+        <f:render
+            partial="Program/Header"
+            arguments="{
+                header: '{program.title}',
+                layout: '{data.header_layout}',
+                link: '{f:uri.page(pageUid: program.uid)}',
+                subheader: '{data.subheader}'
+            }"
+        />
 
         <f:comment>
             The facts of the card, from the setting "plugin.tx_academicprograms.card.fields":
             the degree unless the setting names others. "facts.mostSpecificOnly" leaves out
             a category whose descendant the program carries as well.
         </f:comment>
-        <f:variable name="cardFacts" value="{ace:program.facts(program: program, fields: settings.card.fields, mostSpecificOnly: settings.facts.mostSpecificOnly)}" />
+        <f:variable
+            name="cardFacts"
+            value="{ace:program.facts(
+                program: program,
+                fields: settings.card.fields,
+                mostSpecificOnly: settings.facts.mostSpecificOnly
+            )}"
+        />
+
         <f:render
             partial="Program/Facts"
-            arguments="{
-                facts: cardFacts,
-                listClass: 'ace-properties',
-                itemClass: 'ace-property'
-            }"
+            arguments="{facts: cardFacts}"
         />
     </div>
 
     <f:for each="{program.media}" as="image" iteration="i">
         <f:if condition="{i.isFirst}">
             <f:comment>The shared partial of EXT:academic_base.</f:comment>
-            <div class="ace-media">
-                <f:render
-                    partial="Academic/Image"
-                    arguments="{
-                        image: image,
-                        preset: 'card',
-                    }"
-                />
-            </div>
+            <f:render
+                partial="Academic/Image"
+                arguments="{
+                    image: image,
+                    preset: 'card',
+                }"
+            />
         </f:if>
     </f:for>
 </article>

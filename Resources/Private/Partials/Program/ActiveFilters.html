@@ -35,7 +35,9 @@
     - settings:          for `filter.showActiveFilters` and `filter.showReset`
     - visitorSelection:  whether the request carried a demand
 </f:comment>
+
 <f:variable name="categoryTags" value="0" />
+
 <f:if condition="{settings.filter.showActiveFilters} && {demand.filterCollection.filterCategories}">
     <f:for each="{demand.filterCollection.filterCategories.allCategoriesByType}" as="categoriesOfType">
         <f:if condition="{categoriesOfType}">
@@ -43,62 +45,76 @@
         </f:if>
     </f:for>
 </f:if>
+
 <f:variable name="resettable" value="0" />
+
 <f:if condition="{demand.filterCollection.filterCategories}">
     <f:variable name="resettable" value="1" />
 </f:if>
+
 <f:if condition="{settings.categories}">
     <f:variable name="resettable" value="1" />
 </f:if>
+
 <f:variable name="showResetLink" value="0" />
+
 <f:if condition="{settings.filter.showReset} && {visitorSelection} && {resettable}">
     <f:variable name="showResetLink" value="1" />
 </f:if>
 
 <f:if condition="{categoryTags} || {showResetLink}">
-    <div class="ace-filters">
-        <f:if condition="{categoryTags}">
-            <ul
-                class="ace-tags"
-                aria-label="{f:translate(key: 'filter.activeFilters.label', extensionName: 'AcademicPrograms')}"
-            >
-                <f:for each="{demand.filterCollection.filterCategories.allCategoriesByType}" as="categoriesOfType">
-                    <f:for each="{categoriesOfType}" as="category">
-                        <f:variable name="remainingFilter" value="{ct:filterArgument(filterCollection: demand.filterCollection, without: category)}" />
-                        <f:if condition="{remainingFilter}">
-                            <f:then>
-                                <f:variable name="tagDemand" value="{
+    <f:if condition="{categoryTags}">
+        <ul class="ace-list ace-active-filters" aria-label="{f:translate(key: 'filter.activeFilters.label', extensionName: 'AcademicPrograms')}">
+            <f:for each="{demand.filterCollection.filterCategories.allCategoriesByType}" as="categoriesOfType">
+                <f:for each="{categoriesOfType}" as="category">
+                    <f:variable name="remainingFilter" value="{ct:filterArgument(filterCollection: demand.filterCollection, without: category)}" />
+
+                    <f:if condition="{remainingFilter}">
+                        <f:then>
+                            <f:variable
+                                name="tagDemand"
+                                value="{
                                     filterCollection: {categories: remainingFilter},
                                     sortingField: demand.sortingField,
                                     sortingDirection: demand.sortingDirection
-                                }" />
-                            </f:then>
-                            <f:else>
-                                <f:variable name="tagDemand" value="{
+                                }"
+                            />
+                        </f:then>
+                        <f:else>
+                            <f:variable
+                                name="tagDemand"
+                                value="{
                                     sortingField: demand.sortingField,
                                     sortingDirection: demand.sortingDirection
-                                }" />
-                            </f:else>
-                        </f:if>
-                        <f:variable name="removeLabel" value="{f:translate(key: 'filter.activeFilters.remove', extensionName: 'AcademicPrograms', arguments: {0: category.title})}" />
-                        <li class="ace-tag">
-                            <f:link.action
-                                action="list"
-                                arguments="{demand: tagDemand}"
-                                class="ace-remove"
-                                additionalAttributes="{'aria-label': removeLabel}"
-                            >{category.title}<span class="ace-icon" aria-hidden="true"> ×</span></f:link.action>
-                        </li>
-                    </f:for>
+                                }"
+                            />
+                        </f:else>
+                    </f:if>
+
+                    <f:variable name="removeLabel" value="{f:translate(key: 'filter.activeFilters.remove', extensionName: 'AcademicPrograms', arguments: {0: category.title})}" />
+
+                    <li class="ace-list-item ace-active-filter">
+                        <f:link.action
+                            action="list"
+                            arguments="{demand: tagDemand}"
+                            class="ace-link"
+                            additionalAttributes="{'aria-label': removeLabel}"
+                        >
+                            {category.title}
+
+                            <span class="ace-icon" aria-hidden="true"> ×</span>
+                        </f:link.action>
+                    </li>
                 </f:for>
-            </ul>
-        </f:if>
-        <f:if condition="{showResetLink}">
-            <f:link.page class="ace-reset">
-                {f:translate(key: 'filter.reset', extensionName: 'AcademicPrograms')}
-            </f:link.page>
-        </f:if>
-    </div>
+            </f:for>
+        </ul>
+    </f:if>
+
+    <f:if condition="{showResetLink}">
+        <f:link.page class="ace-link">
+            {f:translate(key: 'filter.reset', extensionName: 'AcademicPrograms')}
+        </f:link.page>
+    </f:if>
 </f:if>
 
 </html>
