@@ -25,6 +25,7 @@
     element that announces a changed count. Without the module the button keeps its plain
     label and the status element stays empty.
 </f:comment>
+
 <f:if condition="{settings.renderContentElementHeader}">
     <f:render partial="Header/All" arguments="{_all}" />
 </f:if>
@@ -33,59 +34,61 @@
     <f:asset.module identifier="@fgtclb/academic-programs/frontend/program-finder.js" />
     <f:variable name="countLabelOne" value="{f:translate(key: 'finder.submit.count.one', extensionName: 'AcademicPrograms')}"/>
     <f:variable name="countLabelOther" value="{f:translate(key: 'finder.submit.count.other', extensionName: 'AcademicPrograms')}"/>
-    <f:form
-        actionUri="{listUri}"
-        extensionName="AcademicPrograms"
-        pluginName="ProgramList"
-        class="academic-programs-finder ace-form"
-        additionalAttributes="{
-            'data-academic-programs-finder-programs': programCategories,
-            'data-academic-programs-finder-count-one': countLabelOne,
-            'data-academic-programs-finder-count-other': countLabelOther
-        }"
-    >
-        <div class="ace-filters">
-            <div class="row">
-                <f:variable name="allOptionsLabel" value="{f:translate(key: 'sys_category.programs.allOptions', extensionName: 'AcademicPrograms')}"/>
-                <f:for each="{filterTypes.visible}" as="categoryKey">
-                    <div class="col-12 col-md">
-                        <div class="ace-filter">
-                            <label class="ace-label" for="academic-programs-finder-{categoryKey}-{data.uid}">
-                                {f:translate(key: 'sys_category.programs.{categoryKey}', extensionName: 'AcademicPrograms') -> ct:categoryTypeTitle(group: 'programs', identifier: categoryKey)}
-                            </label>
 
-                            <ct:form.filterSelect
-                                class="ace-control"
-                                id="academic-programs-finder-{categoryKey}-{data.uid}"
-                                name="demand[filterCollection][{categoryKey}]"
-                                value="{preselection.{categoryKey}}"
-                                options="{categories.{categoryKey}}"
-                                optionValueField="uid"
-                                optionLabelField="title"
-                                prependOptionLabel="{f:translate(
-                                    key: 'sys_category.programs.allOptions.{categoryKey}',
-                                    extensionName: 'AcademicPrograms',
-                                    default: allOptionsLabel
-                                )}"
-                                prependOptionValue=""
-                                hideDisabledOptions="{settings.filter.hideDisabledOptions}"
-                                additionalAttributes="{'data-academic-programs-finder-select': ''}"
-                            />
+    <div class="academic-programs-finder container">
+        <f:form
+            actionUri="{listUri}"
+            extensionName="AcademicPrograms"
+            pluginName="ProgramList"
+            class="ace-form"
+            additionalAttributes="{
+                'data-academic-programs-finder-programs': programCategories,
+                'data-academic-programs-finder-count-one': countLabelOne,
+                'data-academic-programs-finder-count-other': countLabelOther
+            }"
+        >
+            <div class="ace-filters">
+                <div class="row">
+                    <f:variable name="allOptionsLabel" value="{f:translate(key: 'sys_category.programs.allOptions', extensionName: 'AcademicPrograms')}"/>
+                    <f:for each="{filterTypes.visible}" as="categoryKey">
+                        <div class="col-12 col-md">
+                            <div class="ace-filter">
+                                <label class="ace-label" for="academic-programs-finder-{categoryKey}-{data.uid}">
+                                    {f:translate(key: 'sys_category.programs.{categoryKey}', extensionName: 'AcademicPrograms') -> ct:categoryTypeTitle(group: 'programs', identifier: categoryKey)}
+                                </label>
+
+                                <ct:form.filterSelect
+                                    class="ace-control"
+                                    id="academic-programs-finder-{categoryKey}-{data.uid}"
+                                    name="demand[filterCollection][{categoryKey}]"
+                                    value="{preselection.{categoryKey}}"
+                                    options="{categories.{categoryKey}}"
+                                    optionValueField="uid"
+                                    optionLabelField="title"
+                                    prependOptionLabel="{f:translate(
+                                        key: 'sys_category.programs.allOptions.{categoryKey}',
+                                        extensionName: 'AcademicPrograms',
+                                        default: allOptionsLabel
+                                    )}"
+                                    prependOptionValue=""
+                                    hideDisabledOptions="{settings.filter.hideDisabledOptions}"
+                                    additionalAttributes="{'data-academic-programs-finder-select': ''}"
+                                />
+                            </div>
                         </div>
-                    </div>
-                </f:for>
+                    </f:for>
 
-                <div class="col-12 col-md-auto">
-                    <div class="ace-actions">
+                    <div class="col-12 col-lg-4">
                         <button type="submit" class="btn btn-primary">
                             <span class="ace-count" data-academic-programs-finder-count>{f:translate(key: 'finder.submit', extensionName: 'AcademicPrograms')}</span>
                         </button>
                     </div>
                 </div>
             </div>
-        </div>
-        <p class="ace-status visually-hidden" role="status" aria-live="polite" data-academic-programs-finder-status></p>
-    </f:form>
+
+            <p class="ace-status visually-hidden" role="status" aria-live="polite" data-academic-programs-finder-status></p>
+        </f:form>
+    </div>
 </f:if>
 
 </html>

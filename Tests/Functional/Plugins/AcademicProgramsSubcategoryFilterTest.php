@@ -36,7 +36,7 @@ final class AcademicProgramsSubcategoryFilterTest extends AbstractAcademicProgra
 
     private const LIST_NAMESPACE = 'tx_academicprograms_programlist';
     private const LIST_FORM = '//form[@name="demand"]';
-    private const FINDER_FORM = '//form[contains(concat(" ", normalize-space(@class), " "), " academic-programs-finder ")]';
+    private const FINDER_FORM = '//div[contains(concat(" ", normalize-space(@class), " "), " academic-programs-finder ")]/form';
 
     protected const LANGUAGE_PRESETS = [
         'EN' => ['id' => 0, 'title' => 'English', 'locale' => 'en_US.UTF8', 'iso' => 'en', 'hrefLang' => 'en-US', 'direction' => ''],

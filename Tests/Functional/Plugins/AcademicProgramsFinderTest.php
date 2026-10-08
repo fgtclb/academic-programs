@@ -37,7 +37,7 @@ final class AcademicProgramsFinderTest extends AbstractAcademicProgramsTestCase
     private const LIST_NAMESPACE = 'tx_academicprograms_programlist';
 
     private const FINDER_FORM_CLASS = 'academic-programs-finder';
-    private const FINDER_FORM = '//form[contains(concat(" ", normalize-space(@class), " "), " ' . self::FINDER_FORM_CLASS . ' ")]';
+    private const FINDER_FORM = '//div[contains(concat(" ", normalize-space(@class), " "), " ' . self::FINDER_FORM_CLASS . ' ")]/form';
 
     private const HEADER = 'Find your program';
     private const SUBHEADER = 'Choose a degree and a topic';

@@ -18,21 +18,59 @@
 <f:layout name="{programPageLayout}" />
 
 <f:section name="Main">
-    <div class="container">
-        <div class="academic-programs-detail-page">
-            <div class="ace-hero">
-                <f:render partial="Program/Page/Header" arguments="{_all}" />
-                <f:render partial="Program/Page/Media" arguments="{_all}" />
-            </div>
+    <f:comment>
+        The page record: the record of the page information object "page" a PAGEVIEW page
+        object assigns, or "data" of a FLUIDTEMPLATE page object. "page" first, because
+        PAGEVIEW reserves that name, while a PAGEVIEW site package may assign a "data" of
+        its own.
+    </f:comment>
+    <f:variable name="pageRecord" value="{f:if(condition: page.pageRecord, then: page.pageRecord, else: data)}" />
 
-            <f:render partial="Program/Page/CallToAction" arguments="{_all}" />
+    <div class="academic-programs-page container">
+        <div class="ace-hero">
+            <f:render
+                partial="Program/Page/Header"
+                arguments="{_all}"
+            />
 
-            <f:render partial="Program/Page/Facts" arguments="{_all}" />
+            <f:render
+                partial="Program/Page/Media"
+                arguments="{_all}"
+            />
         </div>
-    </div>
 
-    <div class="ace-content">
-        <f:render partial="Program/Page/Content" arguments="{_all}" />
+        <f:if condition="{programListPid}">
+            <f:comment>
+                The link is rendered when the site setting
+                "plugin.tx_academicprograms.page.listPid" names a page that can be linked;
+                "programListPid" is that page, or "0".
+                Resolved first, so a list page that cannot be linked - hidden, or not
+                translated - renders no link rather than the bare label.
+            </f:comment>
+
+            <f:variable name="backToListUri" value="{f:uri.page(pageUid: programListPid)}" />
+
+            <f:if condition="{backToListUri}">
+                <a class="ace-link" href="{backToListUri}">
+                    {f:translate(key: 'page.backToList', extensionName: 'AcademicPrograms')}
+                </a>
+            </f:if>
+        </f:if>
+
+        <f:render
+            partial="Program/Page/CallToAction"
+            arguments="{_all}"
+        />
+
+        <f:render
+            partial="Program/Page/Facts"
+            arguments="{_all}"
+        />
+
+        <f:render
+            partial="Program/Page/Content"
+            arguments="{_all}"
+        />
     </div>
 </f:section>
 

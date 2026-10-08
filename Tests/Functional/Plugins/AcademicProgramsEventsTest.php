@@ -32,7 +32,7 @@ final class AcademicProgramsEventsTest extends AbstractAcademicProgramsTestCase
 
     private const LIST_NAMESPACE = 'tx_academicprograms_programlist';
 
-    private const FINDER_FORM = '//form[contains(concat(" ", normalize-space(@class), " "), " academic-programs-finder ")]';
+    private const FINDER_FORM = '//div[contains(concat(" ", normalize-space(@class), " "), " academic-programs-finder ")]/form';
 
     private const FIXTURE_TYPOSCRIPT = 'EXT:test_program_events/Configuration/TypoScript/';
 

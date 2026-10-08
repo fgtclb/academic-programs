@@ -41,11 +41,11 @@ final class AcademicProgramPageLayoutTest extends AbstractAcademicProgramsTestCa
     ];
 
     /**
-     * The header of the program page holds the link back to the list in front of its
-     * heading and the subtitle after it.
+     * The header of the program page holds the subtitle after its heading, the page the
+     * link back to the list.
      */
     private const HEADER = '//header[h1]';
-    private const BACK_LINK = self::HEADER . '/h1/preceding-sibling::a';
+    private const BACK_LINK = '//div[contains(concat(" ", normalize-space(@class), " "), " academic-programs-page ")]/a';
     private const SUBTITLE = self::HEADER . '/h1/following-sibling::p';
     private const FIXTURES = 'EXT:academic_programs/Tests/Functional/Pages/Fixtures/';
     private const PROGRAM_PAGE = 'https://www.acme.com/applied-physics';
@@ -308,6 +308,7 @@ final class AcademicProgramPageLayoutTest extends AbstractAcademicProgramsTestCa
 
         $this->assertStringContainsString('<div class="project-program-page">Applied Physics</div>', $content);
         $this->assertStringNotContainsString('academic-programs-detail', $content);
+        $this->assertStringNotContainsString('academic-programs-page', $content);
     }
 
     #[Test]
@@ -405,7 +406,7 @@ final class AcademicProgramPageLayoutTest extends AbstractAcademicProgramsTestCa
     private function assertProgramBetween(string $content, string $headerMarker, string $footerMarker): void
     {
         $header = strpos($content, $headerMarker);
-        $program = strpos($content, 'academic-programs-detail-page');
+        $program = strpos($content, 'academic-programs-page');
         $element = strpos($content, self::CONTENT_ELEMENT);
         $footer = strpos($content, $footerMarker);
         $this->assertIsInt($header, sprintf('The layout marker "%s" is missing.', $headerMarker));

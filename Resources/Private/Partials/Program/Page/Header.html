@@ -5,10 +5,7 @@
 >
 
 <f:comment>
-    The header of the program page: a link back to the program list, the title and the
-    subtitle. The link is rendered when the site setting
-    "plugin.tx_academicprograms.page.listPid" names a page that can be linked;
-    "programListPid" is that page, or "0".
+    The header of the program page: a title and the subtitle.
 
     One element, because the page template renders it inside a reversed flex column
     together with the media: the image is shown above the header, the heading stays
@@ -16,20 +13,6 @@
 </f:comment>
 
 <header class="ace-header">
-    <f:if condition="{programListPid}">
-        <f:comment>
-            Resolved first, so a list page that cannot be linked - hidden, or not
-            translated - renders no link rather than the bare label.
-        </f:comment>
-        <f:variable name="backToListUri" value="{f:uri.page(pageUid: programListPid)}" />
-        <f:if condition="{backToListUri}">
-            <a
-                class="ace-back"
-                href="{backToListUri}"
-            >{f:translate(key: 'page.backToList', extensionName: 'AcademicPrograms')}</a>
-        </f:if>
-    </f:if>
-
     <h1 class="ace-title">{program.title}</h1>
 
     <f:if condition="{program.subtitle}">
