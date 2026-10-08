@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace FGTCLB\AcademicPrograms\Domain\Repository;
 
+use FGTCLB\AcademicBase\Domain\Repository\HiddenRecordsQueryTrait;
 use FGTCLB\AcademicPrograms\Domain\Model\Dto\ProgramDemand;
 use FGTCLB\AcademicPrograms\Domain\Model\Program;
 use FGTCLB\AcademicPrograms\Enumeration\PageTypes;
@@ -17,6 +18,8 @@ use TYPO3\CMS\Extbase\Persistence\Repository;
  */
 class ProgramRepository extends Repository
 {
+    use HiddenRecordsQueryTrait;
+
     /**
      * @return QueryResult<Program>
      * @throws InvalidEnumerationValueException
@@ -27,10 +30,7 @@ class ProgramRepository extends Repository
         $query->getQuerySettings()->setRespectStoragePage(false);
 
         if ($demand->getShowHiddenRecords() === true) {
-            // Include hidden (disabled) records; other enable fields
-            // (deleted, start-/endtime, fe_group) stay in effect.
-            $query->getQuerySettings()->setIgnoreEnableFields(true);
-            $query->getQuerySettings()->setEnableFieldsToBeIgnored(['disabled']);
+            $this->includeHiddenRecords($query);
         }
 
         $constraints = [];
@@ -57,6 +57,9 @@ class ProgramRepository extends Repository
                 'uid' => QueryInterface::ORDER_ASCENDING,
             ]
         );
-        return $query->execute();
+        $this->matchTranslationsOfHiddenRecords($query);
+        $programs = $query->execute();
+        $this->fetchIncludingHiddenRecords($programs);
+        return $programs;
     }
 }
