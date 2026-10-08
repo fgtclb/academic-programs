@@ -1,0 +1,26 @@
+"be_users",
+,"uid","pid","username","password","admin"
+,1,0,"admin","$1$tCrlLajZ$C0sikFQQ3SWaFAZ1Me0Z/1",1
+"pages",
+,"uid","pid","doktype","deleted","hidden","sys_language_uid","l10n_parent","slug","title"
+,1,0,1,0,0,0,0,"/","Site Root"
+"tt_content",
+,"uid","pid","CType","header","pi_flexform"
+,1,1,"academicprograms_programlist","List",""
+"sys_category",
+,"uid","pid","deleted","hidden","sys_language_uid","l10n_parent","parent","sorting","type","title"
+,1,1,0,0,0,0,0,1,"degree","Degree: Bachelor"
+,2,1,0,0,0,0,0,2,"program_type","Program type: Full time"
+,3,1,0,0,0,0,0,3,"topic","Topic: Engineering"
+,4,1,0,0,0,0,0,4,"location","Location: Campus North"
+,5,1,0,0,0,0,0,5,"default","Plain category"
+,6,1,0,0,0,0,0,6,"region","Region: Europe (partners)"
+,7,1,0,0,0,0,0,7,"competence_field","Competence field: Energy (projects)"
+,8,1,0,0,0,0,0,8,"job_type","Job type: Full time (jobs)"
+,9,1,0,0,0,0,0,9,"default","Plain parent of a program category"
+,10,1,0,0,0,0,9,10,"teaching_language","Teaching language: English (below a plain parent)"
+,11,1,0,0,0,0,9,11,"region","Region: Asia (below the same plain parent)"
+,12,1,0,0,0,0,0,12,"region","Region parent of a program category"
+,13,1,0,0,0,0,12,13,"degree","Degree: Master (below a region)"
+,14,1,1,0,0,0,0,14,"degree","Deleted"
+,15,1,0,0,1,1,0,15,"degree","Translation"
