@@ -7,21 +7,19 @@
 <f:comment>
     The facts of a program, in the order given: the program page, the details content
     element and the program card render them through this partial. "facts" is the list of
-    ProgramFact objects built from the field list of the place, "listClass" and
-    "itemClass" are classes added to the list and to each of its items.
+    ProgramFact objects built from the field list of the place.
 
     One fact is one "Program/Facts/Item", so a project that changes one row overrides that
     partial rather than this one.
 </f:comment>
 
 <f:if condition="{facts}">
-    <ul class="ace-facts{f:if(condition: listClass, then: ' {listClass}')}">
+    <ul class="ace-list ace-attributes">
         <f:for each="{facts}" as="fact">
             <f:render
                 partial="Program/Facts/Item"
                 arguments="{
-                    fact: fact,
-                    itemClass: itemClass
+                    fact: fact
                 }"
             />
         </f:for>

@@ -163,7 +163,7 @@ final class AcademicProgramsLabelOverrideTest extends AbstractAcademicProgramsTe
         ];
         yield 'fact of the program card, key from PHP' => [
             'https://www.acme.com/home', 'sys_category.programs.degree', 'Degree',
-            '<b class="ace-label">%s:</b> <span class="ace-value"> Bachelor of Science </span>',
+            '<b class="ace-label"> %s: </b> <span class="ace-value"> Bachelor of Science </span>',
         ];
         yield 'message of an empty list' => [
             'https://www.acme.com/empty', 'list.noProgramsFound', 'No programs found.',
@@ -223,9 +223,9 @@ final class AcademicProgramsLabelOverrideTest extends AbstractAcademicProgramsTe
     {
         yield 'link back to the list' => ['page.backToList', 'Back to all programs', '<a class="ace-back" href="/home" >%s</a>'];
         yield 'category type fact, key from PHP' => [
-            'sys_category.programs.degree', 'Degree', '<b class="ace-label">%s:</b> <span class="ace-value"> Bachelor of Science </span>',
+            'sys_category.programs.degree', 'Degree', '<b class="ace-label"> %s: </b> <span class="ace-value"> Bachelor of Science </span>',
         ];
-        yield 'program field fact, key from PHP' => ['program.creditPoints', 'Credit points', '<b class="ace-label">%s:</b> <span class="ace-value"> 180 </span>'];
+        yield 'program field fact, key from PHP' => ['program.creditPoints', 'Credit points', '<b class="ace-label"> %s: </b> <span class="ace-value"> 180 </span>'];
     }
 
     #[DataProvider('pageTranslationDataProvider')]

@@ -362,8 +362,7 @@ other partial of this extension:
         -   Renders
     *   -   :file:`Program/Facts.html`
         -   The list, :html:`<ul class="academic-programs-facts">`, from
-            :html:`{facts}`. The card hands in the additional classes
-            :html:`listClass` and :html:`itemClass`.
+            :html:`{facts}`.
     *   -   :file:`Program/Facts/Item.html`
         -   One fact, :html:`{fact}`: an icon if it has one, the label and the
             categories or the value. A rich text value is rendered as it is

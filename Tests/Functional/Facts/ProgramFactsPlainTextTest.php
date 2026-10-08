@@ -154,7 +154,7 @@ final class ProgramFactsPlainTextTest extends AbstractAcademicProgramsTestCase
 
         $item = $this->factItem($this->renderPlace($url), 'prerequisites');
 
-        $this->assertStringContainsString('<span class="ace-value ace-richtext ce-bodytext">', $item);
+        $this->assertStringContainsString('<span class="ace-value ce-bodytext">', $item);
         $this->assertStringContainsString('<p>Good <strong>maths</strong></p>', $item);
     }
 
@@ -197,7 +197,7 @@ final class ProgramFactsPlainTextTest extends AbstractAcademicProgramsTestCase
      */
     private function factsList(string $content): string
     {
-        $this->assertSame(1, preg_match('#<ul class="ace-facts[ "].*?</ul>#s', $content, $matches), 'No facts list is rendered.');
+        $this->assertSame(1, preg_match('#<ul class="ace-list ace-attributes">.*?</ul>#s', $content, $matches), 'No facts list is rendered.');
         return $matches[0];
     }
 

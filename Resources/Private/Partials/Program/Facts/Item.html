@@ -19,18 +19,20 @@
 </f:comment>
 
 <li
-    class="ace-item {f:if(condition: itemClass, then: '{itemClass}')}"
+    class="ace-list-item ace-attribute"
     data-academic-programs-fact="{fact.identifier}"
 >
     <f:if condition="{fact.iconIdentifier}">
         <span class="ace-icon"><ab:icon identifier="{fact.iconIdentifier}" /></span>
     </f:if>
 
-    <b class="ace-label">{f:translate(key: fact.labelKey, extensionName: 'AcademicPrograms') -> ct:categoryTypeTitle(group: 'programs', identifier: fact.identifier)}:</b>
+    <b class="ace-label">
+        {f:translate(key: fact.labelKey, extensionName: 'AcademicPrograms') -> ct:categoryTypeTitle(group: 'programs', identifier: fact.identifier)}:
+    </b>
 
     <f:if condition="{fact.isRichText}">
         <f:then>
-            <span class="ace-value ace-richtext ce-bodytext">
+            <span class="ace-value ce-bodytext">
                 {fact.value -> f:format.raw()}
             </span>
         </f:then>
