@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace FGTCLB\AcademicPrograms\Domain\Repository;
 
+use FGTCLB\AcademicBase\Persistence\HiddenRecordsFetcher;
 use FGTCLB\AcademicPrograms\Domain\Model\Dto\ProgramDemand;
 use FGTCLB\AcademicPrograms\Domain\Model\Program;
 use FGTCLB\AcademicPrograms\Enumeration\PageTypes;
@@ -20,6 +21,8 @@ class ProgramRepository extends Repository
 {
     private CategoryRepository $categoryRepository;
 
+    private HiddenRecordsFetcher $hiddenRecordsFetcher;
+
     /**
      * Method injection keeps the constructor of the Extbase repository, which project
      * subclasses may call, unchanged.
@@ -27,6 +30,15 @@ class ProgramRepository extends Repository
     final public function injectCategoryRepository(CategoryRepository $categoryRepository): void
     {
         $this->categoryRepository = $categoryRepository;
+    }
+
+    /**
+     * Method injection keeps the constructor of the Extbase repository, which project
+     * subclasses may call, unchanged.
+     */
+    final public function injectHiddenRecordsFetcher(HiddenRecordsFetcher $hiddenRecordsFetcher): void
+    {
+        $this->hiddenRecordsFetcher = $hiddenRecordsFetcher;
     }
 
     /**
@@ -83,6 +95,6 @@ class ProgramRepository extends Repository
                 'uid' => QueryInterface::ORDER_ASCENDING,
             ]
         );
-        return $query->execute();
+        return $this->hiddenRecordsFetcher->execute($query);
     }
 }

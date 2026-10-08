@@ -1,0 +1,22 @@
+"pages",
+,"uid","pid","doktype","deleted","hidden","sys_language_uid","l10n_parent","l18n_cfg","slug","title","abstract","credit_points","starttime","endtime"
+,1,0,1,0,0,0,0,0,"/","Site Root","",0,0,0
+,2,1,1,0,0,0,0,0,"/home","Home (EN)","",0,0,0
+,10,1,20,0,0,0,0,0,"/applied-physics","Applied Physics","",180,0,0
+,11,1,20,0,1,0,0,0,"/molecular-chemistry","Molecular Chemistry","",120,0,0
+,102,1,1,0,0,1,2,0,"/home","Startseite (DE)","",0,0,0
+,110,1,20,0,0,1,10,0,"/angewandte-physik","Angewandte Physik","",180,0,0
+,111,1,20,0,1,1,11,0,"/molekulare-chemie","Molekulare Chemie","",120,0,0
+,12,1,20,0,1,0,0,0,"/untranslated-biology","Untranslated Biology","",90,0,0
+,13,1,20,0,0,0,0,0,"/mixed-visible-default","Mixed Visible Default","",0,0,0
+,113,1,20,0,1,1,13,0,"/gemischt-verborgene-uebersetzung","Gemischt Verborgene Uebersetzung","",0,0,0
+,14,1,20,0,1,0,0,0,"/mixed-hidden-default","Mixed Hidden Default","",0,0,0
+,114,1,20,0,0,1,14,0,"/gemischt-sichtbare-uebersetzung","Gemischt Sichtbare Uebersetzung","",0,0,0
+,15,1,20,0,0,0,0,0,"/scheduled-default-record","Scheduled Default Record","",0,2145916800,0
+,115,1,20,0,0,1,15,0,"/geplante-uebersetzung","Geplante Uebersetzung","",0,0,0
+,16,1,20,0,0,0,0,0,"/expired-default-record","Expired Default Record","",0,0,946684800
+,116,1,20,0,0,1,16,0,"/abgelaufene-uebersetzung","Abgelaufene Uebersetzung","",0,0,0
+"tt_content",
+,"uid","pid","deleted","hidden","sys_language_uid","l18n_parent","CType","header","pages","recursive","pi_flexform"
+,1,2,0,0,0,0,"academicprograms_programlist","","",0,"<?xml version=""1.0"" encoding=""utf-8"" standalone=""yes"" ?><T3FlexForms><data><sheet index=""sDEF""><language index=""lDEF""><field index=""settings.hideFilter""><value index=""vDEF"">1</value></field><field index=""settings.hideSorting""><value index=""vDEF"">1</value></field><field index=""settings.sorting""><value index=""vDEF"">title asc</value></field><field index=""settings.categories""><value index=""vDEF"">0</value></field><field index=""settings.showHiddenRecords""><value index=""vDEF"">1</value></field></language></sheet></data></T3FlexForms>"
+,11,2,0,0,1,1,"academicprograms_programlist","","",0,"<?xml version=""1.0"" encoding=""utf-8"" standalone=""yes"" ?><T3FlexForms><data><sheet index=""sDEF""><language index=""lDEF""><field index=""settings.hideFilter""><value index=""vDEF"">1</value></field><field index=""settings.hideSorting""><value index=""vDEF"">1</value></field><field index=""settings.sorting""><value index=""vDEF"">title asc</value></field><field index=""settings.categories""><value index=""vDEF"">0</value></field><field index=""settings.showHiddenRecords""><value index=""vDEF"">1</value></field></language></sheet></data></T3FlexForms>"
