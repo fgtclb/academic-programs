@@ -66,8 +66,10 @@ final class ProgramFinderFieldsTest extends AbstractAcademicProgramsTestCase
 
     /**
      * The preselection is a category field whose uids the FlexForm stores inline - no MM
-     * table, which a FlexForm does not support - and it offers typed categories of the
-     * default language only, like the default categories of the list.
+     * table, which a FlexForm does not support - and it offers the categories of the
+     * `programs` group, and their ancestors, of the default language only, like the
+     * default categories of the list (ACE-876). The marker is resolved when the data
+     * structure is parsed, see `CategoryTreeTypeGroupTest` for the tree it yields.
      */
     #[Test]
     public function thePreselectionIsAnInlineListOfTypedCategories(): void
@@ -78,7 +80,10 @@ final class ProgramFinderFieldsTest extends AbstractAcademicProgramsTestCase
         $this->assertSame('sys_category', $field['foreign_table'] ?? null);
         $this->assertSame('oneToMany', $field['relationship'] ?? null);
         $this->assertArrayNotHasKey('MM', $field);
-        $this->assertStringContainsString("{#sys_category}.{#type} != ''", (string)($field['foreign_table_where'] ?? ''));
+        $where = (string)($field['foreign_table_where'] ?? '');
+        $this->assertStringStartsWith('AND {#sys_category}.{#uid} IN (WITH RECURSIVE ', $where);
+        $this->assertStringContainsString("'degree'", $where);
+        $this->assertStringContainsString('AND {#sys_category}.{#sys_language_uid} IN (-1, 0)', $where);
     }
 
     /**

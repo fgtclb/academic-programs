@@ -84,7 +84,7 @@
                     <default>0</default>
                     <relationship>oneToMany</relationship>
                     <foreign_table>sys_category</foreign_table>
-                    <foreign_table_where>AND {#sys_category}.{#type} != '' AND {#sys_category}.{#sys_language_uid} IN (-1, 0)</foreign_table_where>
+                    <foreign_table_where>AND {#sys_category}.{#uid} IN (###CATEGORY_TYPE_GROUP:programs###) AND {#sys_category}.{#sys_language_uid} IN (-1, 0)</foreign_table_where>
                     <maxitems>9999</maxitems>
                     <MM>sys_category_record_mm</MM>
                     <MM_match_fields>
