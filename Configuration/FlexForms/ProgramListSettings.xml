@@ -78,7 +78,7 @@
             </settings.sorting>
             <settings.categories>
                 <label>LLL:EXT:academic_programs/Resources/Private/Language/locallang_be.xlf:flexform.categories.label</label>
-                <description>LLL:EXT:academic_programs/Resources/Private/Language/locallang_be.xlf:flexform.category.description</description>
+                <description>LLL:EXT:academic_programs/Resources/Private/Language/locallang_be.xlf:flexform.categories.description</description>
                 <config>
                     <type>category</type>
                     <default>0</default>
