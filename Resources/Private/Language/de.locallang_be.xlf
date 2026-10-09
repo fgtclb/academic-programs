@@ -139,28 +139,28 @@
         <target>Akademisch</target>
       </trans-unit>
       <trans-unit id="plugin.program_list.title">
-        <source>Program List</source>
-        <target>Programmliste</target>
+        <source>Course List</source>
+        <target>Studiengang Liste</target>
       </trans-unit>
       <trans-unit id="plugin.program_list.description">
-        <source>Display a sortable and filterable list of academic programs.</source>
-        <target>Zeigt eine sortierbare und filterbare Liste von akademischen Programmen an.</target>
+        <source>Degree programme overview page with sorting and filtering by category</source>
+        <target>Studiengang-Übersichtsseite mit Sortierung und Filterung nach Kategorien</target>
       </trans-unit>
       <trans-unit id="plugin.program_details.title">
-        <source>Program Details</source>
-        <target>Programmdetails</target>
+        <source>Course Data</source>
+        <target>Studiengang Daten</target>
       </trans-unit>
       <trans-unit id="plugin.program_details.description">
-        <source>Displays the details of an academic program</source>
-        <target>Zeigt die Details eines akademischen Programms an.</target>
+        <source>Displays the key details and categories of a degree programme</source>
+        <target>Zeigt die Kerndaten und Kategorien eines Studiengangs an</target>
       </trans-unit>
       <trans-unit id="plugin.program_finder.title">
-        <source>Program Finder</source>
-        <target>Programmfinder</target>
+        <source>Course Finder</source>
+        <target>Studiengang Finder</target>
       </trans-unit>
       <trans-unit id="plugin.program_finder.description">
-        <source>A compact form of category selects that opens a program list with the selection applied.</source>
-        <target>Ein kompaktes Formular mit Kategorieauswahlen, das eine Programmliste mit dieser Auswahl gefiltert öffnet.</target>
+        <source>Degree programme finder with filters for qualification and area of interest</source>
+        <target>Studiengang-Finder mit Filter für Abschluss und Interesse</target>
       </trans-unit>
 
       <!-- Doktype -->

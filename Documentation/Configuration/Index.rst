@@ -34,11 +34,11 @@ the backend offers, not how much TypoScript is loaded.
     *   -   Set
         -   Delivers
     *   -   `fgtclb/academic-programs-program-list`
-        -   The :guilabel:`Program List` content element.
+        -   The :guilabel:`Course List` content element.
     *   -   `fgtclb/academic-programs-program-details`
-        -   The :guilabel:`Program Details` content element.
+        -   The :guilabel:`Course Data` content element.
     *   -   `fgtclb/academic-programs-program-finder`
-        -   The :guilabel:`Program Finder` content element, see
+        -   The :guilabel:`Course Finder` content element, see
             :ref:`program-finder`.
     *   -   `fgtclb/academic-programs`
         -   Everything above. This is the set to use unless you deliberately
@@ -271,7 +271,7 @@ back to another one.
 
 Templates reach both values as :html:`{program.applicationLink}` and
 :html:`{program.applicationLinkLabel}`, on the program page and in a list item
-of the :guilabel:`Program List`. The label is empty where the editor left it
+of the :guilabel:`Course List`. The label is empty where the editor left it
 empty. The default list item does not render the link. An override of
 :file:`Program/Item.html` renders the partial of the program page, which needs
 nothing but the program, and gets the same button with the same rules:
@@ -290,8 +290,8 @@ the button of the program page and of every list item that renders it.
 The facts of a program
 ======================
 
-The program page, the :guilabel:`Program Details` content element and each
-card of the :guilabel:`Program List` show facts about a program: its
+The program page, the :guilabel:`Course Data` content element and each
+card of the :guilabel:`Course List` show facts about a program: its
 categories per category type, and the program fields credit points, job
 profile, performance scope and prerequisites. Two settings decide which facts
 a place shows and in which order:
@@ -304,11 +304,11 @@ a place shows and in which order:
         -   Facts of
     *   -   :typoscript:`plugin.tx_academicprograms.facts.fields`
         -   empty
-        -   the program page and the :guilabel:`Program Details` content
+        -   the program page and the :guilabel:`Course Data` content
             element
     *   -   :typoscript:`plugin.tx_academicprograms.card.fields`
         -   `degree`
-        -   each card of the :guilabel:`Program List`
+        -   each card of the :guilabel:`Course List`
 
 Both are site settings of the aggregate set `fgtclb/academic-programs` and
 constants of the same name for a site on the static templates, like the
@@ -488,8 +488,8 @@ type as well:
         -   Applies to
     *   -   :typoscript:`plugin.tx_academicprograms.facts.mostSpecificOnly`
         -   `false`
-        -   the program page, the :guilabel:`Program Details` content element
-            and each card of the :guilabel:`Program List`
+        -   the program page, the :guilabel:`Course Data` content element
+            and each card of the :guilabel:`Course List`
 
 ..  code-block:: yaml
     :caption: config/sites/my-site/settings.yaml
@@ -515,7 +515,7 @@ above.
 The filters of the program list
 ===============================
 
-The filter form of the :guilabel:`Program List` offers one select per category
+The filter form of the :guilabel:`Course List` offers one select per category
 type of the group `programs`. Which types it offers, and in which order, is set
 in two places:
 
@@ -524,7 +524,7 @@ in two places:
 
     *   -   Where
         -   Applies to
-    *   -   Field :guilabel:`Filter types` of the :guilabel:`Program List`
+    *   -   Field :guilabel:`Filter types` of the :guilabel:`Course List`
             content element, tab :guilabel:`Configuration`
         -   That element. The editor picks the types and orders them.
     *   -   Site setting / constant
@@ -579,7 +579,7 @@ have no effect. To use them, pass :html:`filterTypes` on in a template that
 renders the partial. A project that overrides the partial itself and still
 loops :html:`{categories.allCategoriesByType}` keeps its own list as well.
 
-The :guilabel:`Program Finder` reads the same setting when its own field is
+The :guilabel:`Course Finder` reads the same setting when its own field is
 empty, see :ref:`program-finder`.
 
 Two more settings, for the whole site, change how the list offers its filters:
@@ -661,7 +661,7 @@ Active filters, reset link and result count
 ===========================================
 
 Three switches add to the filter form of the
-:guilabel:`Program List`, for the whole site. All
+:guilabel:`Course List`, for the whole site. All
 three are off by default.
 
 ..  list-table::
@@ -734,7 +734,7 @@ Updating the list without a reload
 ==================================
 
 When a visitor changes a filter or the sorting of the
-:guilabel:`Program List`, the list updates in place: the results, the filter
+:guilabel:`Course List`, the list updates in place: the results, the filter
 form, the active filters and the result count are replaced by the ones of the
 filtered list, without reloading the page. There is no setting for it.
 
@@ -849,7 +849,7 @@ category. A visitor who filters by "Bachelor" does not find a program that
 carries only "Bachelor of Science", and the filter offers "Bachelor" as a
 disabled option as long as no listed program carries it.
 
-The field :guilabel:`Include subcategories` of the :guilabel:`Program List`
+The field :guilabel:`Include subcategories` of the :guilabel:`Course List`
 content element, tab :guilabel:`Configuration`, off by default, changes both:
 
 *   A selected category finds every program that carries the category itself
@@ -876,7 +876,7 @@ category, "Bachelor of Science" rather than "Bachelor of Science" and
 "Bachelor". The parent no longer has to be assigned for the filter, and no
 longer shows up in the facts of the program.
 
-The :guilabel:`Program Finder` has the same field for the options it offers,
+The :guilabel:`Course Finder` has the same field for the options it offers,
 see :ref:`program-finder`. The finder does not decide which programs are
 found, the list on its target page does. Switch the field on in both elements.
 
@@ -891,7 +891,7 @@ found, the list on its target page does. Switch the field on in both elements.
 The program finder
 ==================
 
-The :guilabel:`Program Finder` content element is a compact entry into a
+The :guilabel:`Course Finder` content element is a compact entry into a
 program list, for a home page hero for example: a few selects and a button that
 open the list page with the selection applied.
 
@@ -910,7 +910,7 @@ name. Its settings, tab :guilabel:`Configuration`:
     *   -   Field
         -   Meaning
     *   -   :guilabel:`Program list page`
-        -   Required. The page whose :guilabel:`Program List` the finder opens.
+        -   Required. The page whose :guilabel:`Course List` the finder opens.
     *   -   :guilabel:`Filter types`
         -   One select per chosen category type, in the chosen order, as the
             field of the same name of the list. Empty: the site setting
@@ -1077,8 +1077,8 @@ Category tree root
 ==================
 
 Editors pick the categories of a program page, the :guilabel:`Default
-categories` of the :guilabel:`Program List` and the :guilabel:`Preselected
-categories` of the :guilabel:`Program Finder` from a category tree. By default
+categories` of the :guilabel:`Course List` and the :guilabel:`Preselected
+categories` of the :guilabel:`Course Finder` from a category tree. By default
 that is the whole category tree of the installation, although the program
 categories are usually one branch of it.
 
@@ -1197,8 +1197,8 @@ program pages again, and the free ratio preselected on an image without a crop.
 The header of the content elements
 ==================================
 
-The header and the subheader an editor enters on a :guilabel:`Program List`,
-:guilabel:`Program Details` or :guilabel:`Program Finder` content element are
+The header and the subheader an editor enters on a :guilabel:`Course List`,
+:guilabel:`Course Data` or :guilabel:`Course Finder` content element are
 rendered by the content element layout of the site, as for any other content
 element. The layouts of :guilabel:`EXT:fluid_styled_content` and of the
 bootstrap package do that, and the plugins render no header of their own.
@@ -1281,11 +1281,11 @@ Edit the :sql:`sys_template` record of the site root and add the entry to
     *   -   Entry
         -   Delivers
     *   -   :guilabel:`Academic Programs: Program List (academic_programs)`
-        -   The TypoScript of the :guilabel:`Program List` content element.
+        -   The TypoScript of the :guilabel:`Course List` content element.
     *   -   :guilabel:`Academic Programs: Program Details (academic_programs)`
-        -   The same for :guilabel:`Program Details`.
+        -   The same for :guilabel:`Course Data`.
     *   -   :guilabel:`Academic Programs: Program Finder (academic_programs)`
-        -   The same for :guilabel:`Program Finder`.
+        -   The same for :guilabel:`Course Finder`.
     *   -   :guilabel:`Academic Programs: All components (academic_programs)`
         -   Every component this extension ships, in one entry.
     *   -   :guilabel:`Academic Programs: Shared plugin settings and page
@@ -1310,12 +1310,12 @@ Edit the page record of the site root, tab :guilabel:`Resources`, field
     *   -   Entry
         -   Delivers
     *   -   :guilabel:`Academic Programs: Program List (academic_programs)`
-        -   Makes the :guilabel:`Program List` content element selectable, and
+        -   Makes the :guilabel:`Course List` content element selectable, and
             configures its entry in the new content element wizard.
     *   -   :guilabel:`Academic Programs: Program Details (academic_programs)`
-        -   The same for :guilabel:`Program Details`.
+        -   The same for :guilabel:`Course Data`.
     *   -   :guilabel:`Academic Programs: Program Finder (academic_programs)`
-        -   The same for :guilabel:`Program Finder`.
+        -   The same for :guilabel:`Course Finder`.
     *   -   :guilabel:`Academic Programs: All components (academic_programs)`
         -   Every component this extension ships, in one entry.
 

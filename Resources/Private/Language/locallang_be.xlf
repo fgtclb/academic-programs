@@ -108,22 +108,22 @@
         <source>Academic</source>
       </trans-unit>
       <trans-unit id="plugin.program_list.title">
-        <source>Program List</source>
+        <source>Course List</source>
       </trans-unit>
       <trans-unit id="plugin.program_list.description">
-        <source>Display a sortable and filterable list of academic programs.</source>
+        <source>Degree programme overview page with sorting and filtering by category</source>
       </trans-unit>
       <trans-unit id="plugin.program_details.title">
-        <source>Program Details</source>
+        <source>Course Data</source>
       </trans-unit>
       <trans-unit id="plugin.program_details.description">
-        <source>Displays the details of an academic program</source>
+        <source>Displays the key details and categories of a degree programme</source>
       </trans-unit>
       <trans-unit id="plugin.program_finder.title">
-        <source>Program Finder</source>
+        <source>Course Finder</source>
       </trans-unit>
       <trans-unit id="plugin.program_finder.description">
-        <source>A compact form of category selects that opens a program list with the selection applied.</source>
+        <source>Degree programme finder with filters for qualification and area of interest</source>
       </trans-unit>
 
       <!-- Doktype -->

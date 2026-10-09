@@ -5,7 +5,7 @@
 Route enhancers
 ===============
 
-This extension ships a route enhancer for the :guilabel:`Program List` in
+This extension ships a route enhancer for the :guilabel:`Course List` in
 :file:`Configuration/Routes/List.yaml`. It turns the category filter and the
 sorting of the list into path segments in the language of the site:
 

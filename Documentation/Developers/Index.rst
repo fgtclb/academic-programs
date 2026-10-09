@@ -254,7 +254,7 @@ given:
     }
 
 The event reaches the program page template only. The
-:guilabel:`Program Details` content element reads the program model instead,
+:guilabel:`Course Data` content element reads the program model instead,
 and the plugin view event is the way to change what it renders.
 
 Nothing changes in an installation that has no listener: without one, both

@@ -33,11 +33,11 @@ under its language key, :typoscript:`de` for German.
 
     *   - Content element
         - Path
-    *   - :guilabel:`Program List` (:typoscript:`academicprograms_programlist`)
+    *   - :guilabel:`Course List` (:typoscript:`academicprograms_programlist`)
         - :typoscript:`plugin.tx_academicprograms_programlist._LOCAL_LANG`
-    *   - :guilabel:`Program Details` (:typoscript:`academicprograms_programdetails`)
+    *   - :guilabel:`Course Data` (:typoscript:`academicprograms_programdetails`)
         - :typoscript:`plugin.tx_academicprograms_programdetails._LOCAL_LANG`
-    *   - :guilabel:`Program Finder` (:typoscript:`academicprograms_programfinder`)
+    *   - :guilabel:`Course Finder` (:typoscript:`academicprograms_programfinder`)
         - :typoscript:`plugin.tx_academicprograms_programfinder._LOCAL_LANG`
 
 The page template of a program page is not rendered by a plugin: a site sets
