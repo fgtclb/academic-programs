@@ -25,10 +25,12 @@
     `Program/SortingAndFilters.html` that predates the module, which is why this template
     loads the module too. The partials of the form load it as well, for a list template
     without the region, and the asset collector loads it once. There a change submits the
-    form and reloads the page, as before.
+    form and reloads the page, as before. Each of them registers it only while
+    `settings.assets.js` is on: an installation that brings its own script switches it off,
+    and the form then works through its submit button.
 </f:comment>
 
-<f:if condition="!{settings.hideSorting} || !{settings.hideFilter}">
+<f:if condition="{settings.assets.js} && (!{settings.hideSorting} || !{settings.hideFilter})">
     <f:asset.module identifier="@fgtclb/academic-programs/frontend/program-list.js" />
 </f:if>
 

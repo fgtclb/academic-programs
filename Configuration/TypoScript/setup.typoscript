@@ -36,6 +36,12 @@ plugin.tx_academicprograms {
     # which plugin settings do not carry the way the settings of `lib.contentElement` do.
     renderContentElementHeader = {$plugin.tx_academicprograms.renderContentElementHeader}
     defaultHeaderType = {$styles.content.defaultHeaderType}
+
+    # Whether the list and the finder load their scripts, see "constants.typoscript". The
+    # templates and partials check it where they register a module, and nowhere else.
+    assets {
+      js = {$plugin.tx_academicprograms.assets.js}
+    }
   }
 
   # A list or finder element that leaves the field "Filter types" empty keeps the

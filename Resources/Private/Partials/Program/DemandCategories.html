@@ -22,7 +22,9 @@
     `Program/SortingAndFilters.html` predates the module, it is the only file that does, and
     a change of a select then submits the form as the inline handler did before.
 </f:comment>
-<f:asset.module identifier="@fgtclb/academic-programs/frontend/program-list.js" />
+<f:if condition="{settings.assets.js}">
+    <f:asset.module identifier="@fgtclb/academic-programs/frontend/program-list.js" />
+</f:if>
 
 <f:if condition="{filterTypes}">
     <f:then>

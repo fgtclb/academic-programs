@@ -1,0 +1,2 @@
+# The scripts of the program list and finder switched off, as an integrator who brings their own does.
+plugin.tx_academicprograms.assets.js = 0

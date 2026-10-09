@@ -1329,6 +1329,61 @@ Edit the page record of the site root, tab :guilabel:`Resources`, field
 
 The setting is inherited by every page below the one it is set on.
 
+..  _configuration-javascript:
+
+Load the script or bring your own
+=================================
+
+Two content elements of this extension load a module on the page that carries
+them: the :guilabel:`Program List`
+:js:`@fgtclb/academic-programs/frontend/program-list.js`, which updates the
+list in place, see :ref:`program-list-in-place`, and the
+:guilabel:`Program Finder`
+:js:`@fgtclb/academic-programs/frontend/program-finder.js`, which narrows the
+options in the browser, see :ref:`program-finder-narrowing`. The program
+details and the program page load no script.
+
+Both are switched off together, per site, for an installation that brings its
+own:
+
+..  list-table::
+    :header-rows: 1
+
+    *   -   Site setting and constant
+        -   Default
+        -   Off means
+    *   -   :yaml:`plugin.tx_academicprograms.assets.js`
+        -   :yaml:`true`
+        -   The page loads neither module.
+
+With the site set, it is a site setting of `fgtclb/academic-programs`, like
+every other setting of this extension:
+
+..  code-block:: yaml
+    :caption: config/sites/my-site/settings.yaml
+
+    plugin.tx_academicprograms.assets.js: false
+
+With the static template, it is the TypoScript constant of the same name:
+
+..  code-block:: typoscript
+    :caption: Constants of the root sys_template record
+
+    plugin.tx_academicprograms.assets.js = 0
+
+**Both elements keep working without a script.** The filter form of the list
+is submitted with its button and the page reloads with the filtered list, and
+the finder submits to the list without narrowing its options first. A script of
+your own finds the parts of both by the data attributes the two sections above
+name.
+
+The list template and the three partials of its form,
+:file:`Program/SortingAndFilters.html`, :file:`Program/DemandSorting.html` and
+:file:`Program/DemandCategories.html`, each register the list module and each
+check the switch. A project that overrides one of them keeps whatever its copy
+loads, until it wraps its own :html:`<f:asset.module>` in
+:html:`<f:if condition="{settings.assets.js}">`.
+
 ..  _one-mechanism-per-site:
 
 Do not combine both
@@ -1342,8 +1397,9 @@ the extension ships a default for back to that default. For this extension that
 is the :typoscript:`plugin.tx_academicprograms` constants block: the three Fluid
 root paths, the page layout and the list page of the program page, the two
 facts lists, the three filter settings of the program list and the program
-finder, and the :ref:`content element header
-<configuration-content-element-header>` switch.
+finder, the :ref:`content element header
+<configuration-content-element-header>` switch and the
+:ref:`script switch <configuration-javascript>`.
 
 Nothing else is damaged: the :guilabel:`Constants` and :guilabel:`Setup` fields
 of the :sql:`sys_template` record, the page TSconfig of a page and the page

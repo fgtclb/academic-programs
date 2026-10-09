@@ -97,3 +97,9 @@ settings:
     category: academic.programs
     type: bool
     default: false
+  plugin.tx_academicprograms.assets.js:
+    label: 'Program list and finder | Load the scripts'
+    description: 'Off for an installation that brings its own script. Both elements keep working without one: the list reloads the page on a filter change submitted with its button, and the finder submits to the list without narrowing its options first.'
+    category: academic.programs
+    type: bool
+    default: true
