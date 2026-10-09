@@ -34,30 +34,42 @@ const option = (value: string, label: string, state: { selected?: boolean; disab
   `<option value="${value}"${state.selected ? ' selected="selected"' : ""}${state.disabled ? ' disabled="disabled"' : ""}>${label}</option>`;
 
 const finderMarkup = (fixture: FinderFixture = {}): string =>
-  '<form class="academic-programs-finder" action="/programs" method="post"' +
+  '<div class="academic-programs-finder">' +
+  '<form class="ace-form" action="/programs" method="post"' +
   ` data-academic-programs-finder-programs='${JSON.stringify(fixture.programs ?? PROGRAMS)}'` +
   ' data-academic-programs-finder-count-one="Show %d program"' +
   ' data-academic-programs-finder-count-other="Show %d programs">' +
-  '<select name="tx_academicprograms_programlist[demand][filterCollection][degree]"' +
-  ' data-academic-programs-finder-select="" class="form-select">' +
+  '<div class="ace-filters"><div class="row">' +
+  '<div class="col-12 col-md"><div class="ace-filter">' +
+  '<label class="ace-label" for="academic-programs-finder-degree-1">Degree</label>' +
+  '<select id="academic-programs-finder-degree-1" name="tx_academicprograms_programlist[demand][filterCollection][degree]"' +
+  ' data-academic-programs-finder-select="" class="ace-control">' +
   option("", "All options") +
   option("1", "Bachelor of Science", { selected: fixture.degree === "1" }) +
   option("2", "Master of Science", { selected: fixture.degree === "2" }) +
   option("3", "Diploma", { disabled: true }) +
   option("8", "Doctorate", { disabled: true }) +
   "</select>" +
-  '<select name="tx_academicprograms_programlist[demand][filterCollection][topic]"' +
-  ' data-academic-programs-finder-select="" class="form-select">' +
+  "</div></div>" +
+  '<div class="col-12 col-md"><div class="ace-filter">' +
+  '<label class="ace-label" for="academic-programs-finder-topic-1">Topic</label>' +
+  '<select id="academic-programs-finder-topic-1" name="tx_academicprograms_programlist[demand][filterCollection][topic]"' +
+  ' data-academic-programs-finder-select="" class="ace-control">' +
   option("", "All options") +
   option("4", "Engineering", { selected: fixture.topic === "4" }) +
   option("5", "Life sciences", { selected: fixture.topic === "5" }) +
   "</select>" +
+  "</div></div>" +
   (fixture.extraSelect ?? "") +
+  '<div class="col-12 col-lg-4">' +
   '<button type="submit" class="btn btn-primary">' +
-  "<span data-academic-programs-finder-count>Show programs</span>" +
+  '<span class="ace-count" data-academic-programs-finder-count>Show programs</span>' +
   "</button>" +
-  '<p class="visually-hidden" role="status" aria-live="polite" data-academic-programs-finder-status></p>' +
-  "</form>";
+  "</div>" +
+  "</div></div>" +
+  '<p class="ace-status visually-hidden" role="status" aria-live="polite" data-academic-programs-finder-status></p>' +
+  "</form>" +
+  "</div>";
 
 /**
  * Puts the markup in the document and starts the module on it. The import

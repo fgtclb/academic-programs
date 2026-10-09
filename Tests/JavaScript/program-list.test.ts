@@ -58,7 +58,7 @@ const option = (value: string, label: string, selected: boolean): string =>
 /** A select of the filter partials: marked, or with the inline handler of an override from before. */
 const select = (property: string, id: string, options: string, inlineHandlers: boolean): string =>
   `<select${inlineHandlers ? ' onchange="this.form.submit()"' : " data-academic-programs-list-select"} id="${id}"` +
-  ` class="form-select" name="${NAMESPACE}[demand][${property}]">${options}</select>`;
+  ` class="ace-control ace-select" name="${NAMESPACE}[demand][${property}]">${options}</select>`;
 
 const formMarkup = (fixture: ListFixture): string => {
   const degree = fixture.degree ?? "";
@@ -68,21 +68,21 @@ const formMarkup = (fixture: ListFixture): string => {
   const before = fixture.formPartialFromBefore ?? false;
 
   return (
-    `<form action="${ACTION}" method="post" name="demand" class="academic-programs-filtersorting"` +
+    `<form action="${ACTION}" method="post" name="demand" class="ace-form"` +
     `${before ? "" : " data-academic-programs-list-form"}>` +
     `<input type="hidden" name="${NAMESPACE}[__referrer][@extension]" value="AcademicPrograms" />` +
-    '<div class="row">' +
-    '<div class="col-12 col-md-6 col-lg-4 col-xl-3">' +
-    '<label for="sortingField" class="form-label">Sort by</label>' +
+    '<div class="ace-filters"><div class="row">' +
+    '<div class="col-12 col-md-6 col-lg-4 col-xl-3"><div class="ace-filter ace-field ace-select-wrap">' +
+    '<label for="sortingField" class="ace-label">Sort by</label>' +
     select(
       "sortingField",
       "sortingField",
       option("title", "Title", true) + option("credit_points", "Credit points", false),
       inlineSorting,
     ) +
-    "</div>" +
-    '<div class="col-12 col-md-6 col-lg-4 col-xl-3">' +
-    '<label for="degree" class="form-label">Degree</label>' +
+    "</div></div>" +
+    '<div class="col-12 col-md-6 col-lg-4 col-xl-3"><div class="ace-filter ace-field ace-select-wrap">' +
+    '<label class="ace-label" for="degree">Degree</label>' +
     select(
       "filterCollection][degree",
       "degree",
@@ -91,35 +91,42 @@ const formMarkup = (fixture: ListFixture): string => {
         option("2", "Master of Science", degree === "2"),
       inline,
     ) +
-    "</div>" +
-    `<details class="col-12 academic-programs-more-filters"${programType !== "" ? " open" : ""}>` +
-    "<summary>More filters</summary>" +
-    '<div class="row"><div class="col-12 col-md-6 col-lg-4 col-xl-3">' +
-    '<label for="program_type" class="form-label">Type of program</label>' +
+    "</div></div>" +
+    '<div class="col-12">' +
+    `<details class="ace-more"${programType !== "" ? " open" : ""}>` +
+    '<summary class="ace-toggle">More filters</summary>' +
+    '<div class="row"><div class="col-12 col-md-6 col-lg-4 col-xl-3"><div class="ace-filter ace-field ace-select-wrap">' +
+    '<label class="ace-label" for="program_type">Type of program</label>' +
     select(
       "filterCollection][program_type",
       "program_type",
       option("", "All options", programType === "") + option("3", "Full-time", programType === "3"),
       inline,
     ) +
-    "</div></div>" +
+    "</div></div></div>" +
     "</details>" +
+    "</div>" +
     (before
       ? ""
-      : '<div class="col-12 col-md-6 col-lg-4 col-xl-3 align-self-end" data-academic-programs-list-submit>' +
+      : '<div class="col-12 col-md-6 col-lg-4 col-xl-3" data-academic-programs-list-submit>' +
         '<button type="submit" class="btn btn-primary">Show programs</button>' +
         "</div>") +
-    "</div>" +
+    "</div></div>" +
     "</form>"
   );
 };
 
 const itemsMarkup = (degree: string): string =>
-  '<div class="row academic-programs-itemlist">' +
+  '<div class="ace-itemlist"><div class="row">' +
   (PROGRAMS[degree] ?? [])
-    .map((title): string => `<div class="col-12 col-md-6 col-lg-4 col-xl-3"><h3 class="program">${title}</h3></div>`)
+    .map(
+      (title): string =>
+        '<div class="col-12 col-md-6 col-lg-4 col-xl-3"><article class="ace-item"><div class="ace-item-content">' +
+        `<header class="ace-header"><h3 class="ace-title"><a href="#">${title}</a></h3></header>` +
+        "</div></article></div>",
+    )
     .join("") +
-  "</div>";
+  "</div></div>";
 
 const listMarkup = (fixture: ListFixture = {}): string => {
   const degree = fixture.degree ?? "";
@@ -132,8 +139,8 @@ const listMarkup = (fixture: ListFixture = {}): string => {
     ' data-academic-programs-list-count-other="%d programs found">' +
     (fixture.withoutContentRegion === true
       ? content
-      : `<div data-academic-programs-list-content data-academic-programs-list-total="${count}">${content}</div>`) +
-    '<p class="visually-hidden" role="status" aria-live="polite" data-academic-programs-list-status></p>' +
+      : `<div class="ace-content" data-academic-programs-list-content data-academic-programs-list-total="${count}">${content}</div>`) +
+    '<p class="ace-status visually-hidden" role="status" aria-live="polite" data-academic-programs-list-status></p>' +
     "</div>"
   );
 };
@@ -177,7 +184,7 @@ const field = (name: string, uid = "10"): HTMLSelectElement => {
 };
 
 const programs = (uid = "10"): string[] =>
-  Array.from(list(uid).querySelectorAll(".program")).map((element): string => element.textContent ?? "");
+  Array.from(list(uid).querySelectorAll(".ace-item .ace-title")).map((element): string => element.textContent ?? "");
 
 const status = (uid = "10"): string => list(uid).querySelector("[data-academic-programs-list-status]")?.textContent ?? "";
 
