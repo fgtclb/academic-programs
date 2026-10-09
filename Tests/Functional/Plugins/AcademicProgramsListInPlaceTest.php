@@ -89,6 +89,7 @@ final class AcademicProgramsListInPlaceTest extends AbstractAcademicProgramsTest
         $this->assertTrue($form->hasAttribute('data-academic-programs-list-form'));
         $button = $this->singleElement($xpath, './/*[@data-academic-programs-list-submit]//button', $form);
         $this->assertSame('submit', $button->getAttribute('type'));
+        $this->assertSame('btn btn-primary', $button->getAttribute('class'));
         $this->assertSame('Show programs', trim($button->textContent));
         // Sorting field and direction, degree and program type, each marked for an override
         // of the list template that lacks the region.
@@ -102,6 +103,8 @@ final class AcademicProgramsListInPlaceTest extends AbstractAcademicProgramsTest
         $this->assertSame('status', $status->getAttribute('role'));
         $this->assertSame('polite', $status->getAttribute('aria-live'));
         $this->assertSame('', $status->textContent);
+        // Read out, never shown: the class of Bootstrap hides it on screen.
+        $this->assertSame('ace-status visually-hidden', $status->getAttribute('class'));
 
         $this->assertSame(0, $this->countElements($xpath, '//*[@onchange]'), 'The list still carries an inline event handler.');
 

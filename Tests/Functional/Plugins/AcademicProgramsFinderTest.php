@@ -376,6 +376,10 @@ final class AcademicProgramsFinderTest extends AbstractAcademicProgramsTestCase
         $this->assertInstanceOf(\DOMNodeList::class, $statuses);
         $this->assertCount(1, $statuses);
         $this->assertSame('', (string)$statuses->item(0)?->textContent);
+        // Read out, never shown: the class of Bootstrap hides it on screen.
+        $status = $statuses->item(0);
+        $this->assertInstanceOf(\DOMElement::class, $status);
+        $this->assertSame('ace-status visually-hidden', $status->getAttribute('class'));
         $this->assertSame(1, preg_match('#<script type="importmap"[^>]*>(.*?)</script>#s', $content, $matches), 'The page has no import map.');
         /** @var array{imports?: array<string, string>} $importMap */
         $importMap = json_decode($matches[1], true, 512, JSON_THROW_ON_ERROR);
@@ -612,6 +616,9 @@ final class AcademicProgramsFinderTest extends AbstractAcademicProgramsTestCase
         $this->assertInstanceOf(\DOMNodeList::class, $buttons);
         $this->assertCount(1, $buttons);
         $this->assertSame('Show programs', trim((string)$buttons->item(0)?->textContent));
+        $button = $buttons->item(0);
+        $this->assertInstanceOf(\DOMElement::class, $button);
+        $this->assertSame('btn btn-primary', $button->getAttribute('class'));
     }
 
     /**

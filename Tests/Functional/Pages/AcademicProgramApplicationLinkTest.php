@@ -33,10 +33,10 @@ final class AcademicProgramApplicationLinkTest extends AbstractAcademicProgramsT
     ];
 
     /**
-     * The link, a button the page renders below the header. The other link of the page is
-     * the one back to the list.
+     * The link, a button the page renders below the header, told from the link back to
+     * the list by its own class.
      */
-    private const APPLICATION_LINK = "//*[contains(concat(' ', normalize-space(@class), ' '), ' academic-programs-page ')]/a[contains(concat(' ', normalize-space(@class), ' '), ' btn ')]";
+    private const APPLICATION_LINK = "//*[contains(concat(' ', normalize-space(@class), ' '), ' academic-programs-page ')]/a[contains(concat(' ', normalize-space(@class), ' '), ' ace-apply ')]";
 
     protected function setUp(): void
     {
@@ -143,7 +143,7 @@ final class AcademicProgramApplicationLinkTest extends AbstractAcademicProgramsT
         $this->assertSame('/apply', $link->getAttribute('href'));
         $this->assertSame('_blank', $link->getAttribute('target'));
         $this->assertSame('Apply here', $link->getAttribute('title'));
-        $this->assertStringContainsString('btn btn-primary', $link->getAttribute('class'));
+        $this->assertSame('btn btn-primary ace-apply', $link->getAttribute('class'));
         $this->assertSame('<b>Apply</b> & enrol', trim($link->textContent));
         $this->assertSame(0, $link->getElementsByTagName('b')->length);
     }

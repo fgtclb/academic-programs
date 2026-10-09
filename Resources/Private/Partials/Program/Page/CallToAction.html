@@ -11,8 +11,8 @@
 
     A sibling of the header rather than part of it, so a project that replaces
     "Program/Page/Header" keeps the link. It needs "program" alone, so a list item
-    renders it as well, which is why its class is a block of its own rather than an
-    element of "academic-programs-detail".
+    renders it as well. It keeps the button classes of Bootstrap, and "ace-apply"
+    tells it from the link back to the list and from other buttons.
 </f:comment>
 
 <f:if condition="{program.applicationLink}">
@@ -31,7 +31,7 @@
             <f:variable name="applicationLabel" value="{program.applicationLinkLabel}" />
         </f:if>
 
-        <f:link.typolink parameter="{program.applicationLink}" class="btn btn-primary">
+        <f:link.typolink parameter="{program.applicationLink}" class="btn btn-primary ace-apply">
             {applicationLabel}
         </f:link.typolink>
     </f:if>
