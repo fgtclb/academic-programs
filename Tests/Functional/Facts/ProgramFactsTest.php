@@ -438,7 +438,7 @@ final class ProgramFactsTest extends AbstractAcademicProgramsTestCase
             $this->assertStringContainsString('<span class="ace-value">', $this->factItem($card, $identifier));
             $this->assertStringNotContainsString('ce-bodytext', $this->factItem($card, $identifier));
         }
-        $this->assertStringNotContainsString('class=""', $this->factsList($card));
+        $this->assertStringNotContainsString('class=""', $card);
     }
 
     private function assertOnlyRichTextFactsAreMarked(string $content): void
@@ -458,16 +458,7 @@ final class ProgramFactsTest extends AbstractAcademicProgramsTestCase
             $this->assertStringContainsString('<span class="ace-value">', $item);
             $this->assertStringNotContainsString('ce-bodytext', $item);
         }
-        $this->assertStringNotContainsString('class=""', $this->factsList($content));
-    }
-
-    /**
-     * The facts list, from its opening tag to its end.
-     */
-    private function factsList(string $content): string
-    {
-        $this->assertSame(1, preg_match('#<ul class="ace-list ace-attributes">.*?</ul>#s', $content, $matches), 'No facts list is rendered.');
-        return $matches[0];
+        $this->assertStringNotContainsString('class=""', $content);
     }
 
     /**

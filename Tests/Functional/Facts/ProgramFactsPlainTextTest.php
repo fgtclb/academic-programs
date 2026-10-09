@@ -172,7 +172,7 @@ final class ProgramFactsPlainTextTest extends AbstractAcademicProgramsTestCase
             $this->assertStringContainsString($value, $item);
             $this->assertStringNotContainsString('ce-bodytext', $item);
         }
-        $this->assertStringNotContainsString('class=""', $this->factsList($content));
+        $this->assertStringNotContainsString('class=""', $content);
     }
 
     /**
@@ -190,15 +190,6 @@ final class ProgramFactsPlainTextTest extends AbstractAcademicProgramsTestCase
             }
         }
         $this->fail('The list renders no card of "Applied Physics".');
-    }
-
-    /**
-     * The facts list, from its opening tag to its end.
-     */
-    private function factsList(string $content): string
-    {
-        $this->assertSame(1, preg_match('#<ul class="ace-list ace-attributes">.*?</ul>#s', $content, $matches), 'No facts list is rendered.');
-        return $matches[0];
     }
 
     /**
