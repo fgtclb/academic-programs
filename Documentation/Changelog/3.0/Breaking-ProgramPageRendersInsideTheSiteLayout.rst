@@ -50,8 +50,8 @@ Impact
     as before, without the frame of the site. A layout named by the setting
     that the site package does not have fails the page.
 *   A program with a subtitle shows it below the title, in an element with the
-    class `academic-programs-detail__subtitle`. The title is wrapped in an
-    element with the class `academic-programs-detail__header`.
+    class `ace-subtitle`. The title is wrapped in an element
+    :html:`<header class="ace-header">`.
 *   A path a project registered at a key between `50` and `100` now wins over
     the extension, where it lost before. A site package path at `100` is no
     longer replaced on program pages.

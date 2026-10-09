@@ -21,7 +21,8 @@ without a template of its own. See :ref:`Rich text facts <program-facts-rich-tex
 :file:`Program/Facts/Item.html` uses the new property :html:`{fact.isRichText}`:
 
 *   The value of a rich text fact is rendered as it is stored, as before, in an
-    element with the class :html:`ce-bodytext`, so the styles a site gives to
+    element with the class :html:`ce-bodytext` next to :html:`ace-value`, so
+    the styles a site gives to
     the body text of content elements apply to it.
 *   Any other value, the credit points and a text field without the editor, is
     escaped, and its line breaks are kept.
@@ -33,12 +34,12 @@ An override of the partial adopts the same branches:
 
     <f:if condition="{fact.isRichText}">
         <f:then>
-            <span class="ce-bodytext">
+            <span class="ace-value ce-bodytext">
                 {fact.value -> f:format.raw()}
             </span>
         </f:then>
         <f:else>
-            <span>
+            <span class="ace-value">
                 <f:if condition="{fact.isCategoryType}">
                     <f:then>
                         <f:for each="{fact.categories}" as="category" iteration="i">
@@ -58,7 +59,7 @@ Impact
 
 With the shipped configuration the facts show the same values as before. The
 value element of the three text facts gains the class :html:`ce-bodytext`, every
-other value element stays a plain :html:`<span>`.
+other value element carries :html:`ace-value` alone.
 
 A project that switched the rich text editor off for one of the three fields
 sees a change, and it is intended: the facts used to print the stored text as

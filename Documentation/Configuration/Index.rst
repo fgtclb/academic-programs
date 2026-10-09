@@ -191,8 +191,9 @@ on its own:
     *   -   Partial
         -   Renders
     *   -   :file:`Program/Page/Header.html`
-        -   The link back to the program list, the title and the subtitle, in
-            one element with the class `academic-programs-detail__header`.
+        -   The title and the subtitle, in one element
+            :html:`<header class="ace-header">`. The page template renders the
+            link back to the program list after it.
     *   -   :file:`Program/Page/Media.html`
         -   The first image of the page, through the shared image partial of
             :guilabel:`EXT:academic_base`.
@@ -262,7 +263,8 @@ with the page, so a translated program page can link a translated application
 form.
 
 The partial :file:`Program/Page/CallToAction.html` renders the link as a
-button right after the header and the image, before the facts. It is a partial
+button after the header, the image and the link back to the list, before the
+facts. It is a partial
 of its own rather than part of the header, so an override of
 :file:`Program/Page/Header.html` keeps the link. A link whose target cannot be
 linked, such as a hidden page, renders nothing, the label included. A page
@@ -281,9 +283,12 @@ nothing but the program, and gets the same button with the same rules:
 
     <f:render partial="Program/Page/CallToAction" arguments="{program: program}" />
 
-The button sits in an element with the class `academic-programs-application`
-in both places. An override of :file:`Program/Page/CallToAction.html` changes
-the button of the program page and of every list item that renders it.
+The link carries the classes `btn btn-primary ace-apply` in both places,
+without an element around it. The button classes of Bootstrap stay on
+purpose, and `ace-apply` tells the link from the link back to the list and
+from other buttons. An override of :file:`Program/Page/CallToAction.html`
+changes the button of the program page and of every list item that renders
+it.
 
 ..  _program-facts:
 
@@ -361,12 +366,13 @@ other partial of this extension:
     *   -   Partial
         -   Renders
     *   -   :file:`Program/Facts.html`
-        -   The list, :html:`<ul class="academic-programs-facts">`, from
+        -   The list, :html:`<ul class="ace-list ace-attributes">`, from
             :html:`{facts}`.
     *   -   :file:`Program/Facts/Item.html`
         -   One fact, :html:`{fact}`: an icon if it has one, the label and the
-            categories or the value. A rich text value is rendered as it is
-            stored, in an element with the class :html:`ce-bodytext`, any
+            categories or the value, in an element with the class
+            :html:`ace-value`. A rich text value is rendered as it is stored,
+            and its element gets the class :html:`ce-bodytext` as well, any
             other value escaped, with its line breaks kept.
 
 :html:`{fact}` carries :html:`identifier`, :html:`labelKey` (a key of
@@ -712,8 +718,9 @@ the same names, like the filter settings above.
     :file:`Program/ResultCount.html`. Both are rendered by
     :file:`Program/SortingAndFilters.html`, so a project that overrides that
     partial does not show them until it renders them as well. The partials use
-    the classes `academic-programs-active-filters` (with `__tags`, `__tag`, `__remove` and
-    `__reset`) and `academic-programs-result-count`, and bring no styles.
+    the classes `ace-active-filters` on the list of tags, `ace-active-filter` on
+    a tag, `ace-link` on the links and `ace-count` on the count, and bring no
+    styles.
 *   The reset link needs the variable :html:`{visitorSelection}`, which the list
     action assigns. A template that renders the partials with arguments of its
     own has to pass it on, or the list offers no reset link.
@@ -748,9 +755,10 @@ filtered list, without reloading the page. There is no setting for it.
 *   The select the visitor changed keeps the focus, and an opened
     :guilabel:`More filters` stays open.
 *   Screen reader users hear the number of programs found after an update,
-    through a visually hidden element with the role `status`. It reads the
-    labels :xml:`list.resultCount.singular` and :xml:`list.resultCount.plural`,
-    and loading the page announces nothing. The element is hidden by the class
+    through a visually hidden element with the role `status` and the classes
+    `ace-status visually-hidden`. It reads the labels
+    :xml:`list.resultCount.singular` and :xml:`list.resultCount.plural`, and
+    loading the page announces nothing. The element is hidden by the class
     `visually-hidden` of Bootstrap, so a site without Bootstrap provides that
     class itself.
 *   Without JavaScript the form shows a submit button with the label
@@ -994,11 +1002,12 @@ page does not reload.
 The button states how many programs the current selection finds, with the
 labels `finder.submit.count.one` and `finder.submit.count.other`, `%d` standing
 for the number. A changed number is announced to screen reader users by a
-visually hidden element with the role `status`: politely, so it waits for the
-current speech, and without moving the focus. Loading the page announces
-nothing. The element is hidden by the class `visually-hidden` of Bootstrap, so
-a site without Bootstrap provides that class itself, as it provides the other
-classes of the template.
+visually hidden element with the role `status` and the classes
+`ace-status visually-hidden`: politely, so it waits for the current speech,
+and without moving the focus. Loading the page announces nothing. The element
+is hidden by the class `visually-hidden` of Bootstrap, so a site without
+Bootstrap provides that class itself, as it provides the other Bootstrap
+classes the template keeps, the grid and the button.
 
 The number counts the programs of the finder's own storage, with its own
 :guilabel:`Include subcategories`. It agrees with the list on the target page

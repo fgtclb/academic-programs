@@ -38,6 +38,6 @@ Impact
     the request carried a list argument at all.
 *   A project that renders tags, a reset link or a count in its own templates
     can switch the settings on and remove its own markup. The classes are
-    `academic-programs-active-filters` and `academic-programs-result-count`, without styles.
+    `ace-active-filters` and `ace-count`, without styles.
 
 .. index:: Frontend, TypoScript, NotScanned

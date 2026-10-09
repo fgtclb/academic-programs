@@ -21,17 +21,19 @@ one fact -, from the field lists of :ref:`feature-1790345444`.
 
 The markup of the facts changes in all three places:
 
-*   The facts are one :html:`<ul class="academic-programs-facts">`. On the
+*   The facts are one :html:`<ul class="ace-list ace-attributes">`. On the
     program page the program fields are items of that list, after the
     categories, instead of a second :html:`<ul>`.
-*   Every fact is an :html:`<li class="academic-programs-facts__item
-    academic-programs-facts__item--{identifier}">`, the identifier being the
-    category type (`degree`) or the program field (`creditPoints`).
+*   Every fact is an :html:`<li class="ace-list-item ace-attribute"
+    data-academic-programs-fact="{identifier}">`, the identifier being the
+    category type (`degree`) or the program field (`creditPoints`). The label
+    is a :html:`<b class="ace-label">`, the value a
+    :html:`<span class="ace-value">`.
 *   Every label is followed by a colon, the program field labels included.
 *   The credit points fact renders the icon
     `tx-academicprograms-info-credit-points` before its label.
-*   The card keeps its classes: the list additionally carries
-    `list-group list-group-flush`, every item `list-group-item`.
+*   The list, its items, the label and the value carry the same classes in
+    all three places.
 
 Impact
 ======

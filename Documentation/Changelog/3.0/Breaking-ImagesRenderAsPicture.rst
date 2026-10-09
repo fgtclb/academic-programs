@@ -11,7 +11,7 @@ The program list item and the program page template render their image
 through the responsive image partial of `EXT:academic_base`,
 :file:`Partials/Academic/Image.html`, from 3.0 on. Every raster image is
 therefore a :html:`<picture>` with WebP sources and a fallback :html:`<img>`
-that carries the classes it carried before, and an SVG file is rendered as one
+with the class `ace-image` of the partial, and an SVG file is rendered as one
 :html:`<img>` of the original file without processing.
 
 The list item asks for the preset `card`, the page template for `detail`.

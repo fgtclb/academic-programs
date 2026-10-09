@@ -11,10 +11,10 @@ The :guilabel:`Program` tab of a program page offers two new fields: the
 :guilabel:`Application link`, a page or an external URL, and an optional
 :guilabel:`Label of the application link` of up to 60 characters.
 
-The program page renders the link as a button right after its header and
-image. Without a label, the link reads "Apply now" in the language of the
-page. Without a link, the page renders no button, and neither does a link to a
-page that cannot be linked, such as a hidden one.
+The program page renders the link as a button after its header, its image and
+the link back to the list. Without a label, the link reads "Apply now" in the
+language of the page. Without a link, the page renders no button, and neither
+does a link to a page that cannot be linked, such as a hidden one.
 
 The button is the new partial :file:`Program/Page/CallToAction.html`. Templates
 reach the values as :html:`{program.applicationLink}` and
