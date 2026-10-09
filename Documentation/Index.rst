@@ -59,6 +59,11 @@ for all academic extensions on the `extension points page of academic_base
 
         Configure the extension and its plugins for your installation.
 
+    ..  card:: :ref:`Styling <styling>`
+
+        The classes of the program plugins and the program page, and how a site
+        package styles them.
+
     ..  card:: :ref:`For developers <developers>`
 
         The events a project listens to instead of replacing classes.
@@ -80,6 +85,7 @@ for all academic extensions on the `extension points page of academic_base
     Introduction/Index
     Installation/Index
     Configuration/Index
+    Styling/Index
     Developers/Index
     KnownProblems/Index
     Changelog/Changelog-3
