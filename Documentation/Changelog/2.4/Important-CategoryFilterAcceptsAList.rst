@@ -66,4 +66,4 @@ References
     <https://github.com/fgtclb/typo3-category-types>`__ in EXT:category_types,
     the class the filter is read with, and where its behaviour is documented.
 
-.. index:: Frontend, PHP-API, NotScanned
+.. index:: Frontend, PHP-API, NotScanned, ext:academic_programs

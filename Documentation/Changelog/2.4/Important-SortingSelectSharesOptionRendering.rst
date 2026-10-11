@@ -33,4 +33,4 @@ References
     <https://github.com/fgtclb/typo3-category-types>`__ in EXT:category_types,
     the class writing the option markup, and where the change is documented.
 
-.. index:: Fluid, Frontend, PHP-API, NotScanned
+.. index:: Fluid, Frontend, PHP-API, NotScanned, ext:academic_programs

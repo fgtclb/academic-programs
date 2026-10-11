@@ -18,18 +18,18 @@ category that is assigned and switched off is listed with the hidden overlay.
 
 The extension shipped such a table before, as the partial
 :file:`Resources/Private/Backend/Partials/PageLayout/Doktype20.html`, registered
-for the backend templates in page TSconfig. No template of :php:`EXT:backend`
+for the backend templates in page TSconfig. No template of EXT:backend
 renders a :file:`PageLayout/Doktype*` partial, in no version of TYPO3. The table
 has therefore not been shown since March 2023, when the template override it was
 part of was turned into this partial.
 
 A second defect hid behind the first: the partial translated
-:php:`sys_category.academic_programs.{type}`, a key that exists in no XLF
+:xml:`sys_category.academic_programs.{type}`, a key that exists in no XLF
 file of this extension, so every type label would have been empty even if
 something had rendered it.
 
 The partial and the registration are removed. The summary is rendered by
-:php:`EXT:category_types` now, which this extension already depends on, and
+EXT:category_types now, which this extension already depends on, and
 asked for by an event listener on
 :php:`\TYPO3\CMS\Backend\Controller\Event\ModifyPageLayoutContentEvent`.
 
@@ -64,7 +64,7 @@ Impact
 Affected Installations
 ======================
 
-Every installation using this extension sees the summary after the update -
+Every installation using this extension sees the summary after the update,
 that is the point of the change. Only an installation that overrode the removed
 partial has anything to do, and what it had was not in effect.
 
@@ -83,8 +83,8 @@ References
     which explains why the :typoscript:`module.tx_backend.view` registration
     stopped existing and what replaced it.
 
-*   The chapter :guilabel:`For Developers` of :php:`EXT:category_types`,
+*   The chapter :guilabel:`For Developers` of EXT:category_types,
     section :guilabel:`The page module category summary`, describes the
     template, its variables and the override key.
 
-.. index:: Backend, TSConfig, Fluid, NotScanned
+.. index:: Backend, TSConfig, Fluid, NotScanned, ext:academic_programs
