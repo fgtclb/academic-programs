@@ -1,47 +1,20 @@
 ..  _breaking-programs-content-load-set-removed:
 
-==================================================================
-Breaking: Program pages render their content without a global path
-==================================================================
+===========================================================
+Breaking: The content load component of programs is removed
+===========================================================
 
 Description
 ===========
 
-The page template of the page type :guilabel:`Academic program` rendered the
-content elements of the page through the global TypoScript object
-:typoscript:`styles.content.getContent`. Only the opt-in set
-`fgtclb/academic-programs-content-load`, its static template and the static
-template :guilabel:`Academic Programs: All components`, which included it,
-defined it, for every page of the site. A site on the component sets or the
-component static templates without them got an exception on every program
-page:
+Since version 2.4 the page type :guilabel:`Academic program` renders its
+content from the variable :typoscript:`programContent` of its own page object,
+see :ref:`important-program-page-renders-its-own-content`. The component
+`fgtclb/academic-programs-content-load` stayed, and kept defining the global
+TypoScript object :typoscript:`styles.content.getContent` for every page of the
+site.
 
-..  code-block:: text
-
-    No Content Object definition found at TypoScript object path "styles.content.getContent"
-
-From 3.0 on, the page object of the program page type carries the content
-itself, as the variable :typoscript:`programContent`:
-
-..  code-block:: typoscript
-
-    [page && traverse(page, "doktype") == 20]
-      page.10.variables.programContent = CONTENT
-      page.10.variables.programContent {
-        table = tt_content
-        select {
-          orderBy = sorting, uid
-          where = {#colPos}=0
-        }
-      }
-    [END]
-
-The page template renders it as
-:html:`{programContent -> f:format.raw()}`, on a :typoscript:`FLUIDTEMPLATE`
-and on a :typoscript:`PAGEVIEW` page object alike. Every set of this extension
-delivers it.
-
-The site wide override is not needed any more, and it is removed:
+That site wide override is removed:
 
 *   the set `fgtclb/academic-programs-content-load`;
 *   the dependency on it in the aggregate set `fgtclb/academic-programs`;
@@ -100,12 +73,13 @@ Migration
     program page needs.
 *   Remove the static template from the :sql:`sys_template` record, and an
     :typoscript:`@import` of the removed file from a site package.
-*   A template override of :file:`AcademicProgram.html` renders
+*   A template override of :file:`AcademicProgram.html` that still renders
+    :typoscript:`styles.content.getContent` renders
     :html:`{programContent -> f:format.raw()}` instead of the
     :html:`f:cObject` call.
 *   Move a customisation of :typoscript:`styles.content.getContent` for
     program pages to :typoscript:`page.10.variables.programContent`, inside the
-    same condition - see :ref:`program-page-content`.
+    same condition, see :ref:`program-page-content`.
 *   A site package that renders :typoscript:`styles.content.getContent` in a
     template of its own defines the object itself, for example from
     :typoscript:`styles.content.get`, which TYPO3 defines on every site:
