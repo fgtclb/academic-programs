@@ -8,14 +8,14 @@ Description
 ===========
 
 A new boolean plugin option **Show hidden records**
-(:typoscript:`settings.showHiddenRecords`, checkbox/toggle, default off)
-was added to the following plugin:
+(:typoscript:`settings.showHiddenRecords`, a toggle, off by default) was added
+to the following plugin:
 
 * **Program List** (:php:`academicprograms_programlist`)
 
 When the option is enabled, the frontend program listing includes hidden
-(disabled) records, also for visitors without a preview of hidden records.
-Only the `hidden` enable column (`disabled`) is ignored; the `deleted`,
+(disabled) records, also for visitors without a preview of hidden records. Only
+the `hidden` enable column (`disabled`) is ignored. The `deleted`,
 `starttime`/`endtime` and `fe_group` restrictions stay in effect.
 
 On a translated page the listing shows the translation of a hidden record,

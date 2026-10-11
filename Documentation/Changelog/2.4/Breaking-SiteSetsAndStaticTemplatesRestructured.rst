@@ -25,8 +25,8 @@ deliver the extension per component instead of as one block:
     a one-line :file:`include_static_file.txt`.
 *   :file:`Configuration/TypoScript/ProgramList/` and
     :file:`Configuration/TypoScript/ProgramDetails/` are the two component
-    folders — what the static template registers *and* what the matching set
-    points its :yaml:`typoscript` key at.
+    folders. They are what the static template registers *and* what the matching
+    set points its :yaml:`typoscript` key at.
 *   :file:`Configuration/TSconfig/<Component>/page.tsconfig` holds the page
     TSconfig of a component and is what the page field :guilabel:`Page TSconfig`
     offers *and* what the set points its :yaml:`pagets` key at.
@@ -35,17 +35,16 @@ deliver the extension per component instead of as one block:
     installations that do not use site sets.
 
 The directory :file:`Configuration/TsConfig/` is now spelled
-:file:`Configuration/TSconfig/` — the spelling TYPO3 itself uses for the term,
-and the one this extension family settled on. Every path below it changed with
-it, and the migration table lists them.
+:file:`Configuration/TSconfig/`, the spelling TYPO3 itself uses for the term.
+Every path below it changed with it, and the migration table lists them.
 
 The content elements are now **hidden by default**. The always-included
-:file:`Configuration/page.tsconfig` removes both content element types from
-the selectable ones, and the page TSconfig of a component adds its own back — so
-an element is offered where it is wanted instead of on every page of every
-installation. The TCA registration itself did not move, so the frontend renders
-existing records exactly as before. Editing such a record in the backend is a
-different matter — read the warning below before upgrading.
+:file:`Configuration/page.tsconfig` removes both content element types from the
+selectable ones, and the page TSconfig of a component adds its own back. An
+element is therefore offered where it is wanted instead of on every page of
+every installation. The TCA registration itself did not move, so the frontend
+renders existing records exactly as before. Editing such a record in the backend
+needs care. Read the warning below before upgrading.
 
 The :typoscript:`styles.content.getContent` override that
 :file:`Configuration/TypoScript/setup.typoscript` used to import unconditionally
@@ -60,7 +59,7 @@ The page type :guilabel:`Academic program` (doktype 20) and its backend layout
 file that defines the layout moved from
 :file:`Configuration/TsConfig/Page/BackendLayouts/` to
 :file:`Configuration/TSconfig/BackendLayouts/`, where the sibling extensions of
-this family keep theirs; the identifier :sql:`pagets__AcademicProgram` a page
+this family keep theirs. The identifier :sql:`pagets__AcademicProgram` a page
 record stores is unchanged.
 
 Impact
@@ -89,9 +88,8 @@ page field :guilabel:`Page TSconfig`.
     adds for a stored value it does not know, and the stored value is dropped
     from the form data as well. The field :guilabel:`Type` therefore comes up
     with nothing selected, and **saving the record writes whatever the browser
-    preselected into** :sql:`CType` — the record silently becomes another
-    content element. The frontend keeps rendering it correctly until that
-    happens.
+    preselected into** :sql:`CType`. The record silently becomes another content
+    element. The frontend keeps rendering it correctly until that happens.
 
     Include the page TSconfig of the component on every page tree that holds
     such records, and do it before editing them.
@@ -106,32 +104,23 @@ renders it.
 The set :yaml:`fgtclb/academic-programs` keeps its name and keeps delivering
 everything, so a site configuration that depends on it needs no change.
 
-Site sets arrived in TYPO3 v13.1 and do nothing at all on TYPO3 v12: the core has
-no set API there and the folder :file:`Configuration/Sets/` is never read.
-Everything above about the static templates and the page field
-:guilabel:`Page TSconfig` therefore applies to both TYPO3 versions this extension
-supports, and everything about sets applies to TYPO3 v13 only. An installation on
-v12 has to add the page TSconfig entry described under :guilabel:`Migration`, and
-has no alternative to it.
+Site sets arrived in TYPO3 v13.1 and do nothing at all on TYPO3 v12: the core
+has no set API there and the folder :file:`Configuration/Sets/` is never read.
+Everything above about the static templates and the page field :guilabel:`Page
+TSconfig` therefore applies to both TYPO3 versions this extension supports, and
+everything about sets applies to TYPO3 v13 only. An installation on v12 has to
+add the page TSconfig entry described under :guilabel:`Migration`, and has no
+alternative to it.
 
-The duplicated backend template registration is gone
-====================================================
-
-This extension registered its :guilabel:`EXT:backend` template override twice,
-under two different keys and pointing at the same directory:
+The backend template override of this extension was registered twice, as
 :typoscript:`templates.typo3/cms-backend.1730990129` in
-:file:`Configuration/page.tsconfig` and
+:file:`Configuration/page.tsconfig` and as
 :typoscript:`templates.typo3/cms-backend.academic-programs` in
-:file:`Configuration/TsConfig/page.tsconfig`, which the first file globbed in.
-:php:`BackendViewFactory` does not deduplicate, so
-:file:`fgtclb/academic-programs:Resources/Private/Backend` was appended twice to
-every backend template, layout and partial root path on every page render.
-
-Only :typoscript:`templates.typo3/cms-backend.academic-programs` is left, in
-:file:`Configuration/page.tsconfig`, which is what the sibling extensions of this
-family use. Nothing an integrator configures changes with it — but an own site
-package that overrode the numeric key
-:typoscript:`templates.typo3/cms-backend.1730990129` has to be adjusted.
+:file:`Configuration/TsConfig/page.tsconfig`. Both registrations are gone,
+together with the partial they pointed at, which no template of the backend
+rendered. An own site package that overrode either key has nothing left to
+replace. The page module shows the categories of a program page through
+another template now, see :ref:`important-1789660802`.
 
 Affected Installations
 ======================
@@ -183,7 +172,7 @@ label:
     *   -   :guilabel:`Academic Programs Page Setup (academic_programs)`,
             stored as `EXT:academic_programs/Configuration/TypoScript/`
         -   :guilabel:`Academic Programs: Shared plugin settings and page
-            rendering (academic_programs)`, same stored value — or
+            rendering (academic_programs)`, same stored value, or
             :guilabel:`Academic Programs: All components (academic_programs)`,
             stored as `EXT:academic_programs/Configuration/TypoScript/Full`,
             which also carries the content load override.
@@ -195,10 +184,11 @@ the site root, tab :guilabel:`Resources`, field :guilabel:`Page TSconfig`:
 the content elements are not selectable any more, and existing records of them
 lose their :sql:`CType` when they are saved from the backend form.
 
-Sites that use the site set instead need no migration — but they must not use
-both mechanisms at once, see the :guilabel:`Configuration` chapter.
+Sites that use the site set instead need no migration. They must not use both
+mechanisms at once, see the :guilabel:`Configuration` chapter.
 
-A site configuration may name the new component sets instead of the aggregate:
+A site configuration on TYPO3 v13 may name the new component sets instead of
+the aggregate:
 
 ..  list-table::
     :header-rows: 1
@@ -213,7 +203,7 @@ A site configuration may name the new component sets instead of the aggregate:
         -   The :guilabel:`Program Details` content element only.
     *   -   `fgtclb/academic-programs-content-load`
         -   The :typoscript:`styles.content.getContent` override only. The
-            aggregate depends on it; name the component sets above without it to
+            aggregate depends on it. Name the component sets above without it to
             opt out.
 
 ..  index:: TypoScript, TSConfig, Backend, ext:academic_programs

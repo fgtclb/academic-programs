@@ -7,11 +7,11 @@ Important: List ordering ties are broken by uid
 Description
 ===========
 
-:php:`ProgramRepository::findByDemand()` orders by the sorting
-option the plugin demands — and by nothing else, so records equal in that
-ordering (two programs with the same title, for example) were returned in
-whatever relative order the database yielded. On PostgreSQL that is not the
-same list twice. The query now appends :sql:`uid` ascending as a tiebreaker.
+:php:`ProgramRepository::findByDemand()` ordered by the sorting option the
+plugin demands, and by nothing else. Records equal in that ordering (two
+programs with the same title, for example) were returned in whatever relative
+order the database yielded. On PostgreSQL that is not the same list twice. The
+query now appends :sql:`uid` ascending as a tiebreaker.
 
 Impact
 ======

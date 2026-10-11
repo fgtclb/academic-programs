@@ -10,8 +10,7 @@ Description
 This extension registers a page type with a backend layout and ships the page
 template for it in :file:`Resources/Private/Pages/`. Its TypoScript adds that
 directory to :typoscript:`page.10.templateRootPaths`, but it did not set
-:typoscript:`page.10.templateName` — the property that actually selects the
-file.
+:typoscript:`page.10.templateName`, the property that actually selects the file.
 
 A site package deriving the name from the backend layout therefore did not find
 it. :composer:`bk2k/bootstrap-package` does exactly that:
@@ -32,9 +31,10 @@ it. :composer:`bk2k/bootstrap-package` does exactly that:
 :typoscript:`case = uppercamelcase` is
 :php:`GeneralUtility::underscoredToUpperCamelCase()`, which lowercases the whole
 string before it camel cases it on underscores. The registered backend layout
-:typoscript:`pagets__AcademicProgram` therefore resolved to :file:`Academicprogram.html`, and
-the frontend ended in an :php:`InvalidTemplateResourceException` — in a
-production context a page whose body reads *Oops, an error occurred!*.
+:typoscript:`pagets__AcademicProgram` therefore resolved to
+:file:`Academicprogram.html`, and the frontend ended in an
+:php:`InvalidTemplateResourceException`. In a production context the page body
+read *Oops, an error occurred!*.
 
 The extension now sets the name itself, inside the page type condition it
 already uses:
@@ -48,7 +48,7 @@ already uses:
       }
     [END]
 
-The clear is not decoration. Bootstrap package assigns
+The property has to be cleared first. The Bootstrap package assigns
 :typoscript:`templateName.cObject`, and a cObject overwrites the plain value in
 :php:`ContentObjectRenderer::stdWrapValue()`, so assigning without clearing
 would change nothing.
@@ -61,7 +61,7 @@ name from the backend layout, where it previously did not render at all.
 
 Nothing changes for a site package that sets the name itself, as long as it does
 so after this extension's TypoScript, and nothing changes for a
-:typoscript:`PAGEVIEW` page object — that content object ignores
+:typoscript:`PAGEVIEW` page object on TYPO3 v13. That content object ignores
 :typoscript:`templateName` and resolves the file from :typoscript:`paths`, which
 is why that integration worked before and is unaffected now.
 
@@ -69,9 +69,9 @@ Affected Installations
 ======================
 
 All installations of this extension that use a :typoscript:`FLUIDTEMPLATE` page
-object. An installation that shipped :file:`Academicprogram.html` in its own site
-package to work around this loses that override: the template of this extension
-is used instead. Clearing :typoscript:`page.10.templateName` after this
-extension's TypoScript restores it.
+object. An installation that shipped :file:`Academicprogram.html` in its own
+site package to work around this loses that override: the template of this
+extension is used instead. Clearing :typoscript:`page.10.templateName` after
+this extension's TypoScript restores it.
 
 .. index:: TypoScript, Frontend, ext:academic_programs
