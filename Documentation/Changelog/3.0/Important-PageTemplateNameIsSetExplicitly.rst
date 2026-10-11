@@ -1,4 +1,4 @@
-.. _important-1786968000:
+.. _important-1786968000-3-0:
 
 =====================================================================================
 Important: The page template name of the academic program page type is set explicitly

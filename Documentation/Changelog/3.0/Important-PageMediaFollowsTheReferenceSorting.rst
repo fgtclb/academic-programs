@@ -1,4 +1,4 @@
-.. _important-page-media-follows-the-reference-sorting:
+.. _important-page-media-follows-the-reference-sorting-3-0:
 
 ===================================================
 Important: Page media follows the reference sorting

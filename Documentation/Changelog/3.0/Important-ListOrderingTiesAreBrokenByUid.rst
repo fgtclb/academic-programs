@@ -1,4 +1,4 @@
-.. _important-list-ordering-ties-are-broken-by-uid:
+.. _important-list-ordering-ties-are-broken-by-uid-3-0:
 
 ===============================================
 Important: List ordering ties are broken by uid

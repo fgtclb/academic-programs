@@ -1,4 +1,4 @@
-.. _important-manual-order-can-be-reversed:
+.. _important-manual-order-can-be-reversed-3-0:
 
 =======================================
 Important: Manual order can be reversed

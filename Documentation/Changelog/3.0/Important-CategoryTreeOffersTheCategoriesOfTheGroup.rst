@@ -1,4 +1,4 @@
-..  _important-category-tree-offers-the-categories-of-the-group:
+..  _important-category-tree-offers-the-categories-of-the-group-3-0:
 
 ===============================================================
 Important: The category tree offers the categories of the group
