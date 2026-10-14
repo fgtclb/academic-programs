@@ -28,9 +28,21 @@ use TYPO3\CMS\Core\Resource\FileReference;
  * The collection follows `sorting_foreign` - the order the editor arranged the images
  * in - with `uid` settling ties, since ACE-491; before that the query carried no
  * `ORDER BY` and the order was whatever the DBMS returned.
+ *
+ * The method is deprecated since 2.4 and raises an `E_USER_DEPRECATED` on every call,
+ * the class goes in 3.0. Until then it is public API and stays pinned down here. Every
+ * call goes through `collection()`, which captures the notice and asserts it, because
+ * PHPUnit 10, installed on this branch for TYPO3 v12 and v13, has no
+ * `expectUserDeprecationMessage()`. The notice never reaches the error handler of
+ * PHPUnit, so the tests need no `#[IgnoreDeprecations]`, and any other deprecation
+ * still fails them under `failOnDeprecation`.
  */
 final class FileReferenceCollectionTest extends AbstractAcademicProgramsTestCase
 {
+    private const DEPRECATION_MESSAGE = 'FileReferenceCollection::getCollectionByPageIdAndField() of '
+        . 'academic_programs is deprecated since 2.4 and will be removed in 3.0. Use '
+        . 'FileRepository::findByRelation() of the TYPO3 core instead.';
+
     private const PAGE_WITH_MEDIA = 1;
     private const PAGE_WITHOUT_MEDIA = 2;
     private const PAGE_WITH_REMOVED_MEDIA = 3;
@@ -45,7 +57,7 @@ final class FileReferenceCollectionTest extends AbstractAcademicProgramsTestCase
     #[Test]
     public function countReportsTheNumberOfMatchingReferences(): void
     {
-        $collection = FileReferenceCollection::getCollectionByPageIdAndField(self::PAGE_WITH_MEDIA, 'media');
+        $collection = $this->collection(self::PAGE_WITH_MEDIA, 'media');
 
         $this->assertCount(2, $collection);
         $this->assertSame(2, $collection->count());
@@ -54,7 +66,7 @@ final class FileReferenceCollectionTest extends AbstractAcademicProgramsTestCase
     #[Test]
     public function everyMatchingReferenceIsPartOfTheCollection(): void
     {
-        $collection = FileReferenceCollection::getCollectionByPageIdAndField(self::PAGE_WITH_MEDIA, 'media');
+        $collection = $this->collection(self::PAGE_WITH_MEDIA, 'media');
 
         $this->assertSame([1, 2], $this->referenceUids($collection));
     }
@@ -68,7 +80,7 @@ final class FileReferenceCollectionTest extends AbstractAcademicProgramsTestCase
     public function referencesFollowTheOrderTheEditorArranged(): void
     {
         $uids = [];
-        foreach (FileReferenceCollection::getCollectionByPageIdAndField(self::PAGE_WITH_MEDIA, 'media') as $reference) {
+        foreach ($this->collection(self::PAGE_WITH_MEDIA, 'media') as $reference) {
             $uids[] = $reference->getUid();
         }
 
@@ -83,7 +95,7 @@ final class FileReferenceCollectionTest extends AbstractAcademicProgramsTestCase
     #[Test]
     public function eachReferencePointsAtItsOriginalFile(): void
     {
-        $collection = FileReferenceCollection::getCollectionByPageIdAndField(self::PAGE_WITH_MEDIA, 'media');
+        $collection = $this->collection(self::PAGE_WITH_MEDIA, 'media');
 
         $names = [];
         foreach ($collection as $reference) {
@@ -103,10 +115,10 @@ final class FileReferenceCollectionTest extends AbstractAcademicProgramsTestCase
     public function referencesOfAnotherFieldOfTheSamePageAreNotPartOfTheCollection(): void
     {
         $this->assertSame([1, 2], $this->referenceUids(
-            FileReferenceCollection::getCollectionByPageIdAndField(self::PAGE_WITH_MEDIA, 'media')
+            $this->collection(self::PAGE_WITH_MEDIA, 'media')
         ));
         $this->assertSame([3], $this->referenceUids(
-            FileReferenceCollection::getCollectionByPageIdAndField(self::PAGE_WITH_MEDIA, 'og_image')
+            $this->collection(self::PAGE_WITH_MEDIA, 'og_image')
         ));
     }
 
@@ -118,7 +130,7 @@ final class FileReferenceCollectionTest extends AbstractAcademicProgramsTestCase
     #[Test]
     public function referencesOfAnotherTableAreNotPartOfTheCollection(): void
     {
-        $collection = FileReferenceCollection::getCollectionByPageIdAndField(self::PAGE_WITH_MEDIA, 'media');
+        $collection = $this->collection(self::PAGE_WITH_MEDIA, 'media');
 
         $this->assertNotContains(4, $this->referenceUids($collection));
     }
@@ -126,7 +138,7 @@ final class FileReferenceCollectionTest extends AbstractAcademicProgramsTestCase
     #[Test]
     public function aFieldWithoutAnyReferenceYieldsAnEmptyCollection(): void
     {
-        $collection = FileReferenceCollection::getCollectionByPageIdAndField(self::PAGE_WITH_MEDIA, 'teaser_image');
+        $collection = $this->collection(self::PAGE_WITH_MEDIA, 'teaser_image');
 
         $this->assertCount(0, $collection);
         $this->assertSame([], $this->referenceUids($collection));
@@ -135,7 +147,7 @@ final class FileReferenceCollectionTest extends AbstractAcademicProgramsTestCase
     #[Test]
     public function anUnknownPageIdYieldsAnEmptyCollection(): void
     {
-        $collection = FileReferenceCollection::getCollectionByPageIdAndField(999, 'media');
+        $collection = $this->collection(999, 'media');
 
         $this->assertCount(0, $collection);
     }
@@ -143,7 +155,7 @@ final class FileReferenceCollectionTest extends AbstractAcademicProgramsTestCase
     #[Test]
     public function aPageWithoutAnyReferenceYieldsAnEmptyCollection(): void
     {
-        $collection = FileReferenceCollection::getCollectionByPageIdAndField(self::PAGE_WITHOUT_MEDIA, 'media');
+        $collection = $this->collection(self::PAGE_WITHOUT_MEDIA, 'media');
 
         $this->assertCount(0, $collection);
     }
@@ -157,7 +169,7 @@ final class FileReferenceCollectionTest extends AbstractAcademicProgramsTestCase
     #[Test]
     public function deletedAndHiddenReferencesAreNotPartOfTheCollection(): void
     {
-        $collection = FileReferenceCollection::getCollectionByPageIdAndField(self::PAGE_WITH_REMOVED_MEDIA, 'media');
+        $collection = $this->collection(self::PAGE_WITH_REMOVED_MEDIA, 'media');
 
         $this->assertCount(0, $collection);
     }
@@ -170,7 +182,7 @@ final class FileReferenceCollectionTest extends AbstractAcademicProgramsTestCase
     #[Test]
     public function anEmptyCollectionIsNotValidAndHasNoCurrentEntry(): void
     {
-        $collection = FileReferenceCollection::getCollectionByPageIdAndField(self::PAGE_WITHOUT_MEDIA, 'media');
+        $collection = $this->collection(self::PAGE_WITHOUT_MEDIA, 'media');
 
         $this->assertFalse($collection->valid());
         $this->assertFalse($collection->current());
@@ -191,7 +203,7 @@ final class FileReferenceCollectionTest extends AbstractAcademicProgramsTestCase
     #[Test]
     public function theCollectionCanBeIteratedMoreThanOnce(): void
     {
-        $collection = FileReferenceCollection::getCollectionByPageIdAndField(self::PAGE_WITH_MEDIA, 'media');
+        $collection = $this->collection(self::PAGE_WITH_MEDIA, 'media');
 
         $firstPass = $this->referenceUids($collection);
         $secondPass = $this->referenceUids($collection);
@@ -207,7 +219,7 @@ final class FileReferenceCollectionTest extends AbstractAcademicProgramsTestCase
     #[Test]
     public function iterationYieldsTheSequentialArrayPositionsAsKeys(): void
     {
-        $collection = FileReferenceCollection::getCollectionByPageIdAndField(self::PAGE_WITH_MEDIA, 'media');
+        $collection = $this->collection(self::PAGE_WITH_MEDIA, 'media');
 
         $this->assertSame([0, 1], array_keys(iterator_to_array($collection)));
     }
@@ -250,9 +262,36 @@ final class FileReferenceCollectionTest extends AbstractAcademicProgramsTestCase
     #[Test]
     public function referencesAreNotFilteredByLanguage(): void
     {
-        $collection = FileReferenceCollection::getCollectionByPageIdAndField(self::PAGE_WITH_TRANSLATED_MEDIA, 'media');
+        $collection = $this->collection(self::PAGE_WITH_TRANSLATED_MEDIA, 'media');
 
         $this->assertSame([7, 8], $this->referenceUids($collection));
+    }
+
+    /**
+     * Reads the collection and asserts that the call raised exactly the deprecation
+     * notice of the method. Only the notices of this one call are captured, so a
+     * deprecation raised anywhere else in a test still fails it.
+     */
+    private function collection(int $pageId, string $field): FileReferenceCollection
+    {
+        $messages = [];
+        set_error_handler(
+            static function (int $errno, string $errstr) use (&$messages): bool {
+                $messages[] = $errstr;
+                return true;
+            },
+            E_USER_DEPRECATED
+        );
+
+        try {
+            $collection = FileReferenceCollection::getCollectionByPageIdAndField($pageId, $field);
+        } finally {
+            restore_error_handler();
+        }
+
+        $this->assertSame([self::DEPRECATION_MESSAGE], $messages);
+
+        return $collection;
     }
 
     /**
@@ -271,7 +310,7 @@ final class FileReferenceCollectionTest extends AbstractAcademicProgramsTestCase
 
     private function referenceWithUid(int $uid): FileReference
     {
-        foreach (FileReferenceCollection::getCollectionByPageIdAndField(self::PAGE_WITH_MEDIA, 'media') as $reference) {
+        foreach ($this->collection(self::PAGE_WITH_MEDIA, 'media') as $reference) {
             if ($reference->getUid() === $uid) {
                 return $reference;
             }

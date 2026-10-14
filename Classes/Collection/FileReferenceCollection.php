@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace FGTCLB\AcademicPrograms\Collection;
 
-use Doctrine\DBAL\Driver\Exception;
 use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Database\Query\QueryBuilder;
@@ -14,6 +13,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * @implements \Iterator<int, FileReference>
+ * @deprecated since 2.4, will be removed in 3.0. Use {@see \TYPO3\CMS\Core\Resource\FileRepository::findByRelation()} instead.
  */
 final class FileReferenceCollection implements \Countable, \Iterator
 {
@@ -24,12 +24,18 @@ final class FileReferenceCollection implements \Countable, \Iterator
 
     /**
      * @throws FileDoesNotExistException
-     * @throws Exception
+     * @throws \Doctrine\DBAL\Exception
+     * @deprecated since 2.4, will be removed in 3.0. Use {@see \TYPO3\CMS\Core\Resource\FileRepository::findByRelation()} instead.
      */
     public static function getCollectionByPageIdAndField(
         int $pageId,
         string $field
     ): FileReferenceCollection {
+        trigger_error(
+            'FileReferenceCollection::getCollectionByPageIdAndField() of academic_programs is deprecated since 2.4 '
+            . 'and will be removed in 3.0. Use FileRepository::findByRelation() of the TYPO3 core instead.',
+            E_USER_DEPRECATED,
+        );
         $fileReferenceCollection = new self();
 
         $queryBuilder = self::buildQueryBuilder();
@@ -104,15 +110,11 @@ final class FileReferenceCollection implements \Countable, \Iterator
         reset($this->fileReferences);
     }
 
-    /**
-     * @param string $tableName
-     * @return QueryBuilder
-     */
-    private static function buildQueryBuilder(string $tableName = 'sys_file_reference'): QueryBuilder
+    private static function buildQueryBuilder(): QueryBuilder
     {
         /** @var ConnectionPool $connectionPool */
         $connectionPool = GeneralUtility::makeInstance(ConnectionPool::class);
-        $queryBuilder = $connectionPool->getQueryBuilderForTable($tableName);
+        $queryBuilder = $connectionPool->getQueryBuilderForTable('sys_file_reference');
         return $queryBuilder;
     }
 }
