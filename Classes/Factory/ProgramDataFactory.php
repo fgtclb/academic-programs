@@ -19,18 +19,19 @@ class ProgramDataFactory
     public function get(array $properties): ProgramData
     {
         $program = GeneralUtility::makeInstance(ProgramData::class);
-        $program->setPid((int)$properties['pid']);
-        $program->setUid((int)$properties['uid']);
-        $program->setDoktype((int)$properties['doktype']);
-        $program->setTitle((string)$properties['title']);
-        $program->setSubtitle((string)$properties['subtitle']);
-        $program->setAbstract((string)$properties['abstract']);
-        $program->setCreditPoints((int)$properties['credit_points']);
-        $program->setJobProfile((string)$properties['job_profile']);
-        $program->setPerformanceScope((string)$properties['performance_scope']);
-        $program->setPrerequisites((string)$properties['prerequisites']);
-        // Read with a fallback: code updated before the database compare meets a page
-        // record without these two columns.
+        // Read with a fallback: the data processor may be attached to a record that is no
+        // page, and code updated before the database compare meets a page record without
+        // the columns of this extension.
+        $program->setPid((int)($properties['pid'] ?? 0));
+        $program->setUid((int)($properties['uid'] ?? 0));
+        $program->setDoktype((int)($properties['doktype'] ?? 0));
+        $program->setTitle((string)($properties['title'] ?? ''));
+        $program->setSubtitle((string)($properties['subtitle'] ?? ''));
+        $program->setAbstract((string)($properties['abstract'] ?? ''));
+        $program->setCreditPoints((int)($properties['credit_points'] ?? 0));
+        $program->setJobProfile((string)($properties['job_profile'] ?? ''));
+        $program->setPerformanceScope((string)($properties['performance_scope'] ?? ''));
+        $program->setPrerequisites((string)($properties['prerequisites'] ?? ''));
         $program->setApplicationLink((string)($properties['application_link'] ?? ''));
         $program->setApplicationLinkLabel((string)($properties['application_link_label'] ?? ''));
 
