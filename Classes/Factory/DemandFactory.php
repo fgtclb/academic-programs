@@ -44,7 +44,7 @@ class DemandFactory
             if (isset($settings['categories'])
                 && (int)$settings['categories'] > 0
             ) {
-                $categoryCollection = $this->categoryRepository->getByDatabaseFields('programs', (int)$contentElementData['uid']);
+                $categoryCollection = $this->categoryRepository->getByDatabaseFields('programs', (int)($contentElementData['uid'] ?? 0));
             }
         } else {
             // Either use combined sorting or separate sorting field and direction

@@ -92,6 +92,30 @@ final class ProgramDataFactoryTest extends AbstractAcademicProgramsTestCase
     }
 
     /**
+     * The data processor hands over whatever record it is attached to, which an integrator
+     * may configure on something other than a page, and code deployed before the database
+     * compare meets a page record without the columns of this extension. A missing key
+     * maps to zero or an empty string rather than raising a PHP warning, which the Debug
+     * preset turns into an exception.
+     */
+    #[Test]
+    public function aRecordWithoutThePageColumnsMapsToEmptyValues(): void
+    {
+        $program = GeneralUtility::makeInstance(ProgramDataFactory::class)->get(['uid' => 7]);
+
+        $this->assertSame(7, $program->getUid());
+        $this->assertSame(0, $program->getPid());
+        $this->assertSame(0, $program->getDoktype());
+        $this->assertSame('', $program->getTitle());
+        $this->assertSame('', $program->getSubtitle());
+        $this->assertSame('', $program->getAbstract());
+        $this->assertSame(0, $program->getCreditPoints());
+        $this->assertSame('', $program->getJobProfile());
+        $this->assertSame('', $program->getPerformanceScope());
+        $this->assertSame('', $program->getPrerequisites());
+    }
+
+    /**
      * `ProgramData::getCategories()` looks the categories up by the uid the factory set,
      * which is what makes the mapped uid load bearing rather than decorative.
      */

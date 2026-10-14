@@ -75,6 +75,22 @@ final class DemandFactoryCategoryFilterTest extends AbstractAcademicProgramsTest
         $this->assertSame([], $this->filteredUids($demand));
     }
 
+    /**
+     * Without a submitted filter the `categories` setting takes the categories related to
+     * the content element. `listAction()` falls back to `[]` when there is no content
+     * object, so the setting can meet a record without a uid. It then finds no related
+     * category instead of raising a PHP warning, which the Debug preset turns into an
+     * exception.
+     */
+    #[Test]
+    public function aContentElementRecordWithoutUidGetsAnEmptyFilter(): void
+    {
+        $demand = $this->get(DemandFactory::class)->createDemandObject(null, ['categories' => '1'], []);
+
+        $this->assertNotNull($demand->getFilterCollection());
+        $this->assertSame([], $this->filteredUids($demand));
+    }
+
     private function createDemand(mixed $filterCollection): ProgramDemand
     {
         return $this->get(DemandFactory::class)->createDemandObject(
