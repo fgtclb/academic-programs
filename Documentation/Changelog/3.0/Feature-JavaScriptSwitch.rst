@@ -7,9 +7,9 @@ Feature: The scripts of the program list and finder can be switched off
 Description
 ===========
 
-The :guilabel:`Program List` registers the module
+The :guilabel:`Course List` registers the module
 :js:`@fgtclb/academic-programs/frontend/program-list.js`, from its template and
-from the three partials of its filter form, and the :guilabel:`Program Finder`
+from the three partials of its filter form, and the :guilabel:`Course Finder`
 registers :js:`@fgtclb/academic-programs/frontend/program-finder.js`. An
 installation that brings its own scripts had to override every one of those
 files to leave them out.

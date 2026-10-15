@@ -19,7 +19,7 @@ does a link to a page that cannot be linked, such as a hidden one.
 The button is the new partial :file:`Program/Page/CallToAction.html`. Templates
 reach the values as :html:`{program.applicationLink}` and
 :html:`{program.applicationLinkLabel}`, on the program page and in a list item
-of the :guilabel:`Program List`, whose default item does not render them. A
+of the :guilabel:`Course List`, whose default item does not render them. A
 list item of your own renders the same button with
 :html:`<f:render partial="Program/Page/CallToAction" arguments="{program: program}" />`.
 

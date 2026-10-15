@@ -8,8 +8,8 @@ Description
 ===========
 
 Editors picked the categories of a program page, the :guilabel:`Default
-categories` of the :guilabel:`Program List` and the :guilabel:`Preselected
-categories` of the :guilabel:`Program Finder` from the whole category tree of
+categories` of the :guilabel:`Course List` and the :guilabel:`Preselected
+categories` of the :guilabel:`Course Finder` from the whole category tree of
 the installation, although the program categories are usually one branch of
 it. Projects restricted the tree in their own TCA or page TSconfig, with a
 category uid that differs between the live and the development database.

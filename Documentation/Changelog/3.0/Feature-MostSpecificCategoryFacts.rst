@@ -26,8 +26,8 @@ of the same category type as well. With it switched on, the program above shows
 
 It is a site setting of the aggregate set `fgtclb/academic-programs` and a
 constant of the same name for a site on the static templates. It applies to
-the program page, the :guilabel:`Program Details` content element and each card
-of the :guilabel:`Program List`.
+the program page, the :guilabel:`Course Data` content element and each card
+of the :guilabel:`Course List`.
 
 Only the categories assigned to the program are compared. A level that is not
 assigned breaks the line: with "Bachelor" and a subcategory two levels below it

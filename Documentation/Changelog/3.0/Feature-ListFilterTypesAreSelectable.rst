@@ -7,7 +7,7 @@ Feature: Integrators choose the filters of the program list
 Description
 ===========
 
-The filter form of the :guilabel:`Program List` offered one select for every
+The filter form of the :guilabel:`Course List` offered one select for every
 category type of the group `programs` that had a category, always in the order
 the types are registered in. Offering fewer filters, or the same filters in
 another order, needed an override of the partial
@@ -20,7 +20,7 @@ Two places now decide it:
 
     *   -   Where
         -   Applies to
-    *   -   Field :guilabel:`Filter types` of the :guilabel:`Program List`
+    *   -   Field :guilabel:`Filter types` of the :guilabel:`Course List`
             content element, tab :guilabel:`Configuration`
         -   That element. The editor picks the category types and arranges
             them in the order the form offers them.

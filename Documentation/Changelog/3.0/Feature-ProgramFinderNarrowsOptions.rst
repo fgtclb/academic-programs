@@ -7,7 +7,7 @@ Feature: The program finder narrows its options in the browser
 Description
 ===========
 
-The :guilabel:`Program Finder` now offers only the combinations that find a
+The :guilabel:`Course Finder` now offers only the combinations that find a
 program. Once a visitor selects a degree, every topic no program of that degree
 carries is disabled, and it is enabled again as soon as the degree is cleared
 or changed. A category the editor preselected narrows the other selects as soon

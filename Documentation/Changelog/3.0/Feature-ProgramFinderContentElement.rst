@@ -7,7 +7,7 @@ Feature: A program finder content element
 Description
 ===========
 
-The new content element :guilabel:`Program Finder` is a compact entry into a
+The new content element :guilabel:`Course Finder` is a compact entry into a
 program list: one select per category type and a button, for a home page hero
 for example. Submitting it opens a program list page with the selection
 applied, and the list shows the selection in its own filter unless it hides
@@ -19,14 +19,14 @@ the filter.
     *   -   Field
         -   Meaning
     *   -   :guilabel:`Program list page`
-        -   Required. The page whose :guilabel:`Program List` the finder opens.
+        -   Required. The page whose :guilabel:`Course List` the finder opens.
     *   -   :guilabel:`Filter types`
         -   The selects, in their order. Empty: the site setting
             :typoscript:`plugin.tx_academicprograms.filter.categoryTypes` of
             the program list, then the degree and the topic.
     *   -   :guilabel:`Preselected categories`
-        -   Selected when the page loads, one per select; of two categories of
-            one type the one higher in the category tree.
+        -   Selected when the page loads, one per select. Of two categories of
+            one type, the one higher in the category tree.
 
 The options are the categories of the programs in the storage of the finder
 element, the ones no program there carries disabled. Point the finder at the

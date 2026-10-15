@@ -9,15 +9,15 @@ Description
 
 The partial :file:`Resources/Private/Partials/Program/Categories.html`
 rendered the categories of a program per category type, on the program page
-and in the :guilabel:`Program Details` content element. The program page added
+and in the :guilabel:`Course Data` content element. The program page added
 the program fields credit points, job profile, performance scope and
 prerequisites as a second list of its own, and the program card of the
-:guilabel:`Program List` rendered the degree with markup of its own.
+:guilabel:`Course List` rendered the degree with markup of its own.
 
 The partial is removed. The program page, the details content element and the
 program card render their facts through the new partials
-:file:`Program/Facts.html` - the list - and :file:`Program/Facts/Item.html` -
-one fact -, from the field lists of :ref:`feature-1790345444`.
+:file:`Program/Facts.html`, the list, and :file:`Program/Facts/Item.html`, one
+fact, from the field lists of :ref:`feature-1790345444`.
 
 The markup of the facts changes in all three places:
 
@@ -43,10 +43,10 @@ rendered: nothing of this extension renders that partial any more, and Fluid
 does not report an override that nobody renders.
 
 A project override of a template or partial that still renders
-:html:`<f:render partial="Program/Categories" />` - an override of
+:html:`<f:render partial="Program/Categories" />`, for example an override of
 :file:`Pages/AcademicProgram.html` or :file:`Templates/Details/Show.html` taken
-from an earlier version, for example - fails with an exception of Fluid that
-the partial cannot be found, unless the project ships that partial itself.
+from an earlier version, fails with an exception of Fluid that the partial
+cannot be found, unless the project ships that partial itself.
 
 Site CSS or JavaScript that addressed the facts through the old markup, a
 second list on the program page or a label without a colon has to follow the

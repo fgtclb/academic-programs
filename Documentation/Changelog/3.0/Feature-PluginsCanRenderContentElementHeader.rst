@@ -7,8 +7,8 @@ Feature: The plugins can render the content element header
 Description
 ===========
 
-The header and the subheader an editor enters on a :guilabel:`Program List`,
-:guilabel:`Program Details` or :guilabel:`Program Finder` content element are
+The header and the subheader an editor enters on a :guilabel:`Course List`,
+:guilabel:`Course Data` or :guilabel:`Course Finder` content element are
 rendered by the content element layout of the site, like those of any other
 content element. The layouts of :guilabel:`EXT:fluid_styled_content` and of the
 bootstrap package do that. A site package whose layout leaves the header out,

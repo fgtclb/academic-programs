@@ -7,7 +7,7 @@ Important: The route enhancer moved and translates its values
 Description
 ===========
 
-The route enhancer of the :guilabel:`Program List` moved from
+The route enhancer of the :guilabel:`Course List` moved from
 :file:`Configuration/Yaml/Routes.yaml` to
 :file:`Configuration/Routes/List.yaml` and maps the category filter as well
 (:ref:`feature-1791043404`). The former file stays and imports the new one, and

@@ -7,8 +7,8 @@ Feature: Program facts know whether they are rich text
 Description
 ===========
 
-The facts of a program, on the program page, in the :guilabel:`Program Details`
-content element and on the cards of the :guilabel:`Program List`, now know
+The facts of a program, on the program page, in the :guilabel:`Course Data`
+content element and on the cards of the :guilabel:`Course List`, now know
 whether the value of a program field is rich text. The job profile, the
 performance scope and the prerequisites are rich text while their field has the
 rich text editor on program pages, which it has as shipped.

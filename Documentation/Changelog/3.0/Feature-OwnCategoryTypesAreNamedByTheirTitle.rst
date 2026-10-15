@@ -32,12 +32,12 @@ path of one plugin, still wins. The shipped types keep their labels.
 
 It applies to
 
-*   the facts of the program page, of the :guilabel:`Program Details` content
-    element and of each card of the :guilabel:`Program List`,
+*   the facts of the program page, of the :guilabel:`Course Data` content
+    element and of each card of the :guilabel:`Course List`,
     :file:`Partials/Program/Facts/Item.html`;
-*   the filter selects of the :guilabel:`Program List`,
+*   the filter selects of the :guilabel:`Course List`,
     :file:`Partials/Program/DemandCategories.html`;
-*   the selects of the :guilabel:`Program Finder`,
+*   the selects of the :guilabel:`Course Finder`,
     :file:`Templates/Program/Finder.html`.
 
 See :ref:`configuration-labels`.

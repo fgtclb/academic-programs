@@ -7,8 +7,8 @@ Feature: Integrators choose the facts of a program
 Description
 ===========
 
-The program page, the :guilabel:`Program Details` content element and each
-card of the :guilabel:`Program List` show facts about a program: its
+The program page, the :guilabel:`Course Data` content element and each
+card of the :guilabel:`Course List` show facts about a program: its
 categories per category type, and the program fields credit points, job
 profile, performance scope and prerequisites. Which facts a place showed, and
 in which order, was fixed in its template, and credit points appeared on the
@@ -25,11 +25,11 @@ order:
         -   Facts of
     *   -   :typoscript:`plugin.tx_academicprograms.facts.fields`
         -   empty
-        -   the program page and the :guilabel:`Program Details` content
+        -   the program page and the :guilabel:`Course Data` content
             element
     *   -   :typoscript:`plugin.tx_academicprograms.card.fields`
         -   `degree`
-        -   each card of the :guilabel:`Program List`
+        -   each card of the :guilabel:`Course List`
 
 An item is the identifier of a category type of the group `programs`, for
 example `degree`, `standard_period` or `location`, or one of the program

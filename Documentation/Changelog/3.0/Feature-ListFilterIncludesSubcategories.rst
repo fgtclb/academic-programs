@@ -7,7 +7,7 @@ Feature: The program filter can include subcategories
 Description
 ===========
 
-A category selected in the filter of the :guilabel:`Program List`, or set in the
+A category selected in the filter of the :guilabel:`Course List`, or set in the
 :guilabel:`Default categories` of the element, found only the programs that
 carry that very category. A visitor who filtered by "Bachelor" did not find a
 program that carries only "Bachelor of Science", a subcategory of "Bachelor",
@@ -15,7 +15,7 @@ and the filter offered "Bachelor" as a disabled option unless some program
 carried it itself. Editors therefore assigned both levels, and projects hid the
 parent in the program output again.
 
-The :guilabel:`Program List` content element has a new field
+The :guilabel:`Course List` content element has a new field
 :guilabel:`Include subcategories`, tab :guilabel:`Configuration`, off by
 default. With it on:
 
@@ -28,7 +28,7 @@ default. With it on:
     its subcategories, and keeps it when the site hides options without
     results.
 
-The :guilabel:`Program Finder` has the same field, for the options it offers
+The :guilabel:`Course Finder` has the same field, for the options it offers
 and the categories it preselects.
 The list on its target page decides which programs are found, so the field is
 switched on in both elements.

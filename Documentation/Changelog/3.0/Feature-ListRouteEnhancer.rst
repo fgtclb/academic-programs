@@ -7,7 +7,7 @@ Feature: The route enhancer maps the filter
 Description
 ===========
 
-The route enhancer of the :guilabel:`Program List` maps the category filter
+The route enhancer of the :guilabel:`Course List` maps the category filter
 as well as the sorting, and translates the sorting values. It ships in
 :file:`Configuration/Routes/List.yaml`, next to the route files of the other
 academic extensions. A site that imports the file gets readable list URLs in

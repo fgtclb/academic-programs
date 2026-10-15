@@ -20,8 +20,8 @@ Every icon of this extension is now a Font Awesome Free solid icon, drawn in
 :php:`\FGTCLB\AcademicBase\Imaging\IconProvider\CurrentColorSvgIconProvider`,
 and each concept has a glyph that fits it (ACE-591). Icons that mean the same in
 every academic extension, degree, department, standard period and location,
-come from the shared icon set of :guilabel:`academic_base`. The licence and origin of every file of
-this extension are listed in
+come from the shared icon set of :guilabel:`academic_base`. The licence and
+origin of every file of this extension are listed in
 :file:`Resources/Public/Icons/LICENSE-font-awesome.txt`.
 
 The identifiers follow the scheme
@@ -131,17 +131,15 @@ The folder :file:`Resources/Public/Icons/CategoryTypes/` is removed, with
 :file:`Resources/Public/Icons/LICENSE-bootstrap-icons.txt`, which covered two of
 the removed drawings.
 
-The credit points fact of a program shows the icon
+The credit points fact of a program, new in 3.0, shows the icon
 ``tx-academicprograms-info-credit-points``. Only the frontend shows it, on the
 program page, in the program details content element and on the program card.
-It was registered in :file:`Configuration/Icons.php`, for the icon registry of
-the TYPO3 backend, and :file:`Partials/Program/Facts/Item.html` rendered it with
-``core:icon``. It is now registered in :file:`Configuration/FrontendIcons.php`,
-for the frontend icon registry of :guilabel:`academic_base`, and is no longer
-registered in :file:`Configuration/Icons.php`. The partial renders the icons of
-all facts with the ``ab:icon`` ViewHelper of :guilabel:`academic_base`, with the
-arguments it had. Identifier, file and icon provider of the credit points icon
-are unchanged (ACE-814).
+It is registered in :file:`Configuration/FrontendIcons.php`, for the frontend
+icon registry of :guilabel:`academic_base`, and not in
+:file:`Configuration/Icons.php`. The partial
+:file:`Partials/Program/Facts/Item.html`, new in 3.0 as well, renders the icons
+of all facts with the ``ab:icon`` ViewHelper of :guilabel:`academic_base`
+(ACE-814).
 
 The icons of the category type facts, ``category_types.programs.<type>``, come
 from the frontend icon registry now as well. :guilabel:`category_types`
@@ -169,27 +167,17 @@ program, under its unchanged identifier. How the provider and the markup of
 these icons changed is described in
 :ref:`breaking-programs-record-and-category-icons-follow-the-colour-scheme`.
 
-Two things change for the credit points icon, and neither shows an error:
+The credit points icon is not known to the icon registry of the backend. A
+replacement registered in the :file:`Configuration/Icons.php` of a site package
+is not read for it, and PHP or backend code that asks the :php:`IconFactory` of
+TYPO3 for ``tx-academicprograms-info-credit-points`` gets the not-found icon.
 
-*   A site package that replaced the credit points icon in its own
-    :file:`Configuration/Icons.php` sees the shipped drawing again in the
-    facts. The frontend icon registry does not read that file.
-*   An override of :file:`Partials/Program/Facts/Item.html` that still renders
-    the icons with ``core:icon`` shows TYPO3's not-found icon in place of the
-    credit points icon, because the icon registry of the backend no longer
-    knows the identifier. The category type icons keep rendering there, from
-    the backend registry, and miss a replacement the site registers for the
-    frontend only.
-
-PHP or backend code that asks the :php:`IconFactory` of TYPO3 for
-``tx-academicprograms-info-credit-points`` gets the not-found icon as well.
-
-The rendered markup of the fact icons is the same as before, the inlined
-drawing in its wrapper :html:`<span class="t3js-icon icon" data-identifier="…">`,
-so a site stylesheet needs no change. One case changes on purpose: a category
-type declared without an icon file made the partial fail with exception
-1440754980 of the bitmap icon provider of TYPO3, which the backend icon registry
-picks for an empty source. It now shows TYPO3's not-found placeholder.
+The fact icons render as the inlined drawing in the wrapper
+:html:`<span class="t3js-icon icon" data-identifier="…">`. A category type
+declared without an icon file made :file:`Program/Categories.html` of 2.x fail
+with exception 1440754980 of the bitmap icon provider of TYPO3, which the
+backend icon registry picks for an empty source. The facts show TYPO3's
+not-found placeholder for it instead.
 
 Affected Installations
 ======================
@@ -198,9 +186,8 @@ Installations that name ``academic-programs`` anywhere, select
 ``.icon-academic-programs`` in CSS, override that identifier, or reference a
 file below :file:`Resources/Public/Icons/CategoryTypes/` of this extension.
 
-Installations whose site package replaces the credit points icon, overrides
-:file:`Partials/Program/Facts/Item.html`, or renders
-``tx-academicprograms-info-credit-points`` in a template or PHP code of its own.
+Installations whose site package wants another drawing for the credit points
+icon.
 
 Migration
 =========
@@ -230,9 +217,9 @@ Migration
     without colours of its own. Use the core
     :php:`\TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider` for a drawing
     with fixed colours.
-#.  Move a replacement of the credit points icon from the
-    :file:`Configuration/Icons.php` of the site package to its
-    :file:`Configuration/FrontendIcons.php`. The file has the format of
+#.  Register a replacement of the credit points icon in the
+    :file:`Configuration/FrontendIcons.php` of the site package, not in its
+    :file:`Configuration/Icons.php`. The file has the format of
     :file:`Icons.php`. The site package has to depend on
     :guilabel:`academic_programs`, so its entry is read after the shipped one:
 
@@ -250,10 +237,6 @@ Migration
             ],
         ];
 
-#.  In an override of :file:`Partials/Program/Facts/Item.html`, replace
-    ``<core:icon`` with ``<ab:icon``, keep every argument, and declare the
-    namespace in the :html:`<html>` tag of the partial instead of the core one:
-    ``xmlns:ab="http://typo3.org/ns/FGTCLB/AcademicBase/ViewHelpers"``.
 #.  Replace a path to a removed category type file with the new file from the
     table above.
 #.  Flush the TYPO3 caches, so the icon registries and the Fluid template cache

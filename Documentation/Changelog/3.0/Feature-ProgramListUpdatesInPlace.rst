@@ -7,7 +7,7 @@ Feature: The program list updates without a reload
 Description
 ===========
 
-The :guilabel:`Program List` updates in place when a visitor changes a filter
+The :guilabel:`Course List` updates in place when a visitor changes a filter
 or the sorting. The results, the filter form, the active filters and the
 result count are replaced by the ones of the filtered list, without reloading
 the page. The address bar shows the URL of the filtered list afterwards, so the

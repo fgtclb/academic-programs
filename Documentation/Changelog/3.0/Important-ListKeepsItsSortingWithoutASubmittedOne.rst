@@ -17,15 +17,16 @@ send:
 
 *   the filter form of a list element whose sorting select is hidden
     (:guilabel:`Hide sorting`);
-*   the :guilabel:`Program Finder`, which submits its selection to the list
+*   the :guilabel:`Course Finder`, which submits its selection to the list
     without a sorting (:ref:`program-finder`);
 *   a link to the list that carries a category filter and no sorting.
 
 A demand that carries a sorting, as the filter form of a list with a visible
 sorting select always does, is sorted the way it asks, as before. A sorting
-setting without a direction - a :typoscript:`plugin.tx_academicprograms.settings.sorting`
-of `title` alone, where the element's :guilabel:`Default sorting` does not set
-one - keeps the default sorting instead of raising a PHP warning.
+setting without a direction, such as a
+:typoscript:`plugin.tx_academicprograms.settings.sorting` of `title` alone,
+where the element's :guilabel:`Default sorting` does not set one, keeps the
+default sorting instead of raising a PHP warning.
 
 Impact
 ======

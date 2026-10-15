@@ -7,7 +7,7 @@ Feature: Active filter tags, a reset link and a result count
 Description
 ===========
 
-A visitor who filtered the :guilabel:`Program List` saw the selects and nothing else. Three
+A visitor who filtered the :guilabel:`Course List` saw the selects and nothing else. Three
 settings add what was missing, each off by default:
 
 *   :typoscript:`plugin.tx_academicprograms.filter.showActiveFilters` shows one tag per

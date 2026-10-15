@@ -7,7 +7,7 @@ Breaking: The content type academicprograms_programfinder is taken
 Description
 ===========
 
-This extension now registers the content element :guilabel:`Program Finder`
+This extension now registers the content element :guilabel:`Course Finder`
 itself, as the content type `academicprograms_programfinder` with the Extbase
 plugin `ProgramFinder` of the extension `AcademicPrograms`, and the FlexForm
 field `settings.listPid` for its target page. See

@@ -24,14 +24,14 @@ wizard.
         -   :guilabel:`Program Details` (German :guilabel:`Programmdetails`)
         -   :guilabel:`Course Data` (German :guilabel:`Studiengang Daten`)
         -   Displays the key details and categories of a degree programme
-    *   -   :typoscript:`academicprograms_programfinder`
-        -   :guilabel:`Program Finder` (German :guilabel:`Programmfinder`)
-        -   :guilabel:`Course Finder` (German :guilabel:`Studiengang Finder`)
-        -   Degree programme finder with filters for qualification and area of interest
     *   -   :typoscript:`academicprograms_programlist`
         -   :guilabel:`Program List` (German :guilabel:`Programmliste`)
         -   :guilabel:`Course List` (German :guilabel:`Studiengang Liste`)
         -   Degree programme overview page with sorting and filtering by category
+
+The content element :guilabel:`Course Finder`, content type
+:typoscript:`academicprograms_programfinder`, is new in this version and comes
+with the same wording, see :ref:`feature-1790367619`.
 
 Impact
 ======
