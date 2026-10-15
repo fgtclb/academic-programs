@@ -66,11 +66,14 @@ records keep rendering.
 ..  warning::
 
     This changed in version 2.4. Before it, both elements were selectable on
-    every page of every installation. Read
-    :ref:`Breaking: Site sets and static templates have been restructured
-    <breaking-site-sets-and-static-templates-restructured>` before upgrading:
-    opening an existing record on a page that does not include the page TSconfig
-    of its component can rewrite the type of that record.
+    every page of every installation. Read :ref:`Breaking: Site sets and static
+    templates have been restructured
+    <breaking-site-sets-and-static-templates-restructured>` before upgrading. An
+    existing content element on a page that does not enable its component keeps
+    its type: the backend shows the stored type followed by
+    :guilabel:`(not enabled on this page)`, and saving keeps it. Content
+    elements whose type an earlier save already replaced are not repaired, the
+    record history shows their former type.
 
 What the sets do not control
 ============================
