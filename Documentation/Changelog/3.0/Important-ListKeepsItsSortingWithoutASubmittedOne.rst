@@ -26,7 +26,8 @@ sorting select always does, is sorted the way it asks, as before. A sorting
 setting without a direction, such as a
 :typoscript:`plugin.tx_academicprograms.settings.sorting` of `title` alone,
 where the element's :guilabel:`Default sorting` does not set one, keeps the
-default sorting instead of raising a PHP warning.
+default sorting for such a request as well, as it does for a request without
+any demand, see :ref:`important-incomplete-program-sorting-keeps-the-default`.
 
 Impact
 ======

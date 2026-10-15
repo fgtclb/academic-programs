@@ -141,6 +141,13 @@ The tab :guilabel:`Configuration` of the content element holds every option.
 
     A filter submitted while the sorting selects are hidden keeps this order.
 
+    Only the items of the select are supported. A value that is not a field and
+    a direction, an empty one or a field alone for example, which the form never
+    stores but an import or a TypoScript value for a content element without
+    the field can produce, is ignored, and the list sorts by title, A to Z. Of
+    a field and a direction, an unknown one is ignored on its own and the other
+    one still applies, so `uid desc` sorts by title, Z to A.
+
 ..  confval:: Default categories
     :name: program-list-categories
     :type: category tree
