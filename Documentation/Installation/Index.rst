@@ -14,7 +14,7 @@ download and install it using one of the following methods.
         ..  code-block:: bash
             :caption: Install the stable release
 
-            composer require 'fgtclb/academic-programs':'^2'
+            composer require 'fgtclb/academic-programs':'^3'
 
         ..  tip::
 
@@ -31,7 +31,7 @@ download and install it using one of the following methods.
 
             ..  code-block:: bash
 
-                composer require 'fgtclb/academic-programs':'~2.3.1@dev'
+                composer require 'fgtclb/academic-programs':'~3.0.0@dev'
 
     ..  group-tab:: Extension Manager
 
