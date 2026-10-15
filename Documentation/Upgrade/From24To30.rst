@@ -467,3 +467,6 @@ Check the result
     changes.
 *   A list element with a hidden sorting select keeps the default sorting of
     the element when it is filtered now, see :ref:`important-1790370061`.
+*   A list keeps its default categories of the category types a finder or its
+    own filter does not offer, see
+    :ref:`important-list-keeps-default-categories-of-types-not-submitted`.

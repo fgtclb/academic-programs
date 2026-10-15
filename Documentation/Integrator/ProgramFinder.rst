@@ -79,9 +79,13 @@ the target page opens with the programs that carry every selected category, and
 with the selection shown in its own filter, unless that list hides its filter.
 
 The selection of the finder replaces the :guilabel:`Default categories` of the
-target list, as a selection in the list's own filter does. The list keeps its
-:guilabel:`Default sorting`: the finder submits no sorting, and a submission
-without one is sorted the way the element is configured.
+target list of the category types the finder offers, as a selection in the
+list's own filter does. The default categories of every other category type
+stay, so a list preset to one location shows the programs of that location
+the visitor searched for. A target list that hides its filter keeps all its
+default categories, and the selection of the finder narrows it further. The
+list keeps its :guilabel:`Default sorting`: the finder submits no sorting, and
+a submission without one is sorted the way the element is configured.
 
 A finder renders no form without a target page, with a target page that cannot
 be linked, because it is hidden, deleted or access restricted, and when none

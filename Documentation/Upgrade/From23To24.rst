@@ -277,6 +277,10 @@ Check the result
     and its page module shows the categories of the page.
 *   Pages of the site package that render
     :typoscript:`styles.content.getContent` still render their content.
+*   A list that hides a part of its form keeps the preset of that part when a
+    visitor uses the rest of the form, see
+    :ref:`important-hidden-program-form-parts-keep-their-presets`. A sorting
+    that was hidden only to keep the default categories can be shown again.
 *   On PostgreSQL, programs that are equal in the chosen ordering may change
     their relative order once, they are ordered by uid now. See
     :ref:`important-list-ordering-ties-are-broken-by-uid`.

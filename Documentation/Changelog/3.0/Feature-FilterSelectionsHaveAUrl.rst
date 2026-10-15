@@ -30,8 +30,10 @@ and plugin, carrying the selection as GET arguments:
 *   The categories of every category type are one comma separated list, in
     ascending order, so one selection has exactly one URL.
 *   The sorting is always part of the URL. The content element's preset
-    categories and sorting apply only to the page URL without any list
-    argument, so a visitor who clears a preset category keeps it cleared.
+    categories and sorting of a part the form shows apply only to the page URL
+    without any list argument, so a visitor who clears a preset category keeps
+    it cleared. A part the form hides keeps its preset, see
+    :ref:`important-hidden-program-form-parts-keep-their-presets`.
 *   A GET request with those arguments renders the list exactly as the POST did
     before, and the form shows the selection again.
 *   The selection is read from the submitted form alone. A form that posts to

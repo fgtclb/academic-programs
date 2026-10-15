@@ -70,12 +70,12 @@ The tab :guilabel:`Configuration` of the content element holds every option.
     Leaves out the category selects of the form, together with the active
     filter tags and the reset link of :ref:`configuration-active-filters`. The
     visitor can no longer change the categories, and the list shows what
-    :confval:`Default categories <program-list-categories>` presets.
+    :confval:`Default categories <program-list-categories>` presets, also
+    when the visitor changes the sorting.
 
-    The categories are preset only for a request without a selection of the
-    visitor. While the sorting stays visible, a visitor who changes it gets
-    the list without the default categories. Hide the sorting as well when the
-    default categories must hold.
+    Categories that reach a list with a hidden filter, from the
+    :ref:`Course Finder <integrator-program-finder>` or in the URL of a link,
+    narrow the list further and never replace a default category.
 
 ..  confval:: Filter types
     :name: program-list-filter-types
@@ -106,8 +106,8 @@ The tab :guilabel:`Configuration` of the content element holds every option.
     Leaves out the two sorting selects, :guilabel:`Sorting field` and
     :guilabel:`Sorting direction`. The list is then sorted as
     :confval:`Default sorting <program-list-sorting>` says, also after the
-    visitor filtered it. With the filter hidden as well, the element renders no
-    form at all.
+    visitor filtered it, and whatever sorting the URL of a link carries. With
+    the filter hidden as well, the element renders no form at all.
 
 ..  figure:: /Images/Screenshots/program-list-preset.png
     :alt: The number of programs found above a grid of program cards, without any form
@@ -164,7 +164,10 @@ The tab :guilabel:`Configuration` of the content element holds every option.
     The selects of the form show the default categories as selected, and the
     active filter tags show them as tags the visitor can remove. A selection
     the visitor submits, in the form or through the
-    :ref:`Course Finder <integrator-program-finder>`, replaces them. The tree
+    :ref:`Course Finder <integrator-program-finder>`, replaces the default
+    categories of the category types it carries a select for and keeps the
+    others. With :confval:`Hide category filtering <program-list-hide-filter>`
+    switched on, the default categories always apply. The tree
     starts at the categories the site setting
     :typoscript:`plugin.tx_academicprograms.categoryRootUids` names, see
     :ref:`configuration-category-tree-root`.
@@ -357,8 +360,9 @@ filtered list, without reloading the page. There is no setting for it.
     browser step through the selections.
 *   The page shows what a reload of that URL shows. All program lists of a page
     read the selection from the same URL arguments, so with two lists on a page
-    a change in one of them filters both, with a reload as without one. That
-    holds for a list that hides its filter and its sorting as well.
+    a change in one of them filters both, with a reload as without one. A list
+    that hides its filter or its sorting keeps its own preset for that part,
+    see :ref:`integrator-program-list-two-lists`.
 *   The select the visitor changed keeps the focus, and an opened
     :guilabel:`More filters` stays open.
 *   Screen reader users hear the number of programs found after an update,
@@ -441,3 +445,18 @@ once. A template override from before 3.0 keeps working:
     through the attribute of the selects of the filter partials.
 
 ..  versionadded:: 3.0
+
+..  _integrator-program-list-two-lists:
+
+Two lists on one page
+=====================
+
+All :guilabel:`Course List` elements of a page read the selection from the same
+URL arguments. A submission of the form is answered by the first of them on
+the page: it redirects to a URL that carries the selection as that element
+sees it, the presets it keeps included. For another :guilabel:`Course List`
+element of the page, a sorting the first element hides replaces the one
+its visitor chose. The default categories of a category filter the first
+element hides, and its default categories of the category types its form does
+not offer, are added to the categories the visitor chose. Put lists whose
+forms hide or offer different parts on pages of their own.

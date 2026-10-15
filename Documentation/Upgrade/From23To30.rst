@@ -573,6 +573,13 @@ Check the result
     changes.
 *   A list element with a hidden sorting select keeps the default sorting of
     the element when it is filtered now, see :ref:`important-1790370061`.
+*   A list that hides a part of its form keeps the preset of that part when a
+    visitor uses the rest of the form, see
+    :ref:`important-hidden-program-form-parts-keep-their-presets`. A sorting
+    that was hidden only to keep the default categories can be shown again.
+*   A list keeps its default categories of the category types a finder or its
+    own filter does not offer, see
+    :ref:`important-list-keeps-default-categories-of-types-not-submitted`.
 *   On PostgreSQL, programs that are equal in the chosen ordering may change
     their relative order once, they are ordered by uid now. See
     :ref:`important-list-ordering-ties-are-broken-by-uid`.
