@@ -51,6 +51,11 @@ detail views in the frontend.
         Install :guilabel:`academic_programs` via Composer, the Extension
         Manager or a TER upload.
 
+    ..  card:: :ref:`Upgrade <upgrade>`
+
+        The steps to upgrade :guilabel:`academic_programs` to a newer version,
+        in the order to take them.
+
     ..  card:: :ref:`Configuration <configuration>`
 
         Configure the extension and its plugins for your installation.
@@ -71,6 +76,7 @@ detail views in the frontend.
 
     Introduction/Index
     Installation/Index
+    Upgrade/Index
     Configuration/Index
     KnownProblems/Index
     Changelog/Changelog-2
