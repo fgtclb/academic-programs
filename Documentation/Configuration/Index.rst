@@ -14,6 +14,9 @@ same files, so they configure an installation identically.
 Pick one of them per site and stay with it — see
 :ref:`Do not combine both <one-mechanism-per-site>` for what happens otherwise.
 
+The content elements and the options of their backend forms are described in
+:ref:`integrator`.
+
 ..  _configuration-components:
 
 What the sets contain
@@ -34,12 +37,13 @@ the backend offers, not how much TypoScript is loaded.
     *   -   Set
         -   Delivers
     *   -   `fgtclb/academic-programs-program-list`
-        -   The :guilabel:`Course List` content element.
+        -   The :ref:`Course List <integrator-program-list>` content element.
     *   -   `fgtclb/academic-programs-program-details`
-        -   The :guilabel:`Course Data` content element.
+        -   The :ref:`Course Data <integrator-program-details>` content
+            element.
     *   -   `fgtclb/academic-programs-program-finder`
-        -   The :guilabel:`Course Finder` content element, see
-            :ref:`program-finder`.
+        -   The :ref:`Course Finder <integrator-program-finder>` content
+            element.
     *   -   `fgtclb/academic-programs`
         -   Everything above. This is the set to use unless you deliberately
             want a subset, and it is the name this extension published before
@@ -515,79 +519,15 @@ type as well:
 The view helper takes the setting as its argument :html:`mostSpecificOnly`, see
 above.
 
-..  _program-list-filter-types:
+..  _configuration-filter-settings:
 
 The filters of the program list
 ===============================
 
 The filter form of the :guilabel:`Course List` offers one select per category
-type of the group `programs`. Which types it offers, and in which order, is set
-in two places:
-
-..  list-table::
-    :header-rows: 1
-
-    *   -   Where
-        -   Applies to
-    *   -   Field :guilabel:`Filter types` of the :guilabel:`Course List`
-            content element, tab :guilabel:`Configuration`
-        -   That element. The editor picks the types and orders them.
-    *   -   Site setting / constant
-            :typoscript:`plugin.tx_academicprograms.filter.categoryTypes`,
-            default empty
-        -   Every program list of the site whose field is empty. A comma
-            separated list of type identifiers, for example
-            `degree,location,program_type`.
-
-..  code-block:: yaml
-    :caption: config/sites/my-site/settings.yaml
-
-    plugin:
-      tx_academicprograms:
-        filter:
-          categoryTypes: 'degree,location'
-
-The setting is a site setting of the aggregate set `fgtclb/academic-programs`
-and a constant of the same name for a site on the static templates, like the
-settings of :ref:`program-page-layout`. A site that depends on the
-:guilabel:`Program List` component set alone gets the default, but the site
-settings editor does not offer the setting there.
-
-With both empty the form offers every category type of the group that has a
-category, in the order of the category types of the group — what it offered
-before the setting existed.
-
-A type is offered only when at least one category of that type exists. A
-category of an offered type that no listed program carries is still offered,
-as a disabled option, unless the site hides options without results, see
-below. A type the project removed from the group later is
-ignored, and so is an identifier that is no type of the group. The field only
-offers the types the group has, including those a project adds in its own
-:file:`Configuration/CategoryTypes.yaml`.
-
-The filter types decide what the form offers, not what the list accepts: a
-link that filters by a category of a type the form does not offer still
-filters the list.
-
-The field is labelled with the title of each type. A type a project adds shows
-the title its :file:`CategoryTypes.yaml` gives it, and the filter select in the
-frontend is labelled with :xml:`sys_category.programs.<identifier>` when the
-extension or the site has that label, and with the registered title otherwise,
-see :ref:`configuration-labels-category-types`.
-
-The partial :file:`Program/DemandCategories.html` renders the selects from the
-variable :html:`{filterTypes.visible}`, the identifiers of the offered types in
-their order. Where that variable does not reach the partial, in a template that
-renders the partial with arguments of its own instead of :html:`{_all}`, it
-offers every type with a category, as before, and the field and the setting
-have no effect. To use them, pass :html:`filterTypes` on in a template that
-renders the partial. A project that overrides the partial itself and still
-loops :html:`{categories.allCategoriesByType}` keeps its own list as well.
-
-The :guilabel:`Course Finder` reads the same setting when its own field is
-empty, see :ref:`program-finder`.
-
-Two more settings, for the whole site, change how the list offers its filters:
+type of the group `programs`. Which types an element offers is its field
+:guilabel:`Filter types`, see :ref:`program-list-filter-types`. Three settings
+decide the filters for the whole site:
 
 ..  list-table::
     :header-rows: 1
@@ -595,6 +535,13 @@ Two more settings, for the whole site, change how the list offers its filters:
     *   -   Site setting and constant
         -   Default
         -   Meaning
+    *   -   :typoscript:`plugin.tx_academicprograms.filter.categoryTypes`
+        -   empty
+        -   The category types every program list and finder of the site
+            offers while its field :guilabel:`Filter types` is empty, in this
+            order, as a comma separated list of type identifiers, for example
+            `degree,location,program_type`. Empty, the list offers every type
+            with a category, the finder the degree and the topic.
     *   -   :typoscript:`plugin.tx_academicprograms.filter.visibleCount`
         -   0
         -   How many filters the form shows right away. The others follow in a
@@ -619,16 +566,21 @@ Two more settings, for the whole site, change how the list offers its filters:
           visibleCount: 2
           hideDisabledOptions: true
 
-Both are declared with the aggregate set, like the filter types.
-:html:`{filterTypes.more}` holds the types behind :guilabel:`More filters`;
-without :html:`{filterTypes}` the partial ignores the visible count as it
+The settings are site settings of the aggregate set `fgtclb/academic-programs`
+and constants of the same name for a site on the static templates, like the
+settings of :ref:`program-page-layout`. A site that depends on the component
+set `fgtclb/academic-programs-program-list` alone gets the defaults, but the
+site settings editor does not offer the settings there.
+
+:html:`{filterTypes.more}` holds the types behind :guilabel:`More filters`.
+Without :html:`{filterTypes}` the partial ignores the visible count as it
 ignores the filter types.
 
 The first option of each select, in the list and in the finder, the one that
 selects no category, reads the label
 :xml:`sys_category.programs.allOptions.<type>` of this extension, and
 falls back to :xml:`sys_category.programs.allOptions` ("All options") where a
-type has none. The extension ships no label per type; a site adds them in
+type has none. The extension ships no label per type. A site adds them in
 TypoScript, for every content element of the extension or for one plugin:
 
 ..  code-block:: typoscript
@@ -655,10 +607,6 @@ of the site package.
     without results and the "All" label per type. Up to 2.3 the form offered
     every type with a category, all of them right away and with one "All"
     label, and anything else needed an override of the partial.
-
-..  versionadded:: 3.0
-
-    The field :guilabel:`Filter types` of the content element.
 
 ..  _configuration-active-filters:
 
@@ -734,350 +682,15 @@ the same names, like the filter settings above.
 
     The three settings and the two partials.
 
-..  _program-list-in-place:
+..  _configuration-plugin-options:
 
-Updating the list without a reload
-==================================
+The options of the content elements
+===================================
 
-When a visitor changes a filter or the sorting of the
-:guilabel:`Course List`, the list updates in place: the results, the filter
-form, the active filters and the result count are replaced by the ones of the
-filtered list, without reloading the page. There is no setting for it.
-
-*   The address bar shows the URL of the filtered list afterwards, the same URL
-    a reload would show, see :ref:`feature-1790226102`. The list can still be
-    bookmarked, shared and reloaded, and the back and forward buttons of the
-    browser step through the selections.
-*   The page shows what a reload of that URL shows. All program lists of a page
-    read the selection from the same URL arguments, so with two lists on a page
-    a change in one of them filters both, with a reload as without one. That
-    holds for a list that hides its filter and its sorting as well.
-*   The select the visitor changed keeps the focus, and an opened
-    :guilabel:`More filters` stays open.
-*   Screen reader users hear the number of programs found after an update,
-    through a visually hidden element with the role `status` and the classes
-    `ace-status visually-hidden`. It reads the labels
-    :xml:`list.resultCount.singular` and :xml:`list.resultCount.plural`, and
-    loading the page announces nothing. The element is hidden by the class
-    `visually-hidden` of Bootstrap, so a site without Bootstrap provides that
-    class itself.
-*   Without JavaScript the form shows a submit button with the label
-    :xml:`list.submit`, and submitting it opens the filtered list. With
-    JavaScript the column of the button gets the attribute :html:`hidden`. A
-    stylesheet that gives that column a `display` of its own needs
-    :css:`[hidden] { display: none }` as well, as Bootstrap has it.
-*   Where the list cannot be updated in place, because the request fails or the
-    answer lacks the list, the form is submitted as before and the page reloads.
-*   The selects carry no inline :html:`onchange` handler any more, so a site
-    with a strict content security policy no longer has to allow inline event
-    handlers for the list.
-
-The module is :js:`@fgtclb/academic-programs/frontend/program-list.js`, loaded
-on a page whose list renders a filter or a sorting. It finds its parts by
-attributes, so an override of the templates keeps the update in place by
-keeping them:
-
-..  list-table::
-    :header-rows: 1
-
-    *   -   Attribute
-        -   On
-        -   Carries
-    *   -   `data-academic-programs-list`
-        -   The wrapper of the list in :file:`Program/List.html`
-        -   The uid of the content element, which finds the same list in the
-            filtered page.
-    *   -   `data-academic-programs-list-count-one`, `data-academic-programs-list-count-other`
-        -   The wrapper
-        -   The sentences announced after an update, `%d` standing for the
-            number. Without both of them nothing is announced.
-    *   -   `data-academic-programs-list-content`
-        -   An element inside the wrapper that holds the form and the results
-        -   Nothing. It is the part that is replaced.
-            `data-academic-programs-list-total` on the same element carries the
-            number of programs it shows.
-    *   -   `data-academic-programs-list-status`
-        -   An empty element with `role="status"` inside the wrapper, outside
-            the replaced part
-        -   Nothing. The sentence is written into it after an update.
-    *   -   `data-academic-programs-list-form`
-        -   The form in :file:`Program/SortingAndFilters.html`
-        -   Nothing. A form outside the replaced part is submitted on a change,
-            and the page reloads.
-    *   -   `data-academic-programs-list-select`
-        -   Each select in :file:`Program/DemandCategories.html` and
-            :file:`Program/DemandSorting.html`
-        -   Nothing. Like the form attribute, for a form that carries neither
-            the attribute nor a place in the replaced part.
-    *   -   `data-academic-programs-list-submit`
-        -   The column around the submit button
-        -   Nothing. The module hides it.
-
-The template, the form partial and the two filter partials each load the
-module, so that it runs whichever of them a project overrides. It is loaded
-once. A template override from before 3.0 keeps working:
-
-*   An override of :file:`Program/DemandCategories.html` or
-    :file:`Program/DemandSorting.html` that keeps the inline :html:`onchange`
-    handlers reloads the page on a change of its selects, as before. The
-    module leaves those selects to their handlers and drives the others, so
-    the selects of the partial that is not overridden keep working. It hides
-    the submit button either way.
-*   An override of :file:`Program/List.html` without the wrapper reloads the
-    page on a change.
-*   An override of :file:`Program/SortingAndFilters.html` is updated in place,
-    as long as :file:`Program/List.html` is the one of the extension. It has no
-    submit button for a visitor without JavaScript until it renders one.
-*   An override of both :file:`Program/List.html` and
-    :file:`Program/SortingAndFilters.html` reloads the page on a change,
-    through the attribute of the selects of the filter partials.
-
-..  versionadded:: 3.0
-
-..  _program-list-subcategories:
-
-Matching subcategories
-======================
-
-Categories of the group `programs` can form a tree, a degree for example:
-
-..  code-block:: text
-    :caption: A degree tree
-
-    Bachelor
-        Bachelor of Science
-            Bachelor of Science with Honours
-        Bachelor of Engineering
-    Master
-        Master of Science
-
-By default a selected category finds only the programs that carry that very
-category. A visitor who filters by "Bachelor" does not find a program that
-carries only "Bachelor of Science", and the filter offers "Bachelor" as a
-disabled option as long as no listed program carries it.
-
-The field :guilabel:`Include subcategories` of the :guilabel:`Course List`
-content element, tab :guilabel:`Configuration`, off by default, changes both:
-
-*   A selected category finds every program that carries the category itself
-    or a category anywhere below it. That applies to a category the visitor
-    selects in the filter and to the :guilabel:`Default categories` of the
-    element.
-*   The filter offers a category as soon as a listed program carries it or one
-    of its subcategories. With
-    :typoscript:`plugin.tx_academicprograms.filter.hideDisabledOptions` set,
-    such a category is kept as well.
-
-Several selections still all have to match: "Bachelor" and "Berlin" find the
-programs with a Bachelor degree of any kind in Berlin, not every Bachelor
-program and every program in Berlin.
-
-Only categories the visitor can see take part. A hidden category, a category of
-a type outside the group `programs`, and everything below either of them are
-not part of the tree. A category that names one of its own subcategories as its
-parent does not break the list: each of the two finds the programs of the
-other.
-
-With the field switched on, assign each program only its most specific
-category, "Bachelor of Science" rather than "Bachelor of Science" and
-"Bachelor". The parent no longer has to be assigned for the filter, and no
-longer shows up in the facts of the program.
-
-The :guilabel:`Course Finder` has the same field for the options it offers,
-see :ref:`program-finder`. The finder does not decide which programs are
-found, the list on its target page does. Switch the field on in both elements.
-
-..  versionadded:: 3.0
-
-    The field :guilabel:`Include subcategories`. Up to 2.x a category matched
-    only itself, and projects assigned both levels and hid the parent in the
-    program output again.
-
-..  _program-finder:
-
-The program finder
-==================
-
-The :guilabel:`Course Finder` content element is a compact entry into a
-program list, for a home page hero for example: a few selects and a button that
-open the list page with the selection applied.
-
-..  code-block:: text
-    :caption: What the finder renders, unstyled
-
-    Degree   [ Bachelor of Science v ]   Topic [ All options v ]   [ Show programs ]
-
-It is enabled by the set `fgtclb/academic-programs-program-finder`, which the
-aggregate set includes, or by its static template and page TSconfig of the same
-name. Its settings, tab :guilabel:`Configuration`:
-
-..  list-table::
-    :header-rows: 1
-
-    *   -   Field
-        -   Meaning
-    *   -   :guilabel:`Program list page`
-        -   Required. The page whose :guilabel:`Course List` the finder opens.
-    *   -   :guilabel:`Filter types`
-        -   One select per chosen category type, in the chosen order, as the
-            field of the same name of the list. Empty: the site setting
-            :typoscript:`plugin.tx_academicprograms.filter.categoryTypes` of
-            :ref:`program-list-filter-types`, and the degree followed by the
-            topic when that is empty as well.
-    *   -   :guilabel:`Preselected categories`
-        -   Selected when the page loads, one per select. Of two categories of
-            one type the one higher in the category tree counts; a category of a
-            type the finder does not offer, and one the finder offers disabled,
-            is not preselected.
-    *   -   :guilabel:`Include subcategories`
-        -   Offers a category as soon as a program in the storage of the finder
-            carries one of its subcategories, and preselects it as well, see
-            :ref:`program-list-subcategories`. The list on the target page needs
-            the field as well, it decides which programs are found.
-
-The options of each select are the categories of its type. A category that no
-program in the storage of the finder carries is offered disabled, as in the
-filter of the list, or left out when the site hides options without results —
-the setting :typoscript:`plugin.tx_academicprograms.filter.hideDisabledOptions`,
-see :ref:`program-list-filter-types`. That section also describes the label of
-the "All" option, which the finder reads the same way. The storage is the :guilabel:`Startingpoint` and
-:guilabel:`Recursive` of the finder element, and it should be the storage of
-the list the finder targets — the finder cannot read the storage of another
-element, and a finder pointing elsewhere offers categories the list does not
-show, or disables ones it does. An empty :guilabel:`Startingpoint` means every
-program page of the installation, of every site, for the finder as for the
-list.
-
-In the browser the finder narrows the options further, to the combinations
-that find a program, and states the number of programs on its button, see
-:ref:`program-finder-narrowing`.
-
-Submitting the form posts the selection to the list plugin of the target page,
-in the argument shape of the list's own filter form:
-:html:`tx_academicprograms_programlist[demand][filterCollection][<type>]`, one
-category uid per type. The list answers with a redirect to its filtered URL, so
-the target page opens with the programs that carry every selected category, and
-with the selection shown in its own filter, unless that list hides its filter.
-
-The selection of the finder replaces the :guilabel:`Default categories` of the
-target list, as a selection in the list's own filter does. The list keeps its
-:guilabel:`Default sorting`: the finder submits no sorting, and a submission
-without one is sorted the way the element is configured.
-
-A finder renders no form without a target page, with a target page that cannot
-be linked - hidden, deleted or access restricted - and when none of its category
-types has a category; the frame and the header of the element still render.
-The backend does not save a finder without a target page, but a record written
-by an import or an upgrade can lack it, and a page can be hidden later.
-
-The finder renders the template :file:`Program/Finder.html`, uncached like the
-list: which options are disabled depends on program pages elsewhere in the page
-tree, and a cached finder would keep offering what changed there.
-
-..  versionadded:: 3.0
-
-    Up to 2.x a project that wanted a finder registered one itself. See
-    :ref:`breaking-program-finder-registered-upstream` for what such a project
-    removes.
-
-..  _program-finder-narrowing:
-
-Narrowing the options in the browser
-------------------------------------
-
-The finder offers only the combinations that find a program. The selections
-of all selects have to match together, as in the list the finder opens: once a
-visitor selects a degree, every option of the other selects that no program of
-that degree carries is disabled, and enabled again as soon as the degree is
-cleared or changed. A preselected category narrows the other selects as soon
-as the page has loaded. Nothing is requested from the server for it, and the
-page does not reload.
-
-..  code-block:: text
-    :caption: The finder after selecting a degree, unstyled
-
-    Degree   [ Master of Science v ]   Topic [ All options v ]   [ Show 2 programs ]
-                                               ( Engineering, disabled )
-
-The button states how many programs the current selection finds, with the
-labels `finder.submit.count.one` and `finder.submit.count.other`, `%d` standing
-for the number. A changed number is announced to screen reader users by a
-visually hidden element with the role `status` and the classes
-`ace-status visually-hidden`: politely, so it waits for the current speech,
-and without moving the focus. Loading the page announces nothing. The element
-is hidden by the class `visually-hidden` of Bootstrap, so a site without
-Bootstrap provides that class itself, as it provides the other Bootstrap
-classes the template keeps, the grid and the button.
-
-The number counts the programs of the finder's own storage, with its own
-:guilabel:`Include subcategories`. It agrees with the list on the target page
-as long as both elements share the storage and that field, the same condition
-the options of the finder already depend on.
-
-Narrowing disables an option, it never leaves one out, whatever
-:typoscript:`plugin.tx_academicprograms.filter.hideDisabledOptions` says. The
-setting decides which options the server renders: the ones no program in
-storage carries are left out. An option that only the current selection
-excludes stays in its place, so the selects do not change their length while
-the visitor works through them. An option the server rendered disabled stays
-disabled, and the option a select shows stays selectable even when the other
-selections exclude it, so a preselection whose categories exclude each other
-can still be changed.
-
-The programs come with the page: the form carries, in the attribute
-`data-academic-programs-finder-programs`, a JSON list with one entry per
-program the finder found in its storage, the uids of the categories of the
-offered selects it carries. The uids of the programs themselves are not part
-of it. With :guilabel:`Include subcategories` switched on, a program carries
-every category above its own as well, the way the server offers such a parent.
-Hidden programs, programs outside the storage and programs a listener of
-:php:`ModifyProgramListEvent` removed are not part of it. A few hundred
-programs stay in the low kilobytes.
-
-Without JavaScript the finder renders as described above, with every option
-that a program in its storage carries selectable and the plain label on the
-button. The module is
-:js:`@fgtclb/academic-programs/frontend/program-finder.js`, loaded only on a
-page whose finder renders a form.
-
-An override of :file:`Program/Finder.html` keeps the narrowing by keeping the
-attributes the module reads:
-
-..  list-table::
-    :header-rows: 1
-
-    *   -   Attribute
-        -   On
-        -   Carries
-    *   -   `data-academic-programs-finder-programs`
-        -   The form
-        -   The programs as JSON, rendered by the action as
-            `{programCategories}`. Without a list there the module does not
-            start.
-    *   -   `data-academic-programs-finder-count-one`, `data-academic-programs-finder-count-other`
-        -   The form
-        -   The patterns of the count sentence. Without both of them the
-            options are narrowed, the count keeps its label and nothing is
-            announced.
-    *   -   `data-academic-programs-finder-select`
-        -   Each category select
-        -   Nothing. Only a marked select takes part, so a select the override
-            adds for something else is left alone.
-    *   -   `data-academic-programs-finder-count`
-        -   A span inside the submit button, or any element in the form
-        -   Nothing. Its text is replaced by the count sentence, which leaves
-            an icon next to it in the button alone.
-    *   -   `data-academic-programs-finder-status`
-        -   An empty element in the form with `role="status"`
-        -   Nothing. The count sentence is written into it when the number
-            changes.
-
-An option with an empty value is the "All" option, which is never disabled.
-
-..  versionadded:: 3.0
-
-    Up to 2.x projects reloaded the whole finder on every change, through a
-    turbo frame for example, to offer only possible combinations.
+What the :guilabel:`Course List`, the :guilabel:`Course Data` and the
+:guilabel:`Course Finder` show, every option of their backend forms, the
+matching of subcategories and how the list and the finder work in the browser
+are described in :ref:`integrator`.
 
 ..  _configuration-category-tree-root:
 
@@ -1335,10 +948,10 @@ Load the script or bring your own
 =================================
 
 Two content elements of this extension load a module on the page that carries
-them: the :guilabel:`Program List`
+them: the :guilabel:`Course List`
 :js:`@fgtclb/academic-programs/frontend/program-list.js`, which updates the
 list in place, see :ref:`program-list-in-place`, and the
-:guilabel:`Program Finder`
+:guilabel:`Course Finder`
 :js:`@fgtclb/academic-programs/frontend/program-finder.js`, which narrows the
 options in the browser, see :ref:`program-finder-narrowing`. The program
 details and the program page load no script.

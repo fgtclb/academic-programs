@@ -55,9 +55,15 @@ for all academic extensions on the `extension points page of academic_base
         Install :guilabel:`academic_programs` via Composer, the Extension
         Manager or a TER upload.
 
+    ..  card:: :ref:`For integrators <integrator>`
+
+        The three content elements, what each one shows and every option of
+        its backend form.
+
     ..  card:: :ref:`Configuration <configuration>`
 
-        Configure the extension and its plugins for your installation.
+        The site sets, the site settings and the TypoScript of the
+        extension, and the program page type.
 
     ..  card:: :ref:`Styling <styling>`
 
@@ -66,7 +72,8 @@ for all academic extensions on the `extension points page of academic_base
 
     ..  card:: :ref:`For developers <developers>`
 
-        The events a project listens to instead of replacing classes.
+        The events the content elements and the program page dispatch, one
+        page each.
 
     ..  card:: :ref:`Known problems <known-problems>`
 
@@ -84,6 +91,7 @@ for all academic extensions on the `extension points page of academic_base
 
     Introduction/Index
     Installation/Index
+    Integrator/Index
     Configuration/Index
     Styling/Index
     Developers/Index

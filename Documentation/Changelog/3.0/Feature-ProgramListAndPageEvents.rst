@@ -11,7 +11,7 @@ Three PSR-14 events let a project change what the program plugins query and
 what a program page shows, without replacing a class of the extension:
 
 *   :php:`\FGTCLB\AcademicPrograms\Event\ModifyProgramDemandEvent` fires in the
-    :guilabel:`Program List` and the :guilabel:`Program Finder` after the
+    :guilabel:`Course List` and the :guilabel:`Course Finder` after the
     demand has been built from the content element settings and the request,
     and before the programs are queried. The demand a listener hands back is
     the one that is queried, and in the list the one assigned to the view as
@@ -37,7 +37,10 @@ The events have the names, the arguments and the rules of the partner and
 project list events. :php:`\FGTCLB\AcademicPrograms\Domain\Model\Dto\ProgramDemand`
 and :php:`\FGTCLB\AcademicPrograms\Domain\Model\ProgramData`, which they hand
 over, are public API from this version on. The events, their rules and an
-example listener for each are described in :ref:`developers`.
+example listener for each are described in
+:ref:`developers-event-modify-program-demand-event`,
+:ref:`developers-event-modify-program-list-event` and
+:ref:`developers-event-modify-program-data-event`.
 
 ..  code-block:: php
     :caption: EXT:my_extension/Classes/EventListener/ReplaceProgramSubtitle.php

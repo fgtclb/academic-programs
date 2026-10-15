@@ -17,4 +17,6 @@ International license <https://creativecommons.org/licenses/by/4.0/>`__. The
 notice :file:`Resources/Public/Icons/LICENSE-font-awesome.txt` lists every file
 with its Font Awesome name and the changes made to it. The degree, department,
 standard period and location category types draw the shared icons of
-:guilabel:`academic_base`, which lists them in its own notice.
+:guilabel:`academic_base`, which lists them in its own notice. The plugin icon
+in :file:`Documentation/Images/Icons/` of this manual is a grey copy of
+:file:`Resources/Public/Icons/plugin/programs.svg` under the same license.

@@ -21,6 +21,8 @@ plugin names :php:`ProgramList`, :php:`ProgramFinder` and
 The event, with an example listener, is described in the `changelog of
 academic_base
 <https://docs.typo3.org/p/fgtclb/academic-base/main/en-us/Changelog/3.0/Feature-ModifyPluginViewEvent.html>`__.
+What these plugins pass in is described in
+:ref:`developers-event-modify-plugin-view-event`.
 
 Impact
 ======
