@@ -10,7 +10,8 @@ Description
 The class :php:`\FGTCLB\AcademicPrograms\Collection\FileReferenceCollection`
 is removed. It read the file references of one field of a page, through its
 static method :php:`getCollectionByPageIdAndField()`, and nothing this
-extension ships calls it.
+extension ships calls it. Version 2.4 deprecated it, see
+:ref:`deprecation-file-reference-collection`.
 
 The core has the same lookup:
 :php:`\TYPO3\CMS\Core\Resource\FileRepository::findByRelation()` returns the
