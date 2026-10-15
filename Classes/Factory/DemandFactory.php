@@ -6,6 +6,7 @@ namespace FGTCLB\AcademicPrograms\Factory;
 
 use FGTCLB\AcademicPrograms\Domain\Model\Dto\ProgramDemand;
 use FGTCLB\AcademicPrograms\Utility\PagesUtility;
+use FGTCLB\CategoryTypes\Collection\CategoryCollection;
 use FGTCLB\CategoryTypes\Collection\FilterCollection;
 use FGTCLB\CategoryTypes\Domain\Repository\CategoryRepository;
 use FGTCLB\CategoryTypes\Filter\CategoryFilterNormalizer;
@@ -31,37 +32,33 @@ class DemandFactory
         array $contentElementData
     ): ProgramDemand {
         $demand = GeneralUtility::makeInstance(ProgramDemand::class);
-        $categoryCollection = null;
 
-        // Initialise demand from settings if there is no demand from form
-        if ($demandFromForm === null) {
+        // The content element presets every part of the form for a request without a demand,
+        // and a part it hides for every request: a hidden part submits nothing, and neither a
+        // submission nor a URL may change what the editor did not offer to change (ACE-916).
+        $hideSorting = (bool)($settings['hideSorting'] ?? false);
+        $hideFilter = (bool)($settings['hideFilter'] ?? false);
+
+        if ($demandFromForm === null || $hideSorting) {
             $this->applySortingFromSettings($demand, $settings);
-
-            if (isset($settings['categories'])
-                && (int)$settings['categories'] > 0
-            ) {
-                $categoryCollection = $this->categoryRepository->getByDatabaseFields('programs', (int)($contentElementData['uid'] ?? 0));
-            }
-        } else {
+        } elseif (isset($demandFromForm['sorting'])) {
             // Either use combined sorting or separate sorting field and direction
-            if (isset($demandFromForm['sorting'])) {
-                $demand->setSorting($demandFromForm['sorting']);
-            } else {
-                if (isset($demandFromForm['sortingField'])) {
-                    $demand->setSortingField($demandFromForm['sortingField']);
-                }
-                if (isset($demandFromForm['sortingDirection'])) {
-                    $demand->setSortingDirection($demandFromForm['sortingDirection']);
-                }
+            $demand->setSorting($demandFromForm['sorting']);
+        } else {
+            if (isset($demandFromForm['sortingField'])) {
+                $demand->setSortingField($demandFromForm['sortingField']);
             }
-
-            if (isset($demandFromForm['filterCollection'])) {
-                $categoryCollection = $this->categoryRepository->findByGroupAndUidList(
-                    'programs',
-                    $this->categoryFilterNormalizer->toUidList($demandFromForm['filterCollection']),
-                );
+            if (isset($demandFromForm['sortingDirection'])) {
+                $demand->setSortingDirection($demandFromForm['sortingDirection']);
             }
         }
+
+        $categoryCollection = $this->resolveCategories(
+            $demandFromForm,
+            $settings,
+            (int)($contentElementData['uid'] ?? 0),
+            $hideFilter,
+        );
 
         if ($categoryCollection !== null) {
             $demand->setFilterCollection(new FilterCollection($categoryCollection));
@@ -97,6 +94,49 @@ class DemandFactory
         }
 
         return $demand;
+    }
+
+    /**
+     * The categories the list is filtered by, `null` for none.
+     *
+     * A request without a demand gets the preset categories of the element, and a demand
+     * replaces them with the categories it carries, as the visible filter submits them.
+     * Where the element hides the filter, every preset stays and categories a request
+     * carries are added to them: a record has to carry every category, so a link can
+     * narrow the list but never leave what the editor set (ACE-916).
+     *
+     * @param ?array<string, mixed> $demandFromForm
+     * @param array<string, mixed> $settings
+     */
+    private function resolveCategories(
+        ?array $demandFromForm,
+        array $settings,
+        int $contentElementUid,
+        bool $hideFilter
+    ): ?CategoryCollection {
+        $presetCategories = null;
+        if (($demandFromForm === null || $hideFilter)
+            && isset($settings['categories'])
+            && (int)$settings['categories'] > 0
+        ) {
+            $presetCategories = $this->categoryRepository->getByDatabaseFields('programs', $contentElementUid);
+        }
+        $filter = $demandFromForm['filterCollection'] ?? null;
+        if ($demandFromForm === null || ($hideFilter && $filter === null)) {
+            return $presetCategories;
+        }
+        if ($filter === null) {
+            return null;
+        }
+
+        $uids = $this->categoryFilterNormalizer->toUidList($filter);
+        if ($presetCategories !== null) {
+            foreach ($presetCategories as $category) {
+                $uids[] = $category->getUid();
+            }
+        }
+
+        return $this->categoryRepository->findByGroupAndUidList('programs', array_values(array_unique($uids)));
     }
 
     /**
