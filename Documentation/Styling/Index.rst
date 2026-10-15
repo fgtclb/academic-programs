@@ -250,5 +250,14 @@ Rules in the stylesheet of the site package, scoped by the outermost element:
         margin-block: 1rem;
     }
 
+The development instances style the program list, the program finder, the
+program details and the program page with the partial
+`_academic-programs.scss
+<https://github.com/fgtclb/academic-extensions/blob/main/packages-dev/dev-site/Resources/Private/Scss/frontend/_academic-programs.scss>`__,
+together with the shared rules of `_academic-base.scss
+<https://github.com/fgtclb/academic-extensions/blob/main/packages-dev/dev-site/Resources/Private/Scss/frontend/_academic-base.scss>`__,
+both of the site package `academics_dev_site`, a complete example to copy
+from.
+
 To change the markup itself, override the partials of the extension, the page
 partials as described in :ref:`program-page-partials`.
