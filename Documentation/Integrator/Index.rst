@@ -32,20 +32,20 @@ extension has a TypoScript value of the same name.
         -   Content element
         -   CType
         -   Shows
-    *   -   ..  image:: /Images/Icons/programs.svg
+    *   -   ..  figure:: /Images/Icons/programs.svg
                 :width: 32px
                 :alt: Icon of the Course List content element
         -   :ref:`Course List <integrator-program-list>`
         -   ``academicprograms_programlist``
         -   The program pages of a storage as cards, with category filters
             and a sorting the visitor can change.
-    *   -   ..  image:: /Images/Icons/programs.svg
+    *   -   ..  figure:: /Images/Icons/programs.svg
                 :width: 32px
                 :alt: Icon of the Course Data content element
         -   :ref:`Course Data <integrator-program-details>`
         -   ``academicprograms_programdetails``
         -   The facts of the program page the element is placed on.
-    *   -   ..  image:: /Images/Icons/programs.svg
+    *   -   ..  figure:: /Images/Icons/programs.svg
                 :width: 32px
                 :alt: Icon of the Course Finder content element
         -   :ref:`Course Finder <integrator-program-finder>`
