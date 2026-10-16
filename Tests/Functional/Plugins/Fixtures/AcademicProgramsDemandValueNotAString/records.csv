@@ -1,0 +1,11 @@
+"pages",
+,"uid","pid","doktype","deleted","hidden","sys_language_uid","l10n_parent","l18n_cfg","slug","title","abstract","credit_points"
+,1,0,1,0,0,0,0,0,"/","Site Root","",0
+,2,1,1,0,0,0,0,0,"/list","List","",0
+,4,1,1,0,0,0,0,0,"/study","Study","",0
+,10,4,20,0,0,0,0,0,"/study/applied-physics","Applied Physics","",180
+,11,4,20,0,0,0,0,0,"/study/molecular-chemistry","Molecular Chemistry","",120
+,12,4,20,0,0,0,0,0,"/study/mechanical-engineering","Mechanical Engineering","",120
+"tt_content",
+,"uid","pid","sorting","deleted","hidden","sys_language_uid","l18n_parent","CType","header","pages","recursive","pi_flexform"
+,1,2,1,0,0,0,0,"academicprograms_programlist","","4",0,"<?xml version=""1.0"" encoding=""utf-8"" standalone=""yes"" ?><T3FlexForms><data><sheet index=""sDEF""><language index=""lDEF""><field index=""settings.hideFilter""><value index=""vDEF"">0</value></field><field index=""settings.hideSorting""><value index=""vDEF"">0</value></field><field index=""settings.sorting""><value index=""vDEF"">title asc</value></field><field index=""settings.showHiddenRecords""><value index=""vDEF"">0</value></field></language></sheet></data></T3FlexForms>"
