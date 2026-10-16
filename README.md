@@ -1,10 +1,10 @@
 # TYPO3 extension `academic_programs` (READ-ONLY)
 
-|                  | URL                                                           |
-|------------------|---------------------------------------------------------------|
-| **Repository:**  | https://github.com/fgtclb/academic-programs                   |
-| **Read online:** | https://docs.typo3.org/p/fgtclb/academic-programs/main/en-us/ |
-| **TER:**         | https://extensions.typo3.org/extension/academic_programs/     |
+|                  | URL                                                          |
+|------------------|--------------------------------------------------------------|
+| **Repository:**  | https://github.com/fgtclb/academic-programs                  |
+| **Read online:** | https://docs.typo3.org/p/fgtclb/academic-programs/2.4/en-us/ |
+| **TER:**         | https://extensions.typo3.org/extension/academic_programs/    |
 
 ## Description
 
