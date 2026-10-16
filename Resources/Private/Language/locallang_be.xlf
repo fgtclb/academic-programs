@@ -90,7 +90,7 @@
         <source>The page with the program list the finder opens. Point the list and the finder at the same storage, or the finder offers categories the list does not show.</source>
       </trans-unit>
       <trans-unit id="flexform.finder.categoryTypes.description">
-        <source>A select for each chosen type, in this order. A chosen type without categories is left out. Empty: the filter types of the program list for the site, or the degree and the topic.</source>
+        <source>A select for each chosen type, in this order. A chosen type without categories is left out. Empty: the filter types of the program list for the site, else the degree and the topic, or every type with categories when neither of the two has one.</source>
       </trans-unit>
       <trans-unit id="flexform.finder.includeSubcategories.description">
         <source>The finder offers a category as soon as a program carries one of its subcategories. Switch the option on in the program list of the target page as well, because that list decides which programs are found.</source>

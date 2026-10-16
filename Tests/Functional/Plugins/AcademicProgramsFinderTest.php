@@ -261,6 +261,36 @@ final class AcademicProgramsFinderTest extends AbstractAcademicProgramsTestCase
     }
 
     /**
+     * Of the two default types one with categories is enough: without a topic category the
+     * finder offers the degree alone.
+     */
+    #[Test]
+    public function withoutATopicCategoryTheDegreeAloneIsOffered(): void
+    {
+        $this->getConnectionPool()->getConnectionForTable('sys_category')->update('sys_category', ['type' => 'department'], ['type' => 'topic']);
+        $this->setUpSite();
+
+        $this->assertSame(['degree'], $this->renderedFinderTypes($this->renderHomePage()));
+    }
+
+    /**
+     * Neither the degree nor the topic has a category, the categories carry other types
+     * of the group here, so the default of the finder offers nothing. The finder then
+     * offers every type with categories, in the type order of the group, as the program
+     * list does without filter types.
+     */
+    #[Test]
+    public function withoutDegreeAndTopicCategoriesEveryTypeWithCategoriesIsOffered(): void
+    {
+        $connection = $this->getConnectionPool()->getConnectionForTable('sys_category');
+        $connection->update('sys_category', ['type' => 'program_type'], ['type' => 'degree']);
+        $connection->update('sys_category', ['type' => 'department'], ['type' => 'topic']);
+        $this->setUpSite();
+
+        $this->assertSame(['department', 'location', 'program_type'], $this->renderedFinderTypes($this->renderHomePage()));
+    }
+
+    /**
      * The site-wide filter types of the program list, in their order, instead of the
      * default of the finder.
      */

@@ -129,9 +129,14 @@ The tab :guilabel:`Configuration` of the content element holds every option.
     the field of the list. Empty, the finder offers the types of the site
     setting :typoscript:`plugin.tx_academicprograms.filter.categoryTypes`, see
     :ref:`program-list-filter-types`, and the degree followed by the topic when
-    that is empty as well. That last fallback differs from the list, which
-    offers every type with categories, so a finder and a list that both leave
-    the field and the setting empty offer different selects.
+    that is empty as well. That fallback differs from the list, which offers
+    every type with categories, so a finder and a list that both leave the
+    field and the setting empty offer different selects. A finder offers one
+    of the two alone when the other has no category. When neither has one, a
+    site that names its types differently for example, the finder offers
+    every type with categories in the type order of the group, as the list
+    does. Types the field or the setting names are never replaced that way: a
+    finder whose types have no category renders no form.
 
 ..  confval:: Include subcategories
     :name: program-finder-include-subcategories

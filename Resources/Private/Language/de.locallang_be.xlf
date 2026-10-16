@@ -116,8 +116,8 @@
         <target>Die Seite mit der Programmliste, die der Finder öffnet. Liste und Finder sollten denselben Datensatzspeicher verwenden, sonst bietet der Finder Kategorien an, die die Liste nicht zeigt.</target>
       </trans-unit>
       <trans-unit id="flexform.finder.categoryTypes.description">
-        <source>A select for each chosen type, in this order. A chosen type without categories is left out. Empty: the filter types of the program list for the site, or the degree and the topic.</source>
-        <target>Eine Auswahlliste je gewähltem Typ, in dieser Reihenfolge. Ein gewählter Typ ohne Kategorien entfällt. Leer: die Filtertypen der Programmliste der Website oder Abschluss und Thema.</target>
+        <source>A select for each chosen type, in this order. A chosen type without categories is left out. Empty: the filter types of the program list for the site, else the degree and the topic, or every type with categories when neither of the two has one.</source>
+        <target>Eine Auswahlliste je gewähltem Typ, in dieser Reihenfolge. Ein gewählter Typ ohne Kategorien entfällt. Leer: die Filtertypen der Programmliste der Website, sonst Abschluss und Thema oder jeder Typ mit Kategorien, wenn keiner der beiden welche hat.</target>
       </trans-unit>
       <trans-unit id="flexform.finder.includeSubcategories.description">
         <source>The finder offers a category as soon as a program carries one of its subcategories. Switch the option on in the program list of the target page as well, because that list decides which programs are found.</source>

@@ -56,7 +56,7 @@ plugin.tx_academicprograms {
   # sets in "Configuration/Sets/Full/settings.definitions.yaml" with the same
   # defaults.
   filter {
-    # cat=plugin.tx_academicprograms/filter; type=string; label=Filter types of the program list and the program finder: empty offers every category type with categories, and the degree and the topic in the finder
+    # cat=plugin.tx_academicprograms/filter; type=string; label=Filter types of the program list and the program finder: empty offers every category type with categories, in the finder the degree and the topic while one of the two has categories
     categoryTypes =
     # cat=plugin.tx_academicprograms/filter; type=int+; label=Visible filters of the program list: how many filters are shown right away, the others behind "More filters"; 0 shows every filter
     visibleCount = 0

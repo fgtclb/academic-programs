@@ -23,7 +23,8 @@ the filter.
     *   -   :guilabel:`Filter types`
         -   The selects, in their order. Empty: the site setting
             :typoscript:`plugin.tx_academicprograms.filter.categoryTypes` of
-            the program list, then the degree and the topic.
+            the program list, then the degree and the topic, and every type
+            with categories when neither of the two has one.
     *   -   :guilabel:`Preselected categories`
         -   Selected when the page loads, one per select. Of two categories of
             one type, the one higher in the category tree.

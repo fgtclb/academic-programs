@@ -51,7 +51,7 @@ settings:
     default: 'degree'
   plugin.tx_academicprograms.filter.categoryTypes:
     label: 'Program list and finder | Filter types'
-    description: 'The category filters the program list offers, in this order, comma-separated: category type identifiers of the group "programs" (degree, location, program_type, ...). A type without categories is left out. The field "Filter types" of a list or finder element overrides this for the element. Empty: every category type with categories, in the type order of the group - and in the program finder the degree and the topic.'
+    description: 'The category filters the program list offers, in this order, comma-separated: category type identifiers of the group "programs" (degree, location, program_type, ...). A type without categories is left out. The field "Filter types" of a list or finder element overrides this for the element. Empty: every category type with categories, in the type order of the group. The program finder offers the degree and the topic instead, and every type with categories only when neither of the two has one.'
     category: academic.programs
     type: string
     default: ''

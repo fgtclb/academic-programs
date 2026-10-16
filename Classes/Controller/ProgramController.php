@@ -17,6 +17,7 @@ use FGTCLB\AcademicPrograms\Factory\DemandFactory;
 use FGTCLB\CategoryTypes\Collection\CategoryCollection;
 use FGTCLB\CategoryTypes\Domain\Repository\CategoryRepository;
 use FGTCLB\CategoryTypes\Filter\FilterTypeResolver;
+use FGTCLB\CategoryTypes\Filter\FilterTypes;
 use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Core\Http\PropagateResponseException;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -30,7 +31,8 @@ final class ProgramController extends ActionController
     use GetCurrentContentRecordMethodTrait;
 
     /**
-     * The selects of a finder whose element and site name no filter types.
+     * The selects of a finder whose element and site name no filter types, as long as one
+     * of them has a category, see {@see finderFilterTypes()}.
      */
     private const FINDER_DEFAULT_CATEGORY_TYPES = 'degree,topic';
 
@@ -127,10 +129,7 @@ final class ProgramController extends ActionController
         ));
 
         $categories = $listEvent->getCategories();
-        $filterTypes = $this->filterTypeResolver->resolve(
-            $categories,
-            $this->filterCategoryTypes() ?: self::FINDER_DEFAULT_CATEGORY_TYPES,
-        );
+        $filterTypes = $this->finderFilterTypes($categories);
         $programCategories = $this->finderProgramCategories(
             $demandObject,
             $categories,
@@ -150,6 +149,29 @@ final class ProgramController extends ActionController
         $this->dispatchModifyPluginViewEvent($context, $this->view, $this->eventDispatcher);
 
         return $this->htmlResponse();
+    }
+
+    /**
+     * The selects of the finder: the filter types of the element or the site, else the
+     * degree and the topic. Where neither of those two has a category, a site that names
+     * its types differently or does not use them, the finder offers every type with
+     * categories in the type order of the group, as the list does without filter types,
+     * rather than no select at all. Filter types the element or the site names are kept as
+     * they are, also when none of them has a category.
+     */
+    private function finderFilterTypes(CategoryCollection $categories): FilterTypes
+    {
+        $categoryTypes = $this->filterCategoryTypes();
+        if ($categoryTypes !== '') {
+            return $this->filterTypeResolver->resolve($categories, $categoryTypes);
+        }
+
+        $defaultTypes = $this->filterTypeResolver->resolve($categories, self::FINDER_DEFAULT_CATEGORY_TYPES);
+        if ($defaultTypes->getVisible() !== []) {
+            return $defaultTypes;
+        }
+
+        return $this->filterTypeResolver->resolve($categories, '');
     }
 
     /**

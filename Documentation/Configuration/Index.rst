@@ -544,7 +544,8 @@ decide the filters for the whole site:
             offers while its field :guilabel:`Filter types` is empty, in this
             order, as a comma separated list of type identifiers, for example
             `degree,location,program_type`. Empty, the list offers every type
-            with a category, the finder the degree and the topic.
+            with a category, the finder the degree and the topic, and every
+            type with a category as well when neither of the two has one.
     *   -   :typoscript:`plugin.tx_academicprograms.filter.visibleCount`
         -   0
         -   How many filters the form shows right away. The others follow in a

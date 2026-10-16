@@ -1,0 +1,19 @@
+# An installation that names the degree and the topic differently: it removes the
+# two shipped types and adds a qualification and a subject of its own, the way a
+# project replaces shipped types it names otherwise. The subject is declared before
+# the qualification, so the type order of the group is not the alphabetical one.
+types:
+  - identifier: degree
+    group: programs
+    remove: true
+  - identifier: topic
+    group: programs
+    remove: true
+  - identifier: subject
+    title: 'Subject'
+    group: programs
+    icon: 'EXT:core/Resources/Public/Icons/T3Icons/svgs/apps/apps-pagetree-folder-contains-category.svg'
+  - identifier: qualification
+    title: 'Qualification'
+    group: programs
+    icon: 'EXT:core/Resources/Public/Icons/T3Icons/svgs/apps/apps-pagetree-folder-contains-category.svg'
