@@ -44,13 +44,13 @@ class DemandFactory
             $this->applySortingFromSettings($demand, $settings);
         } elseif (isset($demandFromForm['sorting'])) {
             // Either use combined sorting or separate sorting field and direction
-            $demand->setSorting($demandFromForm['sorting']);
+            $demand->setSorting($this->optionValue($demandFromForm['sorting']));
         } elseif (isset($demandFromForm['sortingField']) || isset($demandFromForm['sortingDirection'])) {
             if (isset($demandFromForm['sortingField'])) {
-                $demand->setSortingField($demandFromForm['sortingField']);
+                $demand->setSortingField($this->optionValue($demandFromForm['sortingField']));
             }
             if (isset($demandFromForm['sortingDirection'])) {
-                $demand->setSortingDirection($demandFromForm['sortingDirection']);
+                $demand->setSortingDirection($this->optionValue($demandFromForm['sortingDirection']));
             }
         } else {
             // A demand without any sorting, the one of the program finder, keeps the sorting
@@ -159,6 +159,17 @@ class DemandFactory
             $demand->setSortingField($parts[0]);
             $demand->setSortingDirection($parts[1]);
         }
+    }
+
+    /**
+     * A value of a request as the string the setters of the demand take. A value that is
+     * not a string, the array of `demand[sortingField][]=title` for example, which Extbase
+     * hands over as it came, becomes the empty string. No setter accepts that, so the
+     * value is ignored like an unknown option instead of raising a `TypeError`.
+     */
+    private function optionValue(mixed $value): string
+    {
+        return is_string($value) ? $value : '';
     }
 
     /**

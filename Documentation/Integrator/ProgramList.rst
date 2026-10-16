@@ -53,7 +53,10 @@ and :file:`Item.html` for a card. :ref:`styling-list` shows the markup. The
 list is rendered on every request rather than from the page cache, because the
 programs it shows depend on the selection in the URL and on program pages
 elsewhere in the page tree. Speaking URLs for a filtered list are described in
-:ref:`configuration-route-enhancers`.
+:ref:`configuration-route-enhancers`. A sorting the form does not offer, in the
+URL or in a submission, is ignored, also a list of values where the form sends
+one. The default of the extension applies in its place where the element shows
+the sorting selects, the preset of the element where it hides them.
 
 ..  _integrator-program-list-configuration:
 

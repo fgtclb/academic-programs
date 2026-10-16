@@ -6,6 +6,7 @@ namespace FGTCLB\AcademicPrograms\Tests\Functional\Plugins;
 
 use FGTCLB\AcademicPrograms\Tests\Functional\AbstractAcademicProgramsTestCase;
 use FGTCLB\TestingHelper\FunctionalTestCase\FrontendPluginRenderingTrait;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
 use SBUERK\TYPO3\Testing\SiteHandling\SiteBasedTestTrait;
 use TYPO3\CMS\Core\Cache\Backend\Typo3DatabaseBackend;
@@ -306,6 +307,51 @@ final class AcademicProgramsFilterUrlTest extends AbstractAcademicProgramsTestCa
         $this->assertLessThan($applied, $regional);
     }
 
+    /**
+     * Every form and URL of the list carries a string per demand value. A crafted request
+     * may carry an array instead, `demand[sortingField][]=title` for example, and Extbase
+     * hands the demand argument over as it came. Such a value is ignored like an unknown
+     * option, so the list keeps its default instead of failing with a `TypeError`.
+     *
+     * @return \Generator<string, array{0: array<string, mixed>}>
+     */
+    public static function demandValueNotAStringDataProvider(): \Generator
+    {
+        yield 'sorting' => [['sorting' => ['title desc']]];
+        yield 'sorting field' => [['sortingField' => ['lastUpdated']]];
+        yield 'sorting direction' => [['sortingDirection' => ['desc']]];
+    }
+
+    /**
+     * @param array<string, mixed> $demand
+     */
+    #[DataProvider('demandValueNotAStringDataProvider')]
+    #[Test]
+    public function aUrlDemandValueThatIsNotAStringIsIgnored(array $demand): void
+    {
+        $content = $this->renderFrontendPage('https://www.acme.com/home?' . http_build_query([self::PLUGIN_NAMESPACE => ['demand' => $demand]]));
+
+        $this->assertRenderedInOrder($content, 'Applied Physics', 'Molecular Chemistry');
+        $this->assertRenderedInOrder($content, 'Molecular Chemistry', 'Regional Teaching');
+    }
+
+    /**
+     * @param array<string, mixed> $demand
+     */
+    #[DataProvider('demandValueNotAStringDataProvider')]
+    #[Test]
+    public function aSubmittedDemandValueThatIsNotAStringIsIgnored(array $demand): void
+    {
+        $response = $this->requestFrontendPage($this->frontendPostRequest('https://www.acme.com/home', [
+            self::PLUGIN_NAMESPACE => ['demand' => $demand],
+        ]));
+
+        $this->assertSame(
+            ['sortingDirection' => 'asc', 'sortingField' => 'title'],
+            $this->demandArguments($this->assertSeeOtherWithCacheHash($response)),
+        );
+    }
+
     private function filteredListUrl(string $uid): string
     {
         return $this->assertSeeOtherWithCacheHash($this->submitFrontendForm('https://www.acme.com/home', self::FORM, [
@@ -326,5 +372,14 @@ final class AcademicProgramsFilterUrlTest extends AbstractAcademicProgramsTestCa
         $this->assertIsArray($demand, 'The redirect target carries no demand: ' . $location);
 
         return $demand;
+    }
+
+    private function assertRenderedInOrder(string $content, string $first, string $second): void
+    {
+        $firstPosition = strpos($content, $first);
+        $secondPosition = strpos($content, $second);
+        $this->assertNotFalse($firstPosition, $first . ' is not rendered.');
+        $this->assertNotFalse($secondPosition, $second . ' is not rendered.');
+        $this->assertLessThan($secondPosition, $firstPosition, $first . ' is not rendered before ' . $second . '.');
     }
 }

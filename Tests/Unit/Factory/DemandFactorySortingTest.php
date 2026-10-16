@@ -104,6 +104,31 @@ final class DemandFactorySortingTest extends UnitTestCase
     }
 
     /**
+     * A value of a request that is not a string, `demand[sortingField][]=lastUpdated` for
+     * example, is ignored like an unknown option instead of raising a `TypeError`. Extbase
+     * hands the demand argument over as it came, nested arrays included.
+     *
+     * @return \Generator<string, array{0: array<string, mixed>, 1: string}>
+     */
+    public static function requestValueNotAStringDataProvider(): \Generator
+    {
+        yield 'sorting' => [['sorting' => ['lastUpdated desc']], 'title asc'];
+        yield 'sorting field' => [['sortingField' => ['lastUpdated']], 'title asc'];
+        yield 'sorting direction' => [['sortingDirection' => ['desc']], 'title asc'];
+        yield 'sorting field beside a direction' => [['sortingField' => ['lastUpdated'], 'sortingDirection' => 'desc'], 'title desc'];
+    }
+
+    /**
+     * @param array<string, mixed> $demandFromRequest
+     */
+    #[DataProvider('requestValueNotAStringDataProvider')]
+    #[Test]
+    public function aRequestValueThatIsNotAStringIsIgnored(array $demandFromRequest, string $expected): void
+    {
+        $this->assertSame($expected, $this->createDemand(['sorting' => 'sorting desc'], $demandFromRequest)->getSorting());
+    }
+
+    /**
      * @param array<string, mixed> $settings
      * @param array<string, mixed>|null $demandFromRequest
      */
