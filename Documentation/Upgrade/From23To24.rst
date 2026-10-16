@@ -281,6 +281,9 @@ Check the result
     visitor uses the rest of the form, see
     :ref:`important-hidden-program-form-parts-keep-their-presets`. A sorting
     that was hidden only to keep the default categories can be shown again.
+*   A list with two default categories of one category type shows only the
+    programs that carry both, as before. The description of the field says so
+    now, see :ref:`important-program-default-categories-description`.
 *   On PostgreSQL, programs that are equal in the chosen ordering may change
     their relative order once, they are ordered by uid now. See
     :ref:`important-list-ordering-ties-are-broken-by-uid`.
