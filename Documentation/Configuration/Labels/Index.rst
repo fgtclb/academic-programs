@@ -62,6 +62,8 @@ or the code fills in, a category type or a field name for example.
         - Shown by
     *   - :xml:`filter.moreFilters`
         - :file:`Partials/Program/DemandCategories.html`
+    *   - :xml:`filter.submit`
+        - :file:`Partials/Program/SortingAndFilters.html`
     *   - :xml:`list.noProgramsFound`
         - :file:`Partials/Program/ItemList.html`
     *   - :xml:`program.<attribute>`

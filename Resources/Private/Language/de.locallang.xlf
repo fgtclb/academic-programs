@@ -72,6 +72,10 @@
 				<source>More filters</source>
 				<target>Weitere Filter</target>
 			</trans-unit>
+			<trans-unit id="filter.submit">
+				<source>Show programs</source>
+				<target>Studiengänge anzeigen</target>
+			</trans-unit>
 
 			<!-- Sorting direction options -->
 

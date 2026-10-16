@@ -235,6 +235,10 @@ file and take over the changes. The paths below are relative to
             instead of :html:`academic_programs`. A copy that keeps the old
             name does not see the label overrides of the previous section.
         -   :ref:`important-label-overrides-use-the-documented-path`
+    *   -   :file:`Partials/Program/SortingAndFilters.html`
+        -   Renders a submit button inside :html:`<noscript>` for visitors
+            without JavaScript.
+        -   :ref:`important-ace-924-academic-programs`
     *   -   :file:`Backend/Partials/PageLayout/Doktype20.html`
         -   Removed, with its registrations
             :typoscript:`templates.typo3/cms-backend.1730990129` and
