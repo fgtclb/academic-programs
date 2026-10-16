@@ -35,7 +35,10 @@ cannot be updated in place:
     as before. The selects of the other partial are updated in place. Remove
     the handlers to get the update in place for all of them. With JavaScript,
     the submit button of the extension's :file:`SortingAndFilters.html` stays
-    hidden.
+    hidden. Version 3.0 no longer allows the handler in the Content Security
+    Policy, as 2.4 did, so under an enforced policy the override needs the
+    hash of its handler in the :file:`csp.yaml` of the site, see
+    :ref:`important-ace-924-academic-programs`.
 *   An override of :file:`List.html` reloads the page on a change. Add the
     wrapper, the region and the status element to get the update in place.
 *   An override of :file:`SortingAndFilters.html` is updated in place, because

@@ -379,8 +379,12 @@ file and take over the changes. The paths below are relative to
         -   Carry the wrapper, the region, the submit button and the marks the
             module of the list reads to update the list in place, and load
             the module unless :typoscript:`settings.assets.js` switches it off.
-            The selects have no :html:`onchange` handler any more.
+            The selects have no :html:`onchange` handler any more, and the
+            extension allows none in the Content Security Policy. A copy that
+            keeps the handler needs its hash in the :file:`csp.yaml` of the
+            site.
         -   :ref:`important-1790982307`,
+            :ref:`important-ace-924-academic-programs`,
             :ref:`feature-1791566505`
     *   -   :file:`Templates/Program/List.html`,
             :file:`Templates/Details/Show.html`
