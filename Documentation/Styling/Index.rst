@@ -8,8 +8,8 @@ Styling
 The plugins and the program page of this extension render their markup with
 the class system of the academic extensions and ship no styling for it. The
 system, the classes of Bootstrap it keeps and how a site package styles the
-markup are described once, in the chapter `Styling of academic_base
-<https://docs.typo3.org/p/fgtclb/academic-base/main/en-us/Styling/Index.html>`__.
+markup are described once, in the chapter :ref:`Styling of academic_base
+<fgtclb/academic-base:styling>`.
 This chapter shows how the markup of this extension is built up.
 
 ..  contents::

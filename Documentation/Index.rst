@@ -34,8 +34,8 @@ structured data and typified system categories, including filterable list and
 detail views in the frontend.
 
 What a project may build on in this extension, and what it may not, is stated
-for all academic extensions on the `extension points page of academic_base
-<https://docs.typo3.org/p/fgtclb/academic-base/main/en-us/Developers/ExtensionPoints/Index.html>`__.
+for all academic extensions on the :ref:`extension points page of academic_base
+<fgtclb/academic-base:developers-extension-points>`.
 
 ----
 

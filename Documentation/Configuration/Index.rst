@@ -1028,8 +1028,8 @@ one mechanism per site and the question does not arise.
 Search, permissions and the wizard
 ==================================
 
-The `Integration chapter of academic_base
-<https://docs.typo3.org/p/fgtclb/academic-base/main/en-us/Integration/Index.html>`__
+The :ref:`Integration chapter of academic_base
+<fgtclb/academic-base:integration>`
 covers what an installation runs beside the academic extensions: an index
 queue for program pages with EXT:solr, the tables, fields and content types
 an editor group needs as a preset for b13/permission-sets, and how to move,

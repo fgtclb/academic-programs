@@ -9,8 +9,8 @@ ModifyPluginViewEvent
 dispatch it. It hands a listener the view of a plugin right before it
 renders, so the listener can assign further variables that a template override
 renders. The event, its methods and the context it carries are described in
-the `documentation of academic_base
-<https://docs.typo3.org/p/fgtclb/academic-base/main/en-us/Developers/Events/ModifyPluginViewEvent.html>`__.
+the :ref:`documentation of academic_base
+<fgtclb/academic-base:developers-event-modify-plugin-view-event>`.
 This page states what the plugins of :guilabel:`academic_programs` pass in.
 
 When it is dispatched
@@ -143,4 +143,4 @@ Introduced in
 *   :ref:`breaking-1791043408` names the event as the replacement of a
     subclass of :php:`DetailsController` that added a view variable.
 *   The event itself was introduced by
-    `academic_base 3.0 <https://docs.typo3.org/p/fgtclb/academic-base/main/en-us/Changelog/3.0/Feature-ModifyPluginViewEvent.html>`__.
+    :ref:`academic_base 3.0 <fgtclb/academic-base:feature-modify-plugin-view-event>`.

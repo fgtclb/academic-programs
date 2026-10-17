@@ -12,8 +12,8 @@ before: subclassing :php:`ProgramController`, querying the database from
 ViewHelpers, or replacing the data processor of the program page.
 
 Which classes of this extension are public API, and what that promises, is
-stated for all academic extensions on the `extension points page of
-academic_base <https://docs.typo3.org/p/fgtclb/academic-base/main/en-us/Developers/ExtensionPoints/Index.html>`__.
+stated for all academic extensions on the :ref:`extension points page of
+academic_base <fgtclb/academic-base:developers-extension-points>`.
 
 Nothing changes in an installation that has no listener: without one, the
 plugins query and render, and program pages show, exactly what they did
