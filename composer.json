@@ -33,7 +33,7 @@
             "ignore-as-root": false,
             "web-dir": ".Build/public",
             "app-dir": ".Build",
-            "version": "3.0.0",
+            "version": "3.0.1-dev",
             "Package": {
                 "providesPackages": []
             }
@@ -44,8 +44,8 @@
     },
     "require": {
         "php": "^8.2 || ^8.3 || ^8.4",
-        "fgtclb/academic-base": "3.0.0@dev",
-        "fgtclb/category-types": "3.0.0@dev",
+        "fgtclb/academic-base": "~3.0.1@dev",
+        "fgtclb/category-types": "~3.0.1@dev",
         "typo3/cms-backend": "~13.4.35 || ~14.3.7",
         "typo3/cms-core": "~13.4.35 || ~14.3.7",
         "typo3/cms-extbase": "~13.4.35 || ~14.3.7",

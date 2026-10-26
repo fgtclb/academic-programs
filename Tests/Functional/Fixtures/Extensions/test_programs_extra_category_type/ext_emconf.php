@@ -3,7 +3,7 @@
 $EM_CONF[$_EXTKEY] = [
     'title' => 'TESTS: Programs Extra Category Type',
     'description' => 'Extension adding a category type to the programs group for tests',
-    'version' => '3.0.0',
+    'version' => '3.0.1',
     'category' => 'misc',
     'state' => 'beta',
     'author' => 'Stefan Bürk',
@@ -13,8 +13,8 @@ $EM_CONF[$_EXTKEY] = [
         'depends' => [
             'typo3' => '13.4.35-14.3.99',
             'core' => '13.4.35-14.3.99',
-            'academic_programs' => '3.0.0',
-            'category_types' => '3.0.0',
+            'academic_programs' => '3.0.1',
+            'category_types' => '3.0.1',
         ],
     ],
 ];
