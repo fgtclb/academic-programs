@@ -107,7 +107,7 @@ on every TYPO3 version this extension supports.
 In :guilabel:`academic_persons` the same mechanism is not a precaution but a
 requirement — that extension ships three enhancers whose routes overlap each
 other by construction. See `its route enhancer documentation
-<https://docs.typo3.org/p/fgtclb/academic-persons/2.4/en-us/Configuration/RouteEnhancers/Index.html>`__.
+<https://docs.typo3.org/p/fgtclb/academic-persons/2.5/en-us/Configuration/RouteEnhancers/Index.html>`__.
 
 What the URLs look like
 -----------------------
