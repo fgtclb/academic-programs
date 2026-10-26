@@ -38,6 +38,11 @@ Before you start
 *   :guilabel:`academic_programs` requires :guilabel:`academic_base` and
     :guilabel:`category_types`. Upgrade them first, in this order, each by the
     upgrade chapter of its own manual.
+*   An installation on TYPO3 v12, on a release older than 2.3, on an
+    unreleased revision or on a development constraint of an earlier version
+    takes the steps of :ref:`Installations outside these paths
+    <fgtclb/academic-base:upgrade-outside-these-paths>` in the manual of
+    :guilabel:`academic_base` first.
 
 ..  toctree::
     :hidden:
