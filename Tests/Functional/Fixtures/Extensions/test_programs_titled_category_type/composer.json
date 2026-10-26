@@ -12,8 +12,8 @@
     ],
     "require": {
         "typo3/cms-core": "~13.4.35 || ~14.3.7",
-        "fgtclb/category-types": "~3.0.0@dev",
-        "fgtclb/academic-programs": "~3.0.0@dev"
+        "fgtclb/category-types": "3.0.0@dev",
+        "fgtclb/academic-programs": "3.0.0@dev"
     },
     "extra": {
         "typo3/cms": {
