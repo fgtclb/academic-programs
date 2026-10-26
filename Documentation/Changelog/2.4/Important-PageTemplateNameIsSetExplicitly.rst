@@ -74,4 +74,24 @@ site package to work around this loses that override: the template of this
 extension is used instead. Clearing :typoscript:`page.10.templateName` after
 this extension's TypoScript restores it.
 
+The name only takes effect when the TypoScript of this extension is parsed
+after the TypoScript that assigns :typoscript:`templateName.cObject`.
+Otherwise the name is overwritten again, and a page of this type ends in the
+exception described above:
+
+*   On TYPO3 v13 and v14 the TypoScript of the site sets is parsed before the
+    TypoScript of the :sql:`sys_template` records. The static template of the
+    Bootstrap Package, which its version 15 offers and its version 16 no longer
+    does, therefore wins over the name the set of this extension sets, and so
+    does a record of the site package that assigns
+    :typoscript:`templateName.cObject` itself. Include the Bootstrap Package
+    through its site set instead, or include the static template of this
+    extension after the one of the Bootstrap Package in the same record.
+*   On TYPO3 v12 the static templates of a record are parsed in the order of
+    the record. Include the static template of this extension after the one of
+    the Bootstrap Package.
+
+:guilabel:`Included TypoScript` in the module :guilabel:`TypoScript` shows the
+order on a page of this type.
+
 .. index:: TypoScript, Frontend, ext:academic_programs
