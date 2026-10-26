@@ -39,7 +39,7 @@
             }
         },
         "branch-alias": {
-            "dev-main": "3.0.x-dev"
+            "3.0.x-dev": "3.0.x-dev"
         }
     },
     "require": {
